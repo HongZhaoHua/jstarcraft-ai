@@ -34,7 +34,7 @@ public class PCCSimilarity extends AbstractSimilarity {
 			leftPower += leftDelta * leftDelta;
 			rightPower += rightDelta * rightDelta;
 		}
-		return (float) (sum / (Math.sqrt(leftPower * rightPower)));
+		return (float) (sum / (Math.sqrt(leftPower) * Math.sqrt(rightPower)));
 	}
 
 	@Override
