@@ -1,0 +1,20 @@
+package com.jstarcraft.ai.neuralnetwork.condition;
+
+import java.util.Map;
+
+import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
+
+/**
+ * 无效分数条件
+ * 
+ * @author Birdy
+ *
+ */
+public class InvalidScoreCondition implements Condition {
+
+	@Override
+	public boolean stop(double newScore, double oldScore, Map<String, MathMatrix> gradients) {
+		return Double.isNaN(newScore) || Double.isInfinite(newScore);
+	}
+
+}
