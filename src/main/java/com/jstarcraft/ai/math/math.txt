@@ -1,2 +1,0 @@
-附录D——自动微分(Autodiff):
-https://www.cnblogs.com/royhoo/p/Autodiff.html
