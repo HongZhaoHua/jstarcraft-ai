@@ -1,0 +1,37 @@
+全文检索与Lucene学习:
+http://blog.csdn.net/jiangsanfeng1111/article/details/48825493
+
+Lucene 原理与代码分析完整版:
+http://www.cnblogs.com/forfuture1978/category/300665.html
+
+ 一步一步跟我学习Lucene:
+http://blog.csdn.net/wuyinggui10000/article/details/45502445
+
+Lucene(修真篇):
+Lucene(仙界篇):
+Lucene(神界篇):
+http://qindongliang.iteye.com/category/282568
+
+Lucene 索引文件宏观结构:
+http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
+
+Lucene5学习之使用Ansj-seg分词器
+https://yq.aliyun.com/articles/45372
+
+Lucene5学习之多线程创建索引:
+http://www.tuicool.com/articles/RNVvIzu
+
+Lucene多线程创建索引及多目录下查询索引:
+http://blog.csdn.net/qs_5683955/article/details/51281943
+
+实时搜索引擎Elasticsearch:
+http://blog.csdn.net/xialei199023/article/details/47680401
+
+Google搜索引擎的奥秘:
+http://sanwen8.cn/p/135Bg3L.html
+
+搜索引擎反作弊与幂律分布:
+http://blog.csdn.net/a345017062/article/details/51447302
+
+PageRank算法--从原理到实现:
+http://blog.csdn.net/rubinorth/article/details/52215036

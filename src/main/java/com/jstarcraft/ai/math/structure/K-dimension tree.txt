@@ -1,0 +1,8 @@
+KDTree详解及java实现:(文章已经包含中文注释的代码)
+http://www.cnblogs.com/porco/p/4464414.html
+
+从K近邻算法、距离度量谈到KD树、SIFT+BBF算法:
+http://www.cnblogs.com/v-July-v/archive/2012/11/20/3125419.html
+
+Kd-Tree算法原理和开源实现代码:
+http://www.cnblogs.com/zfyouxi/p/4795584.html
