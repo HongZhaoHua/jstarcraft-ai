@@ -1,2 +1,0 @@
-26种神经网络激活函数可视化:
-https://www.jiqizhixin.com/articles/2017-10-10-3
