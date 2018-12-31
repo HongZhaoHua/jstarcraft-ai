@@ -12,6 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  * @author Birdy
  *
  */
+// TODO 考虑重构为工具?
 public class PageRank {
 
 	/** 阻尼系数(原始性调整) */
@@ -20,17 +21,22 @@ public class PageRank {
 	/** 收敛系数 */
 	private final static float defaultEpsilon = 0.001F;
 
+	/** 维度 */
 	private int dimension;
 
-	private MathMatrix hMatrix;
+	/** 矩阵 */
+	private MathMatrix matrix;
 
+	/** 得分 */
 	private float[] scores;
 
+	/** 悬孤 */
+	// TODO 考虑重构为int[]
 	private boolean[] ganglers;
 
-	public PageRank(int dimension, MathMatrix hMatrix) {
+	public PageRank(int dimension, MathMatrix matrix) {
 		this.dimension = dimension;
-		this.hMatrix = hMatrix;
+		this.matrix = matrix;
 		this.scores = new float[dimension];
 		this.ganglers = new boolean[dimension];
 	}
@@ -49,7 +55,7 @@ public class PageRank {
 			scores[index] = stochasticity;
 		}
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
-			MathVector vector = hMatrix.getRowVector(rowIndex);
+			MathVector vector = matrix.getRowVector(rowIndex);
 			if (vector.getElementSize() == 0 || vector.getSum(false) == 0F) {
 				ganglers[rowIndex] = true;
 			} else {
@@ -64,7 +70,7 @@ public class PageRank {
 			error = 0F;
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				float score = 0F;
-				Iterator<VectorScalar> iterator = hMatrix.getColumnVector(columnIndex).iterator();
+				Iterator<VectorScalar> iterator = matrix.getColumnVector(columnIndex).iterator();
 				VectorScalar scalar = null;
 				int index = -1;
 				float value = 0F;
