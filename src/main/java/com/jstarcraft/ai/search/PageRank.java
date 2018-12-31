@@ -1,7 +1,10 @@
 package com.jstarcraft.ai.search;
 
-import com.jstarcraft.ai.math.structure.MathCalculator;
+import java.util.Iterator;
+
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
 /**
  * PageRank
@@ -23,10 +26,13 @@ public class PageRank {
 
 	private float[] scores;
 
+	private boolean[] ganglers;
+
 	public PageRank(int dimension, MathMatrix hMatrix) {
 		this.dimension = dimension;
 		this.hMatrix = hMatrix;
 		this.scores = new float[dimension];
+		this.ganglers = new boolean[dimension];
 	}
 
 	public void findPageRank() {
@@ -34,22 +40,23 @@ public class PageRank {
 	}
 
 	public void findPageRank(float alpha, float epsilon) {
+		// 随机性调整
+		float stochasticity = 1F / dimension;
+		// 原始性调整
+		float primitivity = (1F - alpha) * stochasticity;
 		// 初始化得分
-		float invert = 1F / dimension;
 		for (int index = 0; index < dimension; index++) {
-			scores[index] = invert;
+			scores[index] = stochasticity;
 		}
-
-		// 悬孤节点
-		float[][] dNodes = getDanglingNodes();
-
-		// 随机性调整,随机转跳.
-		float tNodes = (1F - alpha) * invert;
-
-		// Replace the H matrix with the G matrix
-		hMatrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(alpha * scalar.getValue() + dNodes[scalar.getRow()][scalar.getColumn()] + tNodes);
-		});
+		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
+			MathVector vector = hMatrix.getRowVector(rowIndex);
+			if (vector.getElementSize() == 0 || vector.getSum(false) == 0F) {
+				ganglers[rowIndex] = true;
+			} else {
+				vector.scaleValues(alpha);
+				vector.shiftValues(primitivity);
+			}
+		}
 
 		// 判断是否收敛
 		float error = 1F;
@@ -57,8 +64,40 @@ public class PageRank {
 			error = 0F;
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				float score = 0F;
+				Iterator<VectorScalar> iterator = hMatrix.getColumnVector(columnIndex).iterator();
+				VectorScalar scalar = null;
+				int index = -1;
+				float value = 0F;
+				if (iterator.hasNext()) {
+					scalar = iterator.next();
+					index = scalar.getIndex();
+					value = scalar.getValue();
+				}
 				for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
-					score += scores[rowIndex] * hMatrix.getValue(rowIndex, columnIndex);
+					if (index == rowIndex) {
+						// 判断是否为悬孤
+						if (ganglers[rowIndex]) {
+							score += scores[rowIndex] * stochasticity;
+						} else {
+							score += scores[rowIndex] * value;
+						}
+						if (iterator.hasNext()) {
+							scalar = iterator.next();
+							index = scalar.getIndex();
+							value = scalar.getValue();
+						} else {
+							scalar = null;
+							index = -1;
+							value = 0F;
+						}
+					} else {
+						// 判断是否为悬孤
+						if (ganglers[rowIndex]) {
+							score += scores[rowIndex] * stochasticity;
+						} else {
+							score += scores[rowIndex] * primitivity;
+						}
+					}
 				}
 				error += Math.abs(score - scores[columnIndex]);
 				scores[columnIndex] = score;
@@ -66,43 +105,13 @@ public class PageRank {
 		}
 	}
 
-	float error = 1F;
-	// TODO 考虑重构为支持稀疏
-	private float[][] getDanglingNodes() {
-		MathMatrix matrixH = hMatrix;
-
-		int n = matrixH.getColumnSize();
-
-		float inv_n = 1F / n;
-
-		// The dangling node vector
-		int[] dangling = new int[n];
-		for (int index = 0; index < n; index++) {
-			if (matrixH.getRowVector(index).getSum(false) == 0) {
-				dangling[index] = 1;
-			}
-		}
-
-		float[][] dNodes = new float[n][n];
-
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-
-				if (dangling[i] == 0) {
-					dNodes[i][j] = 0;
-				} else {
-					dNodes[i][j] = defaultAlpha * inv_n;
-				}
-			}
-		}
-
-		return dNodes;
-	}
-
 	/**
-	 * @return the pR
+	 * 获取得分
+	 * 
+	 * @param index
+	 * @return
 	 */
-	public float getPageRank(int i) {
-		return scores[i];
+	public float getScore(int index) {
+		return scores[index];
 	}
 }

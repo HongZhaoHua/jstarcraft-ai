@@ -3,7 +3,10 @@ package com.jstarcraft.ai.search;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
+import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 
 import it.unimi.dsi.fastutil.floats.Float2IntAVLTreeMap;
 import it.unimi.dsi.fastutil.floats.Float2IntSortedMap;
@@ -11,7 +14,7 @@ import it.unimi.dsi.fastutil.floats.Float2IntSortedMap;
 public class PageRankTestCase {
 
 	@Test
-	public void test() throws Exception {
+	public void testDense() throws Exception {
 		int dimension = 7;
 		DenseMatrix matrix = DenseMatrix.valueOf(dimension, dimension);
 		matrix.setValue(0, 1, 0.5F);
@@ -37,7 +40,40 @@ public class PageRankTestCase {
 
 		Float2IntSortedMap sort = new Float2IntAVLTreeMap();
 		for (int index = 0; index < dimension; index++) {
-			sort.put(pageRank.getPageRank(index), index);
+			sort.put(pageRank.getScore(index), index);
+		}
+		Assert.assertArrayEquals(new int[] { 6, 0, 2, 1, 4, 5, 3 }, sort.values().toIntArray());
+	}
+
+	@Test
+	public void testSparse() throws Exception {
+		int dimension = 7;
+		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		table.put(0, 1, 0.5F);
+		table.put(0, 2, 0.5F);
+
+		table.put(2, 0, 0.3F);
+		table.put(2, 1, 0.3F);
+		table.put(2, 4, 0.3F);
+
+		table.put(3, 4, 0.5F);
+		table.put(3, 5, 0.5F);
+
+		table.put(4, 3, 0.5F);
+		table.put(4, 5, 0.5F);
+
+		table.put(5, 3, 1F);
+
+		table.put(6, 1, 0.5F);
+		table.put(6, 3, 0.5F);
+		SparseMatrix matrix = SparseMatrix.valueOf(dimension, dimension, table);
+
+		PageRank pageRank = new PageRank(dimension, matrix);
+		pageRank.findPageRank();
+
+		Float2IntSortedMap sort = new Float2IntAVLTreeMap();
+		for (int index = 0; index < dimension; index++) {
+			sort.put(pageRank.getScore(index), index);
 		}
 		Assert.assertArrayEquals(new int[] { 6, 0, 2, 1, 4, 5, 3 }, sort.values().toIntArray());
 	}
