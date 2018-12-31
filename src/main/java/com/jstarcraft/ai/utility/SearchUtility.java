@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.search;
+package com.jstarcraft.ai.utility;
 
 import java.util.Iterator;
 
@@ -7,13 +7,12 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
 /**
- * PageRank
+ * 搜索工具
  * 
  * @author Birdy
  *
  */
-// TODO 考虑重构为工具?
-public class PageRank {
+public class SearchUtility {
 
 	/** 阻尼系数(原始性调整) */
 	private final static float defaultAlpha = 0.8F;
@@ -21,39 +20,24 @@ public class PageRank {
 	/** 收敛系数 */
 	private final static float defaultEpsilon = 0.001F;
 
-	/** 维度 */
-	private int dimension;
-
-	/** 矩阵 */
-	private MathMatrix matrix;
-
-	/** 得分 */
-	private float[] scores;
-
-	/** 悬孤 */
-	// TODO 考虑重构为int[]
-	private boolean[] ganglers;
-
-	public PageRank(int dimension, MathMatrix matrix) {
-		this.dimension = dimension;
-		this.matrix = matrix;
-		this.scores = new float[dimension];
-		this.ganglers = new boolean[dimension];
+	public static float[] pageRank(int dimension, MathMatrix matrix) {
+		return pageRank(dimension, matrix, defaultAlpha, defaultEpsilon);
 	}
 
-	public void calculateScores() {
-		calculateScores(defaultAlpha, defaultEpsilon);
-	}
-
-	public void calculateScores(float alpha, float epsilon) {
+	public static float[] pageRank(int dimension, MathMatrix matrix, float alpha, float epsilon) {
 		// 随机性调整
 		float stochasticity = 1F / dimension;
 		// 原始性调整
 		float primitivity = (1F - alpha) * stochasticity;
-		// 初始化得分
+
+		// 得分
+		float[] scores = new float[dimension];
 		for (int index = 0; index < dimension; index++) {
 			scores[index] = stochasticity;
 		}
+		// 悬孤
+		// TODO 考虑重构为int[],节省存储空间
+		boolean[] ganglers = new boolean[dimension];
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			MathVector vector = matrix.getRowVector(rowIndex);
 			if (vector.getElementSize() == 0 || vector.getSum(false) == 0F) {
@@ -109,15 +93,7 @@ public class PageRank {
 				scores[columnIndex] = score;
 			}
 		}
+		return scores;
 	}
 
-	/**
-	 * 获取得分
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public float getScore(int index) {
-		return scores[index];
-	}
 }
