@@ -36,7 +36,7 @@ public class PageRankTestCase {
 		matrix.setValue(6, 3, 0.5F);
 
 		PageRank pageRank = new PageRank(dimension, matrix);
-		pageRank.findPageRank();
+		pageRank.calculateScores();
 
 		Float2IntSortedMap sort = new Float2IntAVLTreeMap();
 		for (int index = 0; index < dimension; index++) {
@@ -69,7 +69,7 @@ public class PageRankTestCase {
 		SparseMatrix matrix = SparseMatrix.valueOf(dimension, dimension, table);
 
 		PageRank pageRank = new PageRank(dimension, matrix);
-		pageRank.findPageRank();
+		pageRank.calculateScores();
 
 		Float2IntSortedMap sort = new Float2IntAVLTreeMap();
 		for (int index = 0; index < dimension; index++) {

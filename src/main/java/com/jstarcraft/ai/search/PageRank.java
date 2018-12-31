@@ -35,11 +35,11 @@ public class PageRank {
 		this.ganglers = new boolean[dimension];
 	}
 
-	public void findPageRank() {
-		findPageRank(defaultAlpha, defaultEpsilon);
+	public void calculateScores() {
+		calculateScores(defaultAlpha, defaultEpsilon);
 	}
 
-	public void findPageRank(float alpha, float epsilon) {
+	public void calculateScores(float alpha, float epsilon) {
 		// 随机性调整
 		float stochasticity = 1F / dimension;
 		// 原始性调整
