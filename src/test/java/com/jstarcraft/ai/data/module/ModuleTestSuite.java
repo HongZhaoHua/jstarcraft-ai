@@ -9,7 +9,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		DenseModuleTestCase.class,
 
-		SparseModuleTestCase.class })
+		SparseModuleTestCase.class,
+
+		ReferenceModuleTestCase.class })
 public class ModuleTestSuite {
 
 }

@@ -9,7 +9,7 @@ public class DenseModuleTestCase extends DataModuleTestCase {
 
 	@Override
 	protected DataModule getDataModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity) {
-		return new DenseModule( moduleName, moduleDefinition, instanceCapacity);
+		return new DenseModule(moduleName, moduleDefinition, instanceCapacity);
 	}
 
 }

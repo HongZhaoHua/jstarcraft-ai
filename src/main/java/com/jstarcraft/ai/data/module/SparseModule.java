@@ -83,10 +83,10 @@ public class SparseModule extends AbstractModule {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
-		if (discreteFeatures.firstIntKey() < 0 || discreteFeatures.lastIntKey() >= discreteOrder) {
+		if (!discreteFeatures.isEmpty() && (discreteFeatures.firstIntKey() < 0 || discreteFeatures.lastIntKey() >= discreteOrder)) {
 			throw new DataException();
 		}
-		if (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder) {
+		if (!continuousFeatures.isEmpty() && (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder)) {
 			throw new DataException();
 		}
 		discretePoints.associateData(discretePoints.getData(discretePoints.getSize() - 1) + discreteFeatures.size());
