@@ -53,6 +53,10 @@ public class FloatArray implements CapacityArray {
 		return datas.get(cursor / minimumCapacity)[cursor % minimumCapacity];
 	}
 
+	public void setData(int cursor, float data) {
+		datas.get(cursor / minimumCapacity)[cursor % minimumCapacity] = data;
+	}
+
 	@Override
 	public int getMaximumCapacity() {
 		return maximumCapacity;
