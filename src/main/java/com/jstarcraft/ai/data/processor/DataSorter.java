@@ -33,9 +33,9 @@ public interface DataSorter {
 			return module;
 		}
 		int size = module.getSize();
-		IntegerArray references = new IntegerArray(size, size);
+		IntegerArray reference = new IntegerArray(size, size);
 		for (int index = 0; index < size; index++) {
-			references.associateData(index);
+			reference.associateData(index);
 		}
 		int cursor = 0;
 		DataInstance leftInstance = module.getInstance(cursor);
@@ -46,13 +46,13 @@ public interface DataSorter {
 				// TODO 注意:此处存在0的情况.
 				rightInstance.setCursor(right);
 				if (sort(leftInstance, rightInstance) > 0) {
-					references.setData(left, references.getData(left) ^ references.getData(right));
-					references.setData(right, references.getData(right) ^ references.getData(left));
-					references.setData(left, references.getData(left) ^ references.getData(right));
+					reference.setData(left, reference.getData(left) ^ reference.getData(right));
+					reference.setData(right, reference.getData(right) ^ reference.getData(left));
+					reference.setData(left, reference.getData(left) ^ reference.getData(right));
 				}
 			}
 		}
-		return new ReferenceModule(references, module);
+		return new ReferenceModule(reference, module);
 	}
 
 }

@@ -6,48 +6,51 @@ import com.jstarcraft.ai.data.module.ReferenceModule;
 import com.jstarcraft.ai.utility.IntegerArray;
 
 /**
- * 数据选择器
+ * 数据划分器
  * 
  * @author Birdy
  *
  */
-public interface DataSelector {
+public interface DataSplitter {
 
 	/**
-	 * 选择
+	 * 划分
 	 * 
 	 * @param instance
 	 * @return
 	 */
-	boolean select(DataInstance instance);
+	int split(DataInstance instance);
 
 	/**
-	 * 选择
+	 * 划分
 	 * 
 	 * @param module
+	 * @param number
 	 * @return
 	 */
-	default DataModule select(DataModule module) {
-		if (module.getSize() == 0) {
-			return module;
-		}
+	default DataModule[] split(DataModule module, int number) {
 		int size = module.getSize();
 		int maximum = size;
 		int minimum = 1000;
 		if (maximum < minimum) {
 			maximum = minimum;
 		}
-		IntegerArray reference = new IntegerArray(minimum, maximum);
+		IntegerArray[] references = new IntegerArray[number];
+		for (int index = 0; index < number; index++) {
+			references[index] = new IntegerArray(minimum, maximum);
+		}
 		int cursor = 0;
 		DataInstance instance = module.getInstance(cursor);
 		while (cursor < size) {
 			instance.setCursor(cursor);
-			if (select(instance)) {
-				reference.associateData(cursor);
-			}
+			references[split(instance) % number].associateData(cursor);
 			cursor++;
 		}
-		return new ReferenceModule(reference, module);
+		ReferenceModule[] modules = new ReferenceModule[number];
+		for (int index = 0; index < number; index++) {
+			modules[index] = new ReferenceModule(references[index], module);
+		}
+		return modules;
 	}
 
 }
