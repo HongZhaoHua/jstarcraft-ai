@@ -19,7 +19,7 @@ import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 
-public class MathIteratorTestCase {
+public class ScalarIteratorTestCase {
 
 	@Test
 	public void testBoundary() {

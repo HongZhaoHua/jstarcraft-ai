@@ -5,13 +5,16 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import com.jstarcraft.ai.math.structure.matrix.MatrixTestSuite;
+import com.jstarcraft.ai.math.structure.table.TableTestSuite;
 
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		MathIteratorTestCase.class,
+		ScalarIteratorTestCase.class,
 
-		MatrixTestSuite.class })
+		MatrixTestSuite.class,
+
+		TableTestSuite.class })
 public class StructureTestSuite {
 
 }
