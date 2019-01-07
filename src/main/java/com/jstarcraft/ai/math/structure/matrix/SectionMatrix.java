@@ -259,6 +259,46 @@ public class SectionMatrix implements MathMatrix {
 		matrix.shiftValue(rowIndex + top, columnIndex + left, value);
 	}
 
+	protected MathMatrix getMatrix() {
+		return matrix;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object)
+			return true;
+		if (object == null)
+			return false;
+		if (getClass() != object.getClass())
+			return false;
+		SectionMatrix that = (SectionMatrix) object;
+		EqualsBuilder equal = new EqualsBuilder();
+		equal.append(this.matrix, that.matrix);
+		equal.append(this.left, that.left);
+		equal.append(this.right, that.right);
+		equal.append(this.top, that.top);
+		equal.append(this.bottom, that.bottom);
+		return equal.isEquals();
+	}
+
+	@Override
+	public int hashCode() {
+		HashCodeBuilder hash = new HashCodeBuilder();
+		hash.append(matrix);
+		hash.append(left);
+		hash.append(right);
+		hash.append(top);
+		hash.append(bottom);
+		return hash.toHashCode();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder buffer = new StringBuilder();
+		buffer.append(matrix.toString());
+		return buffer.toString();
+	}
+
 	@Override
 	public Iterator<MatrixScalar> iterator() {
 		return new SectionMatrixIterator();
@@ -330,46 +370,6 @@ public class SectionMatrix implements MathMatrix {
 			matrix.shiftValue(row + top, column + left, value);
 		}
 
-	}
-
-	protected MathMatrix getMatrix() {
-		return matrix;
-	}
-
-	@Override
-	public boolean equals(Object object) {
-		if (this == object)
-			return true;
-		if (object == null)
-			return false;
-		if (getClass() != object.getClass())
-			return false;
-		SectionMatrix that = (SectionMatrix) object;
-		EqualsBuilder equal = new EqualsBuilder();
-		equal.append(this.matrix, that.matrix);
-		equal.append(this.left, that.left);
-		equal.append(this.right, that.right);
-		equal.append(this.top, that.top);
-		equal.append(this.bottom, that.bottom);
-		return equal.isEquals();
-	}
-
-	@Override
-	public int hashCode() {
-		HashCodeBuilder hash = new HashCodeBuilder();
-		hash.append(matrix);
-		hash.append(left);
-		hash.append(right);
-		hash.append(top);
-		hash.append(bottom);
-		return hash.toHashCode();
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder buffer = new StringBuilder();
-		buffer.append(matrix.toString());
-		return buffer.toString();
 	}
 
 }

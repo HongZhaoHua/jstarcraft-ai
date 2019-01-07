@@ -24,7 +24,7 @@ public interface MathTable<T> extends CellIterator<T> {
 	int getColumnSize();
 
 	/**
-	 * 获取指定索引标量的值
+	 * 获取指定索引单元的值
 	 * 
 	 * @param rowIndex
 	 * @param columnIndex
@@ -33,7 +33,7 @@ public interface MathTable<T> extends CellIterator<T> {
 	T getValue(int rowIndex, int columnIndex);
 
 	/**
-	 * 设置指定索引标量的值
+	 * 设置指定索引单元的值
 	 * 
 	 * @param rowIndex
 	 * @param columnIndex
