@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 
 /**
  * 区域向量
@@ -54,14 +54,14 @@ public class SectionVector implements MathVector {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SectionVectorScalar scalar = new SectionVectorScalar();
 			for (int index = 0; index < elementSize; index++) {
 				scalar.update(index);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -75,7 +75,7 @@ public class SectionVector implements MathVector {
 					SectionVectorScalar scalar = new SectionVectorScalar();
 					scalar.update(elementIndex);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});

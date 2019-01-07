@@ -16,7 +16,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentThread;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
 import com.jstarcraft.ai.model.ModelCycle;
@@ -73,7 +73,7 @@ public class Nd4jVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		int size = vector.length();
 		switch (mode) {
 		case SERIAL: {
@@ -81,7 +81,7 @@ public class Nd4jVector implements MathVector, ModelCycle {
 			for (int index = 0; index < size; index++) {
 				scalar.update(index);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -96,7 +96,7 @@ public class Nd4jVector implements MathVector, ModelCycle {
 					Nd4jVectorScalar scalar = new Nd4jVectorScalar();
 					scalar.update(elementIndex);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});
@@ -112,19 +112,19 @@ public class Nd4jVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> setValues(float value) {
+	public ScalarIterator<VectorScalar> setValues(float value) {
 		vector.assign(value);
 		return this;
 	}
 
 	@Override
-	public MathIterator<VectorScalar> scaleValues(float value) {
+	public ScalarIterator<VectorScalar> scaleValues(float value) {
 		vector.muli(value);
 		return this;
 	}
 
 	@Override
-	public MathIterator<VectorScalar> shiftValues(float value) {
+	public ScalarIterator<VectorScalar> shiftValues(float value) {
 		vector.addi(value);
 		return this;
 	}

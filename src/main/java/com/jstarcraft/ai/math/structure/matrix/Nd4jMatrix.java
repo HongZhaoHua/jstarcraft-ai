@@ -16,7 +16,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentThread;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.Nd4jVector;
 import com.jstarcraft.ai.model.ModelCycle;
@@ -118,7 +118,7 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 	}
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		// 保证内存与显存同步
 		manager.ensureLocation(matrix, Location.HOST);
 		manager.tagLocation(matrix, Location.HOST);
@@ -136,7 +136,7 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 					int cursor = order == 'c' ? rowIndex * columnSize + columnIndex : columnIndex * rowSize + rowIndex;
 					scalar.update(cursor);
 					for (MathAccessor<MatrixScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -156,7 +156,7 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 							int cursor = order == 'c' ? rowIndex * columnSize + columnIndex : columnIndex * rowSize + rowIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();
@@ -181,7 +181,7 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 							int cursor = order == 'c' ? rowIndex * columnSize + columnIndex : columnIndex * rowSize + rowIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();

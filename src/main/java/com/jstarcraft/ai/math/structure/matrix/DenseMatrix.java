@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 
 /**
@@ -52,7 +52,7 @@ public class DenseMatrix implements MathMatrix {
 	}
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			DenseMatrixScalar scalar = new DenseMatrixScalar();
@@ -61,7 +61,7 @@ public class DenseMatrix implements MathMatrix {
 					int cursor = rowIndex * columnSize + columnIndex;
 					scalar.update(cursor);
 					for (MathAccessor<MatrixScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -80,7 +80,7 @@ public class DenseMatrix implements MathMatrix {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();
@@ -104,7 +104,7 @@ public class DenseMatrix implements MathMatrix {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();

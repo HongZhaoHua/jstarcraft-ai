@@ -6,7 +6,7 @@ package com.jstarcraft.ai.math.structure;
  * @author Birdy
  *
  */
-public interface MathMonitor<T extends MathScalar> {
+public interface MathMonitor<T> {
 
 	/**
 	 * 通知数量变更

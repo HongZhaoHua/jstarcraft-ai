@@ -11,7 +11,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.SymmetryVector;
 
@@ -45,7 +45,7 @@ public class SymmetryMatrix implements MathMatrix {
 	}
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SymmetryMatrixScalar scalar = new SymmetryMatrixScalar();
@@ -53,7 +53,7 @@ public class SymmetryMatrix implements MathMatrix {
 			while (cursor < size) {
 				scalar.update(rowIndex, columnIndex, cursor);
 				for (MathAccessor<MatrixScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 				if (columnIndex < rowIndex) {
 					columnIndex++;
@@ -78,7 +78,7 @@ public class SymmetryMatrix implements MathMatrix {
 							int cursor = point[rowIndex] + columnIndex;
 							scalar.update(rowIndex, columnIndex, cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();
@@ -102,7 +102,7 @@ public class SymmetryMatrix implements MathMatrix {
 							int cursor = point[rowIndex] + columnIndex;
 							scalar.update(rowIndex, columnIndex, cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();

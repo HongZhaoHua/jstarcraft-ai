@@ -16,6 +16,7 @@ import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathIterator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
@@ -63,7 +64,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			CompositeVectorScalar scalar = new CompositeVectorScalar();
@@ -74,7 +75,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 				for (VectorScalar term : vector) {
 					scalar.update(term, term.getIndex() + split);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -92,7 +93,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 					for (VectorScalar term : vector) {
 						scalar.update(term, term.getIndex() + split);
 						for (MathAccessor<VectorScalar> accessor : accessors) {
-							accessor.accessScalar(scalar);
+							accessor.accessElement(scalar);
 						}
 					}
 					semaphore.release();
@@ -493,7 +494,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 			instance.unknownSize += vector.getUnknownSize();
 		}
 		instance.points = points;
-		for (MathIterator<VectorScalar> vector : components) {
+		for (ScalarIterator<VectorScalar> vector : components) {
 			vector.attachMonitor(instance);
 		}
 		return instance;

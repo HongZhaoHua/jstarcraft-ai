@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 
 /**
  * 稠密向量
@@ -52,7 +52,7 @@ public class DenseVector implements MathVector {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			DenseVectorScalar scalar = new DenseVectorScalar();
@@ -60,7 +60,7 @@ public class DenseVector implements MathVector {
 				int position = cursor + index * delta;
 				scalar.update(position, index);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -75,7 +75,7 @@ public class DenseVector implements MathVector {
 					DenseVectorScalar scalar = new DenseVectorScalar();
 					scalar.update(position, elementIndex);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});

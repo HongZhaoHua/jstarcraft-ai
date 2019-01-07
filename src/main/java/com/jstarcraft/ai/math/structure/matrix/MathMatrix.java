@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
@@ -14,7 +14,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  *
  * @author Birdy
  */
-public interface MathMatrix extends MathIterator<MatrixScalar> {
+public interface MathMatrix extends ScalarIterator<MatrixScalar> {
 
 	/**
 	 * 获取行的大小

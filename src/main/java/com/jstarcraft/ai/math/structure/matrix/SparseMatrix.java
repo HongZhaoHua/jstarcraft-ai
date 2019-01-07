@@ -14,7 +14,7 @@ import com.google.common.collect.Table.Cell;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.SparseVector;
 
 /**
@@ -68,14 +68,14 @@ public class SparseMatrix implements MathMatrix {
 	}
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SparseMatrixScalar scalar = new SparseMatrixScalar();
 			for (int cursor = 0, size = termValues.length; cursor < size; cursor++) {
 				scalar.update(cursor);
 				for (MathAccessor<MatrixScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -94,7 +94,7 @@ public class SparseMatrix implements MathMatrix {
 							int cursor = columnIndexes[beginPoint];
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();
@@ -119,7 +119,7 @@ public class SparseMatrix implements MathMatrix {
 							int cursor = rowIndexes[beginPoint];
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();

@@ -11,7 +11,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 
 /**
  * 对称向量
@@ -45,7 +45,7 @@ public class SymmetryVector implements MathVector {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SymmetryVectorScalar scalar = new SymmetryVectorScalar();
@@ -61,7 +61,7 @@ public class SymmetryVector implements MathVector {
 				int cursor = position;
 				scalar.update(cursor, x, y);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -84,7 +84,7 @@ public class SymmetryVector implements MathVector {
 					SymmetryVectorScalar scalar = new SymmetryVectorScalar();
 					scalar.update(cursor, x, y);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});

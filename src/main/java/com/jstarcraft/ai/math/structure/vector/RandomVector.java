@@ -11,7 +11,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.model.ModelCycle;
 import com.jstarcraft.ai.model.ModelDefinition;
@@ -77,14 +77,14 @@ public class RandomVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			RandomVectorScalar scalar = new RandomVectorScalar();
 			for (Entry element : keyValues.int2FloatEntrySet()) {
 				scalar.update(element);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -97,7 +97,7 @@ public class RandomVector implements MathVector, ModelCycle {
 				scalar.update(element);
 				context.doStructureByAny(element.getIntKey(), () -> {
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});

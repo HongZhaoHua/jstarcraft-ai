@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.RandomVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
@@ -15,7 +15,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 public class RowRandomMatrix extends RandomMatrix {
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			RandomMatrixScalar scalar = new RandomMatrixScalar();
@@ -25,7 +25,7 @@ public class RowRandomMatrix extends RandomMatrix {
 				for (VectorScalar term : vector) {
 					scalar.update(term, rowIndex, term.getIndex());
 					for (MathAccessor<MatrixScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -42,7 +42,7 @@ public class RowRandomMatrix extends RandomMatrix {
 					for (VectorScalar term : vector) {
 						scalar.update(term, rowIndex, term.getIndex());
 						for (MathAccessor<MatrixScalar> accessor : accessors) {
-							accessor.accessScalar(scalar);
+							accessor.accessElement(scalar);
 						}
 					}
 					semaphore.release();

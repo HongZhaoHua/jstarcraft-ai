@@ -5,7 +5,7 @@ import java.util.concurrent.CountDownLatch;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.DefaultScalar;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 /**
@@ -14,7 +14,7 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  * @author Birdy
  *
  */
-public interface MathVector extends MathIterator<VectorScalar> {
+public interface MathVector extends ScalarIterator<VectorScalar> {
 
 	/**
 	 * 是否位置等于索引

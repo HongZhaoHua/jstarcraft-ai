@@ -10,17 +10,17 @@ package com.jstarcraft.ai.math.structure;
  * @author Birdy
  *
  */
-public interface MathAccessor<T extends MathScalar> {
+public interface MathAccessor<T> {
 
 	/**
-	 * 访问标量
+	 * 访问元素
 	 * 
 	 * <pre>
 	 * 与{@link MathIterator#iterateElement(MathCalculator, MathAccessor...)}相关
 	 * </pre>
 	 * 
-	 * @param scalar
+	 * @param element
 	 */
-	void accessScalar(T scalar);
+	void accessElement(T element);
 
 }

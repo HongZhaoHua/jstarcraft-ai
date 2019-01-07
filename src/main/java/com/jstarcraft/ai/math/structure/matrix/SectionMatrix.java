@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.SectionVector;
 import com.jstarcraft.ai.model.ModelDefinition;
@@ -96,7 +96,7 @@ public class SectionMatrix implements MathMatrix {
 	}
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SectionMatrixScalar scalar = new SectionMatrixScalar();
@@ -105,7 +105,7 @@ public class SectionMatrix implements MathMatrix {
 					int cursor = rowIndex * columnSize + columnIndex;
 					scalar.update(cursor);
 					for (MathAccessor<MatrixScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -124,7 +124,7 @@ public class SectionMatrix implements MathMatrix {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();
@@ -148,7 +148,7 @@ public class SectionMatrix implements MathMatrix {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
 							for (MathAccessor<MatrixScalar> accessor : accessors) {
-								accessor.accessScalar(scalar);
+								accessor.accessElement(scalar);
 							}
 						}
 						semaphore.release();

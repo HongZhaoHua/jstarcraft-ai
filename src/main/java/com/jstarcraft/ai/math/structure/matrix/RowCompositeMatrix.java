@@ -27,14 +27,14 @@ import java.util.concurrent.Semaphore;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.CompositeVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class RowCompositeMatrix extends CompositeMatrix {
 
 	@Override
-	public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			CompositeMatrixScalar scalar = new CompositeMatrixScalar();
@@ -45,7 +45,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 				for (MatrixScalar term : matrix) {
 					scalar.update(term, term.getRow() + split, term.getColumn());
 					for (MathAccessor<MatrixScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 				}
 			}
@@ -63,7 +63,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 					for (MatrixScalar term : matrix) {
 						scalar.update(term, term.getRow() + split, term.getColumn());
 						for (MathAccessor<MatrixScalar> accessor : accessors) {
-							accessor.accessScalar(scalar);
+							accessor.accessElement(scalar);
 						}
 					}
 					semaphore.release();

@@ -11,7 +11,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.core.utility.RandomUtility;
 
 /**
@@ -48,14 +48,14 @@ public class SparseVector implements MathVector, Iterable<VectorScalar> {
 	}
 
 	@Override
-	public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
 			SparseVectorScalar scalar = new SparseVectorScalar();
 			for (int position = beginIndex; position < endIndex; position++) {
 				scalar.update(position);
 				for (MathAccessor<VectorScalar> accessor : accessors) {
-					accessor.accessScalar(scalar);
+					accessor.accessElement(scalar);
 				}
 			}
 			return this;
@@ -70,7 +70,7 @@ public class SparseVector implements MathVector, Iterable<VectorScalar> {
 					SparseVectorScalar scalar = new SparseVectorScalar();
 					scalar.update(cursor);
 					for (MathAccessor<VectorScalar> accessor : accessors) {
-						accessor.accessScalar(scalar);
+						accessor.accessElement(scalar);
 					}
 					semaphore.release();
 				});
