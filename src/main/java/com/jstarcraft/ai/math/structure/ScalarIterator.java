@@ -9,7 +9,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
- * 数学迭代器
+ * 标量迭代器
  * 
  * @author Birdy
  *

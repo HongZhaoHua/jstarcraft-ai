@@ -7,7 +7,7 @@ package com.jstarcraft.ai.math.structure;
  *
  * @param <T>
  */
-public interface MathTable<T> {
+public interface MathTable<T> extends CellIterator<T> {
 
 	/**
 	 * 获取行的大小

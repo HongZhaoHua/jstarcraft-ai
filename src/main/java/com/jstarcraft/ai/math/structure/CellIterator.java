@@ -1,12 +1,12 @@
 package com.jstarcraft.ai.math.structure;
 
 /**
- * 数学迭代器
+ * 单元迭代器
  * 
  * @author Birdy
  *
  */
-public interface CellIterator<T extends MathScalar> extends MathIterator<T> {
+public interface CellIterator<T> extends MathIterator<MathCell<T>> {
 
 	/**
 	 * 设置所有单元的值
