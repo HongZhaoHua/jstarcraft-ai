@@ -11,17 +11,15 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		ColumnCompositeMatrixTestCase.class,
 
-		ColumnRandomMatrixTestCase.class,
-
 		DenseMatrixTestCase.class,
 
 		Nd4jMatrixTestCase.class,
 
+		RandomMatrixTestCase.class,
+
 		RowArrayMatrixTestCase.class,
 
 		RowCompositeMatrixTestCase.class,
-
-		RowRandomMatrixTestCase.class,
 
 		SparseMatrixTestCase.class,
 

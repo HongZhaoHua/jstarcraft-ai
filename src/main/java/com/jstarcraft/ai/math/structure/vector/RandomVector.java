@@ -26,8 +26,10 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "capacity", "clazz", "keys", "values" })
+@ModelDefinition(value = { "shift", "capacity", "clazz", "keys", "values" })
 public class RandomVector implements MathVector, ModelCycle {
+
+	private int shift;
 
 	private int capacity;
 
@@ -44,21 +46,14 @@ public class RandomVector implements MathVector, ModelCycle {
 	RandomVector() {
 	}
 
-	public RandomVector(int capacity, Int2FloatSortedMap data) {
+	public RandomVector(int shift, int capacity, Int2FloatSortedMap data) {
 		data.defaultReturnValue(Float.NaN);
-		assert data.firstIntKey() >= 0;
-		assert data.lastIntKey() < capacity;
+		assert shift >= 0;
+		assert data.firstIntKey() - shift >= 0;
+		assert data.lastIntKey() - shift < capacity;
+		this.shift = shift;
 		this.capacity = capacity;
 		this.keyValues = data;
-	}
-
-	public RandomVector(MathVector vector, Int2FloatSortedMap data) {
-		data.defaultReturnValue(Float.NaN);
-		this.capacity = vector.getKnownSize() + vector.getUnknownSize();
-		this.keyValues = data;
-		for (VectorScalar term : vector) {
-			data.put(term.getIndex(), term.getValue());
-		}
 	}
 
 	@Override
@@ -188,7 +183,7 @@ public class RandomVector implements MathVector, ModelCycle {
 
 	@Override
 	public float getValue(int position) {
-		return keyValues.get(position);
+		return keyValues.get(position + shift);
 	}
 
 	@Override
@@ -198,9 +193,9 @@ public class RandomVector implements MathVector, ModelCycle {
 		int oldKnownSize = getKnownSize();
 		int oldUnknownSize = getUnknownSize();
 		if (Float.isNaN(value)) {
-			keyValues.remove(position);
+			keyValues.remove(position + shift);
 		} else {
-			keyValues.put(position, value);
+			keyValues.put(position + shift, value);
 		}
 		int newElementSize = keyValues.size();
 		int newKnownSize = getKnownSize();
@@ -215,22 +210,22 @@ public class RandomVector implements MathVector, ModelCycle {
 	@Override
 	public void scaleValue(int position, float value) {
 		assert position >= 0 && position < capacity;
-		value = keyValues.get(position) * value;
+		value = keyValues.get(position + shift) * value;
 		if (Float.isNaN(value)) {
 			throw new IllegalArgumentException();
 		} else {
-			keyValues.put(position, value);
+			keyValues.put(position + shift, value);
 		}
 	}
 
 	@Override
 	public void shiftValue(int position, float value) {
 		assert position >= 0 && position < capacity;
-		value = keyValues.get(position) + value;
+		value = keyValues.get(position + shift) + value;
 		if (Float.isNaN(value)) {
 			throw new IllegalArgumentException();
 		} else {
-			keyValues.put(position, value);
+			keyValues.put(position + shift, value);
 		}
 	}
 
@@ -329,7 +324,7 @@ public class RandomVector implements MathVector, ModelCycle {
 
 		@Override
 		public int getIndex() {
-			return element.getIntKey();
+			return element.getIntKey() - shift;
 		}
 
 		@Override
