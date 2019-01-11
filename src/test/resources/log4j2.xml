@@ -7,6 +7,7 @@
 			<ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY" />
 		</Console>
 	</Appenders>
+	
 	<Loggers>
 		<Root level="INFO">
 			<AppenderRef ref="Console" />
