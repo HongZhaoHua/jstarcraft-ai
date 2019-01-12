@@ -14,6 +14,10 @@ import com.jstarcraft.core.utility.KeyValue;
 /**
  * Inner Product节点
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

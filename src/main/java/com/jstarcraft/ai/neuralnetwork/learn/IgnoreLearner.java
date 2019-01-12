@@ -7,8 +7,6 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 /**
  * 忽略学习器
  * 
- * <pre></pre>
- * 
  * @author Birdy
  *
  */

@@ -20,6 +20,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * Ada Max学习器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * http://arxiv.org/abs/1412.6980
  * </pre>
  * 

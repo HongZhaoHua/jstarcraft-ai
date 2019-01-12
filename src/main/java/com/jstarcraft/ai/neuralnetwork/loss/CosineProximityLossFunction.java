@@ -8,7 +8,9 @@ import com.jstarcraft.ai.utility.MathUtility;
 /**
  * Cosine Proximity目标函数
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

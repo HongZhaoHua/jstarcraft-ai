@@ -18,6 +18,8 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * Ada Delta学习器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * http://www.matthewzeiler.com/pubs/googleTR2012/googleTR2012.pdf
  * https://arxiv.org/pdf/1212.5701v1.pdf
  * </pre>

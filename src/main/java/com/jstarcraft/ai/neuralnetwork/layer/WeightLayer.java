@@ -16,6 +16,10 @@ import com.jstarcraft.core.utility.StringUtility;
 /**
  * 权重层
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

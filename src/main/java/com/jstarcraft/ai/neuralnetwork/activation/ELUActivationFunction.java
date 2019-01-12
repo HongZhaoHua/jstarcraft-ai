@@ -12,6 +12,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * ELU激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = alpha * (exp(x) - 1.0); x < 0 = x ; x>= 0
  * </pre>
  * 

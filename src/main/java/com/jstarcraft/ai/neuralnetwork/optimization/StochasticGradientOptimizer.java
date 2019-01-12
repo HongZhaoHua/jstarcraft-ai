@@ -11,6 +11,10 @@ import com.jstarcraft.ai.neuralnetwork.step.StepFunction;
 /**
  * Stochastic Gradient Descent优化器
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

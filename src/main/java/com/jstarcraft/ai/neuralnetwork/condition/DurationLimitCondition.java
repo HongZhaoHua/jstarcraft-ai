@@ -7,6 +7,13 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 /**
  * 时间限制条件
+ * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
+ * @author Birdy
+ *
  */
 public class DurationLimitCondition implements Condition {
 

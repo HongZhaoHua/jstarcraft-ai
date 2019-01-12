@@ -20,6 +20,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * Ada Grad学习器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * http://xcorr.net/2014/01/23/adagrad-eliminating-learning-rates-in-stochastic-gradient-descent/
  * </pre>
  * 

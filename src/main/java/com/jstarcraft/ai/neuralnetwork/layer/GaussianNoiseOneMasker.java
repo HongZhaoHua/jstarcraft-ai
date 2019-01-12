@@ -10,6 +10,10 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 /**
  * GaussianNoiseOne掩码器
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

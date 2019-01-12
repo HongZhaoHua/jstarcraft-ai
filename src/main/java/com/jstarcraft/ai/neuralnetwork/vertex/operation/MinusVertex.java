@@ -12,6 +12,10 @@ import com.jstarcraft.core.utility.KeyValue;
 /**
  * Minus节点
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

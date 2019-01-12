@@ -20,6 +20,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * RMS Prop学习器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf
  * </pre>
  * 

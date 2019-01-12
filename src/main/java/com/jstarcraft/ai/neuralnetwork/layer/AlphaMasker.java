@@ -10,6 +10,8 @@ import com.jstarcraft.core.utility.RandomUtility;
  * Alpha掩码器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * 与{@link SELUActivationFunction}相关
  * </pre>
  * 

@@ -13,7 +13,9 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 /**
  * SGD学习器
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

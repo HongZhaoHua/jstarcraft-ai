@@ -8,6 +8,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * HardSigmoid激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = min(1, max(0, 0.2 * x + 0.5))
  * </pre>
  * 

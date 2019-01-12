@@ -20,6 +20,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * Nadam学习器
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * https://arxiv.org/pdf/1609.04747.pdf
  * </pre>
  * 

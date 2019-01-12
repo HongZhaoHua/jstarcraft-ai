@@ -11,7 +11,9 @@ import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
 /**
  * L2目标函数
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

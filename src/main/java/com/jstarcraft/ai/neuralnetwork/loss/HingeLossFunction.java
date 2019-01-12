@@ -7,7 +7,9 @@ import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 /**
  * Hinge目标函数
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

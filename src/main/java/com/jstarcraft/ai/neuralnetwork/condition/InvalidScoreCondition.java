@@ -7,6 +7,10 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 /**
  * 无效分数条件
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

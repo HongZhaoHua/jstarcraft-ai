@@ -11,7 +11,9 @@ import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 /**
  * Multinomial XENT目标函数
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

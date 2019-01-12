@@ -11,6 +11,8 @@ import com.jstarcraft.ai.neuralnetwork.layer.AlphaMasker;
  * SELU激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * {@link AlphaMasker} https://arxiv.org/pdf/1706.02515.pdf
  * </pre>
  * 

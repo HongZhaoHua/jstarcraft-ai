@@ -18,7 +18,9 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 /**
  * Nesterov学习器
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

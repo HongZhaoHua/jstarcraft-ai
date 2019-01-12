@@ -12,6 +12,8 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  * SoftMax激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f_i(x) = exp(x_i - shift) / sum_j exp(x_j - shift) where shift = max_i(x_i)
  * </pre>
  * 

@@ -15,6 +15,8 @@ import com.jstarcraft.core.utility.KeyValue;
  * Embed层
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * 只可以作为输入层
  * </pre>
  * 

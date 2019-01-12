@@ -11,6 +11,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * Leaky ReLU激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = max(0, x) + alpha * min(0, x)
  * </pre>
  * 

@@ -8,6 +8,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * HardTanH激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = 
  * |1, if x > 1 
  * |-1, if x < -1 

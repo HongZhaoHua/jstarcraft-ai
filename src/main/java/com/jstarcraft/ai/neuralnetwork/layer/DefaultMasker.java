@@ -8,6 +8,10 @@ import com.jstarcraft.core.utility.RandomUtility;
 /**
  * 默认掩码器
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

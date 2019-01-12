@@ -10,6 +10,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * Cube激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = x ^ 3
  * </pre>
  * 

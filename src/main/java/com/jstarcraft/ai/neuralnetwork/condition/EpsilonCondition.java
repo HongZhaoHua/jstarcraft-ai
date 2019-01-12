@@ -10,6 +10,10 @@ import com.jstarcraft.ai.utility.MathUtility;
 /**
  * Epsilon条件
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

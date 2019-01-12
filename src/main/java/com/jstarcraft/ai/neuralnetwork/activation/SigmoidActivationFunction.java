@@ -16,6 +16,8 @@ import com.jstarcraft.ai.utility.MathUtility;
  * Sigmoid激活函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * f(x) = 1 / (1 + exp(-x))
  * </pre>
  * 

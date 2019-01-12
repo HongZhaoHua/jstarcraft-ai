@@ -8,14 +8,11 @@ import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.utility.MathUtility;
 
 /**
- * Kullback Leibler Divergence loss function
- *
- * @author Susan Eraly
- */
-/**
  * Binary XENT目标函数
  * 
- * <pre></pre>
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
  * 
  * @author Birdy
  *

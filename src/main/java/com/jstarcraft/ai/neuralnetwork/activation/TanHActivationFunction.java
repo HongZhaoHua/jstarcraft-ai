@@ -14,6 +14,10 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 /**
  * TanH激活函数
  * 
+ * <pre>
+ * 参考Deeplearning4j团队
+ * </pre>
+ * 
  * @author Birdy
  *
  */

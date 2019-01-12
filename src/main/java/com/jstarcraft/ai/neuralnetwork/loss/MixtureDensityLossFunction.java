@@ -15,6 +15,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * Mixture Density目标函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/bishop-ncrg-94-004.pdf
  * </pre>
  * 

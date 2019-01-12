@@ -12,6 +12,8 @@ import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
  * Binomial XENT目标函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ *
  * https://en.wikipedia.org/wiki/Cross_entropy#Cross-entropy_error_function_and_logistic_regression
  * </pre>
  * 

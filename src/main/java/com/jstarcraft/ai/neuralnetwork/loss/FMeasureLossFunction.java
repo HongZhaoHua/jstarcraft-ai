@@ -12,6 +12,8 @@ import com.jstarcraft.core.utility.KeyValue;
  * F Measure目标函数
  * 
  * <pre>
+ * 参考Deeplearning4j团队
+ * 
  * https://link.springer.com/chapter/10.1007/978-3-642-38679-4_37
  * </pre>
  * 
