@@ -2,58 +2,39 @@ package com.jstarcraft.ai.math.structure.matrix;
 
 import java.util.concurrent.Future;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
-import org.junit.Test;
 import org.nd4j.linalg.factory.Nd4j;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.message.SumMessage;
-import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
 
-public class ColumnArrayMatrixTestCase extends MatrixTestCase {
+import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
+
+public class ColumnRandomMatrixTestCase extends RandomMatrixTestCase {
 
 	@Override
-	protected ColumnArrayMatrix getRandomMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
-		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
-			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
+	protected RandomMatrix getRandomMatrix(int dimension) {
+		RandomMatrix matrix = RandomMatrix.valueOf(false, dimension, dimension, new Int2FloatAVLTreeMap());
+		for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
+			for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					table.put(rowIndex, columnIndex, 0F);
+					matrix.setValue(rowIndex, columnIndex, 0F);
 				}
 			}
 		}
-		SparseMatrix data = SparseMatrix.valueOf(dimension, dimension, table);
-		ArrayVector[] vectors = new ArrayVector[dimension];
-		for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-			vectors[columnIndex] = new ArrayVector(data.getColumnVector(columnIndex));
-		}
-		ColumnArrayMatrix matrix = ColumnArrayMatrix.valueOf(dimension, vectors);
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(RandomUtility.randomInteger(dimension));
-		});
 		return matrix;
 	}
 
 	@Override
-	protected ColumnArrayMatrix getZeroMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
-		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
-			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-				table.put(rowIndex, columnIndex, 0F);
+	protected RandomMatrix getZeroMatrix(int dimension) {
+		RandomMatrix matrix = RandomMatrix.valueOf(false, dimension, dimension, new Int2FloatAVLTreeMap());
+		for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
+			for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
+				matrix.setValue(rowIndex, columnIndex, 0F);
 			}
 		}
-		SparseMatrix data = SparseMatrix.valueOf(dimension, dimension, table);
-		ArrayVector[] vectors = new ArrayVector[dimension];
-		for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-			vectors[columnIndex] = new ArrayVector(data.getColumnVector(columnIndex));
-		}
-		ColumnArrayMatrix matrix = ColumnArrayMatrix.valueOf(dimension, vectors);
 		return matrix;
 	}
 
@@ -110,48 +91,6 @@ public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
 		});
 		task.get();
-	}
-
-	@Test
-	public void testNotify() {
-		int dimension = 10;
-		ColumnArrayMatrix matrix = getRandomMatrix(dimension);
-		matrix.setValues(1F);
-
-		try {
-			matrix.getRowVector(RandomUtility.randomInteger(dimension));
-			Assert.fail();
-		} catch (UnsupportedOperationException exception) {
-		}
-
-		ArrayVector vector = matrix.getColumnVector(RandomUtility.randomInteger(dimension));
-		int oldSize = vector.getElementSize();
-		int newSize = RandomUtility.randomInteger(oldSize);
-		int[] indexes = new int[newSize];
-		for (int index = 0; index < newSize; index++) {
-			indexes[index] = index;
-		}
-		SumMessage message = new SumMessage(false);
-		matrix.attachMonitor((iterator, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize) -> {
-			Assert.assertThat(newElementSize - oldElementSize, CoreMatchers.equalTo(newSize - oldSize));
-			message.accumulateValue(oldSize + newSize);
-		});
-		vector.modifyIndexes(indexes);
-		vector.setValues(1F);
-		Assert.assertThat(message.getValue(), CoreMatchers.equalTo(oldSize + newSize + 0F));
-		Assert.assertThat(matrix.getSum(false), CoreMatchers.equalTo(matrix.getElementSize() + 0F));
-
-		message.accumulateValue(-message.getValue());
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			message.accumulateValue(scalar.getValue());
-		});
-		Assert.assertThat(message.getValue(), CoreMatchers.equalTo(matrix.getSum(false)));
-
-		message.accumulateValue(-message.getValue());
-		for (MatrixScalar term : matrix) {
-			message.accumulateValue(term.getValue());
-		}
-		Assert.assertThat(message.getValue(), CoreMatchers.equalTo(matrix.getSum(false)));
 	}
 
 }

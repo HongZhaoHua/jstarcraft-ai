@@ -113,22 +113,14 @@ public abstract class MatrixTestCase {
 			MathVector dataVector = dataMatrix.getRowVector(0);
 			MathVector labelVector = labelMatrix.getRowVector(0);
 
-			// 相当于transposeProductThis
-			labelMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
-			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
+			labelMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.SERIAL);
+			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.SERIAL);
 			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
-			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
-
-			// 相当于transposeProductThat
-			labelMatrix.dotProduct(leftMatrix, false, rightMatrix, false, MathCalculator.SERIAL);
-			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
-			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, false, MathCalculator.PARALLEL);
+			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.PARALLEL);
 			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
 
 			MathVector leftVector = leftMatrix.getRowVector(RandomUtility.randomInteger(dimension));
-			MathVector rightVector = rightMatrix.getColumnVector(RandomUtility.randomInteger(dimension));
+			MathVector rightVector = rightMatrix.getRowVector(RandomUtility.randomInteger(dimension));
 			labelMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
 			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));

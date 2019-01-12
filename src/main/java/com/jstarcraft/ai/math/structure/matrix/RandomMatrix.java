@@ -20,8 +20,8 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.ai.model.ModelCycle;
 import com.jstarcraft.ai.model.ModelDefinition;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
+import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
 import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 
 /**
@@ -175,40 +175,70 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 
 	@Override
 	public MathMatrix addMatrix(MathMatrix matrix, boolean transpose) {
-		for (int index = 0, size = getRowSize(); index < size; index++) {
-			getRowVector(index).addVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+		if (orientation) {
+			for (int index = 0, size = getRowSize(); index < size; index++) {
+				getRowVector(index).addVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+			}
+		} else {
+			for (int index = 0, size = getColumnSize(); index < size; index++) {
+				getColumnVector(index).addVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
+			}
 		}
 		return this;
 	}
 
 	@Override
 	public MathMatrix subtractMatrix(MathMatrix matrix, boolean transpose) {
-		for (int index = 0, size = getRowSize(); index < size; index++) {
-			getRowVector(index).subtractVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+		if (orientation) {
+			for (int index = 0, size = getRowSize(); index < size; index++) {
+				getRowVector(index).subtractVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+			}
+		} else {
+			for (int index = 0, size = getColumnSize(); index < size; index++) {
+				getColumnVector(index).subtractVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
+			}
 		}
 		return this;
 	}
 
 	@Override
 	public MathMatrix multiplyMatrix(MathMatrix matrix, boolean transpose) {
-		for (int index = 0, size = getRowSize(); index < size; index++) {
-			getRowVector(index).multiplyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+		if (orientation) {
+			for (int index = 0, size = getRowSize(); index < size; index++) {
+				getRowVector(index).multiplyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+			}
+		} else {
+			for (int index = 0, size = getColumnSize(); index < size; index++) {
+				getColumnVector(index).multiplyVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
+			}
 		}
 		return this;
 	}
 
 	@Override
 	public MathMatrix divideMatrix(MathMatrix matrix, boolean transpose) {
-		for (int index = 0, size = getRowSize(); index < size; index++) {
-			getRowVector(index).divideVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+		if (orientation) {
+			for (int index = 0, size = getRowSize(); index < size; index++) {
+				getRowVector(index).divideVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+			}
+		} else {
+			for (int index = 0, size = getColumnSize(); index < size; index++) {
+				getColumnVector(index).divideVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
+			}
 		}
 		return this;
 	}
 
 	@Override
 	public MathMatrix copyMatrix(MathMatrix matrix, boolean transpose) {
-		for (int index = 0, size = getRowSize(); index < size; index++) {
-			getRowVector(index).copyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+		if (orientation) {
+			for (int index = 0, size = getRowSize(); index < size; index++) {
+				getRowVector(index).copyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
+			}
+		} else {
+			for (int index = 0, size = getColumnSize(); index < size; index++) {
+				getColumnVector(index).copyVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
+			}
 		}
 		return this;
 	}
@@ -229,28 +259,53 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 			return this;
 		}
 		default: {
-			int size = this.getRowSize();
-			EnvironmentContext context = EnvironmentContext.getContext();
-			CountDownLatch latch = new CountDownLatch(size);
-			for (int index = 0; index < size; index++) {
-				int rowIndex = index;
-				MathVector rowVector = this.getRowVector(index);
-				context.doStructureByAny(index, () -> {
-					for (VectorScalar term : rowVector) {
-						int columnIndex = term.getIndex();
-						MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
-						MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
-						term.dotProduct(leftVector, rightVector);
-					}
-					latch.countDown();
-				});
+			if (orientation) {
+				int size = this.getRowSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (int index = 0; index < size; index++) {
+					int rowIndex = index;
+					MathVector rowVector = this.getRowVector(index);
+					context.doStructureByAny(index, () -> {
+						for (VectorScalar term : rowVector) {
+							int columnIndex = term.getIndex();
+							MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
+							MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
+							term.dotProduct(leftVector, rightVector);
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
+			} else {
+				int size = this.getColumnSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (int index = 0; index < size; index++) {
+					int columnIndex = index;
+					MathVector columnVector = this.getColumnVector(index);
+					context.doStructureByAny(index, () -> {
+						for (VectorScalar term : columnVector) {
+							int rowIndex = term.getIndex();
+							MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
+							MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
+							term.dotProduct(leftVector, rightVector);
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
 			}
-			try {
-				latch.await();
-			} catch (Exception exception) {
-				throw new RuntimeException(exception);
-			}
-			return this;
 		}
 		}
 	}
@@ -260,53 +315,11 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 		// TODO 可能触发元素变更.
 		switch (mode) {
 		case SERIAL: {
-			for (VectorScalar term : rowVector) {
-				float rowValue = term.getValue();
-				MathVector leftVector = this.getRowVector(term.getIndex());
-				MathVector rightVector = columnVector;
-				int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
-				if (leftSize != 0 && rightSize != 0) {
-					Iterator<VectorScalar> leftIterator = leftVector.iterator();
-					Iterator<VectorScalar> rightIterator = rightVector.iterator();
-					VectorScalar leftTerm = leftIterator.next();
-					VectorScalar rightTerm = rightIterator.next();
-					// 判断两个有序数组中是否存在相同的数字
-					while (leftIndex < leftSize && rightIndex < rightSize) {
-						if (leftTerm.getIndex() == rightTerm.getIndex()) {
-							leftTerm.setValue(rowValue * rightTerm.getValue());
-							if (leftIterator.hasNext()) {
-								leftTerm = leftIterator.next();
-							}
-							if (rightIterator.hasNext()) {
-								rightTerm = rightIterator.next();
-							}
-							leftIndex++;
-							rightIndex++;
-						} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
-							if (rightIterator.hasNext()) {
-								rightTerm = rightIterator.next();
-							}
-							rightIndex++;
-						} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
-							if (leftIterator.hasNext()) {
-								leftTerm = leftIterator.next();
-							}
-							leftIndex++;
-						}
-					}
-				}
-			}
-			return this;
-		}
-		default: {
-			int size = rowVector.getElementSize();
-			EnvironmentContext context = EnvironmentContext.getContext();
-			CountDownLatch latch = new CountDownLatch(size);
-			for (VectorScalar term : rowVector) {
-				float rowValue = term.getValue();
-				MathVector leftVector = this.getRowVector(term.getIndex());
-				MathVector rightVector = columnVector;
-				context.doStructureByAny(term.getIndex(), () -> {
+			if (orientation) {
+				for (VectorScalar term : rowVector) {
+					float rowValue = term.getValue();
+					MathVector leftVector = this.getRowVector(term.getIndex());
+					MathVector rightVector = columnVector;
 					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 					if (leftSize != 0 && rightSize != 0) {
 						Iterator<VectorScalar> leftIterator = leftVector.iterator();
@@ -338,15 +351,148 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 							}
 						}
 					}
-					latch.countDown();
-				});
+				}
+				return this;
+			} else {
+				for (VectorScalar term : columnVector) {
+					float columnValue = term.getValue();
+					MathVector leftVector = this.getColumnVector(term.getIndex());
+					MathVector rightVector = rowVector;
+					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+					if (leftSize != 0 && rightSize != 0) {
+						Iterator<VectorScalar> leftIterator = leftVector.iterator();
+						Iterator<VectorScalar> rightIterator = rightVector.iterator();
+						VectorScalar leftTerm = leftIterator.next();
+						VectorScalar rightTerm = rightIterator.next();
+						// 判断两个有序数组中是否存在相同的数字
+						while (leftIndex < leftSize && rightIndex < rightSize) {
+							if (leftTerm.getIndex() == rightTerm.getIndex()) {
+								leftTerm.setValue(columnValue * rightTerm.getValue());
+								if (leftIterator.hasNext()) {
+									leftTerm = leftIterator.next();
+								}
+								if (rightIterator.hasNext()) {
+									rightTerm = rightIterator.next();
+								}
+								leftIndex++;
+								rightIndex++;
+							} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+								if (rightIterator.hasNext()) {
+									rightTerm = rightIterator.next();
+								}
+								rightIndex++;
+							} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+								if (leftIterator.hasNext()) {
+									leftTerm = leftIterator.next();
+								}
+								leftIndex++;
+							}
+						}
+					}
+				}
+				return this;
 			}
-			try {
-				latch.await();
-			} catch (Exception exception) {
-				throw new RuntimeException(exception);
+		}
+		default: {
+			if (orientation) {
+				int size = rowVector.getElementSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (VectorScalar term : rowVector) {
+					float rowValue = term.getValue();
+					MathVector leftVector = this.getRowVector(term.getIndex());
+					MathVector rightVector = columnVector;
+					context.doStructureByAny(term.getIndex(), () -> {
+						int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+						if (leftSize != 0 && rightSize != 0) {
+							Iterator<VectorScalar> leftIterator = leftVector.iterator();
+							Iterator<VectorScalar> rightIterator = rightVector.iterator();
+							VectorScalar leftTerm = leftIterator.next();
+							VectorScalar rightTerm = rightIterator.next();
+							// 判断两个有序数组中是否存在相同的数字
+							while (leftIndex < leftSize && rightIndex < rightSize) {
+								if (leftTerm.getIndex() == rightTerm.getIndex()) {
+									leftTerm.setValue(rowValue * rightTerm.getValue());
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									leftIndex++;
+									rightIndex++;
+								} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									rightIndex++;
+								} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									leftIndex++;
+								}
+							}
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
+			} else {
+				int size = columnVector.getElementSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (VectorScalar term : columnVector) {
+					float columnValue = term.getValue();
+					MathVector leftVector = this.getColumnVector(term.getIndex());
+					MathVector rightVector = rowVector;
+					context.doStructureByAny(term.getIndex(), () -> {
+						int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+						if (leftSize != 0 && rightSize != 0) {
+							Iterator<VectorScalar> leftIterator = leftVector.iterator();
+							Iterator<VectorScalar> rightIterator = rightVector.iterator();
+							VectorScalar leftTerm = leftIterator.next();
+							VectorScalar rightTerm = rightIterator.next();
+							// 判断两个有序数组中是否存在相同的数字
+							while (leftIndex < leftSize && rightIndex < rightSize) {
+								if (leftTerm.getIndex() == rightTerm.getIndex()) {
+									leftTerm.setValue(columnValue * rightTerm.getValue());
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									leftIndex++;
+									rightIndex++;
+								} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									rightIndex++;
+								} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									leftIndex++;
+								}
+							}
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
 			}
-			return this;
 		}
 		}
 	}
@@ -367,28 +513,53 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 			return this;
 		}
 		default: {
-			int size = this.getRowSize();
-			EnvironmentContext context = EnvironmentContext.getContext();
-			CountDownLatch latch = new CountDownLatch(size);
-			for (int index = 0; index < size; index++) {
-				int rowIndex = index;
-				MathVector rowVector = this.getRowVector(index);
-				context.doStructureByAny(index, () -> {
-					for (VectorScalar term : rowVector) {
-						int columnIndex = term.getIndex();
-						MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
-						MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
-						term.accumulateProduct(leftVector, rightVector);
-					}
-					latch.countDown();
-				});
+			if (orientation) {
+				int size = this.getRowSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (int index = 0; index < size; index++) {
+					int rowIndex = index;
+					MathVector rowVector = this.getRowVector(index);
+					context.doStructureByAny(index, () -> {
+						for (VectorScalar term : rowVector) {
+							int columnIndex = term.getIndex();
+							MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
+							MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
+							term.accumulateProduct(leftVector, rightVector);
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
+			} else {
+				int size = this.getColumnSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (int index = 0; index < size; index++) {
+					int columnIndex = index;
+					MathVector columnVector = this.getColumnVector(index);
+					context.doStructureByAny(index, () -> {
+						for (VectorScalar term : columnVector) {
+							int rowIndex = term.getIndex();
+							MathVector leftVector = leftTranspose ? leftMatrix.getColumnVector(rowIndex) : leftMatrix.getRowVector(rowIndex);
+							MathVector rightVector = rightTranspose ? rightMatrix.getRowVector(columnIndex) : rightMatrix.getColumnVector(columnIndex);
+							term.accumulateProduct(leftVector, rightVector);
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
 			}
-			try {
-				latch.await();
-			} catch (Exception exception) {
-				throw new RuntimeException(exception);
-			}
-			return this;
 		}
 		}
 	}
@@ -398,53 +569,11 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 		// TODO 可能触发元素变更.
 		switch (mode) {
 		case SERIAL: {
-			for (VectorScalar term : rowVector) {
-				float rowValue = term.getValue();
-				MathVector leftVector = this.getRowVector(term.getIndex());
-				MathVector rightVector = columnVector;
-				int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
-				if (leftSize != 0 && rightSize != 0) {
-					Iterator<VectorScalar> leftIterator = leftVector.iterator();
-					Iterator<VectorScalar> rightIterator = rightVector.iterator();
-					VectorScalar leftTerm = leftIterator.next();
-					VectorScalar rightTerm = rightIterator.next();
-					// 判断两个有序数组中是否存在相同的数字
-					while (leftIndex < leftSize && rightIndex < rightSize) {
-						if (leftTerm.getIndex() == rightTerm.getIndex()) {
-							leftTerm.shiftValue(rowValue * rightTerm.getValue());
-							if (leftIterator.hasNext()) {
-								leftTerm = leftIterator.next();
-							}
-							if (rightIterator.hasNext()) {
-								rightTerm = rightIterator.next();
-							}
-							leftIndex++;
-							rightIndex++;
-						} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
-							if (rightIterator.hasNext()) {
-								rightTerm = rightIterator.next();
-							}
-							rightIndex++;
-						} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
-							if (leftIterator.hasNext()) {
-								leftTerm = leftIterator.next();
-							}
-							leftIndex++;
-						}
-					}
-				}
-			}
-			return this;
-		}
-		default: {
-			int size = rowVector.getElementSize();
-			EnvironmentContext context = EnvironmentContext.getContext();
-			CountDownLatch latch = new CountDownLatch(size);
-			for (VectorScalar term : rowVector) {
-				float rowValue = term.getValue();
-				MathVector leftVector = this.getRowVector(term.getIndex());
-				MathVector rightVector = columnVector;
-				context.doStructureByAny(term.getIndex(), () -> {
+			if (orientation) {
+				for (VectorScalar term : rowVector) {
+					float rowValue = term.getValue();
+					MathVector leftVector = this.getRowVector(term.getIndex());
+					MathVector rightVector = columnVector;
 					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 					if (leftSize != 0 && rightSize != 0) {
 						Iterator<VectorScalar> leftIterator = leftVector.iterator();
@@ -476,15 +605,148 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 							}
 						}
 					}
-					latch.countDown();
-				});
+				}
+				return this;
+			} else {
+				for (VectorScalar term : columnVector) {
+					float columnValue = term.getValue();
+					MathVector leftVector = this.getColumnVector(term.getIndex());
+					MathVector rightVector = rowVector;
+					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+					if (leftSize != 0 && rightSize != 0) {
+						Iterator<VectorScalar> leftIterator = leftVector.iterator();
+						Iterator<VectorScalar> rightIterator = rightVector.iterator();
+						VectorScalar leftTerm = leftIterator.next();
+						VectorScalar rightTerm = rightIterator.next();
+						// 判断两个有序数组中是否存在相同的数字
+						while (leftIndex < leftSize && rightIndex < rightSize) {
+							if (leftTerm.getIndex() == rightTerm.getIndex()) {
+								leftTerm.shiftValue(columnValue * rightTerm.getValue());
+								if (leftIterator.hasNext()) {
+									leftTerm = leftIterator.next();
+								}
+								if (rightIterator.hasNext()) {
+									rightTerm = rightIterator.next();
+								}
+								leftIndex++;
+								rightIndex++;
+							} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+								if (rightIterator.hasNext()) {
+									rightTerm = rightIterator.next();
+								}
+								rightIndex++;
+							} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+								if (leftIterator.hasNext()) {
+									leftTerm = leftIterator.next();
+								}
+								leftIndex++;
+							}
+						}
+					}
+				}
+				return this;
 			}
-			try {
-				latch.await();
-			} catch (Exception exception) {
-				throw new RuntimeException(exception);
+		}
+		default: {
+			if (orientation) {
+				int size = rowVector.getElementSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (VectorScalar term : rowVector) {
+					float rowValue = term.getValue();
+					MathVector leftVector = this.getRowVector(term.getIndex());
+					MathVector rightVector = columnVector;
+					context.doStructureByAny(term.getIndex(), () -> {
+						int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+						if (leftSize != 0 && rightSize != 0) {
+							Iterator<VectorScalar> leftIterator = leftVector.iterator();
+							Iterator<VectorScalar> rightIterator = rightVector.iterator();
+							VectorScalar leftTerm = leftIterator.next();
+							VectorScalar rightTerm = rightIterator.next();
+							// 判断两个有序数组中是否存在相同的数字
+							while (leftIndex < leftSize && rightIndex < rightSize) {
+								if (leftTerm.getIndex() == rightTerm.getIndex()) {
+									leftTerm.shiftValue(rowValue * rightTerm.getValue());
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									leftIndex++;
+									rightIndex++;
+								} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									rightIndex++;
+								} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									leftIndex++;
+								}
+							}
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
+			} else {
+				int size = columnVector.getElementSize();
+				EnvironmentContext context = EnvironmentContext.getContext();
+				CountDownLatch latch = new CountDownLatch(size);
+				for (VectorScalar term : columnVector) {
+					float columnValue = term.getValue();
+					MathVector leftVector = this.getColumnVector(term.getIndex());
+					MathVector rightVector = rowVector;
+					context.doStructureByAny(term.getIndex(), () -> {
+						int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+						if (leftSize != 0 && rightSize != 0) {
+							Iterator<VectorScalar> leftIterator = leftVector.iterator();
+							Iterator<VectorScalar> rightIterator = rightVector.iterator();
+							VectorScalar leftTerm = leftIterator.next();
+							VectorScalar rightTerm = rightIterator.next();
+							// 判断两个有序数组中是否存在相同的数字
+							while (leftIndex < leftSize && rightIndex < rightSize) {
+								if (leftTerm.getIndex() == rightTerm.getIndex()) {
+									leftTerm.shiftValue(columnValue * rightTerm.getValue());
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									leftIndex++;
+									rightIndex++;
+								} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+									if (rightIterator.hasNext()) {
+										rightTerm = rightIterator.next();
+									}
+									rightIndex++;
+								} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+									if (leftIterator.hasNext()) {
+										leftTerm = leftIterator.next();
+									}
+									leftIndex++;
+								}
+							}
+						}
+						latch.countDown();
+					});
+				}
+				try {
+					latch.await();
+				} catch (Exception exception) {
+					throw new RuntimeException(exception);
+				}
+				return this;
 			}
-			return this;
 		}
 		}
 	}
