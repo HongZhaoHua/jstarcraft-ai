@@ -19,7 +19,7 @@ public class MemoryDiscreteAttribute<T extends Comparable<T>> implements Discret
 	/** 外部键-内部索引映射 */
 	private Object2IntOpenHashMap<Object> indexes;
 
-	MemoryDiscreteAttribute(String name, Class<T> type) {
+	public MemoryDiscreteAttribute(String name, Class<T> type) {
 		this.name = name;
 		this.type = type;
 		this.indexes = new Object2IntOpenHashMap<>();

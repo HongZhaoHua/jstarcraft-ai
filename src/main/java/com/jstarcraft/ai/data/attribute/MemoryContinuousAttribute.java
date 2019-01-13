@@ -18,7 +18,7 @@ public class MemoryContinuousAttribute<T extends Number> implements ContinuousAt
 
 	private float minimum;
 
-	MemoryContinuousAttribute(String name, Class<T> type) {
+	public MemoryContinuousAttribute(String name, Class<T> type) {
 		this.name = name;
 		this.type = type;
 		this.maximum = Float.NEGATIVE_INFINITY;

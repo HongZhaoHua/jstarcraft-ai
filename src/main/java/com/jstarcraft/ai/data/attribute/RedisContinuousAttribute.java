@@ -48,7 +48,7 @@ public class RedisContinuousAttribute<T extends Number> implements ContinuousAtt
 
 	private RAtomicDouble minimumAtomic;
 
-	RedisContinuousAttribute(String name, Class<T> type, Redisson redisson) {
+	public RedisContinuousAttribute(String name, Class<T> type, Redisson redisson) {
 		this.name = name;
 		this.type = type;
 		this.maximumKey = name + maximumSuffix;

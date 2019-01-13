@@ -43,7 +43,7 @@ public class RedisDiscreteAttribute<T extends Comparable<T>> implements Discrete
 
 	private RAtomicLong sizeAtomic;
 
-	RedisDiscreteAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
+	public RedisDiscreteAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
 		this.name = name;
 		this.type = type;
 		this.indexKey = name + indexSuffix;
