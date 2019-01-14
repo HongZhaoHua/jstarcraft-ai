@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.data.module;
 
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import com.jstarcraft.ai.data.DataInstance;
@@ -67,6 +68,35 @@ public class ReferenceModule implements DataModule {
 	@Override
 	public int getContinuousInner(String name) {
 		return module.getContinuousInner(name);
+	}
+
+	@Override
+	public Iterator<DataInstance> iterator() {
+		return new ReferenceModuleIterator();
+	}
+
+	private class ReferenceModuleIterator implements Iterator<DataInstance> {
+
+		private int cursor, size = ReferenceModule.this.getSize();
+
+		private DataInstance term = new ReferenceInstance(cursor, ReferenceModule.this.references, ReferenceModule.this.module);
+
+		@Override
+		public boolean hasNext() {
+			return cursor < size;
+		}
+
+		@Override
+		public DataInstance next() {
+			term.setCursor(cursor++);
+			return term;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 }

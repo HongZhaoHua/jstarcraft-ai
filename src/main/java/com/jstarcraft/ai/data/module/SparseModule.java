@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.data.module;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.jstarcraft.ai.data.DataInstance;
@@ -41,17 +42,17 @@ public class SparseModule extends AbstractModule {
 
 	private int size;
 
-	public SparseModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity) {
-		super(moduleName, moduleDefinition);
-		this.discretePoints = new IntegerArray(1000, instanceCapacity + 1);
-		this.discreteIndexes = new IntegerArray(1000, instanceCapacity * discreteOrder);
-		this.discreteValues = new IntegerArray(1000, instanceCapacity * discreteOrder);
-		this.continuousPoints = new IntegerArray(1000, instanceCapacity + 1);
-		this.continuousIndexes = new IntegerArray(1000, instanceCapacity * continuousOrder);
-		this.continuousValues = new FloatArray(1000, instanceCapacity * continuousOrder);
+	public SparseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
+		super(name, definition);
+		this.discretePoints = new IntegerArray(1000, capacity + 1);
+		this.discreteIndexes = new IntegerArray(1000, capacity * discreteOrder);
+		this.discreteValues = new IntegerArray(1000, capacity * discreteOrder);
+		this.continuousPoints = new IntegerArray(1000, capacity + 1);
+		this.continuousIndexes = new IntegerArray(1000, capacity * continuousOrder);
+		this.continuousValues = new FloatArray(1000, capacity * continuousOrder);
 		this.discretePoints.associateData(0);
 		this.continuousPoints.associateData(0);
-		this.capacity = instanceCapacity;
+		this.capacity = capacity;
 	}
 
 	IntegerArray getDiscretePoints() {
@@ -113,6 +114,35 @@ public class SparseModule extends AbstractModule {
 	@Override
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public Iterator<DataInstance> iterator() {
+		return new SparseModuleIterator();
+	}
+
+	private class SparseModuleIterator implements Iterator<DataInstance> {
+
+		private int cursor;
+
+		private DataInstance term = new SparseInstance(cursor, SparseModule.this);
+
+		@Override
+		public boolean hasNext() {
+			return cursor < size;
+		}
+
+		@Override
+		public DataInstance next() {
+			term.setCursor(cursor++);
+			return term;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 }

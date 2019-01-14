@@ -1,11 +1,13 @@
 package com.jstarcraft.ai.data.module;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.exception.DataCapacityException;
 import com.jstarcraft.ai.data.exception.DataCursorException;
 import com.jstarcraft.ai.data.exception.DataException;
+import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
@@ -33,17 +35,17 @@ public class DenseModule extends AbstractModule {
 
 	private int size;
 
-	public DenseModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity) {
-		super(moduleName, moduleDefinition);
+	public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
+		super(name, definition);
 		this.discreteValues = new IntegerArray[discreteOrder];
 		for (int index = 0; index < discreteOrder; index++) {
-			this.discreteValues[index] = new IntegerArray(1000, instanceCapacity);
+			this.discreteValues[index] = new IntegerArray(1000, capacity);
 		}
 		this.continuousValues = new FloatArray[continuousOrder];
 		for (int index = 0; index < continuousOrder; index++) {
-			this.continuousValues[index] = new FloatArray(1000, instanceCapacity);
+			this.continuousValues[index] = new FloatArray(1000, capacity);
 		}
-		this.capacity = instanceCapacity;
+		this.capacity = capacity;
 	}
 
 	IntegerArray[] getDiscreteValues() {
@@ -87,6 +89,35 @@ public class DenseModule extends AbstractModule {
 	@Override
 	public int getSize() {
 		return size;
+	}
+
+	@Override
+	public Iterator<DataInstance> iterator() {
+		return new DenseModuleIterator();
+	}
+
+	private class DenseModuleIterator implements Iterator<DataInstance> {
+
+		private int cursor;
+
+		private DataInstance term = new DenseInstance(cursor, DenseModule.this);
+
+		@Override
+		public boolean hasNext() {
+			return cursor < size;
+		}
+
+		@Override
+		public DataInstance next() {
+			term.setCursor(cursor++);
+			return term;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+
 	}
 
 }

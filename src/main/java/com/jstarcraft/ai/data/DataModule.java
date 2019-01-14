@@ -17,7 +17,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  * @author Birdy
  *
  */
-public interface DataModule {
+public interface DataModule extends Iterable<DataInstance> {
 
 	/**
 	 * 获取稀疏秩
@@ -55,7 +55,7 @@ public interface DataModule {
 	 * @return
 	 */
 	int getSize();
-	
+
 	/**
 	 * 获取指定外部索引的属性投影(true代表离散,false代表连续)
 	 * 
