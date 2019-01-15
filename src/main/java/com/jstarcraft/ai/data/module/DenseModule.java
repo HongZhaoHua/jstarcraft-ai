@@ -7,7 +7,6 @@ import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.exception.DataCapacityException;
 import com.jstarcraft.ai.data.exception.DataCursorException;
 import com.jstarcraft.ai.data.exception.DataException;
-import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
