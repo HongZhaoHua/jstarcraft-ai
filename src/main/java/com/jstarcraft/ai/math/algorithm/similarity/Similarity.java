@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.math.algorithm.similarity;
 
-import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
+import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
@@ -20,7 +20,7 @@ public interface Similarity {
 	 * @param scale
 	 * @return
 	 */
-	SymmetryMatrix makeSimilarityMatrix(SparseMatrix scoreMatrix, boolean transpose, float scale);
+	SymmetryMatrix makeSimilarityMatrix(MathMatrix scoreMatrix, boolean transpose, float scale);
 
 	/**
 	 * 获取两个向量的相关系数

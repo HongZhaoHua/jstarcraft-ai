@@ -2,8 +2,8 @@ package com.jstarcraft.ai.math.algorithm.similarity;
 
 import java.util.List;
 
+import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
-import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.KeyValue;
@@ -19,7 +19,7 @@ public class CPCSimilarity extends AbstractSimilarity {
 	private double median;
 
 	@Override
-	public SymmetryMatrix makeSimilarityMatrix(SparseMatrix trainMatrix, boolean transpose, float scale) {
+	public SymmetryMatrix makeSimilarityMatrix(MathMatrix trainMatrix, boolean transpose, float scale) {
 		float maximum = 0F;
 		float minimum = 0F;
 		for (MatrixScalar term : trainMatrix) {

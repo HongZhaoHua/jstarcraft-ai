@@ -4,10 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
+import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.SparseVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -42,18 +41,18 @@ public abstract class AbstractSimilarity implements Similarity {
 	}
 
 	@Override
-	public SymmetryMatrix makeSimilarityMatrix(SparseMatrix scoreMatrix, boolean transpose, float scale) {
+	public SymmetryMatrix makeSimilarityMatrix(MathMatrix scoreMatrix, boolean transpose, float scale) {
 		int count = transpose ? scoreMatrix.getColumnSize() : scoreMatrix.getRowSize();
 		SymmetryMatrix similarityMatrix = new SymmetryMatrix(count);
 		for (int leftIndex = 0; leftIndex < count; leftIndex++) {
-			SparseVector thisVector = transpose ? scoreMatrix.getColumnVector(leftIndex) : scoreMatrix.getRowVector(leftIndex);
+			MathVector thisVector = transpose ? scoreMatrix.getColumnVector(leftIndex) : scoreMatrix.getRowVector(leftIndex);
 			if (thisVector.getElementSize() == 0) {
 				continue;
 			}
 			similarityMatrix.setValue(leftIndex, leftIndex, getIdentical());
 			// user/item itself exclusive
 			for (int rightIndex = leftIndex + 1; rightIndex < count; rightIndex++) {
-				SparseVector thatVector = transpose ? scoreMatrix.getColumnVector(rightIndex) : scoreMatrix.getRowVector(rightIndex);
+				MathVector thatVector = transpose ? scoreMatrix.getColumnVector(rightIndex) : scoreMatrix.getRowVector(rightIndex);
 				if (thatVector.getElementSize() == 0) {
 					continue;
 				}
