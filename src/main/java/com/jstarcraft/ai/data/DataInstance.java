@@ -7,6 +7,10 @@ package com.jstarcraft.ai.data;
  *
  */
 public interface DataInstance {
+	
+	public final static int defaultInteger = -1;
+
+	public final static float defaultFloat = Float.NaN;
 
 	/**
 	 * 设置游标
@@ -53,5 +57,19 @@ public interface DataInstance {
 	 * @return
 	 */
 	DataInstance iterateContinuousFeatures(ContinuousAccessor accessor);
+
+	/**
+	 * 获取离散标记
+	 * 
+	 * @return
+	 */
+	float getDiscreteMark();
+
+	/**
+	 * 获取连续标记
+	 * 
+	 * @return
+	 */
+	float getContinuousMark();
 
 }

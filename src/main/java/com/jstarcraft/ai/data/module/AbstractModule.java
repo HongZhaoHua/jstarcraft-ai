@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.jstarcraft.ai.data.DataModule;
+import com.jstarcraft.ai.utility.FloatArray;
+import com.jstarcraft.ai.utility.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
@@ -29,6 +31,12 @@ abstract public class AbstractModule implements DataModule {
 
 	/** 从连续属性到内部索引的投影 */
 	protected TreeMap<String, Integer> continuousInner = new TreeMap<>();
+
+	/** 离散标记 */
+	protected IntegerArray discreteMarks;
+
+	/** 连续标记 */
+	protected FloatArray continuousMarks;
 
 	protected int capacity;
 
@@ -61,6 +69,8 @@ abstract public class AbstractModule implements DataModule {
 				count += term.getValue();
 			}
 		}
+		this.discreteMarks = new IntegerArray(1000, capacity);
+		this.continuousMarks = new FloatArray(1000, capacity);
 		this.capacity = capacity;
 	}
 
@@ -90,6 +100,14 @@ abstract public class AbstractModule implements DataModule {
 	public int getContinuousInner(String name) {
 		// 通过等于查找
 		return continuousInner.get(name);
+	}
+
+	IntegerArray getDiscreteMarks() {
+		return discreteMarks;
+	}
+
+	FloatArray getContinuousMarks() {
+		return continuousMarks;
 	}
 
 }

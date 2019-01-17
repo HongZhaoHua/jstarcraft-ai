@@ -41,7 +41,7 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures) {
+	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
 		throw new UnsupportedOperationException();
 	}
 

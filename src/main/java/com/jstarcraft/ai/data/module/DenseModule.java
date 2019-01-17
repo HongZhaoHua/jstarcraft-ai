@@ -51,7 +51,7 @@ public class DenseModule extends AbstractModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures) {
+	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
@@ -69,6 +69,8 @@ public class DenseModule extends AbstractModule {
 		for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
 			continuousValues[term.getIntKey()].associateData(term.getFloatValue());
 		}
+		discreteMarks.associateData(discreteMark);
+		continuousMarks.associateData(continuousMark);
 		size++;
 	}
 

@@ -38,8 +38,42 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * 
 	 * @param discreteFeatures
 	 * @param continuousFeatures
+	 * @param discreteMark
+	 * @param continuousMark
 	 */
-	void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures);
+	void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark);
+
+	/**
+	 * 关联实例
+	 * 
+	 * @param discreteFeatures
+	 * @param continuousFeatures
+	 * @param discreteMark
+	 */
+	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark) {
+		associateInstance(discreteFeatures, continuousFeatures, discreteMark, DataInstance.defaultFloat);
+	}
+
+	/**
+	 * 关联实例
+	 * 
+	 * @param discreteFeatures
+	 * @param continuousFeatures
+	 * @param continuousMark
+	 */
+	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, float continuousMark) {
+		associateInstance(discreteFeatures, continuousFeatures, DataInstance.defaultInteger, continuousMark);
+	}
+
+	/**
+	 * 关联实例
+	 * 
+	 * @param discreteFeatures
+	 * @param continuousFeatures
+	 */
+	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures) {
+		associateInstance(discreteFeatures, continuousFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
+	}
 
 	/**
 	 * 获取实例

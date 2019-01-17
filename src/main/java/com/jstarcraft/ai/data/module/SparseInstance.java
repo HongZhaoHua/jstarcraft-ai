@@ -28,12 +28,18 @@ public class SparseInstance implements DataInstance {
 
 	private FloatArray continuousValues;
 
+	/** 离散标记 */
+	protected IntegerArray discreteMarks;
+
+	/** 连续标记 */
+	protected FloatArray continuousMarks;
+
 	SparseInstance(int cursor, SparseModule module) {
 		this.cursor = cursor;
 		this.discreteFeatures = new int[module.getDiscreteOrder()];
 		{
 			for (int index = 0, size = module.getDiscreteOrder(); index < size; index++) {
-				this.discreteFeatures[index] = -1;
+				this.discreteFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
 		this.discretePoints = module.getDiscretePoints();
@@ -42,7 +48,7 @@ public class SparseInstance implements DataInstance {
 		this.continuousFeatures = new float[module.getContinuousOrder()];
 		{
 			for (int index = 0, size = module.getContinuousOrder(); index < size; index++) {
-				this.continuousFeatures[index] = Float.NaN;
+				this.continuousFeatures[index] = DataInstance.defaultFloat;
 			}
 		}
 		this.continuousPoints = module.getContinuousPoints();
@@ -73,7 +79,7 @@ public class SparseInstance implements DataInstance {
 			int to = this.discretePoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
 				int index = this.discreteIndexes.getData(current);
-				this.discreteFeatures[index] = -1;
+				this.discreteFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
 		{
@@ -81,7 +87,7 @@ public class SparseInstance implements DataInstance {
 			int to = this.continuousPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
 				int index = this.continuousIndexes.getData(current);
-				this.continuousFeatures[index] = Float.NaN;
+				this.continuousFeatures[index] = DataInstance.defaultFloat;
 			}
 		}
 		this.cursor = cursor;
@@ -138,6 +144,16 @@ public class SparseInstance implements DataInstance {
 			accessor.accessorFeature(index, this.continuousFeatures[index]);
 		}
 		return this;
+	}
+
+	@Override
+	public float getDiscreteMark() {
+		return discreteMarks.getData(cursor);
+	}
+
+	@Override
+	public float getContinuousMark() {
+		return continuousMarks.getData(cursor);
 	}
 
 }

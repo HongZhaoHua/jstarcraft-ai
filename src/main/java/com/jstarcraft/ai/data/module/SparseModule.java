@@ -75,7 +75,7 @@ public class SparseModule extends AbstractModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures) {
+	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
@@ -95,6 +95,8 @@ public class SparseModule extends AbstractModule {
 			continuousIndexes.associateData(term.getIntKey());
 			continuousValues.associateData(term.getFloatValue());
 		}
+		discreteMarks.associateData(discreteMark);
+		continuousMarks.associateData(continuousMark);
 		size++;
 	}
 

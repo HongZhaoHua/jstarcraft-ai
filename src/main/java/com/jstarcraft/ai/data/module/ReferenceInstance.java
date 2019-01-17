@@ -55,4 +55,14 @@ public class ReferenceInstance implements DataInstance {
 		return this;
 	}
 
+	@Override
+	public float getDiscreteMark() {
+		return instance.getDiscreteMark();
+	}
+
+	@Override
+	public float getContinuousMark() {
+		return instance.getContinuousMark();
+	}
+
 }

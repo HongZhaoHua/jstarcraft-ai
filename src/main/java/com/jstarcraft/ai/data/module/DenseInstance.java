@@ -22,6 +22,12 @@ public class DenseInstance implements DataInstance {
 	/** 连续特征 */
 	private FloatArray[] continuousValues;
 
+	/** 离散标记 */
+	protected IntegerArray discreteMarks;
+
+	/** 连续标记 */
+	protected FloatArray continuousMarks;
+
 	DenseInstance(int cursor, DenseModule module) {
 		this.cursor = cursor;
 		this.discreteOrder = module.getDiscreteOrder();
@@ -64,6 +70,16 @@ public class DenseInstance implements DataInstance {
 			accessor.accessorFeature(index, continuousValues[index].getData(cursor));
 		}
 		return this;
+	}
+
+	@Override
+	public float getDiscreteMark() {
+		return discreteMarks.getData(cursor);
+	}
+
+	@Override
+	public float getContinuousMark() {
+		return continuousMarks.getData(cursor);
 	}
 
 }
