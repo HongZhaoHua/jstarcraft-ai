@@ -30,7 +30,11 @@ abstract public class AbstractModule implements DataModule {
 	/** 从连续属性到内部索引的投影 */
 	protected TreeMap<String, Integer> continuousInner = new TreeMap<>();
 
-	protected AbstractModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition) {
+	protected int capacity;
+
+	protected int size;
+
+	protected AbstractModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
 		for (KeyValue<KeyValue<String, Boolean>, Integer> term : definition) {
 			KeyValue<String, Boolean> keyValue = term.getKey();
 			if (keyValue.getValue()) {
@@ -57,6 +61,7 @@ abstract public class AbstractModule implements DataModule {
 				count += term.getValue();
 			}
 		}
+		this.capacity = capacity;
 	}
 
 	@Override

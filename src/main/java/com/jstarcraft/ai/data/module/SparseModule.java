@@ -38,12 +38,8 @@ public class SparseModule extends AbstractModule {
 
 	private FloatArray continuousValues;
 
-	private int capacity;
-
-	private int size;
-
 	public SparseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
-		super(name, definition);
+		super(name, definition, capacity);
 		this.discretePoints = new IntegerArray(1000, capacity + 1);
 		this.discreteIndexes = new IntegerArray(1000, capacity * discreteOrder);
 		this.discreteValues = new IntegerArray(1000, capacity * discreteOrder);
@@ -52,7 +48,6 @@ public class SparseModule extends AbstractModule {
 		this.continuousValues = new FloatArray(1000, capacity * continuousOrder);
 		this.discretePoints.associateData(0);
 		this.continuousPoints.associateData(0);
-		this.capacity = capacity;
 	}
 
 	IntegerArray getDiscretePoints() {

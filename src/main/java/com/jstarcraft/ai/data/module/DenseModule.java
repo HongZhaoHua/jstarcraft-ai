@@ -30,12 +30,8 @@ public class DenseModule extends AbstractModule {
 	/** 连续特征 */
 	private FloatArray[] continuousValues;
 
-	private int capacity;
-
-	private int size;
-
 	public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
-		super(name, definition);
+		super(name, definition, capacity);
 		this.discreteValues = new IntegerArray[discreteOrder];
 		for (int index = 0; index < discreteOrder; index++) {
 			this.discreteValues[index] = new IntegerArray(1000, capacity);
@@ -44,7 +40,6 @@ public class DenseModule extends AbstractModule {
 		for (int index = 0; index < continuousOrder; index++) {
 			this.continuousValues[index] = new FloatArray(1000, capacity);
 		}
-		this.capacity = capacity;
 	}
 
 	IntegerArray[] getDiscreteValues() {
