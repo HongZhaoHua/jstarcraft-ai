@@ -1,6 +1,8 @@
 package com.jstarcraft.ai.data.module;
 
+import com.jstarcraft.ai.data.ContinuousAccessor;
 import com.jstarcraft.ai.data.DataInstance;
+import com.jstarcraft.ai.data.DiscreteAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
@@ -117,7 +119,7 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public SparseInstance iterateDiscreteFeature(DiscreteAccessor accessor) {
+	public SparseInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
 		int from = this.discretePoints.getData(this.cursor);
 		int to = this.discretePoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
@@ -128,7 +130,7 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public SparseInstance iterateContinuousFeature(ContinuousAccessor accessor) {
+	public SparseInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
 		int from = this.continuousPoints.getData(this.cursor);
 		int to = this.continuousPoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {

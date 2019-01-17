@@ -1,7 +1,9 @@
 package com.jstarcraft.ai.data.module;
 
+import com.jstarcraft.ai.data.ContinuousAccessor;
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
+import com.jstarcraft.ai.data.DiscreteAccessor;
 import com.jstarcraft.ai.utility.IntegerArray;
 
 public class ReferenceInstance implements DataInstance {
@@ -42,14 +44,14 @@ public class ReferenceInstance implements DataInstance {
 	}
 
 	@Override
-	public DataInstance iterateDiscreteFeature(DiscreteAccessor accessor) {
-		instance.iterateDiscreteFeature(accessor);
+	public DataInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
+		instance.iterateDiscreteFeatures(accessor);
 		return this;
 	}
 
 	@Override
-	public DataInstance iterateContinuousFeature(ContinuousAccessor accessor) {
-		instance.iterateContinuousFeature(accessor);
+	public DataInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
+		instance.iterateContinuousFeatures(accessor);
 		return this;
 	}
 

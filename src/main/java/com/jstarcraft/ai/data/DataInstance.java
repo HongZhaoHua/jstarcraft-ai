@@ -1,8 +1,5 @@
 package com.jstarcraft.ai.data;
 
-import com.jstarcraft.ai.data.module.ContinuousAccessor;
-import com.jstarcraft.ai.data.module.DiscreteAccessor;
-
 /**
  * 数据实例
  * 
@@ -47,7 +44,7 @@ public interface DataInstance {
 	 * @param accessor
 	 * @return
 	 */
-	DataInstance iterateDiscreteFeature(DiscreteAccessor accessor);
+	DataInstance iterateDiscreteFeatures(DiscreteAccessor accessor);
 
 	/**
 	 * 遍历连续特征
@@ -55,6 +52,6 @@ public interface DataInstance {
 	 * @param accessor
 	 * @return
 	 */
-	DataInstance iterateContinuousFeature(ContinuousAccessor accessor);
+	DataInstance iterateContinuousFeatures(ContinuousAccessor accessor);
 
 }

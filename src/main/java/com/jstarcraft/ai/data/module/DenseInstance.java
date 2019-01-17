@@ -1,6 +1,8 @@
 package com.jstarcraft.ai.data.module;
 
+import com.jstarcraft.ai.data.ContinuousAccessor;
 import com.jstarcraft.ai.data.DataInstance;
+import com.jstarcraft.ai.data.DiscreteAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
@@ -49,7 +51,7 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public DenseInstance iterateDiscreteFeature(DiscreteAccessor accessor) {
+	public DenseInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
 		for (int index = 0; index < discreteOrder; index++) {
 			accessor.accessorFeature(index, discreteValues[index].getData(cursor));
 		}
@@ -57,7 +59,7 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public DenseInstance iterateContinuousFeature(ContinuousAccessor accessor) {
+	public DenseInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
 		for (int index = 0; index < continuousOrder; index++) {
 			accessor.accessorFeature(index, continuousValues[index].getData(cursor));
 		}

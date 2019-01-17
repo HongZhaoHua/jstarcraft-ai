@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.data.module;
+package com.jstarcraft.ai.data;
 
 /**
  * 离散访问器
