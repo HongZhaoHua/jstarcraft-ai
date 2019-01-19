@@ -24,7 +24,7 @@ public class DefaultInstance implements DataInstance {
 	/** 连续标记 */
 	private float continuousMark;
 
-	DefaultInstance(DataInstance instance) {
+	public DefaultInstance(DataInstance instance) {
 		this.discreteOrder = instance.getDiscreteOrder();
 		this.continuousOrder = instance.getContinuousOrder();
 		this.discreteFeatures = new int[instance.getDiscreteOrder()];
