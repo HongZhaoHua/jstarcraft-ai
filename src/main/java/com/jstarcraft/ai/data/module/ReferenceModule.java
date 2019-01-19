@@ -31,16 +31,6 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteOrder() {
-		return module.getDiscreteOrder();
-	}
-
-	@Override
-	public int getContinuousOrder() {
-		return module.getContinuousOrder();
-	}
-
-	@Override
 	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
 		throw new UnsupportedOperationException();
 	}
@@ -68,6 +58,16 @@ public class ReferenceModule implements DataModule {
 	@Override
 	public int getContinuousInner(String name) {
 		return module.getContinuousInner(name);
+	}
+
+	@Override
+	public int getDiscreteOrder() {
+		return module.getDiscreteOrder();
+	}
+
+	@Override
+	public int getContinuousOrder() {
+		return module.getContinuousOrder();
 	}
 
 	@Override

@@ -10,6 +10,12 @@ public class SparseInstance implements DataInstance {
 
 	private int cursor;
 
+	/** 离散秩 */
+	private int discreteOrder;
+
+	/** 连续秩 */
+	private int continuousOrder;
+
 	/** 离散特征 */
 	private int[] discreteFeatures;
 
@@ -36,6 +42,8 @@ public class SparseInstance implements DataInstance {
 
 	SparseInstance(int cursor, SparseModule module) {
 		this.cursor = cursor;
+		this.discreteOrder = module.getDiscreteOrder();
+		this.continuousOrder = module.getContinuousOrder();
 		this.discreteFeatures = new int[module.getDiscreteOrder()];
 		{
 			for (int index = 0, size = module.getDiscreteOrder(); index < size; index++) {
@@ -147,13 +155,23 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public float getDiscreteMark() {
+	public int getDiscreteMark() {
 		return discreteMarks.getData(cursor);
 	}
 
 	@Override
 	public float getContinuousMark() {
 		return continuousMarks.getData(cursor);
+	}
+
+	@Override
+	public int getDiscreteOrder() {
+		return discreteOrder;
+	}
+
+	@Override
+	public int getContinuousOrder() {
+		return continuousOrder;
 	}
 
 }

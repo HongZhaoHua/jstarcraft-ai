@@ -10,10 +10,10 @@ public class DenseInstance implements DataInstance {
 
 	private int cursor;
 
-	/** 离散特征 */
+	/** 离散秩 */
 	private int discreteOrder;
 
-	/** 连续特征 */
+	/** 连续秩 */
 	private int continuousOrder;
 
 	/** 离散特征 */
@@ -73,13 +73,23 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public float getDiscreteMark() {
+	public int getDiscreteMark() {
 		return discreteMarks.getData(cursor);
 	}
 
 	@Override
 	public float getContinuousMark() {
 		return continuousMarks.getData(cursor);
+	}
+
+	@Override
+	public int getDiscreteOrder() {
+		return discreteOrder;
+	}
+
+	@Override
+	public int getContinuousOrder() {
+		return continuousOrder;
 	}
 
 }

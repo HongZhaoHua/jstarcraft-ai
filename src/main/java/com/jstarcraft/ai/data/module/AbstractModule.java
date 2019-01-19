@@ -75,16 +75,6 @@ abstract public class AbstractModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteOrder() {
-		return discreteOrder;
-	}
-
-	@Override
-	public int getContinuousOrder() {
-		return continuousOrder;
-	}
-
-	@Override
 	public Entry<Integer, KeyValue<String, Boolean>> getOuterKeyValue(int index) {
 		// 通过小于等于查找
 		return outer.floorEntry(index);
@@ -100,6 +90,16 @@ abstract public class AbstractModule implements DataModule {
 	public int getContinuousInner(String name) {
 		// 通过等于查找
 		return continuousInner.get(name);
+	}
+
+	@Override
+	public int getDiscreteOrder() {
+		return discreteOrder;
+	}
+
+	@Override
+	public int getContinuousOrder() {
+		return continuousOrder;
 	}
 
 	IntegerArray getDiscreteMarks() {

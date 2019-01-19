@@ -7,7 +7,7 @@ package com.jstarcraft.ai.data;
  *
  */
 public interface DataInstance {
-	
+
 	public final static int defaultInteger = -1;
 
 	public final static float defaultFloat = Float.NaN;
@@ -63,7 +63,7 @@ public interface DataInstance {
 	 * 
 	 * @return
 	 */
-	float getDiscreteMark();
+	int getDiscreteMark();
 
 	/**
 	 * 获取连续标记
@@ -71,5 +71,19 @@ public interface DataInstance {
 	 * @return
 	 */
 	float getContinuousMark();
+
+	/**
+	 * 获取稀疏秩
+	 * 
+	 * @return
+	 */
+	int getDiscreteOrder();
+
+	/**
+	 * 获取连续秩
+	 * 
+	 * @return
+	 */
+	int getContinuousOrder();
 
 }

@@ -20,20 +20,6 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 public interface DataModule extends Iterable<DataInstance> {
 
 	/**
-	 * 获取稀疏秩
-	 * 
-	 * @return
-	 */
-	int getDiscreteOrder();
-
-	/**
-	 * 获取连续秩
-	 * 
-	 * @return
-	 */
-	int getContinuousOrder();
-
-	/**
 	 * 关联实例
 	 * 
 	 * @param discreteFeatures
@@ -113,5 +99,19 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @return
 	 */
 	int getContinuousInner(String name);
+
+	/**
+	 * 获取稀疏秩
+	 * 
+	 * @return
+	 */
+	int getDiscreteOrder();
+
+	/**
+	 * 获取连续秩
+	 * 
+	 * @return
+	 */
+	int getContinuousOrder();
 
 }
