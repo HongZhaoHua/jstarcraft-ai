@@ -7,8 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.nd4j.linalg.factory.Nd4j;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.message.SumMessage;
@@ -16,15 +14,17 @@ import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
 
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+
 public class RowArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected RowArrayMatrix getRandomMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					table.put(rowIndex, columnIndex, 0F);
+					table.setValue(rowIndex, columnIndex, 0F);
 				}
 			}
 		}
@@ -42,10 +42,10 @@ public class RowArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected RowArrayMatrix getZeroMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-				table.put(rowIndex, columnIndex, 0F);
+				table.setValue(rowIndex, columnIndex, 0F);
 			}
 		}
 		SparseMatrix data = SparseMatrix.valueOf(dimension, dimension, table);

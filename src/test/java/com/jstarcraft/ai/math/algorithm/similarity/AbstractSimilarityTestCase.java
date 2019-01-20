@@ -7,12 +7,13 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
+import com.jstarcraft.ai.math.structure.matrix.RandomMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.core.utility.RandomUtility;
+
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 
 public abstract class AbstractSimilarityTestCase {
 
@@ -26,11 +27,11 @@ public abstract class AbstractSimilarityTestCase {
 	public void test() {
 		int rowSize = 50;
 		int columnSize = 100;
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, rowSize, columnSize, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					table.put(rowIndex, columnIndex, RandomUtility.randomFloat(1F));
+					table.setValue(rowIndex, columnIndex, RandomUtility.randomFloat(1F));
 				}
 			}
 		}

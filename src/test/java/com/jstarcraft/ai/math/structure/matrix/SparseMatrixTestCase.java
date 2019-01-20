@@ -1,19 +1,19 @@
 package com.jstarcraft.ai.math.structure.matrix;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.core.utility.RandomUtility;
+
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 
 public class SparseMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected SparseMatrix getRandomMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					table.put(rowIndex, columnIndex, 0F);
+					table.setValue(rowIndex, columnIndex, 0F);
 				}
 			}
 		}
@@ -26,10 +26,10 @@ public class SparseMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected SparseMatrix getZeroMatrix(int dimension) {
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-				table.put(rowIndex, columnIndex, 0F);
+				table.setValue(rowIndex, columnIndex, 0F);
 			}
 		}
 		SparseMatrix matrix = SparseMatrix.valueOf(dimension, dimension, table);

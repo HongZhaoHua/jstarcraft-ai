@@ -6,16 +6,16 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.nd4j.linalg.factory.Nd4j;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
+import com.jstarcraft.ai.math.structure.matrix.RandomMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 
 import it.unimi.dsi.fastutil.floats.Float2IntAVLTreeMap;
 import it.unimi.dsi.fastutil.floats.Float2IntSortedMap;
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 
 public class SearchUtilityTestCase {
 
@@ -29,24 +29,24 @@ public class SearchUtilityTestCase {
 		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
 		Future<?> task = context.doTask(() -> {
 			int dimension = 7;
-			Table<Integer, Integer, Float> table = HashBasedTable.create();
-			table.put(0, 1, 0.5F);
-			table.put(0, 2, 0.5F);
+			RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+			table.setValue(0, 1, 0.5F);
+			table.setValue(0, 2, 0.5F);
 
-			table.put(2, 0, 0.3F);
-			table.put(2, 1, 0.3F);
-			table.put(2, 4, 0.3F);
+			table.setValue(2, 0, 0.3F);
+			table.setValue(2, 1, 0.3F);
+			table.setValue(2, 4, 0.3F);
 
-			table.put(3, 4, 0.5F);
-			table.put(3, 5, 0.5F);
+			table.setValue(3, 4, 0.5F);
+			table.setValue(3, 5, 0.5F);
 
-			table.put(4, 3, 0.5F);
-			table.put(4, 5, 0.5F);
+			table.setValue(4, 3, 0.5F);
+			table.setValue(4, 5, 0.5F);
 
-			table.put(5, 3, 1F);
+			table.setValue(5, 3, 1F);
 
-			table.put(6, 1, 0.5F);
-			table.put(6, 3, 0.5F);
+			table.setValue(6, 1, 0.5F);
+			table.setValue(6, 3, 0.5F);
 			SparseMatrix sparseMatrix = SparseMatrix.valueOf(dimension, dimension, table);
 			DenseMatrix denseMatrix = DenseMatrix.valueOf(dimension, dimension);
 			for (MatrixScalar scalar : sparseMatrix) {

@@ -9,8 +9,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.math3.util.FastMath;
 
-import com.google.common.collect.Table;
-import com.google.common.collect.Table.Cell;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
@@ -364,11 +362,11 @@ public class SparseMatrix implements MathMatrix {
 		return instance;
 	}
 
-	public static SparseMatrix valueOf(int rowSize, int columnSize, Table<Integer, Integer, Float> dataTable) {
+	public static SparseMatrix valueOf(int rowSize, int columnSize, RandomMatrix matrix) {
 		SparseMatrix instance = new SparseMatrix();
 		instance.rowSize = rowSize;
 		instance.columnSize = columnSize;
-		int size = dataTable.size();
+		int size = matrix.getElementSize();
 
 		// CRS
 		instance.rowPoints = new int[rowSize + 1];
@@ -387,9 +385,9 @@ public class SparseMatrix implements MathMatrix {
 		Integer[] rowIndexes = new Integer[size];
 		Integer[] columnIndexes = new Integer[size];
 		int index = 0;
-		for (Cell<Integer, Integer, Float> cell : dataTable.cellSet()) {
-			int row = cell.getRowKey();
-			int column = cell.getColumnKey();
+		for (MatrixScalar cell : matrix) {
+			int row = cell.getRow();
+			int column = cell.getColumn();
 			// 设置term的坐标与值
 			instance.termRows[index] = row;
 			instance.termColumns[index] = column;

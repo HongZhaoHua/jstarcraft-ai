@@ -4,21 +4,21 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.core.utility.RandomUtility;
+
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 
 public class ColumnCompositeMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected ColumnCompositeMatrix getRandomMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(dimension, 1);
-		Table<Integer, Integer, Float> table = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension - 1; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					table.put(rowIndex, columnIndex, 0F);
+					table.setValue(rowIndex, columnIndex, 0F);
 				}
 			}
 		}
@@ -33,13 +33,13 @@ public class ColumnCompositeMatrixTestCase extends MatrixTestCase {
 	@Override
 	protected ColumnCompositeMatrix getZeroMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(dimension, 1);
-		Table<Integer, Integer, Float> data = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension - 1; columnIndex++) {
-				data.put(rowIndex, columnIndex, 0F);
+				table.setValue(rowIndex, columnIndex, 0F);
 			}
 		}
-		MathMatrix to = SparseMatrix.valueOf(dimension, dimension - 1, data);
+		MathMatrix to = SparseMatrix.valueOf(dimension, dimension - 1, table);
 		ColumnCompositeMatrix matrix = ColumnCompositeMatrix.attachOf(from, to);
 		return matrix;
 	}

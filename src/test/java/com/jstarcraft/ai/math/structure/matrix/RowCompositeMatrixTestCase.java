@@ -4,25 +4,25 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.core.utility.RandomUtility;
+
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 
 public class RowCompositeMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected RowCompositeMatrix getRandomMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(1, dimension);
-		Table<Integer, Integer, Float> data = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension - 1; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
-					data.put(rowIndex, columnIndex, 0F);
+					table.setValue(rowIndex, columnIndex, 0F);
 				}
 			}
 		}
-		MathMatrix to = SparseMatrix.valueOf(dimension - 1, dimension, data);
+		MathMatrix to = SparseMatrix.valueOf(dimension - 1, dimension, table);
 		RowCompositeMatrix matrix = RowCompositeMatrix.attachOf(from, to);
 		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
 			scalar.setValue(RandomUtility.randomInteger(dimension));
@@ -33,13 +33,13 @@ public class RowCompositeMatrixTestCase extends MatrixTestCase {
 	@Override
 	protected RowCompositeMatrix getZeroMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(1, dimension);
-		Table<Integer, Integer, Float> data = HashBasedTable.create();
+		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension - 1; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
-				data.put(rowIndex, columnIndex, 0F);
+				table.setValue(rowIndex, columnIndex, 0F);
 			}
 		}
-		MathMatrix to = SparseMatrix.valueOf(dimension - 1, dimension, data);
+		MathMatrix to = SparseMatrix.valueOf(dimension - 1, dimension, table);
 		RowCompositeMatrix matrix = RowCompositeMatrix.attachOf(from, to);
 		return matrix;
 	}
