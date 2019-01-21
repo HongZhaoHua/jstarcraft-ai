@@ -9,6 +9,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.math3.util.FastMath;
 
+import com.google.common.collect.Table;
+import com.google.common.collect.Table.Cell;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
@@ -388,6 +390,90 @@ public class SparseMatrix implements MathMatrix {
 		for (MatrixScalar cell : matrix) {
 			int row = cell.getRow();
 			int column = cell.getColumn();
+			// 设置term的坐标与值
+			instance.termRows[index] = row;
+			instance.termColumns[index] = column;
+			instance.termValues[index] = cell.getValue();
+			// 统计行列的大小
+			rowCounts[row]++;
+			columnCounts[column]++;
+			index++;
+		}
+
+		for (int point = 1; point <= rowSize; ++point) {
+			// 设置行指针
+			int row = point - 1;
+			instance.rowPoints[point] = instance.rowPoints[row] + rowCounts[row];
+		}
+
+		for (int point = 1; point <= columnSize; ++point) {
+			// 设置列指针
+			int column = point - 1;
+			instance.columnPoints[point] = instance.columnPoints[column] + columnCounts[column];
+		}
+
+		for (index = 0; index < size; index++) {
+			// 设置行列的索引
+			int row = instance.termRows[index];
+			int column = instance.termColumns[index];
+			rowIndexes[index] = instance.rowPoints[row] + (--rowCounts[row]);
+			columnIndexes[index] = instance.columnPoints[column] + (--columnCounts[column]);
+		}
+
+		// 排序行的索引
+		Arrays.sort(rowIndexes, (left, right) -> {
+			int value = instance.termRows[left] - instance.termRows[right];
+			if (value == 0) {
+				value = instance.termColumns[left] - instance.termColumns[right];
+			}
+			return value;
+		});
+
+		// 排序列的索引
+		Arrays.sort(columnIndexes, (left, right) -> {
+			int value = instance.termColumns[left] - instance.termColumns[right];
+			if (value == 0) {
+				value = instance.termRows[left] - instance.termRows[right];
+			}
+			return value;
+		});
+
+		for (index = 0; index < size; index++) {
+			// 拷贝行列的索引
+			instance.rowIndexes[index] = rowIndexes[index];
+			instance.columnIndexes[index] = columnIndexes[index];
+		}
+
+		return instance;
+	}
+
+	@Deprecated
+	public static SparseMatrix valueOf(int rowSize, int columnSize, Table<Integer, Integer, Float> dataTable) {
+		SparseMatrix instance = new SparseMatrix();
+		instance.rowSize = rowSize;
+		instance.columnSize = columnSize;
+		int size = dataTable.size();
+
+		// CRS
+		instance.rowPoints = new int[rowSize + 1];
+		instance.rowIndexes = new int[size];
+
+		// CCS
+		instance.columnPoints = new int[columnSize + 1];
+		instance.columnIndexes = new int[size];
+
+		instance.termRows = new int[size];
+		instance.termColumns = new int[size];
+		instance.termValues = new float[size];
+
+		int[] rowCounts = new int[rowSize];
+		int[] columnCounts = new int[columnSize];
+		Integer[] rowIndexes = new Integer[size];
+		Integer[] columnIndexes = new Integer[size];
+		int index = 0;
+		for (Cell<Integer, Integer, Float> cell : dataTable.cellSet()) {
+			int row = cell.getRowKey();
+			int column = cell.getColumnKey();
 			// 设置term的坐标与值
 			instance.termRows[index] = row;
 			instance.termColumns[index] = column;
