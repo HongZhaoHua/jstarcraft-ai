@@ -30,13 +30,15 @@ public abstract class DataModuleTestCase {
 		String moduleName = "module";
 		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
 		for (int index = 0; index < 10; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("discrete", true), 1));
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
+			moduleDefinition.add(new KeyValue<>(new KeyValue<>("user", true), 1));
+			moduleDefinition.add(new KeyValue<>(new KeyValue<>("item", true), 1));
+			moduleDefinition.add(new KeyValue<>(new KeyValue<>("score", false), 1));
 		}
 		int discreteOrder = 10, continuousOrder = 10, instanceCapacity = 10;
 		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
-		Assert.assertThat(module.getDiscreteInner("discrete"), CoreMatchers.equalTo(0));
-		Assert.assertThat(module.getContinuousInner("ontinuous"), CoreMatchers.equalTo(0));
+		Assert.assertThat(module.getDiscreteInner("user"), CoreMatchers.equalTo(10));
+		Assert.assertThat(module.getDiscreteInner("item"), CoreMatchers.equalTo(0));
+		Assert.assertThat(module.getContinuousInner("score"), CoreMatchers.equalTo(0));
 		for (int index = 0; index < 10;) {
 			{
 				Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);

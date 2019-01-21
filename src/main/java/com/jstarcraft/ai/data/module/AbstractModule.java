@@ -58,15 +58,17 @@ abstract public class AbstractModule implements DataModule {
 		{
 			int count = 0;
 			for (Entry<String, Integer> term : discreteInner.entrySet()) {
+				int size = term.getValue();
 				term.setValue(count);
-				count += term.getValue();
+				count += size;
 			}
 		}
 		{
 			int count = 0;
 			for (Entry<String, Integer> term : continuousInner.entrySet()) {
+				int size = term.getValue();
 				term.setValue(count);
-				count += term.getValue();
+				count += size;
 			}
 		}
 		this.discreteMarks = new IntegerArray(1000, capacity);
