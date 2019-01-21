@@ -3,6 +3,7 @@ package com.jstarcraft.ai.math.structure.matrix;
 import java.util.concurrent.Future;
 
 import org.junit.Assert;
+import org.junit.Test;
 import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
@@ -13,6 +14,13 @@ import com.jstarcraft.core.utility.RandomUtility;
 import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
 
 public class RowRandomMatrixTestCase extends RandomMatrixTestCase {
+
+	@Test
+	public void testDefault() {
+		int dimension = 10;
+		RandomMatrix matrix = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatAVLTreeMap());
+		Assert.assertTrue(Float.isNaN(matrix.getValue(0, 0)));
+	}
 
 	@Override
 	protected RandomMatrix getRandomMatrix(int dimension) {
@@ -40,7 +48,9 @@ public class RowRandomMatrixTestCase extends RandomMatrixTestCase {
 
 	@Override
 	public void testProduct() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager")
+				? EnvironmentContext.CPU
+				: EnvironmentContext.GPU;
 		Future<?> task = context.doTask(() -> {
 			int dimension = 10;
 			MathMatrix leftMatrix = getRandomMatrix(dimension);

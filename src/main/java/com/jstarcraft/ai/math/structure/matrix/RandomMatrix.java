@@ -990,6 +990,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 	}
 
 	public static RandomMatrix valueOf(boolean orientation, int rowSize, int columnSize, Int2FloatSortedMap keyValues) {
+		keyValues.defaultReturnValue(Float.NaN);
 		RandomMatrix instance = new RandomMatrix();
 		instance.orientation = orientation;
 		instance.rowSize = rowSize;
