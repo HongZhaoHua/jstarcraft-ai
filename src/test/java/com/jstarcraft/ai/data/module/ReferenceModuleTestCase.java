@@ -6,18 +6,13 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.exception.DataCapacityException;
 import com.jstarcraft.ai.utility.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
-import com.jstarcraft.core.utility.RandomUtility;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
-import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 import it.unimi.dsi.fastutil.ints.Int2IntAVLTreeMap;
-import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 
 public class ReferenceModuleTestCase {
