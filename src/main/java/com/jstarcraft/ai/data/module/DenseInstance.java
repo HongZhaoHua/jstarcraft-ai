@@ -23,17 +23,21 @@ public class DenseInstance implements DataInstance {
 	private FloatArray[] quantityValues;
 
 	/** 离散标记 */
-	protected IntegerArray qualityMarks;
+	private IntegerArray qualityMarks;
 
 	/** 连续标记 */
-	protected FloatArray quantityMarks;
+	private FloatArray quantityMarks;
+	
+	/** 权重 */
+	private FloatArray weights;
 
 	DenseInstance(int cursor, DenseModule module) {
 		this.cursor = cursor;
 		this.qualityOrder = module.getQualityOrder();
 		this.quantityOrder = module.getQuantityOrder();
 		this.qualityValues = module.getQualityValues();
-		this.quantityValues = module.getquantityValues();
+		this.quantityValues = module.getQuantityValues();
+		this.weights = module.getWeights();
 	}
 
 	@Override
@@ -73,6 +77,16 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
+	public int getQualityOrder() {
+		return qualityOrder;
+	}
+
+	@Override
+	public int getQuantityOrder() {
+		return quantityOrder;
+	}
+
+	@Override
 	public int getQualityMark() {
 		return qualityMarks.getData(cursor);
 	}
@@ -83,13 +97,23 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityOrder() {
-		return qualityOrder;
+	public float getWeight() {
+		return weights.getData(cursor);
 	}
 
 	@Override
-	public int getQuantityOrder() {
-		return quantityOrder;
+	public void setQualityMark(int mark) {
+		qualityMarks.setData(cursor, mark);
+	}
+
+	@Override
+	public void setQuantityMark(float mark) {
+		quantityMarks.setData(cursor, mark);
+	}
+
+	@Override
+	public void setWeight(float weight) {
+		weights.setData(cursor, weight);
 	}
 
 }

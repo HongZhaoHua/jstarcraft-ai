@@ -56,16 +56,6 @@ public class ReferenceInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityMark() {
-		return instance.getQualityMark();
-	}
-
-	@Override
-	public float getQuantityMark() {
-		return instance.getQuantityMark();
-	}
-
-	@Override
 	public int getQualityOrder() {
 		return instance.getQualityOrder();
 	}
@@ -73,6 +63,42 @@ public class ReferenceInstance implements DataInstance {
 	@Override
 	public int getQuantityOrder() {
 		return instance.getQuantityOrder();
+	}
+
+	@Override
+	public int getQualityMark() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getQuantityMark() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getWeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setQualityMark(int mark) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setQuantityMark(float mark) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setWeight(float weight) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

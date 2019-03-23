@@ -12,6 +12,8 @@ public interface DataInstance {
 
 	public final static float defaultFloat = Float.NaN;
 
+	public final static float defaultWeight = Float.NaN;
+
 	/**
 	 * 设置游标
 	 * 
@@ -59,6 +61,20 @@ public interface DataInstance {
 	DataInstance iterateQuantityFeatures(QuantityAccessor accessor);
 
 	/**
+	 * 获取离散秩
+	 * 
+	 * @return
+	 */
+	int getQualityOrder();
+
+	/**
+	 * 获取连续秩
+	 * 
+	 * @return
+	 */
+	int getQuantityOrder();
+
+	/**
 	 * 获取离散标记
 	 * 
 	 * @return
@@ -73,17 +89,31 @@ public interface DataInstance {
 	float getQuantityMark();
 
 	/**
-	 * 获取离散秩
+	 * 获取权重
 	 * 
 	 * @return
 	 */
-	int getQualityOrder();
+	float getWeight();
 
 	/**
-	 * 获取连续秩
+	 * 设置离散标记
 	 * 
-	 * @return
+	 * @param mark
 	 */
-	int getQuantityOrder();
+	void setQualityMark(int mark);
+
+	/**
+	 * 设置连续标记
+	 * 
+	 * @param mark
+	 */
+	void setQuantityMark(float mark);
+
+	/**
+	 * 设置权重
+	 * 
+	 * @param weight
+	 */
+	void setWeight(float weight);
 
 }

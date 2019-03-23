@@ -46,7 +46,7 @@ public class DenseModule extends AbstractModule {
 		return qualityValues;
 	}
 
-	FloatArray[] getquantityValues() {
+	FloatArray[] getQuantityValues() {
 		return quantityValues;
 	}
 

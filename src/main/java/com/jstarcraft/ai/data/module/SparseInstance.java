@@ -40,6 +40,9 @@ public class SparseInstance implements DataInstance {
 	/** 连续标记 */
 	protected FloatArray quantityMarks;
 
+	/** 权重 */
+	private FloatArray weights;
+
 	SparseInstance(int cursor, SparseModule module) {
 		this.cursor = cursor;
 		this.qualityOrder = module.getQualityOrder();
@@ -78,6 +81,7 @@ public class SparseInstance implements DataInstance {
 				this.quantityFeatures[index] = this.quantityValues.getData(position);
 			}
 		}
+		this.weights = module.getWeights();
 	}
 
 	@Override
@@ -155,6 +159,16 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
+	public int getQualityOrder() {
+		return qualityOrder;
+	}
+
+	@Override
+	public int getQuantityOrder() {
+		return quantityOrder;
+	}
+
+	@Override
 	public int getQualityMark() {
 		return qualityMarks.getData(cursor);
 	}
@@ -165,13 +179,23 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityOrder() {
-		return qualityOrder;
+	public float getWeight() {
+		return weights.getData(cursor);
 	}
 
 	@Override
-	public int getQuantityOrder() {
-		return quantityOrder;
+	public void setQualityMark(int mark) {
+		qualityMarks.setData(cursor, mark);
+	}
+
+	@Override
+	public void setQuantityMark(float mark) {
+		quantityMarks.setData(cursor, mark);
+	}
+
+	@Override
+	public void setWeight(float weight) {
+		weights.setData(cursor, weight);
 	}
 
 }

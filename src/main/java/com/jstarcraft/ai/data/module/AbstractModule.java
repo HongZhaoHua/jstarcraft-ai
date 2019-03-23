@@ -38,6 +38,9 @@ abstract public class AbstractModule implements DataModule {
 	/** 连续标记 */
 	protected FloatArray quantityMarks;
 
+	/** 权重 */
+	protected FloatArray weights;
+
 	protected int capacity;
 
 	protected int size;
@@ -73,6 +76,7 @@ abstract public class AbstractModule implements DataModule {
 		}
 		this.qualityMarks = new IntegerArray(1000, capacity);
 		this.quantityMarks = new FloatArray(1000, capacity);
+		this.weights = new FloatArray(1000, capacity);
 		this.capacity = capacity;
 	}
 
@@ -110,6 +114,10 @@ abstract public class AbstractModule implements DataModule {
 
 	FloatArray getQuantityMarks() {
 		return quantityMarks;
+	}
+
+	FloatArray getWeights() {
+		return weights;
 	}
 
 }

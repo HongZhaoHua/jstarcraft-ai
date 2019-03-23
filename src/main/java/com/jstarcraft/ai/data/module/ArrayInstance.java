@@ -24,6 +24,9 @@ public class ArrayInstance implements DataInstance {
 	/** 连续标记 */
 	private float quantityMark;
 
+	/** 权重 */
+	private float weight;
+
 	public ArrayInstance(DataInstance instance) {
 		this.qualityOrder = instance.getQualityOrder();
 		this.quantityOrder = instance.getQuantityOrder();
@@ -47,6 +50,7 @@ public class ArrayInstance implements DataInstance {
 		});
 		this.qualityMark = instance.getQualityMark();
 		this.quantityMark = instance.getQuantityMark();
+		this.weight = instance.getWeight();
 	}
 
 	@Override
@@ -86,6 +90,16 @@ public class ArrayInstance implements DataInstance {
 	}
 
 	@Override
+	public int getQualityOrder() {
+		return qualityOrder;
+	}
+
+	@Override
+	public int getQuantityOrder() {
+		return quantityOrder;
+	}
+
+	@Override
 	public int getQualityMark() {
 		return qualityMark;
 	}
@@ -96,13 +110,23 @@ public class ArrayInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityOrder() {
-		return qualityOrder;
+	public float getWeight() {
+		return weight;
 	}
 
 	@Override
-	public int getQuantityOrder() {
-		return quantityOrder;
+	public void setQualityMark(int qualityMark) {
+		this.qualityMark = qualityMark;
+	}
+
+	@Override
+	public void setQuantityMark(float quantityMark) {
+		this.quantityMark = quantityMark;
+	}
+
+	@Override
+	public void setWeight(float weight) {
+		this.weight = weight;
 	}
 
 	public void setQualityFeature(int index, int value) {
@@ -111,14 +135,6 @@ public class ArrayInstance implements DataInstance {
 
 	public void setQuantityFeature(int index, float value) {
 		this.quantityFeatures[index] = value;
-	}
-
-	public void setQualityMark(int qualityMark) {
-		this.qualityMark = qualityMark;
-	}
-
-	public void setQuantityMark(float quantityMark) {
-		this.quantityMark = quantityMark;
 	}
 
 }

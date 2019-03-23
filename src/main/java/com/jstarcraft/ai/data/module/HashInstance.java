@@ -30,7 +30,10 @@ public class HashInstance implements DataInstance {
 	/** 连续标记 */
 	private float quantityMark;
 
-	public HashInstance(Class<? extends Int2IntSortedMap> qualityClass,  Class<? extends Int2FloatSortedMap> quantityClass, DataInstance instance) {
+	/** 权重 */
+	private float weight;
+
+	public HashInstance(Class<? extends Int2IntSortedMap> qualityClass, Class<? extends Int2FloatSortedMap> quantityClass, DataInstance instance) {
 		this.qualityOrder = instance.getQualityOrder();
 		this.quantityOrder = instance.getQuantityOrder();
 		this.qualityFeatures = ReflectionUtility.getInstance(qualityClass);
@@ -45,6 +48,7 @@ public class HashInstance implements DataInstance {
 		});
 		this.qualityMark = instance.getQualityMark();
 		this.quantityMark = instance.getQuantityMark();
+		this.weight = instance.getWeight();
 	}
 
 	@Override
@@ -69,7 +73,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public HashInstance iterateQualityFeatures(QualityAccessor accessor) {
-		for(Int2IntMap.Entry term : this.qualityFeatures.int2IntEntrySet()) {
+		for (Int2IntMap.Entry term : this.qualityFeatures.int2IntEntrySet()) {
 			accessor.accessorFeature(term.getIntKey(), term.getIntValue());
 		}
 		return this;
@@ -77,10 +81,20 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public HashInstance iterateQuantityFeatures(QuantityAccessor accessor) {
-		for(Int2FloatMap.Entry term : this.quantityFeatures.int2FloatEntrySet()) {
+		for (Int2FloatMap.Entry term : this.quantityFeatures.int2FloatEntrySet()) {
 			accessor.accessorFeature(term.getIntKey(), term.getFloatValue());
 		}
 		return this;
+	}
+
+	@Override
+	public int getQualityOrder() {
+		return qualityOrder;
+	}
+
+	@Override
+	public int getQuantityOrder() {
+		return quantityOrder;
 	}
 
 	@Override
@@ -94,13 +108,23 @@ public class HashInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityOrder() {
-		return qualityOrder;
+	public float getWeight() {
+		return weight;
 	}
 
 	@Override
-	public int getQuantityOrder() {
-		return quantityOrder;
+	public void setQualityMark(int qualityMark) {
+		this.qualityMark = qualityMark;
+	}
+
+	@Override
+	public void setQuantityMark(float quantityMark) {
+		this.quantityMark = quantityMark;
+	}
+
+	@Override
+	public void setWeight(float weight) {
+		this.weight = weight;
 	}
 
 	public void setQualityFeature(int index, int value) {
@@ -109,14 +133,6 @@ public class HashInstance implements DataInstance {
 
 	public void setquantityFeature(int index, float value) {
 		this.quantityFeatures.put(index, value);
-	}
-
-	public void setQualityMark(int qualityMark) {
-		this.qualityMark = qualityMark;
-	}
-
-	public void setquantityMark(float quantityMark) {
-		this.quantityMark = quantityMark;
 	}
 
 }
