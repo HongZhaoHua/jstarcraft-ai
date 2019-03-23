@@ -3,8 +3,14 @@ package com.jstarcraft.ai.data.module;
 import com.jstarcraft.ai.data.ContinuousAccessor;
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DiscreteAccessor;
+import com.jstarcraft.core.utility.ReflectionUtility;
 
-public class DefaultInstance implements DataInstance {
+import it.unimi.dsi.fastutil.ints.Int2FloatMap;
+import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
+import it.unimi.dsi.fastutil.ints.Int2IntMap;
+import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
+
+public class HashInstance implements DataInstance {
 
 	/** 离散秩 */
 	private int discreteOrder;
@@ -13,10 +19,10 @@ public class DefaultInstance implements DataInstance {
 	private int continuousOrder;
 
 	/** 离散特征 */
-	private int[] discreteFeatures;
+	private Int2IntSortedMap discreteFeatures;
 
 	/** 连续特征 */
-	private float[] continuousFeatures;
+	private Int2FloatSortedMap continuousFeatures;
 
 	/** 离散标记 */
 	private int discreteMark;
@@ -24,26 +30,18 @@ public class DefaultInstance implements DataInstance {
 	/** 连续标记 */
 	private float continuousMark;
 
-	public DefaultInstance(DataInstance instance) {
+	public HashInstance(Class<? extends Int2IntSortedMap> discreteClass,  Class<? extends Int2FloatSortedMap> continuousClass, DataInstance instance) {
 		this.discreteOrder = instance.getDiscreteOrder();
 		this.continuousOrder = instance.getContinuousOrder();
-		this.discreteFeatures = new int[instance.getDiscreteOrder()];
-		{
-			for (int index = 0, size = instance.getDiscreteOrder(); index < size; index++) {
-				this.discreteFeatures[index] = DataInstance.defaultInteger;
-			}
-		}
-		this.continuousFeatures = new float[instance.getContinuousOrder()];
-		{
-			for (int index = 0, size = instance.getContinuousOrder(); index < size; index++) {
-				this.continuousFeatures[index] = DataInstance.defaultFloat;
-			}
-		}
+		this.discreteFeatures = ReflectionUtility.getInstance(discreteClass);
+		this.discreteFeatures.defaultReturnValue(DataInstance.defaultInteger);
+		this.continuousFeatures = ReflectionUtility.getInstance(continuousClass);
+		this.continuousFeatures.defaultReturnValue(DataInstance.defaultFloat);
 		instance.iterateDiscreteFeatures((index, value) -> {
-			this.discreteFeatures[index] = value;
+			this.discreteFeatures.put(index, value);
 		});
 		instance.iterateContinuousFeatures((index, value) -> {
-			this.continuousFeatures[index] = value;
+			this.continuousFeatures.put(index, value);
 		});
 		this.discreteMark = instance.getDiscreteMark();
 		this.continuousMark = instance.getContinuousMark();
@@ -61,26 +59,26 @@ public class DefaultInstance implements DataInstance {
 
 	@Override
 	public int getDiscreteFeature(int index) {
-		return this.discreteFeatures[index];
+		return this.discreteFeatures.get(index);
 	}
 
 	@Override
 	public float getContinuousFeature(int index) {
-		return this.continuousFeatures[index];
+		return this.continuousFeatures.get(index);
 	}
 
 	@Override
-	public DefaultInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
-		for (int index = 0; index < discreteOrder; index++) {
-			accessor.accessorFeature(index, this.discreteFeatures[index]);
+	public HashInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
+		for(Int2IntMap.Entry term : this.discreteFeatures.int2IntEntrySet()) {
+			accessor.accessorFeature(term.getIntKey(), term.getIntValue());
 		}
 		return this;
 	}
 
 	@Override
-	public DefaultInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
-		for (int index = 0; index < continuousOrder; index++) {
-			accessor.accessorFeature(index, this.continuousFeatures[index]);
+	public HashInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
+		for(Int2FloatMap.Entry term : this.continuousFeatures.int2FloatEntrySet()) {
+			accessor.accessorFeature(term.getIntKey(), term.getFloatValue());
 		}
 		return this;
 	}
@@ -106,11 +104,11 @@ public class DefaultInstance implements DataInstance {
 	}
 
 	public void setDiscreteFeature(int index, int value) {
-		this.discreteFeatures[index] = value;
+		this.discreteFeatures.put(index, value);
 	}
 
 	public void setContinuousFeature(int index, float value) {
-		this.continuousFeatures[index] = value;
+		this.continuousFeatures.put(index, value);
 	}
 
 	public void setDiscreteMark(int discreteMark) {
