@@ -75,7 +75,7 @@ public class SparseModule extends AbstractModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark, float weight) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
@@ -97,6 +97,7 @@ public class SparseModule extends AbstractModule {
 		}
 		qualityMarks.associateData(qualityMark);
 		quantityMarks.associateData(quantityMark);
+		weights.associateData(weight);
 		size++;
 	}
 

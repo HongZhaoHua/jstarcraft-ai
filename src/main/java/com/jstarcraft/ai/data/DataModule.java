@@ -26,8 +26,33 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param quantityFeatures
 	 * @param qualityMark
 	 * @param quantityMark
+	 * @param weight
 	 */
-	void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark);
+	void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark, float weight);
+
+	/**
+	 * 关联实例
+	 * 
+	 * @param qualityFeatures
+	 * @param quantityFeatures
+	 * @param qualityMark
+	 * @param weight
+	 */
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float weight) {
+		associateInstance(qualityFeatures, quantityFeatures, qualityMark, DataInstance.defaultFloat, weight);
+	}
+
+	/**
+	 * 关联实例
+	 * 
+	 * @param qualityFeatures
+	 * @param quantityFeatures
+	 * @param quantityMark
+	 * @param weight
+	 */
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, float quantityMark, float weight) {
+		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, quantityMark, weight);
+	}
 
 	/**
 	 * 关联实例
@@ -37,7 +62,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param qualityMark
 	 */
 	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark) {
-		associateInstance(qualityFeatures, quantityFeatures, qualityMark, DataInstance.defaultFloat);
+		associateInstance(qualityFeatures, quantityFeatures, qualityMark, DataInstance.defaultFloat, DataInstance.defaultWeight);
 	}
 
 	/**
@@ -48,7 +73,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param quantityMark
 	 */
 	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, float quantityMark) {
-		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, quantityMark);
+		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, quantityMark, DataInstance.defaultWeight);
 	}
 
 	/**
@@ -58,7 +83,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param quantityFeatures
 	 */
 	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures) {
-		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
+		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat, DataInstance.defaultWeight);
 	}
 
 	/**
