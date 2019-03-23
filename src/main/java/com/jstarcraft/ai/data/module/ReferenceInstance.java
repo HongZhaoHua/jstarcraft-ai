@@ -1,9 +1,9 @@
 package com.jstarcraft.ai.data.module;
 
-import com.jstarcraft.ai.data.ContinuousAccessor;
+import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.DiscreteAccessor;
+import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.IntegerArray;
 
 public class ReferenceInstance implements DataInstance {
@@ -34,45 +34,45 @@ public class ReferenceInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteFeature(int index) {
-		return instance.getDiscreteFeature(index);
+	public int getQualityFeature(int index) {
+		return instance.getQualityFeature(index);
 	}
 
 	@Override
-	public float getContinuousFeature(int index) {
-		return instance.getContinuousFeature(index);
+	public float getQuantityFeature(int index) {
+		return instance.getQuantityFeature(index);
 	}
 
 	@Override
-	public DataInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
-		instance.iterateDiscreteFeatures(accessor);
+	public DataInstance iterateQualityFeatures(QualityAccessor accessor) {
+		instance.iterateQualityFeatures(accessor);
 		return this;
 	}
 
 	@Override
-	public DataInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
-		instance.iterateContinuousFeatures(accessor);
+	public DataInstance iterateQuantityFeatures(QuantityAccessor accessor) {
+		instance.iterateQuantityFeatures(accessor);
 		return this;
 	}
 
 	@Override
-	public int getDiscreteMark() {
-		return instance.getDiscreteMark();
+	public int getQualityMark() {
+		return instance.getQualityMark();
 	}
 
 	@Override
-	public float getContinuousMark() {
-		return instance.getContinuousMark();
+	public float getQuantityMark() {
+		return instance.getQuantityMark();
 	}
 
 	@Override
-	public int getDiscreteOrder() {
-		return instance.getDiscreteOrder();
+	public int getQualityOrder() {
+		return instance.getQualityOrder();
 	}
 
 	@Override
-	public int getContinuousOrder() {
-		return instance.getContinuousOrder();
+	public int getQuantityOrder() {
+		return instance.getQuantityOrder();
 	}
 
 }

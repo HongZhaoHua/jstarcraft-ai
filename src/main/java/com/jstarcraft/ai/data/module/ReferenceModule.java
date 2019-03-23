@@ -51,8 +51,8 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteInner(String name) {
-		return module.getDiscreteInner(name);
+	public int getQualityInner(String name) {
+		return module.getQualityInner(name);
 	}
 
 	@Override
@@ -61,8 +61,8 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteOrder() {
-		return module.getDiscreteOrder();
+	public int getQualityOrder() {
+		return module.getQualityOrder();
 	}
 
 	@Override

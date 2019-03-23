@@ -17,7 +17,7 @@ import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap.Builder;
  * @author Birdy
  *
  */
-public class RedisDiscreteAttribute<T extends Comparable<T>> implements DiscreteAttribute<T> {
+public class RedisQualityAttribute<T extends Comparable<T>> implements QualityAttribute<T> {
 
 	private final static String indexLua = "local index = redis.call('hget', KEYS[1], ARGV[1]); if (not index) then index = redis.call('incr', KEYS[2]) - 1; redis.call('hset', KEYS[1], ARGV[1], index); end; return index;";
 
@@ -43,7 +43,7 @@ public class RedisDiscreteAttribute<T extends Comparable<T>> implements Discrete
 
 	private RAtomicLong sizeAtomic;
 
-	public RedisDiscreteAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
+	public RedisQualityAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
 		this.name = name;
 		this.type = type;
 		this.indexKey = name + indexSuffix;

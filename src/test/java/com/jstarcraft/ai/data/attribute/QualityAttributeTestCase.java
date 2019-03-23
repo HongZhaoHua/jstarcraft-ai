@@ -8,9 +8,9 @@ import org.junit.Assert;
 
 import com.jstarcraft.core.utility.RandomUtility;
 
-public abstract class ContinuousAttributeTestCase extends DataAttributeTestCase {
+public abstract class QualityAttributeTestCase extends DataAttributeTestCase {
 
-	abstract protected ContinuousAttribute<Float> getContinuousAttribute();
+	abstract protected QualityAttribute<Float> getQualityAttribute();
 
 	@Override
 	public void testConvertValue() {
@@ -20,17 +20,15 @@ public abstract class ContinuousAttributeTestCase extends DataAttributeTestCase 
 			datas[index] = index;
 		}
 		RandomUtility.shuffle(datas);
-		ContinuousAttribute<Float> attribute = getContinuousAttribute();
+		QualityAttribute<Float> attribute = getQualityAttribute();
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+			Assert.assertEquals(index, attribute.convertValue(datas[index]));
 		}
-		Assert.assertEquals(999F, attribute.getMaximum(), 0F);
-		Assert.assertEquals(0F, attribute.getMinimum(), 0F);
+		Assert.assertEquals(size, attribute.getSize());
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+			Assert.assertEquals(index, attribute.convertValue(datas[index]));
 		}
-		Assert.assertEquals(999F, attribute.getMaximum(), 0F);
-		Assert.assertEquals(0F, attribute.getMinimum(), 0F);
+		Assert.assertEquals(size, attribute.getSize());
 	}
 
 	@Override
@@ -45,18 +43,18 @@ public abstract class ContinuousAttributeTestCase extends DataAttributeTestCase 
 		final int numberOfThread = 10;
 		ExecutorService executor = Executors.newFixedThreadPool(numberOfThread);
 		final CyclicBarrier barrier = new CyclicBarrier(numberOfThread + 1);
-		ContinuousAttribute<Float> attribute = getContinuousAttribute();
+		QualityAttribute<Float> attribute = getQualityAttribute();
 		for (int thread = 0; thread < numberOfThread; thread++) {
 			executor.submit(() -> {
 				try {
 					barrier.await();
 					for (int index = 0; index < size; index++) {
-						Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+						Assert.assertEquals(index, attribute.convertValue(datas[index]));
 					}
-					Assert.assertEquals(999F, attribute.getMaximum(), 0F);
-					Assert.assertEquals(0F, attribute.getMinimum(), 0F);
+					Assert.assertEquals(size, attribute.getSize());
 					barrier.await();
 				} catch (Exception exception) {
+					exception.printStackTrace();
 					Assert.fail();
 				}
 			});

@@ -1,8 +1,8 @@
 package com.jstarcraft.ai.data.module;
 
-import com.jstarcraft.ai.data.ContinuousAccessor;
+import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
-import com.jstarcraft.ai.data.DiscreteAccessor;
+import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
@@ -42,11 +42,11 @@ public class SparseInstance implements DataInstance {
 
 	SparseInstance(int cursor, SparseModule module) {
 		this.cursor = cursor;
-		this.discreteOrder = module.getDiscreteOrder();
+		this.discreteOrder = module.getQualityOrder();
 		this.continuousOrder = module.getContinuousOrder();
-		this.discreteFeatures = new int[module.getDiscreteOrder()];
+		this.discreteFeatures = new int[module.getQualityOrder()];
 		{
-			for (int index = 0, size = module.getDiscreteOrder(); index < size; index++) {
+			for (int index = 0, size = module.getQualityOrder(); index < size; index++) {
 				this.discreteFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
@@ -123,17 +123,17 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteFeature(int index) {
+	public int getQualityFeature(int index) {
 		return this.discreteFeatures[index];
 	}
 
 	@Override
-	public float getContinuousFeature(int index) {
+	public float getQuantityFeature(int index) {
 		return this.continuousFeatures[index];
 	}
 
 	@Override
-	public SparseInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
+	public SparseInstance iterateQualityFeatures(QualityAccessor accessor) {
 		int from = this.discretePoints.getData(this.cursor);
 		int to = this.discretePoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
@@ -144,7 +144,7 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public SparseInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
+	public SparseInstance iterateQuantityFeatures(QuantityAccessor accessor) {
 		int from = this.continuousPoints.getData(this.cursor);
 		int to = this.continuousPoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
@@ -155,22 +155,22 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteMark() {
+	public int getQualityMark() {
 		return discreteMarks.getData(cursor);
 	}
 
 	@Override
-	public float getContinuousMark() {
+	public float getQuantityMark() {
 		return continuousMarks.getData(cursor);
 	}
 
 	@Override
-	public int getDiscreteOrder() {
+	public int getQualityOrder() {
 		return discreteOrder;
 	}
 
 	@Override
-	public int getContinuousOrder() {
+	public int getQuantityOrder() {
 		return continuousOrder;
 	}
 

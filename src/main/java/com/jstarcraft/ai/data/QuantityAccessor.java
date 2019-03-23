@@ -1,12 +1,12 @@
 package com.jstarcraft.ai.data;
 
 /**
- * 离散访问器
+ * 连续访问器
  * 
  * @author Birdy
  *
  */
-public interface DiscreteAccessor {
+public interface QuantityAccessor {
 
 	/**
 	 * 访问特征
@@ -14,6 +14,6 @@ public interface DiscreteAccessor {
 	 * @param index
 	 * @param value
 	 */
-	void accessorFeature(int index, int value);
+	void accessorFeature(int index, float value);
 
 }

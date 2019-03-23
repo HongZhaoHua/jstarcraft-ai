@@ -48,13 +48,13 @@ public class DataSorterTestCase {
 
 			@Override
 			public int sort(DataInstance left, DataInstance right) {
-				return right.getDiscreteFeature(0) - left.getDiscreteFeature(0);
+				return right.getQualityFeature(0) - left.getQualityFeature(0);
 			}
 
 		};
 		module = sorter.sort(module);
 		for (int index = 0; index < instanceCapacity; index++) {
-			Assert.assertEquals(instanceCapacity - 1 - index, module.getInstance(index).getDiscreteFeature(0));
+			Assert.assertEquals(instanceCapacity - 1 - index, module.getInstance(index).getQualityFeature(0));
 		}
 	}
 

@@ -6,7 +6,7 @@ package com.jstarcraft.ai.data.attribute;
  * @author Birdy
  *
  */
-public class MemoryContinuousAttribute<T extends Number> implements ContinuousAttribute<T> {
+public class MemoryQuantityAttribute<T extends Number> implements QuantityAttribute<T> {
 
 	/** 属性名称 */
 	private String name;
@@ -18,7 +18,7 @@ public class MemoryContinuousAttribute<T extends Number> implements ContinuousAt
 
 	private float minimum;
 
-	public MemoryContinuousAttribute(String name, Class<T> type) {
+	public MemoryQuantityAttribute(String name, Class<T> type) {
 		this.name = name;
 		this.type = type;
 		this.maximum = Float.NEGATIVE_INFINITY;

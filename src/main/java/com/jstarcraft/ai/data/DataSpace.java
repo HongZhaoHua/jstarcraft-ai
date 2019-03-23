@@ -10,10 +10,10 @@ import java.util.TreeMap;
 
 import com.jstarcraft.ai.data.DataAttribute;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
-import com.jstarcraft.ai.data.attribute.MemoryContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.MemoryDiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
+import com.jstarcraft.ai.data.attribute.MemoryQuantityAttribute;
+import com.jstarcraft.ai.data.attribute.MemoryQualityAttribute;
 import com.jstarcraft.ai.data.module.DenseModule;
 import com.jstarcraft.ai.data.module.SparseModule;
 import com.jstarcraft.core.utility.KeyValue;
@@ -31,10 +31,10 @@ import com.jstarcraft.core.utility.KeyValue;
 public class DataSpace {
 
 	/** 离散属性映射 */
-	private Map<String, DiscreteAttribute> discreteAttributes = new HashMap<>();
+	private Map<String, QualityAttribute> discreteAttributes = new HashMap<>();
 
 	/** 连续属性映射 */
-	private Map<String, ContinuousAttribute> continuousAttributes = new HashMap<>();
+	private Map<String, QuantityAttribute> continuousAttributes = new HashMap<>();
 
 	/** 模型映射 */
 	private Map<String, DataModule> modules = new HashMap<>();
@@ -44,31 +44,31 @@ public class DataSpace {
 			if (continuousAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
-			DiscreteAttribute attribute = new MemoryDiscreteAttribute(keyValue.getKey(), keyValue.getValue());
+			QualityAttribute attribute = new MemoryQualityAttribute(keyValue.getKey(), keyValue.getValue());
 			discreteAttributes.put(attribute.getName(), attribute);
 		}
 		for (Entry<String, Class<?>> keyValue : continuousDifinitions.entrySet()) {
 			if (discreteAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
-			ContinuousAttribute attribute = new MemoryContinuousAttribute(keyValue.getKey(), keyValue.getValue());
+			QuantityAttribute attribute = new MemoryQuantityAttribute(keyValue.getKey(), keyValue.getValue());
 			continuousAttributes.put(attribute.getName(), attribute);
 		}
 	}
 
-	public DiscreteAttribute getDiscreteAttribute(String attributeName) {
+	public QualityAttribute getDiscreteAttribute(String attributeName) {
 		return discreteAttributes.get(attributeName);
 	}
 
-	public ContinuousAttribute getContinuousAttribute(String attributeName) {
+	public QuantityAttribute getContinuousAttribute(String attributeName) {
 		return continuousAttributes.get(attributeName);
 	}
 
-	public Collection<DiscreteAttribute> getDiscreteAttributes() {
+	public Collection<QualityAttribute> getDiscreteAttributes() {
 		return discreteAttributes.values();
 	}
 
-	public Collection<ContinuousAttribute> getContinuousAttributes() {
+	public Collection<QuantityAttribute> getContinuousAttributes() {
 		return continuousAttributes.values();
 	}
 

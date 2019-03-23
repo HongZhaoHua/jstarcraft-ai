@@ -11,8 +11,8 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.core.utility.ConversionUtility;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -32,7 +32,7 @@ public class CsvConverter extends StreamConverter {
 	/** 分隔符 */
 	protected char delimiter;
 
-	public CsvConverter(char delimiter, Collection<DiscreteAttribute> discreteAttributes, Collection<ContinuousAttribute> continuousAttributes) {
+	public CsvConverter(char delimiter, Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
 		super(discreteAttributes, continuousAttributes);
 		this.delimiter = delimiter;
 	}
@@ -51,12 +51,12 @@ public class CsvConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						DiscreteAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						int feature = attribute.convertValue((Comparable) data);
-						discreteFeatures.put(module.getDiscreteInner(keyValue.getKey()) + index - term.getKey(), feature);
+						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						ContinuousAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						float feature = attribute.convertValue((Number) data);
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);

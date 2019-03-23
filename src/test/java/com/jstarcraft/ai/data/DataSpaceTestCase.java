@@ -8,8 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 
 public class DataSpaceTestCase {
 
@@ -23,11 +23,11 @@ public class DataSpaceTestCase {
 		DataSpace space = new DataSpace(discreteDifinitions, continuousDifinitions);
 
 		// 获取数据属性
-		DiscreteAttribute userAttribute = space.getDiscreteAttribute("user");
+		QualityAttribute userAttribute = space.getDiscreteAttribute("user");
 		Assert.assertNotNull(userAttribute);
-		DiscreteAttribute itemAttribute = space.getDiscreteAttribute("item");
+		QualityAttribute itemAttribute = space.getDiscreteAttribute("item");
 		Assert.assertNotNull(itemAttribute);
-		ContinuousAttribute scoreAttribute = space.getContinuousAttribute("score");
+		QuantityAttribute scoreAttribute = space.getContinuousAttribute("score");
 		Assert.assertNotNull(scoreAttribute);
 
 		// 制造数据模型
@@ -37,7 +37,7 @@ public class DataSpaceTestCase {
 			configuration.put(2, "item");
 			configuration.put(3, "score");
 			DataModule sparseModel = space.makeSparseModule("sparse", configuration, 1000);
-			Assert.assertEquals(2, sparseModel.getDiscreteOrder());
+			Assert.assertEquals(2, sparseModel.getQualityOrder());
 			Assert.assertEquals(1, sparseModel.getContinuousOrder());
 		}
 
@@ -45,7 +45,7 @@ public class DataSpaceTestCase {
 			TreeMap<Integer, String> configuration = new TreeMap<>();
 			configuration.put(2, "user");
 			DataModule denseModel = space.makeDenseModule("dense", configuration, 1000);
-			Assert.assertEquals(2, denseModel.getDiscreteOrder());
+			Assert.assertEquals(2, denseModel.getQualityOrder());
 			Assert.assertEquals(0, denseModel.getContinuousOrder());
 		}
 	}

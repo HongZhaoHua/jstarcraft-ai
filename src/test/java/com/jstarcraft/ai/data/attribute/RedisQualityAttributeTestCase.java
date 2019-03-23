@@ -8,7 +8,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RKeys;
 import org.redisson.config.Config;
 
-public class RedisContinuousAttributeTestCase extends ContinuousAttributeTestCase {
+public class RedisQualityAttributeTestCase extends QualityAttributeTestCase {
 
 	private static Redisson redisson;
 
@@ -37,8 +37,8 @@ public class RedisContinuousAttributeTestCase extends ContinuousAttributeTestCas
 	}
 
 	@Override
-	protected ContinuousAttribute<Float> getContinuousAttribute() {
-		return new RedisContinuousAttribute<>("test", Float.class, redisson);
+	protected QualityAttribute<Float> getQualityAttribute() {
+		return new RedisQualityAttribute<>("test", Float.class, 1, 10, redisson);
 	}
 
 }

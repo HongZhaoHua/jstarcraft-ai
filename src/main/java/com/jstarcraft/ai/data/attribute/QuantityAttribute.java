@@ -9,7 +9,7 @@ import com.jstarcraft.ai.data.DataAttribute;
  *
  * @param <T>
  */
-public interface ContinuousAttribute<T extends Number> extends DataAttribute<T> {
+public interface QuantityAttribute<T extends Number> extends DataAttribute<T> {
 
 	/**
 	 * 转换属性值

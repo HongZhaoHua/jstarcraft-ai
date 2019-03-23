@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
  * @author Birdy
  *
  */
-public class MemoryDiscreteAttribute<T extends Comparable<T>> implements DiscreteAttribute<T> {
+public class MemoryQualityAttribute<T extends Comparable<T>> implements QualityAttribute<T> {
 
 	/** 属性名称 */
 	private String name;
@@ -19,7 +19,7 @@ public class MemoryDiscreteAttribute<T extends Comparable<T>> implements Discret
 	/** 外部键-内部索引映射 */
 	private Object2IntOpenHashMap<Object> indexes;
 
-	public MemoryDiscreteAttribute(String name, Class<T> type) {
+	public MemoryQualityAttribute(String name, Class<T> type) {
 		this.name = name;
 		this.type = type;
 		this.indexes = new Object2IntOpenHashMap<>();

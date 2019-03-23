@@ -1,8 +1,8 @@
 package com.jstarcraft.ai.data.module;
 
-import com.jstarcraft.ai.data.ContinuousAccessor;
+import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
-import com.jstarcraft.ai.data.DiscreteAccessor;
+import com.jstarcraft.ai.data.QualityAccessor;
 
 public class ArrayInstance implements DataInstance {
 
@@ -25,28 +25,28 @@ public class ArrayInstance implements DataInstance {
 	private float continuousMark;
 
 	public ArrayInstance(DataInstance instance) {
-		this.discreteOrder = instance.getDiscreteOrder();
-		this.continuousOrder = instance.getContinuousOrder();
-		this.discreteFeatures = new int[instance.getDiscreteOrder()];
+		this.discreteOrder = instance.getQualityOrder();
+		this.continuousOrder = instance.getQuantityOrder();
+		this.discreteFeatures = new int[instance.getQualityOrder()];
 		{
-			for (int index = 0, size = instance.getDiscreteOrder(); index < size; index++) {
+			for (int index = 0, size = instance.getQualityOrder(); index < size; index++) {
 				this.discreteFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
-		this.continuousFeatures = new float[instance.getContinuousOrder()];
+		this.continuousFeatures = new float[instance.getQuantityOrder()];
 		{
-			for (int index = 0, size = instance.getContinuousOrder(); index < size; index++) {
+			for (int index = 0, size = instance.getQuantityOrder(); index < size; index++) {
 				this.continuousFeatures[index] = DataInstance.defaultFloat;
 			}
 		}
-		instance.iterateDiscreteFeatures((index, value) -> {
+		instance.iterateQualityFeatures((index, value) -> {
 			this.discreteFeatures[index] = value;
 		});
-		instance.iterateContinuousFeatures((index, value) -> {
+		instance.iterateQuantityFeatures((index, value) -> {
 			this.continuousFeatures[index] = value;
 		});
-		this.discreteMark = instance.getDiscreteMark();
-		this.continuousMark = instance.getContinuousMark();
+		this.discreteMark = instance.getQualityMark();
+		this.continuousMark = instance.getQuantityMark();
 	}
 
 	@Override
@@ -60,17 +60,17 @@ public class ArrayInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteFeature(int index) {
+	public int getQualityFeature(int index) {
 		return this.discreteFeatures[index];
 	}
 
 	@Override
-	public float getContinuousFeature(int index) {
+	public float getQuantityFeature(int index) {
 		return this.continuousFeatures[index];
 	}
 
 	@Override
-	public ArrayInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
+	public ArrayInstance iterateQualityFeatures(QualityAccessor accessor) {
 		for (int index = 0; index < discreteOrder; index++) {
 			accessor.accessorFeature(index, this.discreteFeatures[index]);
 		}
@@ -78,7 +78,7 @@ public class ArrayInstance implements DataInstance {
 	}
 
 	@Override
-	public ArrayInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
+	public ArrayInstance iterateQuantityFeatures(QuantityAccessor accessor) {
 		for (int index = 0; index < continuousOrder; index++) {
 			accessor.accessorFeature(index, this.continuousFeatures[index]);
 		}
@@ -86,22 +86,22 @@ public class ArrayInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteMark() {
+	public int getQualityMark() {
 		return discreteMark;
 	}
 
 	@Override
-	public float getContinuousMark() {
+	public float getQuantityMark() {
 		return continuousMark;
 	}
 
 	@Override
-	public int getDiscreteOrder() {
+	public int getQualityOrder() {
 		return discreteOrder;
 	}
 
 	@Override
-	public int getContinuousOrder() {
+	public int getQuantityOrder() {
 		return continuousOrder;
 	}
 

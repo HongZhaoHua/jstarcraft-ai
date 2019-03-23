@@ -63,7 +63,7 @@ public class ReferenceModuleTestCase {
 		references.associateData(5);
 		module = new ReferenceModule(references, module);
 		Assert.assertEquals(1, module.getSize());
-		Assert.assertEquals(5, module.getInstance(0).getDiscreteFeature(5));
+		Assert.assertEquals(5, module.getInstance(0).getQualityFeature(5));
 	}
 
 }

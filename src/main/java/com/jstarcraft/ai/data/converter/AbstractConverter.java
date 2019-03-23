@@ -4,22 +4,22 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 
 public abstract class AbstractConverter<T> implements DataConverter<T> {
 
 	/** 离散属性映射 */
-	protected Map<String, DiscreteAttribute> discreteAttributes = new HashMap<>();
+	protected Map<String, QualityAttribute> discreteAttributes = new HashMap<>();
 
 	/** 连续属性映射 */
-	protected Map<String, ContinuousAttribute> continuousAttributes = new HashMap<>();
+	protected Map<String, QuantityAttribute> continuousAttributes = new HashMap<>();
 
-	protected AbstractConverter(Collection<DiscreteAttribute> discreteAttributes, Collection<ContinuousAttribute> continuousAttributes) {
-		for (DiscreteAttribute attribute : discreteAttributes) {
+	protected AbstractConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		for (QualityAttribute attribute : discreteAttributes) {
 			this.discreteAttributes.put(attribute.getName(), attribute);
 		}
-		for (ContinuousAttribute attribute : continuousAttributes) {
+		for (QuantityAttribute attribute : continuousAttributes) {
 			this.continuousAttributes.put(attribute.getName(), attribute);
 		}
 	}

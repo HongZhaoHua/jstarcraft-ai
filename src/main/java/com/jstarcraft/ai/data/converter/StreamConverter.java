@@ -7,8 +7,8 @@ import java.io.InputStreamReader;
 import java.util.Collection;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.exception.DataException;
 
 /**
@@ -19,7 +19,7 @@ import com.jstarcraft.ai.data.exception.DataException;
  */
 public abstract class StreamConverter extends AbstractConverter<InputStream> {
 
-	protected StreamConverter(Collection<DiscreteAttribute> discreteAttributes, Collection<ContinuousAttribute> continuousAttributes) {
+	protected StreamConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
 		super(discreteAttributes, continuousAttributes);
 	}
 

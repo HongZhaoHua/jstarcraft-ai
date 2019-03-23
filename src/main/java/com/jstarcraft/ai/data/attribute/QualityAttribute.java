@@ -8,7 +8,7 @@ import com.jstarcraft.ai.data.DataAttribute;
  *
  * @param <T>
  */
-public interface DiscreteAttribute<T extends Comparable<T>> extends DataAttribute<T> {
+public interface QualityAttribute<T extends Comparable<T>> extends DataAttribute<T> {
 
 	/**
 	 * 转换属性值

@@ -32,7 +32,7 @@ public interface DataInstance {
 	 * @param index
 	 * @return
 	 */
-	int getDiscreteFeature(int index);
+	int getQualityFeature(int index);
 
 	/**
 	 * 获取指定索引的连续特征
@@ -40,7 +40,7 @@ public interface DataInstance {
 	 * @param index
 	 * @return
 	 */
-	float getContinuousFeature(int index);
+	float getQuantityFeature(int index);
 
 	/**
 	 * 遍历离散特征
@@ -48,7 +48,7 @@ public interface DataInstance {
 	 * @param accessor
 	 * @return
 	 */
-	DataInstance iterateDiscreteFeatures(DiscreteAccessor accessor);
+	DataInstance iterateQualityFeatures(QualityAccessor accessor);
 
 	/**
 	 * 遍历连续特征
@@ -56,34 +56,34 @@ public interface DataInstance {
 	 * @param accessor
 	 * @return
 	 */
-	DataInstance iterateContinuousFeatures(ContinuousAccessor accessor);
+	DataInstance iterateQuantityFeatures(QuantityAccessor accessor);
 
 	/**
 	 * 获取离散标记
 	 * 
 	 * @return
 	 */
-	int getDiscreteMark();
+	int getQualityMark();
 
 	/**
 	 * 获取连续标记
 	 * 
 	 * @return
 	 */
-	float getContinuousMark();
+	float getQuantityMark();
 
 	/**
-	 * 获取稀疏秩
+	 * 获取离散秩
 	 * 
 	 * @return
 	 */
-	int getDiscreteOrder();
+	int getQualityOrder();
 
 	/**
 	 * 获取连续秩
 	 * 
 	 * @return
 	 */
-	int getContinuousOrder();
+	int getQuantityOrder();
 
 }

@@ -14,7 +14,7 @@ import org.redisson.api.RScript.ReturnType;
  * @author Birdy
  *
  */
-public class RedisContinuousAttribute<T extends Number> implements ContinuousAttribute<T> {
+public class RedisQuantityAttribute<T extends Number> implements QuantityAttribute<T> {
 
 	private final static String maximumLua = "local maximum = redis.call('get', KEYS[1]); if (maximum) then if (ARGV[1] > maximum) then maximum = ARGV[1]; redis.call('set', KEYS[1], maximum); end; else maximum = ARGV[1]; redis.call('set', KEYS[1], maximum); end; return maximum;";
 
@@ -48,7 +48,7 @@ public class RedisContinuousAttribute<T extends Number> implements ContinuousAtt
 
 	private RAtomicDouble minimumAtomic;
 
-	public RedisContinuousAttribute(String name, Class<T> type, Redisson redisson) {
+	public RedisQuantityAttribute(String name, Class<T> type, Redisson redisson) {
 		this.name = name;
 		this.type = type;
 		this.maximumKey = name + maximumSuffix;

@@ -90,7 +90,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param name
 	 * @return
 	 */
-	int getDiscreteInner(String name);
+	int getQualityInner(String name);
 
 	/**
 	 * 获取指定连续属性的内部索引
@@ -101,11 +101,11 @@ public interface DataModule extends Iterable<DataInstance> {
 	int getContinuousInner(String name);
 
 	/**
-	 * 获取稀疏秩
+	 * 获取定性秩
 	 * 
 	 * @return
 	 */
-	int getDiscreteOrder();
+	int getQualityOrder();
 
 	/**
 	 * 获取连续秩

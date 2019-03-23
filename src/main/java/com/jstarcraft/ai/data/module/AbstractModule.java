@@ -83,7 +83,7 @@ abstract public class AbstractModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteInner(String name) {
+	public int getQualityInner(String name) {
 		// 通过等于查找
 		return discreteInner.get(name);
 	}
@@ -95,7 +95,7 @@ abstract public class AbstractModule implements DataModule {
 	}
 
 	@Override
-	public int getDiscreteOrder() {
+	public int getQualityOrder() {
 		return discreteOrder;
 	}
 

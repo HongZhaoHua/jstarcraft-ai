@@ -1,12 +1,12 @@
 package com.jstarcraft.ai.data;
 
 /**
- * 连续访问器
+ * 离散访问器
  * 
  * @author Birdy
  *
  */
-public interface ContinuousAccessor {
+public interface QualityAccessor {
 
 	/**
 	 * 访问特征
@@ -14,6 +14,6 @@ public interface ContinuousAccessor {
 	 * @param index
 	 * @param value
 	 */
-	void accessorFeature(int index, float value);
+	void accessorFeature(int index, int value);
 
 }

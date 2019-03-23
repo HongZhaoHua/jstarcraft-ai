@@ -7,8 +7,8 @@ import java.util.Collection;
 import org.apache.commons.csv.CSVFormat;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.core.utility.StringUtility;
 
 /**
@@ -24,7 +24,7 @@ import com.jstarcraft.core.utility.StringUtility;
 // TODO 准备支持稀疏数据 https://www.bbsmax.com/A/x9J2RnqeJ6/
 public class ArffConverter extends CsvConverter {
 
-	public ArffConverter(Collection<DiscreteAttribute> discreteAttributes, Collection<ContinuousAttribute> continuousAttributes) {
+	public ArffConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
 		super(CSVFormat.DEFAULT.getDelimiter(), discreteAttributes, continuousAttributes);
 	}
 

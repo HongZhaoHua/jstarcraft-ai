@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.Map.Entry;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.ContinuousAttribute;
-import com.jstarcraft.ai.data.attribute.DiscreteAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.module.DenseModule;
 import com.jstarcraft.ai.data.module.SparseModule;
 import com.jstarcraft.core.utility.ConversionUtility;
@@ -37,7 +37,7 @@ public class JsonConverter extends StreamConverter {
 
 	private final static Type sparseType = TypeUtility.parameterize(Int2ObjectOpenHashMap.class, Object.class);
 
-	public JsonConverter(Collection<DiscreteAttribute> discreteAttributes, Collection<ContinuousAttribute> continuousAttributes) {
+	public JsonConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
 		super(discreteAttributes, continuousAttributes);
 	}
 
@@ -59,12 +59,12 @@ public class JsonConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						DiscreteAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						int feature = attribute.convertValue((Comparable) value);
-						discreteFeatures.put(module.getDiscreteInner(keyValue.getKey()) + index - term.getKey(), feature);
+						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						ContinuousAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						float feature = attribute.convertValue((Number) value);
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
@@ -89,12 +89,12 @@ public class JsonConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						DiscreteAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						int feature = attribute.convertValue((Comparable) value);
-						discreteFeatures.put(module.getDiscreteInner(keyValue.getKey()) + index - term.getKey(), feature);
+						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						ContinuousAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						float feature = attribute.convertValue((Number) value);
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);

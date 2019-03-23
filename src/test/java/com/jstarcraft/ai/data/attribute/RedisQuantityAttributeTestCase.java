@@ -8,7 +8,7 @@ import org.redisson.Redisson;
 import org.redisson.api.RKeys;
 import org.redisson.config.Config;
 
-public class RedisDiscreteAttributeTestCase extends DiscreteAttributeTestCase {
+public class RedisQuantityAttributeTestCase extends QuantityAttributeTestCase {
 
 	private static Redisson redisson;
 
@@ -37,8 +37,8 @@ public class RedisDiscreteAttributeTestCase extends DiscreteAttributeTestCase {
 	}
 
 	@Override
-	protected DiscreteAttribute<Float> getDiscreteAttribute() {
-		return new RedisDiscreteAttribute<>("test", Float.class, 1, 10, redisson);
+	protected QuantityAttribute<Float> getQuantityAttribute() {
+		return new RedisQuantityAttribute<>("test", Float.class, redisson);
 	}
 
 }

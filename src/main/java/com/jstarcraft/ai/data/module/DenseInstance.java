@@ -1,8 +1,8 @@
 package com.jstarcraft.ai.data.module;
 
-import com.jstarcraft.ai.data.ContinuousAccessor;
+import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
-import com.jstarcraft.ai.data.DiscreteAccessor;
+import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
@@ -30,7 +30,7 @@ public class DenseInstance implements DataInstance {
 
 	DenseInstance(int cursor, DenseModule module) {
 		this.cursor = cursor;
-		this.discreteOrder = module.getDiscreteOrder();
+		this.discreteOrder = module.getQualityOrder();
 		this.continuousOrder = module.getContinuousOrder();
 		this.discreteValues = module.getDiscreteValues();
 		this.continuousValues = module.getContinuousValues();
@@ -47,17 +47,17 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteFeature(int index) {
+	public int getQualityFeature(int index) {
 		return discreteValues[index].getData(cursor);
 	}
 
 	@Override
-	public float getContinuousFeature(int index) {
+	public float getQuantityFeature(int index) {
 		return continuousValues[index].getData(cursor);
 	}
 
 	@Override
-	public DenseInstance iterateDiscreteFeatures(DiscreteAccessor accessor) {
+	public DenseInstance iterateQualityFeatures(QualityAccessor accessor) {
 		for (int index = 0; index < discreteOrder; index++) {
 			accessor.accessorFeature(index, discreteValues[index].getData(cursor));
 		}
@@ -65,7 +65,7 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public DenseInstance iterateContinuousFeatures(ContinuousAccessor accessor) {
+	public DenseInstance iterateQuantityFeatures(QuantityAccessor accessor) {
 		for (int index = 0; index < continuousOrder; index++) {
 			accessor.accessorFeature(index, continuousValues[index].getData(cursor));
 		}
@@ -73,22 +73,22 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getDiscreteMark() {
+	public int getQualityMark() {
 		return discreteMarks.getData(cursor);
 	}
 
 	@Override
-	public float getContinuousMark() {
+	public float getQuantityMark() {
 		return continuousMarks.getData(cursor);
 	}
 
 	@Override
-	public int getDiscreteOrder() {
+	public int getQualityOrder() {
 		return discreteOrder;
 	}
 
 	@Override
-	public int getContinuousOrder() {
+	public int getQuantityOrder() {
 		return continuousOrder;
 	}
 

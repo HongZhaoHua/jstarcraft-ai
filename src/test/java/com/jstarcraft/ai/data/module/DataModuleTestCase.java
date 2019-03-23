@@ -36,8 +36,8 @@ public abstract class DataModuleTestCase {
 		}
 		int discreteOrder = 10, continuousOrder = 10, instanceCapacity = 10;
 		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
-		Assert.assertThat(module.getDiscreteInner("user"), CoreMatchers.equalTo(10));
-		Assert.assertThat(module.getDiscreteInner("item"), CoreMatchers.equalTo(0));
+		Assert.assertThat(module.getQualityInner("user"), CoreMatchers.equalTo(10));
+		Assert.assertThat(module.getQualityInner("item"), CoreMatchers.equalTo(0));
 		Assert.assertThat(module.getContinuousInner("score"), CoreMatchers.equalTo(0));
 		for (int index = 0; index < 10;) {
 			{
@@ -78,10 +78,10 @@ public abstract class DataModuleTestCase {
 			Assert.assertEquals(index + 1, module.getSize());
 			DataInstance instance = module.getInstance(index);
 			for (Int2IntMap.Entry term : discreteFeatures.int2IntEntrySet()) {
-				Assert.assertEquals(term.getIntValue(), instance.getDiscreteFeature(term.getIntKey()), 0F);
+				Assert.assertEquals(term.getIntValue(), instance.getQualityFeature(term.getIntKey()), 0F);
 			}
 			for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
-				Assert.assertEquals(term.getFloatValue(), instance.getContinuousFeature(term.getIntKey()), 0F);
+				Assert.assertEquals(term.getFloatValue(), instance.getQuantityFeature(term.getIntKey()), 0F);
 			}
 		}
 

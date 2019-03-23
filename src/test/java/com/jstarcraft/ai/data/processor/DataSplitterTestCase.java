@@ -48,7 +48,7 @@ public class DataSplitterTestCase {
 
 			@Override
 			public int split(DataInstance instance) {
-				return instance.getDiscreteFeature(0);
+				return instance.getQualityFeature(0);
 			}
 
 		};
@@ -57,8 +57,8 @@ public class DataSplitterTestCase {
 		for (int index = 0; index < number; index++) {
 			module = modules[index];
 			Assert.assertEquals(2, module.getSize());
-			Assert.assertEquals(index, module.getInstance(0).getDiscreteFeature(0));
-			Assert.assertEquals(index + number, module.getInstance(1).getDiscreteFeature(0));
+			Assert.assertEquals(index, module.getInstance(0).getQualityFeature(0));
+			Assert.assertEquals(index + number, module.getInstance(1).getQualityFeature(0));
 		}
 
 	}
