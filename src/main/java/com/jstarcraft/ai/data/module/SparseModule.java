@@ -25,11 +25,11 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 public class SparseModule extends AbstractModule {
 
 	/** 离散特征 */
-	private IntegerArray discretePoints;
+	private IntegerArray qualityPoints;
 
-	private IntegerArray discreteIndexes;
+	private IntegerArray qualityIndexes;
 
-	private IntegerArray discreteValues;
+	private IntegerArray qualityValues;
 
 	/** 连续特征 */
 	private IntegerArray continuousPoints;
@@ -40,26 +40,26 @@ public class SparseModule extends AbstractModule {
 
 	public SparseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
 		super(name, definition, capacity);
-		this.discretePoints = new IntegerArray(1000, capacity + 1);
-		this.discreteIndexes = new IntegerArray(1000, capacity * discreteOrder);
-		this.discreteValues = new IntegerArray(1000, capacity * discreteOrder);
+		this.qualityPoints = new IntegerArray(1000, capacity + 1);
+		this.qualityIndexes = new IntegerArray(1000, capacity * qualityOrder);
+		this.qualityValues = new IntegerArray(1000, capacity * qualityOrder);
 		this.continuousPoints = new IntegerArray(1000, capacity + 1);
 		this.continuousIndexes = new IntegerArray(1000, capacity * continuousOrder);
 		this.continuousValues = new FloatArray(1000, capacity * continuousOrder);
-		this.discretePoints.associateData(0);
+		this.qualityPoints.associateData(0);
 		this.continuousPoints.associateData(0);
 	}
 
-	IntegerArray getDiscretePoints() {
-		return discretePoints;
+	IntegerArray getQualityPoints() {
+		return qualityPoints;
 	}
 
-	IntegerArray getDiscreteIndexes() {
-		return discreteIndexes;
+	IntegerArray getQualityIndexes() {
+		return qualityIndexes;
 	}
 
-	IntegerArray getDiscreteValues() {
-		return discreteValues;
+	IntegerArray getQualityValues() {
+		return qualityValues;
 	}
 
 	IntegerArray getContinuousPoints() {
@@ -75,27 +75,27 @@ public class SparseModule extends AbstractModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
-		if (!discreteFeatures.isEmpty() && (discreteFeatures.firstIntKey() < 0 || discreteFeatures.lastIntKey() >= discreteOrder)) {
+		if (!qualityFeatures.isEmpty() && (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder)) {
 			throw new DataException();
 		}
 		if (!continuousFeatures.isEmpty() && (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder)) {
 			throw new DataException();
 		}
-		discretePoints.associateData(discretePoints.getData(discretePoints.getSize() - 1) + discreteFeatures.size());
+		qualityPoints.associateData(qualityPoints.getData(qualityPoints.getSize() - 1) + qualityFeatures.size());
 		continuousPoints.associateData(continuousPoints.getData(continuousPoints.getSize() - 1) + continuousFeatures.size());
-		for (Int2IntMap.Entry term : discreteFeatures.int2IntEntrySet()) {
-			discreteIndexes.associateData(term.getIntKey());
-			discreteValues.associateData(term.getIntValue());
+		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
+			qualityIndexes.associateData(term.getIntKey());
+			qualityValues.associateData(term.getIntValue());
 		}
 		for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
 			continuousIndexes.associateData(term.getIntKey());
 			continuousValues.associateData(term.getFloatValue());
 		}
-		discreteMarks.associateData(discreteMark);
+		qualityMarks.associateData(qualityMark);
 		continuousMarks.associateData(continuousMark);
 		size++;
 	}

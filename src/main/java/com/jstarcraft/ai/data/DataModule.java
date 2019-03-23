@@ -22,43 +22,43 @@ public interface DataModule extends Iterable<DataInstance> {
 	/**
 	 * 关联实例
 	 * 
-	 * @param discreteFeatures
+	 * @param qualityFeatures
 	 * @param continuousFeatures
-	 * @param discreteMark
+	 * @param qualityMark
 	 * @param continuousMark
 	 */
-	void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark);
+	void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark);
 
 	/**
 	 * 关联实例
 	 * 
-	 * @param discreteFeatures
+	 * @param qualityFeatures
 	 * @param continuousFeatures
-	 * @param discreteMark
+	 * @param qualityMark
 	 */
-	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark) {
-		associateInstance(discreteFeatures, continuousFeatures, discreteMark, DataInstance.defaultFloat);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark) {
+		associateInstance(qualityFeatures, continuousFeatures, qualityMark, DataInstance.defaultFloat);
 	}
 
 	/**
 	 * 关联实例
 	 * 
-	 * @param discreteFeatures
+	 * @param qualityFeatures
 	 * @param continuousFeatures
 	 * @param continuousMark
 	 */
-	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, float continuousMark) {
-		associateInstance(discreteFeatures, continuousFeatures, DataInstance.defaultInteger, continuousMark);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, float continuousMark) {
+		associateInstance(qualityFeatures, continuousFeatures, DataInstance.defaultInteger, continuousMark);
 	}
 
 	/**
 	 * 关联实例
 	 * 
-	 * @param discreteFeatures
+	 * @param qualityFeatures
 	 * @param continuousFeatures
 	 */
-	default void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures) {
-		associateInstance(discreteFeatures, continuousFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures) {
+		associateInstance(qualityFeatures, continuousFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
 	}
 
 	/**

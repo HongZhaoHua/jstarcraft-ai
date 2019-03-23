@@ -11,19 +11,19 @@ public class SparseInstance implements DataInstance {
 	private int cursor;
 
 	/** 离散秩 */
-	private int discreteOrder;
+	private int qualityOrder;
 
 	/** 连续秩 */
 	private int continuousOrder;
 
 	/** 离散特征 */
-	private int[] discreteFeatures;
+	private int[] qualityFeatures;
 
-	private IntegerArray discretePoints;
+	private IntegerArray qualityPoints;
 
-	private IntegerArray discreteIndexes;
+	private IntegerArray qualityIndexes;
 
-	private IntegerArray discreteValues;
+	private IntegerArray qualityValues;
 
 	/** 连续特征 */
 	private float[] continuousFeatures;
@@ -35,24 +35,24 @@ public class SparseInstance implements DataInstance {
 	private FloatArray continuousValues;
 
 	/** 离散标记 */
-	protected IntegerArray discreteMarks;
+	protected IntegerArray qualityMarks;
 
 	/** 连续标记 */
 	protected FloatArray continuousMarks;
 
 	SparseInstance(int cursor, SparseModule module) {
 		this.cursor = cursor;
-		this.discreteOrder = module.getQualityOrder();
+		this.qualityOrder = module.getQualityOrder();
 		this.continuousOrder = module.getContinuousOrder();
-		this.discreteFeatures = new int[module.getQualityOrder()];
+		this.qualityFeatures = new int[module.getQualityOrder()];
 		{
 			for (int index = 0, size = module.getQualityOrder(); index < size; index++) {
-				this.discreteFeatures[index] = DataInstance.defaultInteger;
+				this.qualityFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
-		this.discretePoints = module.getDiscretePoints();
-		this.discreteIndexes = module.getDiscreteIndexes();
-		this.discreteValues = module.getDiscreteValues();
+		this.qualityPoints = module.getQualityPoints();
+		this.qualityIndexes = module.getQualityIndexes();
+		this.qualityValues = module.getQualityValues();
 		this.continuousFeatures = new float[module.getContinuousOrder()];
 		{
 			for (int index = 0, size = module.getContinuousOrder(); index < size; index++) {
@@ -63,11 +63,11 @@ public class SparseInstance implements DataInstance {
 		this.continuousIndexes = module.getContinuousIndexes();
 		this.continuousValues = module.getContinuousValues();
 		{
-			int from = this.discretePoints.getData(this.cursor);
-			int to = this.discretePoints.getData(this.cursor + 1);
+			int from = this.qualityPoints.getData(this.cursor);
+			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int position = from; position < to; position++) {
-				int index = this.discreteIndexes.getData(position);
-				this.discreteFeatures[index] = this.discreteValues.getData(position);
+				int index = this.qualityIndexes.getData(position);
+				this.qualityFeatures[index] = this.qualityValues.getData(position);
 			}
 		}
 		{
@@ -83,11 +83,11 @@ public class SparseInstance implements DataInstance {
 	@Override
 	public void setCursor(int cursor) {
 		{
-			int from = this.discretePoints.getData(this.cursor);
-			int to = this.discretePoints.getData(this.cursor + 1);
+			int from = this.qualityPoints.getData(this.cursor);
+			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.discreteIndexes.getData(current);
-				this.discreteFeatures[index] = DataInstance.defaultInteger;
+				int index = this.qualityIndexes.getData(current);
+				this.qualityFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
 		{
@@ -100,11 +100,11 @@ public class SparseInstance implements DataInstance {
 		}
 		this.cursor = cursor;
 		{
-			int from = this.discretePoints.getData(this.cursor);
-			int to = this.discretePoints.getData(this.cursor + 1);
+			int from = this.qualityPoints.getData(this.cursor);
+			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.discreteIndexes.getData(current);
-				this.discreteFeatures[index] = this.discreteValues.getData(current);
+				int index = this.qualityIndexes.getData(current);
+				this.qualityFeatures[index] = this.qualityValues.getData(current);
 			}
 		}
 		{
@@ -124,7 +124,7 @@ public class SparseInstance implements DataInstance {
 
 	@Override
 	public int getQualityFeature(int index) {
-		return this.discreteFeatures[index];
+		return this.qualityFeatures[index];
 	}
 
 	@Override
@@ -134,11 +134,11 @@ public class SparseInstance implements DataInstance {
 
 	@Override
 	public SparseInstance iterateQualityFeatures(QualityAccessor accessor) {
-		int from = this.discretePoints.getData(this.cursor);
-		int to = this.discretePoints.getData(this.cursor + 1);
+		int from = this.qualityPoints.getData(this.cursor);
+		int to = this.qualityPoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
-			int index = this.discreteIndexes.getData(position);
-			accessor.accessorFeature(index, this.discreteFeatures[index]);
+			int index = this.qualityIndexes.getData(position);
+			accessor.accessorFeature(index, this.qualityFeatures[index]);
 		}
 		return this;
 	}
@@ -156,7 +156,7 @@ public class SparseInstance implements DataInstance {
 
 	@Override
 	public int getQualityMark() {
-		return discreteMarks.getData(cursor);
+		return qualityMarks.getData(cursor);
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class SparseInstance implements DataInstance {
 
 	@Override
 	public int getQualityOrder() {
-		return discreteOrder;
+		return qualityOrder;
 	}
 
 	@Override

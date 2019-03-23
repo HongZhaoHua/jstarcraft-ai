@@ -10,7 +10,7 @@ import org.nd4j.linalg.api.rng.DefaultRandom;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
-import com.jstarcraft.ai.math.algorithm.distribution.DiscreteProbability;
+import com.jstarcraft.ai.math.algorithm.distribution.QualityProbability;
 import com.jstarcraft.ai.math.algorithm.distribution.Probability;
 
 public class BinomialProbabilityTestCase extends ProbabilityTestCase {
@@ -26,7 +26,7 @@ public class BinomialProbabilityTestCase extends ProbabilityTestCase {
 	protected Probability getNewFunction(long seed) {
 		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
 		BinomialDistribution distribution = new BinomialDistribution(random, 10, 0.5D);
-		return new DiscreteProbability(distribution);
+		return new QualityProbability(distribution);
 	}
 
 	@Override

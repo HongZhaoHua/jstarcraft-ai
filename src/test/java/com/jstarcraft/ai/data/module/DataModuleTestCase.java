@@ -34,7 +34,7 @@ public abstract class DataModuleTestCase {
 			moduleDefinition.add(new KeyValue<>(new KeyValue<>("item", true), 1));
 			moduleDefinition.add(new KeyValue<>(new KeyValue<>("score", false), 1));
 		}
-		int discreteOrder = 10, continuousOrder = 10, instanceCapacity = 10;
+		int qualityOrder = 10, continuousOrder = 10, instanceCapacity = 10;
 		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
 		Assert.assertThat(module.getQualityInner("user"), CoreMatchers.equalTo(10));
 		Assert.assertThat(module.getQualityInner("item"), CoreMatchers.equalTo(0));
@@ -58,26 +58,26 @@ public abstract class DataModuleTestCase {
 		String moduleName = "module";
 		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
 		for (int index = 0; index < 10; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("discrete", true), 1));
+			moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
 			moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
 		}
-		int discreteOrder = 10, continuousOrder = 10, instanceCapacity = 10;
+		int qualityOrder = 10, continuousOrder = 10, instanceCapacity = 10;
 		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
 		Assert.assertEquals(0, module.getSize());
 
-		Int2IntSortedMap discreteFeatures = new Int2IntAVLTreeMap();
-		for (int index = 0; index < discreteOrder; index++) {
-			discreteFeatures.put(index, RandomUtility.randomInteger(1));
+		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
+		for (int index = 0; index < qualityOrder; index++) {
+			qualityFeatures.put(index, RandomUtility.randomInteger(1));
 		}
 		Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
 		for (int index = 0; index < continuousOrder; index++) {
 			continuousFeatures.put(index, RandomUtility.randomFloat(1F));
 		}
 		for (int index = 0; index < instanceCapacity; index++) {
-			module.associateInstance(discreteFeatures, continuousFeatures);
+			module.associateInstance(qualityFeatures, continuousFeatures);
 			Assert.assertEquals(index + 1, module.getSize());
 			DataInstance instance = module.getInstance(index);
-			for (Int2IntMap.Entry term : discreteFeatures.int2IntEntrySet()) {
+			for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
 				Assert.assertEquals(term.getIntValue(), instance.getQualityFeature(term.getIntKey()), 0F);
 			}
 			for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
@@ -86,7 +86,7 @@ public abstract class DataModuleTestCase {
 		}
 
 		try {
-			module.associateInstance(discreteFeatures, continuousFeatures);
+			module.associateInstance(qualityFeatures, continuousFeatures);
 			Assert.fail();
 		} catch (DataCapacityException exception) {
 		}

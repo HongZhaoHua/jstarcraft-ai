@@ -11,28 +11,28 @@ public class DenseInstance implements DataInstance {
 	private int cursor;
 
 	/** 离散秩 */
-	private int discreteOrder;
+	private int qualityOrder;
 
 	/** 连续秩 */
 	private int continuousOrder;
 
 	/** 离散特征 */
-	private IntegerArray[] discreteValues;
+	private IntegerArray[] qualityValues;
 
 	/** 连续特征 */
 	private FloatArray[] continuousValues;
 
 	/** 离散标记 */
-	protected IntegerArray discreteMarks;
+	protected IntegerArray qualityMarks;
 
 	/** 连续标记 */
 	protected FloatArray continuousMarks;
 
 	DenseInstance(int cursor, DenseModule module) {
 		this.cursor = cursor;
-		this.discreteOrder = module.getQualityOrder();
+		this.qualityOrder = module.getQualityOrder();
 		this.continuousOrder = module.getContinuousOrder();
-		this.discreteValues = module.getDiscreteValues();
+		this.qualityValues = module.getQualityValues();
 		this.continuousValues = module.getContinuousValues();
 	}
 
@@ -48,7 +48,7 @@ public class DenseInstance implements DataInstance {
 
 	@Override
 	public int getQualityFeature(int index) {
-		return discreteValues[index].getData(cursor);
+		return qualityValues[index].getData(cursor);
 	}
 
 	@Override
@@ -58,8 +58,8 @@ public class DenseInstance implements DataInstance {
 
 	@Override
 	public DenseInstance iterateQualityFeatures(QualityAccessor accessor) {
-		for (int index = 0; index < discreteOrder; index++) {
-			accessor.accessorFeature(index, discreteValues[index].getData(cursor));
+		for (int index = 0; index < qualityOrder; index++) {
+			accessor.accessorFeature(index, qualityValues[index].getData(cursor));
 		}
 		return this;
 	}
@@ -74,7 +74,7 @@ public class DenseInstance implements DataInstance {
 
 	@Override
 	public int getQualityMark() {
-		return discreteMarks.getData(cursor);
+		return qualityMarks.getData(cursor);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class DenseInstance implements DataInstance {
 
 	@Override
 	public int getQualityOrder() {
-		return discreteOrder;
+		return qualityOrder;
 	}
 
 	@Override

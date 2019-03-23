@@ -31,7 +31,7 @@ import com.jstarcraft.core.utility.KeyValue;
 public class DataSpace {
 
 	/** 离散属性映射 */
-	private Map<String, QualityAttribute> discreteAttributes = new HashMap<>();
+	private Map<String, QualityAttribute> qualityAttributes = new HashMap<>();
 
 	/** 连续属性映射 */
 	private Map<String, QuantityAttribute> continuousAttributes = new HashMap<>();
@@ -39,16 +39,16 @@ public class DataSpace {
 	/** 模型映射 */
 	private Map<String, DataModule> modules = new HashMap<>();
 
-	public DataSpace(Map<String, Class<?>> discreteDifinitions, Map<String, Class<?>> continuousDifinitions) {
-		for (Entry<String, Class<?>> keyValue : discreteDifinitions.entrySet()) {
+	public DataSpace(Map<String, Class<?>> qualityDifinitions, Map<String, Class<?>> continuousDifinitions) {
+		for (Entry<String, Class<?>> keyValue : qualityDifinitions.entrySet()) {
 			if (continuousAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
 			QualityAttribute attribute = new MemoryQualityAttribute(keyValue.getKey(), keyValue.getValue());
-			discreteAttributes.put(attribute.getName(), attribute);
+			qualityAttributes.put(attribute.getName(), attribute);
 		}
 		for (Entry<String, Class<?>> keyValue : continuousDifinitions.entrySet()) {
-			if (discreteAttributes.containsKey(keyValue.getKey())) {
+			if (qualityAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
 			QuantityAttribute attribute = new MemoryQuantityAttribute(keyValue.getKey(), keyValue.getValue());
@@ -56,16 +56,16 @@ public class DataSpace {
 		}
 	}
 
-	public QualityAttribute getDiscreteAttribute(String attributeName) {
-		return discreteAttributes.get(attributeName);
+	public QualityAttribute getQualityAttribute(String attributeName) {
+		return qualityAttributes.get(attributeName);
 	}
 
 	public QuantityAttribute getContinuousAttribute(String attributeName) {
 		return continuousAttributes.get(attributeName);
 	}
 
-	public Collection<QualityAttribute> getDiscreteAttributes() {
-		return discreteAttributes.values();
+	public Collection<QualityAttribute> getQualityAttributes() {
+		return qualityAttributes.values();
 	}
 
 	public Collection<QuantityAttribute> getContinuousAttributes() {
@@ -86,7 +86,7 @@ public class DataSpace {
 			List<KeyValue<KeyValue<String, Boolean>, Integer>> definition = new ArrayList<>(configuration.size());
 			int current = 0;
 			for (Entry<Integer, String> term : configuration.entrySet()) {
-				if (discreteAttributes.containsKey(term.getValue())) {
+				if (qualityAttributes.containsKey(term.getValue())) {
 					KeyValue<KeyValue<String, Boolean>, Integer> keyValue = new KeyValue<>(new KeyValue<>(term.getValue(), true), term.getKey() - current);
 					definition.add(keyValue);
 					current = term.getKey();
@@ -122,7 +122,7 @@ public class DataSpace {
 			List<KeyValue<KeyValue<String, Boolean>, Integer>> definition = new ArrayList<>(configuration.size());
 			int current = 0;
 			for (Entry<Integer, String> term : configuration.entrySet()) {
-				if (discreteAttributes.containsKey(term.getValue())) {
+				if (qualityAttributes.containsKey(term.getValue())) {
 					KeyValue<KeyValue<String, Boolean>, Integer> keyValue = new KeyValue<>(new KeyValue<>(term.getValue(), true), term.getKey() - current);
 					definition.add(keyValue);
 					current = term.getKey();

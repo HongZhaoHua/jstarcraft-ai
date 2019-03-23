@@ -18,7 +18,7 @@ import com.jstarcraft.core.utility.KeyValue;
 abstract public class AbstractModule implements DataModule {
 
 	/** 离散特征 */
-	protected int discreteOrder;
+	protected int qualityOrder;
 
 	/** 连续特征 */
 	protected int continuousOrder;
@@ -27,13 +27,13 @@ abstract public class AbstractModule implements DataModule {
 	protected TreeMap<Integer, KeyValue<String, Boolean>> outer = new TreeMap<>();
 
 	/** 从离散属性到内部索引的投影 */
-	protected TreeMap<String, Integer> discreteInner = new TreeMap<>();
+	protected TreeMap<String, Integer> qualityInner = new TreeMap<>();
 
 	/** 从连续属性到内部索引的投影 */
 	protected TreeMap<String, Integer> continuousInner = new TreeMap<>();
 
 	/** 离散标记 */
-	protected IntegerArray discreteMarks;
+	protected IntegerArray qualityMarks;
 
 	/** 连续标记 */
 	protected FloatArray continuousMarks;
@@ -46,18 +46,18 @@ abstract public class AbstractModule implements DataModule {
 		for (KeyValue<KeyValue<String, Boolean>, Integer> term : definition) {
 			KeyValue<String, Boolean> keyValue = term.getKey();
 			if (keyValue.getValue()) {
-				this.outer.put(this.discreteOrder + this.continuousOrder, keyValue);
-				this.discreteInner.put(keyValue.getKey(), this.discreteInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
-				this.discreteOrder += term.getValue();
+				this.outer.put(this.qualityOrder + this.continuousOrder, keyValue);
+				this.qualityInner.put(keyValue.getKey(), this.qualityInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
+				this.qualityOrder += term.getValue();
 			} else {
-				this.outer.put(this.discreteOrder + this.continuousOrder, keyValue);
+				this.outer.put(this.qualityOrder + this.continuousOrder, keyValue);
 				this.continuousInner.put(keyValue.getKey(), this.continuousInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
 				this.continuousOrder += term.getValue();
 			}
 		}
 		{
 			int count = 0;
-			for (Entry<String, Integer> term : discreteInner.entrySet()) {
+			for (Entry<String, Integer> term : qualityInner.entrySet()) {
 				int size = term.getValue();
 				term.setValue(count);
 				count += size;
@@ -71,7 +71,7 @@ abstract public class AbstractModule implements DataModule {
 				count += size;
 			}
 		}
-		this.discreteMarks = new IntegerArray(1000, capacity);
+		this.qualityMarks = new IntegerArray(1000, capacity);
 		this.continuousMarks = new FloatArray(1000, capacity);
 		this.capacity = capacity;
 	}
@@ -85,7 +85,7 @@ abstract public class AbstractModule implements DataModule {
 	@Override
 	public int getQualityInner(String name) {
 		// 通过等于查找
-		return discreteInner.get(name);
+		return qualityInner.get(name);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ abstract public class AbstractModule implements DataModule {
 
 	@Override
 	public int getQualityOrder() {
-		return discreteOrder;
+		return qualityOrder;
 	}
 
 	@Override
@@ -104,8 +104,8 @@ abstract public class AbstractModule implements DataModule {
 		return continuousOrder;
 	}
 
-	IntegerArray getDiscreteMarks() {
-		return discreteMarks;
+	IntegerArray getQualityMarks() {
+		return qualityMarks;
 	}
 
 	FloatArray getContinuousMarks() {

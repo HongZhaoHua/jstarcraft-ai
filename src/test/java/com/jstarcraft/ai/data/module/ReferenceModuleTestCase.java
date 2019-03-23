@@ -26,16 +26,16 @@ public class ReferenceModuleTestCase {
 	private DataModule getDataModule() {
 		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
 		for (int index = 0; index < order; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("discrete", true), 1));
+			moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
 			moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
 		}
 		DataModule module = new SparseModule(moduleName, moduleDefinition, instanceCapacity);
-		Int2IntSortedMap discreteFeatures = new Int2IntAVLTreeMap();
+		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
 		Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
 		for (int index = 0; index < instanceCapacity; index++) {
-			discreteFeatures.clear();
-			discreteFeatures.put(index, index);
-			module.associateInstance(discreteFeatures, continuousFeatures);
+			qualityFeatures.clear();
+			qualityFeatures.put(index, index);
+			module.associateInstance(qualityFeatures, continuousFeatures);
 		}
 		return module;
 	}
@@ -48,9 +48,9 @@ public class ReferenceModuleTestCase {
 		Assert.assertEquals(0, module.getSize());
 
 		try {
-			Int2IntSortedMap discreteFeatures = new Int2IntAVLTreeMap();
+			Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
 			Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
-			module.associateInstance(discreteFeatures, continuousFeatures);
+			module.associateInstance(qualityFeatures, continuousFeatures);
 			Assert.fail();
 		} catch (UnsupportedOperationException exception) {
 		}

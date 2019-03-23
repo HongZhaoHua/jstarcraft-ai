@@ -25,14 +25,14 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class HibernateConverter extends AbstractConverter<ScrollableResults> {
 
-	protected HibernateConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(discreteAttributes, continuousAttributes);
+	protected HibernateConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		super(qualityAttributes, continuousAttributes);
 	}
 
 	@Override
 	public int convert(DataModule module, ScrollableResults iterator) {
 		int count = 0;
-		Int2IntSortedMap discreteFeatures = new Int2IntRBTreeMap();
+		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
 		try {
 			int size = module.getQualityOrder() + module.getContinuousOrder();
@@ -45,10 +45,10 @@ public class HibernateConverter extends AbstractConverter<ScrollableResults> {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						int feature = attribute.convertValue((Comparable) data);
-						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
@@ -56,8 +56,8 @@ public class HibernateConverter extends AbstractConverter<ScrollableResults> {
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(discreteFeatures, continuousFeatures);
-				discreteFeatures.clear();
+				module.associateInstance(qualityFeatures, continuousFeatures);
+				qualityFeatures.clear();
 				continuousFeatures.clear();
 				count++;
 			}

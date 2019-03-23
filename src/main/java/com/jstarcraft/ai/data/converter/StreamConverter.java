@@ -19,8 +19,8 @@ import com.jstarcraft.ai.data.exception.DataException;
  */
 public abstract class StreamConverter extends AbstractConverter<InputStream> {
 
-	protected StreamConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(discreteAttributes, continuousAttributes);
+	protected StreamConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		super(qualityAttributes, continuousAttributes);
 	}
 
 	protected abstract int parseData(DataModule module, BufferedReader buffer) throws IOException;

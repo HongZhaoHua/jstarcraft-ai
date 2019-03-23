@@ -15,17 +15,17 @@ public class DataSpaceTestCase {
 
 	@Test
 	public void test() {
-		Map<String, Class<?>> discreteDifinitions = new HashMap<>();
+		Map<String, Class<?>> qualityDifinitions = new HashMap<>();
 		Map<String, Class<?>> continuousDifinitions = new HashMap<>();
-		discreteDifinitions.put("user", int.class);
-		discreteDifinitions.put("item", int.class);
+		qualityDifinitions.put("user", int.class);
+		qualityDifinitions.put("item", int.class);
 		continuousDifinitions.put("score", float.class);
-		DataSpace space = new DataSpace(discreteDifinitions, continuousDifinitions);
+		DataSpace space = new DataSpace(qualityDifinitions, continuousDifinitions);
 
 		// 获取数据属性
-		QualityAttribute userAttribute = space.getDiscreteAttribute("user");
+		QualityAttribute userAttribute = space.getQualityAttribute("user");
 		Assert.assertNotNull(userAttribute);
-		QualityAttribute itemAttribute = space.getDiscreteAttribute("item");
+		QualityAttribute itemAttribute = space.getQualityAttribute("item");
 		Assert.assertNotNull(itemAttribute);
 		QuantityAttribute scoreAttribute = space.getContinuousAttribute("score");
 		Assert.assertNotNull(scoreAttribute);

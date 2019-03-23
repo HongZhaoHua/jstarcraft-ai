@@ -10,14 +10,14 @@ import com.jstarcraft.ai.data.attribute.QualityAttribute;
 public abstract class AbstractConverter<T> implements DataConverter<T> {
 
 	/** 离散属性映射 */
-	protected Map<String, QualityAttribute> discreteAttributes = new HashMap<>();
+	protected Map<String, QualityAttribute> qualityAttributes = new HashMap<>();
 
 	/** 连续属性映射 */
 	protected Map<String, QuantityAttribute> continuousAttributes = new HashMap<>();
 
-	protected AbstractConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		for (QualityAttribute attribute : discreteAttributes) {
-			this.discreteAttributes.put(attribute.getName(), attribute);
+	protected AbstractConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		for (QualityAttribute attribute : qualityAttributes) {
+			this.qualityAttributes.put(attribute.getName(), attribute);
 		}
 		for (QuantityAttribute attribute : continuousAttributes) {
 			this.continuousAttributes.put(attribute.getName(), attribute);

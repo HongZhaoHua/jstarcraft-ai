@@ -8,11 +8,11 @@ import org.apache.commons.math3.distribution.AbstractIntegerDistribution;
  * @author Birdy
  *
  */
-public class DiscreteProbability implements Probability<Integer> {
+public class QualityProbability implements Probability<Integer> {
 
 	private final AbstractIntegerDistribution distribution;
 
-	public DiscreteProbability(AbstractIntegerDistribution distribution) {
+	public QualityProbability(AbstractIntegerDistribution distribution) {
 		this.distribution = distribution;
 	}
 

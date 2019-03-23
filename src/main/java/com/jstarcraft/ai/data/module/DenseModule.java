@@ -25,16 +25,16 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 public class DenseModule extends AbstractModule {
 
 	/** 离散特征 */
-	private IntegerArray[] discreteValues;
+	private IntegerArray[] qualityValues;
 
 	/** 连续特征 */
 	private FloatArray[] continuousValues;
 
 	public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
 		super(name, definition, capacity);
-		this.discreteValues = new IntegerArray[discreteOrder];
-		for (int index = 0; index < discreteOrder; index++) {
-			this.discreteValues[index] = new IntegerArray(1000, capacity);
+		this.qualityValues = new IntegerArray[qualityOrder];
+		for (int index = 0; index < qualityOrder; index++) {
+			this.qualityValues[index] = new IntegerArray(1000, capacity);
 		}
 		this.continuousValues = new FloatArray[continuousOrder];
 		for (int index = 0; index < continuousOrder; index++) {
@@ -42,8 +42,8 @@ public class DenseModule extends AbstractModule {
 		}
 	}
 
-	IntegerArray[] getDiscreteValues() {
-		return discreteValues;
+	IntegerArray[] getQualityValues() {
+		return qualityValues;
 	}
 
 	FloatArray[] getContinuousValues() {
@@ -51,25 +51,25 @@ public class DenseModule extends AbstractModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap discreteFeatures, Int2FloatSortedMap continuousFeatures, int discreteMark, float continuousMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
-		if (discreteFeatures.firstIntKey() < 0 || discreteFeatures.lastIntKey() >= discreteOrder) {
+		if (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder) {
 			throw new DataException();
 		}
 		if (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder) {
 			throw new DataException();
 		}
-		assert discreteOrder == discreteFeatures.size();
+		assert qualityOrder == qualityFeatures.size();
 		assert continuousOrder == continuousFeatures.size();
-		for (Int2IntMap.Entry term : discreteFeatures.int2IntEntrySet()) {
-			discreteValues[term.getIntKey()].associateData(term.getIntValue());
+		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
+			qualityValues[term.getIntKey()].associateData(term.getIntValue());
 		}
 		for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
 			continuousValues[term.getIntKey()].associateData(term.getFloatValue());
 		}
-		discreteMarks.associateData(discreteMark);
+		qualityMarks.associateData(qualityMark);
 		continuousMarks.associateData(continuousMark);
 		size++;
 	}

@@ -47,7 +47,7 @@ public class ShareVertexTestCase {
 
 	// 因子数量
 	private int numberOfFactors = 10;
-	private int discreteDimension = 5;
+	private int qualityDimension = 5;
 	private int continuousOrder = 5;
 	private int numberOfSamples = 20;
 	private int numberOfIterations = 10;
@@ -56,9 +56,9 @@ public class ShareVertexTestCase {
 		GraphConfigurator configurator = new GraphConfigurator();
 		MathCache factory = new DenseCache();
 		// 离散特征部分
-		Layer discreteLayer = new EmbedLayer(discreteDimension, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
-		configurator.connect(new LayerVertex("discreteFeature", factory, discreteLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
-		configurator.connect(new SumVertex("discreteNumber", factory));
+		Layer qualityLayer = new EmbedLayer(qualityDimension, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		configurator.connect(new LayerVertex("qualityFeature", factory, qualityLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
+		configurator.connect(new SumVertex("qualityNumber", factory));
 
 		// 连续特征部分(归一化)
 		Layer continuousLayer = new WeightLayer(continuousOrder, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
@@ -66,8 +66,8 @@ public class ShareVertexTestCase {
 		configurator.connect(new SumVertex("continuousNumber", factory));
 
 		// 编解码部分
-		configurator.connect(new HorizontalAttachVertex("leftStack", factory), "discreteFeature", "discreteNumber", "continuousNumber");
-		configurator.connect(new HorizontalAttachVertex("rightStack", factory), "continuousFeatures", "continuousNumber", "discreteNumber");
+		configurator.connect(new HorizontalAttachVertex("leftStack", factory), "qualityFeature", "qualityNumber", "continuousNumber");
+		configurator.connect(new HorizontalAttachVertex("rightStack", factory), "continuousFeatures", "continuousNumber", "qualityNumber");
 		configurator.connect(new HorizontalAttachVertex("factorStack", factory), "leftStack", "rightStack");
 
 		configurator.connect(shareVertex, "factorStack");
@@ -85,7 +85,7 @@ public class ShareVertexTestCase {
 
 			@Override
 			public void afterForward() {
-				leftLabels.copyMatrix(discreteLayer.getOutputKeyValue().getKey(), false);
+				leftLabels.copyMatrix(qualityLayer.getOutputKeyValue().getKey(), false);
 				rightLabels.copyMatrix(continuousLayer.getOutputKeyValue().getKey(), false);
 			}
 

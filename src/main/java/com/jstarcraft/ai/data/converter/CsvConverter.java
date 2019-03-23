@@ -32,15 +32,15 @@ public class CsvConverter extends StreamConverter {
 	/** 分隔符 */
 	protected char delimiter;
 
-	public CsvConverter(char delimiter, Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(discreteAttributes, continuousAttributes);
+	public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		super(qualityAttributes, continuousAttributes);
 		this.delimiter = delimiter;
 	}
 
 	@Override
 	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
 		int count = 0;
-		Int2IntSortedMap discreteFeatures = new Int2IntRBTreeMap();
+		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
 		try (CSVParser parser = new CSVParser(buffer, CSVFormat.newFormat(delimiter))) {
 			Iterator<CSVRecord> iterator = parser.iterator();
@@ -51,10 +51,10 @@ public class CsvConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						int feature = attribute.convertValue((Comparable) data);
-						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
@@ -62,8 +62,8 @@ public class CsvConverter extends StreamConverter {
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(discreteFeatures, continuousFeatures);
-				discreteFeatures.clear();
+				module.associateInstance(qualityFeatures, continuousFeatures);
+				qualityFeatures.clear();
 				continuousFeatures.clear();
 				count++;
 			}

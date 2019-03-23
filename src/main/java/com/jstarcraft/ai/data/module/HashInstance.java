@@ -13,37 +13,37 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 public class HashInstance implements DataInstance {
 
 	/** 离散秩 */
-	private int discreteOrder;
+	private int qualityOrder;
 
 	/** 连续秩 */
 	private int continuousOrder;
 
 	/** 离散特征 */
-	private Int2IntSortedMap discreteFeatures;
+	private Int2IntSortedMap qualityFeatures;
 
 	/** 连续特征 */
 	private Int2FloatSortedMap continuousFeatures;
 
 	/** 离散标记 */
-	private int discreteMark;
+	private int qualityMark;
 
 	/** 连续标记 */
 	private float continuousMark;
 
-	public HashInstance(Class<? extends Int2IntSortedMap> discreteClass,  Class<? extends Int2FloatSortedMap> continuousClass, DataInstance instance) {
-		this.discreteOrder = instance.getQualityOrder();
+	public HashInstance(Class<? extends Int2IntSortedMap> qualityClass,  Class<? extends Int2FloatSortedMap> continuousClass, DataInstance instance) {
+		this.qualityOrder = instance.getQualityOrder();
 		this.continuousOrder = instance.getQuantityOrder();
-		this.discreteFeatures = ReflectionUtility.getInstance(discreteClass);
-		this.discreteFeatures.defaultReturnValue(DataInstance.defaultInteger);
+		this.qualityFeatures = ReflectionUtility.getInstance(qualityClass);
+		this.qualityFeatures.defaultReturnValue(DataInstance.defaultInteger);
 		this.continuousFeatures = ReflectionUtility.getInstance(continuousClass);
 		this.continuousFeatures.defaultReturnValue(DataInstance.defaultFloat);
 		instance.iterateQualityFeatures((index, value) -> {
-			this.discreteFeatures.put(index, value);
+			this.qualityFeatures.put(index, value);
 		});
 		instance.iterateQuantityFeatures((index, value) -> {
 			this.continuousFeatures.put(index, value);
 		});
-		this.discreteMark = instance.getQualityMark();
+		this.qualityMark = instance.getQualityMark();
 		this.continuousMark = instance.getQuantityMark();
 	}
 
@@ -59,7 +59,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public int getQualityFeature(int index) {
-		return this.discreteFeatures.get(index);
+		return this.qualityFeatures.get(index);
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public HashInstance iterateQualityFeatures(QualityAccessor accessor) {
-		for(Int2IntMap.Entry term : this.discreteFeatures.int2IntEntrySet()) {
+		for(Int2IntMap.Entry term : this.qualityFeatures.int2IntEntrySet()) {
 			accessor.accessorFeature(term.getIntKey(), term.getIntValue());
 		}
 		return this;
@@ -85,7 +85,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public int getQualityMark() {
-		return discreteMark;
+		return qualityMark;
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public int getQualityOrder() {
-		return discreteOrder;
+		return qualityOrder;
 	}
 
 	@Override
@@ -103,16 +103,16 @@ public class HashInstance implements DataInstance {
 		return continuousOrder;
 	}
 
-	public void setDiscreteFeature(int index, int value) {
-		this.discreteFeatures.put(index, value);
+	public void setQualityFeature(int index, int value) {
+		this.qualityFeatures.put(index, value);
 	}
 
 	public void setContinuousFeature(int index, float value) {
 		this.continuousFeatures.put(index, value);
 	}
 
-	public void setDiscreteMark(int discreteMark) {
-		this.discreteMark = discreteMark;
+	public void setQualityMark(int qualityMark) {
+		this.qualityMark = qualityMark;
 	}
 
 	public void setContinuousMark(float continuousMark) {

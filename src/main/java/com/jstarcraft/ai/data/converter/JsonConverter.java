@@ -37,14 +37,14 @@ public class JsonConverter extends StreamConverter {
 
 	private final static Type sparseType = TypeUtility.parameterize(Int2ObjectOpenHashMap.class, Object.class);
 
-	public JsonConverter(Collection<QualityAttribute> discreteAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(discreteAttributes, continuousAttributes);
+	public JsonConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
+		super(qualityAttributes, continuousAttributes);
 	}
 
 	@Override
 	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
 		int count = 0;
-		Int2IntSortedMap discreteFeatures = new Int2IntRBTreeMap();
+		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
 		if (module instanceof DenseModule) {
 			String line = null;
@@ -59,10 +59,10 @@ public class JsonConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						int feature = attribute.convertValue((Comparable) value);
-						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
@@ -70,8 +70,8 @@ public class JsonConverter extends StreamConverter {
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(discreteFeatures, continuousFeatures);
-				discreteFeatures.clear();
+				module.associateInstance(qualityFeatures, continuousFeatures);
+				qualityFeatures.clear();
 				continuousFeatures.clear();
 				count++;
 			}
@@ -89,10 +89,10 @@ public class JsonConverter extends StreamConverter {
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();
 					if (keyValue.getValue()) {
-						QualityAttribute attribute = discreteAttributes.get(keyValue.getKey());
+						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						int feature = attribute.convertValue((Comparable) value);
-						discreteFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
@@ -100,8 +100,8 @@ public class JsonConverter extends StreamConverter {
 						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(discreteFeatures, continuousFeatures);
-				discreteFeatures.clear();
+				module.associateInstance(qualityFeatures, continuousFeatures);
+				qualityFeatures.clear();
 				continuousFeatures.clear();
 				count++;
 			}
