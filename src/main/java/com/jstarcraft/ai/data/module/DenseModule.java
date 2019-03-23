@@ -28,7 +28,7 @@ public class DenseModule extends AbstractModule {
 	private IntegerArray[] qualityValues;
 
 	/** 连续特征 */
-	private FloatArray[] continuousValues;
+	private FloatArray[] quantityValues;
 
 	public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
 		super(name, definition, capacity);
@@ -36,9 +36,9 @@ public class DenseModule extends AbstractModule {
 		for (int index = 0; index < qualityOrder; index++) {
 			this.qualityValues[index] = new IntegerArray(1000, capacity);
 		}
-		this.continuousValues = new FloatArray[continuousOrder];
-		for (int index = 0; index < continuousOrder; index++) {
-			this.continuousValues[index] = new FloatArray(1000, capacity);
+		this.quantityValues = new FloatArray[quantityOrder];
+		for (int index = 0; index < quantityOrder; index++) {
+			this.quantityValues[index] = new FloatArray(1000, capacity);
 		}
 	}
 
@@ -46,31 +46,31 @@ public class DenseModule extends AbstractModule {
 		return qualityValues;
 	}
 
-	FloatArray[] getContinuousValues() {
-		return continuousValues;
+	FloatArray[] getquantityValues() {
+		return quantityValues;
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
 		if (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder) {
 			throw new DataException();
 		}
-		if (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder) {
+		if (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder) {
 			throw new DataException();
 		}
 		assert qualityOrder == qualityFeatures.size();
-		assert continuousOrder == continuousFeatures.size();
+		assert quantityOrder == quantityFeatures.size();
 		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
 			qualityValues[term.getIntKey()].associateData(term.getIntValue());
 		}
-		for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
-			continuousValues[term.getIntKey()].associateData(term.getFloatValue());
+		for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
+			quantityValues[term.getIntKey()].associateData(term.getFloatValue());
 		}
 		qualityMarks.associateData(qualityMark);
-		continuousMarks.associateData(continuousMark);
+		quantityMarks.associateData(quantityMark);
 		size++;
 	}
 

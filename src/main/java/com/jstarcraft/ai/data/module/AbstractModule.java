@@ -21,7 +21,7 @@ abstract public class AbstractModule implements DataModule {
 	protected int qualityOrder;
 
 	/** 连续特征 */
-	protected int continuousOrder;
+	protected int quantityOrder;
 
 	/** 从外部索引到属性的投影(true代表离散,false代表连续) */
 	protected TreeMap<Integer, KeyValue<String, Boolean>> outer = new TreeMap<>();
@@ -30,13 +30,13 @@ abstract public class AbstractModule implements DataModule {
 	protected TreeMap<String, Integer> qualityInner = new TreeMap<>();
 
 	/** 从连续属性到内部索引的投影 */
-	protected TreeMap<String, Integer> continuousInner = new TreeMap<>();
+	protected TreeMap<String, Integer> quantityInner = new TreeMap<>();
 
 	/** 离散标记 */
 	protected IntegerArray qualityMarks;
 
 	/** 连续标记 */
-	protected FloatArray continuousMarks;
+	protected FloatArray quantityMarks;
 
 	protected int capacity;
 
@@ -46,13 +46,13 @@ abstract public class AbstractModule implements DataModule {
 		for (KeyValue<KeyValue<String, Boolean>, Integer> term : definition) {
 			KeyValue<String, Boolean> keyValue = term.getKey();
 			if (keyValue.getValue()) {
-				this.outer.put(this.qualityOrder + this.continuousOrder, keyValue);
+				this.outer.put(this.qualityOrder + this.quantityOrder, keyValue);
 				this.qualityInner.put(keyValue.getKey(), this.qualityInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
 				this.qualityOrder += term.getValue();
 			} else {
-				this.outer.put(this.qualityOrder + this.continuousOrder, keyValue);
-				this.continuousInner.put(keyValue.getKey(), this.continuousInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
-				this.continuousOrder += term.getValue();
+				this.outer.put(this.qualityOrder + this.quantityOrder, keyValue);
+				this.quantityInner.put(keyValue.getKey(), this.quantityInner.getOrDefault(keyValue.getKey(), 0) + term.getValue());
+				this.quantityOrder += term.getValue();
 			}
 		}
 		{
@@ -65,14 +65,14 @@ abstract public class AbstractModule implements DataModule {
 		}
 		{
 			int count = 0;
-			for (Entry<String, Integer> term : continuousInner.entrySet()) {
+			for (Entry<String, Integer> term : quantityInner.entrySet()) {
 				int size = term.getValue();
 				term.setValue(count);
 				count += size;
 			}
 		}
 		this.qualityMarks = new IntegerArray(1000, capacity);
-		this.continuousMarks = new FloatArray(1000, capacity);
+		this.quantityMarks = new FloatArray(1000, capacity);
 		this.capacity = capacity;
 	}
 
@@ -89,9 +89,9 @@ abstract public class AbstractModule implements DataModule {
 	}
 
 	@Override
-	public int getContinuousInner(String name) {
+	public int getQuantityInner(String name) {
 		// 通过等于查找
-		return continuousInner.get(name);
+		return quantityInner.get(name);
 	}
 
 	@Override
@@ -100,16 +100,16 @@ abstract public class AbstractModule implements DataModule {
 	}
 
 	@Override
-	public int getContinuousOrder() {
-		return continuousOrder;
+	public int getQuantityOrder() {
+		return quantityOrder;
 	}
 
 	IntegerArray getQualityMarks() {
 		return qualityMarks;
 	}
 
-	FloatArray getContinuousMarks() {
-		return continuousMarks;
+	FloatArray getQuantityMarks() {
+		return quantityMarks;
 	}
 
 }

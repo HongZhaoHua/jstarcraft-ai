@@ -18,18 +18,18 @@ public class JsonConverterTestCase {
 	@Test
 	public void testConvert() throws Exception {
 		Map<String, Class<?>> qualityDifinitions = new HashMap<>();
-		Map<String, Class<?>> continuousDifinitions = new HashMap<>();
+		Map<String, Class<?>> quantityDifinitions = new HashMap<>();
 		qualityDifinitions.put("user", int.class);
 		qualityDifinitions.put("item", int.class);
-		continuousDifinitions.put("score", float.class);
-		DataSpace space = new DataSpace(qualityDifinitions, continuousDifinitions);
+		quantityDifinitions.put("score", float.class);
+		DataSpace space = new DataSpace(qualityDifinitions, quantityDifinitions);
 
 		TreeMap<Integer, String> configuration = new TreeMap<>();
 		configuration.put(2, "user");
 		configuration.put(4, "item");
 		configuration.put(5, "score");
 
-		JsonConverter converter = new JsonConverter(space.getQualityAttributes(), space.getContinuousAttributes());
+		JsonConverter converter = new JsonConverter(space.getQualityAttributes(), space.getQuantityAttributes());
 		{
 			DataModule dense = space.makeDenseModule("dense", configuration, 1000);
 			File file = new File(this.getClass().getResource("dense.js").toURI());

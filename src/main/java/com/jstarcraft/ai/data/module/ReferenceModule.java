@@ -31,7 +31,7 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -56,8 +56,8 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public int getContinuousInner(String name) {
-		return module.getContinuousInner(name);
+	public int getQuantityInner(String name) {
+		return module.getQuantityInner(name);
 	}
 
 	@Override
@@ -66,8 +66,8 @@ public class ReferenceModule implements DataModule {
 	}
 
 	@Override
-	public int getContinuousOrder() {
-		return module.getContinuousOrder();
+	public int getQuantityOrder() {
+		return module.getQuantityOrder();
 	}
 
 	@Override

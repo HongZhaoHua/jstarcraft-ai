@@ -10,43 +10,43 @@ public class ArrayInstance implements DataInstance {
 	private int qualityOrder;
 
 	/** 连续秩 */
-	private int continuousOrder;
+	private int quantityOrder;
 
 	/** 离散特征 */
 	private int[] qualityFeatures;
 
 	/** 连续特征 */
-	private float[] continuousFeatures;
+	private float[] quantityFeatures;
 
 	/** 离散标记 */
 	private int qualityMark;
 
 	/** 连续标记 */
-	private float continuousMark;
+	private float quantityMark;
 
 	public ArrayInstance(DataInstance instance) {
 		this.qualityOrder = instance.getQualityOrder();
-		this.continuousOrder = instance.getQuantityOrder();
+		this.quantityOrder = instance.getQuantityOrder();
 		this.qualityFeatures = new int[instance.getQualityOrder()];
 		{
 			for (int index = 0, size = instance.getQualityOrder(); index < size; index++) {
 				this.qualityFeatures[index] = DataInstance.defaultInteger;
 			}
 		}
-		this.continuousFeatures = new float[instance.getQuantityOrder()];
+		this.quantityFeatures = new float[instance.getQuantityOrder()];
 		{
 			for (int index = 0, size = instance.getQuantityOrder(); index < size; index++) {
-				this.continuousFeatures[index] = DataInstance.defaultFloat;
+				this.quantityFeatures[index] = DataInstance.defaultFloat;
 			}
 		}
 		instance.iterateQualityFeatures((index, value) -> {
 			this.qualityFeatures[index] = value;
 		});
 		instance.iterateQuantityFeatures((index, value) -> {
-			this.continuousFeatures[index] = value;
+			this.quantityFeatures[index] = value;
 		});
 		this.qualityMark = instance.getQualityMark();
-		this.continuousMark = instance.getQuantityMark();
+		this.quantityMark = instance.getQuantityMark();
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class ArrayInstance implements DataInstance {
 
 	@Override
 	public float getQuantityFeature(int index) {
-		return this.continuousFeatures[index];
+		return this.quantityFeatures[index];
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class ArrayInstance implements DataInstance {
 
 	@Override
 	public ArrayInstance iterateQuantityFeatures(QuantityAccessor accessor) {
-		for (int index = 0; index < continuousOrder; index++) {
-			accessor.accessorFeature(index, this.continuousFeatures[index]);
+		for (int index = 0; index < quantityOrder; index++) {
+			accessor.accessorFeature(index, this.quantityFeatures[index]);
 		}
 		return this;
 	}
@@ -92,7 +92,7 @@ public class ArrayInstance implements DataInstance {
 
 	@Override
 	public float getQuantityMark() {
-		return continuousMark;
+		return quantityMark;
 	}
 
 	@Override
@@ -102,23 +102,23 @@ public class ArrayInstance implements DataInstance {
 
 	@Override
 	public int getQuantityOrder() {
-		return continuousOrder;
+		return quantityOrder;
 	}
 
 	public void setQualityFeature(int index, int value) {
 		this.qualityFeatures[index] = value;
 	}
 
-	public void setContinuousFeature(int index, float value) {
-		this.continuousFeatures[index] = value;
+	public void setQuantityFeature(int index, float value) {
+		this.quantityFeatures[index] = value;
 	}
 
 	public void setQualityMark(int qualityMark) {
 		this.qualityMark = qualityMark;
 	}
 
-	public void setContinuousMark(float continuousMark) {
-		this.continuousMark = continuousMark;
+	public void setQuantityMark(float quantityMark) {
+		this.quantityMark = quantityMark;
 	}
 
 }

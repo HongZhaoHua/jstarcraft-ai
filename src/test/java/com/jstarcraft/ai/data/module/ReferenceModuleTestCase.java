@@ -31,11 +31,11 @@ public class ReferenceModuleTestCase {
 		}
 		DataModule module = new SparseModule(moduleName, moduleDefinition, instanceCapacity);
 		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
 		for (int index = 0; index < instanceCapacity; index++) {
 			qualityFeatures.clear();
 			qualityFeatures.put(index, index);
-			module.associateInstance(qualityFeatures, continuousFeatures);
+			module.associateInstance(qualityFeatures, quantityFeatures);
 		}
 		return module;
 	}
@@ -49,8 +49,8 @@ public class ReferenceModuleTestCase {
 
 		try {
 			Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
-			Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
-			module.associateInstance(qualityFeatures, continuousFeatures);
+			Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
+			module.associateInstance(qualityFeatures, quantityFeatures);
 			Assert.fail();
 		} catch (UnsupportedOperationException exception) {
 		}

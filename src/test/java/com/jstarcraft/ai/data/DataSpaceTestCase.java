@@ -16,18 +16,18 @@ public class DataSpaceTestCase {
 	@Test
 	public void test() {
 		Map<String, Class<?>> qualityDifinitions = new HashMap<>();
-		Map<String, Class<?>> continuousDifinitions = new HashMap<>();
+		Map<String, Class<?>> quantityDifinitions = new HashMap<>();
 		qualityDifinitions.put("user", int.class);
 		qualityDifinitions.put("item", int.class);
-		continuousDifinitions.put("score", float.class);
-		DataSpace space = new DataSpace(qualityDifinitions, continuousDifinitions);
+		quantityDifinitions.put("score", float.class);
+		DataSpace space = new DataSpace(qualityDifinitions, quantityDifinitions);
 
 		// 获取数据属性
 		QualityAttribute userAttribute = space.getQualityAttribute("user");
 		Assert.assertNotNull(userAttribute);
 		QualityAttribute itemAttribute = space.getQualityAttribute("item");
 		Assert.assertNotNull(itemAttribute);
-		QuantityAttribute scoreAttribute = space.getContinuousAttribute("score");
+		QuantityAttribute scoreAttribute = space.getQuantityAttribute("score");
 		Assert.assertNotNull(scoreAttribute);
 
 		// 制造数据模型
@@ -38,7 +38,7 @@ public class DataSpaceTestCase {
 			configuration.put(3, "score");
 			DataModule sparseModel = space.makeSparseModule("sparse", configuration, 1000);
 			Assert.assertEquals(2, sparseModel.getQualityOrder());
-			Assert.assertEquals(1, sparseModel.getContinuousOrder());
+			Assert.assertEquals(1, sparseModel.getQuantityOrder());
 		}
 
 		{
@@ -46,7 +46,7 @@ public class DataSpaceTestCase {
 			configuration.put(2, "user");
 			DataModule denseModel = space.makeDenseModule("dense", configuration, 1000);
 			Assert.assertEquals(2, denseModel.getQualityOrder());
-			Assert.assertEquals(0, denseModel.getContinuousOrder());
+			Assert.assertEquals(0, denseModel.getQuantityOrder());
 		}
 	}
 

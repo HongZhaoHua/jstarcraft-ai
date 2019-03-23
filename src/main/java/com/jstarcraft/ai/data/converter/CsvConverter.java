@@ -32,8 +32,8 @@ public class CsvConverter extends StreamConverter {
 	/** 分隔符 */
 	protected char delimiter;
 
-	public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(qualityAttributes, continuousAttributes);
+	public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+		super(qualityAttributes, quantityAttributes);
 		this.delimiter = delimiter;
 	}
 
@@ -41,7 +41,7 @@ public class CsvConverter extends StreamConverter {
 	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
 		try (CSVParser parser = new CSVParser(buffer, CSVFormat.newFormat(delimiter))) {
 			Iterator<CSVRecord> iterator = parser.iterator();
 			while (iterator.hasNext()) {
@@ -56,15 +56,15 @@ public class CsvConverter extends StreamConverter {
 						int feature = attribute.convertValue((Comparable) data);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						float feature = attribute.convertValue((Number) data);
-						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
+						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, continuousFeatures);
+				module.associateInstance(qualityFeatures, quantityFeatures);
 				qualityFeatures.clear();
-				continuousFeatures.clear();
+				quantityFeatures.clear();
 				count++;
 			}
 			return count;

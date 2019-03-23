@@ -24,15 +24,15 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class JdbcConverter extends AbstractConverter<ResultSet> {
 
-	protected JdbcConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(qualityAttributes, continuousAttributes);
+	protected JdbcConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+		super(qualityAttributes, quantityAttributes);
 	}
 
 	@Override
 	public int convert(DataModule module, ResultSet iterator) {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
 		try {
 			int size = iterator.getMetaData().getColumnCount();
 			while (iterator.next()) {
@@ -49,15 +49,15 @@ public class JdbcConverter extends AbstractConverter<ResultSet> {
 						int feature = attribute.convertValue((Comparable) data);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						float feature = attribute.convertValue((Number) data);
-						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
+						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, continuousFeatures);
+				module.associateInstance(qualityFeatures, quantityFeatures);
 				qualityFeatures.clear();
-				continuousFeatures.clear();
+				quantityFeatures.clear();
 				count++;
 			}
 		} catch (SQLException exception) {

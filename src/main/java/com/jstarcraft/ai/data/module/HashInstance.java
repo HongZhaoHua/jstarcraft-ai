@@ -16,35 +16,35 @@ public class HashInstance implements DataInstance {
 	private int qualityOrder;
 
 	/** 连续秩 */
-	private int continuousOrder;
+	private int quantityOrder;
 
 	/** 离散特征 */
 	private Int2IntSortedMap qualityFeatures;
 
 	/** 连续特征 */
-	private Int2FloatSortedMap continuousFeatures;
+	private Int2FloatSortedMap quantityFeatures;
 
 	/** 离散标记 */
 	private int qualityMark;
 
 	/** 连续标记 */
-	private float continuousMark;
+	private float quantityMark;
 
-	public HashInstance(Class<? extends Int2IntSortedMap> qualityClass,  Class<? extends Int2FloatSortedMap> continuousClass, DataInstance instance) {
+	public HashInstance(Class<? extends Int2IntSortedMap> qualityClass,  Class<? extends Int2FloatSortedMap> quantityClass, DataInstance instance) {
 		this.qualityOrder = instance.getQualityOrder();
-		this.continuousOrder = instance.getQuantityOrder();
+		this.quantityOrder = instance.getQuantityOrder();
 		this.qualityFeatures = ReflectionUtility.getInstance(qualityClass);
 		this.qualityFeatures.defaultReturnValue(DataInstance.defaultInteger);
-		this.continuousFeatures = ReflectionUtility.getInstance(continuousClass);
-		this.continuousFeatures.defaultReturnValue(DataInstance.defaultFloat);
+		this.quantityFeatures = ReflectionUtility.getInstance(quantityClass);
+		this.quantityFeatures.defaultReturnValue(DataInstance.defaultFloat);
 		instance.iterateQualityFeatures((index, value) -> {
 			this.qualityFeatures.put(index, value);
 		});
 		instance.iterateQuantityFeatures((index, value) -> {
-			this.continuousFeatures.put(index, value);
+			this.quantityFeatures.put(index, value);
 		});
 		this.qualityMark = instance.getQualityMark();
-		this.continuousMark = instance.getQuantityMark();
+		this.quantityMark = instance.getQuantityMark();
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public float getQuantityFeature(int index) {
-		return this.continuousFeatures.get(index);
+		return this.quantityFeatures.get(index);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public HashInstance iterateQuantityFeatures(QuantityAccessor accessor) {
-		for(Int2FloatMap.Entry term : this.continuousFeatures.int2FloatEntrySet()) {
+		for(Int2FloatMap.Entry term : this.quantityFeatures.int2FloatEntrySet()) {
 			accessor.accessorFeature(term.getIntKey(), term.getFloatValue());
 		}
 		return this;
@@ -90,7 +90,7 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public float getQuantityMark() {
-		return continuousMark;
+		return quantityMark;
 	}
 
 	@Override
@@ -100,23 +100,23 @@ public class HashInstance implements DataInstance {
 
 	@Override
 	public int getQuantityOrder() {
-		return continuousOrder;
+		return quantityOrder;
 	}
 
 	public void setQualityFeature(int index, int value) {
 		this.qualityFeatures.put(index, value);
 	}
 
-	public void setContinuousFeature(int index, float value) {
-		this.continuousFeatures.put(index, value);
+	public void setquantityFeature(int index, float value) {
+		this.quantityFeatures.put(index, value);
 	}
 
 	public void setQualityMark(int qualityMark) {
 		this.qualityMark = qualityMark;
 	}
 
-	public void setContinuousMark(float continuousMark) {
-		this.continuousMark = continuousMark;
+	public void setquantityMark(float quantityMark) {
+		this.quantityMark = quantityMark;
 	}
 
 }

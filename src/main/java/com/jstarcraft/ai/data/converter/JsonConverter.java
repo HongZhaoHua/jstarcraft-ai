@@ -37,15 +37,15 @@ public class JsonConverter extends StreamConverter {
 
 	private final static Type sparseType = TypeUtility.parameterize(Int2ObjectOpenHashMap.class, Object.class);
 
-	public JsonConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(qualityAttributes, continuousAttributes);
+	public JsonConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+		super(qualityAttributes, quantityAttributes);
 	}
 
 	@Override
 	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
 		if (module instanceof DenseModule) {
 			String line = null;
 			while ((line = buffer.readLine()) != null) {
@@ -64,15 +64,15 @@ public class JsonConverter extends StreamConverter {
 						int feature = attribute.convertValue((Comparable) value);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						float feature = attribute.convertValue((Number) value);
-						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
+						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, continuousFeatures);
+				module.associateInstance(qualityFeatures, quantityFeatures);
 				qualityFeatures.clear();
-				continuousFeatures.clear();
+				quantityFeatures.clear();
 				count++;
 			}
 		} else if (module instanceof SparseModule) {
@@ -94,15 +94,15 @@ public class JsonConverter extends StreamConverter {
 						int feature = attribute.convertValue((Comparable) value);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
 						float feature = attribute.convertValue((Number) value);
-						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
+						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, continuousFeatures);
+				module.associateInstance(qualityFeatures, quantityFeatures);
 				qualityFeatures.clear();
-				continuousFeatures.clear();
+				quantityFeatures.clear();
 				count++;
 			}
 		}

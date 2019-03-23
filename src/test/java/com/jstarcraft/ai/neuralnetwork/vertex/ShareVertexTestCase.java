@@ -48,7 +48,7 @@ public class ShareVertexTestCase {
 	// 因子数量
 	private int numberOfFactors = 10;
 	private int qualityDimension = 5;
-	private int continuousOrder = 5;
+	private int quantityOrder = 5;
 	private int numberOfSamples = 20;
 	private int numberOfIterations = 10;
 
@@ -61,13 +61,13 @@ public class ShareVertexTestCase {
 		configurator.connect(new SumVertex("qualityNumber", factory));
 
 		// 连续特征部分(归一化)
-		Layer continuousLayer = new WeightLayer(continuousOrder, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
-		configurator.connect(new LayerVertex("continuousFeatures", factory, continuousLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
-		configurator.connect(new SumVertex("continuousNumber", factory));
+		Layer quantityLayer = new WeightLayer(quantityOrder, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		configurator.connect(new LayerVertex("quantityFeatures", factory, quantityLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
+		configurator.connect(new SumVertex("quantityNumber", factory));
 
 		// 编解码部分
-		configurator.connect(new HorizontalAttachVertex("leftStack", factory), "qualityFeature", "qualityNumber", "continuousNumber");
-		configurator.connect(new HorizontalAttachVertex("rightStack", factory), "continuousFeatures", "continuousNumber", "qualityNumber");
+		configurator.connect(new HorizontalAttachVertex("leftStack", factory), "qualityFeature", "qualityNumber", "quantityNumber");
+		configurator.connect(new HorizontalAttachVertex("rightStack", factory), "quantityFeatures", "quantityNumber", "qualityNumber");
 		configurator.connect(new HorizontalAttachVertex("factorStack", factory), "leftStack", "rightStack");
 
 		configurator.connect(shareVertex, "factorStack");
@@ -86,7 +86,7 @@ public class ShareVertexTestCase {
 			@Override
 			public void afterForward() {
 				leftLabels.copyMatrix(qualityLayer.getOutputKeyValue().getKey(), false);
-				rightLabels.copyMatrix(continuousLayer.getOutputKeyValue().getKey(), false);
+				rightLabels.copyMatrix(quantityLayer.getOutputKeyValue().getKey(), false);
 			}
 
 			@Override
@@ -122,7 +122,7 @@ public class ShareVertexTestCase {
 
 			DenseMatrix layerLeftInputs = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix layerLeftNumber = DenseMatrix.valueOf(numberOfSamples, 1);
-			DenseMatrix layerRightInputs = DenseMatrix.valueOf(numberOfSamples, continuousOrder);
+			DenseMatrix layerRightInputs = DenseMatrix.valueOf(numberOfSamples, quantityOrder);
 			DenseMatrix layerRightNumber = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix layerLeftLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix layerLeftOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
@@ -134,7 +134,7 @@ public class ShareVertexTestCase {
 				for (int point = 0; point < numberOfSamples; point++) {
 					layerLeftInputs.setValue(point, 0, RandomUtility.randomInteger(5));
 					layerLeftNumber.setValue(point, 0, RandomUtility.randomInteger(10) + 1);
-					for (int index = 0; index < continuousOrder; index++) {
+					for (int index = 0; index < quantityOrder; index++) {
 						layerRightInputs.setValue(point, index, RandomUtility.randomFloat(1F));
 					}
 					layerRightNumber.setValue(point, 0, RandomUtility.randomInteger(5) + 1);
@@ -150,7 +150,7 @@ public class ShareVertexTestCase {
 
 			DenseMatrix vertexLeftInputs = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix vertexLeftNumber = DenseMatrix.valueOf(numberOfSamples, 1);
-			DenseMatrix vertexRightInputs = DenseMatrix.valueOf(numberOfSamples, continuousOrder);
+			DenseMatrix vertexRightInputs = DenseMatrix.valueOf(numberOfSamples, quantityOrder);
 			DenseMatrix vertexRightNumber = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix vertexLeftLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix vertexLeftOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
@@ -162,7 +162,7 @@ public class ShareVertexTestCase {
 				for (int point = 0; point < numberOfSamples; point++) {
 					vertexLeftInputs.setValue(point, 0, RandomUtility.randomInteger(5));
 					vertexLeftNumber.setValue(point, 0, RandomUtility.randomInteger(10) + 1);
-					for (int index = 0; index < continuousOrder; index++) {
+					for (int index = 0; index < quantityOrder; index++) {
 						vertexRightInputs.setValue(point, index, RandomUtility.randomFloat(1F));
 					}
 					vertexRightNumber.setValue(point, 0, RandomUtility.randomInteger(5) + 1);

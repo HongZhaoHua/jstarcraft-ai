@@ -10,7 +10,7 @@ import org.nd4j.linalg.api.rng.DefaultRandom;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
-import com.jstarcraft.ai.math.algorithm.distribution.ContinuousProbability;
+import com.jstarcraft.ai.math.algorithm.distribution.QuantityProbability;
 import com.jstarcraft.ai.math.algorithm.distribution.Probability;
 
 public class NormalProbabilityTestCase extends ProbabilityTestCase {
@@ -26,7 +26,7 @@ public class NormalProbabilityTestCase extends ProbabilityTestCase {
 	protected Probability getNewFunction(long seed) {
 		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
 		NormalDistribution distribution = new NormalDistribution(random, 1D, 5D);
-		return new ContinuousProbability(distribution);
+		return new QuantityProbability(distribution);
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.jstarcraft.ai.neuralnetwork.layer;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-import com.jstarcraft.ai.math.algorithm.distribution.ContinuousProbability;
+import com.jstarcraft.ai.math.algorithm.distribution.QuantityProbability;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
@@ -30,7 +30,7 @@ public class GaussianNoiseOneMasker implements Masker {
 		float current = schedule.valueAt(iteration, epoch);
 		current = (float) Math.sqrt(current / (1F - current));
 
-		ContinuousProbability probability = new ContinuousProbability(new NormalDistribution(1F, current));
+		QuantityProbability probability = new QuantityProbability(new NormalDistribution(1F, current));
 		matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			float value = scalar.getValue();
 			scalar.setValue(value * probability.sample().floatValue());

@@ -8,11 +8,11 @@ import org.apache.commons.math3.distribution.AbstractRealDistribution;
  * @author Birdy
  *
  */
-public class ContinuousProbability implements Probability<Double> {
+public class QuantityProbability implements Probability<Double> {
 
 	private final AbstractRealDistribution distribution;
 
-	public ContinuousProbability(AbstractRealDistribution distribution) {
+	public QuantityProbability(AbstractRealDistribution distribution) {
 		this.distribution = distribution;
 	}
 

@@ -24,8 +24,8 @@ import com.jstarcraft.core.utility.StringUtility;
 // TODO 准备支持稀疏数据 https://www.bbsmax.com/A/x9J2RnqeJ6/
 public class ArffConverter extends CsvConverter {
 
-	public ArffConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(CSVFormat.DEFAULT.getDelimiter(), qualityAttributes, continuousAttributes);
+	public ArffConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+		super(CSVFormat.DEFAULT.getDelimiter(), qualityAttributes, quantityAttributes);
 	}
 
 	@Override

@@ -23,42 +23,42 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * 关联实例
 	 * 
 	 * @param qualityFeatures
-	 * @param continuousFeatures
+	 * @param quantityFeatures
 	 * @param qualityMark
-	 * @param continuousMark
+	 * @param quantityMark
 	 */
-	void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark);
+	void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark);
 
 	/**
 	 * 关联实例
 	 * 
 	 * @param qualityFeatures
-	 * @param continuousFeatures
+	 * @param quantityFeatures
 	 * @param qualityMark
 	 */
-	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark) {
-		associateInstance(qualityFeatures, continuousFeatures, qualityMark, DataInstance.defaultFloat);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark) {
+		associateInstance(qualityFeatures, quantityFeatures, qualityMark, DataInstance.defaultFloat);
 	}
 
 	/**
 	 * 关联实例
 	 * 
 	 * @param qualityFeatures
-	 * @param continuousFeatures
-	 * @param continuousMark
+	 * @param quantityFeatures
+	 * @param quantityMark
 	 */
-	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, float continuousMark) {
-		associateInstance(qualityFeatures, continuousFeatures, DataInstance.defaultInteger, continuousMark);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, float quantityMark) {
+		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, quantityMark);
 	}
 
 	/**
 	 * 关联实例
 	 * 
 	 * @param qualityFeatures
-	 * @param continuousFeatures
+	 * @param quantityFeatures
 	 */
-	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures) {
-		associateInstance(qualityFeatures, continuousFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
+	default void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures) {
+		associateInstance(qualityFeatures, quantityFeatures, DataInstance.defaultInteger, DataInstance.defaultFloat);
 	}
 
 	/**
@@ -98,7 +98,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * @param name
 	 * @return
 	 */
-	int getContinuousInner(String name);
+	int getQuantityInner(String name);
 
 	/**
 	 * 获取定性秩
@@ -112,6 +112,6 @@ public interface DataModule extends Iterable<DataInstance> {
 	 * 
 	 * @return
 	 */
-	int getContinuousOrder();
+	int getQuantityOrder();
 
 }

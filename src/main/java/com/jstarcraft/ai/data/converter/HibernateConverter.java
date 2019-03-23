@@ -25,17 +25,17 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class HibernateConverter extends AbstractConverter<ScrollableResults> {
 
-	protected HibernateConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> continuousAttributes) {
-		super(qualityAttributes, continuousAttributes);
+	protected HibernateConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+		super(qualityAttributes, quantityAttributes);
 	}
 
 	@Override
 	public int convert(DataModule module, ScrollableResults iterator) {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatRBTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
 		try {
-			int size = module.getQualityOrder() + module.getContinuousOrder();
+			int size = module.getQualityOrder() + module.getQuantityOrder();
 			while (iterator.next()) {
 				for (int index = 0; index < size; index++) {
 					Object data = iterator.get(index);
@@ -50,15 +50,15 @@ public class HibernateConverter extends AbstractConverter<ScrollableResults> {
 						int feature = attribute.convertValue((Comparable) data);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
-						QuantityAttribute attribute = continuousAttributes.get(keyValue.getKey());
+						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
 						float feature = attribute.convertValue((Number) data);
-						continuousFeatures.put(module.getContinuousInner(keyValue.getKey()) + index - term.getKey(), feature);
+						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, continuousFeatures);
+				module.associateInstance(qualityFeatures, quantityFeatures);
 				qualityFeatures.clear();
-				continuousFeatures.clear();
+				quantityFeatures.clear();
 				count++;
 			}
 		} catch (HibernateException exception) {

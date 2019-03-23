@@ -23,7 +23,7 @@ public class UniformProbabilityTestCase extends ProbabilityTestCase {
 	protected Probability getNewFunction(long seed) {
 		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
 		UniformRealDistribution distribution = new UniformRealDistribution(random, 0.4D, 4D);
-		return new ContinuousProbability(distribution);
+		return new QuantityProbability(distribution);
 	}
 
 	@Override

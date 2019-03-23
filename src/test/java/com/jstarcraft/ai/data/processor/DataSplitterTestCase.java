@@ -32,11 +32,11 @@ public class DataSplitterTestCase {
 		}
 		DataModule module = new SparseModule(moduleName, moduleDefinition, instanceCapacity);
 		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
-		Int2FloatSortedMap continuousFeatures = new Int2FloatAVLTreeMap();
+		Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
 		for (int index = 0; index < instanceCapacity; index++) {
 			qualityFeatures.clear();
 			qualityFeatures.put(0, index);
-			module.associateInstance(qualityFeatures, continuousFeatures);
+			module.associateInstance(qualityFeatures, quantityFeatures);
 		}
 		return module;
 	}

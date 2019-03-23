@@ -34,25 +34,25 @@ public class DataSpace {
 	private Map<String, QualityAttribute> qualityAttributes = new HashMap<>();
 
 	/** 连续属性映射 */
-	private Map<String, QuantityAttribute> continuousAttributes = new HashMap<>();
+	private Map<String, QuantityAttribute> quantityAttributes = new HashMap<>();
 
 	/** 模型映射 */
 	private Map<String, DataModule> modules = new HashMap<>();
 
-	public DataSpace(Map<String, Class<?>> qualityDifinitions, Map<String, Class<?>> continuousDifinitions) {
+	public DataSpace(Map<String, Class<?>> qualityDifinitions, Map<String, Class<?>> quantityDifinitions) {
 		for (Entry<String, Class<?>> keyValue : qualityDifinitions.entrySet()) {
-			if (continuousAttributes.containsKey(keyValue.getKey())) {
+			if (quantityAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
 			QualityAttribute attribute = new MemoryQualityAttribute(keyValue.getKey(), keyValue.getValue());
 			qualityAttributes.put(attribute.getName(), attribute);
 		}
-		for (Entry<String, Class<?>> keyValue : continuousDifinitions.entrySet()) {
+		for (Entry<String, Class<?>> keyValue : quantityDifinitions.entrySet()) {
 			if (qualityAttributes.containsKey(keyValue.getKey())) {
 				throw new IllegalArgumentException("属性冲突");
 			}
 			QuantityAttribute attribute = new MemoryQuantityAttribute(keyValue.getKey(), keyValue.getValue());
-			continuousAttributes.put(attribute.getName(), attribute);
+			quantityAttributes.put(attribute.getName(), attribute);
 		}
 	}
 
@@ -60,16 +60,16 @@ public class DataSpace {
 		return qualityAttributes.get(attributeName);
 	}
 
-	public QuantityAttribute getContinuousAttribute(String attributeName) {
-		return continuousAttributes.get(attributeName);
+	public QuantityAttribute getQuantityAttribute(String attributeName) {
+		return quantityAttributes.get(attributeName);
 	}
 
 	public Collection<QualityAttribute> getQualityAttributes() {
 		return qualityAttributes.values();
 	}
 
-	public Collection<QuantityAttribute> getContinuousAttributes() {
-		return continuousAttributes.values();
+	public Collection<QuantityAttribute> getQuantityAttributes() {
+		return quantityAttributes.values();
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class DataSpace {
 					current = term.getKey();
 					continue;
 				}
-				if (continuousAttributes.containsKey(term.getValue())) {
+				if (quantityAttributes.containsKey(term.getValue())) {
 					KeyValue<KeyValue<String, Boolean>, Integer> keyValue = new KeyValue<>(new KeyValue<>(term.getValue(), false), term.getKey() - current);
 					definition.add(keyValue);
 					current = term.getKey();
@@ -128,7 +128,7 @@ public class DataSpace {
 					current = term.getKey();
 					continue;
 				}
-				if (continuousAttributes.containsKey(term.getValue())) {
+				if (quantityAttributes.containsKey(term.getValue())) {
 					KeyValue<KeyValue<String, Boolean>, Integer> keyValue = new KeyValue<>(new KeyValue<>(term.getValue(), false), term.getKey() - current);
 					definition.add(keyValue);
 					current = term.getKey();

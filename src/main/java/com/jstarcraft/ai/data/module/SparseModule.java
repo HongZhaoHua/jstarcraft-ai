@@ -32,22 +32,22 @@ public class SparseModule extends AbstractModule {
 	private IntegerArray qualityValues;
 
 	/** 连续特征 */
-	private IntegerArray continuousPoints;
+	private IntegerArray quantityPoints;
 
-	private IntegerArray continuousIndexes;
+	private IntegerArray quantityIndexes;
 
-	private FloatArray continuousValues;
+	private FloatArray quantityValues;
 
 	public SparseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
 		super(name, definition, capacity);
 		this.qualityPoints = new IntegerArray(1000, capacity + 1);
 		this.qualityIndexes = new IntegerArray(1000, capacity * qualityOrder);
 		this.qualityValues = new IntegerArray(1000, capacity * qualityOrder);
-		this.continuousPoints = new IntegerArray(1000, capacity + 1);
-		this.continuousIndexes = new IntegerArray(1000, capacity * continuousOrder);
-		this.continuousValues = new FloatArray(1000, capacity * continuousOrder);
+		this.quantityPoints = new IntegerArray(1000, capacity + 1);
+		this.quantityIndexes = new IntegerArray(1000, capacity * quantityOrder);
+		this.quantityValues = new FloatArray(1000, capacity * quantityOrder);
 		this.qualityPoints.associateData(0);
-		this.continuousPoints.associateData(0);
+		this.quantityPoints.associateData(0);
 	}
 
 	IntegerArray getQualityPoints() {
@@ -62,41 +62,41 @@ public class SparseModule extends AbstractModule {
 		return qualityValues;
 	}
 
-	IntegerArray getContinuousPoints() {
-		return continuousPoints;
+	IntegerArray getquantityPoints() {
+		return quantityPoints;
 	}
 
-	IntegerArray getContinuousIndexes() {
-		return continuousIndexes;
+	IntegerArray getquantityIndexes() {
+		return quantityIndexes;
 	}
 
-	FloatArray getContinuousValues() {
-		return continuousValues;
+	FloatArray getquantityValues() {
+		return quantityValues;
 	}
 
 	@Override
-	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap continuousFeatures, int qualityMark, float continuousMark) {
+	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark) {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
 		if (!qualityFeatures.isEmpty() && (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder)) {
 			throw new DataException();
 		}
-		if (!continuousFeatures.isEmpty() && (continuousFeatures.firstIntKey() < 0 || continuousFeatures.lastIntKey() >= continuousOrder)) {
+		if (!quantityFeatures.isEmpty() && (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder)) {
 			throw new DataException();
 		}
 		qualityPoints.associateData(qualityPoints.getData(qualityPoints.getSize() - 1) + qualityFeatures.size());
-		continuousPoints.associateData(continuousPoints.getData(continuousPoints.getSize() - 1) + continuousFeatures.size());
+		quantityPoints.associateData(quantityPoints.getData(quantityPoints.getSize() - 1) + quantityFeatures.size());
 		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
 			qualityIndexes.associateData(term.getIntKey());
 			qualityValues.associateData(term.getIntValue());
 		}
-		for (Int2FloatMap.Entry term : continuousFeatures.int2FloatEntrySet()) {
-			continuousIndexes.associateData(term.getIntKey());
-			continuousValues.associateData(term.getFloatValue());
+		for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
+			quantityIndexes.associateData(term.getIntKey());
+			quantityValues.associateData(term.getFloatValue());
 		}
 		qualityMarks.associateData(qualityMark);
-		continuousMarks.associateData(continuousMark);
+		quantityMarks.associateData(quantityMark);
 		size++;
 	}
 
