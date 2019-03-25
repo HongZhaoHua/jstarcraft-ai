@@ -6,7 +6,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
- * Extend Jaccard相似度
+ * Tanimoto相似度
  * 
  * @author Birdy
  *
