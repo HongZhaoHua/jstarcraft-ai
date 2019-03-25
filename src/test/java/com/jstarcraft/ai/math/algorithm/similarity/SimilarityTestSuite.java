@@ -15,7 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		DiceCoefficientSimilarityTestCase.class,
 
-		ExJaccardSimilarityTestCase.class,
+		TanimotoSimilarityTestCase.class,
 
 		JaccardSimilarityTestCase.class,
 

@@ -10,15 +10,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  *
  */
 public class BinaryCosineSimilarity extends AbstractSimilarity {
-	/**
-	 * Get the binary cosine similarity of two sparse vectors.
-	 *
-	 * @param thisVector:
-	 *            the rated items by this user, or users that have rated this item .
-	 * @param thatVector:
-	 *            the rated items by that user, or users that have rated that item.
-	 * @return similarity
-	 */
+
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
 		DefaultScalar scalar = DefaultScalar.getInstance();

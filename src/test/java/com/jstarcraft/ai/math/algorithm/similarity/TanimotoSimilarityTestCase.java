@@ -1,9 +1,9 @@
 package com.jstarcraft.ai.math.algorithm.similarity;
 
-import com.jstarcraft.ai.math.algorithm.similarity.ExJaccardSimilarity;
+import com.jstarcraft.ai.math.algorithm.similarity.TanimotoSimilarity;
 import com.jstarcraft.ai.math.algorithm.similarity.Similarity;
 
-public class ExJaccardSimilarityTestCase extends AbstractSimilarityTestCase {
+public class TanimotoSimilarityTestCase extends AbstractSimilarityTestCase {
 
 	@Override
 	protected boolean checkCorrelation(float correlation) {
@@ -17,7 +17,7 @@ public class ExJaccardSimilarityTestCase extends AbstractSimilarityTestCase {
 
 	@Override
 	protected Similarity getSimilarity() {
-		return new ExJaccardSimilarity();
+		return new TanimotoSimilarity();
 	}
 
 }

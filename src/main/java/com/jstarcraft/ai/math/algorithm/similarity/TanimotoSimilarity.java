@@ -11,7 +11,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-public class ExJaccardSimilarity extends AbstractSimilarity {
+public class TanimotoSimilarity extends AbstractSimilarity {
 
 	private float getSimilarity(int count, List<KeyValue<Float, Float>> scoreList) {
 		if (count == 0) {
