@@ -6,8 +6,15 @@ import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
+/**
+ * 稠密实例
+ * 
+ * @author Birdy
+ *
+ */
 public class DenseInstance implements DataInstance {
 
+	/** 游标 */
 	private int cursor;
 
 	/** 离散秩 */
@@ -27,7 +34,7 @@ public class DenseInstance implements DataInstance {
 
 	/** 连续标记 */
 	private FloatArray quantityMarks;
-	
+
 	/** 权重 */
 	private FloatArray weights;
 

@@ -6,8 +6,15 @@ import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.FloatArray;
 import com.jstarcraft.ai.utility.IntegerArray;
 
+/**
+ * 稀疏实例
+ * 
+ * @author Birdy
+ *
+ */
 public class SparseInstance implements DataInstance {
 
+	/** 游标 */
 	private int cursor;
 
 	/** 离散秩 */

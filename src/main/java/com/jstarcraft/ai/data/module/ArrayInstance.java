@@ -4,6 +4,12 @@ import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.QualityAccessor;
 
+/**
+ * 数组实例
+ * 
+ * @author Birdy
+ *
+ */
 public class ArrayInstance implements DataInstance {
 
 	/** 离散秩 */

@@ -10,6 +10,12 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 import it.unimi.dsi.fastutil.ints.Int2IntMap;
 import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 
+/**
+ * 哈希实例
+ * 
+ * @author Birdy
+ *
+ */
 public class HashInstance implements DataInstance {
 
 	/** 离散秩 */

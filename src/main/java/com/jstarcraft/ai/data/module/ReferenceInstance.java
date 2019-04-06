@@ -6,14 +6,21 @@ import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.QualityAccessor;
 import com.jstarcraft.ai.utility.IntegerArray;
 
+/**
+ * 引用实例
+ * 
+ * @author Birdy
+ *
+ */
 public class ReferenceInstance implements DataInstance {
 
+	/** 游标 */
 	private int cursor;
 
 	/** 引用 */
 	private IntegerArray references;
 
-	/** 模型 */
+	/** 实例 */
 	private DataInstance instance;
 
 	public ReferenceInstance(int cursor, IntegerArray references, DataModule module) {
@@ -67,38 +74,32 @@ public class ReferenceInstance implements DataInstance {
 
 	@Override
 	public int getQualityMark() {
-		// TODO Auto-generated method stub
-		return 0;
+		return instance.getQualityMark();
 	}
 
 	@Override
 	public float getQuantityMark() {
-		// TODO Auto-generated method stub
-		return 0;
+		return instance.getQuantityMark();
 	}
 
 	@Override
 	public float getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return instance.getWeight();
 	}
 
 	@Override
 	public void setQualityMark(int mark) {
-		// TODO Auto-generated method stub
-		
+		instance.setQualityMark(mark);
 	}
 
 	@Override
 	public void setQuantityMark(float mark) {
-		// TODO Auto-generated method stub
-		
+		instance.setQuantityMark(mark);
 	}
 
 	@Override
 	public void setWeight(float weight) {
-		// TODO Auto-generated method stub
-		
+		instance.setWeight(weight);
 	}
 
 }
