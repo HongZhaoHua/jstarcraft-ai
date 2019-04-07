@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Collection;
 

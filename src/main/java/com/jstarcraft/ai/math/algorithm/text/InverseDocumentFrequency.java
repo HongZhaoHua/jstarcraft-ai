@@ -1,14 +1,14 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
- * Term Frequency
+ * Inverse Document Frequency
  * 
  * @author Birdy
  *
  */
-public interface TermFrequency {
+public interface InverseDocumentFrequency {
 
 	IntSet getKeys();
 

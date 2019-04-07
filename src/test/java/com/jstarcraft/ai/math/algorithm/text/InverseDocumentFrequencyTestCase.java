@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -8,9 +8,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.jstarcraft.ai.text.InverseDocumentFrequency;
-import com.jstarcraft.ai.text.NaturalTermFrequency;
-import com.jstarcraft.ai.text.TermFrequency;
+import com.jstarcraft.ai.math.algorithm.text.InverseDocumentFrequency;
+import com.jstarcraft.ai.math.algorithm.text.NaturalTermFrequency;
+import com.jstarcraft.ai.math.algorithm.text.TermFrequency;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;

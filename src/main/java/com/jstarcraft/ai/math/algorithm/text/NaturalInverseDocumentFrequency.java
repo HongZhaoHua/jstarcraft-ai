@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -13,17 +13,17 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  * Inverse Document Frequency
  * 
  * <pre>
- * smooth
+ * inverse document frequency
  * </pre>
  * 
  * @author Birdy
  *
  */
-public class SmoothInverseDocumentFrequency implements InverseDocumentFrequency {
+public class NaturalInverseDocumentFrequency implements InverseDocumentFrequency {
 
 	private Int2FloatMap keyValues;
 
-	public SmoothInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
+	public NaturalInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
 		int size = documents.length;
 		for (TermFrequency document : documents) {
 			IntIterator iterator = document.getKeys().iterator();
@@ -35,12 +35,12 @@ public class SmoothInverseDocumentFrequency implements InverseDocumentFrequency 
 		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
 			int key = term.getIntKey();
 			float value = term.getFloatValue();
-			keyValues.put(key, (float) FastMath.log(1F + size / value));
+			keyValues.put(key, (float) FastMath.log(size / value));
 		}
 		this.keyValues = keyValues;
 	}
 
-	public SmoothInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
+	public NaturalInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
 		int size = documents.size();
 		for (TermFrequency document : documents) {
 			IntIterator iterator = document.getKeys().iterator();
@@ -52,12 +52,12 @@ public class SmoothInverseDocumentFrequency implements InverseDocumentFrequency 
 		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
 			int key = term.getIntKey();
 			float value = term.getFloatValue();
-			keyValues.put(key, (float) FastMath.log(1F + size / value));
+			keyValues.put(key, (float) FastMath.log(size / value));
 		}
 		this.keyValues = keyValues;
 	}
 
-	public SmoothInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
+	public NaturalInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
 		int size = 0;
 		while (documents.hasNext()) {
 			size++;
@@ -71,7 +71,7 @@ public class SmoothInverseDocumentFrequency implements InverseDocumentFrequency 
 		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
 			int key = term.getIntKey();
 			float value = term.getFloatValue();
-			keyValues.put(key, (float) FastMath.log(1F + size / value));
+			keyValues.put(key, (float) FastMath.log(size / value));
 		}
 		this.keyValues = keyValues;
 	}

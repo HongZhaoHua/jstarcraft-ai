@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.jstarcraft.ai.text.Ngram;
+import com.jstarcraft.ai.math.algorithm.text.Ngram;
 import com.jstarcraft.core.utility.StringUtility;
 
 public class NgramTestCase {

@@ -1,10 +1,10 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Collection;
 
-import com.jstarcraft.ai.text.InverseDocumentFrequency;
-import com.jstarcraft.ai.text.TermFrequency;
-import com.jstarcraft.ai.text.UnaryInverseDocumentFrequency;
+import com.jstarcraft.ai.math.algorithm.text.InverseDocumentFrequency;
+import com.jstarcraft.ai.math.algorithm.text.TermFrequency;
+import com.jstarcraft.ai.math.algorithm.text.UnaryInverseDocumentFrequency;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;

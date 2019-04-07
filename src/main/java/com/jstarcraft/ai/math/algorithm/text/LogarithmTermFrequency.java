@@ -1,6 +1,8 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.Collection;
+
+import org.apache.commons.math3.util.FastMath;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.IntSet;
@@ -9,26 +11,32 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  * Term Frequency
  * 
  * <pre>
- * raw count
+ * log
  * </pre>
  * 
  * @author Birdy
  *
  */
-public class CountTermFrequency implements TermFrequency {
+public class LogarithmTermFrequency implements TermFrequency {
 
 	private Int2FloatMap keyValues;
 
-	public CountTermFrequency(Int2FloatMap keyValues, int... document) {
+	public LogarithmTermFrequency(Int2FloatMap keyValues, int... document) {
 		for (int term : document) {
 			keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
+		}
+		for (int term : keyValues.keySet()) {
+			keyValues.put(term, (float) FastMath.log(1F + keyValues.get(term)));
 		}
 		this.keyValues = keyValues;
 	}
 
-	public CountTermFrequency(Int2FloatMap keyValues, Collection<Integer> document) {
+	public LogarithmTermFrequency(Int2FloatMap keyValues, Collection<Integer> document) {
 		for (int term : document) {
 			keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
+		}
+		for (int term : keyValues.keySet()) {
+			keyValues.put(term, (float) FastMath.log(1F + keyValues.get(term)));
 		}
 		this.keyValues = keyValues;
 	}

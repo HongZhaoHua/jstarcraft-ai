@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.text;
+package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
-import com.jstarcraft.ai.text.TermFrequency;
+import com.jstarcraft.ai.math.algorithm.text.TermFrequency;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatOpenHashMap;
