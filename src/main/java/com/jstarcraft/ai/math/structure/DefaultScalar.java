@@ -15,7 +15,7 @@ public class DefaultScalar implements MathScalar {
 	private final static ThreadLocal<DefaultScalar> instances = new ThreadLocal<>();
 
 	private DefaultScalar() {
-	};
+	}
 
 	private float value;
 
