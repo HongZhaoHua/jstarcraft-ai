@@ -1,6 +1,5 @@
 package com.jstarcraft.ai.math.structure.vector;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.concurrent.Semaphore;
 
@@ -12,7 +11,6 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.core.utility.RandomUtility;
 
 /**
  * 稀疏向量
