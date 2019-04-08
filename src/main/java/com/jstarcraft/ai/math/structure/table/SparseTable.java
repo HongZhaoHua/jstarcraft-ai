@@ -10,6 +10,7 @@ import com.jstarcraft.ai.math.structure.MathCell;
 import com.jstarcraft.ai.math.structure.MathTable;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap.Entry;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap;
 
 public class SparseTable<T> implements MathTable<T> {
@@ -31,8 +32,10 @@ public class SparseTable<T> implements MathTable<T> {
 
 	@Override
 	public SparseTable<T> setValues(T value) {
-		// TODO Auto-generated method stub
-		return null;
+		for (Int2ObjectMap.Entry<T> term : cells.int2ObjectEntrySet()) {
+			term.setValue(value);
+		}
+		return this;
 	}
 
 	@Override
@@ -47,7 +50,7 @@ public class SparseTable<T> implements MathTable<T> {
 
 	@Override
 	public int getUnknownSize() {
-		return 0;
+		return rowSize * columnSize - getElementSize();
 	}
 
 	@Override

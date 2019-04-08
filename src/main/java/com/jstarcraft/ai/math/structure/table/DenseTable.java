@@ -29,8 +29,10 @@ public class DenseTable<T> implements MathTable<T> {
 
 	@Override
 	public DenseTable<T> setValues(T value) {
-		// TODO Auto-generated method stub
-		return null;
+		for (int index = 0, size = cells.length; index < size; index++) {
+			cells[index] = value;
+		}
+		return this;
 	}
 
 	@Override

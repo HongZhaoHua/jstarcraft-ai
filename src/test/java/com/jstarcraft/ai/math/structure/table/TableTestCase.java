@@ -28,11 +28,19 @@ public abstract class TableTestCase {
 			for (MathCell<Integer> cell : table) {
 				Assert.assertThat(cell.getValue(), CoreMatchers.equalTo(data.get(cell.getRow(), cell.getColumn())));
 			}
+			table.setValues(0);
+			for (MathCell<Integer> cell : table) {
+				Assert.assertThat(cell.getValue(), CoreMatchers.equalTo(0));
+			}
 		}
 		{
 			MathTable<Integer> table = getTable(false, dimension, data);
 			for (MathCell<Integer> cell : table) {
 				Assert.assertThat(cell.getValue(), CoreMatchers.equalTo(data.get(cell.getRow(), cell.getColumn())));
+			}
+			table.setValues(0);
+			for (MathCell<Integer> cell : table) {
+				Assert.assertThat(cell.getValue(), CoreMatchers.equalTo(0));
 			}
 		}
 	}
