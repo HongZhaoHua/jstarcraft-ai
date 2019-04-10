@@ -109,41 +109,41 @@ public abstract class MatrixTestCase {
 			MathMatrix leftMatrix = getRandomMatrix(dimension);
 			MathMatrix rightMatrix = getRandomMatrix(dimension);
 			MathMatrix dataMatrix = getZeroMatrix(dimension);
-			MathMatrix labelMatrix = DenseMatrix.valueOf(dimension, dimension);
+			MathMatrix markMatrix = DenseMatrix.valueOf(dimension, dimension);
 			MathVector dataVector = dataMatrix.getRowVector(0);
-			MathVector labelVector = labelMatrix.getRowVector(0);
+			MathVector markVector = markMatrix.getRowVector(0);
 
-			labelMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
 			MathVector leftVector = leftMatrix.getRowVector(RandomUtility.randomInteger(dimension));
 			MathVector rightVector = rightMatrix.getRowVector(RandomUtility.randomInteger(dimension));
-			labelMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(leftVector, rightVector, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
-			labelVector.dotProduct(leftMatrix, false, rightVector, MathCalculator.SERIAL);
+			markVector.dotProduct(leftMatrix, false, rightVector, MathCalculator.SERIAL);
 			dataVector.dotProduct(leftMatrix, false, rightVector, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(leftMatrix, false, rightVector, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 
-			labelVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
+			markVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
 			dataVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 
 			// 利用转置乘运算的对称性
 			dataMatrix = new SymmetryMatrix(dimension);
-			labelMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 		});
 		task.get();
 	}

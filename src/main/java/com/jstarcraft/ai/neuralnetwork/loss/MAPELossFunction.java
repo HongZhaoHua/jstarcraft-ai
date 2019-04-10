@@ -22,8 +22,8 @@ public class MAPELossFunction implements LossFunction {
 		float scale = 100F / trains.getColumnSize();
 		for (MatrixScalar term : trains) {
 			double value = term.getValue();
-			double label = tests.getValue(term.getRow(), term.getColumn());
-			value = (value - label) / label;
+			double mark = tests.getValue(term.getRow(), term.getColumn());
+			value = (value - mark) / mark;
 			value = Math.abs(value) * scale;
 			score += value;
 		}
@@ -38,10 +38,10 @@ public class MAPELossFunction implements LossFunction {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
 			float value = trains.getValue(row, column);
-			float label = tests.getValue(row, column);
-			value = label - value;
+			float mark = tests.getValue(row, column);
+			value = mark - value;
 			value = value < 0F ? -1F : (value > 0F ? 1F : 0F);
-			value = value / Math.abs(label) * scale;
+			value = value / Math.abs(mark) * scale;
 			scalar.setValue(value);
 		});
 		// TODO 暂时不处理masks

@@ -118,7 +118,7 @@ public class Graph implements ModelCycle {
 		return monitor;
 	}
 
-	public void doCache(MathMatrix[] samples, MathMatrix[] labels) {
+	public void doCache(MathMatrix[] samples, MathMatrix[] marks) {
 		numberOfSamples = samples[0].getRowSize();
 		for (int index = 1, size = samples.length; index < size; index++) {
 			// 检查数量
@@ -145,7 +145,7 @@ public class Graph implements ModelCycle {
 			Vertex vertex = outputVertices[index];
 			LossFunction lossFunction = lossFunctions[index];
 			KeyValue<MathMatrix, MathMatrix> keyValue = vertex.getOutputKeyValue();
-			lossFunction.doCache(labels[index], keyValue.getKey());
+			lossFunction.doCache(marks[index], keyValue.getKey());
 		}
 	}
 
@@ -238,13 +238,13 @@ public class Graph implements ModelCycle {
 	 * 训练
 	 * 
 	 * @param samples
-	 * @param labels
+	 * @param marks
 	 */
-	public float practice(int numberOfIterations, MathMatrix[] samples, MathMatrix[] labels) {
-		doCache(samples, labels);
-		for (int index = 0, size = labels.length; index < size; index++) {
+	public float practice(int numberOfIterations, MathMatrix[] samples, MathMatrix[] marks) {
+		doCache(samples, marks);
+		for (int index = 0, size = marks.length; index < size; index++) {
 			// 检查数量
-			if (labels[index].getRowSize() != numberOfSamples) {
+			if (marks[index].getRowSize() != numberOfSamples) {
 				throw new IllegalArgumentException();
 			}
 		}
@@ -283,8 +283,8 @@ public class Graph implements ModelCycle {
 				LossFunction lossFunction = lossFunctions[index];
 				KeyValue<MathMatrix, MathMatrix> keyValue = vertex.getOutputKeyValue();
 				// TODO 考虑computeGradient与computeScore整合,避免重复迭代.
-				lossFunction.computeGradient(labels[index], keyValue.getKey(), null, keyValue.getValue());
-				score += lossFunction.computeScore(labels[index], keyValue.getKey(), null);
+				lossFunction.computeGradient(marks[index], keyValue.getKey(), null, keyValue.getValue());
+				score += lossFunction.computeScore(marks[index], keyValue.getKey(), null);
 				if (logger.isDebugEnabled()) {
 					logger.debug(StringUtility.format("{}目标函数计算耗时{}毫秒", lossFunction.getClass().getSimpleName(), System.currentTimeMillis() - time));
 				}
@@ -341,11 +341,11 @@ public class Graph implements ModelCycle {
 	 * @param inputs
 	 * @param outputs
 	 */
-	public void predict(MathMatrix[] samples, MathMatrix[] labels) {
-		doCache(samples, labels);
-		for (int index = 0, size = labels.length; index < size; index++) {
+	public void predict(MathMatrix[] samples, MathMatrix[] marks) {
+		doCache(samples, marks);
+		for (int index = 0, size = marks.length; index < size; index++) {
 			// 检查数量
-			if (labels[index].getRowSize() != numberOfSamples) {
+			if (marks[index].getRowSize() != numberOfSamples) {
 				throw new IllegalArgumentException();
 			}
 		}
@@ -355,7 +355,7 @@ public class Graph implements ModelCycle {
 			Vertex vertex = outputVertices[index];
 			KeyValue<MathMatrix, MathMatrix> keyValue = vertex.getOutputKeyValue();
 			MathMatrix outputData = keyValue.getKey();
-			labels[index].iterateElement(MathCalculator.PARALLEL, (scalar) -> {
+			marks[index].iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				scalar.setValue(outputData.getValue(scalar.getRow(), scalar.getColumn()));
 			});
 		}

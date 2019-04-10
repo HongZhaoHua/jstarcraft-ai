@@ -35,29 +35,29 @@ public class SymmetryMatrixTestCase extends MatrixTestCase {
 			int dimension = 10;
 			MathMatrix randomMatrix = getRandomMatrix(dimension);
 			MathMatrix dataMatrix = getZeroMatrix(dimension);
-			MathMatrix labelMatrix = DenseMatrix.valueOf(dimension, dimension);
+			MathMatrix markMatrix = DenseMatrix.valueOf(dimension, dimension);
 			MathVector dataVector = dataMatrix.getRowVector(0);
-			MathVector labelVector = labelMatrix.getRowVector(0);
+			MathVector markVector = markMatrix.getRowVector(0);
 
-			labelMatrix.dotProduct(randomMatrix, true, randomMatrix, false, MathCalculator.SERIAL);
+			markMatrix.dotProduct(randomMatrix, true, randomMatrix, false, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(randomMatrix, true, randomMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(randomMatrix, true, randomMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
 			MathVector leftVector = randomMatrix.getRowVector(RandomUtility.randomInteger(dimension));
 			MathVector rightVector = randomMatrix.getRowVector(RandomUtility.randomInteger(dimension));
-			labelVector.dotProduct(randomMatrix, false, rightVector, MathCalculator.SERIAL);
+			markVector.dotProduct(randomMatrix, false, rightVector, MathCalculator.SERIAL);
 			dataVector.dotProduct(randomMatrix, false, rightVector, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(randomMatrix, false, rightVector, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 
-			labelVector.dotProduct(leftVector, randomMatrix, false, MathCalculator.SERIAL);
+			markVector.dotProduct(leftVector, randomMatrix, false, MathCalculator.SERIAL);
 			dataVector.dotProduct(leftVector, randomMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(leftVector, randomMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 		});
 		task.get();
 	}

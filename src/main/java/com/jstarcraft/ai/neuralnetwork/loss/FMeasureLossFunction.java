@@ -47,38 +47,38 @@ public class FMeasureLossFunction implements LossFunction {
 		float fp = 0F;
 		float fn = 0F;
 
-		float isPositiveLabel;
-		float isNegativeLabel;
+		float isPositiveMark;
+		float isNegativeMark;
 		float pClass0;
 		float pClass1;
 		if (size == 1) {
 			for (int row = 0; row < trains.getRowSize(); row++) {
 				if (tests.getValue(row, 0) != 0F) {
-					isPositiveLabel = 1F;
-					isNegativeLabel = 0F;
+					isPositiveMark = 1F;
+					isNegativeMark = 0F;
 				} else {
-					isPositiveLabel = 0F;
-					isNegativeLabel = 1F;
+					isPositiveMark = 0F;
+					isNegativeMark = 1F;
 				}
 
 				float score = trains.getValue(row, 0);
 				pClass0 = 1F - score;
 				pClass1 = score;
 
-				tp += isPositiveLabel * pClass1;
-				fp += isNegativeLabel * pClass1;
-				fn += isPositiveLabel * pClass0;
+				tp += isPositiveMark * pClass1;
+				fp += isNegativeMark * pClass1;
+				fn += isPositiveMark * pClass0;
 			}
 		} else {
 			for (int row = 0; row < trains.getRowSize(); row++) {
-				isPositiveLabel = tests.getValue(row, 1);
-				isNegativeLabel = tests.getValue(row, 0);
+				isPositiveMark = tests.getValue(row, 1);
+				isNegativeMark = tests.getValue(row, 0);
 				pClass0 = trains.getValue(row, 0);
 				pClass1 = trains.getValue(row, 1);
 
-				tp += isPositiveLabel * pClass1;
-				fp += isNegativeLabel * pClass1;
-				fn += isPositiveLabel * pClass0;
+				tp += isPositiveMark * pClass1;
+				fp += isNegativeMark * pClass1;
+				fn += isPositiveMark * pClass0;
 			}
 		}
 
@@ -127,10 +127,10 @@ public class FMeasureLossFunction implements LossFunction {
 			// only in the score function; column(1) is equivalent to output for
 			// the single output case
 			MathVector vector = gradients.getColumnVector(1);
-			MathVector label = tests.getColumnVector(1);
+			MathVector mark = tests.getColumnVector(1);
 			vector.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int index = scalar.getIndex();
-				float value = label.getValue(index) * (1F + beta * beta) / denominator - secondTerm;
+				float value = mark.getValue(index) * (1F + beta * beta) / denominator - secondTerm;
 				scalar.setValue(-value);
 			});
 		}

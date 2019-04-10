@@ -25,11 +25,11 @@ public class CosineProximityLossFunction implements LossFunction {
 		float score = 0F;
 		for (int row = 0; row < trains.getRowSize(); row++) {
 			MathVector vector = trains.getRowVector(row);
-			MathVector label = tests.getRowVector(row);
+			MathVector mark = tests.getRowVector(row);
 			float scoreNorm = Math.max(vector.getNorm(2), MathUtility.EPSILON);
-			float labelNorm = Math.max(label.getNorm(2), MathUtility.EPSILON);
+			float markNorm = Math.max(mark.getNorm(2), MathUtility.EPSILON);
 			for (VectorScalar term : vector) {
-				score += -(term.getValue() * label.getValue(term.getIndex()) / scoreNorm / labelNorm);
+				score += -(term.getValue() * mark.getValue(term.getIndex()) / scoreNorm / markNorm);
 			}
 		}
 		// TODO 暂时不处理masks
@@ -40,22 +40,22 @@ public class CosineProximityLossFunction implements LossFunction {
 	public void computeGradient(MathMatrix tests, MathMatrix trains, MathMatrix masks, MathMatrix gradients) {
 		for (int row = 0; row < trains.getRowSize(); row++) {
 			MathVector vector = trains.getRowVector(row);
-			MathVector label = tests.getRowVector(row);
+			MathVector mark = tests.getRowVector(row);
 			float scoreNorm = vector.getNorm(2F);
-			float labelNorm = label.getNorm(2F);
+			float markNorm = mark.getNorm(2F);
 			float squareNorm = scoreNorm * scoreNorm;
 			float sum = 0F;
 			for (VectorScalar term : vector) {
-				sum += term.getValue() * label.getValue(term.getIndex());
+				sum += term.getValue() * mark.getValue(term.getIndex());
 			}
 
-			labelNorm = Math.max(labelNorm, MathUtility.EPSILON);
+			markNorm = Math.max(markNorm, MathUtility.EPSILON);
 			scoreNorm = Math.max(scoreNorm, MathUtility.EPSILON);
 			squareNorm = Math.max(squareNorm, MathUtility.EPSILON);
 			for (VectorScalar term : vector) {
 				float value = term.getValue();
-				value = label.getValue(term.getIndex()) * squareNorm - value * sum;
-				value /= (labelNorm * scoreNorm * squareNorm);
+				value = mark.getValue(term.getIndex()) * squareNorm - value * sum;
+				value /= (markNorm * scoreNorm * squareNorm);
 				gradients.setValue(row, term.getIndex(), -value);
 			}
 		}

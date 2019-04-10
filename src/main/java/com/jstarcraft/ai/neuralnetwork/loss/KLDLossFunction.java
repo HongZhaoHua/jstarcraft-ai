@@ -25,10 +25,10 @@ public class KLDLossFunction implements LossFunction {
 		for (MatrixScalar term : trains) {
 			float value = term.getValue();
 			value = value < MathUtility.EPSILON ? MathUtility.EPSILON : (value > 1F ? 1F : value);
-			float label = tests.getValue(term.getRow(), term.getColumn());
-			label = label < MathUtility.EPSILON ? MathUtility.EPSILON : (label > 1F ? 1F : label);
-			float ratio = (float) FastMath.log(label / value);
-			score += ratio * label;
+			float mark = tests.getValue(term.getRow(), term.getColumn());
+			mark = mark < MathUtility.EPSILON ? MathUtility.EPSILON : (mark > 1F ? 1F : mark);
+			float ratio = (float) FastMath.log(mark / value);
+			score += ratio * mark;
 		}
 
 		// TODO 暂时不处理masks

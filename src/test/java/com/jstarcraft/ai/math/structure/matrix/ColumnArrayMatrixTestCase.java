@@ -65,49 +65,49 @@ public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 			MathMatrix leftMatrix = getRandomMatrix(dimension);
 			MathMatrix rightMatrix = getRandomMatrix(dimension);
 			MathMatrix dataMatrix = getZeroMatrix(dimension);
-			MathMatrix labelMatrix = DenseMatrix.valueOf(dimension, dimension);
+			MathMatrix markMatrix = DenseMatrix.valueOf(dimension, dimension);
 			MathVector dataVector = dataMatrix.getColumnVector(0);
-			MathVector labelVector = labelMatrix.getColumnVector(0);
+			MathVector markVector = markMatrix.getColumnVector(0);
 
 			// 相当于transposeProductThis
-			labelMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
 			// 相当于transposeProductThat
-			labelMatrix.dotProduct(leftMatrix, true, rightMatrix, false, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftMatrix, true, rightMatrix, false, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftMatrix, true, rightMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(leftMatrix, true, rightMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
 			MathVector leftVector = leftMatrix.getColumnVector(RandomUtility.randomInteger(dimension));
 			MathVector rightVector = rightMatrix.getColumnVector(RandomUtility.randomInteger(dimension));
-			labelMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftVector, rightVector, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 			dataMatrix.dotProduct(leftVector, rightVector, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 
-			labelVector.dotProduct(leftMatrix, true, rightVector, MathCalculator.SERIAL);
+			markVector.dotProduct(leftMatrix, true, rightVector, MathCalculator.SERIAL);
 			dataVector.dotProduct(leftMatrix, true, rightVector, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(leftMatrix, true, rightVector, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 
-			labelVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
+			markVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
 			dataVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 			dataVector.dotProduct(leftVector, rightMatrix, false, MathCalculator.PARALLEL);
-			Assert.assertTrue(equalVector(dataVector, labelVector));
+			Assert.assertTrue(equalVector(dataVector, markVector));
 
 			// 利用转置乘运算的对称性
 			dataMatrix = new SymmetryMatrix(dimension);
-			labelMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
+			markMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
 			dataMatrix.dotProduct(leftMatrix, true, leftMatrix, false, MathCalculator.SERIAL);
-			Assert.assertTrue(equalMatrix(dataMatrix, labelMatrix));
+			Assert.assertTrue(equalMatrix(dataMatrix, markMatrix));
 		});
 		task.get();
 	}

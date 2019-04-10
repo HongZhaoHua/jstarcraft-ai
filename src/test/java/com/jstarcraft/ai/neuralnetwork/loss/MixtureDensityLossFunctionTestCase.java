@@ -20,8 +20,6 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.ai.neuralnetwork.activation.SigmoidActivationFunction;
 import com.jstarcraft.ai.neuralnetwork.activation.SoftMaxActivationFunction;
-import com.jstarcraft.ai.neuralnetwork.loss.LossFunction;
-import com.jstarcraft.ai.neuralnetwork.loss.MixtureDensityLossFunction;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -55,17 +53,17 @@ public class MixtureDensityLossFunctionTestCase extends LossFunctionTestCase {
 			activetionList.add(new KeyValue<>(new ActivationSoftmax(), new SoftMaxActivationFunction()));
 			for (KeyValue<IActivation, ActivationFunction> keyValue : activetionList) {
 				INDArray array = Nd4j.linspace(-2.5D, 2.0D, 20).reshape(5, 4);
-				INDArray labels = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
+				INDArray marks = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
 				ILossFunction oldFunction = getOldFunction();
-				float value = (float) oldFunction.computeScore(labels, array.dup(), keyValue.getKey(), null, false);
+				float value = (float) oldFunction.computeScore(marks, array.dup(), keyValue.getKey(), null, false);
 
 				MathMatrix input = getMatrix(array.rows(), array.columns()).copyMatrix(getMatrix(array), false);
 				MathMatrix output = getMatrix(input.getRowSize(), input.getColumnSize());
 				ActivationFunction function = keyValue.getValue();
 				function.forward(input, output);
 				LossFunction newFunction = getNewFunction(function);
-				newFunction.doCache(getMatrix(labels.rows(), labels.columns()).copyMatrix(getMatrix(labels), false), output);
-				float score = newFunction.computeScore(getMatrix(labels.rows(), labels.columns()).copyMatrix(getMatrix(labels), false), output, null);
+				newFunction.doCache(getMatrix(marks.rows(), marks.columns()).copyMatrix(getMatrix(marks), false), output);
+				float score = newFunction.computeScore(getMatrix(marks.rows(), marks.columns()).copyMatrix(getMatrix(marks), false), output, null);
 
 				System.out.println(value);
 				System.out.println(score);
@@ -87,9 +85,9 @@ public class MixtureDensityLossFunctionTestCase extends LossFunctionTestCase {
 			activetionList.add(new KeyValue<>(new ActivationSoftmax(), new SoftMaxActivationFunction()));
 			for (KeyValue<IActivation, ActivationFunction> keyValue : activetionList) {
 				INDArray array = Nd4j.linspace(-2.5D, 2.0D, 20).reshape(5, 4);
-				INDArray labels = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
+				INDArray marks = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
 				ILossFunction oldFunction = getOldFunction();
-				INDArray value = oldFunction.computeGradient(labels, array.dup(), keyValue.getKey(), null);
+				INDArray value = oldFunction.computeGradient(marks, array.dup(), keyValue.getKey(), null);
 
 				MathMatrix input = getMatrix(array.rows(), array.columns()).copyMatrix(getMatrix(array), false);
 				MathMatrix output = getMatrix(input.getRowSize(), input.getColumnSize());
@@ -97,8 +95,8 @@ public class MixtureDensityLossFunctionTestCase extends LossFunctionTestCase {
 				function.forward(input, output);
 				MathMatrix gradient = getMatrix(input.getRowSize(), input.getColumnSize());
 				LossFunction newFunction = getNewFunction(function);
-				newFunction.doCache(getMatrix(labels.rows(), labels.columns()).copyMatrix(getMatrix(labels), false), output);
-				newFunction.computeGradient(getMatrix(labels.rows(), labels.columns()).copyMatrix(getMatrix(labels), false), output, null, gradient);
+				newFunction.doCache(getMatrix(marks.rows(), marks.columns()).copyMatrix(getMatrix(marks), false), output);
+				newFunction.computeGradient(getMatrix(marks.rows(), marks.columns()).copyMatrix(getMatrix(marks), false), output, null, gradient);
 				function.backward(input, gradient, output);
 				System.out.println(value);
 				System.out.println(output);

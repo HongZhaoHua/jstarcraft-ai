@@ -52,7 +52,7 @@ public class ShareVertexTestCase {
 	private int numberOfSamples = 20;
 	private int numberOfIterations = 10;
 
-	private Graph getCrossGraph(Vertex shareVertex, DenseMatrix leftLabels, DenseMatrix rightLabels) {
+	private Graph getCrossGraph(Vertex shareVertex, DenseMatrix leftMarks, DenseMatrix rightMarks) {
 		GraphConfigurator configurator = new GraphConfigurator();
 		MathCache factory = new DenseCache();
 		// 离散特征部分
@@ -85,8 +85,8 @@ public class ShareVertexTestCase {
 
 			@Override
 			public void afterForward() {
-				leftLabels.copyMatrix(qualityLayer.getOutputKeyValue().getKey(), false);
-				rightLabels.copyMatrix(quantityLayer.getOutputKeyValue().getKey(), false);
+				leftMarks.copyMatrix(qualityLayer.getOutputKeyValue().getKey(), false);
+				rightMarks.copyMatrix(quantityLayer.getOutputKeyValue().getKey(), false);
 			}
 
 			@Override
@@ -124,9 +124,9 @@ public class ShareVertexTestCase {
 			DenseMatrix layerLeftNumber = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix layerRightInputs = DenseMatrix.valueOf(numberOfSamples, quantityOrder);
 			DenseMatrix layerRightNumber = DenseMatrix.valueOf(numberOfSamples, 1);
-			DenseMatrix layerLeftLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
+			DenseMatrix layerLeftMarks = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix layerLeftOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
-			DenseMatrix layerRightLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
+			DenseMatrix layerRightMarks = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix layerRightOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			double layerScore;
 			{
@@ -142,9 +142,9 @@ public class ShareVertexTestCase {
 
 				Layer factorLayer = new ShareLayer(numberOfFactors + 2, numberOfFactors, 2, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
 				Vertex shareVertex = new LayerVertex("factorCodec", factory, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
-				Graph graph = getCrossGraph(shareVertex, layerLeftLabels, layerRightLabels);
+				Graph graph = getCrossGraph(shareVertex, layerLeftMarks, layerRightMarks);
 
-				layerScore = graph.practice(numberOfIterations, new DenseMatrix[] { layerLeftInputs, layerLeftNumber, layerRightInputs, layerRightNumber }, new DenseMatrix[] { layerRightLabels, layerLeftLabels });
+				layerScore = graph.practice(numberOfIterations, new DenseMatrix[] { layerLeftInputs, layerLeftNumber, layerRightInputs, layerRightNumber }, new DenseMatrix[] { layerRightMarks, layerLeftMarks });
 				graph.predict(new DenseMatrix[] { layerLeftInputs, layerLeftNumber, layerRightInputs, layerRightNumber }, new DenseMatrix[] { layerRightOutputs, layerLeftOutputs });
 			}
 
@@ -152,9 +152,9 @@ public class ShareVertexTestCase {
 			DenseMatrix vertexLeftNumber = DenseMatrix.valueOf(numberOfSamples, 1);
 			DenseMatrix vertexRightInputs = DenseMatrix.valueOf(numberOfSamples, quantityOrder);
 			DenseMatrix vertexRightNumber = DenseMatrix.valueOf(numberOfSamples, 1);
-			DenseMatrix vertexLeftLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
+			DenseMatrix vertexLeftMarks = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix vertexLeftOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
-			DenseMatrix vertexRightLabels = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
+			DenseMatrix vertexRightMarks = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			DenseMatrix vertexRightOutputs = DenseMatrix.valueOf(numberOfSamples, numberOfFactors);
 			double vertexScore;
 			{
@@ -170,16 +170,16 @@ public class ShareVertexTestCase {
 
 				Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
 				Vertex shareVertex = new ShareVertex("factorCodec", factory, 2, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
-				Graph graph = getCrossGraph(shareVertex, vertexLeftLabels, vertexRightLabels);
+				Graph graph = getCrossGraph(shareVertex, vertexLeftMarks, vertexRightMarks);
 
-				vertexScore = graph.practice(numberOfIterations, new DenseMatrix[] { vertexLeftInputs, vertexLeftNumber, vertexRightInputs, vertexRightNumber }, new DenseMatrix[] { vertexRightLabels, vertexLeftLabels });
+				vertexScore = graph.practice(numberOfIterations, new DenseMatrix[] { vertexLeftInputs, vertexLeftNumber, vertexRightInputs, vertexRightNumber }, new DenseMatrix[] { vertexRightMarks, vertexLeftMarks });
 				graph.predict(new DenseMatrix[] { vertexLeftInputs, vertexLeftNumber, vertexRightInputs, vertexRightNumber }, new DenseMatrix[] { vertexRightOutputs, vertexLeftOutputs });
 			}
 
 			Assert.assertThat(layerScore, CoreMatchers.equalTo(vertexScore));
-			Assert.assertTrue(equalMatrix(layerLeftLabels, vertexLeftLabels));
+			Assert.assertTrue(equalMatrix(layerLeftMarks, vertexLeftMarks));
 			Assert.assertTrue(equalMatrix(layerLeftOutputs, vertexLeftOutputs));
-			Assert.assertTrue(equalMatrix(layerRightLabels, vertexRightLabels));
+			Assert.assertTrue(equalMatrix(layerRightMarks, vertexRightMarks));
 			Assert.assertTrue(equalMatrix(layerRightOutputs, vertexRightOutputs));
 		});
 		task.get();

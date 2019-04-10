@@ -29,7 +29,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 
 	private int mixtures;
 
-	private int labels;
+	private int marks;
 
 	/**
 	 * This class is a data holder for the mixture density components for convenient
@@ -59,24 +59,24 @@ public class MixtureDensityLossFunction implements LossFunction {
 	 * 
 	 * @param mixtures
 	 *            Number of gaussian mixtures to model.
-	 * @param labelWidth
+	 * @param markWidth
 	 *            Size of the labels vector for each sample.
 	 */
-	public MixtureDensityLossFunction(int mixtures, int labelWidth) {
+	public MixtureDensityLossFunction(int mixtures, int markWidth) {
 		this.mixtures = mixtures;
-		this.labels = labelWidth;
-		this.means = new DenseMatrix[labelWidth];
+		this.marks = markWidth;
+		this.means = new DenseMatrix[markWidth];
 	}
 
 	@Override
 	public void doCache(MathMatrix tests, MathMatrix trains) {
 		int rowSize = tests.getRowSize();
 		int columnSize = tests.getColumnSize();
-		if (columnSize != labels * mixtures) {
-			throw new IllegalArgumentException("tests size " + columnSize + " must be labels*mixtures where labels = " + labels + " and mixtures = " + mixtures);
+		if (columnSize != marks * mixtures) {
+			throw new IllegalArgumentException("tests size " + columnSize + " must be labels*mixtures where labels = " + marks + " and mixtures = " + mixtures);
 		}
 		weight = DenseMatrix.valueOf(rowSize, mixtures);
-		for (int index = 0, size = labels; index < size; index++) {
+		for (int index = 0, size = marks; index < size; index++) {
 			means[index] = DenseMatrix.valueOf(rowSize, mixtures);
 		}
 		standardDeviation = DenseMatrix.valueOf(rowSize, mixtures);
@@ -93,8 +93,8 @@ public class MixtureDensityLossFunction implements LossFunction {
 	private void extractComponents(MathMatrix trains) {
 		int rowSize = trains.getRowSize();
 		int columnSize = trains.getColumnSize();
-		if (columnSize != (labels + 2) * mixtures) {
-			throw new IllegalArgumentException("trains size " + columnSize + " must be (labels+2)*mixtures where labels = " + labels + " and mixtures = " + mixtures);
+		if (columnSize != (marks + 2) * mixtures) {
+			throw new IllegalArgumentException("trains size " + columnSize + " must be (labels+2)*mixtures where labels = " + marks + " and mixtures = " + mixtures);
 		}
 
 		// Output is 2 dimensional (samples, labels)
@@ -183,7 +183,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 		});
 	}
 
-	private void labelsMinusMu(MathMatrix tests) {
+	private void marksMinusMu(MathMatrix tests) {
 		// Now that we have the mixtures, let's compute the negative
 		// log likelihodd of the label against the
 
@@ -215,7 +215,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 	@Override
 	public float computeScore(MathMatrix tests, MathMatrix trains, MathMatrix masks) {
 		extractComponents(trains);
-		labelsMinusMu(tests);
+		marksMinusMu(tests);
 		sum.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
@@ -237,7 +237,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 				float value = standardDeviation.getValue(rowIndex, columnIndex);
 				value = -(value * value * 2);
 				value = (float) FastMath.exp(sum.getValue(rowIndex, columnIndex) / value);
-				value /= (float) FastMath.pow(standardDeviation.getValue(rowIndex, columnIndex) * SQRT_TWO_PI, labels);
+				value /= (float) FastMath.pow(standardDeviation.getValue(rowIndex, columnIndex) * SQRT_TWO_PI, marks);
 				value *= weight.getValue(rowIndex, columnIndex);
 				likelihood += value;
 			}
@@ -250,7 +250,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 	@Override
 	public void computeGradient(MathMatrix tests, MathMatrix trains, MathMatrix masks, MathMatrix gradients) {
 		extractComponents(trains);
-		labelsMinusMu(tests);
+		marksMinusMu(tests);
 		sum.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
@@ -301,7 +301,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
 			float value = weight.getValue(row, column);
-			value /= (float) FastMath.pow(standardDeviation.getValue(row, column) * SQRT_TWO_PI, labels) * FastMath.exp(exponent.getValue(row, column));
+			value /= (float) FastMath.pow(standardDeviation.getValue(row, column) * SQRT_TWO_PI, marks) * FastMath.exp(exponent.getValue(row, column));
 			scalar.setValue(value);
 		});
 		for (int rowIndex = 0, rowSize = normal.getRowSize(); rowIndex < rowSize; rowIndex++) {
@@ -329,10 +329,10 @@ public class MixtureDensityLossFunction implements LossFunction {
 		sigmaGradient.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
-			scalar.setValue(-(sum.getValue(row, column) / variance.getValue(row, column) - labels) * normal.getValue(row, column));
+			scalar.setValue(-(sum.getValue(row, column) / variance.getValue(row, column) - marks) * normal.getValue(row, column));
 		});
 		// See Bishop equation (39)
-		for (int index = 0; index < labels; index++) {
+		for (int index = 0; index < marks; index++) {
 			DenseMatrix mean = means[index];
 			MathMatrix meanGradient = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(gradients), (2 + index) * mixtures, (3 + index) * mixtures);
 			meanGradient.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
@@ -358,7 +358,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 			MixtureDensityLossFunction that = (MixtureDensityLossFunction) object;
 			EqualsBuilder equal = new EqualsBuilder();
 			equal.append(this.mixtures, that.mixtures);
-			equal.append(this.labels, that.labels);
+			equal.append(this.marks, that.marks);
 			return equal.isEquals();
 		}
 	}
@@ -367,13 +367,13 @@ public class MixtureDensityLossFunction implements LossFunction {
 	public int hashCode() {
 		HashCodeBuilder hash = new HashCodeBuilder();
 		hash.append(mixtures);
-		hash.append(labels);
+		hash.append(marks);
 		return hash.toHashCode();
 	}
 
 	@Override
 	public String toString() {
-		return "MixtureDensityLossFunction(mixtures=" + mixtures + ", labels=" + labels + ")";
+		return "MixtureDensityLossFunction(mixtures=" + mixtures + ", labels=" + marks + ")";
 	}
 
 }

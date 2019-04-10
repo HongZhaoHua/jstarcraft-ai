@@ -136,14 +136,14 @@ public class GraphTestCase {
 			int size = 5;
 			INDArray oldLeftInputs = Nd4j.zeros(size, 1);
 			INDArray oldRightInputs = Nd4j.zeros(size, 1);
-			INDArray oldLabels = Nd4j.zeros(size, 1).assign(5);
+			INDArray oldMarks = Nd4j.zeros(size, 1).assign(5);
 			for (int point = 0; point < 5; point++) {
 				oldLeftInputs.put(point, 0, RandomUtility.randomInteger(5));
 				oldRightInputs.put(point, 0, RandomUtility.randomInteger(5));
 			}
 			for (int index = 0; index < 50; index++) {
 				oldGraph.setInputs(oldLeftInputs, oldRightInputs);
-				oldGraph.setLabels(oldLabels);
+				oldGraph.setLabels(oldMarks);
 				// 设置fit过程的迭代次数
 				for (int iteration = 0; iteration < 2; iteration++) {
 					oldGraph.fit();
@@ -158,11 +158,11 @@ public class GraphTestCase {
 			manager.attachThreadToDevice(Thread.currentThread(), 0);
 			MathMatrix newLeftInputs = getMatrix(factory, oldLeftInputs);
 			MathMatrix newRightInputs = getMatrix(factory, oldRightInputs);
-			MathMatrix newLabels = getMatrix(factory, oldLabels);
+			MathMatrix newMarks = getMatrix(factory, oldMarks);
 			MathMatrix newOutputs = getMatrix(factory, oldOutputs);
 
 			for (int index = 0; index < 50; index++) {
-				double newScore = graph.practice(2, new MathMatrix[] { newLeftInputs, newRightInputs }, new MathMatrix[] { newLabels });
+				double newScore = graph.practice(2, new MathMatrix[] { newLeftInputs, newRightInputs }, new MathMatrix[] { newMarks });
 				System.out.println(newScore);
 			}
 

@@ -58,17 +58,17 @@ public abstract class LossFunctionTestCase {
 			activetionList.add(new KeyValue<>(new ActivationSoftmax(), new SoftMaxActivationFunction()));
 			for (KeyValue<IActivation, ActivationFunction> keyValue : activetionList) {
 				INDArray array = Nd4j.linspace(-2.5D, 2.0D, 10).reshape(5, 2);
-				INDArray labels = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
+				INDArray marks = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
 				ILossFunction oldFunction = getOldFunction();
-				double value = oldFunction.computeScore(labels, array.dup(), keyValue.getKey(), null, false);
+				double value = oldFunction.computeScore(marks, array.dup(), keyValue.getKey(), null, false);
 
 				DenseMatrix input = getMatrix(array);
 				DenseMatrix output = DenseMatrix.valueOf(input.getRowSize(), input.getColumnSize());
 				ActivationFunction function = keyValue.getValue();
 				function.forward(input, output);
 				LossFunction newFunction = getNewFunction(function);
-				newFunction.doCache(getMatrix(labels), output);
-				double score = newFunction.computeScore(getMatrix(labels), output, null);
+				newFunction.doCache(getMatrix(marks), output);
+				double score = newFunction.computeScore(getMatrix(marks), output, null);
 
 				System.out.println(value);
 				System.out.println(score);
@@ -90,9 +90,9 @@ public abstract class LossFunctionTestCase {
 			activetionList.add(new KeyValue<>(new ActivationSoftmax(), new SoftMaxActivationFunction()));
 			for (KeyValue<IActivation, ActivationFunction> keyValue : activetionList) {
 				INDArray array = Nd4j.linspace(-2.5D, 2.0D, 10).reshape(5, 2);
-				INDArray labels = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
+				INDArray marks = Nd4j.create(new double[] { 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D, 0D, 1D }).reshape(5, 2);
 				ILossFunction oldFunction = getOldFunction();
-				INDArray value = oldFunction.computeGradient(labels, array.dup(), keyValue.getKey(), null);
+				INDArray value = oldFunction.computeGradient(marks, array.dup(), keyValue.getKey(), null);
 
 				DenseMatrix input = getMatrix(array);
 				DenseMatrix output = DenseMatrix.valueOf(input.getRowSize(), input.getColumnSize());
@@ -100,8 +100,8 @@ public abstract class LossFunctionTestCase {
 				function.forward(input, output);
 				DenseMatrix gradient = DenseMatrix.valueOf(input.getRowSize(), input.getColumnSize());
 				LossFunction newFunction = getNewFunction(function);
-				newFunction.doCache(getMatrix(labels), output);
-				newFunction.computeGradient(getMatrix(labels), output, null, gradient);
+				newFunction.doCache(getMatrix(marks), output);
+				newFunction.computeGradient(getMatrix(marks), output, null, gradient);
 				function.backward(input, gradient, output);
 				System.out.println(value);
 				System.out.println(output);
