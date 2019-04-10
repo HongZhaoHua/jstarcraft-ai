@@ -16,7 +16,7 @@ public enum MathCalculator {
 	/** 并行 */
 	PARALLEL;
 
-	public final static ThreadLocal<Semaphore> STORAGES = new ThreadLocal<>();
+	private final static ThreadLocal<Semaphore> semaphores = new ThreadLocal<>();
 
 	/**
 	 * 获取信号量
@@ -24,10 +24,10 @@ public enum MathCalculator {
 	 * @return
 	 */
 	public static Semaphore getSemaphore() {
-		Semaphore semaphore = STORAGES.get();
+		Semaphore semaphore = semaphores.get();
 		if (semaphore == null) {
 			semaphore = new Semaphore(0);
-			STORAGES.set(semaphore);
+			semaphores.set(semaphore);
 		}
 		return semaphore;
 	}
