@@ -10,10 +10,10 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.vector.CompositeVector;
+import com.jstarcraft.ai.math.structure.vector.GlobalVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class ColumnCompositeMatrix extends CompositeMatrix {
+public class ColumnGlobalMatrix extends GlobalMatrix {
 
 	@Override
 	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
@@ -67,7 +67,7 @@ public class ColumnCompositeMatrix extends CompositeMatrix {
 		for (int point = 0, size = components.length; point < size; point++) {
 			vectors[point] = components[point].getRowVector(rowIndex);
 		}
-		return CompositeVector.valueOf(indexed ? points : null, vectors);
+		return GlobalVector.valueOf(indexed ? points : null, vectors);
 	}
 
 	@Override
@@ -142,10 +142,10 @@ public class ColumnCompositeMatrix extends CompositeMatrix {
 
 	@Override
 	public Iterator<MatrixScalar> iterator() {
-		return new ColumnCompositeMatrixIterator();
+		return new ColumnGlobalMatrixIterator();
 	}
 
-	private class ColumnCompositeMatrixIterator implements Iterator<MatrixScalar> {
+	private class ColumnGlobalMatrixIterator implements Iterator<MatrixScalar> {
 
 		private int index;
 
@@ -184,9 +184,9 @@ public class ColumnCompositeMatrix extends CompositeMatrix {
 
 	}
 
-	private static ColumnCompositeMatrix valueOf(MathMatrix... components) {
+	private static ColumnGlobalMatrix valueOf(MathMatrix... components) {
 		assert components.length != 0;
-		ColumnCompositeMatrix instance = new ColumnCompositeMatrix();
+		ColumnGlobalMatrix instance = new ColumnGlobalMatrix();
 		instance.components = components;
 		instance.rowSize = components[0].getRowSize();
 		instance.splits = new int[components.length + 1];
@@ -216,11 +216,11 @@ public class ColumnCompositeMatrix extends CompositeMatrix {
 		return instance;
 	}
 
-	public static ColumnCompositeMatrix attachOf(MathMatrix... components) {
+	public static ColumnGlobalMatrix attachOf(MathMatrix... components) {
 		Collection<MathMatrix> elements = new LinkedList<>();
 		for (MathMatrix component : components) {
-			if (component instanceof ColumnCompositeMatrix) {
-				ColumnCompositeMatrix element = ColumnCompositeMatrix.class.cast(component);
+			if (component instanceof ColumnGlobalMatrix) {
+				ColumnGlobalMatrix element = ColumnGlobalMatrix.class.cast(component);
 				Collections.addAll(elements, element.components);
 			} else {
 				elements.add(component);
@@ -230,7 +230,7 @@ public class ColumnCompositeMatrix extends CompositeMatrix {
 		return valueOf(matrixes);
 	}
 
-	public static ColumnCompositeMatrix detachOf(ColumnCompositeMatrix components, int from, int to) {
+	public static ColumnGlobalMatrix detachOf(ColumnGlobalMatrix components, int from, int to) {
 		Collection<MathMatrix> elements = new LinkedList<>();
 		for (int point = 0, size = components.splits.length; point < size; point++) {
 			int split = components.splits[point];

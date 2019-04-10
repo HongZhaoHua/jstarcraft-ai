@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.RowCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.RowGlobalMatrix;
 import com.jstarcraft.ai.neuralnetwork.vertex.transformation.VerticalDetachVertex;
 
 public class VerticalUnstackVertexTestCase extends VertexTestCase {
@@ -22,7 +22,7 @@ public class VerticalUnstackVertexTestCase extends VertexTestCase {
 		for (int index = 0; index < size; index++) {
 			components[index] = DenseMatrix.valueOf(1, array.columns());
 		}
-		MathMatrix matrix = RowCompositeMatrix.attachOf(components);
+		MathMatrix matrix = RowGlobalMatrix.attachOf(components);
 		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
 			scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
 		});

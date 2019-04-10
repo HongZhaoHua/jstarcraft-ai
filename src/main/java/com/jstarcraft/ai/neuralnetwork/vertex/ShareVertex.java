@@ -8,9 +8,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.SectionMatrix;
+import com.jstarcraft.ai.math.structure.matrix.LocalMatrix;
 import com.jstarcraft.ai.model.ModelDefinition;
 import com.jstarcraft.ai.neuralnetwork.layer.Layer;
 import com.jstarcraft.ai.neuralnetwork.learn.IgnoreLearner;
@@ -91,15 +91,15 @@ public class ShareVertex extends LayerVertex {
 			int from = shareIndex * key.getColumnSize() / numberOfShares;
 			int to = from + key.getColumnSize() / numberOfShares;
 
-			if (key instanceof ColumnCompositeMatrix) {
-				key = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(key), from, to);
+			if (key instanceof ColumnGlobalMatrix) {
+				key = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(key), from, to);
 				if (value != null) {
-					value = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(value), from, to);
+					value = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(value), from, to);
 				}
 			} else {
-				key = new SectionMatrix(key, from, to, 0, key.getRowSize());
+				key = new LocalMatrix(key, from, to, 0, key.getRowSize());
 				if (value != null) {
-					value = new SectionMatrix(value, from, to, 0, key.getRowSize());
+					value = new LocalMatrix(value, from, to, 0, key.getRowSize());
 				}
 			}
 
@@ -117,14 +117,14 @@ public class ShareVertex extends LayerVertex {
 			innerLocalErrors[shareIndex] = keyValue.getValue();
 		}
 
-		inputGlobalData = ColumnCompositeMatrix.attachOf(inputLocalDatas);
-		middleGlobalData = ColumnCompositeMatrix.attachOf(middleLocalDatas);
-		outputGlobalData = ColumnCompositeMatrix.attachOf(outputLocalDatas);
+		inputGlobalData = ColumnGlobalMatrix.attachOf(inputLocalDatas);
+		middleGlobalData = ColumnGlobalMatrix.attachOf(middleLocalDatas);
+		outputGlobalData = ColumnGlobalMatrix.attachOf(outputLocalDatas);
 		if (inputKeyValues[0].getValue() != null) {
-			outterGlobalError = ColumnCompositeMatrix.attachOf(outterLocalErrors);
+			outterGlobalError = ColumnGlobalMatrix.attachOf(outterLocalErrors);
 		}
-		middleGlobalError = ColumnCompositeMatrix.attachOf(middleLocalErrors);
-		innerGlobalError = ColumnCompositeMatrix.attachOf(innerLocalErrors);
+		middleGlobalError = ColumnGlobalMatrix.attachOf(middleLocalErrors);
+		innerGlobalError = ColumnGlobalMatrix.attachOf(innerLocalErrors);
 
 		// 中间部分
 		middleKeyValue.setKey(middleGlobalData);

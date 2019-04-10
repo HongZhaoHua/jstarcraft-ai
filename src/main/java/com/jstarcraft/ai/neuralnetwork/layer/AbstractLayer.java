@@ -10,7 +10,7 @@ import org.apache.commons.math3.util.FastMath;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.model.ModelDefinition;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
@@ -26,8 +26,8 @@ import com.jstarcraft.core.utility.KeyValue;
 public abstract class AbstractLayer implements Layer {
 
 	protected static MathMatrix getMatrix(MathMatrix matrix) {
-		if (matrix instanceof CompositeMatrix) {
-			CompositeMatrix matrixes = CompositeMatrix.class.cast(matrix);
+		if (matrix instanceof GlobalMatrix) {
+			GlobalMatrix matrixes = GlobalMatrix.class.cast(matrix);
 			if (matrixes.getComponentSize() == 1) {
 				return matrixes.getComponentMatrix(0);
 			}

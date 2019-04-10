@@ -27,7 +27,7 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
  *
  */
 @ModelDefinition(value = { "shift", "capacity", "clazz", "keys", "values" })
-public class RandomVector implements MathVector, ModelCycle {
+public class HashVector implements MathVector, ModelCycle {
 
 	private int shift;
 
@@ -43,10 +43,10 @@ public class RandomVector implements MathVector, ModelCycle {
 
 	private transient WeakHashMap<MathMonitor<VectorScalar>, Object> monitors = new WeakHashMap<>();
 
-	RandomVector() {
+	HashVector() {
 	}
 
-	public RandomVector(int shift, int capacity, Int2FloatSortedMap data) {
+	public HashVector(int shift, int capacity, Int2FloatSortedMap data) {
 		data.defaultReturnValue(Float.NaN);
 		assert shift >= 0;
 		assert data.firstIntKey() - shift >= 0;
@@ -108,7 +108,7 @@ public class RandomVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public RandomVector setValues(float value) {
+	public HashVector setValues(float value) {
 		if (Float.isNaN(value)) {
 			int oldElementSize = keyValues.size();
 			int oldKnownSize = getKnownSize();
@@ -131,7 +131,7 @@ public class RandomVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public RandomVector scaleValues(float value) {
+	public HashVector scaleValues(float value) {
 		for (Entry term : keyValues.int2FloatEntrySet()) {
 			term.setValue(term.getFloatValue() * value);
 		}
@@ -139,7 +139,7 @@ public class RandomVector implements MathVector, ModelCycle {
 	}
 
 	@Override
-	public RandomVector shiftValues(float value) {
+	public HashVector shiftValues(float value) {
 		for (Entry term : keyValues.int2FloatEntrySet()) {
 			term.setValue(term.getFloatValue() + value);
 		}
@@ -265,7 +265,7 @@ public class RandomVector implements MathVector, ModelCycle {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		RandomVector that = (RandomVector) object;
+		HashVector that = (HashVector) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.capacity, that.capacity);
 		equal.append(this.keyValues, that.keyValues);
@@ -348,7 +348,7 @@ public class RandomVector implements MathVector, ModelCycle {
 				int newUnknownSize = oldUnknownSize + 1;
 				keyValues.remove(element.getIntKey());
 				for (MathMonitor<VectorScalar> monitor : monitors.keySet()) {
-					monitor.notifySizeChanged(RandomVector.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
+					monitor.notifySizeChanged(HashVector.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
 				}
 			} else {
 				element.setValue(value);

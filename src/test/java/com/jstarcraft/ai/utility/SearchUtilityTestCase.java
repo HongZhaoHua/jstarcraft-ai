@@ -10,7 +10,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
-import com.jstarcraft.ai.math.structure.matrix.RandomMatrix;
+import com.jstarcraft.ai.math.structure.matrix.HashMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 
 import it.unimi.dsi.fastutil.floats.Float2IntAVLTreeMap;
@@ -29,7 +29,7 @@ public class SearchUtilityTestCase {
 		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
 		Future<?> task = context.doTask(() -> {
 			int dimension = 7;
-			RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+			HashMatrix table = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 			table.setValue(0, 1, 0.5F);
 			table.setValue(0, 2, 0.5F);
 

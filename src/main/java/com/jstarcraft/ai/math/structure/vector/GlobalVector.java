@@ -17,20 +17,20 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathIterator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 /**
  * 组合向量
  * 
  * <pre>
- * 由一系列组件向量组成.用于配合{@link CompositeMatrix}
+ * 由一系列组件向量组成.用于配合{@link GlobalMatrix}
  * </pre>
  * 
  * @author Birdy
  *
  */
-public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
+public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
 
 	/** 向量 */
 	private MathVector[] components;
@@ -45,7 +45,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 
 	private transient WeakHashMap<MathMonitor<VectorScalar>, Object> monitors = new WeakHashMap<>();
 
-	CompositeVector() {
+	GlobalVector() {
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 	}
 
 	@Override
-	public CompositeVector setValues(float value) {
+	public GlobalVector setValues(float value) {
 		for (MathVector vector : components) {
 			vector.setValues(value);
 		}
@@ -118,7 +118,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 	}
 
 	@Override
-	public CompositeVector scaleValues(float value) {
+	public GlobalVector scaleValues(float value) {
 		for (MathVector vector : components) {
 			vector.scaleValues(value);
 		}
@@ -126,7 +126,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 	}
 
 	@Override
-	public CompositeVector shiftValues(float value) {
+	public GlobalVector shiftValues(float value) {
 		for (MathVector vector : components) {
 			vector.shiftValues(value);
 		}
@@ -377,7 +377,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		CompositeVector that = (CompositeVector) object;
+		GlobalVector that = (GlobalVector) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.components, that.components);
 		return equal.isEquals();
@@ -481,9 +481,9 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 
 	}
 
-	public static CompositeVector valueOf(int[] points, MathVector... components) {
+	public static GlobalVector valueOf(int[] points, MathVector... components) {
 		assert components.length != 0;
-		CompositeVector instance = new CompositeVector();
+		GlobalVector instance = new GlobalVector();
 		instance.components = components;
 		instance.splits = new int[components.length + 1];
 		for (int point = 0, size = components.length; point < size; point++) {
@@ -500,11 +500,11 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 		return instance;
 	}
 
-	public static CompositeVector attachOf(MathVector... components) {
+	public static GlobalVector attachOf(MathVector... components) {
 		Collection<MathVector> elements = new LinkedList<>();
 		for (MathVector component : components) {
-			if (component instanceof CompositeVector) {
-				CompositeVector element = CompositeVector.class.cast(component);
+			if (component instanceof GlobalVector) {
+				GlobalVector element = GlobalVector.class.cast(component);
 				Collections.addAll(elements, element.components);
 			} else {
 				elements.add(component);
@@ -536,7 +536,7 @@ public class CompositeVector implements MathVector, MathMonitor<VectorScalar> {
 		return valueOf(points, vectors);
 	}
 
-	public static CompositeVector detachOf(CompositeVector components, int from, int to) {
+	public static GlobalVector detachOf(GlobalVector components, int from, int to) {
 		Collection<MathVector> elements = new LinkedList<>();
 		for (int point = 0, size = components.splits.length; point < size; point++) {
 			int split = components.splits[point];

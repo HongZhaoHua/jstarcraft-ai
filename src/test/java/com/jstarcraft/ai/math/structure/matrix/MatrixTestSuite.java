@@ -9,9 +9,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		ColumnArrayMatrixTestCase.class,
 
-		ColumnCompositeMatrixTestCase.class,
+		ColumnGlobalMatrixTestCase.class,
 
-		ColumnRandomMatrixTestCase.class,
+		ColumnHashMatrixTestCase.class,
 
 		DenseMatrixTestCase.class,
 
@@ -19,9 +19,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		RowArrayMatrixTestCase.class,
 
-		RowCompositeMatrixTestCase.class,
+		RowGlobalMatrixTestCase.class,
 
-		RowRandomMatrixTestCase.class,
+		RowHashMatrixTestCase.class,
 
 		SparseMatrixTestCase.class,
 

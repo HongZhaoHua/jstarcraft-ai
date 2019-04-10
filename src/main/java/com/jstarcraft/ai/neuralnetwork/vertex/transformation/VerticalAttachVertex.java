@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.RowCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.RowGlobalMatrix;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -48,9 +48,9 @@ public class VerticalAttachVertex extends AbstractVertex {
 			values[position] = inputKeyValues[position].getValue();
 		}
 
-		MathMatrix outputData = RowCompositeMatrix.attachOf(keys);
+		MathMatrix outputData = RowGlobalMatrix.attachOf(keys);
 		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = RowCompositeMatrix.attachOf(values);
+		MathMatrix innerError = RowGlobalMatrix.attachOf(values);
 		outputKeyValue.setValue(innerError);
 	}
 

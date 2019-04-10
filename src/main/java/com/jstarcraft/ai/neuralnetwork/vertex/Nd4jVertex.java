@@ -8,7 +8,7 @@ import org.nd4j.linalg.indexing.INDArrayIndex;
 import org.nd4j.linalg.indexing.NDArrayIndex;
 
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
 import com.jstarcraft.ai.model.ModelDefinition;
@@ -45,19 +45,19 @@ public class Nd4jVertex extends AbstractVertex {
 			throw new IllegalArgumentException();
 		}
 
-		CompositeMatrix keyMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getKey());
+		GlobalMatrix keyMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getKey());
 		MathMatrix outputData = new Nd4jMatrix(Nd4j.zeros(keyMatrix.getRowSize(), keyMatrix.getColumnSize()));
 		outputKeyValue.setKey(outputData);
 
-		CompositeMatrix valueMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getValue());
+		GlobalMatrix valueMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getValue());
 		MathMatrix innerError = new Nd4jMatrix(Nd4j.zeros(valueMatrix.getRowSize(), valueMatrix.getColumnSize()));
 		outputKeyValue.setValue(innerError);
 	}
 
 	@Override
 	public void doForward() {
-		CompositeMatrix inputKeyMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getKey());
-		CompositeMatrix inputValueMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getValue());
+		GlobalMatrix inputKeyMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getKey());
+		GlobalMatrix inputValueMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getValue());
 		Nd4jMatrix outputKeyMatrix = Nd4jMatrix.class.cast(outputKeyValue.getKey());
 		Nd4jMatrix outputValueMatrix = Nd4jMatrix.class.cast(outputKeyValue.getValue());
 
@@ -82,8 +82,8 @@ public class Nd4jVertex extends AbstractVertex {
 
 	@Override
 	public void doBackward() {
-		CompositeMatrix inputKeyMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getKey());
-		CompositeMatrix inputValueMatrix = CompositeMatrix.class.cast(inputKeyValues[0].getValue());
+		GlobalMatrix inputKeyMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getKey());
+		GlobalMatrix inputValueMatrix = GlobalMatrix.class.cast(inputKeyValues[0].getValue());
 		Nd4jMatrix outputKeyMatrix = Nd4jMatrix.class.cast(outputKeyValue.getKey());
 		Nd4jMatrix outputValueMatrix = Nd4jMatrix.class.cast(outputKeyValue.getValue());
 

@@ -8,7 +8,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.vertex.transformation.HorizontalDetachVertex;
@@ -22,7 +22,7 @@ public class HorizontalUnstackVertexTestCase extends VertexTestCase {
 		for (int index = 0; index < size; index++) {
 			components[index] = DenseMatrix.valueOf(array.rows(), 1);
 		}
-		MathMatrix matrix = ColumnCompositeMatrix.attachOf(components);
+		MathMatrix matrix = ColumnGlobalMatrix.attachOf(components);
 		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
 			scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
 		});

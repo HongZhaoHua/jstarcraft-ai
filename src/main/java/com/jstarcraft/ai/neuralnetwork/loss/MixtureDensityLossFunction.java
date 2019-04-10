@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.math3.util.FastMath;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
@@ -115,7 +115,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 		// samples.
 
 		{
-			ColumnCompositeMatrix matrix = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(trains), 0, mixtures);
+			ColumnGlobalMatrix matrix = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(trains), 0, mixtures);
 			weight.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
 				int column = scalar.getColumn();
@@ -146,7 +146,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 		}
 
 		{
-			MathMatrix matrix = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(trains), mixtures, 2 * mixtures);
+			MathMatrix matrix = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(trains), mixtures, 2 * mixtures);
 			standardDeviation.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
 				int column = scalar.getColumn();
@@ -155,7 +155,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 			});
 		}
 		for (int index = 0, size = means.length; index < size; index++) {
-			MathMatrix matrix = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(trains), (2 + index) * mixtures, (3 + index) * mixtures);
+			MathMatrix matrix = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(trains), (2 + index) * mixtures, (3 + index) * mixtures);
 			means[index].iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
 				int column = scalar.getColumn();
@@ -201,7 +201,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 		// but it does it with index magix instead of a for loop.
 		// It turned out to be way less efficient than the simple 'for' here.
 		for (int index = 0, size = means.length; index < size; index++) {
-			MathMatrix matrix = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(tests), index * mixtures, (index + 1) * mixtures);
+			MathMatrix matrix = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(tests), index * mixtures, (index + 1) * mixtures);
 			means[index].iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
 				int column = scalar.getColumn();
@@ -318,14 +318,14 @@ public class MixtureDensityLossFunction implements LossFunction {
 		}
 
 		// See Bishop equation (35)
-		MathMatrix weightGradient = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(gradients), 0, mixtures);
+		MathMatrix weightGradient = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(gradients), 0, mixtures);
 		weightGradient.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
 			scalar.setValue(weight.getValue(row, column) - normal.getValue(row, column));
 		});
 		// See Bishop equation (38)
-		MathMatrix sigmaGradient = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(gradients), mixtures, 2 * mixtures);
+		MathMatrix sigmaGradient = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(gradients), mixtures, 2 * mixtures);
 		sigmaGradient.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			int row = scalar.getRow();
 			int column = scalar.getColumn();
@@ -334,7 +334,7 @@ public class MixtureDensityLossFunction implements LossFunction {
 		// See Bishop equation (39)
 		for (int index = 0; index < marks; index++) {
 			DenseMatrix mean = means[index];
-			MathMatrix meanGradient = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(gradients), (2 + index) * mixtures, (3 + index) * mixtures);
+			MathMatrix meanGradient = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(gradients), (2 + index) * mixtures, (3 + index) * mixtures);
 			meanGradient.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
 				int column = scalar.getColumn();

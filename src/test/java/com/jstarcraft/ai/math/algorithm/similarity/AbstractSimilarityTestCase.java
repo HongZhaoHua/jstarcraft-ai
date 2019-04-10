@@ -8,7 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
-import com.jstarcraft.ai.math.structure.matrix.RandomMatrix;
+import com.jstarcraft.ai.math.structure.matrix.HashMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.core.utility.RandomUtility;
@@ -27,7 +27,7 @@ public abstract class AbstractSimilarityTestCase {
 	public void test() {
 		int rowSize = 50;
 		int columnSize = 100;
-		RandomMatrix table = RandomMatrix.valueOf(true, rowSize, columnSize, new Int2FloatRBTreeMap());
+		HashMatrix table = HashMatrix.valueOf(true, rowSize, columnSize, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {

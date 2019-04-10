@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.RowCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.RowGlobalMatrix;
 import com.jstarcraft.ai.model.ModelDefinition;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
@@ -43,9 +43,9 @@ public class VerticalDetachVertex extends AbstractVertex {
 		super.doCache(samples);
 
 		// 获取样本的数量与维度
-		MathMatrix outputData = RowCompositeMatrix.detachOf(RowCompositeMatrix.class.cast(samples[0].getKey()), from, to);
+		MathMatrix outputData = RowGlobalMatrix.detachOf(RowGlobalMatrix.class.cast(samples[0].getKey()), from, to);
 		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = RowCompositeMatrix.detachOf(RowCompositeMatrix.class.cast(samples[0].getValue()), from, to);
+		MathMatrix innerError = RowGlobalMatrix.detachOf(RowGlobalMatrix.class.cast(samples[0].getValue()), from, to);
 		outputKeyValue.setValue(innerError);
 	}
 

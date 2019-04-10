@@ -4,7 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
@@ -48,9 +48,9 @@ public class HorizontalAttachVertex extends AbstractVertex {
 			values[position] = inputKeyValues[position].getValue();
 		}
 
-		MathMatrix outputData = ColumnCompositeMatrix.attachOf(keys);
+		MathMatrix outputData = ColumnGlobalMatrix.attachOf(keys);
 		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = ColumnCompositeMatrix.attachOf(values);
+		MathMatrix innerError = ColumnGlobalMatrix.attachOf(values);
 		outputKeyValue.setValue(innerError);
 	}
 

@@ -6,9 +6,9 @@ import java.util.concurrent.CountDownLatch;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.vector.CompositeVector;
+import com.jstarcraft.ai.math.structure.vector.GlobalVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.core.utility.KeyValue;
@@ -64,14 +64,14 @@ public class RandomLayer extends WeightLayer {
 			innerErrors[index + 1] = factory.makeMatrix(rowSize, numberOfOutputs);
 		}
 
-		MathMatrix middleData = ColumnCompositeMatrix.attachOf(middleDatas);
+		MathMatrix middleData = ColumnGlobalMatrix.attachOf(middleDatas);
 		middleKeyValue.setKey(middleData);
-		MathMatrix middleError = ColumnCompositeMatrix.attachOf(middleErrors);
+		MathMatrix middleError = ColumnGlobalMatrix.attachOf(middleErrors);
 		middleKeyValue.setValue(middleError);
 
-		MathMatrix outputData = ColumnCompositeMatrix.attachOf(outputDatas);
+		MathMatrix outputData = ColumnGlobalMatrix.attachOf(outputDatas);
 		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = ColumnCompositeMatrix.attachOf(innerErrors);
+		MathMatrix innerError = ColumnGlobalMatrix.attachOf(innerErrors);
 		outputKeyValue.setValue(innerError);
 	}
 
@@ -96,9 +96,9 @@ public class RandomLayer extends WeightLayer {
 			int numberOfColumns = (int) inputMajorData.getValue(0);
 			context.doStructureByAny(rowIndex, () -> {
 				for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
-					MathVector inputMinorData = CompositeVector.detachOf(CompositeVector.class.cast(inputMajorData), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
-					MathVector middleMinorData = CompositeVector.detachOf(CompositeVector.class.cast(middleMajorData), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
-					MathVector outputMinorData = CompositeVector.detachOf(CompositeVector.class.cast(outputMajorData), columnIndex * numberOfOutputs + 1, (columnIndex + 1) * numberOfOutputs + 1);
+					MathVector inputMinorData = GlobalVector.detachOf(GlobalVector.class.cast(inputMajorData), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
+					MathVector middleMinorData = GlobalVector.detachOf(GlobalVector.class.cast(middleMajorData), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
+					MathVector outputMinorData = GlobalVector.detachOf(GlobalVector.class.cast(outputMajorData), columnIndex * numberOfOutputs + 1, (columnIndex + 1) * numberOfOutputs + 1);
 					middleMinorData.dotProduct(inputMinorData, weightParameters, false, MathCalculator.SERIAL);
 					if (biasParameters != null) {
 						middleMinorData.iterateElement(MathCalculator.SERIAL, (scalar) -> {
@@ -154,10 +154,10 @@ public class RandomLayer extends WeightLayer {
 			int numberOfColumns = (int) inputMajorData.getValue(0);
 			numberOfInstances += numberOfColumns;
 			for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
-				MathVector inputMinorData = CompositeVector.detachOf(CompositeVector.class.cast(inputMajorData), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
-				MathVector middleMinorData = CompositeVector.detachOf(CompositeVector.class.cast(middleMajorData), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
-				MathVector innerMinorError = CompositeVector.detachOf(CompositeVector.class.cast(innerMajorError), columnIndex * numberOfOutputs + 1, (columnIndex + 1) * numberOfOutputs + 1);
-				MathVector middleMinorError = CompositeVector.detachOf(CompositeVector.class.cast(middleMajorError), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
+				MathVector inputMinorData = GlobalVector.detachOf(GlobalVector.class.cast(inputMajorData), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
+				MathVector middleMinorData = GlobalVector.detachOf(GlobalVector.class.cast(middleMajorData), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
+				MathVector innerMinorError = GlobalVector.detachOf(GlobalVector.class.cast(innerMajorError), columnIndex * numberOfOutputs + 1, (columnIndex + 1) * numberOfOutputs + 1);
+				MathVector middleMinorError = GlobalVector.detachOf(GlobalVector.class.cast(middleMajorError), columnIndex * numberOfOutputs, (columnIndex + 1) * numberOfOutputs);
 
 				// 计算梯度
 				function.backward(middleMinorData, innerMinorError, middleMinorError);
@@ -173,7 +173,7 @@ public class RandomLayer extends WeightLayer {
 				if (outerMajorError != null) {
 					// TODO 使用累计的方式计算
 					// TODO 需要锁机制,否则并发计算会导致Bug
-					MathVector outerMinorError = CompositeVector.detachOf(CompositeVector.class.cast(outerMajorError), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
+					MathVector outerMinorError = GlobalVector.detachOf(GlobalVector.class.cast(outerMajorError), columnIndex * numberOfInputs + 1, (columnIndex + 1) * numberOfInputs + 1);
 					outerMinorError.accumulateProduct(middleMinorError, weightParameters, true, MathCalculator.SERIAL);
 				}
 			}

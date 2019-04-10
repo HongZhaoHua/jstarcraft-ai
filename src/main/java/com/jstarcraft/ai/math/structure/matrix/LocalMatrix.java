@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.SectionVector;
+import com.jstarcraft.ai.math.structure.vector.LocalVector;
 import com.jstarcraft.ai.model.ModelDefinition;
 
 /**
@@ -22,7 +22,7 @@ import com.jstarcraft.ai.model.ModelDefinition;
  *
  */
 @ModelDefinition(value = { "left", "right", "top", "bottom", "matrix", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
-public class SectionMatrix implements MathMatrix {
+public class LocalMatrix implements MathMatrix {
 
 	/** inclusive */
 	protected int left;
@@ -42,10 +42,10 @@ public class SectionMatrix implements MathMatrix {
 
 	protected int elementSize, knownSize, unknownSize;
 
-	private SectionMatrix() {
+	private LocalMatrix() {
 	}
 
-	public SectionMatrix(MathMatrix matrix, int left, int right, int top, int bottom) {
+	public LocalMatrix(MathMatrix matrix, int left, int right, int top, int bottom) {
 		assert left < right;
 		assert top < bottom;
 		assert matrix.getColumnSize() >= left && matrix.getColumnSize() >= right;
@@ -57,8 +57,8 @@ public class SectionMatrix implements MathMatrix {
 			throw new IllegalArgumentException();
 		}
 
-		if (matrix instanceof SectionMatrix) {
-			SectionMatrix section = SectionMatrix.class.cast(matrix);
+		if (matrix instanceof LocalMatrix) {
+			LocalMatrix section = LocalMatrix.class.cast(matrix);
 			this.left = left + section.left;
 			this.right = right + section.left;
 			this.top = top + section.top;
@@ -166,7 +166,7 @@ public class SectionMatrix implements MathMatrix {
 	}
 
 	@Override
-	public SectionMatrix setValues(float value) {
+	public LocalMatrix setValues(float value) {
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				matrix.setValue(rowIndex + top, columnIndex + left, value);
@@ -176,7 +176,7 @@ public class SectionMatrix implements MathMatrix {
 	}
 
 	@Override
-	public SectionMatrix scaleValues(float value) {
+	public LocalMatrix scaleValues(float value) {
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				matrix.scaleValue(rowIndex + top, columnIndex + left, value);
@@ -186,7 +186,7 @@ public class SectionMatrix implements MathMatrix {
 	}
 
 	@Override
-	public SectionMatrix shiftValues(float value) {
+	public LocalMatrix shiftValues(float value) {
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				matrix.shiftValue(rowIndex + top, columnIndex + left, value);
@@ -226,12 +226,12 @@ public class SectionMatrix implements MathMatrix {
 
 	@Override
 	public MathVector getRowVector(int rowIndex) {
-		return new SectionVector(matrix.getRowVector(rowIndex + top), left, right);
+		return new LocalVector(matrix.getRowVector(rowIndex + top), left, right);
 	}
 
 	@Override
 	public MathVector getColumnVector(int columnIndex) {
-		return new SectionVector(matrix.getColumnVector(columnIndex + left), top, bottom);
+		return new LocalVector(matrix.getColumnVector(columnIndex + left), top, bottom);
 	}
 
 	@Override
@@ -271,7 +271,7 @@ public class SectionMatrix implements MathMatrix {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		SectionMatrix that = (SectionMatrix) object;
+		LocalMatrix that = (LocalMatrix) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.matrix, that.matrix);
 		equal.append(this.left, that.left);

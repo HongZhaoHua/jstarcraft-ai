@@ -28,10 +28,10 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.vector.CompositeVector;
+import com.jstarcraft.ai.math.structure.vector.GlobalVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class RowCompositeMatrix extends CompositeMatrix {
+public class RowGlobalMatrix extends GlobalMatrix {
 
 	@Override
 	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
@@ -91,7 +91,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 		for (int point = 0, size = components.length; point < size; point++) {
 			vectors[point] = components[point].getColumnVector(columnIndex);
 		}
-		return CompositeVector.valueOf(indexed ? points : null, vectors);
+		return GlobalVector.valueOf(indexed ? points : null, vectors);
 	}
 
 	@Override
@@ -120,7 +120,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 
 	@Override
 	public Iterator<MatrixScalar> iterator() {
-		return new RowCompositeMatrixIterator();
+		return new RowGlobalMatrixIterator();
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 		return this;
 	}
 
-	private class RowCompositeMatrixIterator implements Iterator<MatrixScalar> {
+	private class RowGlobalMatrixIterator implements Iterator<MatrixScalar> {
 
 		private int index;
 
@@ -202,9 +202,9 @@ public class RowCompositeMatrix extends CompositeMatrix {
 
 	}
 
-	private static RowCompositeMatrix valueOf(MathMatrix... components) {
+	private static RowGlobalMatrix valueOf(MathMatrix... components) {
 		assert components.length != 0;
-		RowCompositeMatrix instance = new RowCompositeMatrix();
+		RowGlobalMatrix instance = new RowGlobalMatrix();
 		instance.components = components;
 		instance.columnSize = components[0].getColumnSize();
 		instance.splits = new int[components.length + 1];
@@ -234,11 +234,11 @@ public class RowCompositeMatrix extends CompositeMatrix {
 		return instance;
 	}
 
-	public static RowCompositeMatrix attachOf(MathMatrix... components) {
+	public static RowGlobalMatrix attachOf(MathMatrix... components) {
 		Collection<MathMatrix> elements = new LinkedList<>();
 		for (MathMatrix component : components) {
-			if (component instanceof RowCompositeMatrix) {
-				RowCompositeMatrix element = RowCompositeMatrix.class.cast(component);
+			if (component instanceof RowGlobalMatrix) {
+				RowGlobalMatrix element = RowGlobalMatrix.class.cast(component);
 				Collections.addAll(elements, element.components);
 			} else {
 				elements.add(component);
@@ -248,7 +248,7 @@ public class RowCompositeMatrix extends CompositeMatrix {
 		return valueOf(matrixes);
 	}
 
-	public static RowCompositeMatrix detachOf(RowCompositeMatrix components, int from, int to) {
+	public static RowGlobalMatrix detachOf(RowGlobalMatrix components, int from, int to) {
 		Collection<MathMatrix> elements = new LinkedList<>();
 		for (int point = 0, size = components.splits.length; point < size; point++) {
 			int split = components.splits[point];

@@ -4,10 +4,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
-import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
+import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.RowCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.RowGlobalMatrix;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -51,8 +51,8 @@ public class PlusVertex extends AbstractVertex {
 		}
 
 		// TODO 考虑支持CompositeMatrix.
-		if (samples[0].getKey() instanceof CompositeMatrix) {
-			CompositeMatrix matrix = CompositeMatrix.class.cast(samples[0].getKey());
+		if (samples[0].getKey() instanceof GlobalMatrix) {
+			GlobalMatrix matrix = GlobalMatrix.class.cast(samples[0].getKey());
 			int size = matrix.getComponentSize();
 			MathMatrix[] outputDatas = new MathMatrix[size];
 			MathMatrix[] innerErrors = new MathMatrix[size];
@@ -61,16 +61,16 @@ public class PlusVertex extends AbstractVertex {
 				outputDatas[index] = factory.makeMatrix(component.getRowSize(), component.getColumnSize());
 				innerErrors[index] = factory.makeMatrix(component.getRowSize(), component.getColumnSize());
 			}
-			if (samples[0].getKey() instanceof ColumnCompositeMatrix) {
-				MathMatrix outputData = ColumnCompositeMatrix.attachOf(outputDatas);
+			if (samples[0].getKey() instanceof ColumnGlobalMatrix) {
+				MathMatrix outputData = ColumnGlobalMatrix.attachOf(outputDatas);
 				outputKeyValue.setKey(outputData);
-				MathMatrix innerError = ColumnCompositeMatrix.attachOf(innerErrors);
+				MathMatrix innerError = ColumnGlobalMatrix.attachOf(innerErrors);
 				outputKeyValue.setValue(innerError);
 			}
-			if (samples[0].getKey() instanceof RowCompositeMatrix) {
-				MathMatrix outputData = RowCompositeMatrix.attachOf(outputDatas);
+			if (samples[0].getKey() instanceof RowGlobalMatrix) {
+				MathMatrix outputData = RowGlobalMatrix.attachOf(outputDatas);
 				outputKeyValue.setKey(outputData);
-				MathMatrix innerError = RowCompositeMatrix.attachOf(innerErrors);
+				MathMatrix innerError = RowGlobalMatrix.attachOf(innerErrors);
 				outputKeyValue.setValue(innerError);
 			}
 		} else {

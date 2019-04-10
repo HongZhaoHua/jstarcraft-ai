@@ -15,7 +15,7 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.RandomVector;
+import com.jstarcraft.ai.math.structure.vector.HashVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.ai.model.ModelCycle;
 import com.jstarcraft.ai.model.ModelDefinition;
@@ -25,13 +25,13 @@ import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
 import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 
 /**
- * 随机矩阵
+ * 哈希矩阵
  * 
  * @author Birdy
  *
  */
 @ModelDefinition(value = { "orientation", "clazz", "keys", "values", "rowSize", "columnSize" })
-public class RandomMatrix implements MathMatrix, ModelCycle {
+public class HashMatrix implements MathMatrix, ModelCycle {
 
 	private boolean orientation;
 
@@ -47,7 +47,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 
 	private transient WeakHashMap<MathMonitor<MatrixScalar>, Object> monitors = new WeakHashMap<>();
 
-	RandomMatrix() {
+	HashMatrix() {
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 	}
 
 	@Override
-	public RandomMatrix setValues(float value) {
+	public HashMatrix setValues(float value) {
 		if (Float.isNaN(value)) {
 			int oldElementSize = keyValues.size();
 			int oldKnownSize = getKnownSize();
@@ -158,7 +158,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 	}
 
 	@Override
-	public RandomMatrix scaleValues(float value) {
+	public HashMatrix scaleValues(float value) {
 		for (Entry term : keyValues.int2FloatEntrySet()) {
 			term.setValue(term.getFloatValue() * value);
 		}
@@ -166,7 +166,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 	}
 
 	@Override
-	public RandomMatrix shiftValues(float value) {
+	public HashMatrix shiftValues(float value) {
 		for (Entry term : keyValues.int2FloatEntrySet()) {
 			term.setValue(term.getFloatValue() + value);
 		}
@@ -787,24 +787,24 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 	}
 
 	@Override
-	public RandomVector getRowVector(int rowIndex) {
+	public HashVector getRowVector(int rowIndex) {
 		if (orientation) {
 			int from = rowIndex * columnSize;
 			int to = rowIndex * columnSize + columnSize;
-			return new RandomVector(rowIndex * columnSize, columnSize, keyValues.subMap(from, to));
+			return new HashVector(rowIndex * columnSize, columnSize, keyValues.subMap(from, to));
 		} else {
 			throw new UnsupportedOperationException();
 		}
 	}
 
 	@Override
-	public RandomVector getColumnVector(int columnIndex) {
+	public HashVector getColumnVector(int columnIndex) {
 		if (orientation) {
 			throw new UnsupportedOperationException();
 		} else {
 			int from = columnIndex * rowSize;
 			int to = columnIndex * rowSize + rowSize;
-			return new RandomVector(columnIndex * rowSize, rowSize, keyValues.subMap(from, to));
+			return new HashVector(columnIndex * rowSize, rowSize, keyValues.subMap(from, to));
 		}
 	}
 
@@ -889,7 +889,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		RandomMatrix that = (RandomMatrix) object;
+		HashMatrix that = (HashMatrix) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.keyValues, that.keyValues);
 		return equal.isEquals();
@@ -975,7 +975,7 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 				int newUnknownSize = oldUnknownSize + 1;
 				keyValues.remove(element.getIntKey());
 				for (MathMonitor<MatrixScalar> monitor : monitors.keySet()) {
-					monitor.notifySizeChanged(RandomMatrix.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
+					monitor.notifySizeChanged(HashMatrix.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
 				}
 			} else {
 				element.setValue(value);
@@ -989,9 +989,9 @@ public class RandomMatrix implements MathMatrix, ModelCycle {
 
 	}
 
-	public static RandomMatrix valueOf(boolean orientation, int rowSize, int columnSize, Int2FloatSortedMap keyValues) {
+	public static HashMatrix valueOf(boolean orientation, int rowSize, int columnSize, Int2FloatSortedMap keyValues) {
 		keyValues.defaultReturnValue(Float.NaN);
-		RandomMatrix instance = new RandomMatrix();
+		HashMatrix instance = new HashMatrix();
 		instance.orientation = orientation;
 		instance.rowSize = rowSize;
 		instance.columnSize = columnSize;

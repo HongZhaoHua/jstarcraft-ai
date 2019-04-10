@@ -20,7 +20,7 @@ import com.jstarcraft.ai.model.ModelDefinition;
  *
  */
 @ModelDefinition(value = { "indexed", "components", "points", "splits", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
-public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixScalar> {
+public abstract class GlobalMatrix implements MathMatrix, MathMonitor<MatrixScalar> {
 
 	/** 是否索引 */
 	protected boolean indexed;
@@ -40,7 +40,7 @@ public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixS
 
 	private transient WeakHashMap<MathMonitor<MatrixScalar>, Object> monitors = new WeakHashMap<>();
 
-	CompositeMatrix() {
+	GlobalMatrix() {
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixS
 	}
 
 	@Override
-	public CompositeMatrix setValues(float value) {
+	public GlobalMatrix setValues(float value) {
 		for (MathMatrix matrix : components) {
 			matrix.setValues(value);
 		}
@@ -67,7 +67,7 @@ public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixS
 	}
 
 	@Override
-	public CompositeMatrix scaleValues(float value) {
+	public GlobalMatrix scaleValues(float value) {
 		for (MathMatrix matrix : components) {
 			matrix.scaleValues(value);
 		}
@@ -75,7 +75,7 @@ public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixS
 	}
 
 	@Override
-	public CompositeMatrix shiftValues(float value) {
+	public GlobalMatrix shiftValues(float value) {
 		for (MathMatrix matrix : components) {
 			matrix.shiftValues(value);
 		}
@@ -162,7 +162,7 @@ public abstract class CompositeMatrix implements MathMatrix, MathMonitor<MatrixS
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		CompositeMatrix that = (CompositeMatrix) object;
+		GlobalMatrix that = (GlobalMatrix) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.components, that.components);
 		return equal.isEquals();

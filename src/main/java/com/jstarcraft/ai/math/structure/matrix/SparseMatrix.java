@@ -364,7 +364,7 @@ public class SparseMatrix implements MathMatrix {
 		return instance;
 	}
 
-	public static SparseMatrix valueOf(int rowSize, int columnSize, RandomMatrix matrix) {
+	public static SparseMatrix valueOf(int rowSize, int columnSize, HashMatrix matrix) {
 		SparseMatrix instance = new SparseMatrix();
 		instance.rowSize = rowSize;
 		instance.columnSize = columnSize;

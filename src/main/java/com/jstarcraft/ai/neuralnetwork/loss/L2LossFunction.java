@@ -3,7 +3,7 @@ package com.jstarcraft.ai.neuralnetwork.loss;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.matrix.CompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
@@ -23,9 +23,9 @@ public class L2LossFunction implements LossFunction {
 	private float calculateScore(MathMatrix tests, MathMatrix trains) {
 		float score = 0F;
 		// TODO 此处需要重构.
-		if (tests instanceof CompositeMatrix && trains instanceof CompositeMatrix) {
-			MathMatrix[] testComponents = CompositeMatrix.class.cast(tests).getComponentMatrixes();
-			MathMatrix[] trainComponents = CompositeMatrix.class.cast(trains).getComponentMatrixes();
+		if (tests instanceof GlobalMatrix && trains instanceof GlobalMatrix) {
+			MathMatrix[] testComponents = GlobalMatrix.class.cast(tests).getComponentMatrixes();
+			MathMatrix[] trainComponents = GlobalMatrix.class.cast(trains).getComponentMatrixes();
 			assert testComponents.length == trainComponents.length;
 			for (int index = 0, size = testComponents.length; index < size; index++) {
 				score += calculateScore(testComponents[index], trainComponents[index]);
@@ -55,10 +55,10 @@ public class L2LossFunction implements LossFunction {
 
 	private void calculateGradient(MathMatrix tests, MathMatrix trains, MathMatrix gradients) {
 		// TODO 此处需要重构.
-		if (tests instanceof CompositeMatrix && trains instanceof CompositeMatrix) {
-			MathMatrix[] testComponents = CompositeMatrix.class.cast(tests).getComponentMatrixes();
-			MathMatrix[] trainComponents = CompositeMatrix.class.cast(trains).getComponentMatrixes();
-			MathMatrix[] gradientComponents = CompositeMatrix.class.cast(gradients).getComponentMatrixes();
+		if (tests instanceof GlobalMatrix && trains instanceof GlobalMatrix) {
+			MathMatrix[] testComponents = GlobalMatrix.class.cast(tests).getComponentMatrixes();
+			MathMatrix[] trainComponents = GlobalMatrix.class.cast(trains).getComponentMatrixes();
+			MathMatrix[] gradientComponents = GlobalMatrix.class.cast(gradients).getComponentMatrixes();
 			assert testComponents.length == trainComponents.length;
 			for (int index = 0, size = testComponents.length; index < size; index++) {
 				calculateGradient(testComponents[index], trainComponents[index], gradientComponents[index]);

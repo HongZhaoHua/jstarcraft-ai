@@ -14,7 +14,7 @@ import org.nd4j.linalg.lossfunctions.ILossFunction;
 import org.nd4j.linalg.lossfunctions.impl.LossMixtureDensity;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
@@ -25,12 +25,12 @@ import com.jstarcraft.core.utility.KeyValue;
 
 public class MixtureDensityLossFunctionTestCase extends LossFunctionTestCase {
 
-	protected static ColumnCompositeMatrix getMatrix(int rowSize, int columnSize) {
+	protected static ColumnGlobalMatrix getMatrix(int rowSize, int columnSize) {
 		MathMatrix[] matrixes = new MathMatrix[columnSize];
 		for (int index = 0; index < columnSize; index++) {
 			matrixes[index] = DenseMatrix.valueOf(rowSize, 1);
 		}
-		return ColumnCompositeMatrix.attachOf(matrixes);
+		return ColumnGlobalMatrix.attachOf(matrixes);
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.Map;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
-import com.jstarcraft.ai.math.structure.matrix.ColumnCompositeMatrix;
+import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.message.SumMessage;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
@@ -55,14 +55,14 @@ public class ShareLayer extends WeightLayer {
 		outputKeyValue = new KeyValue<>(null, null);
 
 		// TODO 此处需要改为CompositeMatrix
-		MathMatrix middleData = ColumnCompositeMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
+		MathMatrix middleData = ColumnGlobalMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
 		middleKeyValue.setKey(middleData);
-		MathMatrix middleError = ColumnCompositeMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
+		MathMatrix middleError = ColumnGlobalMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
 		middleKeyValue.setValue(middleError);
 
-		MathMatrix outputData = ColumnCompositeMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
+		MathMatrix outputData = ColumnGlobalMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
 		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = ColumnCompositeMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
+		MathMatrix innerError = ColumnGlobalMatrix.attachOf(getMatrixes(factory, rowSize, numberOfOutputs, numberOfShares));
 		outputKeyValue.setValue(innerError);
 	}
 
@@ -72,9 +72,9 @@ public class ShareLayer extends WeightLayer {
 		MathMatrix biasParameters = parameters.get(BIAS_KEY);
 
 		for (int shareIndex = 0; shareIndex < numberOfShares; shareIndex++) {
-			MathMatrix inputData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(inputKeyValue.getKey()), shareIndex * numberOfInputs, (shareIndex + 1) * numberOfInputs);
-			MathMatrix middleData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(middleKeyValue.getKey()), shareIndex * numberOfOutputs, (shareIndex + 1) * numberOfOutputs);
-			MathMatrix outputData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(outputKeyValue.getKey()), shareIndex * numberOfOutputs, (shareIndex + 1) * numberOfOutputs);
+			MathMatrix inputData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(inputKeyValue.getKey()), shareIndex * numberOfInputs, (shareIndex + 1) * numberOfInputs);
+			MathMatrix middleData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(middleKeyValue.getKey()), shareIndex * numberOfOutputs, (shareIndex + 1) * numberOfOutputs);
+			MathMatrix outputData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(outputKeyValue.getKey()), shareIndex * numberOfOutputs, (shareIndex + 1) * numberOfOutputs);
 
 			middleData.dotProduct(inputData, false, weightParameters, false, MathCalculator.PARALLEL);
 			if (biasParameters != null) {
@@ -106,13 +106,13 @@ public class ShareLayer extends WeightLayer {
 		biasGradients.setValues(0F);
 
 		for (int partIndex = 0; partIndex < numberOfShares; partIndex++) {
-			MathMatrix inputData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(inputKeyValue.getKey()), partIndex * numberOfInputs, (partIndex + 1) * numberOfInputs);
-			MathMatrix middleData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(middleKeyValue.getKey()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
-			MathMatrix outputData = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(outputKeyValue.getKey()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
+			MathMatrix inputData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(inputKeyValue.getKey()), partIndex * numberOfInputs, (partIndex + 1) * numberOfInputs);
+			MathMatrix middleData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(middleKeyValue.getKey()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
+			MathMatrix outputData = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(outputKeyValue.getKey()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
 
-			MathMatrix innerError = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(outputKeyValue.getValue()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
-			MathMatrix middleError = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(middleKeyValue.getValue()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
-			MathMatrix outerError = ColumnCompositeMatrix.detachOf(ColumnCompositeMatrix.class.cast(inputKeyValue.getValue()), partIndex * numberOfInputs, (partIndex + 1) * numberOfInputs);
+			MathMatrix innerError = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(outputKeyValue.getValue()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
+			MathMatrix middleError = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(middleKeyValue.getValue()), partIndex * numberOfOutputs, (partIndex + 1) * numberOfOutputs);
+			MathMatrix outerError = ColumnGlobalMatrix.detachOf(ColumnGlobalMatrix.class.cast(inputKeyValue.getValue()), partIndex * numberOfInputs, (partIndex + 1) * numberOfInputs);
 
 			// 计算梯度
 			function.backward(middleData, innerError, middleError);

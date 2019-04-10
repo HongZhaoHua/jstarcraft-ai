@@ -20,7 +20,7 @@ public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected ColumnArrayMatrix getRandomMatrix(int dimension) {
-		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
@@ -42,7 +42,7 @@ public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected ColumnArrayMatrix getZeroMatrix(int dimension) {
-		RandomMatrix table = RandomMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				table.setValue(rowIndex, columnIndex, 0F);

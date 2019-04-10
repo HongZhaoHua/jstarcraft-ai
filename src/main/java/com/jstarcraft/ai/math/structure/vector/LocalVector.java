@@ -18,7 +18,7 @@ import com.jstarcraft.ai.math.structure.ScalarIterator;
  * @author Birdy
  *
  */
-public class SectionVector implements MathVector {
+public class LocalVector implements MathVector {
 
 	private int from;
 
@@ -28,7 +28,7 @@ public class SectionVector implements MathVector {
 
 	private int elementSize, knownSize, unknownSize;
 
-	public SectionVector(MathVector dataVector, int from, int to) {
+	public LocalVector(MathVector dataVector, int from, int to) {
 		this.dataVector = dataVector;
 		this.from = from;
 		this.to = to;
@@ -91,7 +91,7 @@ public class SectionVector implements MathVector {
 	}
 
 	@Override
-	public SectionVector setValues(float value) {
+	public LocalVector setValues(float value) {
 		for (int index = from; index < to; index++) {
 			dataVector.setValue(index, value);
 		}
@@ -99,7 +99,7 @@ public class SectionVector implements MathVector {
 	}
 
 	@Override
-	public SectionVector scaleValues(float value) {
+	public LocalVector scaleValues(float value) {
 		for (int index = from; index < to; index++) {
 			dataVector.scaleValue(index, value);
 		}
@@ -107,7 +107,7 @@ public class SectionVector implements MathVector {
 	}
 
 	@Override
-	public SectionVector shiftValues(float value) {
+	public LocalVector shiftValues(float value) {
 		for (int index = from; index < to; index++) {
 			dataVector.shiftValue(index, value);
 		}
@@ -167,7 +167,7 @@ public class SectionVector implements MathVector {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		SectionVector that = (SectionVector) object;
+		LocalVector that = (LocalVector) object;
 		EqualsBuilder equal = new EqualsBuilder();
 		equal.append(this.dataVector, that.dataVector);
 		equal.append(this.from, that.from);
