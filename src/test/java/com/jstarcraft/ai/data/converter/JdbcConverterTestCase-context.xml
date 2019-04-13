@@ -30,20 +30,11 @@ http://www.jstarcraft.com/core/cache/cache.xsd">
 	<context:component-scan base-package="com.jstarcraft.ai.data.converter" />
 
 	<!-- 数据源配置 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-		<property name="validationQuery" value="select ''" />
-		<property name="timeBetweenEvictionRunsMillis" value="5000" />
-		<property name="numTestsPerEvictionRun" value="10" />
-		<property name="testOnBorrow" value="false" />
-		<property name="testWhileIdle" value="false" />
-		<property name="initialSize" value="10" />
-		<property name="maxActive" value="2000" />
-		<property name="maxIdle" value="5" />
-		<property name="minIdle" value="1" />
 	</bean>
 
 	<!-- JDBC配置 -->

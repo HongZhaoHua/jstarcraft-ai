@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.21.0-GA</version>
+			<version>3.24.1-GA</version>
 		</dependency>
 
 		<dependency>
@@ -74,29 +74,29 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>5.0.7.RELEASE</version>
+			<version>5.1.6.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.6.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.192</version>
+			<version>1.4.199</version>
 			<scope>test</scope>
 		</dependency>
 
-		<!-- 桥接器:Slf4j使用Log4j2 -->
+			<!-- 桥接器:Slf4j使用Log4j2 -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.8.2</version>
+			<version>2.11.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -104,7 +104,7 @@
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
-			<version>2.8.2</version>
+			<version>2.11.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
