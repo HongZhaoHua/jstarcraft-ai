@@ -4,6 +4,7 @@ import org.nd4j.linalg.api.concurrency.AffinityManager;
 import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.core.utility.NameThreadFactory;
+import com.jstarcraft.core.utility.StringUtility;
 
 /**
  * 环境工厂
@@ -25,7 +26,7 @@ class EnvironmentThreadFactory extends NameThreadFactory {
 	@Override
 	public Thread newThread(Runnable runnable) {
 		int index = number.getAndIncrement();
-		String name = group.getName() + COLON + index;
+		String name = group.getName() + StringUtility.COLON + index;
 		Thread thread = new EnvironmentThread(context, group, runnable, name, 0);
 		manager.attachThreadToDevice(thread, index % manager.getNumberOfDevices());
 		return thread;
