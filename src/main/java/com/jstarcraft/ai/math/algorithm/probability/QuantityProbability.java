@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.math.algorithm.distribution;
+package com.jstarcraft.ai.math.algorithm.probability;
 
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
 

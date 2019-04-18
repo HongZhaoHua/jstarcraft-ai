@@ -10,8 +10,8 @@ import org.nd4j.linalg.api.rng.DefaultRandom;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
-import com.jstarcraft.ai.math.algorithm.distribution.QuantityProbability;
-import com.jstarcraft.ai.math.algorithm.distribution.Probability;
+import com.jstarcraft.ai.math.algorithm.probability.Probability;
+import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
 
 public class NormalProbabilityTestCase extends ProbabilityTestCase {
 

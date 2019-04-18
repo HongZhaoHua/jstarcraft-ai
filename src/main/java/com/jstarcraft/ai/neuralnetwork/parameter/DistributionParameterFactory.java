@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.neuralnetwork.parameter;
 
-import com.jstarcraft.ai.math.algorithm.distribution.Probability;
+import com.jstarcraft.ai.math.algorithm.probability.Probability;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 public class DistributionParameterFactory implements ParameterFactory {

@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
+import com.jstarcraft.ai.math.algorithm.probability.Probability;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.utility.MathUtility;

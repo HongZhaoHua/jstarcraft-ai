@@ -2,7 +2,7 @@ package com.jstarcraft.ai.neuralnetwork.layer;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
 
-import com.jstarcraft.ai.math.algorithm.distribution.QuantityProbability;
+import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
