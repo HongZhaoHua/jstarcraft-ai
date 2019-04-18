@@ -1,7 +1,7 @@
 package com.jstarcraft.ai.data;
 
 /**
- * 连续访问器
+ * 定量访问器
  * 
  * @author Birdy
  *
