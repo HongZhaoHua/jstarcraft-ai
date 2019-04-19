@@ -3,7 +3,7 @@ package com.jstarcraft.ai.neuralnetwork.layer;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.parameter.IgnoreParameterFactory;
 import com.jstarcraft.ai.neuralnetwork.parameter.ParameterFactory;
 
@@ -13,7 +13,7 @@ import com.jstarcraft.ai.neuralnetwork.parameter.ParameterFactory;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "l1Regularization", "l2Regularization", "factory" })
+@ModemDefinition(value = { "l1Regularization", "l2Regularization", "factory" })
 public class ParameterConfigurator {
 
 	private float l1Regularization;

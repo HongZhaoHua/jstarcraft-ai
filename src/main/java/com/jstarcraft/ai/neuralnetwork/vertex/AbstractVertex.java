@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
@@ -14,7 +14,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vertexName", "factory" })
+@ModemDefinition(value = { "vertexName", "factory" })
 public abstract class AbstractVertex implements Vertex {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());

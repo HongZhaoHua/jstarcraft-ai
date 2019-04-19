@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.schedule.ConstantSchedule;
 import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 
@@ -20,7 +20,7 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "learnSchedule" })
+@ModemDefinition(value = { "learnSchedule" })
 public class SgdLearner implements Learner {
 
 	public static final float DEFAULT_SGD_LR = 1E-3F;

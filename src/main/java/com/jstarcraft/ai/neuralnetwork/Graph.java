@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.layer.Layer;
 import com.jstarcraft.ai.neuralnetwork.loss.LossFunction;
 import com.jstarcraft.ai.neuralnetwork.optimization.Optimizer;
@@ -33,8 +33,8 @@ import com.jstarcraft.core.utility.StringUtility;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "topologicalOrder", "forwardDependencies", "backwardDependencies", "vertices", "optimizer", "lossFunctions" })
-public class Graph implements ModelCycle {
+@ModemDefinition(value = { "topologicalOrder", "forwardDependencies", "backwardDependencies", "vertices", "optimizer", "lossFunctions" })
+public class Graph implements ModemCycle {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 

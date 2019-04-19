@@ -11,8 +11,8 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.schedule.ConstantSchedule;
 import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 
@@ -28,8 +28,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "beta1", "beta2", "epsilon", "learnSchedule" })
-public class AdaMaxLearner implements Learner, ModelCycle {
+@ModemDefinition(value = { "beta1", "beta2", "epsilon", "learnSchedule" })
+public class AdaMaxLearner implements Learner, ModemCycle {
 
 	public static final float DEFAULT_ADAMAX_LEARN_RATE = 1E-3F;
 	public static final float DEFAULT_ADAMAX_EPSILON = 1E-8F;

@@ -6,7 +6,7 @@ import org.apache.commons.math3.util.FastMath;
 
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -20,7 +20,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vertexName", "factory", "epsilon" })
+@ModemDefinition(value = { "vertexName", "factory", "epsilon" })
 public class EuclideanVertex extends AbstractVertex {
 
 	public static final float DEFAULT_EPSILON = 1E-5F;

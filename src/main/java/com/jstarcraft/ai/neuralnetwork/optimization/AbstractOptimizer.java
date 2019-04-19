@@ -5,11 +5,11 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.condition.Condition;
 import com.jstarcraft.ai.neuralnetwork.step.StepFunction;
 
-@ModelDefinition(value = { "stepFunction", "conditions" })
+@ModemDefinition(value = { "stepFunction", "conditions" })
 public abstract class AbstractOptimizer implements Optimizer {
 
 	protected static final Logger log = LoggerFactory.getLogger(AbstractOptimizer.class);

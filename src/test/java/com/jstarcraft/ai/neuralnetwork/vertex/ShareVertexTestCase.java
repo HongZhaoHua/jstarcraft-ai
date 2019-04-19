@@ -13,7 +13,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.neuralnetwork.EpochMonitor;
 import com.jstarcraft.ai.neuralnetwork.Graph;
 import com.jstarcraft.ai.neuralnetwork.GraphConfigurator;
@@ -190,7 +190,7 @@ public class ShareVertexTestCase {
 		MathCache factory = new DenseCache();
 		Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
 		Vertex oldModel = new ShareVertex("factorCodec", factory, 2, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
-		for (ModelCodec codec : ModelCodec.values()) {
+		for (ModemCodec codec : ModemCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);
 			Vertex newModel = (Vertex) codec.decodeModel(data);
 			Assert.assertThat(newModel, CoreMatchers.equalTo(oldModel));

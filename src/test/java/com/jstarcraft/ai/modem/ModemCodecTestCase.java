@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -8,13 +8,13 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 
-public class ModelCodecTestCase {
+public class ModemCodecTestCase {
 
 	@Test
 	public void test() {
-		for (ModelCodec codec : ModelCodec.values()) {
+		for (ModemCodec codec : ModemCodec.values()) {
 			Map<String, Object> oldModel = new HashMap<>();
 			oldModel.put("complex", MockComplexObject.valueOf(0, "birdy", "hong", 10, Instant.now(), MockEnumeration.TERRAN));
 			oldModel.put("enumeration", MockEnumeration.TERRAN);

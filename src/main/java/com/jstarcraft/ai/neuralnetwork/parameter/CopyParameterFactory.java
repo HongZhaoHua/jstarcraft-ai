@@ -5,9 +5,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 
-@ModelDefinition(value = { "copy" })
+@ModemDefinition(value = { "copy" })
 public class CopyParameterFactory implements ParameterFactory {
 
 	private MathMatrix copy;

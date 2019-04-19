@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import com.jstarcraft.core.codec.protocolbufferx.annotation.ProtocolConfiguration;
 

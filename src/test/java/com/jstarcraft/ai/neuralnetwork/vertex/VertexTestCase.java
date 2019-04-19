@@ -14,7 +14,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -101,7 +101,7 @@ public abstract class VertexTestCase {
 	@Test
 	public void testModel() {
 		Vertex oldModel = getNewFunction();
-		for (ModelCodec codec : ModelCodec.values()) {
+		for (ModemCodec codec : ModemCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);
 			Vertex newModel = (Vertex) codec.decodeModel(data);
 			Assert.assertThat(newModel, CoreMatchers.equalTo(oldModel));

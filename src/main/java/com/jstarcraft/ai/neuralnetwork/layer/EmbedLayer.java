@@ -7,7 +7,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.model.ModelCycle;
+import com.jstarcraft.ai.modem.ModemCycle;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -23,7 +23,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-public class EmbedLayer extends WeightLayer implements ModelCycle {
+public class EmbedLayer extends WeightLayer implements ModemCycle {
 
 	private KeyValue<MathVector, MathVector>[] weightReferences;
 

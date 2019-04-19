@@ -12,9 +12,9 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.math.structure.MathMonitor;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
@@ -26,8 +26,8 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "shift", "capacity", "clazz", "keys", "values" })
-public class HashVector implements MathVector, ModelCycle {
+@ModemDefinition(value = { "shift", "capacity", "clazz", "keys", "values" })
+public class HashVector implements MathVector, ModemCycle {
 
 	private int shift;
 

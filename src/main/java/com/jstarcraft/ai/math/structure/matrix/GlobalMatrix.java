@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import com.jstarcraft.ai.math.structure.MathIterator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 
 /**
  * 组合矩阵
@@ -19,7 +19,7 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "indexed", "components", "points", "splits", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
+@ModemDefinition(value = { "indexed", "components", "points", "splits", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
 public abstract class GlobalMatrix implements MathMatrix, MathMonitor<MatrixScalar> {
 
 	/** 是否索引 */

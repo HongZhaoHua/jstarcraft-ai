@@ -19,8 +19,8 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.Nd4jVector;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 
 /**
  * ND4J矩阵
@@ -28,8 +28,8 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "rowSize", "columnSize", "order", "data" })
-public class Nd4jMatrix implements MathMatrix, ModelCycle {
+@ModemDefinition(value = { "rowSize", "columnSize", "order", "data" })
+public class Nd4jMatrix implements MathMatrix, ModemCycle {
 
 	private static final AffinityManager manager = Nd4j.getAffinityManager();
 

@@ -14,7 +14,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.ai.utility.MathUtility;
 
@@ -109,7 +109,7 @@ public abstract class ActivationFunctionTestCase {
 	@Test
 	public void testModel() {
 		ActivationFunction oldModel = getNewFunction();
-		for (ModelCodec codec : ModelCodec.values()) {
+		for (ModemCodec codec : ModemCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);
 			ActivationFunction newModel = (ActivationFunction) codec.decodeModel(data);
 			Assert.assertThat(newModel, CoreMatchers.equalTo(oldModel));

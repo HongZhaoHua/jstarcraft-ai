@@ -14,7 +14,7 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MockMessage;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.RandomUtility;
 import com.jstarcraft.core.utility.StringUtility;
@@ -201,7 +201,7 @@ public abstract class MatrixTestCase {
 			int dimension = 100;
 			MathMatrix oldMatrix = getRandomMatrix(dimension);
 
-			for (ModelCodec codec : ModelCodec.values()) {
+			for (ModemCodec codec : ModemCodec.values()) {
 				long encodeInstant = System.currentTimeMillis();
 				byte[] data = codec.encodeModel(oldMatrix);
 				String encodeMessage = StringUtility.format("编码{}数据的时间:{}毫秒", codec, System.currentTimeMillis() - encodeInstant);

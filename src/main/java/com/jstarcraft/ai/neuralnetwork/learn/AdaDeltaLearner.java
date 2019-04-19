@@ -11,8 +11,8 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 
 /**
  * Ada Delta学习器
@@ -27,8 +27,8 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "rho", "epsilon" })
-public class AdaDeltaLearner implements Learner, ModelCycle {
+@ModemDefinition(value = { "rho", "epsilon" })
+public class AdaDeltaLearner implements Learner, ModemCycle {
 
 	public static final float DEFAULT_ADADELTA_RHO = 0.95F;
 	public static final float DEFAULT_ADADELTA_EPSILON = 1E-6F;

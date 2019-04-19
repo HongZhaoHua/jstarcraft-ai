@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -10,21 +10,21 @@ import org.slf4j.LoggerFactory;
 import com.jstarcraft.core.utility.ReflectionUtility;
 
 /**
- * 模型存取器
+ * 调制解调存取器
  * 
  * @author Birdy
  *
  */
-public final class ModelAccessor {
+public final class ModemAccessor {
 
-	private final static Logger logger = LoggerFactory.getLogger(ModelAccessor.class);
+	private final static Logger logger = LoggerFactory.getLogger(ModemAccessor.class);
 
 	private final static Map<Class<?>, Map<String, Field>> properties = new HashMap<>();
 
 	private synchronized static Field getField(Class<?> clazz, String name) {
 		Map<String, Field> fields = properties.get(clazz);
 		if (fields == null) {
-			ModelDefinition annotation = clazz.getAnnotation(ModelDefinition.class);
+			ModemDefinition annotation = clazz.getAnnotation(ModemDefinition.class);
 			assert annotation != null;
 			fields = new HashMap<>();
 			for (String property : annotation.value()) {

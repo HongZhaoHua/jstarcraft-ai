@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

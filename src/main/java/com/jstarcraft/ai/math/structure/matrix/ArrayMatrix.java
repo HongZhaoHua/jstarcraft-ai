@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 
 /**
  * 数组矩阵
@@ -22,7 +22,7 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vectors", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
+@ModemDefinition(value = { "vectors", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
 public abstract class ArrayMatrix implements MathMatrix, MathMonitor<VectorScalar> {
 
 	/** 向量 */

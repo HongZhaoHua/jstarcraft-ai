@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import java.lang.reflect.Type;
 import java.time.Instant;
@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import com.jstarcraft.ai.model.ModelCycle;
+import com.jstarcraft.ai.modem.ModemCycle;
 
 /**
  * 模仿复杂对象
@@ -16,7 +16,7 @@ import com.jstarcraft.ai.model.ModelCycle;
  * @author Birdy
  *
  */
-public class MockComplexObject implements ModelCycle {
+public class MockComplexObject implements ModemCycle {
 
 	private Integer id;
 

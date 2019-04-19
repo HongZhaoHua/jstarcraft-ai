@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -22,7 +22,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "numberOfInputs", "numberOfOutputs", "configurators", "parameters", "gradients", "mode", "function" })
+@ModemDefinition(value = { "numberOfInputs", "numberOfOutputs", "configurators", "parameters", "gradients", "mode", "function" })
 public abstract class AbstractLayer implements Layer {
 
 	protected static MathMatrix getMatrix(MathMatrix matrix) {

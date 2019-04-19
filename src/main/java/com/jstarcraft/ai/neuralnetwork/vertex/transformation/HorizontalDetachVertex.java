@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.vertex.AbstractVertex;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -20,7 +20,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vertexName", "factory", "from", "to" })
+@ModemDefinition(value = { "vertexName", "factory", "from", "to" })
 public class HorizontalDetachVertex extends AbstractVertex {
 
 	// inclusive

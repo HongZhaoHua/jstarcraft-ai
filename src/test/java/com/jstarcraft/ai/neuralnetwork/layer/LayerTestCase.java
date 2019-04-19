@@ -20,7 +20,7 @@ import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCodec;
+import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.neuralnetwork.vertex.LayerVertex;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
@@ -113,7 +113,7 @@ public abstract class LayerTestCase {
 	public void testModel() {
 		AbstractLayer<?> oldFunction = getOldFunction();
 		Layer oldModel = getNewFunction(oldFunction);
-		for (ModelCodec codec : ModelCodec.values()) {
+		for (ModemCodec codec : ModemCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);
 			Layer newModel = (Layer) codec.decodeModel(data);
 			Assert.assertThat(newModel, CoreMatchers.equalTo(oldModel));

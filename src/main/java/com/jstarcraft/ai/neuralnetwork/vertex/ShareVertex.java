@@ -10,8 +10,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.math.structure.matrix.LocalMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
 import com.jstarcraft.ai.neuralnetwork.layer.Layer;
 import com.jstarcraft.ai.neuralnetwork.learn.IgnoreLearner;
 import com.jstarcraft.ai.neuralnetwork.learn.Learner;
@@ -25,7 +25,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vertexName", "factory", "layer", "learner", "normalizer", "numberOfShares" })
+@ModemDefinition(value = { "vertexName", "factory", "layer", "learner", "normalizer", "numberOfShares" })
 public class ShareVertex extends LayerVertex {
 
 	private int numberOfShares;

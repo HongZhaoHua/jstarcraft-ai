@@ -1,7 +1,7 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 /**
- * 模型数据
+ * 调制解调数据
  * 
  * <pre>
  * 当数据为复杂类型时,valueData为ModelData[],size大于等于0.
@@ -11,7 +11,7 @@ package com.jstarcraft.ai.model;
  * @author Birdy
  *
  */
-class ModelData {
+class ModemData {
 
 	/**
 	 * 类型(格式为JavaType)
@@ -28,10 +28,10 @@ class ModelData {
 	 */
 	private int size;
 
-	ModelData() {
+	ModemData() {
 	}
 
-	ModelData(byte[] keyData, byte[] valueData, int size) {
+	ModemData(byte[] keyData, byte[] valueData, int size) {
 		this.keyData = keyData;
 		this.valueData = valueData;
 		this.size = size;

@@ -11,7 +11,7 @@ import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.vertex.transformation.HorizontalAttachVertex;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -21,7 +21,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "vertexName", "factory", "orientation" })
+@ModemDefinition(value = { "vertexName", "factory", "orientation" })
 // TODO 准备整合到StackVertex
 @Deprecated
 public class Nd4jVertex extends AbstractVertex {

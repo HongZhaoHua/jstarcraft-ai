@@ -12,8 +12,8 @@ import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.math.structure.vector.LocalVector;
-import com.jstarcraft.ai.model.ModelDefinition;
 
 /**
  * 区域矩阵
@@ -21,7 +21,7 @@ import com.jstarcraft.ai.model.ModelDefinition;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "left", "right", "top", "bottom", "matrix", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
+@ModemDefinition(value = { "left", "right", "top", "bottom", "matrix", "rowSize", "columnSize", "elementSize", "knownSize", "unknownSize" })
 public class LocalMatrix implements MathMatrix {
 
 	/** inclusive */

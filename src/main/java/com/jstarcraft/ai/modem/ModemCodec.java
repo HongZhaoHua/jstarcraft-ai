@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.jstarcraft.ai.model.exception.ModelException;
+import com.jstarcraft.ai.modem.exception.ModemException;
 import com.jstarcraft.core.codec.ContentCodec;
 import com.jstarcraft.core.codec.CsvContentCodec;
 import com.jstarcraft.core.codec.JsonContentCodec;
@@ -28,12 +28,12 @@ import com.jstarcraft.core.utility.StringUtility;
 import com.jstarcraft.core.utility.TypeUtility;
 
 /**
- * 模式编解码
+ * 调制解调编解码
  * 
  * @author Birdy
  *
  */
-public enum ModelCodec {
+public enum ModemCodec {
 
 	CSV(CsvContentCodec.class),
 
@@ -51,20 +51,20 @@ public enum ModelCodec {
 
 	private final ContentCodec codec;
 
-	ModelCodec(Class<? extends ContentCodec> mode) {
+	ModemCodec(Class<? extends ContentCodec> mode) {
 		try {
 			this.codecConstructor = mode.getDeclaredConstructor(CodecDefinition.class);
 			this.codecConstructor.setAccessible(true);
 			Collection<Type> classes = new LinkedList<>();
-			classes.add(ModelData.class);
+			classes.add(ModemData.class);
 			CodecDefinition definition = CodecDefinition.instanceOf(classes);
 			this.codec = codecConstructor.newInstance(definition);
 		} catch (Exception exception) {
-			throw new ModelException(exception);
+			throw new ModemException(exception);
 		}
 	}
 
-	private ModelData saveModel(Object model) {
+	private ModemData saveModel(Object model) {
 		try {
 			Class<?> clazz = model.getClass();
 			JavaType java = factory.constructType(clazz);
@@ -85,49 +85,49 @@ public enum ModelCodec {
 					valueData = codec.encode(clazz, model);
 				} else {
 					size = Array.getLength(model);
-					ModelData[] datas = new ModelData[size];
+					ModemData[] datas = new ModemData[size];
 					for (int index = 0; index < size; index++) {
 						Object element = Array.get(model, index);
 						datas[index] = saveModel(element);
 					}
-					valueData = codec.encode(ModelData[].class, datas);
+					valueData = codec.encode(ModemData[].class, datas);
 				}
 			} else if (Collection.class.isAssignableFrom(clazz)) {
 				// 处理集合类型
 				Collection<?> collection = Collection.class.cast(model);
 				size = collection.size();
-				ModelData[] datas = new ModelData[size];
+				ModemData[] datas = new ModemData[size];
 				int index = 0;
 				for (Object element : collection) {
 					datas[index++] = saveModel(element);
 				}
-				valueData = codec.encode(ModelData[].class, datas);
+				valueData = codec.encode(ModemData[].class, datas);
 			} else if (Map.class.isAssignableFrom(clazz)) {
 				// 处理映射类型
 				Map<Object, Object> map = Map.class.cast(model);
 				size = map.size() * 2;
-				ModelData[] datas = new ModelData[size];
+				ModemData[] datas = new ModemData[size];
 				int index = 0;
 				for (Entry<Object, Object> element : map.entrySet()) {
 					datas[index++] = saveModel(element.getKey());
 					datas[index++] = saveModel(element.getValue());
 				}
-				valueData = codec.encode(ModelData[].class, datas);
+				valueData = codec.encode(ModemData[].class, datas);
 			} else {
-				if (model instanceof ModelCycle) {
-					ModelCycle.class.cast(model).beforeSave();
+				if (model instanceof ModemCycle) {
+					ModemCycle.class.cast(model).beforeSave();
 				}
-				ModelDefinition annotation = clazz.getAnnotation(ModelDefinition.class);
+				ModemDefinition annotation = clazz.getAnnotation(ModemDefinition.class);
 				if (annotation != null) {
 					size = annotation.value().length;
-					ModelData[] datas = new ModelData[size];
+					ModemData[] datas = new ModemData[size];
 					int index = 0;
 					for (String name : annotation.value()) {
 						Field field = ReflectionUtility.findField(clazz, name);
 						field.setAccessible(true);
 						datas[index++] = saveModel(field.get(model));
 					}
-					valueData = codec.encode(ModelData[].class, datas);
+					valueData = codec.encode(ModemData[].class, datas);
 				} else {
 					Collection<Type> classes = new LinkedList<>();
 					classes.add(clazz);
@@ -137,15 +137,15 @@ public enum ModelCodec {
 				}
 			}
 
-			ModelData content = new ModelData(keyData, valueData, size);
+			ModemData content = new ModemData(keyData, valueData, size);
 			return content;
 		} catch (Exception exception) {
 			logger.error(name(), exception);
-			throw new ModelException(exception);
+			throw new ModemException(exception);
 		}
 	}
 
-	private Object loadModel(ModelData content) {
+	private Object loadModel(ModemData content) {
 		try {
 			byte[] keyData = content.getKeyData();
 			byte[] valueData = content.getValueData();
@@ -167,7 +167,7 @@ public enum ModelCodec {
 					return array;
 				} else {
 					Object array = Array.newInstance(clazz.getComponentType(), size);
-					ModelData[] datas = (ModelData[]) codec.decode(ModelData[].class, valueData);
+					ModemData[] datas = (ModemData[]) codec.decode(ModemData[].class, valueData);
 					for (int index = 0; index < size; index++) {
 						Object element = loadModel(datas[index]);
 						Array.set(array, index, element);
@@ -177,7 +177,7 @@ public enum ModelCodec {
 			} else if (Collection.class.isAssignableFrom(clazz)) {
 				// 处理集合类型
 				Collection<Object> collection = Collection.class.cast(clazz.newInstance());
-				ModelData[] datas = (ModelData[]) codec.decode(ModelData[].class, valueData);
+				ModemData[] datas = (ModemData[]) codec.decode(ModemData[].class, valueData);
 				for (int index = 0; index < size; index++) {
 					Object element = loadModel(datas[index]);
 					collection.add(element);
@@ -186,7 +186,7 @@ public enum ModelCodec {
 			} else if (Map.class.isAssignableFrom(clazz)) {
 				// 处理映射类型
 				Map<Object, Object> map = Map.class.cast(clazz.newInstance());
-				ModelData[] datas = (ModelData[]) codec.decode(ModelData[].class, valueData);
+				ModemData[] datas = (ModemData[]) codec.decode(ModemData[].class, valueData);
 				for (int index = 0; index < size;) {
 					Object key = loadModel(datas[index++]);
 					Object value = loadModel(datas[index++]);
@@ -194,13 +194,13 @@ public enum ModelCodec {
 				}
 				return map;
 			} else {
-				ModelDefinition annotation = clazz.getAnnotation(ModelDefinition.class);
+				ModemDefinition annotation = clazz.getAnnotation(ModemDefinition.class);
 				Object model = null;
 				if (annotation != null) {
 					Constructor<?> constructor = clazz.getDeclaredConstructor();
 					constructor.setAccessible(true);
 					model = constructor.newInstance();
-					ModelData[] datas = (ModelData[]) codec.decode(ModelData[].class, valueData);
+					ModemData[] datas = (ModemData[]) codec.decode(ModemData[].class, valueData);
 					int index = 0;
 					for (String name : annotation.value()) {
 						Field field = ReflectionUtility.findField(clazz, name);
@@ -214,24 +214,24 @@ public enum ModelCodec {
 					ContentCodec codec = codecConstructor.newInstance(definition);
 					model = codec.decode(clazz, valueData);
 				}
-				if (model instanceof ModelCycle) {
-					ModelCycle.class.cast(model).afterLoad();
+				if (model instanceof ModemCycle) {
+					ModemCycle.class.cast(model).afterLoad();
 				}
 				return model;
 			}
 		} catch (Exception exception) {
 			logger.error(name(), exception);
-			throw new ModelException(exception);
+			throw new ModemException(exception);
 		}
 	}
 
 	public byte[] encodeModel(Object model) {
-		ModelData data = saveModel(model);
-		return codec.encode(ModelData.class, data);
+		ModemData data = saveModel(model);
+		return codec.encode(ModemData.class, data);
 	}
 
 	public Object decodeModel(byte[] content) {
-		ModelData data = (ModelData) codec.decode(ModelData.class, content);
+		ModemData data = (ModemData) codec.decode(ModemData.class, content);
 		return loadModel(data);
 	}
 

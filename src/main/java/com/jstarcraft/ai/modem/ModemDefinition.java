@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.model;
+package com.jstarcraft.ai.modem;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -7,7 +7,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 模型定义
+ * 调制解调定义
  * 
  * @author Birdy
  *
@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ModelDefinition {
+public @interface ModemDefinition {
 
 	String[] value();
 

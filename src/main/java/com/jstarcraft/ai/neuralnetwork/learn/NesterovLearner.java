@@ -10,8 +10,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.ModelCycle;
-import com.jstarcraft.ai.model.ModelDefinition;
+import com.jstarcraft.ai.modem.ModemCycle;
+import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.ai.neuralnetwork.schedule.ConstantSchedule;
 import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
 
@@ -25,8 +25,8 @@ import com.jstarcraft.ai.neuralnetwork.schedule.Schedule;
  * @author Birdy
  *
  */
-@ModelDefinition(value = { "learnSchedule", "momentumSchedule" })
-public class NesterovLearner implements Learner, ModelCycle {
+@ModemDefinition(value = { "learnSchedule", "momentumSchedule" })
+public class NesterovLearner implements Learner, ModemCycle {
 
 	public static final float DEFAULT_NESTEROV_LEARN_RATE = 0.1F;
 	public static final float DEFAULT_NESTEROV_MOMENTUM = 0.9F;
