@@ -12,7 +12,7 @@ import com.jstarcraft.ai.neuralnetwork.learn.RmsPropLearner;
 public class RmsPropLearnerTestCase extends LearnerTestCase {
 
 	@Override
-	protected GradientUpdater<?> getOldFunction(int[] shape) {
+	protected GradientUpdater<?> getOldFunction(long[] shape) {
 		RmsProp configuration = new RmsProp();
 		GradientUpdater<?> oldFunction = new RmsPropUpdater(configuration);
 		int length = (int) (shape[0] * configuration.stateSize(shape[1]));
@@ -22,7 +22,7 @@ public class RmsPropLearnerTestCase extends LearnerTestCase {
 	}
 
 	@Override
-	protected Learner getNewFunction(int[] shape) {
+	protected Learner getNewFunction(long[] shape) {
 		Learner newFuction = new RmsPropLearner();
 		return newFuction;
 	}

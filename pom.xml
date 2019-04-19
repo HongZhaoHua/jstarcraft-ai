@@ -55,16 +55,16 @@
 		<dependency>
 			<groupId>org.deeplearning4j</groupId>
 			<artifactId>deeplearning4j-core</artifactId>
-			<version>1.0.0-alpha</version>
+			<version>1.0.0-beta3</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.nd4j</groupId>
 			<artifactId>nd4j-native-platform</artifactId>
-			<version>1.0.0-alpha</version>
+			<version>1.0.0-beta3</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.0-platform</artifactId> <version>1.0.0-alpha</version> </dependency> -->
+		<!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <version>1.0.0-beta3</version> </dependency> -->
 
 		<!-- Test框架依赖 -->
 		<dependency>

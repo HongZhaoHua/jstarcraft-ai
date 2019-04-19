@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 
 import org.deeplearning4j.nn.gradient.Gradient;
 import org.deeplearning4j.nn.layers.AbstractLayer;
+import org.deeplearning4j.nn.workspace.LayerWorkspaceMgr;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,9 +15,9 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.primitives.Pair;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
-import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
+import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.model.ModelCodec;
@@ -58,6 +59,7 @@ public abstract class LayerTestCase {
 	@Test
 	public void testPropagate() throws Exception {
 		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		LayerWorkspaceMgr space = LayerWorkspaceMgr.noWorkspacesImmutable();
 		Future<?> task = context.doTask(() -> {
 			INDArray array = getData();
 			MathCache cache = new DenseCache();
@@ -72,8 +74,8 @@ public abstract class LayerTestCase {
 			}
 
 			// 正向传播
-			oldFunction.setInput(array);
-			INDArray value = oldFunction.activate(true);
+			oldFunction.setInput(array, space);
+			INDArray value = oldFunction.activate(true, space);
 			newVertex.doForward();
 			KeyValue<MathMatrix, MathMatrix> output = newVertex.getOutputKeyValue();
 			System.out.println(value);
@@ -82,7 +84,7 @@ public abstract class LayerTestCase {
 
 			// 反向传播
 			INDArray previousEpsilon = getError();
-			Pair<Gradient, INDArray> keyValue = oldFunction.backpropGradient(previousEpsilon);
+			Pair<Gradient, INDArray> keyValue = oldFunction.backpropGradient(previousEpsilon, space);
 			INDArray nextEpsilon = keyValue.getValue();
 			output.getValue().copyMatrix(getMatrix(previousEpsilon), false);
 			newVertex.doBackward();

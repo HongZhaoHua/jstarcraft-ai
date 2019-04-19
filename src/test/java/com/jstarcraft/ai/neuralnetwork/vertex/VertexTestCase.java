@@ -3,6 +3,7 @@ package com.jstarcraft.ai.neuralnetwork.vertex;
 import java.util.concurrent.Future;
 
 import org.deeplearning4j.nn.graph.vertex.GraphVertex;
+import org.deeplearning4j.nn.workspace.LayerWorkspaceMgr;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
@@ -49,6 +50,7 @@ public abstract class VertexTestCase {
 	@Test
 	public void testPropagate() throws Exception {
 		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		LayerWorkspaceMgr space = LayerWorkspaceMgr.noWorkspacesImmutable();
 		Future<?> task = context.doTask(() -> {
 			int size = getSize();
 
@@ -72,7 +74,7 @@ public abstract class VertexTestCase {
 
 			// 正向传播
 			oldFunction.setInputs(arrays);
-			INDArray value = oldFunction.doForward(true);
+			INDArray value = oldFunction.doForward(true, space);
 			newFuction.doForward();
 			KeyValue<MathMatrix, MathMatrix> output = newFuction.getOutputKeyValue();
 			System.out.println(value);
@@ -82,7 +84,7 @@ public abstract class VertexTestCase {
 			// 反向传播
 			INDArray epsilon = getError();
 			oldFunction.setEpsilon(epsilon);
-			INDArray[] epsilons = oldFunction.doBackward(false).getValue();
+			INDArray[] epsilons = oldFunction.doBackward(false, space).getValue();
 			output.getValue().copyMatrix(getMatrix(epsilon), false);
 			newFuction.doBackward();
 			for (int index = 0; index < size; index++) {

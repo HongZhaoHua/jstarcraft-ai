@@ -40,15 +40,15 @@ public abstract class LearnerTestCase {
 		return true;
 	}
 
-	protected abstract GradientUpdater<?> getOldFunction(int[] shape);
+	protected abstract GradientUpdater<?> getOldFunction(long[] shape);
 
-	protected abstract Learner getNewFunction(int[] shape);
+	protected abstract Learner getNewFunction(long[] shape);
 
 	@Test
 	public void testGradient() throws Exception {
 		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
 		Future<?> task = context.doTask(() -> {
-			int[] shape = { 5, 2 };
+			long[] shape = { 5L, 2L };
 			INDArray array = Nd4j.linspace(-2.5D, 2.0D, 10).reshape(shape);
 			GradientUpdater<?> oldFunction = getOldFunction(shape);
 			DenseMatrix gradient = getMatrix(array);
@@ -72,7 +72,7 @@ public abstract class LearnerTestCase {
 
 	@Test
 	public void testModel() {
-		int[] shape = { 5, 2 };
+		long[] shape = { 5L, 2L };
 		Learner oldModel = getNewFunction(shape);
 		for (ModelCodec codec : ModelCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);

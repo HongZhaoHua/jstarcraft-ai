@@ -52,19 +52,19 @@ public class Nd4jVector implements MathVector, ModelCycle {
 		if (vector.rank() != 1) {
 			new IllegalArgumentException();
 		}
-		this.size = vector.length();
+		this.size = (int) vector.length();
 		this.order = vector.ordering();
 		this.vector = vector;
 	}
 
 	@Override
 	public int getElementSize() {
-		return vector.length();
+		return size;
 	}
 
 	@Override
 	public int getKnownSize() {
-		return vector.length();
+		return size;
 	}
 
 	@Override
@@ -74,7 +74,6 @@ public class Nd4jVector implements MathVector, ModelCycle {
 
 	@Override
 	public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
-		int size = vector.length();
 		switch (mode) {
 		case SERIAL: {
 			Nd4jVectorScalar scalar = new Nd4jVectorScalar();
@@ -405,7 +404,7 @@ public class Nd4jVector implements MathVector, ModelCycle {
 
 	private class Nd4jVectorIterator implements Iterator<VectorScalar> {
 
-		private int index = 0, size = vector.length();
+		private int index = 0;
 
 		private final Nd4jVectorScalar term = new Nd4jVectorScalar();
 

@@ -12,7 +12,7 @@ import com.jstarcraft.ai.neuralnetwork.learn.Learner;
 public class AdaMaxLearnerTestCase extends LearnerTestCase {
 
 	@Override
-	protected GradientUpdater<?> getOldFunction(int[] shape) {
+	protected GradientUpdater<?> getOldFunction(long[] shape) {
 		AdaMax configuration = new AdaMax();
 		GradientUpdater<?> oldFunction = new AdaMaxUpdater(configuration);
 		int length = (int) (shape[0] * configuration.stateSize(shape[1]));
@@ -22,7 +22,7 @@ public class AdaMaxLearnerTestCase extends LearnerTestCase {
 	}
 
 	@Override
-	protected Learner getNewFunction(int[] shape) {
+	protected Learner getNewFunction(long[] shape) {
 		Learner newFuction = new AdaMaxLearner();
 		return newFuction;
 	}

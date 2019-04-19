@@ -12,7 +12,7 @@ import com.jstarcraft.ai.neuralnetwork.learn.NesterovLearner;
 public class NesterovLearnerTestCase extends LearnerTestCase {
 
 	@Override
-	protected GradientUpdater<?> getOldFunction(int[] shape) {
+	protected GradientUpdater<?> getOldFunction(long[] shape) {
 		Nesterovs configuration = new Nesterovs();
 		GradientUpdater<?> oldFunction = new NesterovsUpdater(configuration);
 		int length = (int) (shape[0] * configuration.stateSize(shape[1]));
@@ -22,7 +22,7 @@ public class NesterovLearnerTestCase extends LearnerTestCase {
 	}
 
 	@Override
-	protected Learner getNewFunction(int[] shape) {
+	protected Learner getNewFunction(long[] shape) {
 		Learner newFuction = new NesterovLearner();
 		return newFuction;
 	}

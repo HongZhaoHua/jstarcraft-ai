@@ -37,6 +37,8 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 
 	private int columnSize;
 
+	private int size;
+
 	private char order;
 
 	private float[] data;
@@ -52,18 +54,19 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 		}
 		this.rowSize = matrix.rows();
 		this.columnSize = matrix.columns();
+		this.size = rowSize * columnSize;
 		this.order = matrix.ordering();
 		this.matrix = matrix;
 	}
 
 	@Override
 	public int getElementSize() {
-		return matrix.length();
+		return size;
 	}
 
 	@Override
 	public int getKnownSize() {
-		return matrix.length();
+		return size;
 	}
 
 	@Override
@@ -647,8 +650,6 @@ public class Nd4jMatrix implements MathMatrix, ModelCycle {
 	}
 
 	private class Nd4jMatrixIterator implements Iterator<MatrixScalar> {
-
-		private int size = matrix.length();
 
 		private int cursor = 0;
 
