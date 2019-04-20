@@ -7,6 +7,13 @@ JStarCraft AI
 
 **JStarCraft AI是一个机器学习的轻量级框架,目标是为其它人工智能系统提供必要的基础特性.遵循Apache 2.0协议.**
 
+在学术界,绝大多数研究人员使用的编程语言是Python.
+在工业界,绝大多数开发人员使用的编程语言是Java.
+
+JStarCraft AI愿景是作为在学术界与工业界从事机器学习研发的相关人员的桥梁.
+
+JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已经组件化.
+
 |作者|洪钊桦|
 |---|---
 |E-mail|110399057@qq.com, jstarcraft@gmail.com
@@ -32,7 +39,7 @@ JStarCraft AI
 * 3.数学(math)
     * 算法(algorithm)
         * 分解
-        * 分布
+        * 概率
         * 相似度
     * 数据结构(structure)
         * 矩阵
