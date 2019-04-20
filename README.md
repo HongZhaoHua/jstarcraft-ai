@@ -52,13 +52,19 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 标量
 * 4.调制解调(modem)
 * 5.[模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
-    * 神经网络(neutralnetwork)
+    * 线性模型(linear)
+    * 近邻模型(nearest neighbor)
+    * 神经网络模型(neutral network)
         * 计算图
             * 节点
             * 层
         * 正向传播与反向传播
         * 激活函数
         * 梯度更新
+    * 概率图模型(probabilistic graphical)
+    * 规则模型(rule)
+    * 支持向量机模型(support vector machine)
+    * 树模型(tree)
 * 6.优化(optimization)
     * 梯度下降法(gradient descent)
         * 批量梯度下降
