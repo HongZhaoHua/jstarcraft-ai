@@ -27,7 +27,7 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
 *****
 
 ## JStarCraft AI特性
-* 1.数据(data)
+* 1.[数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%95%B0%E6%8D%AE)
     * 属性与特征
         * 连续
         * 离散
@@ -51,7 +51,7 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 向量
         * 标量
 * 4.调制解调(modem)
-* 5.模型(model)
+* 5.[模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
     * 神经网络(neutralnetwork)
         * 计算图
             * 节点
@@ -70,10 +70,10 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 遗传算法
         * 蚁群算法
         * 粒子群算法
-* 7.有监督学习(supervised)
+* 7.[有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 分类
     * 回归
-* 8.无监督学习(unsupervised)
+* 8.[无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 聚类
     * 关联
 * 9.工具(utility)
