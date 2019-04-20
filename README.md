@@ -65,7 +65,7 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 随机梯度下降
     * 牛顿法和拟牛顿法(newton method/quasi newton method)
     * 共轭梯度法(conjugate gradient)
-    * 试探法(heuristics)
+    * [试探法(heuristics)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
         * 模拟退火算法
         * 遗传算法
         * 蚁群算法
