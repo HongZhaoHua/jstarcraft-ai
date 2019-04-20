@@ -43,26 +43,37 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 分解
         * 概率
         * 相似度
+        * 损失函数
     * 数据结构(structure)
         * 矩阵
         * 表
         * 张量
         * 向量
         * 标量
-* 4.模型(model)-序列化与反序列化
-* 5.神经网络(neutralnetwork)
-    * 计算图
-        * 节点
-        * 层
-    * 正向传播与反向传播
-    * 学习器
-    * 优化器
-    * 激活函数
-    * 损失函数
-* 6.有监督学习(supervised)
+* 4.调制解调(modem)
+* 5.模型(model)
+    * 神经网络(neutralnetwork)
+        * 计算图
+            * 节点
+            * 层
+        * 正向传播与反向传播
+        * 激活函数
+        * 梯度更新
+* 6.优化(optimization)
+    * 梯度下降法(gradient descent)
+        * 批量梯度下降
+        * 随机梯度下降
+    * 牛顿法和拟牛顿法(newton method/quasi newton method)
+    * 共轭梯度法(conjugate gradient)
+    * 试探法(heuristics)
+        * 模拟退火算法
+        * 遗传算法
+        * 蚁群算法
+        * 粒子群算法
+* 7.有监督学习(supervised)
     * 分类
     * 回归
-* 7.无监督学习(unsupervised)
+* 8.无监督学习(unsupervised)
     * 聚类
     * 关联
-* 8.工具(utility)
+* 9.工具(utility)
