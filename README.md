@@ -33,9 +33,11 @@ JStarCraft AI是面向服务架构(SOA)的机器学习框架,所有模块都已�
         * 离散
     * 模块与实例
     * 选择,排序与切割
-* 2.环境(environment)-多线程与硬件加速
-    * CPU
-    * GPU
+* 2.环境(environment)
+    * 串行计算
+    * 并行计算
+    * CPU计算
+    * GPU计算
 * 3.数学(math)
     * 算法(algorithm)
         * 分解
