@@ -1,5 +1,11 @@
-全文检索与Lucene学习:
-http://blog.csdn.net/jiangsanfeng1111/article/details/48825493
+Lucene介绍与入门使用:
+https://www.cnblogs.com/xiaobai1226/p/7652093.html
+
+lucene原理及java实现:
+https://blog.csdn.net/liuhaiabc/article/details/52346493
+
+搜索引擎:
+https://www.cnblogs.com/leeSmall/category/1210814.html
 
 Lucene 原理与代码分析完整版:
 http://www.cnblogs.com/forfuture1978/category/300665.html
