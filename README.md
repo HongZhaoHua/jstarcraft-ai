@@ -24,7 +24,7 @@ JStarCraft AI
 *****
 
 ## JStarCraft AI特性
-* 1.[数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%95%B0%E6%8D%AE)
+* [1.数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%95%B0%E6%8D%AE)
     * 属性与特征
         * 连续
         * 离散
@@ -48,7 +48,7 @@ JStarCraft AI
         * 向量
         * 标量
 * 4.调制解调(modem)
-* 5.[模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
+* [5.模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
     * 线性模型(linear)
     * 近邻模型(nearest neighbor)
     * 神经网络模型(neutral network)
@@ -73,10 +73,10 @@ JStarCraft AI
         * 遗传算法
         * 蚁群算法
         * 粒子群算法
-* 7.[有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
+* [7.有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 分类
     * 回归
-* 8.[无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
+* [8.无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 聚类
     * 关联
 * 9.工具(utility)
