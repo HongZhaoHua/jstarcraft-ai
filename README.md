@@ -19,6 +19,7 @@ JStarCraft AI
 
 ## JStarCraft AI架构
 
+JStarCraft AI框架各个模块之间的关系:
 ![ai](https://github.com/HongZhaoHua/reference-document/blob/master/ai/JStarCraft%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A1%86%E6%9E%B6%E7%BB%84%E4%BB%B6%E5%9B%BE.png "JStarCraft AI架构")
 
 *****
