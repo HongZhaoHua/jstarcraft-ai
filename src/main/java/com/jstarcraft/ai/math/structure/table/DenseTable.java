@@ -9,6 +9,13 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCell;
 import com.jstarcraft.ai.math.structure.MathTable;
 
+/**
+ * 稠密表单
+ * 
+ * @author Birdy
+ *
+ * @param <T>
+ */
 public class DenseTable<T> implements MathTable<T> {
 
 	/** 方向(true为按行,false为按列) */

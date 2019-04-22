@@ -13,6 +13,13 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectMap.Entry;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectSortedMap;
 
+/**
+ * 稀疏表单
+ * 
+ * @author Birdy
+ *
+ * @param <T>
+ */
 public class SparseTable<T> implements MathTable<T> {
 
 	/** 大小 */
