@@ -42,12 +42,13 @@ JStarCraft AI框架各个模块之间的关系:
         * 概率
         * 相似度
         * 损失函数
-    * 数据结构(structure)
-        * 矩阵
-        * 表
-        * 张量
-        * 向量
+    * [数据结构(structure)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
         * 标量
+        * 向量
+        * 矩阵
+        * 张量
+        * 单元
+        * 表单
 * 4.调制解调(modem)
 * [5.模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
     * 线性模型(linear)
