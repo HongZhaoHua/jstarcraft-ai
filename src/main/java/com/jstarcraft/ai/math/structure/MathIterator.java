@@ -10,14 +10,14 @@ public interface MathIterator<T> extends Iterable<T> {
 	int getElementSize();
 
 	/**
-	 * 获取已知标量的数量
+	 * 获取已知标量/单元的数量
 	 * 
 	 * @return
 	 */
 	int getKnownSize();
 
 	/**
-	 * 获取未知标量的数量
+	 * 获取未知标量/单元的数量
 	 * 
 	 * @return
 	 */
