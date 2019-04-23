@@ -1,2 +1,5 @@
 距离和相似度度量方法:
 https://blog.csdn.net/pipisorry/article/details/45651315
+
+局部敏感哈希-Locality-Sensitive-Hashing-LSH:
+http://blog.rexking6.top/2018/10/09/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C-Locality-Sensitive-Hashing-LSH/
