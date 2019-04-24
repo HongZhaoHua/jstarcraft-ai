@@ -9,7 +9,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public class BinaryCosineSimilarity extends AbstractSimilarity {
+public class BinarySimilarity extends AbstractSimilarity {
 
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {

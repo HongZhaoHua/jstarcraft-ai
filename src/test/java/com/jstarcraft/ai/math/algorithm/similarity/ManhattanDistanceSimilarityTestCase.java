@@ -1,9 +1,6 @@
 package com.jstarcraft.ai.math.algorithm.similarity;
 
-import com.jstarcraft.ai.math.algorithm.similarity.BinaryCosineSimilarity;
-import com.jstarcraft.ai.math.algorithm.similarity.Similarity;
-
-public class BinaryCosineSimilarityTestCase extends AbstractSimilarityTestCase {
+public class ManhattanDistanceSimilarityTestCase extends AbstractSimilarityTestCase {
 
 	@Override
 	protected boolean checkCorrelation(float correlation) {
@@ -17,7 +14,7 @@ public class BinaryCosineSimilarityTestCase extends AbstractSimilarityTestCase {
 
 	@Override
 	protected Similarity getSimilarity() {
-		return new BinaryCosineSimilarity();
+		return new ManhattanDistanceSimilarity();
 	}
 
 }

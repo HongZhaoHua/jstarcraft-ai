@@ -7,7 +7,7 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
-public class EuclideanDistanceSimilarity extends AbstractSimilarity {
+public class ManhattanDistanceSimilarity extends AbstractSimilarity {
 
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
@@ -37,10 +37,10 @@ public class EuclideanDistanceSimilarity extends AbstractSimilarity {
 					leftTerm = leftIterator.next();
 					leftIndex++;
 				}
-				similarity += distance * distance;
+				similarity += FastMath.abs(distance);
 			}
 		}
-		return 1F / (scale + (float) FastMath.sqrt(similarity));
+		return 1F / (scale + similarity);
 	}
 
 }

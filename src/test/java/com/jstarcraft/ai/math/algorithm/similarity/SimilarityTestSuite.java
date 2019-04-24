@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 		// 相似度测试集
-		BinaryCosineSimilarityTestCase.class,
+		BinarySimilarityTestCase.class,
 
 		CosineSimilarityTestCase.class,
 
@@ -15,17 +15,21 @@ import org.junit.runners.Suite.SuiteClasses;
 
 		DiceCoefficientSimilarityTestCase.class,
 
-		TanimotoSimilarityTestCase.class,
+		EuclideanDistanceSimilarityTestCase.class,
 
 		JaccardSimilarityTestCase.class,
 
 		KRCCSimilarityTestCase.class,
+		
+		ManhattanDistanceSimilarityTestCase.class,
 
 		MSDSimilarityTestCase.class,
 
 		MSESimilarityTestCase.class,
 
-		PCCSimilarityTestCase.class })
+		PCCSimilarityTestCase.class,
+		
+		TanimotoSimilarityTestCase.class})
 public class SimilarityTestSuite {
 
 }
