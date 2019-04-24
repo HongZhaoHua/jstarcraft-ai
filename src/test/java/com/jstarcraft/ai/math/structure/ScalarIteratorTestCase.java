@@ -15,6 +15,7 @@ import com.jstarcraft.ai.math.structure.message.SumMessage;
 import com.jstarcraft.ai.math.structure.message.VarianceMessage;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
@@ -117,7 +118,7 @@ public class ScalarIteratorTestCase {
 			message.accumulateValue(scalar.getValue());
 		});
 
-		KeyValue<Float, Float> keyValue = matrix.getVariance();
+		Float2FloatKeyValue keyValue = matrix.getVariance();
 
 		Assert.assertEquals("平均值比较", message.getMean(), keyValue.getKey(), MathUtility.EPSILON);
 		Assert.assertEquals("方差值比较", message.getValue(), keyValue.getValue(), MathUtility.EPSILON);

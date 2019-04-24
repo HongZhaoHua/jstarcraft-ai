@@ -8,12 +8,12 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.core.utility.KeyValue;
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 
 public abstract class AbstractSimilarity implements Similarity {
 
-	protected final List<KeyValue<Float, Float>> getScoreList(MathVector leftVector, MathVector rightVector) {
-		LinkedList<KeyValue<Float, Float>> scoreList = new LinkedList<>();
+	protected final List<Float2FloatKeyValue> getScoreList(MathVector leftVector, MathVector rightVector) {
+		LinkedList<Float2FloatKeyValue> scoreList = new LinkedList<>();
 		int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 		if (leftSize != 0 && rightSize != 0) {
 			Iterator<VectorScalar> leftIterator = leftVector.iterator();
@@ -23,7 +23,7 @@ public abstract class AbstractSimilarity implements Similarity {
 			// 判断两个有序数组中是否存在相同的数字
 			while (leftIndex < leftSize && rightIndex < rightSize) {
 				if (leftTerm.getIndex() == rightTerm.getIndex()) {
-					scoreList.add(new KeyValue<>(leftTerm.getValue(), rightTerm.getValue()));
+					scoreList.add(new Float2FloatKeyValue(leftTerm.getValue(), rightTerm.getValue()));
 					leftTerm = leftIterator.next();
 					rightTerm = rightIterator.next();
 					leftIndex++;

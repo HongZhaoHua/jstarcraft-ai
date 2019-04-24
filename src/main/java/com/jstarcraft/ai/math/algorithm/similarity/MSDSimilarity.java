@@ -3,7 +3,7 @@ package com.jstarcraft.ai.math.algorithm.similarity;
 import java.util.List;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.core.utility.KeyValue;
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 
 /**
  * Mean Squared Difference相似度
@@ -13,12 +13,12 @@ import com.jstarcraft.core.utility.KeyValue;
  */
 public class MSDSimilarity extends AbstractSimilarity {
 
-	private float getSimilarity(int count, List<KeyValue<Float, Float>> scoreList) {
+	private float getSimilarity(int count, List<Float2FloatKeyValue> scoreList) {
 		if (count == 0) {
 			return Float.NaN;
 		}
 		float sum = 0F;
-		for (KeyValue<Float, Float> term : scoreList) {
+		for (Float2FloatKeyValue term : scoreList) {
 			sum += Math.pow(term.getKey() - term.getValue(), 2);
 		}
 		float similarity = count / sum;
@@ -31,7 +31,7 @@ public class MSDSimilarity extends AbstractSimilarity {
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
 		// compute similarity
-		List<KeyValue<Float, Float>> scoreList = getScoreList(leftVector, rightVector);
+		List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
 		int count = scoreList.size();
 		float similarity = getSimilarity(count, scoreList);
 		// shrink to account for vector size

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.core.utility.KeyValue;
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 
 /**
  * Kendall Rank Correlation相似度
@@ -14,14 +14,14 @@ import com.jstarcraft.core.utility.KeyValue;
  */
 public class KRCCSimilarity extends AbstractSimilarity {
 
-	private float getSimilarity(int count, List<KeyValue<Float, Float>> scoreList) {
+	private float getSimilarity(int count, List<Float2FloatKeyValue> scoreList) {
 		if (count < 2) {
 			return Float.NaN;
 		}
 		float sum = 0F;
-		Iterator<KeyValue<Float, Float>> iterator = scoreList.iterator();
-		KeyValue<Float, Float> previousTerm = iterator.next();
-		KeyValue<Float, Float> nextTerm = null;
+		Iterator<Float2FloatKeyValue> iterator = scoreList.iterator();
+		Float2FloatKeyValue previousTerm = iterator.next();
+		Float2FloatKeyValue nextTerm = null;
 		while (iterator.hasNext()) {
 			nextTerm = iterator.next();
 			float leftDelta = previousTerm.getKey() - nextTerm.getKey();
@@ -37,7 +37,7 @@ public class KRCCSimilarity extends AbstractSimilarity {
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
 		// compute similarity
-		List<KeyValue<Float, Float>> scoreList = getScoreList(leftVector, rightVector);
+		List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
 		int count = scoreList.size();
 		float similarity = getSimilarity(count, scoreList);
 		// shrink to account for vector size

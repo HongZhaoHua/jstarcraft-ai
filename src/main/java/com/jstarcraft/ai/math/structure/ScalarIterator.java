@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
 
 import org.apache.commons.math3.util.FastMath;
 
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
@@ -202,7 +203,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
 	 * 
 	 * @return
 	 */
-	default KeyValue<Float, Float> getVariance() {
+	default Float2FloatKeyValue getVariance() {
 		// TODO 此处对称矩阵可能会存在错误,需要Override
 		float mean = Float.NaN;
 		float variance = Float.NaN;
@@ -223,7 +224,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
 			mean += delta / size;
 			variance += delta * (value - mean);
 		}
-		return new KeyValue<>(mean, variance);
+		return new Float2FloatKeyValue(mean, variance);
 	}
 
 	/**

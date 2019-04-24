@@ -6,7 +6,7 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.core.utility.KeyValue;
+import com.jstarcraft.ai.utility.Float2FloatKeyValue;
 
 /**
  * Constrained Pearson Correlation相似度
@@ -34,13 +34,13 @@ public class CPCSimilarity extends AbstractSimilarity {
 		return super.makeSimilarityMatrix(trainMatrix, transpose, scale);
 	}
 
-	private float getSimilarity(int count, List<KeyValue<Float, Float>> scoreList) {
+	private float getSimilarity(int count, List<Float2FloatKeyValue> scoreList) {
 		// compute similarity
 		if (count == 0) {
 			return Float.NaN;
 		}
 		double power = 0D, leftPower = 0D, rightPower = 0D;
-		for (KeyValue<Float, Float> term : scoreList) {
+		for (Float2FloatKeyValue term : scoreList) {
 			double leftDelta = term.getKey() - median;
 			double rightDelta = term.getValue() - median;
 			power += leftDelta * rightDelta;
@@ -53,7 +53,7 @@ public class CPCSimilarity extends AbstractSimilarity {
 	@Override
 	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
 		// compute similarity
-		List<KeyValue<Float, Float>> scoreList = getScoreList(leftVector, rightVector);
+		List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
 		int count = scoreList.size();
 		float similarity = getSimilarity(count, scoreList);
 		// shrink to account for vector size
