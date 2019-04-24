@@ -3,3 +3,15 @@ https://blog.csdn.net/pipisorry/article/details/45651315
 
 局部敏感哈希-Locality-Sensitive-Hashing-LSH:
 http://blog.rexking6.top/2018/10/09/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C-Locality-Sensitive-Hashing-LSH/
+
+深入浅出LSH
+http://www.cppblog.com/humanchao/archive/2018/02/24/215521.html
+
+通过找到一些hash functions，使得经过它们的哈希映射变换后，就可以使原始空间中相邻的数据落入相同的桶内，那具有怎样特点的hash function才能够使得原本相邻的两个数据点经过hash变换后会落入相同的桶内？
+https://blog.csdn.net/aspirinvagrant/article/details/41284491
+
+海量数据相似度计算之simhash和海明距离:
+http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html
+
+使用SimHash进行海量文本去重:
+https://www.cnblogs.com/maybe2030/p/5203186.html
