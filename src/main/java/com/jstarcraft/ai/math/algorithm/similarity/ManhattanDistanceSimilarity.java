@@ -7,6 +7,16 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
+/**
+ * Manhattan Distance相似度
+ * 
+ * <pre>
+ * Manhattan Distance(曼哈顿距离)
+ * </pre>
+ * 
+ * @author Birdy
+ *
+ */
 public class ManhattanDistanceSimilarity extends AbstractSimilarity {
 
 	@Override

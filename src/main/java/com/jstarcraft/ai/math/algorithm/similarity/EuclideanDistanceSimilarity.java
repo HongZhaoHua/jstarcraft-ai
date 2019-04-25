@@ -7,6 +7,16 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
+/**
+ * Euclidean Distance相似度
+ * 
+ * <pre>
+ * Euclidean Distance(欧几里得距离)
+ * </pre>
+ * 
+ * @author Birdy
+ *
+ */
 public class EuclideanDistanceSimilarity extends AbstractSimilarity {
 
 	@Override
