@@ -1,6 +1,10 @@
 package com.jstarcraft.ai.math.algorithm.probability;
 
 import org.apache.commons.math3.distribution.AbstractIntegerDistribution;
+import org.apache.commons.math3.random.RandomGenerator;
+
+import com.jstarcraft.core.utility.ArrayUtility;
+import com.jstarcraft.core.utility.ReflectionUtility;
 
 /**
  * 离散概率分布
@@ -12,8 +16,9 @@ public class QualityProbability implements Probability<Integer> {
 
 	private final AbstractIntegerDistribution distribution;
 
-	public QualityProbability(AbstractIntegerDistribution distribution) {
-		this.distribution = distribution;
+	public QualityProbability(Class<? extends AbstractIntegerDistribution> clazz, RandomGenerator random, Object... parameters) {
+		parameters = ArrayUtility.insert(0, parameters, random);
+		this.distribution = ReflectionUtility.getInstance(clazz, parameters);
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.jstarcraft.ai.model.neuralnetwork.layer;
 
 import org.apache.commons.math3.distribution.NormalDistribution;
+import org.apache.commons.math3.random.Well19937c;
 
 import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
 import com.jstarcraft.ai.math.structure.MathCalculator;
@@ -29,7 +30,7 @@ public class GaussianNoiseZeroMasker implements Masker {
 	public void mask(MathMatrix matrix, int iteration, int epoch) {
 		float current = schedule.valueAt(iteration, epoch);
 
-		QuantityProbability probability = new QuantityProbability(new NormalDistribution(0F, current));
+		QuantityProbability probability = new QuantityProbability(NormalDistribution.class, new Well19937c(), 0F, current);
 		matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 			float value = scalar.getValue();
 			scalar.setValue(value + probability.sample().floatValue());

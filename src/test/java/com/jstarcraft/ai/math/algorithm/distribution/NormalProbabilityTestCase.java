@@ -26,7 +26,7 @@ public class NormalProbabilityTestCase extends ProbabilityTestCase {
 	protected Probability getNewFunction(long seed) {
 		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
 		NormalDistribution distribution = new NormalDistribution(random, 1D, 5D);
-		return new QuantityProbability(distribution);
+		return new QuantityProbability(NormalDistribution.class, new MersenneTwister(seed), 1D, 5D);
 	}
 
 	@Override

@@ -1,6 +1,10 @@
 package com.jstarcraft.ai.math.algorithm.probability;
 
 import org.apache.commons.math3.distribution.AbstractRealDistribution;
+import org.apache.commons.math3.random.RandomGenerator;
+
+import com.jstarcraft.core.utility.ArrayUtility;
+import com.jstarcraft.core.utility.ReflectionUtility;
 
 /**
  * 连续概率分布
@@ -12,8 +16,9 @@ public class QuantityProbability implements Probability<Double> {
 
 	private final AbstractRealDistribution distribution;
 
-	public QuantityProbability(AbstractRealDistribution distribution) {
-		this.distribution = distribution;
+	public QuantityProbability(Class<? extends AbstractRealDistribution> clazz, RandomGenerator random, Object... parameters) {
+		parameters = ArrayUtility.insert(0, parameters, random);
+		this.distribution = ReflectionUtility.getInstance(clazz, parameters);
 	}
 
 	/**

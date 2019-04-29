@@ -2,8 +2,6 @@ package com.jstarcraft.ai.math.algorithm.distribution;
 
 import org.apache.commons.math3.distribution.BinomialDistribution;
 import org.apache.commons.math3.random.MersenneTwister;
-import org.apache.commons.math3.random.RandomGenerator;
-import org.apache.commons.math3.random.SynchronizedRandomGenerator;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.nd4j.linalg.api.rng.DefaultRandom;
@@ -24,9 +22,7 @@ public class BinomialProbabilityTestCase extends ProbabilityTestCase {
 
 	@Override
 	protected Probability getNewFunction(long seed) {
-		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
-		BinomialDistribution distribution = new BinomialDistribution(random, 10, 0.5D);
-		return new QualityProbability(distribution);
+		return new QualityProbability(BinomialDistribution.class, new MersenneTwister(seed), 10, 0.5D);
 	}
 
 	@Override
