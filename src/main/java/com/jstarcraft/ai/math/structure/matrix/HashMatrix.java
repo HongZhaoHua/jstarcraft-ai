@@ -14,8 +14,8 @@ import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.HashVector;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.ai.modem.ModemCycle;
 import com.jstarcraft.ai.modem.ModemDefinition;
@@ -33,6 +33,7 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 @ModemDefinition(value = { "orientation", "clazz", "keys", "values", "rowSize", "columnSize" })
 public class HashMatrix implements MathMatrix, ModemCycle {
 
+	/** 方向(true为按行,false为按列) */
 	private boolean orientation;
 
 	private String clazz;
