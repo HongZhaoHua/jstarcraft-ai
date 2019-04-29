@@ -22,7 +22,7 @@ public class ZeroRuleClassifier implements Practicer, Predictor {
 	}
 
 	@Override
-	public void practice(DataModule module) {
+	public void practice(DataModule module, DataModule... contexts) {
 		float[] markSums = new float[dimension];
 		for (DataInstance instance : module) {
 			markSums[instance.getQualityMark()] += instance.getWeight();
@@ -37,7 +37,7 @@ public class ZeroRuleClassifier implements Practicer, Predictor {
 	}
 
 	@Override
-	public void predict(DataInstance instance) {
+	public void predict(DataInstance instance, DataInstance... contexts) {
 		instance.setQualityMark(quality);
 	}
 

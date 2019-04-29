@@ -14,8 +14,8 @@ public interface Predictor {
 	 * 预测
 	 * 
 	 * @param instance
-	 * @return
+	 * @param contexts
 	 */
-	void predict(DataInstance instance);
+	void predict(DataInstance instance, DataInstance... contexts);
 
 }

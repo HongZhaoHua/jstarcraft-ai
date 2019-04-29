@@ -16,7 +16,7 @@ public class ZeroRuleRegressor implements Practicer, Predictor {
 	private float quantity;
 
 	@Override
-	public void practice(DataModule module) {
+	public void practice(DataModule module, DataModule... contexts) {
 		float markSum = 0F;
 		float weightSum = 0F;
 		for (DataInstance instance : module) {
@@ -27,7 +27,7 @@ public class ZeroRuleRegressor implements Practicer, Predictor {
 	}
 
 	@Override
-	public void predict(DataInstance instance) {
+	public void predict(DataInstance instance, DataInstance... contexts) {
 		instance.setQuantityMark(quantity);
 	}
 
