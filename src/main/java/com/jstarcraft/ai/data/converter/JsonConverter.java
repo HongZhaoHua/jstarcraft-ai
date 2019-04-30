@@ -61,12 +61,12 @@ public class JsonConverter extends StreamConverter {
 					if (keyValue.getValue()) {
 						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
-						int feature = attribute.convertValue((Comparable) value);
+						int feature = attribute.convertData((Comparable) value);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
-						float feature = attribute.convertValue((Number) value);
+						float feature = attribute.convertData((Number) value);
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
@@ -91,12 +91,12 @@ public class JsonConverter extends StreamConverter {
 					if (keyValue.getValue()) {
 						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
-						int feature = attribute.convertValue((Comparable) value);
+						int feature = attribute.convertData((Comparable) value);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						value = ConversionUtility.convert(value, attribute.getType());
-						float feature = attribute.convertValue((Number) value);
+						float feature = attribute.convertData((Number) value);
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}

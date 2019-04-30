@@ -46,12 +46,12 @@ public class JdbcConverter extends AbstractConverter<ResultSet> {
 					if (keyValue.getValue()) {
 						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
-						int feature = attribute.convertValue((Comparable) data);
+						int feature = attribute.convertData((Comparable) data);
 						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					} else {
 						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
 						data = ConversionUtility.convert(data, attribute.getType());
-						float feature = attribute.convertValue((Number) data);
+						float feature = attribute.convertData((Number) data);
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
