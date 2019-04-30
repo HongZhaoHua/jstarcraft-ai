@@ -36,8 +36,8 @@ public class MemoryQuantityAttribute<T extends Number> implements QuantityAttrib
 	}
 
 	@Override
-	public synchronized float convertValue(T value) {
-		float feature = value.floatValue();
+	public synchronized float convertData(T data) {
+		float feature = data.floatValue();
 		if (feature > maximum) {
 			maximum = feature;
 		}

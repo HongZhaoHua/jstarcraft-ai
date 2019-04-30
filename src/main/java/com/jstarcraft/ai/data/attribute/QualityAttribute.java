@@ -14,10 +14,10 @@ public interface QualityAttribute<T extends Comparable<T>> extends DataAttribute
 	/**
 	 * 转换属性值
 	 * 
-	 * @param value
+	 * @param data
 	 * @return
 	 */
-	int convertValue(T value);
+	int convertData(T data);
 
 	int getSize();
 

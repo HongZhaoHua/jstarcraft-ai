@@ -68,12 +68,12 @@ public class RedisQualityAttribute<T extends Comparable<T>> implements QualityAt
 	}
 
 	@Override
-	public int convertValue(T value) {
-		Integer index = indexCache.get(value);
+	public int convertData(T data) {
+		Integer index = indexCache.get(data);
 		if (index == null) {
-			Number number = script.evalSha(Mode.READ_WRITE, indexSignature, ReturnType.INTEGER, Arrays.asList(indexKey, sizeKey), value);
+			Number number = script.evalSha(Mode.READ_WRITE, indexSignature, ReturnType.INTEGER, Arrays.asList(indexKey, sizeKey), data);
 			index = number.intValue();
-			indexCache.put(value, index);
+			indexCache.put(data, index);
 		}
 		return index;
 	}

@@ -36,11 +36,11 @@ public class MemoryQualityAttribute<T extends Comparable<T>> implements QualityA
 	}
 
 	@Override
-	public synchronized int convertValue(T value) {
-		int index = indexes.getOrDefault(value, -1);
+	public synchronized int convertData(T data) {
+		int index = indexes.getOrDefault(data, -1);
 		if (index == -1) {
 			index = indexes.size();
-			indexes.put(value, index);
+			indexes.put(data, index);
 		}
 		return index;
 	}

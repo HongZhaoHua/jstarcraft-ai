@@ -14,10 +14,10 @@ public interface QuantityAttribute<T extends Number> extends DataAttribute<T> {
 	/**
 	 * 转换属性值
 	 * 
-	 * @param value
+	 * @param data
 	 * @return
 	 */
-	float convertValue(T value);
+	float convertData(T data);
 
 	float getMaximum();
 

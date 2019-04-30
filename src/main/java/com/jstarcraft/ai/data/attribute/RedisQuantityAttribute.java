@@ -73,8 +73,8 @@ public class RedisQuantityAttribute<T extends Number> implements QuantityAttribu
 	}
 
 	@Override
-	public float convertValue(T value) {
-		float feature = value.floatValue();
+	public float convertData(T data) {
+		float feature = data.floatValue();
 		if (feature > maximumCache) {
 			Number number = script.evalSha(Mode.READ_WRITE, maximumSignature, ReturnType.INTEGER, Arrays.asList(maximumKey), feature);
 			maximumCache = number.floatValue();
