@@ -4,6 +4,7 @@ import com.jstarcraft.ai.data.DataAttribute;
 
 /**
  * 离散属性
+ * 
  * @author Birdy
  *
  * @param <T>
