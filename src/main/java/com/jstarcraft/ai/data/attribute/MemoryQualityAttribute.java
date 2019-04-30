@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.data.attribute;
 
+import it.unimi.dsi.fastutil.objects.Object2IntMap.Entry;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 /**
@@ -17,7 +18,7 @@ public class MemoryQualityAttribute<T extends Comparable<T>> implements QualityA
 	private Class<T> type;
 
 	/** 外部键-内部索引映射 */
-	private Object2IntOpenHashMap<Object> indexes;
+	private Object2IntOpenHashMap<T> indexes;
 
 	public MemoryQualityAttribute(String name, Class<T> type) {
 		this.name = name;
@@ -48,6 +49,16 @@ public class MemoryQualityAttribute<T extends Comparable<T>> implements QualityA
 	@Override
 	public int getSize() {
 		return indexes.size();
+	}
+
+	@Deprecated
+	// TODO 临时兼容性方法
+	public Object[] getDatas() {
+		Object[] datas = new Object[indexes.size()];
+		for(Entry<T> term : indexes.object2IntEntrySet()) {
+			datas[term.getIntValue()] = term.getKey();
+		}
+		return datas;
 	}
 
 }
