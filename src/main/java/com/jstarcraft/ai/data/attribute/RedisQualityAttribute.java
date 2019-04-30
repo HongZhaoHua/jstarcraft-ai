@@ -78,6 +78,7 @@ public class RedisQualityAttribute<T extends Comparable<T>> implements QualityAt
 		return index;
 	}
 
+	@Override
 	public int getSize() {
 		return (int) sizeAtomic.get();
 	}

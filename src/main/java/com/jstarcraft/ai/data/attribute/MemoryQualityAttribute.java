@@ -45,6 +45,7 @@ public class MemoryQualityAttribute<T extends Comparable<T>> implements QualityA
 		return index;
 	}
 
+	@Override
 	public int getSize() {
 		return indexes.size();
 	}
