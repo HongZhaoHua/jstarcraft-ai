@@ -22,12 +22,12 @@ public abstract class QuantityAttributeTestCase extends DataAttributeTestCase {
 		RandomUtility.shuffle(datas);
 		QuantityAttribute<Float> attribute = getQuantityAttribute();
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+			Assert.assertEquals(datas[index], attribute.convertData(datas[index]), 0F);
 		}
 		Assert.assertEquals(999F, attribute.getMaximum(), 0F);
 		Assert.assertEquals(0F, attribute.getMinimum(), 0F);
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+			Assert.assertEquals(datas[index], attribute.convertData(datas[index]), 0F);
 		}
 		Assert.assertEquals(999F, attribute.getMaximum(), 0F);
 		Assert.assertEquals(0F, attribute.getMinimum(), 0F);
@@ -51,7 +51,7 @@ public abstract class QuantityAttributeTestCase extends DataAttributeTestCase {
 				try {
 					barrier.await();
 					for (int index = 0; index < size; index++) {
-						Assert.assertEquals(datas[index], attribute.convertValue(datas[index]), 0F);
+						Assert.assertEquals(datas[index], attribute.convertData(datas[index]), 0F);
 					}
 					Assert.assertEquals(999F, attribute.getMaximum(), 0F);
 					Assert.assertEquals(0F, attribute.getMinimum(), 0F);

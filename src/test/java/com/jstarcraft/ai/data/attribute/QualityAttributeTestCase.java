@@ -22,11 +22,11 @@ public abstract class QualityAttributeTestCase extends DataAttributeTestCase {
 		RandomUtility.shuffle(datas);
 		QualityAttribute<Float> attribute = getQualityAttribute();
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(index, attribute.convertValue(datas[index]));
+			Assert.assertEquals(index, attribute.convertData(datas[index]));
 		}
 		Assert.assertEquals(size, attribute.getSize());
 		for (int index = 0; index < size; index++) {
-			Assert.assertEquals(index, attribute.convertValue(datas[index]));
+			Assert.assertEquals(index, attribute.convertData(datas[index]));
 		}
 		Assert.assertEquals(size, attribute.getSize());
 	}
@@ -49,7 +49,7 @@ public abstract class QualityAttributeTestCase extends DataAttributeTestCase {
 				try {
 					barrier.await();
 					for (int index = 0; index < size; index++) {
-						Assert.assertEquals(index, attribute.convertValue(datas[index]));
+						Assert.assertEquals(index, attribute.convertData(datas[index]));
 					}
 					Assert.assertEquals(size, attribute.getSize());
 					barrier.await();
