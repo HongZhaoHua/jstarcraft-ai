@@ -88,7 +88,9 @@ public class SparseInstance implements DataInstance {
 				this.quantityFeatures[index] = this.quantityValues.getData(position);
 			}
 		}
-		this.weights = module.getWeights();
+		this.qualityMarks = module.getQualityMarks();
+        this.quantityMarks = module.getQuantityMarks();
+        this.weights = module.getWeights();
 	}
 
 	@Override

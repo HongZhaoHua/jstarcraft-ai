@@ -44,6 +44,8 @@ public class DenseInstance implements DataInstance {
 		this.quantityOrder = module.getQuantityOrder();
 		this.qualityValues = module.getQualityValues();
 		this.quantityValues = module.getQuantityValues();
+		this.qualityMarks = module.getQualityMarks();
+		this.quantityMarks = module.getQuantityMarks();
 		this.weights = module.getWeights();
 	}
 
