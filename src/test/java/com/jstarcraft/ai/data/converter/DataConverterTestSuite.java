@@ -7,13 +7,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		CsvConverterTestCase.class,
+        CsvConverterTestCase.class,
 
-		HibernateConverterTestCase.class,
+        QueryConverterTestCase.class,
 
-		JdbcConverterTestCase.class,
-
-		JsonConverterTestCase.class })
+        JsonConverterTestCase.class })
 public class DataConverterTestSuite {
 
 }
