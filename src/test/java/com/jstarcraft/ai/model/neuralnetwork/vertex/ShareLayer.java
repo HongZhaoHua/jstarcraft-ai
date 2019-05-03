@@ -2,8 +2,8 @@ package com.jstarcraft.ai.model.neuralnetwork.vertex;
 
 import java.util.Map;
 
-import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
+import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.message.SumMessage;
@@ -24,8 +24,8 @@ public class ShareLayer extends WeightLayer {
 
 	private MathMatrix weightCache;
 
-	public ShareLayer(int numberOfInputs, int numberOfOutputs, int numberOfShares, MathCache factory, Map<String, ParameterConfigurator> configurators, Mode mode, ActivationFunction function) {
-		super(numberOfInputs, numberOfOutputs, factory, configurators, mode, function);
+	public ShareLayer(int numberOfInputs, int numberOfOutputs, int numberOfShares, MathCache factory, Map<String, ParameterConfigurator> configurators, ActivationFunction function) {
+		super(numberOfInputs, numberOfOutputs, factory, configurators, function);
 		this.numberOfShares = numberOfShares;
 		MathMatrix weightGradients = gradients.get(WEIGHT_KEY);
 		this.weightCache = factory.makeMatrix(weightGradients.getRowSize(), weightGradients.getColumnSize());

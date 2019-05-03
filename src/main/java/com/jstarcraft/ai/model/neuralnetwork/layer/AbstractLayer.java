@@ -8,8 +8,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.math3.util.FastMath;
 
-import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
+import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.GlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.model.neuralnetwork.activation.ActivationFunction;
@@ -22,7 +22,7 @@ import com.jstarcraft.core.utility.KeyValue;
  * @author Birdy
  *
  */
-@ModemDefinition(value = { "numberOfInputs", "numberOfOutputs", "configurators", "parameters", "gradients", "mode", "function" })
+@ModemDefinition(value = { "numberOfInputs", "numberOfOutputs", "configurators", "parameters", "gradients", "function" })
 public abstract class AbstractLayer implements Layer {
 
 	protected static MathMatrix getMatrix(MathMatrix matrix) {
@@ -51,17 +51,14 @@ public abstract class AbstractLayer implements Layer {
 	/** 参数与梯度 */
 	protected Map<String, MathMatrix> parameters, gradients;
 
-	protected Mode mode;
-
 	protected ActivationFunction function;
 
 	protected AbstractLayer() {
 	}
 
-	protected AbstractLayer(int numberOfInputs, int numberOfOutputs, Map<String, ParameterConfigurator> configurators, Mode mode, ActivationFunction function) {
+	protected AbstractLayer(int numberOfInputs, int numberOfOutputs, Map<String, ParameterConfigurator> configurators, ActivationFunction function) {
 		this.numberOfInputs = numberOfInputs;
 		this.numberOfOutputs = numberOfOutputs;
-		this.mode = mode;
 		this.function = function;
 		this.configurators = configurators;
 		this.parameters = new HashMap<>();
@@ -151,16 +148,6 @@ public abstract class AbstractLayer implements Layer {
 	}
 
 	@Override
-	public void setMode(Mode mode) {
-		this.mode = mode;
-	}
-
-	@Override
-	public Mode getMode() {
-		return mode;
-	}
-
-	@Override
 	public ActivationFunction getFunction() {
 		return function;
 	}
@@ -182,7 +169,6 @@ public abstract class AbstractLayer implements Layer {
 			equal.append(this.numberOfOutputs, that.numberOfOutputs);
 			equal.append(this.configurators, that.configurators);
 			equal.append(this.parameters, that.parameters);
-			equal.append(this.mode, that.mode);
 			equal.append(this.function, that.function);
 			return equal.isEquals();
 		}
@@ -195,14 +181,13 @@ public abstract class AbstractLayer implements Layer {
 		hash.append(numberOfOutputs);
 		hash.append(configurators);
 		hash.append(parameters);
-		hash.append(mode);
 		hash.append(function);
 		return hash.toHashCode();
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "(numberOfInputs=" + numberOfInputs + ", numberOfOutputs=" + numberOfOutputs + ", configurators=" + configurators + ", parameters=" + parameters + ", mode=" + mode + ", function=" + function + ")";
+		return getClass().getSimpleName() + "(numberOfInputs=" + numberOfInputs + ", numberOfOutputs=" + numberOfOutputs + ", configurators=" + configurators + ", parameters=" + parameters + ", function=" + function + ")";
 	}
 
 }

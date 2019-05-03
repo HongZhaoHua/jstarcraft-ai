@@ -29,14 +29,11 @@ import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.Nd4jCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.Nd4jMatrix;
-import com.jstarcraft.ai.model.neuralnetwork.Graph;
-import com.jstarcraft.ai.model.neuralnetwork.GraphConfigurator;
 import com.jstarcraft.ai.model.neuralnetwork.activation.IdentityActivationFunction;
 import com.jstarcraft.ai.model.neuralnetwork.layer.EmbedLayer;
 import com.jstarcraft.ai.model.neuralnetwork.layer.Layer;
 import com.jstarcraft.ai.model.neuralnetwork.layer.ParameterConfigurator;
 import com.jstarcraft.ai.model.neuralnetwork.layer.WeightLayer;
-import com.jstarcraft.ai.model.neuralnetwork.layer.Layer.Mode;
 import com.jstarcraft.ai.model.neuralnetwork.learn.SgdLearner;
 import com.jstarcraft.ai.model.neuralnetwork.loss.MSELossFunction;
 import com.jstarcraft.ai.model.neuralnetwork.normalization.IgnoreNormalizer;
@@ -99,14 +96,14 @@ public class GraphTestCase {
 	private Graph getNewFunction(MathCache factory, ComputationGraph computationGraph) {
 		Schedule schedule = new ConstantSchedule(learnRatio);
 		GraphConfigurator configurator = new GraphConfigurator();
-		Layer leftEmbed = new EmbedLayer(5, 5, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("leftEmbed")), Mode.TRAIN, new IdentityActivationFunction());
-		Layer rightEmbed = new EmbedLayer(5, 5, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("rightEmbed")), Mode.TRAIN, new IdentityActivationFunction());
+		Layer leftEmbed = new EmbedLayer(5, 5, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("leftEmbed")), new IdentityActivationFunction());
+		Layer rightEmbed = new EmbedLayer(5, 5, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("rightEmbed")), new IdentityActivationFunction());
 
 		configurator.connect(new LayerVertex("leftEmbed", factory, leftEmbed, new SgdLearner(schedule), new IgnoreNormalizer()));
 		configurator.connect(new LayerVertex("rightEmbed", factory, rightEmbed, new SgdLearner(schedule), new IgnoreNormalizer()));
 		configurator.connect(new HorizontalAttachVertex("embed", factory), "leftEmbed", "rightEmbed");
 		configurator.connect(new Nd4jVertex("nd4j", factory, true), "embed");
-		Layer weightLayer = new WeightLayer(10, 1, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("output")), Mode.TRAIN, new IdentityActivationFunction());
+		Layer weightLayer = new WeightLayer(10, 1, factory, getConfigurators(factory, (AbstractLayer<?>) computationGraph.getLayer("output")), new IdentityActivationFunction());
 		configurator.connect(new LayerVertex("output", factory, weightLayer, new SgdLearner(schedule), new IgnoreNormalizer()), "nd4j");
 
 		Graph graph = new Graph(configurator, new StochasticGradientOptimizer(), new MSELossFunction());

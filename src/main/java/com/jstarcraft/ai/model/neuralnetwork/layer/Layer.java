@@ -16,15 +16,6 @@ import com.jstarcraft.core.utility.KeyValue;
  */
 public interface Layer extends Model {
 
-	@Deprecated
-	enum Mode {
-
-		TRAIN,
-
-		TEST;
-
-	}
-
 	/**
 	 * 根据指定的样本分配缓存(每次epoch调用)
 	 * 
@@ -86,10 +77,6 @@ public interface Layer extends Model {
 	 * @return
 	 */
 	Map<String, MathMatrix> getGradients();
-
-	void setMode(Mode mode);
-
-	Mode getMode();
 
 	/**
 	 * 获取激活函数

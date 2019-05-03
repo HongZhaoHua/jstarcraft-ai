@@ -21,16 +21,12 @@ import com.jstarcraft.ai.model.neuralnetwork.layer.EmbedLayer;
 import com.jstarcraft.ai.model.neuralnetwork.layer.Layer;
 import com.jstarcraft.ai.model.neuralnetwork.layer.ParameterConfigurator;
 import com.jstarcraft.ai.model.neuralnetwork.layer.WeightLayer;
-import com.jstarcraft.ai.model.neuralnetwork.layer.Layer.Mode;
 import com.jstarcraft.ai.model.neuralnetwork.learn.SgdLearner;
 import com.jstarcraft.ai.model.neuralnetwork.loss.MSELossFunction;
 import com.jstarcraft.ai.model.neuralnetwork.normalization.IgnoreNormalizer;
 import com.jstarcraft.ai.model.neuralnetwork.optimization.StochasticGradientOptimizer;
 import com.jstarcraft.ai.model.neuralnetwork.schedule.ConstantSchedule;
 import com.jstarcraft.ai.model.neuralnetwork.schedule.Schedule;
-import com.jstarcraft.ai.model.neuralnetwork.vertex.LayerVertex;
-import com.jstarcraft.ai.model.neuralnetwork.vertex.ShareVertex;
-import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.accumulation.SumVertex;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.HorizontalAttachVertex;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.HorizontalDetachVertex;
@@ -59,12 +55,12 @@ public class ShareVertexTestCase {
 		GraphConfigurator configurator = new GraphConfigurator();
 		MathCache factory = new DenseCache();
 		// 离散特征部分
-		Layer qualityLayer = new EmbedLayer(qualityDimension, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		Layer qualityLayer = new EmbedLayer(qualityDimension, numberOfFactors, factory, configurators, new SigmoidActivationFunction());
 		configurator.connect(new LayerVertex("qualityFeature", factory, qualityLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
 		configurator.connect(new SumVertex("qualityNumber", factory));
 
 		// 连续特征部分(归一化)
-		Layer quantityLayer = new WeightLayer(quantityOrder, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		Layer quantityLayer = new WeightLayer(quantityOrder, numberOfFactors, factory, configurators, new SigmoidActivationFunction());
 		configurator.connect(new LayerVertex("quantityFeatures", factory, quantityLayer, new SgdLearner(schedule), new IgnoreNormalizer()));
 		configurator.connect(new SumVertex("quantityNumber", factory));
 
@@ -143,7 +139,7 @@ public class ShareVertexTestCase {
 					layerRightNumber.setValue(point, 0, RandomUtility.randomInteger(5) + 1);
 				}
 
-				Layer factorLayer = new ShareLayer(numberOfFactors + 2, numberOfFactors, 2, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+				Layer factorLayer = new ShareLayer(numberOfFactors + 2, numberOfFactors, 2, factory, configurators, new SigmoidActivationFunction());
 				Vertex shareVertex = new LayerVertex("factorCodec", factory, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
 				Graph graph = getCrossGraph(shareVertex, layerLeftMarks, layerRightMarks);
 
@@ -171,7 +167,7 @@ public class ShareVertexTestCase {
 					vertexRightNumber.setValue(point, 0, RandomUtility.randomInteger(5) + 1);
 				}
 
-				Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+				Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, new SigmoidActivationFunction());
 				Vertex shareVertex = new ShareVertex("factorCodec", factory, 2, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
 				Graph graph = getCrossGraph(shareVertex, vertexLeftMarks, vertexRightMarks);
 
@@ -191,7 +187,7 @@ public class ShareVertexTestCase {
 	@Test
 	public void testModel() {
 		MathCache factory = new DenseCache();
-		Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		Layer factorLayer = new WeightLayer(numberOfFactors + 2, numberOfFactors, factory, configurators, new SigmoidActivationFunction());
 		Vertex oldModel = new ShareVertex("factorCodec", factory, 2, factorLayer, new SgdLearner(schedule), new IgnoreNormalizer());
 		for (ModemCodec codec : ModemCodec.values()) {
 			byte[] data = codec.encodeModel(oldModel);

@@ -17,10 +17,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.model.neuralnetwork.activation.SigmoidActivationFunction;
-import com.jstarcraft.ai.model.neuralnetwork.layer.Layer;
-import com.jstarcraft.ai.model.neuralnetwork.layer.ParameterConfigurator;
-import com.jstarcraft.ai.model.neuralnetwork.layer.WeightLayer;
-import com.jstarcraft.ai.model.neuralnetwork.layer.Layer.Mode;
 import com.jstarcraft.ai.model.neuralnetwork.parameter.CopyParameterFactory;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -70,7 +66,7 @@ public class WeightLayerTestCase extends LayerTestCase {
 		CopyParameterFactory bias = new CopyParameterFactory(getMatrix(layer.getParam(DefaultParamInitializer.BIAS_KEY)));
 		configurators.put(WeightLayer.BIAS_KEY, new ParameterConfigurator(0.01F, 0.05F, bias));
 		MathCache factory = new DenseCache();
-		return new WeightLayer(2, 1, factory, configurators, Mode.TRAIN, new SigmoidActivationFunction());
+		return new WeightLayer(2, 1, factory, configurators, new SigmoidActivationFunction());
 	}
 
 }

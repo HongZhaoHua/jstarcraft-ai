@@ -33,8 +33,8 @@ public class WeightLayer extends AbstractLayer {
 		super();
 	}
 
-	public WeightLayer(int numberOfInputs, int numberOfOutputs, MathCache factory, Map<String, ParameterConfigurator> configurators, Mode mode, ActivationFunction function) {
-		super(numberOfInputs, numberOfOutputs, configurators, mode, function);
+	public WeightLayer(int numberOfInputs, int numberOfOutputs, MathCache factory, Map<String, ParameterConfigurator> configurators, ActivationFunction function) {
+		super(numberOfInputs, numberOfOutputs, configurators, function);
 
 		if (!this.configurators.containsKey(WEIGHT_KEY)) {
 			String message = StringUtility.format("参数{}配置缺失.", WEIGHT_KEY);

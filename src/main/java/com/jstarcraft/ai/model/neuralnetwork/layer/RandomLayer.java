@@ -4,8 +4,8 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
-import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathCache;
+import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.ColumnGlobalMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.vector.GlobalVector;
@@ -29,8 +29,8 @@ public class RandomLayer extends WeightLayer {
 
 	private MathCache factory;
 
-	public RandomLayer(int numberOfInputs, int numberOfOutputs, int numberOfRandoms, MathCache factory, Map<String, ParameterConfigurator> configurators, Mode mode, ActivationFunction function) {
-		super(numberOfInputs, numberOfOutputs, factory, configurators, mode, function);
+	public RandomLayer(int numberOfInputs, int numberOfOutputs, int numberOfRandoms, MathCache factory, Map<String, ParameterConfigurator> configurators, ActivationFunction function) {
+		super(numberOfInputs, numberOfOutputs, factory, configurators, function);
 		this.numberOfRandoms = numberOfRandoms;
 	}
 

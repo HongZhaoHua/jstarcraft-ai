@@ -31,8 +31,8 @@ public class EmbedLayer extends WeightLayer implements ModemCycle {
 		super();
 	}
 
-	public EmbedLayer(int numberOfInputs, int numberOfOutputs, MathCache factory, Map<String, ParameterConfigurator> configurators, Mode mode, ActivationFunction function) {
-		super(numberOfInputs, numberOfOutputs, factory, configurators, mode, function);
+	public EmbedLayer(int numberOfInputs, int numberOfOutputs, MathCache factory, Map<String, ParameterConfigurator> configurators, ActivationFunction function) {
+		super(numberOfInputs, numberOfOutputs, factory, configurators, function);
 		this.weightReferences = new KeyValue[numberOfInputs];
 	}
 
