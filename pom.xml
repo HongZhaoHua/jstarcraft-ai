@@ -47,18 +47,16 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-api</artifactId>
+			<version>1.0.0-beta3</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.deeplearning4j</groupId>
 			<artifactId>deeplearning4j-core</artifactId>
 			<version>1.0.0-beta3</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.nd4j</groupId>
-			<artifactId>nd4j-native-platform</artifactId>
-			<version>1.0.0-beta3</version>
-		</dependency>
-
-		<!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <version>1.0.0-beta3</version> </dependency> -->
 
 		<!-- Test框架依赖 -->
 		<dependency>
@@ -88,6 +86,15 @@
 			<version>1.4.199</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-native-platform</artifactId>
+			<version>1.0.0-beta3</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <version>1.0.0-beta3</version> <scope>test</scope> </dependency> -->
 
 		<!-- 桥接器:Slf4j使用Log4j2 -->
 		<dependency>
