@@ -53,6 +53,7 @@ JStarCraft AI框架各个模块之间的关系:
 * [5.模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
     * 线性模型(linear)
     * 近邻模型(nearest neighbor)
+    * 矩阵分解模型(matrix factorization)
     * 神经网络模型(neutral network)
         * 计算图
             * 节点
