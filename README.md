@@ -82,3 +82,108 @@ JStarCraft AI框架各个模块之间的关系:
     * 聚类
     * 关联
 * 9.工具(utility)
+
+*****
+
+## JStarCraft AI教程
+
+* 1.设置依赖
+    * [Maven依赖](#Maven依赖)
+    * [Gradle依赖](#Gradle依赖)
+* 2.配置环境
+    * [设置CPU环境](#设置CPU环境)
+    * [设置GPU环境](#设置GPU环境)
+    * [使用环境上下文](#使用环境上下文)
+
+#### Maven依赖
+
+```maven
+<dependency>
+    <groupId>com.jstarcraft</groupId>
+    <artifactId>ai</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+
+#### Gradle依赖
+
+```gradle
+compile group: 'com.jstarcraft', name: 'ai', version: '1.0'
+```
+
+#### 设置CPU环境
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-native-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+#### 设置GPU环境
+
+* CUDA 9.0
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-cuda-9.0-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+* CUDA 9.1
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-cuda-9.1-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+* CUDA 9.2
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-cuda-9.2-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+* CUDA 10.0
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-cuda-10.0-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+* CUDA 10.1
+
+```maven
+<dependency>
+    <groupId>org.nd4j</groupId>
+    <artifactId>nd4j-cuda-10.1-platform</artifactId>
+    <version>1.0.0-beta3</version>
+</dependency>
+```
+
+#### 使用环境上下文
+
+```java
+// 获取默认环境上下文
+EnvironmentContext context = EnvironmentContext.getContext();
+// 在环境上下文中执行任务
+Future<?> task = context.doTask(() - > {
+    int dimension = 10;
+    MathMatrix leftMatrix = getRandomMatrix(dimension);
+    MathMatrix rightMatrix = getRandomMatrix(dimension);
+    MathMatrix dataMatrix = getZeroMatrix(dimension);
+    dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.PARALLEL);
+});
+```
