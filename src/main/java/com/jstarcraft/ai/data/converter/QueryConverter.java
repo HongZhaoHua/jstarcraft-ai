@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import org.hibernate.HibernateException;
 import org.hibernate.ScrollableResults;
 
+import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -56,8 +57,11 @@ public class QueryConverter extends AbstractConverter<ScrollableResults> {
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, quantityFeatures);
-				qualityFeatures.clear();
+				int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(iterator.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(iterator.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
+                float weight = weightOrder != null ? ConversionUtility.convert(iterator.get(weightOrder), float.class) : DataInstance.defaultWeight;
+                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                qualityFeatures.clear();
 				quantityFeatures.clear();
 				count++;
 			}

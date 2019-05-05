@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map.Entry;
 
+import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -71,8 +72,11 @@ public class JsonConverter extends StreamConverter {
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, quantityFeatures);
-				qualityFeatures.clear();
+				int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(datas.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
+                float weight = weightOrder != null ? ConversionUtility.convert(datas.get(weightOrder), float.class) : DataInstance.defaultWeight;
+                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                qualityFeatures.clear();
 				quantityFeatures.clear();
 				count++;
 			}
@@ -101,8 +105,11 @@ public class JsonConverter extends StreamConverter {
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				module.associateInstance(qualityFeatures, quantityFeatures);
-				qualityFeatures.clear();
+				int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(datas.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
+                float weight = weightOrder != null ? ConversionUtility.convert(datas.get(weightOrder), float.class) : DataInstance.defaultWeight;
+                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                qualityFeatures.clear();
 				quantityFeatures.clear();
 				count++;
 			}

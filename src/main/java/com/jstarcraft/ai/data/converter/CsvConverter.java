@@ -10,9 +10,10 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -63,7 +64,10 @@ public class CsvConverter extends StreamConverter {
                         quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                     }
                 }
-                module.associateInstance(qualityFeatures, quantityFeatures);
+                int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(datas.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
+                float weight = weightOrder != null ? ConversionUtility.convert(datas.get(weightOrder), float.class) : DataInstance.defaultWeight;
+                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
                 qualityFeatures.clear();
                 quantityFeatures.clear();
                 count++;
