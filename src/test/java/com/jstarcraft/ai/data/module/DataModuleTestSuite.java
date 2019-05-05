@@ -12,6 +12,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		SparseModuleTestCase.class,
 
 		ReferenceModuleTestCase.class })
-public class ModuleTestSuite {
+public class DataModuleTestSuite {
 
 }

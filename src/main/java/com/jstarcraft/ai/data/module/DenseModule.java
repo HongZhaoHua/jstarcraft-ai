@@ -55,12 +55,12 @@ public class DenseModule extends AbstractModule {
 		if (capacity == size) {
 			throw new DataCapacityException();
 		}
-		if (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder) {
-			throw new DataException();
-		}
-		if (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder) {
-			throw new DataException();
-		}
+		if (!qualityFeatures.isEmpty() && (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder)) {
+            throw new DataException();
+        }
+        if (!quantityFeatures.isEmpty() && (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder)) {
+            throw new DataException();
+        }
 		assert qualityOrder == qualityFeatures.size();
 		assert quantityOrder == quantityFeatures.size();
 		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {

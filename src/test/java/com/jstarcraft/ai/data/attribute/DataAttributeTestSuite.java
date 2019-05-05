@@ -14,6 +14,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		RedisQuantityAttributeTestCase.class,
 
 		RedisQualityAttributeTestCase.class })
-public class AttributeTestSuite {
+public class DataAttributeTestSuite {
 
 }
