@@ -30,7 +30,7 @@ public class QueryConverter extends AbstractConverter<ScrollableResults> {
 	}
 
 	@Override
-	public int convert(DataModule module, ScrollableResults iterator) {
+	public int convert(DataModule module, ScrollableResults iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();

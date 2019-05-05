@@ -24,39 +24,39 @@ import com.jstarcraft.core.utility.StringUtility;
 // TODO 准备支持稀疏数据 https://www.bbsmax.com/A/x9J2RnqeJ6/
 public class ArffConverter extends CsvConverter {
 
-	public ArffConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
-		super(CSVFormat.DEFAULT.getDelimiter(), qualityAttributes, quantityAttributes);
-	}
+    public ArffConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+        super(CSVFormat.DEFAULT.getDelimiter(), qualityAttributes, quantityAttributes);
+    }
 
-	@Override
-	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
-		int count = 0;
-		boolean mark = false;
-		while (true) {
-			if (mark) {
-				count += super.parseData(module, buffer);
-				break;
-			} else {
-				String line = buffer.readLine();
-				if (StringUtility.isBlank(line) || line.startsWith("%")) {
-					continue;
-				}
-				String[] datas = line.trim().split("[ \t]");
-				switch (datas[0].toUpperCase()) {
-				case "@RELATION": {
-					break;
-				}
-				case "@ATTRIBUTE": {
-					break;
-				}
-				case "@DATA": {
-					mark = true;
-					break;
-				}
-				}
-			}
-		}
-		return count;
-	}
+    @Override
+    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException {
+        int count = 0;
+        boolean mark = false;
+        while (true) {
+            if (mark) {
+                count += super.parseData(module, buffer, qualityMarkOrder, quantityMarkOrder, weightOrder);
+                break;
+            } else {
+                String line = buffer.readLine();
+                if (StringUtility.isBlank(line) || line.startsWith("%")) {
+                    continue;
+                }
+                String[] datas = line.trim().split("[ \t]");
+                switch (datas[0].toUpperCase()) {
+                case "@RELATION": {
+                    break;
+                }
+                case "@ATTRIBUTE": {
+                    break;
+                }
+                case "@DATA": {
+                    mark = true;
+                    break;
+                }
+                }
+            }
+        }
+        return count;
+    }
 
 }

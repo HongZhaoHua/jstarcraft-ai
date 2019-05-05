@@ -42,7 +42,7 @@ public class JsonConverter extends StreamConverter {
 	}
 
 	@Override
-	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
+	protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
