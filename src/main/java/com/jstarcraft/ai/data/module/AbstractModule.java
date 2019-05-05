@@ -89,13 +89,13 @@ abstract public class AbstractModule implements DataModule {
 	@Override
 	public int getQualityInner(String name) {
 		// 通过等于查找
-		return qualityInner.get(name);
+		return qualityInner.getOrDefault(name, -1);
 	}
 
 	@Override
 	public int getQuantityInner(String name) {
 		// 通过等于查找
-		return quantityInner.get(name);
+		return quantityInner.getOrDefault(name, -1);
 	}
 
 	@Override
