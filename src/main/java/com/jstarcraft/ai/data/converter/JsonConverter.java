@@ -8,8 +8,8 @@ import java.util.Collection;
 import java.util.Map.Entry;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.module.DenseModule;
 import com.jstarcraft.ai.data.module.SparseModule;
 import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
@@ -46,6 +46,7 @@ public class JsonConverter extends StreamConverter {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
+        int size = module.getQualityOrder() + module.getQuantityOrder();
 		if (module instanceof DenseModule) {
 			String line = null;
 			while ((line = buffer.readLine()) != null) {
@@ -54,7 +55,7 @@ public class JsonConverter extends StreamConverter {
 					continue;
 				}
 				ArrayList<Object> datas = JsonUtility.string2Object(line, denseType);
-				for (int index = 0, size = datas.size(); index < size; index++) {
+				for (int index = 0; index < size; index++) {
 					Object value = datas.get(index);
 					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
 					KeyValue<String, Boolean> keyValue = term.getValue();

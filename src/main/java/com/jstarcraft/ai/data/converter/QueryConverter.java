@@ -7,8 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.ScrollableResults;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
 import com.jstarcraft.core.utility.KeyValue;
 
@@ -34,8 +34,8 @@ public class QueryConverter extends AbstractConverter<ScrollableResults> {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
+		int size = module.getQualityOrder() + module.getQuantityOrder();
 		try {
-			int size = module.getQualityOrder() + module.getQuantityOrder();
 			while (iterator.next()) {
 				for (int index = 0; index < size; index++) {
 					Object data = iterator.get(index);

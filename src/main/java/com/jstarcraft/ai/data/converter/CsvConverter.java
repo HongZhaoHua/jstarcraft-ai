@@ -29,49 +29,50 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class CsvConverter extends StreamConverter {
 
-	/** 分隔符 */
-	protected char delimiter;
+    /** 分隔符 */
+    protected char delimiter;
 
-	public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
-		super(qualityAttributes, quantityAttributes);
-		this.delimiter = delimiter;
-	}
+    public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+        super(qualityAttributes, quantityAttributes);
+        this.delimiter = delimiter;
+    }
 
-	@Override
-	protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
-		int count = 0;
-		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
-		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
-		try (CSVParser parser = new CSVParser(buffer, CSVFormat.newFormat(delimiter))) {
-			Iterator<CSVRecord> iterator = parser.iterator();
-			while (iterator.hasNext()) {
-				CSVRecord datas = iterator.next();
-				for (int index = 0, size = datas.size(); index < size; index++) {
-					Object data = datas.get(index);
-					Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
-					KeyValue<String, Boolean> keyValue = term.getValue();
-					if (keyValue.getValue()) {
-						QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
-						data = ConversionUtility.convert(data, attribute.getType());
-						int feature = attribute.convertData((Comparable) data);
-						qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
-					} else {
-						QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
-						data = ConversionUtility.convert(data, attribute.getType());
-						float feature = attribute.convertData((Number) data);
-						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
-					}
-				}
-				module.associateInstance(qualityFeatures, quantityFeatures);
-				qualityFeatures.clear();
-				quantityFeatures.clear();
-				count++;
-			}
-			return count;
-		} catch (Exception exception) {
-			// TODO 处理日志.
-			throw new RuntimeException(exception);
-		}
-	}
+    @Override
+    protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
+        int count = 0;
+        Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
+        Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
+        int size = module.getQualityOrder() + module.getQuantityOrder();
+        try (CSVParser parser = new CSVParser(buffer, CSVFormat.newFormat(delimiter))) {
+            Iterator<CSVRecord> iterator = parser.iterator();
+            while (iterator.hasNext()) {
+                CSVRecord datas = iterator.next();
+                for (int index = 0; index < size; index++) {
+                    Object data = datas.get(index);
+                    Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
+                    KeyValue<String, Boolean> keyValue = term.getValue();
+                    if (keyValue.getValue()) {
+                        QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
+                        data = ConversionUtility.convert(data, attribute.getType());
+                        int feature = attribute.convertData((Comparable) data);
+                        qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+                    } else {
+                        QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
+                        data = ConversionUtility.convert(data, attribute.getType());
+                        float feature = attribute.convertData((Number) data);
+                        quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
+                    }
+                }
+                module.associateInstance(qualityFeatures, quantityFeatures);
+                qualityFeatures.clear();
+                quantityFeatures.clear();
+                count++;
+            }
+            return count;
+        } catch (Exception exception) {
+            // TODO 处理日志.
+            throw new RuntimeException(exception);
+        }
+    }
 
 }
