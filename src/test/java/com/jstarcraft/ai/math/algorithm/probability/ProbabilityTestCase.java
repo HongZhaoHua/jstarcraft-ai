@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.math.algorithm.distribution;
+package com.jstarcraft.ai.math.algorithm.probability;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
