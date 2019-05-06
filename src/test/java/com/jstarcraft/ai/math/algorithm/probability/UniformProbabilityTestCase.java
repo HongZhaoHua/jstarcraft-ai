@@ -8,9 +8,6 @@ import org.nd4j.linalg.api.rng.DefaultRandom;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
-import com.jstarcraft.ai.math.algorithm.probability.Probability;
-import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
-
 public class UniformProbabilityTestCase extends ProbabilityTestCase {
 
 	@Override
@@ -22,7 +19,7 @@ public class UniformProbabilityTestCase extends ProbabilityTestCase {
 
 	@Override
 	protected Probability getNewFunction(long seed) {
-		return new QuantityProbability(UniformRealDistribution.class, new MersenneTwister(seed), 0.4D, 4D);
+		return new QuantityProbability(MersenneTwister.class, seed, UniformRealDistribution.class, 0.4D, 4D);
 	}
 
 	@Override

@@ -8,43 +8,45 @@ package com.jstarcraft.ai.math.algorithm.probability;
  */
 public interface Probability<T extends Number> {
 
-	/**
-	 * 累积分布函数 (cumulative distribution function)
-	 * 
-	 * <pre>
-	 * 不管是什么类型(连续/离散/其他)的随机变量,都可以定义它的累积分布函数.
-	 * </pre>
-	 * 
-	 * @param value
-	 * @return
-	 */
-	double cumulativeDistribution(T value);
+    public final static long DEFAULT_SEED = 0L;
 
-	/**
-	 * 累积分布函数 (cumulative distribution function)
-	 * 
-	 * <pre>
-	 * 不管是什么类型(连续/离散/其他)的随机变量,都可以定义它的累积分布函数.
-	 * </pre>
-	 * 
-	 * @param minimum
-	 * @param maximum
-	 * @return
-	 */
-	double cumulativeDistribution(T minimum, T maximum);
+    /**
+     * 累积分布函数 (cumulative distribution function)
+     * 
+     * <pre>
+     * 不管是什么类型(连续/离散/其他)的随机变量,都可以定义它的累积分布函数.
+     * </pre>
+     * 
+     * @param value
+     * @return
+     */
+    double cumulativeDistribution(T value);
 
-	T inverseDistribution(double probability);
+    /**
+     * 累积分布函数 (cumulative distribution function)
+     * 
+     * <pre>
+     * 不管是什么类型(连续/离散/其他)的随机变量,都可以定义它的累积分布函数.
+     * </pre>
+     * 
+     * @param minimum
+     * @param maximum
+     * @return
+     */
+    double cumulativeDistribution(T minimum, T maximum);
 
-	T sample();
+    T inverseDistribution(double probability);
 
-	T getMaximum();
+    T sample();
 
-	T getMinimum();
+    T getMaximum();
 
-	double getMean();
+    T getMinimum();
 
-	double getVariance();
+    double getMean();
 
-	void setSeed(long seed);
+    double getVariance();
+
+    void setSeed(long seed);
 
 }

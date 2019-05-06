@@ -20,22 +20,22 @@ import com.jstarcraft.ai.model.neuralnetwork.schedule.Schedule;
  */
 public class GaussianNoiseOneMasker implements Masker {
 
-	private Schedule schedule;
+    private Schedule schedule;
 
-	protected GaussianNoiseOneMasker(Schedule schedule) {
-		this.schedule = schedule;
-	}
+    protected GaussianNoiseOneMasker(Schedule schedule) {
+        this.schedule = schedule;
+    }
 
-	@Override
-	public void mask(MathMatrix matrix, int iteration, int epoch) {
-		float current = schedule.valueAt(iteration, epoch);
-		current = (float) Math.sqrt(current / (1F - current));
+    @Override
+    public void mask(MathMatrix matrix, int iteration, int epoch) {
+        float current = schedule.valueAt(iteration, epoch);
+        current = (float) Math.sqrt(current / (1F - current));
 
-		QuantityProbability probability = new QuantityProbability(NormalDistribution.class, new Well19937c(), 1F, current);
-		matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
-			float value = scalar.getValue();
-			scalar.setValue(value * probability.sample().floatValue());
-		});
-	}
+        QuantityProbability probability = new QuantityProbability(Well19937c.class, 0L, NormalDistribution.class, 1F, current);
+        matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
+            float value = scalar.getValue();
+            scalar.setValue(value * probability.sample().floatValue());
+        });
+    }
 
 }
