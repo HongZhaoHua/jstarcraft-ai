@@ -25,14 +25,14 @@ public class QualityProbability implements Probability<Integer>, ModemCycle {
 
     private String randomClass;
 
-    private long randomSeed;
+    private int randomSeed;
 
     private transient RandomGenerator random;
 
     QualityProbability() {
     }
 
-    public QualityProbability(Class<? extends RandomGenerator> randomClazz, long randomSeed, Class<? extends AbstractIntegerDistribution> distributionClazz, Object... distributionParameters) {
+    public QualityProbability(Class<? extends RandomGenerator> randomClazz, int randomSeed, Class<? extends AbstractIntegerDistribution> distributionClazz, Object... distributionParameters) {
         this.randomSeed = randomSeed;
         this.random = ReflectionUtility.getInstance(randomClazz, randomSeed);
         this.distributionParameters = distributionParameters;
@@ -92,7 +92,6 @@ public class QualityProbability implements Probability<Integer>, ModemCycle {
 
     @Override
     public void setSeed(long seed) {
-        randomSeed = seed;
         distribution.reseedRandomGenerator(seed);
     }
 

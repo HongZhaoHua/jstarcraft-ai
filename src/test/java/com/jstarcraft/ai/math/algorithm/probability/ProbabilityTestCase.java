@@ -34,13 +34,13 @@ public abstract class ProbabilityTestCase {
 
     protected abstract void assertSample(Probability newFuction, Distribution oldFunction);
 
-    protected abstract Distribution getOldFunction(long seed);
+    protected abstract Distribution getOldFunction(int seed);
 
-    protected abstract Probability getNewFunction(long seed);
+    protected abstract Probability getNewFunction(int seed);
 
     @Test
     public void testSample() {
-        long seed = 100L;
+        int seed = 1000;
 
         Distribution oldFunction = getOldFunction(seed);
         Probability<Number> newFuction = getNewFunction(seed);
@@ -61,7 +61,7 @@ public abstract class ProbabilityTestCase {
 
     @Test
     public void testModem() {
-        long seed = 1000L;
+        int seed = 1000;
 
         for (ModemCodec codec : ModemCodec.values()) {
             Probability<Number> oldFuction = getNewFunction(seed);

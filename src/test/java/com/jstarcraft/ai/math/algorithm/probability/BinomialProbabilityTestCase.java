@@ -11,14 +11,14 @@ import org.nd4j.linalg.api.rng.distribution.Distribution;
 public class BinomialProbabilityTestCase extends ProbabilityTestCase {
 
     @Override
-    protected Distribution getOldFunction(long seed) {
+    protected Distribution getOldFunction(int seed) {
         Random random = new DefaultRandom(seed);
         Distribution distribution = new org.nd4j.linalg.api.rng.distribution.impl.BinomialDistribution(random, 10, 0.5D);
         return distribution;
     }
 
     @Override
-    protected Probability getNewFunction(long seed) {
+    protected Probability getNewFunction(int seed) {
         return new QualityProbability(MersenneTwister.class, seed, BinomialDistribution.class, 10, 0.5D);
     }
 

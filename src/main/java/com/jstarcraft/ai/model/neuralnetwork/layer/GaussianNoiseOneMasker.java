@@ -31,7 +31,7 @@ public class GaussianNoiseOneMasker implements Masker {
         float current = schedule.valueAt(iteration, epoch);
         current = (float) Math.sqrt(current / (1F - current));
 
-        QuantityProbability probability = new QuantityProbability(Well19937c.class, 0L, NormalDistribution.class, 1F, current);
+        QuantityProbability probability = new QuantityProbability(Well19937c.class, 0, NormalDistribution.class, 1F, current);
         matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
             float value = scalar.getValue();
             scalar.setValue(value * probability.sample().floatValue());

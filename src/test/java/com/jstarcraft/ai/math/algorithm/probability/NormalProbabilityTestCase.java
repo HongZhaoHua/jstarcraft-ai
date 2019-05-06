@@ -15,25 +15,25 @@ import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
 
 public class NormalProbabilityTestCase extends ProbabilityTestCase {
 
-	@Override
-	protected Distribution getOldFunction(long seed) {
-		Random random = new DefaultRandom(seed);
-		Distribution distribution = new org.nd4j.linalg.api.rng.distribution.impl.NormalDistribution(random, 1D, 5D);
-		return distribution;
-	}
+    @Override
+    protected Distribution getOldFunction(int seed) {
+        Random random = new DefaultRandom(seed);
+        Distribution distribution = new org.nd4j.linalg.api.rng.distribution.impl.NormalDistribution(random, 1D, 5D);
+        return distribution;
+    }
 
-	@Override
-	protected Probability getNewFunction(long seed) {
-		RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
-		NormalDistribution distribution = new NormalDistribution(random, 1D, 5D);
-		return new QuantityProbability(MersenneTwister.class, seed, NormalDistribution.class, 1D, 5D);
-	}
+    @Override
+    protected Probability getNewFunction(int seed) {
+        RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
+        NormalDistribution distribution = new NormalDistribution(random, 1D, 5D);
+        return new QuantityProbability(MersenneTwister.class, seed, NormalDistribution.class, 1D, 5D);
+    }
 
-	@Override
-	protected void assertSample(Probability newFuction, Distribution oldFunction) {
-		Number newSample = newFuction.sample();
-		Number oldSample = oldFunction.sample();
-		Assert.assertThat(newSample, CoreMatchers.equalTo(oldSample));
-	}
+    @Override
+    protected void assertSample(Probability newFuction, Distribution oldFunction) {
+        Number newSample = newFuction.sample();
+        Number oldSample = oldFunction.sample();
+        Assert.assertThat(newSample, CoreMatchers.equalTo(oldSample));
+    }
 
 }
