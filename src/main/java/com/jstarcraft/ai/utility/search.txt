@@ -1,3 +1,6 @@
+搜索引擎算法研究:
+https://blog.csdn.net/javabandit/article/details/83290944
+
 Lucene介绍与入门使用:
 https://www.cnblogs.com/xiaobai1226/p/7652093.html
 
