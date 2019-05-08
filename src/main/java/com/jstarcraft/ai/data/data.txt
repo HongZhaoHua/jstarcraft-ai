@@ -1,41 +1,11 @@
+分布式计算平台Hadoop:
+https://www.jianshu.com/p/45aaf1065e08
+
+使用MiniCluster快速配置Hadoop开发环境:
+https://www.huangyunkun.com/2014/04/02/use_minicluster_quick_develop/
+
 Spark RDD、DataFrame原理及操作详解:
 https://www.cnblogs.com/ITtangtang/p/7977312.html
 
 流形学习-高维数据的降维与可视化:
 http://blog.csdn.net/u012162613/article/details/45920827
-
-Data模块主要负责将半结构化数据转换为模型的特征空间:
-
-DataConverter提供接口负责IO系统与DataModel的转换.
-
-DataModel提供DataAttribute(类似column)与DataInstance(类似row).
-
-DataAttribute提供外部键(outer key)与内部索引(inner index)的映射.
-
-DataInstance提供访问数据的接口.
-
-math提供将DataModel转换为向量(vector),矩阵(matrix)和张量(tensor)的方式.
-
-接口设计:
-
-
-DataAttribute DataContext.makeAttribute(name, type);
-
-DataModel DataContext.makeDataModel(name, attributes);
-
-DataModel DataContext.getDataModel(name);
-
-DataAttribute DataModel.getAttribute(index);
-
-DataAttribute[] DataModel.getAttributes();
-
-DataModel.makeInstance(values...);
-
-DataInstance[][] DataModel.getInstances(groupIndex, sortIndexes...);
-
-DataInstance[] DataModel.getInstances();
-
-SparseTensor.valueOf(scoreIndex, attributes, instances) -> SparseTensor.valueOf(scoreIndex, attributes, instances)
-
-
-
