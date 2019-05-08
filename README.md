@@ -261,9 +261,11 @@ DataModule module = space.makeDenseModule("module", configuration, 1000);
 // ARFF转换器
 ArffConverter converter = new ArffConverter(space.getQualityAttributes(), space.getQuantityAttributes());
 
-// 转换数据
+// 获取流
 File file = new File(this.getClass().getResource("module.arff").toURI());
 InputStream stream = new FileInputStream(file);
+
+// 转换数据
 int count = converter.convert(module, stream, null, null, null);
 ```
 
@@ -273,9 +275,11 @@ int count = converter.convert(module, stream, null, null, null);
 // CSV转换器
 CsvConverter converter = new CsvConverter(',', space.getQualityAttributes(), space.getQuantityAttributes());
 
-// 转换数据
+// 获取流
 File file = new File(this.getClass().getResource("module.csv").toURI());
 InputStream stream = new FileInputStream(file);
+
+// 转换数据
 int count = converter.convert(module, stream, null, null, null);
 ```
 
@@ -285,41 +289,45 @@ int count = converter.convert(module, stream, null, null, null);
 // JSON转换器
 JsonConverter converter = new JsonConverter(space.getQualityAttributes(), space.getQuantityAttributes());
 
-// 转换数据
+// 获取流
 File file = new File(this.getClass().getResource("module.json").toURI());
 InputStream stream = new FileInputStream(file);
+
+// 转换数据
 int count = converter.convert(module, stream, null, null, null);
 ```
 
 * HQL
 
 ```java
-// Query转换器
+// HQL转换器
 QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
 
-// 转换数据
+// 获取游标
 String selectDataHql = "select data.user, data.leftItem, data.rightItem, data.score from MockData data";
-// 使用Hibernate获取会话
 Session session = sessionFactory.openSession();
 Query query = session.createQuery(selectDataHql);
 ScrollableResults iterator = query.scroll();
-int count = converter.convert(dense, iterator, null, null, null);
+
+// 转换数据
+int count = converter.convert(module, iterator, null, null, null);
 session.close();
 ```
 
 * SQL
 
 ```java
-// Query转换器
+// SQL转换器
 QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
 
-// 转换数据
+// 获取游标
 String selectDataSql = "select user, leftItem, rightItem, score from MockData";
-// 使用Hibernate获取会话
 Session session = sessionFactory.openSession();
 Query query = session.createQuery(selectDataSql);
+
+// 转换数据
 ScrollableResults iterator = query.scroll();
-int count = converter.convert(dense, iterator, null, null, null);
+int count = converter.convert(module, iterator, null, null, null);
 session.close();
 ```
 
