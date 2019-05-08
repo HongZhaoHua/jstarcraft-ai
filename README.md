@@ -324,9 +324,9 @@ QueryConverter converter = new QueryConverter(space.getQualityAttributes(), spac
 String selectDataSql = "select user, leftItem, rightItem, score from MockData";
 Session session = sessionFactory.openSession();
 Query query = session.createQuery(selectDataSql);
+ScrollableResults iterator = query.scroll();
 
 // 转换数据
-ScrollableResults iterator = query.scroll();
 int count = converter.convert(module, iterator, null, null, null);
 session.close();
 ```
