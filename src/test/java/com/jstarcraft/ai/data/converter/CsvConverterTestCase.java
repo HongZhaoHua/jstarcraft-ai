@@ -15,35 +15,35 @@ import com.jstarcraft.ai.data.DataSpace;
 
 public class CsvConverterTestCase {
 
-	@Test
-	public void testConvert() throws Exception {
-		Map<String, Class<?>> qualityDifinitions = new HashMap<>();
-		Map<String, Class<?>> quantityDifinitions = new HashMap<>();
-		qualityDifinitions.put("user", int.class);
-		qualityDifinitions.put("item", int.class);
-		quantityDifinitions.put("score", float.class);
-		DataSpace space = new DataSpace(qualityDifinitions, quantityDifinitions);
+    @Test
+    public void testConvert() throws Exception {
+        Map<String, Class<?>> qualityDifinitions = new HashMap<>();
+        Map<String, Class<?>> quantityDifinitions = new HashMap<>();
+        qualityDifinitions.put("user", int.class);
+        qualityDifinitions.put("item", int.class);
+        quantityDifinitions.put("score", float.class);
+        DataSpace space = new DataSpace(qualityDifinitions, quantityDifinitions);
 
-		TreeMap<Integer, String> configuration = new TreeMap<>();
-		configuration.put(2, "user");
-		configuration.put(4, "item");
-		configuration.put(5, "score");
+        TreeMap<Integer, String> configuration = new TreeMap<>();
+        configuration.put(2, "user");
+        configuration.put(4, "item");
+        configuration.put(5, "score");
 
-		CsvConverter converter = new CsvConverter(',', space.getQualityAttributes(), space.getQuantityAttributes());
-		{
-			DataModule dense = space.makeDenseModule("dense", configuration, 1000);
-			File file = new File(this.getClass().getResource("dense.csv").toURI());
-			InputStream stream = new FileInputStream(file);
-			int count = converter.convert(dense, stream, null, null, null);
-			Assert.assertEquals(5, count);
-		}
-		{
-			DataModule sparse = space.makeSparseModule("sparse", configuration, 1000);
-			File file = new File(this.getClass().getResource("sparse.csv").toURI());
-			InputStream stream = new FileInputStream(file);
-			int count = converter.convert(sparse, stream, null, null, null);
-			Assert.assertEquals(5, count);
-		}
-	}
+        CsvConverter converter = new CsvConverter(',', space.getQualityAttributes(), space.getQuantityAttributes());
+        {
+            DataModule dense = space.makeDenseModule("dense", configuration, 1000);
+            File file = new File(this.getClass().getResource("dense.csv").toURI());
+            InputStream stream = new FileInputStream(file);
+            int count = converter.convert(dense, stream, null, null, null);
+            Assert.assertEquals(5, count);
+        }
+        {
+            DataModule sparse = space.makeSparseModule("sparse", configuration, 1000);
+            File file = new File(this.getClass().getResource("sparse.csv").toURI());
+            InputStream stream = new FileInputStream(file);
+            int count = converter.convert(sparse, stream, null, null, null);
+            Assert.assertEquals(5, count);
+        }
+    }
 
 }

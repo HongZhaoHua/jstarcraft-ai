@@ -67,11 +67,13 @@ public class QueryConverterTestCase {
             int count = converter.convert(dense, iterator, null, null, null);
             Assert.assertEquals(5, count);
             iterator.close();
-            Transaction transaction = session.beginTransaction();
-            for (MockData data : datas) {
-                session.delete(data);
+            {
+                Transaction transaction = session.beginTransaction();
+                for (MockData data : datas) {
+                    session.delete(data);
+                }
+                transaction.commit();
             }
-            transaction.commit();
             session.close();
         }
         {
@@ -95,15 +97,17 @@ public class QueryConverterTestCase {
             int count = converter.convert(sparse, iterator, null, null, null);
             Assert.assertEquals(5, count);
             iterator.close();
-            Transaction transaction = session.beginTransaction();
-            for (MockData data : datas) {
-                session.delete(data);
+            {
+                Transaction transaction = session.beginTransaction();
+                for (MockData data : datas) {
+                    session.delete(data);
+                }
+                transaction.commit();
             }
-            transaction.commit();
             session.close();
         }
     }
-    
+
     @Test
     public void testSql() throws Exception {
         Map<String, Class<?>> qualityDifinitions = new HashMap<>();
@@ -139,11 +143,13 @@ public class QueryConverterTestCase {
             int count = converter.convert(dense, iterator, null, null, null);
             Assert.assertEquals(5, count);
             iterator.close();
-            Transaction transaction = session.beginTransaction();
-            for (MockData data : datas) {
-                session.delete(data);
+            {
+                Transaction transaction = session.beginTransaction();
+                for (MockData data : datas) {
+                    session.delete(data);
+                }
+                transaction.commit();
             }
-            transaction.commit();
             session.close();
         }
         {
@@ -167,11 +173,13 @@ public class QueryConverterTestCase {
             int count = converter.convert(sparse, iterator, null, null, null);
             Assert.assertEquals(5, count);
             iterator.close();
-            Transaction transaction = session.beginTransaction();
-            for (MockData data : datas) {
-                session.delete(data);
+            {
+                Transaction transaction = session.beginTransaction();
+                for (MockData data : datas) {
+                    session.delete(data);
+                }
+                transaction.commit();
             }
-            transaction.commit();
             session.close();
         }
     }

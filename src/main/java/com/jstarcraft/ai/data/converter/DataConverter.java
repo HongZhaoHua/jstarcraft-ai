@@ -10,6 +10,20 @@ import com.jstarcraft.ai.data.DataModule;
  */
 public interface DataConverter<T> {
 
-	int convert(DataModule module, T iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder);
+    /**
+     * 转换
+     * 
+     * <pre>
+     * 通过迭代器将指定数据转换到模块
+     * </pre>
+     * 
+     * @param module
+     * @param iterator
+     * @param qualityMarkOrder
+     * @param quantityMarkOrder
+     * @param weightOrder
+     * @return
+     */
+    int convert(DataModule module, T iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder);
 
 }

@@ -8,53 +8,53 @@ import javax.persistence.Table;
 @Table
 public class MockData {
 
-	@Id
-	private long id;
+    @Id
+    private long id;
 
-	private Integer leftUser;
+    private Integer leftUser;
 
-	private Integer rightUser;
+    private Integer rightUser;
 
-	private Integer leftItem;
+    private Integer leftItem;
 
-	private Integer rightItem;
+    private Integer rightItem;
 
-	private Float score;
+    private Float score;
 
-	MockData() {
-	}
+    MockData() {
+    }
 
-	public MockData(long id, Integer leftUser, Integer rightUser, Integer leftItem, Integer rightItem, Float score) {
-		this.id = id;
-		this.leftUser = leftUser;
-		this.rightUser = rightUser;
-		this.leftItem = leftItem;
-		this.rightItem = rightItem;
-		this.score = score;
-	}
+    public MockData(long id, Integer leftUser, Integer rightUser, Integer leftItem, Integer rightItem, Float score) {
+        this.id = id;
+        this.leftUser = leftUser;
+        this.rightUser = rightUser;
+        this.leftItem = leftItem;
+        this.rightItem = rightItem;
+        this.score = score;
+    }
 
-	public long getId() {
-		return id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public Integer getLeftUser() {
-		return leftUser;
-	}
+    public Integer getLeftUser() {
+        return leftUser;
+    }
 
-	public Integer getRightUser() {
-		return rightUser;
-	}
+    public Integer getRightUser() {
+        return rightUser;
+    }
 
-	public Integer getLeftItem() {
-		return leftItem;
-	}
+    public Integer getLeftItem() {
+        return leftItem;
+    }
 
-	public Integer getRightItem() {
-		return rightItem;
-	}
+    public Integer getRightItem() {
+        return rightItem;
+    }
 
-	public Float getScore() {
-		return score;
-	}
+    public Float getScore() {
+        return score;
+    }
 
 }
