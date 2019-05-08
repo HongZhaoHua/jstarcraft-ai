@@ -2,14 +2,28 @@ package com.jstarcraft.ai.data.converter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map.Entry;
 
 import org.apache.commons.csv.CSVFormat;
 
+import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
+import com.jstarcraft.ai.data.attribute.QuantityAttribute;
+import com.jstarcraft.ai.data.module.DenseModule;
+import com.jstarcraft.ai.data.module.SparseModule;
+import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
+import com.jstarcraft.core.utility.JsonUtility;
+import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.StringUtility;
+
+import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
+import it.unimi.dsi.fastutil.ints.Int2IntRBTreeMap;
+import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 
 /**
  * Attribute-Relation File Format转换器
@@ -32,27 +46,103 @@ public class ArffConverter extends CsvConverter {
     protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException {
         int count = 0;
         boolean mark = false;
-        while (true) {
-            if (mark) {
-                count += super.parseData(module, buffer, qualityMarkOrder, quantityMarkOrder, weightOrder);
-                break;
-            } else {
-                String line = buffer.readLine();
-                if (StringUtility.isBlank(line) || line.startsWith("%")) {
-                    continue;
-                }
-                String[] datas = line.trim().split("[ \t]");
-                switch (datas[0].toUpperCase()) {
-                case "@RELATION": {
+        if (module instanceof DenseModule) {
+            while (true) {
+                if (mark) {
+                    count += super.parseData(module, buffer, qualityMarkOrder, quantityMarkOrder, weightOrder);
                     break;
+                } else {
+                    String line = buffer.readLine();
+                    if (StringUtility.isBlank(line) || line.startsWith("%")) {
+                        continue;
+                    }
+                    String[] datas = line.trim().split("[ \t]");
+                    switch (datas[0].toUpperCase()) {
+                    case "@RELATION": {
+                        break;
+                    }
+                    case "@ATTRIBUTE": {
+                        break;
+                    }
+                    case "@DATA": {
+                        mark = true;
+                        break;
+                    }
+                    }
                 }
-                case "@ATTRIBUTE": {
+            }
+        } else if (module instanceof SparseModule) {
+            while (true) {
+                if (mark) {
+                    Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
+                    Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
+                    String line = null;
+                    while ((line = buffer.readLine()) != null) {
+                        if (StringUtility.isBlank(line)) {
+                            // TODO 考虑改为异常或者日志.
+                            continue;
+                        }
+                        line = line.substring(1, line.length() - 1);
+                        String[] elements = line.split(",\\s*");
+                        int qualityMark = DataInstance.defaultInteger;
+                        float quantityMark = DataInstance.defaultFloat;
+                        float weight = DataInstance.defaultWeight;
+                        for (String element : elements) {
+                            String[] data = element.split(StringUtility.SPACE);
+                            int index = Integer.parseInt(data[0]) - 1;
+                            Object value = data[1];
+
+                            if (qualityMarkOrder != null && qualityMarkOrder == index) {
+                                qualityMark = ConversionUtility.convert(value, int.class);
+                                continue;
+                            }
+                            if (quantityMarkOrder != null && quantityMarkOrder == index) {
+                                quantityMark = ConversionUtility.convert(value, float.class);
+                                continue;
+                            }
+                            if (weightOrder != null && weightOrder == index) {
+                                weight = ConversionUtility.convert(value, float.class);
+                                continue;
+                            }
+
+                            Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
+                            KeyValue<String, Boolean> keyValue = term.getValue();
+                            if (keyValue.getValue()) {
+                                QualityAttribute attribute = qualityAttributes.get(keyValue.getKey());
+                                value = ConversionUtility.convert(value, attribute.getType());
+                                int feature = attribute.convertData((Comparable) value);
+                                qualityFeatures.put(module.getQualityInner(keyValue.getKey()) + index - term.getKey(), feature);
+                            } else {
+                                QuantityAttribute attribute = quantityAttributes.get(keyValue.getKey());
+                                value = ConversionUtility.convert(value, attribute.getType());
+                                float feature = attribute.convertData((Number) value);
+                                quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
+                            }
+                        }
+                        module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                        qualityFeatures.clear();
+                        quantityFeatures.clear();
+                        count++;
+                    }
                     break;
-                }
-                case "@DATA": {
-                    mark = true;
-                    break;
-                }
+                } else {
+                    String line = buffer.readLine();
+                    if (StringUtility.isBlank(line) || line.startsWith("%")) {
+                        continue;
+                    }
+                    String[] datas = line.trim().split("[ \t]");
+                    switch (datas[0].toUpperCase()) {
+                    case "@RELATION": {
+                        break;
+                    }
+                    case "@ATTRIBUTE": {
+                        break;
+                    }
+                    case "@DATA": {
+                        mark = true;
+                        break;
+                    }
+                    }
                 }
             }
         }
