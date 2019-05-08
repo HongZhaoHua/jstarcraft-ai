@@ -95,6 +95,18 @@ JStarCraft AI框架各个模块之间的关系:
     * [设置CPU环境](#设置CPU环境)
     * [设置GPU环境](#设置GPU环境)
     * [使用环境上下文](#使用环境上下文)
+* 3.使用数据
+    * [数据表示](#数据表示)
+    * [数据转换](#数据转换)
+        * ARFF
+        * CSV
+        * JSON
+        * HQL
+        * SQL
+    * [数据处理](#数据处理)
+        * 选择
+        * 排序
+        * 切割
 
 #### Maven依赖
 
@@ -187,4 +199,138 @@ Future<?> task = context.doTask(() - > {
     MathMatrix dataMatrix = getZeroMatrix(dimension);
     dataMatrix.dotProduct(leftMatrix, false, rightMatrix, true, MathCalculator.PARALLEL);
 });
+```
+
+#### 数据表示
+
+* 未处理的形式(转换前)
+
+| 用户(User) | 旧手机类型(Item) | 新手机类型(Item) | 评分(Score) |
+| :----: | :----: | :----: | :----: |
+| Google Fan | Android | Android | 3 |
+| Google Fan | Android | IOS | 1 |
+| Google Fan | IOS | Android | 5 |
+| Apple Fan | IOS | IOS | 3 |
+| Apple Fan | Android | IOS | 5 |
+| Apple Fan | IOS | Android | 1 |
+
+* 已处理的形式(转换后)
+
+| 定性(Item) | 定性(Item) | 定性(User) | 定量(Score) |
+| :----: | :----: | :----: | :----: |
+| 0 | 0 | 0 | 3 |
+| 0 | 0 | 1 | 1 |
+| 0 | 1 | 0 | 5 |
+| 1 | 1 | 1 | 3 |
+| 1 | 0 | 1 | 5 |
+| 1 | 1 | 0 | 1 |
+
+#### 数据转换
+
+**数据转换器**(DataConverter)负责各种各样的格式转换为JStarCraft AI框架能够处理的**数据模块**(DataModule).
+
+* 定义数据属性
+
+```java
+// 定性属性
+Map<String, Class<?>> qualityDifinitions = new HashMap<>();
+qualityDifinitions.put("user", String.class);
+qualityDifinitions.put("item", String.class);
+// 定量属性
+Map<String, Class<?>> quantityDifinitions = new HashMap<>();
+quantityDifinitions.put("score", float.class);
+DataSpace space = new DataSpace(qualityDifinitions, quantityDifinitions);
+```
+
+* 定义数据模块
+
+```java
+TreeMap<Integer, String> configuration = new TreeMap<>();
+configuration.put(1, "user");
+configuration.put(3, "item");
+configuration.put(4, "score");
+DataModule module = space.makeDenseModule("module", configuration, 1000);
+```
+
+JStarCraft AI框架兼容的格式包括:
+
+* ARFF
+
+```java
+// ARFF转换器
+ArffConverter converter = new ArffConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+
+// 转换数据
+File file = new File(this.getClass().getResource("module.arff").toURI());
+InputStream stream = new FileInputStream(file);
+int count = converter.convert(module, stream, null, null, null);
+```
+
+* CSV
+
+```java
+// CSV转换器
+CsvConverter converter = new CsvConverter(',', space.getQualityAttributes(), space.getQuantityAttributes());
+
+// 转换数据
+File file = new File(this.getClass().getResource("module.csv").toURI());
+InputStream stream = new FileInputStream(file);
+int count = converter.convert(module, stream, null, null, null);
+```
+
+* JSON
+
+```java
+// JSON转换器
+JsonConverter converter = new JsonConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+// 转换数据
+File file = new File(this.getClass().getResource("module.json").toURI());
+InputStream stream = new FileInputStream(file);
+int count = converter.convert(module, stream, null, null, null);
+```
+
+* HQL
+
+```java
+// Query转换器
+QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+// 转换数据
+String selectDataHql = "select data.user, data.leftItem, data.rightItem, data.score from MockData data";
+// 使用Hibernate获取会话
+Session session = sessionFactory.openSession();
+Query query = session.createQuery(selectDataHql);
+ScrollableResults iterator = query.scroll();
+int count = converter.convert(dense, iterator, null, null, null);
+session.close();
+```
+
+* SQL
+
+```java
+QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+// 转换数据
+String selectDataSql = "select user, leftItem, rightItem, score from MockData";
+// 使用Hibernate获取会话
+Session session = sessionFactory.openSession();
+Query query = session.createQuery(selectDataSql);
+ScrollableResults iterator = query.scroll();
+int count = converter.convert(dense, iterator, null, null, null);
+session.close();
+```
+
+#### 数据处理
+
+* 选择
+
+```java
+```
+
+* 排序
+
+```java
+```
+
+* 切割
+
+```java
 ```
