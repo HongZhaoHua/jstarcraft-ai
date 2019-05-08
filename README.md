@@ -236,6 +236,7 @@ Future<?> task = context.doTask(() - > {
 Map<String, Class<?>> qualityDifinitions = new HashMap<>();
 qualityDifinitions.put("user", String.class);
 qualityDifinitions.put("item", String.class);
+
 // 定量属性
 Map<String, Class<?>> quantityDifinitions = new HashMap<>();
 quantityDifinitions.put("score", float.class);
@@ -252,7 +253,7 @@ configuration.put(4, "score");
 DataModule module = space.makeDenseModule("module", configuration, 1000);
 ```
 
-JStarCraft AI框架兼容的格式包括:
+**JStarCraft AI框架兼容的格式**
 
 * ARFF
 
@@ -283,6 +284,7 @@ int count = converter.convert(module, stream, null, null, null);
 ```java
 // JSON转换器
 JsonConverter converter = new JsonConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+
 // 转换数据
 File file = new File(this.getClass().getResource("module.json").toURI());
 InputStream stream = new FileInputStream(file);
@@ -294,6 +296,7 @@ int count = converter.convert(module, stream, null, null, null);
 ```java
 // Query转换器
 QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+
 // 转换数据
 String selectDataHql = "select data.user, data.leftItem, data.rightItem, data.score from MockData data";
 // 使用Hibernate获取会话
@@ -307,7 +310,9 @@ session.close();
 * SQL
 
 ```java
+// Query转换器
 QueryConverter converter = new QueryConverter(space.getQualityAttributes(), space.getQuantityAttributes());
+
 // 转换数据
 String selectDataSql = "select user, leftItem, rightItem, score from MockData";
 // 使用Hibernate获取会话
@@ -323,14 +328,17 @@ session.close();
 * 选择
 
 ```java
+
 ```
 
 * 排序
 
 ```java
+
 ```
 
 * 切割
 
 ```java
+
 ```
