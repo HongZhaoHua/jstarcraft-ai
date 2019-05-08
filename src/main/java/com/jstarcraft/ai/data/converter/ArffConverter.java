@@ -53,10 +53,10 @@ public class ArffConverter extends CsvConverter {
                     break;
                 } else {
                     String line = buffer.readLine();
-                    if (StringUtility.isBlank(line) || line.startsWith("%")) {
+                    if (StringUtility.isBlank(line) || line.startsWith(StringUtility.PERCENT)) {
                         continue;
                     }
-                    String[] datas = line.trim().split("[ \t]");
+                    String[] datas = line.trim().split("\\s+");
                     switch (datas[0].toUpperCase()) {
                     case "@RELATION": {
                         break;
@@ -127,10 +127,10 @@ public class ArffConverter extends CsvConverter {
                     break;
                 } else {
                     String line = buffer.readLine();
-                    if (StringUtility.isBlank(line) || line.startsWith("%")) {
+                    if (StringUtility.isBlank(line) || line.startsWith(StringUtility.PERCENT)) {
                         continue;
                     }
-                    String[] datas = line.trim().split("[ \t]");
+                    String[] datas = line.trim().split("\\s+");
                     switch (datas[0].toUpperCase()) {
                     case "@RELATION": {
                         break;
