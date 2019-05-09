@@ -21,10 +21,10 @@ import org.apache.parquet.hadoop.example.GroupWriteSupport;
 import org.apache.parquet.hadoop.util.HadoopInputFile;
 import org.apache.parquet.hadoop.util.HadoopOutputFile;
 import org.apache.parquet.schema.MessageType;
-import org.apache.parquet.schema.MessageTypeParser;
 import org.apache.parquet.schema.OriginalType;
 import org.apache.parquet.schema.PrimitiveType;
 import org.apache.parquet.schema.Types;
+import org.apache.parquet.schema.Types.MessageTypeBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -46,38 +46,18 @@ public class ParquetTestCase {
     }
 
     @Test
-    public void testReadWriteSimple() throws Exception {
+    public void testReadWriteHadoop() throws Exception {
         fileSystem.delete(path, true);
-
-        MessageType schema = Types.buildMessage().required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("left").required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("right").named("parquet");
-
-        {
-            GroupFactory factory = new SimpleGroupFactory(schema);
-            Group group = factory.newGroup().append("left", "Left").append("right", "Right");
-
-            GroupWriteSupport writeSupport = new GroupWriteSupport();
-            writeSupport.setSchema(schema, configuration);
-            ParquetWriter<Group> writer = new ParquetWriter<Group>(path, configuration, writeSupport);
-            writer.write(group);
-            writer.close();
-        }
-
-        {
-            GroupReadSupport readSupport = new GroupReadSupport();
-            ParquetReader<Group> reader = new ParquetReader<Group>(path, readSupport);
-
-            Group group = reader.read();
-            Assert.assertEquals("Left", group.getString("left", 0));
-            Assert.assertEquals("Right", group.getString("right", 0));
-            reader.close();
-        }
-    }
-
-    @Test
-    public void testReadWriteComplex() throws Exception {
-        fileSystem.delete(path, true);
-
-        MessageType schema = MessageTypeParser.parseMessageType("message parquet { required binary title (UTF8); required binary when (UTF8); repeated group where { required float longitude; required float latitude; } }");
+        /**
+         * <pre>
+         * message parquet { required binary title (UTF8); required binary when (UTF8); repeated group where { required float longitude; required float latitude; } }
+         * </pre>
+         */
+        MessageTypeBuilder builder = Types.buildMessage();
+        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("title");
+        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("when");
+        builder.repeatedGroup().required(PrimitiveType.PrimitiveTypeName.FLOAT).named("longitude").required(PrimitiveType.PrimitiveTypeName.FLOAT).named("latitude").named("where");
+        MessageType schema = builder.named("parquet");
 
         {
             GroupFactory factory = new SimpleGroupFactory(schema);
