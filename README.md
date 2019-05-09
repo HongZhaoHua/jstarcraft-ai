@@ -229,6 +229,10 @@ Future<?> task = context.doTask(() - > {
 
 **数据转换器**(DataConverter)负责各种各样的格式转换为JStarCraft AI框架能够处理的**数据模块**(DataModule).
 
+JStarCraft AI框架各个转换器与其它系统之间的关系: 
+
+![converter](https://github.com/HongZhaoHua/jstarcraft-reference/blob/master/ai/%E8%BD%AC%E6%8D%A2%E5%99%A8%E7%B1%BB%E5%9B%BE.png "转换器")
+
 * 定义数据属性
 
 ```java
