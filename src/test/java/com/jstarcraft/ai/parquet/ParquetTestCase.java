@@ -48,6 +48,7 @@ public class ParquetTestCase {
     @Test
     public void testReadWriteHadoop() throws Exception {
         fileSystem.delete(path, true);
+
         /**
          * <pre>
          * message parquet { required binary title (UTF8); required binary when (UTF8); repeated group where { required float longitude; required float latitude; } }
