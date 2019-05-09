@@ -22,6 +22,9 @@ import org.apache.parquet.hadoop.util.HadoopInputFile;
 import org.apache.parquet.hadoop.util.HadoopOutputFile;
 import org.apache.parquet.schema.MessageType;
 import org.apache.parquet.schema.MessageTypeParser;
+import org.apache.parquet.schema.OriginalType;
+import org.apache.parquet.schema.PrimitiveType;
+import org.apache.parquet.schema.Types;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -46,7 +49,7 @@ public class ParquetTestCase {
     public void testReadWriteSimple() throws Exception {
         fileSystem.delete(path, true);
 
-        MessageType schema = MessageTypeParser.parseMessageType("message parquet { required binary left (UTF8); required binary right (UTF8); }");
+        MessageType schema = Types.buildMessage().required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("left").required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("right").named("parquet");
 
         {
             GroupFactory factory = new SimpleGroupFactory(schema);
