@@ -38,7 +38,7 @@ public class ParquetTestCase {
     public void testReadWriteSimple() throws Exception {
         fileSystem.delete(path, true);
 
-        MessageType schema = MessageTypeParser.parseMessageType("message KeyValue { required binary left (UTF8); required binary right (UTF8); }");
+        MessageType schema = MessageTypeParser.parseMessageType("message parquet { required binary left (UTF8); required binary right (UTF8); }");
 
         {
             GroupFactory factory = new SimpleGroupFactory(schema);
@@ -66,7 +66,7 @@ public class ParquetTestCase {
     public void testReadWriteComplex() throws Exception {
         fileSystem.delete(path, true);
 
-        MessageType schema = MessageTypeParser.parseMessageType("message Record { required binary title (UTF8); required binary when (UTF8); repeated group where { required float longitude; required float latitude; } }");
+        MessageType schema = MessageTypeParser.parseMessageType("message parquet { required binary title (UTF8); required binary when (UTF8); repeated group where { required float longitude; required float latitude; } }");
 
         {
             GroupFactory factory = new SimpleGroupFactory(schema);
