@@ -99,7 +99,7 @@ public class LocalMatrix implements MathMatrix {
 	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
-			SectionMatrixScalar scalar = new SectionMatrixScalar();
+			LocalMatrixScalar scalar = new LocalMatrixScalar();
 			for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 				for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 					int cursor = rowIndex * columnSize + columnIndex;
@@ -119,7 +119,7 @@ public class LocalMatrix implements MathMatrix {
 				for (int index = 0; index < size; index++) {
 					int columnIndex = index;
 					context.doStructureByAny(index, () -> {
-						SectionMatrixScalar scalar = new SectionMatrixScalar();
+						LocalMatrixScalar scalar = new LocalMatrixScalar();
 						for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
@@ -143,7 +143,7 @@ public class LocalMatrix implements MathMatrix {
 				for (int index = 0; index < size; index++) {
 					int rowIndex = index;
 					context.doStructureByAny(index, () -> {
-						SectionMatrixScalar scalar = new SectionMatrixScalar();
+						LocalMatrixScalar scalar = new LocalMatrixScalar();
 						for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 							int cursor = rowIndex * columnSize + columnIndex;
 							scalar.update(cursor);
@@ -301,16 +301,16 @@ public class LocalMatrix implements MathMatrix {
 
 	@Override
 	public Iterator<MatrixScalar> iterator() {
-		return new SectionMatrixIterator();
+		return new LocalMatrixIterator();
 	}
 
-	private class SectionMatrixIterator implements Iterator<MatrixScalar> {
+	private class LocalMatrixIterator implements Iterator<MatrixScalar> {
 
 		private int cursor;
 
 		private int size = rowSize * columnSize;
 
-		private SectionMatrixScalar term = new SectionMatrixScalar();
+		private LocalMatrixScalar term = new LocalMatrixScalar();
 
 		@Override
 		public boolean hasNext() {
@@ -330,7 +330,7 @@ public class LocalMatrix implements MathMatrix {
 
 	}
 
-	private class SectionMatrixScalar implements MatrixScalar {
+	private class LocalMatrixScalar implements MatrixScalar {
 
 		private int index, row, column;
 

@@ -37,7 +37,7 @@ public class RowGlobalMatrix extends GlobalMatrix {
 	public ScalarIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
 		switch (mode) {
 		case SERIAL: {
-			CompositeMatrixScalar scalar = new CompositeMatrixScalar();
+			GlobalMatrixScalar scalar = new GlobalMatrixScalar();
 			int size = components.length;
 			for (int point = 0; point < size; point++) {
 				MathMatrix matrix = components[point];
@@ -59,7 +59,7 @@ public class RowGlobalMatrix extends GlobalMatrix {
 				MathMatrix matrix = components[point];
 				int split = splits[point];
 				context.doStructureByAny(point, () -> {
-					CompositeMatrixScalar scalar = new CompositeMatrixScalar();
+					GlobalMatrixScalar scalar = new GlobalMatrixScalar();
 					for (MatrixScalar term : matrix) {
 						scalar.update(term, term.getRow() + split, term.getColumn());
 						for (MathAccessor<MatrixScalar> accessor : accessors) {
@@ -175,7 +175,7 @@ public class RowGlobalMatrix extends GlobalMatrix {
 
 		private Iterator<MatrixScalar> iterator = components[index].iterator();
 
-		private CompositeMatrixScalar term = new CompositeMatrixScalar();
+		private GlobalMatrixScalar term = new GlobalMatrixScalar();
 
 		@Override
 		public boolean hasNext() {

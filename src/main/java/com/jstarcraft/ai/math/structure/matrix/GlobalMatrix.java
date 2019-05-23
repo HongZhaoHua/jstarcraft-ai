@@ -184,7 +184,7 @@ public abstract class GlobalMatrix implements MathMatrix, MathMonitor<MatrixScal
 		return buffer.toString();
 	}
 
-	protected class CompositeMatrixScalar implements MatrixScalar {
+	protected class GlobalMatrixScalar implements MatrixScalar {
 
 		private MatrixScalar term;
 
