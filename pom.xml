@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jstarcraft</groupId>
-    <artifactId>ai</artifactId>
+    <artifactId>jstarcraft-ai</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
