@@ -12,3 +12,9 @@ https://www.cnblogs.com/ITtangtang/p/7977312.html
 
 流形学习-高维数据的降维与可视化:
 http://blog.csdn.net/u012162613/article/details/45920827
+
+各领域公开数据集:
+https://zhuanlan.zhihu.com/p/25138563
+
+推荐领域数据集:
+https://www.cnblogs.com/startover/p/3261476.html
