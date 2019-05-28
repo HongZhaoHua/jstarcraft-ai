@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.modem;
 
-import com.jstarcraft.core.codec.protocolbufferx.annotation.ProtocolConfiguration;
+import com.jstarcraft.core.codec.annotation.ProtocolConfiguration;
 
 @ProtocolConfiguration
 public enum MockEnumeration {
