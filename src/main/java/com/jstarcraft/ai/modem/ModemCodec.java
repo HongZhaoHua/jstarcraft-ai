@@ -22,7 +22,7 @@ import com.jstarcraft.core.codec.KryoContentCodec;
 import com.jstarcraft.core.codec.ProtocolContentCodec;
 import com.jstarcraft.core.codec.specification.CodecDefinition;
 import com.jstarcraft.core.codec.specification.CodecSpecification;
-import com.jstarcraft.core.utility.JsonUtility;
+import com.jstarcraft.core.common.conversion.json.JsonUtility;
 import com.jstarcraft.core.utility.ReflectionUtility;
 import com.jstarcraft.core.utility.StringUtility;
 import com.jstarcraft.core.utility.TypeUtility;
