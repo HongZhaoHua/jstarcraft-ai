@@ -6,8 +6,8 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 import com.jstarcraft.ai.modem.ModemCycle;
 import com.jstarcraft.ai.modem.ModemDefinition;
+import com.jstarcraft.core.common.reflection.ReflectionUtility;
 import com.jstarcraft.core.utility.ArrayUtility;
-import com.jstarcraft.core.utility.ReflectionUtility;
 
 /**
  * 连续概率分布
