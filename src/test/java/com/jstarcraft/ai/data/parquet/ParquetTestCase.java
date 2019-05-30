@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.parquet;
+package com.jstarcraft.ai.data.parquet;
 
 import org.apache.avro.Schema;
 import org.apache.avro.SchemaBuilder;
@@ -61,16 +61,19 @@ public class ParquetTestCase {
         MessageType schema = builder.named("parquet");
 
         {
-            GroupFactory factory = new SimpleGroupFactory(schema);
-            Group group = factory.newGroup().append("title", "title").append("when", "2020-01-01 00:00:00");
-            Group where = group.addGroup("where");
-            where.append("longitude", 0F);
-            where.append("latitude", 0F);
-
             GroupWriteSupport writeSupport = new GroupWriteSupport();
             writeSupport.setSchema(schema, configuration);
             ParquetWriter<Group> writer = new ParquetWriter<Group>(path, configuration, writeSupport);
-            writer.write(group);
+
+            for (int index = 0; index < 5; index++) {
+                GroupFactory factory = new SimpleGroupFactory(schema);
+                Group group = factory.newGroup().append("title", "title").append("when", "2020-01-01 00:00:00");
+                Group where = group.addGroup("where");
+                where.append("longitude", (float) index);
+                where.append("latitude", (float) index);
+                writer.write(group);
+            }
+
             writer.close();
         }
 
@@ -78,12 +81,15 @@ public class ParquetTestCase {
             GroupReadSupport readSupport = new GroupReadSupport();
             ParquetReader<Group> reader = new ParquetReader<Group>(path, readSupport);
 
-            Group group = reader.read();
-            Group where = group.getGroup("where", 0);
-            Assert.assertEquals("title", group.getString("title", 0));
-            Assert.assertEquals("2020-01-01 00:00:00", group.getString("when", 0));
-            Assert.assertEquals(0F, where.getFloat("longitude", 0), 0F);
-            Assert.assertEquals(0F, where.getFloat("latitude", 0), 0F);
+            for (int index = 0; index < 5; index++) {
+                Group group = reader.read();
+                Group where = group.getGroup("where", 0);
+                Assert.assertEquals("title", group.getString("title", 0));
+                Assert.assertEquals("2020-01-01 00:00:00", group.getString("when", 0));
+                Assert.assertEquals(index, where.getFloat("longitude", 0), 0F);
+                Assert.assertEquals(index, where.getFloat("latitude", 0), 0F);
+            }
+
             reader.close();
         }
     }
