@@ -18,13 +18,13 @@ public class RowHashMatrixTestCase extends HashMatrixTestCase {
 	@Test
 	public void testDefault() {
 		int dimension = 10;
-		HashMatrix matrix = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatAVLTreeMap());
+		HashMatrix matrix = new HashMatrix(true, dimension, dimension, new Int2FloatAVLTreeMap());
 		Assert.assertTrue(Float.isNaN(matrix.getValue(0, 0)));
 	}
 
 	@Override
 	protected HashMatrix getRandomMatrix(int dimension) {
-		HashMatrix matrix = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatAVLTreeMap());
+		HashMatrix matrix = new HashMatrix(true, dimension, dimension, new Int2FloatAVLTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
@@ -37,7 +37,7 @@ public class RowHashMatrixTestCase extends HashMatrixTestCase {
 
 	@Override
 	protected HashMatrix getZeroMatrix(int dimension) {
-		HashMatrix matrix = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatAVLTreeMap());
+		HashMatrix matrix = new HashMatrix(true, dimension, dimension, new Int2FloatAVLTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				matrix.setValue(rowIndex, columnIndex, 0F);

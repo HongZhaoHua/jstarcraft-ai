@@ -14,7 +14,7 @@ public class ColumnGlobalMatrixTestCase extends MatrixTestCase {
 	@Override
 	protected ColumnGlobalMatrix getRandomMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(dimension, 1);
-		HashMatrix table = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension - 1; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
@@ -33,7 +33,7 @@ public class ColumnGlobalMatrixTestCase extends MatrixTestCase {
 	@Override
 	protected ColumnGlobalMatrix getZeroMatrix(int dimension) {
 		MathMatrix from = DenseMatrix.valueOf(dimension, 1);
-		HashMatrix table = HashMatrix.valueOf(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension - 1; columnIndex++) {
 				table.setValue(rowIndex, columnIndex, 0F);

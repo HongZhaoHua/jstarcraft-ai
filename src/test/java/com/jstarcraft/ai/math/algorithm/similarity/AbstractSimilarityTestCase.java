@@ -27,7 +27,7 @@ public abstract class AbstractSimilarityTestCase {
 	public void test() {
 		int rowSize = 50;
 		int columnSize = 100;
-		HashMatrix table = HashMatrix.valueOf(true, rowSize, columnSize, new Int2FloatRBTreeMap());
+		HashMatrix table = new HashMatrix(true, rowSize, columnSize, new Int2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
