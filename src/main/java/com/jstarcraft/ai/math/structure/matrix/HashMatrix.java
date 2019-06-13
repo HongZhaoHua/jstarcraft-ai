@@ -160,16 +160,46 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     @Override
     public HashMatrix scaleValues(float value) {
-        for (Entry term : keyValues.int2FloatEntrySet()) {
-            term.setValue(term.getFloatValue() * value);
+        if (Float.isNaN(value)) {
+            int oldElementSize = keyValues.size();
+            int oldKnownSize = getKnownSize();
+            int oldUnknownSize = getUnknownSize();
+            keyValues.clear();
+            int newElementSize = 0;
+            int newKnownSize = 0;
+            int newUnknownSize = rowSize * columnSize;
+            if (oldElementSize != newElementSize) {
+                for (MathMonitor<MatrixScalar> monitor : monitors.keySet()) {
+                    monitor.notifySizeChanged(this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
+                }
+            }
+        } else {
+            for (Entry term : keyValues.int2FloatEntrySet()) {
+                term.setValue(term.getFloatValue() * value);
+            }
         }
         return this;
     }
 
     @Override
     public HashMatrix shiftValues(float value) {
-        for (Entry term : keyValues.int2FloatEntrySet()) {
-            term.setValue(term.getFloatValue() + value);
+        if (Float.isNaN(value)) {
+            int oldElementSize = keyValues.size();
+            int oldKnownSize = getKnownSize();
+            int oldUnknownSize = getUnknownSize();
+            keyValues.clear();
+            int newElementSize = 0;
+            int newKnownSize = 0;
+            int newUnknownSize = rowSize * columnSize;
+            if (oldElementSize != newElementSize) {
+                for (MathMonitor<MatrixScalar> monitor : monitors.keySet()) {
+                    monitor.notifySizeChanged(this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
+                }
+            }
+        } else {
+            for (Entry term : keyValues.int2FloatEntrySet()) {
+                term.setValue(term.getFloatValue() + value);
+            }
         }
         return this;
     }
@@ -825,32 +855,46 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     @Override
     public void setValue(int rowIndex, int columnIndex, float value) {
+        int index;
         if (orientation) {
-            keyValues.put(rowIndex * columnSize + columnIndex, value);
+            index = rowIndex * columnSize + columnIndex;
         } else {
-            keyValues.put(columnIndex * rowSize + rowIndex, value);
+            index = columnIndex * rowSize + rowIndex;
+        }
+        if (Float.isNaN(value)) {
+            keyValues.remove(index);
+        } else {
+            keyValues.put(index, value);
         }
     }
 
     @Override
     public void scaleValue(int rowIndex, int columnIndex, float value) {
+        int index = 0;
         if (orientation) {
-            value *= keyValues.get(rowIndex * columnSize + columnIndex);
-            keyValues.put(rowIndex * columnSize + columnIndex, value);
+            index = rowIndex * columnSize + columnIndex;
         } else {
-            value *= keyValues.get(columnIndex * rowSize + rowIndex);
-            keyValues.put(columnIndex * rowSize + rowIndex, value);
+            index = columnIndex * rowSize + rowIndex;
+        }
+        if (Float.isNaN(value)) {
+            keyValues.remove(index);
+        } else {
+            keyValues.put(index, keyValues.get(index) * value);
         }
     }
 
     @Override
     public void shiftValue(int rowIndex, int columnIndex, float value) {
+        int index = 0;
         if (orientation) {
-            value += keyValues.get(rowIndex * columnSize + columnIndex);
-            keyValues.put(rowIndex * columnSize + columnIndex, value);
+            index = rowIndex * columnSize + columnIndex;
         } else {
-            value += keyValues.get(columnIndex * rowSize + rowIndex);
-            keyValues.put(columnIndex * rowSize + rowIndex, value);
+            index = columnIndex * rowSize + rowIndex;
+        }
+        if (Float.isNaN(value)) {
+            keyValues.remove(index);
+        } else {
+            keyValues.put(index, keyValues.get(index) + value);
         }
     }
 
