@@ -20,9 +20,11 @@ http://www.cnblogs.com/forfuture1978/category/300665.html
 http://blog.csdn.net/wuyinggui10000/article/details/45502445
 
 Lucene(修真篇):
+https://qindongliang.iteye.com/category/282568
 Lucene(仙界篇):
+https://qindongliang.iteye.com/category/297975
 Lucene(神界篇):
-http://qindongliang.iteye.com/category/282568
+https://qindongliang.iteye.com/category/317466
 
 Lucene 索引文件宏观结构:
 http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
@@ -35,6 +37,9 @@ http://www.tuicool.com/articles/RNVvIzu
 
 Lucene多线程创建索引及多目录下查询索引:
 http://blog.csdn.net/qs_5683955/article/details/51281943
+
+Lucene 6.0实战:
+http://codepub.cn/tags/Lucene/
 
 实时搜索引擎Elasticsearch:
 http://blog.csdn.net/xialei199023/article/details/47680401
