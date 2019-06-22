@@ -216,7 +216,7 @@ Future<?> task = context.doTask(() - > {
 
 * 已处理的形式(转换后)
 
-| 定性(Item) | 定性(Item) | 定性(User) | 定量(Score) |
+| 定性(User) | 定性(Item) | 定性(Item) | 定量(Score) |
 | :----: | :----: | :----: | :----: |
 | 0 | 0 | 0 | 3 |
 | 0 | 0 | 1 | 1 |
