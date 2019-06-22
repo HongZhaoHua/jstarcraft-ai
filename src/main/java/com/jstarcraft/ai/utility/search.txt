@@ -10,6 +10,9 @@ https://www.cnblogs.com/xiaobai1226/p/7652093.html
 lucene原理及java实现:
 https://blog.csdn.net/liuhaiabc/article/details/52346493
 
+深入理解Lucene默认打分算法:
+https://www.biaodianfu.com/lucene-score.html
+
 搜索引擎:
 https://www.cnblogs.com/leeSmall/category/1210814.html
 
