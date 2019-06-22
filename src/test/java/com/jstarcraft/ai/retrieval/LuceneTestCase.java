@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.lucene;
+package com.jstarcraft.ai.retrieval;
 
 import java.io.File;
 import java.nio.file.Path;
