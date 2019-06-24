@@ -32,7 +32,7 @@ https://blog.csdn.net/huangzhilin2015/article/details/89329854
 https://blog.csdn.net/huangzhilin2015/article/details/89372127
 
  一步一步跟我学习Lucene:
-http://blog.csdn.net/wuyinggui10000/article/details/45502445
+https://blog.csdn.net/wuyinggui10000/article/category/3173543
 
 Lucene5学习之使用Ansj-seg分词器
 https://yq.aliyun.com/articles/45372
