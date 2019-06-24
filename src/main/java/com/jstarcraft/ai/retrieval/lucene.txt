@@ -1,30 +1,10 @@
+Lucene 索引文件宏观结构:
+http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
+
 史上最全中文分词工具整理:
 https://blog.csdn.net/fendouaini/article/details/82027310
 
-搜索引擎:
-https://www.cnblogs.com/leeSmall/category/1210814.html
-
-Lucene介绍与入门使用:
-https://www.cnblogs.com/xiaobai1226/p/7652093.html
-
-lucene原理及java实现:
-https://blog.csdn.net/liuhaiabc/article/details/52346493
-
-深入理解Lucene默认打分算法:
-https://www.biaodianfu.com/lucene-score.html
-
-Lucene打分公式详解(TFIDFSimilarity):
-https://blog.csdn.net/huangzhilin2015/article/details/89296203
-
-Lucene检索源码解析:
-https://blog.csdn.net/huangzhilin2015/article/details/89329854
-https://blog.csdn.net/huangzhilin2015/article/details/89372127
-
-Lucene 原理与代码分析完整版:
-http://www.cnblogs.com/forfuture1978/category/300665.html
-
- 一步一步跟我学习Lucene:
-http://blog.csdn.net/wuyinggui10000/article/details/45502445
+4.x
 
 Lucene(修真篇):
 https://qindongliang.iteye.com/category/282568
@@ -33,8 +13,26 @@ https://qindongliang.iteye.com/category/297975
 Lucene(神界篇):
 https://qindongliang.iteye.com/category/317466
 
-Lucene 索引文件宏观结构:
-http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
+Lucene 原理与代码分析完整版:
+http://www.cnblogs.com/forfuture1978/category/300665.html
+
+Lucene技术学习总结:
+https://www.mayou18.com/category/7pJjYrLb.html
+
+----- 5.x -----
+
+Lucene介绍与入门使用:
+https://www.cnblogs.com/xiaobai1226/p/7652093.html
+
+lucene原理及java实现:
+https://blog.csdn.net/liuhaiabc/article/details/52346493
+
+Lucene检索源码解析:
+https://blog.csdn.net/huangzhilin2015/article/details/89329854
+https://blog.csdn.net/huangzhilin2015/article/details/89372127
+
+ 一步一步跟我学习Lucene:
+http://blog.csdn.net/wuyinggui10000/article/details/45502445
 
 Lucene5学习之使用Ansj-seg分词器
 https://yq.aliyun.com/articles/45372
@@ -45,8 +43,24 @@ http://www.tuicool.com/articles/RNVvIzu
 Lucene多线程创建索引及多目录下查询索引:
 http://blog.csdn.net/qs_5683955/article/details/51281943
 
+Lucene打分公式详解(TFIDFSimilarity):
+https://blog.csdn.net/huangzhilin2015/article/details/89296203
+
+----- 6.x -----
+
 Lucene 6.0实战:
 http://codepub.cn/tags/Lucene/
+
+Lucene深入学习:
+https://blog.csdn.net/jiangchao858/article/category/7242214
+
+深入理解Lucene默认打分算法:
+https://www.biaodianfu.com/lucene-score.html
+
+----- 7.x -----
+
+搜索引擎:
+https://www.cnblogs.com/leeSmall/category/1210814.html
 
 lucene增量建立索引，近实时查询以及多线程建立索引的项目实例:
 https://blog.csdn.net/m0_37556444/article/details/82777547?tdsourcetag=s_pcqq_aiomsg
