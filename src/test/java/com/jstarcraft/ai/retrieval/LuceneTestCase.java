@@ -24,7 +24,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.hankcs.lucene.HanLPIndexAnalyzer;
+import com.jstarcraft.ai.retrieval.hanlp.HanLPIndexAnalyzer;
 import com.jstarcraft.core.utility.StringUtility;
 
 public class LuceneTestCase {
@@ -78,24 +78,24 @@ public class LuceneTestCase {
         {
             Document document = indexSearcher.doc(topDocs.scoreDocs[0].doc);
             // 文件名称
-            Assert.assertEquals("chinese.txt",document.get("fileName"));
+            Assert.assertEquals("chinese.txt", document.get("fileName"));
             // 文件内容
-            Assert.assertEquals("我爱你",document.get("fileContent"));
+            Assert.assertEquals("我爱你", document.get("fileContent"));
             // 文件大小
-            Assert.assertEquals("9",document.get("fileSize"));
+            Assert.assertEquals("9", document.get("fileSize"));
             // 文件路径
-            Assert.assertEquals("lucene\\documents\\chinese.txt",document.get("filePath"));
+            Assert.assertEquals("lucene\\documents\\chinese.txt", document.get("filePath"));
         }
         {
             Document document = indexSearcher.doc(topDocs.scoreDocs[1].doc);
             // 文件名称
-            Assert.assertEquals("english.txt",document.get("fileName"));
+            Assert.assertEquals("english.txt", document.get("fileName"));
             // 文件内容
-            Assert.assertEquals("i love you",document.get("fileContent"));
+            Assert.assertEquals("i love you", document.get("fileContent"));
             // 文件大小
-            Assert.assertEquals("10",document.get("fileSize"));
+            Assert.assertEquals("10", document.get("fileSize"));
             // 文件路径
-            Assert.assertEquals("lucene\\documents\\english.txt",document.get("filePath"));
+            Assert.assertEquals("lucene\\documents\\english.txt", document.get("filePath"));
         }
         indexReader.close();
     }
