@@ -1,11 +1,19 @@
+分词
+
+史上最全中文分词工具整理:
+https://blog.csdn.net/fendouaini/article/details/82027310
+
+Ansj中文分词:
+https://github.com/NLPchina/ansj_seg
+
+IK中文分词:
+https://github.com/magese/ik-analyzer-solr
+
 实时搜索引擎Elasticsearch:
 http://blog.csdn.net/xialei199023/article/details/47680401
 
 Lucene 索引文件宏观结构:
 http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
-
-史上最全中文分词工具整理:
-https://blog.csdn.net/fendouaini/article/details/82027310
 
 4.x
 

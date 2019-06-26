@@ -6,16 +6,22 @@ import org.apache.lucene.analysis.Tokenizer;
 
 import java.util.Set;
 
-public class HanLPAnalyzer extends Analyzer {
+/**
+ * HanLP查询分析器(仅用于查询)
+ * 
+ * @author Birdy
+ *
+ */
+public class HanLPQueryAnalyzer extends Analyzer {
 
     private boolean enablePorterStemming;
     private Set<String> filter;
 
     /**
      * @param filter               停用词
-     * @param enablePorterStemming 是否分析词干（仅限英文）
+     * @param enablePorterStemming 是否分析词干(仅限英文)
      */
-    public HanLPAnalyzer(Set<String> filter, boolean enablePorterStemming) {
+    public HanLPQueryAnalyzer(Set<String> filter, boolean enablePorterStemming) {
         this.filter = filter;
         this.enablePorterStemming = enablePorterStemming;
     }
@@ -23,11 +29,11 @@ public class HanLPAnalyzer extends Analyzer {
     /**
      * @param enablePorterStemming 是否分析词干.进行单复数,时态的转换
      */
-    public HanLPAnalyzer(boolean enablePorterStemming) {
+    public HanLPQueryAnalyzer(boolean enablePorterStemming) {
         this.enablePorterStemming = enablePorterStemming;
     }
 
-    public HanLPAnalyzer() {
+    public HanLPQueryAnalyzer() {
         super();
     }
 

@@ -6,6 +6,12 @@ import org.apache.lucene.analysis.Tokenizer;
 
 import java.util.Set;
 
+/**
+ * HanLP索引分析器(仅用于索引)
+ * 
+ * @author Birdy
+ *
+ */
 public class HanLPIndexAnalyzer extends Analyzer {
 
     private boolean pstemming;

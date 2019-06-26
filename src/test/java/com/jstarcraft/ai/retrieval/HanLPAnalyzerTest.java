@@ -25,7 +25,7 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanLPAnalyzer;
+import com.jstarcraft.ai.retrieval.hanlp.HanLPQueryAnalyzer;
 import com.jstarcraft.ai.retrieval.hanlp.HanLPTokenizerFactory;
 
 import junit.framework.TestCase;
@@ -38,7 +38,7 @@ public class HanLPAnalyzerTest extends TestCase {
             System.out.print(text.charAt(i) + "" + i + " ");
         }
         System.out.println();
-        Analyzer analyzer = new HanLPAnalyzer();
+        Analyzer analyzer = new HanLPQueryAnalyzer();
         TokenStream tokenStream = analyzer.tokenStream("field", text);
         tokenStream.reset();
         while (tokenStream.incrementToken()) {
@@ -54,7 +54,7 @@ public class HanLPAnalyzerTest extends TestCase {
     }
 
     public void testIndexAndSearch() throws Exception {
-        Analyzer analyzer = new HanLPAnalyzer();////////////////////////////////////////////////////
+        Analyzer analyzer = new HanLPQueryAnalyzer();////////////////////////////////////////////////////
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
         Directory directory = new RAMDirectory();

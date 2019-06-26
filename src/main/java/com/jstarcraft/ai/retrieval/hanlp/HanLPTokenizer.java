@@ -35,7 +35,7 @@ public class HanLPTokenizer extends Tokenizer {
     private final PorterStemmer stemmer = new PorterStemmer();
 
     /**
-     * 单文档当前所在的总offset，当reset（切换multi-value fields中的value）的时候不清零，在end（切换field）时清零
+     * 单文档当前所在的总offset,当reset(切换multi-value fields中的value)的时候不清零,在end(切换field)时清零
      */
     private int totalOffset = 0;
 
@@ -67,8 +67,8 @@ public class HanLPTokenizer extends Tokenizer {
             if (term == null) {
                 break;
             }
-            if (TextUtility.isBlank(term.word)) // 过滤掉空白符，提高索引效率
-            {
+            if (TextUtility.isBlank(term.word)) {
+                // 过滤掉空白符，提高索引效率
                 continue;
             }
             if (enablePorterStemming && term.nature == Nature.nx) {
@@ -103,7 +103,7 @@ public class HanLPTokenizer extends Tokenizer {
     }
 
     /**
-     * 必须重载的方法，否则在批量索引文件时将会导致文件索引失败
+     * 必须重载的方法,否则在批量索引文件时将会导致文件索引失败
      */
     @Override
     public void reset() throws IOException {

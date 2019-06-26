@@ -1,0 +1,2 @@
+word2vec java版本的一个实现:
+https://github.com/NLPchina/Word2VEC_java
