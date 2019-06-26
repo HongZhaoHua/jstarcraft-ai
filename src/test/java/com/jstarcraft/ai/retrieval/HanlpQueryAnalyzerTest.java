@@ -30,7 +30,7 @@ import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizerFactory;
 
 import junit.framework.TestCase;
 
-public class HanlpAnalyzerTest extends TestCase {
+public class HanlpQueryAnalyzerTest extends TestCase {
 
     public void testCreateComponents() throws Exception {
         String text = "中华人民共和国很辽阔";
