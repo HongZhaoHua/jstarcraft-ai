@@ -15,7 +15,7 @@ import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.TraditionalChineseTokenizer;
 
-public class HanLPTokenizerFactory extends TokenizerFactory {
+public class HanlpTokenizerFactory extends TokenizerFactory {
 
     private boolean enableIndexMode;
     private boolean enablePorterStemming;
@@ -36,7 +36,7 @@ public class HanLPTokenizerFactory extends TokenizerFactory {
      *
      * @param args 通过这个Map保存xml中的配置项
      */
-    public HanLPTokenizerFactory(Map<String, String> args) {
+    public HanlpTokenizerFactory(Map<String, String> args) {
         super(args);
         enableIndexMode = getBoolean(args, "enableIndexMode", true);
         enablePorterStemming = getBoolean(args, "enablePorterStemming", false);
@@ -86,6 +86,6 @@ public class HanLPTokenizerFactory extends TokenizerFactory {
             };
         }
 
-        return new HanLPTokenizer(segment, stopWordDictionary, enablePorterStemming);
+        return new HanlpTokenizer(segment, stopWordDictionary, enablePorterStemming);
     }
 }

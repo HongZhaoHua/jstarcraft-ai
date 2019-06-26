@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Birdy
  *
  */
-public class HanLPQueryAnalyzer extends Analyzer {
+public class HanlpQueryAnalyzer extends Analyzer {
 
     private boolean enablePorterStemming;
     private Set<String> filter;
@@ -21,7 +21,7 @@ public class HanLPQueryAnalyzer extends Analyzer {
      * @param filter               停用词
      * @param enablePorterStemming 是否分析词干(仅限英文)
      */
-    public HanLPQueryAnalyzer(Set<String> filter, boolean enablePorterStemming) {
+    public HanlpQueryAnalyzer(Set<String> filter, boolean enablePorterStemming) {
         this.filter = filter;
         this.enablePorterStemming = enablePorterStemming;
     }
@@ -29,20 +29,20 @@ public class HanLPQueryAnalyzer extends Analyzer {
     /**
      * @param enablePorterStemming 是否分析词干.进行单复数,时态的转换
      */
-    public HanLPQueryAnalyzer(boolean enablePorterStemming) {
+    public HanlpQueryAnalyzer(boolean enablePorterStemming) {
         this.enablePorterStemming = enablePorterStemming;
     }
 
-    public HanLPQueryAnalyzer() {
+    public HanlpQueryAnalyzer() {
         super();
     }
 
     /**
-     * 重载Analyzer接口，构造分词组件
+     * 重载Analyzer接口,构造分词组件
      */
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new HanLPTokenizer(HanLP.newSegment().enableOffset(true), filter, enablePorterStemming);
+        Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableOffset(true), filter, enablePorterStemming);
         return new TokenStreamComponents(tokenizer);
     }
 }

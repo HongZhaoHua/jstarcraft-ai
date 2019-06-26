@@ -13,7 +13,7 @@ import java.util.*;
 /**
  * 拼音TokenFilter
  */
-public final class HanLPPinyinTokenFilter extends TokenFilter {
+public final class HanlpPinyinTokenFilter extends TokenFilter {
 
     // 词性
     private final TypeAttribute typeAttribute = addAttribute(TypeAttribute.class);
@@ -22,20 +22,20 @@ public final class HanLPPinyinTokenFilter extends TokenFilter {
     // 是否保留原词
     private final boolean original;
     // 拼音转换器
-    private final Collection<HanLPPinyinConverter> converters;
+    private final Collection<HanlpPinyinConverter> converters;
     // 待输出拼音队列
     private final Queue<CharSequence> queue;
 
-    public HanLPPinyinTokenFilter(TokenStream input) {
+    public HanlpPinyinTokenFilter(TokenStream input) {
         // 默认全拼加首字母
-        this(input, new HanLPPinyinConverter.ToPinyinString(), new HanLPPinyinConverter.ToPinyinFirstCharString());
+        this(input, new HanlpPinyinConverter.ToPinyinString(), new HanlpPinyinConverter.ToPinyinFirstCharString());
     }
 
-    public HanLPPinyinTokenFilter(TokenStream input, HanLPPinyinConverter... converters) {
+    public HanlpPinyinTokenFilter(TokenStream input, HanlpPinyinConverter... converters) {
         this(input, true, Arrays.asList(converters));
     }
 
-    public HanLPPinyinTokenFilter(TokenStream input, boolean original, Collection<HanLPPinyinConverter> converters) {
+    public HanlpPinyinTokenFilter(TokenStream input, boolean original, Collection<HanlpPinyinConverter> converters) {
         super(input);
         this.original = original;
         this.converters = converters;
@@ -54,7 +54,7 @@ public final class HanLPPinyinTokenFilter extends TokenFilter {
             if (input.incrementToken()) {
                 String text = charTermAttribute.toString();
                 List<Pinyin> pinyin = PinyinDictionary.convertToPinyin(text);
-                for (HanLPPinyinConverter converter : converters) {
+                for (HanlpPinyinConverter converter : converters) {
                     CharSequence pinyinTerm = converter.convert(text, pinyin);
                     if (pinyinTerm != null && pinyinTerm.length() > 0) {
                         queue.offer(pinyinTerm);

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 将分词器包装起来，每次输出一个token
+ * 将分词器包装起来,每次输出一个token
  *
  * @author hankcs
  */
@@ -30,7 +30,7 @@ public class SegmentWrapper {
      */
     private Iterator<Term> iterator;
     /**
-     * term的偏移量，由于wrapper是按行读取的，必须对term.offset做一个校正
+     * term的偏移量,由于wrapper是按行读取的,必须对term.offset做一个校正
      */
     int offset;
     /**

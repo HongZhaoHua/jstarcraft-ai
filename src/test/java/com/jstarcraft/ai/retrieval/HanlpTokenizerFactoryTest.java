@@ -11,16 +11,16 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.analysis.util.TokenizerFactory;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanLPTokenizerFactory;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizerFactory;
 
 import junit.framework.TestCase;
 
-public class HanLPTokenizerFactoryTest extends TestCase {
+public class HanlpTokenizerFactoryTest extends TestCase {
 
     public void testCreate() throws Exception {
         Map<String, String> args = new TreeMap<>();
         args.put("enableTraditionalChineseMode", "true");
-        TokenizerFactory factory = new HanLPTokenizerFactory(args);
+        TokenizerFactory factory = new HanlpTokenizerFactory(args);
         Tokenizer tokenizer = factory.create(null);
 
         tokenizer.setReader(new StringReader("大衛貝克漢不僅僅是名著名球員，球場以外，其妻為前" + "辣妹合唱團成員維多利亞·碧咸，亦由於他擁有" + "突出外表、百變髮型及正面的形象，以至自己" + "品牌的男士香水等商品，及長期擔任運動品牌" + "Adidas的代言人，因此對大眾傳播媒介和時尚界" + "等方面都具很大的影響力，在足球圈外所獲得的" + "認受程度可謂前所未見。"));

@@ -25,12 +25,12 @@ import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanLPQueryAnalyzer;
-import com.jstarcraft.ai.retrieval.hanlp.HanLPTokenizerFactory;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpQueryAnalyzer;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizerFactory;
 
 import junit.framework.TestCase;
 
-public class HanLPAnalyzerTest extends TestCase {
+public class HanlpAnalyzerTest extends TestCase {
 
     public void testCreateComponents() throws Exception {
         String text = "中华人民共和国很辽阔";
@@ -38,7 +38,7 @@ public class HanLPAnalyzerTest extends TestCase {
             System.out.print(text.charAt(i) + "" + i + " ");
         }
         System.out.println();
-        Analyzer analyzer = new HanLPQueryAnalyzer();
+        Analyzer analyzer = new HanlpQueryAnalyzer();
         TokenStream tokenStream = analyzer.tokenStream("field", text);
         tokenStream.reset();
         while (tokenStream.incrementToken()) {
@@ -54,7 +54,7 @@ public class HanLPAnalyzerTest extends TestCase {
     }
 
     public void testIndexAndSearch() throws Exception {
-        Analyzer analyzer = new HanLPQueryAnalyzer();////////////////////////////////////////////////////
+        Analyzer analyzer = new HanlpQueryAnalyzer();////////////////////////////////////////////////////
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
         Directory directory = new RAMDirectory();
@@ -91,7 +91,7 @@ public class HanLPAnalyzerTest extends TestCase {
         Map<String, String> args = new TreeMap<>();
         args.put("enableTraditionalChineseMode", "true");
         args.put("enableNormalization", "true");
-        HanLPTokenizerFactory factory = new HanLPTokenizerFactory(args);
+        HanlpTokenizerFactory factory = new HanlpTokenizerFactory(args);
         Tokenizer tokenizer = factory.create();
         String text = "會辦台星保證最低價的原因？";
 

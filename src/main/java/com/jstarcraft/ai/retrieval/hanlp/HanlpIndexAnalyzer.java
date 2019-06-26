@@ -12,7 +12,7 @@ import java.util.Set;
  * @author Birdy
  *
  */
-public class HanLPIndexAnalyzer extends Analyzer {
+public class HanlpIndexAnalyzer extends Analyzer {
 
     private boolean pstemming;
     private Set<String> filter;
@@ -21,7 +21,7 @@ public class HanLPIndexAnalyzer extends Analyzer {
      * @param filter    停用词
      * @param pstemming 是否分析词干
      */
-    public HanLPIndexAnalyzer(Set<String> filter, boolean pstemming) {
+    public HanlpIndexAnalyzer(Set<String> filter, boolean pstemming) {
         this.filter = filter;
         this.pstemming = pstemming;
     }
@@ -29,17 +29,17 @@ public class HanLPIndexAnalyzer extends Analyzer {
     /**
      * @param pstemming 是否分析词干.进行单复数,时态的转换
      */
-    public HanLPIndexAnalyzer(boolean pstemming) {
+    public HanlpIndexAnalyzer(boolean pstemming) {
         this.pstemming = pstemming;
     }
 
-    public HanLPIndexAnalyzer() {
+    public HanlpIndexAnalyzer() {
         super();
     }
 
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new HanLPTokenizer(HanLP.newSegment().enableIndexMode(true), filter, pstemming);
+        Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableIndexMode(true), filter, pstemming);
         return new TokenStreamComponents(tokenizer);
     }
 }

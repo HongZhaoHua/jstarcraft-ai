@@ -12,18 +12,18 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
 import com.hankcs.hanlp.HanLP;
-import com.jstarcraft.ai.retrieval.hanlp.HanLPPinyinTokenFilterFactory;
-import com.jstarcraft.ai.retrieval.hanlp.HanLPTokenizer;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpPinyinTokenFilterFactory;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizer;
 
 import junit.framework.TestCase;
 
-public class HanLPTokenizerTest extends TestCase {
+public class HanlpTokenizerTest extends TestCase {
 
     Tokenizer tokenizer;
 
     @Override
     public void setUp() throws Exception {
-        tokenizer = new HanLPTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null, false);
+        tokenizer = new HanlpTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null, false);
         tokenizer.setReader(new StringReader("林志玲亮相网友:确定不是波多野结衣？"));
         tokenizer.reset();
     }
@@ -43,7 +43,7 @@ public class HanLPTokenizerTest extends TestCase {
 
     public void testMultiText() throws Exception {
         String[] sentences = new String[] { "中华人民共和国", "地大物博" };
-        tokenizer = new HanLPTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null, false);
+        tokenizer = new HanlpTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null, false);
         for (String sentence : sentences) {
             tokenizer.setReader(new StringReader(sentence));
             tokenizer.reset();
@@ -57,7 +57,7 @@ public class HanLPTokenizerTest extends TestCase {
         args.put("original", "true");
         args.put("pinyin", "false");
         args.put("pinyinFirstChar", "true");
-        HanLPPinyinTokenFilterFactory factory = new HanLPPinyinTokenFilterFactory(args);
+        HanlpPinyinTokenFilterFactory factory = new HanlpPinyinTokenFilterFactory(args);
         TokenStream tokenStream = factory.create(tokenizer);
         while (tokenStream.incrementToken()) {
             CharTermAttribute attribute = tokenizer.getAttribute(CharTermAttribute.class);

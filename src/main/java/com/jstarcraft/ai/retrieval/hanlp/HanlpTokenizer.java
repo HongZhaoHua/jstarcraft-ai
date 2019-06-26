@@ -16,9 +16,9 @@ import java.io.IOException;
 import java.util.Set;
 
 /**
- * Tokenizer，抄袭ansj的
+ * Tokenizer,抄袭ansj的
  */
-public class HanLPTokenizer extends Tokenizer {
+public class HanlpTokenizer extends Tokenizer {
 
     // 当前词
     private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
@@ -44,7 +44,7 @@ public class HanLPTokenizer extends Tokenizer {
      * @param filter               停用词
      * @param enablePorterStemming 英文原型转换
      */
-    public HanLPTokenizer(Segment segment, Set<String> filter, boolean enablePorterStemming) {
+    public HanlpTokenizer(Segment segment, Set<String> filter, boolean enablePorterStemming) {
         super();
         this.segment = new SegmentWrapper(input, segment);
         if (filter != null && filter.size() > 0) {
@@ -68,7 +68,7 @@ public class HanLPTokenizer extends Tokenizer {
                 break;
             }
             if (TextUtility.isBlank(term.word)) {
-                // 过滤掉空白符，提高索引效率
+                // 过滤掉空白符,提高索引效率
                 continue;
             }
             if (enablePorterStemming && term.nature == Nature.nx) {

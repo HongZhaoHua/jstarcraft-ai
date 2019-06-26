@@ -24,7 +24,7 @@ import org.apache.lucene.store.FSDirectory;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanLPIndexAnalyzer;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpIndexAnalyzer;
 import com.jstarcraft.core.utility.StringUtility;
 
 public class LuceneTestCase {
@@ -36,7 +36,7 @@ public class LuceneTestCase {
         FileUtils.forceDelete(indexPath.toFile());
         Directory directory = FSDirectory.open(indexPath);
 
-        Analyzer analyzer = new HanLPIndexAnalyzer();
+        Analyzer analyzer = new HanlpIndexAnalyzer();
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
         IndexWriter indexWriter = new IndexWriter(directory, config);
 

@@ -7,11 +7,11 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanLPIndexAnalyzer;
+import com.jstarcraft.ai.retrieval.hanlp.HanlpIndexAnalyzer;
 
 import junit.framework.TestCase;
 
-public class HanLPIndexAnalyzerTest extends TestCase {
+public class HanlpIndexAnalyzerTest extends TestCase {
 
     public void testCreateComponents() throws Exception {
         String text = "中华人民共和国很辽阔";
@@ -19,7 +19,7 @@ public class HanLPIndexAnalyzerTest extends TestCase {
             System.out.print(text.charAt(i) + "" + i + " ");
         }
         System.out.println();
-        Analyzer analyzer = new HanLPIndexAnalyzer();
+        Analyzer analyzer = new HanlpIndexAnalyzer();
         TokenStream tokenStream = analyzer.tokenStream("field", text);
         tokenStream.reset();
         while (tokenStream.incrementToken()) {

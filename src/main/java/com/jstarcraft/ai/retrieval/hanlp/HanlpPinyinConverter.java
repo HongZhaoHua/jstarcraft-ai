@@ -7,14 +7,14 @@ import java.util.List;
 /**
  * 拼音字符串
  */
-public interface HanLPPinyinConverter {
+public interface HanlpPinyinConverter {
 
     CharSequence convert(String text, List<Pinyin> pinyin);
 
     /**
-     * 全拼，HanLP.convertToPinyinString
+     * 全拼,HanLP.convertToPinyinString
      */
-    class ToPinyinString implements HanLPPinyinConverter {
+    class ToPinyinString implements HanlpPinyinConverter {
         private StringBuilder buffer = new StringBuilder(32);
 
         @Override
@@ -30,9 +30,9 @@ public interface HanLPPinyinConverter {
     }
 
     /**
-     * 首字母，HanLP.convertToPinyinFirstCharString
+     * 首字母,HanLP.convertToPinyinFirstCharString
      */
-    class ToPinyinFirstCharString implements HanLPPinyinConverter {
+    class ToPinyinFirstCharString implements HanlpPinyinConverter {
         private StringBuilder buffer = new StringBuilder(32);
 
         @Override
