@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.retrieval;
+package com.jstarcraft.ai.retrieval.hanlp;
 
 import com.hankcs.hanlp.corpus.tag.Nature;
 import com.hankcs.hanlp.seg.Segment;
@@ -43,4 +43,5 @@ public class EmailSegment extends Segment {
         }
         return resultList;
     }
+
 }

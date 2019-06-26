@@ -45,4 +45,5 @@ public class HanlpQueryAnalyzer extends Analyzer {
         Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableOffset(true), filter, enablePorterStemming);
         return new TokenStreamComponents(tokenizer);
     }
+
 }

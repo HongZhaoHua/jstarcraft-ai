@@ -88,4 +88,5 @@ public class HanlpTokenizerFactory extends TokenizerFactory {
 
         return new HanlpTokenizer(segment, stopWordDictionary, enablePorterStemming);
     }
+
 }

@@ -46,4 +46,5 @@ public interface HanlpPinyinConverter {
             return buffer;
         }
     }
+
 }

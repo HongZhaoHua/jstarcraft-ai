@@ -68,4 +68,6 @@ public final class HanlpPinyinTokenFilter extends TokenFilter {
             }
         }
     }
+    
 }
+

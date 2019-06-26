@@ -36,4 +36,5 @@ public class HanlpPinyinTokenFilterFactory extends TokenFilterFactory {
         }
         return new HanlpPinyinTokenFilter(input, original, converters);
     }
+
 }

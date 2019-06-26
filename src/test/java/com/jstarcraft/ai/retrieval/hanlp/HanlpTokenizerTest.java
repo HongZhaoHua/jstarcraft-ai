@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.retrieval;
+package com.jstarcraft.ai.retrieval.hanlp;
 
 import java.io.StringReader;
 import java.util.HashMap;
@@ -70,4 +70,5 @@ public class HanlpTokenizerTest extends TestCase {
             System.out.printf("[%d:%d %d] %s/%s\n", offsetAtt.startOffset(), offsetAtt.endOffset(), positionAttr.getPositionIncrement(), attribute, typeAttr.type());
         }
     }
+
 }

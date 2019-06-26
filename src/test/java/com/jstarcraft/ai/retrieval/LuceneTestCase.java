@@ -99,4 +99,5 @@ public class LuceneTestCase {
         }
         indexReader.close();
     }
+
 }

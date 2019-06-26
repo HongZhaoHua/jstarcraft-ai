@@ -42,4 +42,5 @@ public class HanlpIndexAnalyzer extends Analyzer {
         Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableIndexMode(true), filter, pstemming);
         return new TokenStreamComponents(tokenizer);
     }
+
 }

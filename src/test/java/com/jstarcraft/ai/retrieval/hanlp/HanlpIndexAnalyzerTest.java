@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.retrieval;
+package com.jstarcraft.ai.retrieval.hanlp;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
@@ -33,4 +33,5 @@ public class HanlpIndexAnalyzerTest extends TestCase {
             System.out.printf("[%d:%d %d] %s/%s\n", offsetAtt.startOffset(), offsetAtt.endOffset(), positionAttr.getPositionIncrement(), attribute, typeAttr.type());
         }
     }
+
 }
