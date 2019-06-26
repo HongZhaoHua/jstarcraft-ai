@@ -3,8 +3,11 @@
 史上最全中文分词工具整理:
 https://blog.csdn.net/fendouaini/article/details/82027310
 
-中文分词器性能比较:
-https://www.jianshu.com/p/4b37c36e81a3
+中文分词器分词效果评估对比:
+https://github.com/ysc/cws_evaluation
+
+Java分布式中文分词组件 - word分词:
+https://github.com/ysc/word
 
 Ansj中文分词:
 https://github.com/NLPchina/ansj_seg
