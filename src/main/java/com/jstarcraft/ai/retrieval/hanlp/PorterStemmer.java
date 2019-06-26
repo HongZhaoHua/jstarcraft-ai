@@ -9,7 +9,8 @@ import org.apache.lucene.util.ArrayUtil;
  * provided a character at time (by calling add()), or at once by calling one of
  * the various stem(something) methods.
  */
-
+// TODO 准备取消,使用PorterStemFilter替代.
+@Deprecated
 public class PorterStemmer {
 
     private char[] b;
