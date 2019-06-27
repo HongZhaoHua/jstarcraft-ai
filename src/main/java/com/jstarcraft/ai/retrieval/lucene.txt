@@ -79,7 +79,10 @@ https://www.biaodianfu.com/lucene-score.html
 搜索引擎:
 https://www.cnblogs.com/leeSmall/category/1210814.html
 
-Lucene 7.0实战:
+LuXugang的博客:
+https://www.amazingkoala.com.cn/
+
+太美博客:
 https://www.tiomg.org/blog?category=13ea0af8-5f27-4bce-8c83-ac14849b73aa
 
 lucene增量建立索引，近实时查询以及多线程建立索引的项目实例:
