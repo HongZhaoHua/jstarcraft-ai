@@ -1,3 +1,9 @@
+Lucene DocValues详解:
+https://blog.csdn.net/zteny/article/details/60633374
+
+Solr DocValues详解:
+https://mozhenghua.iteye.com/blog/2275932
+
 分词
 
 史上最全中文分词工具整理:
