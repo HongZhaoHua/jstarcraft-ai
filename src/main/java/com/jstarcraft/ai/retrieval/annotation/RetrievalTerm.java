@@ -1,11 +1,15 @@
 package com.jstarcraft.ai.retrieval.annotation;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * 检索词向量
  * 
  * @author Birdy
  *
  */
+@Retention(RetentionPolicy.RUNTIME)
 public @interface RetrievalTerm {
 
     /** 词频 */

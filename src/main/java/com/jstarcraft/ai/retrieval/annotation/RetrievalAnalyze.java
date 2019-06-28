@@ -1,6 +1,10 @@
 package com.jstarcraft.ai.retrieval.annotation;
 
 import java.io.Reader;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * 检索分词
@@ -12,6 +16,8 @@ import java.io.Reader;
  * @author Birdy
  *
  */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.FIELD })
 public @interface RetrievalAnalyze {
 
     /** 反向词向量(取决于是否需要查询) */
