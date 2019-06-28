@@ -11,12 +11,13 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
+import com.jstarcraft.ai.utility.Integer2IntegerKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**
  * 图配置器
  * 
- * @author Administrator
+ * @author Birdy
  *
  */
 public class GraphConfigurator {
@@ -25,7 +26,7 @@ public class GraphConfigurator {
     private Map<String, KeyValue<Integer, Vertex>> vertices;
 
     /** 边集合(索引,索引) */
-    private Set<KeyValue<Integer, Integer>> edges;
+    private Set<Integer2IntegerKeyValue> edges;
 
     public GraphConfigurator() {
         vertices = new LinkedHashMap<>();
@@ -45,7 +46,7 @@ public class GraphConfigurator {
             if (vertexKeyValue == null) {
                 throw new IllegalArgumentException("节点缺失");
             }
-            KeyValue<Integer, Integer> edgeKeyValue = new KeyValue<>(vertexKeyValue.getKey(), index);
+            Integer2IntegerKeyValue edgeKeyValue = new Integer2IntegerKeyValue(vertexKeyValue.getKey(), index);
             if (!edges.add(edgeKeyValue)) {
                 throw new IllegalArgumentException("边冲突");
             }
@@ -65,7 +66,7 @@ public class GraphConfigurator {
             if (vertexKeyValue == null) {
                 throw new IllegalArgumentException("节点缺失");
             }
-            KeyValue<Integer, Integer> edgeKeyValue = new KeyValue<>(vertexKeyValue.getKey(), index);
+            Integer2IntegerKeyValue edgeKeyValue = new Integer2IntegerKeyValue(vertexKeyValue.getKey(), index);
             if (!edges.add(edgeKeyValue)) {
                 throw new IllegalArgumentException("边冲突");
             }
@@ -94,9 +95,9 @@ public class GraphConfigurator {
             inputEdges[index] = new HashSet<>();
             outputEdges[index] = new HashSet<>();
         }
-        for (KeyValue<Integer, Integer> keyValue : edges) {
-            inputEdges[keyValue.getValue()].add(keyValue.getKey());
-            outputEdges[keyValue.getKey()].add(keyValue.getValue());
+        for (Integer2IntegerKeyValue edge : edges) {
+            inputEdges[edge.getValue()].add(edge.getKey());
+            outputEdges[edge.getKey()].add(edge.getValue());
         }
         // 正向依赖与反向依赖
         List<Integer>[] forwardDependencies = new List[size];
@@ -105,10 +106,10 @@ public class GraphConfigurator {
             forwardDependencies[index] = new ArrayList<>(inputEdges[index].size());
             backwardDependencies[index] = new ArrayList<>(outputEdges[index].size());
         }
-        for (KeyValue<Integer, Integer> keyValue : edges) {
+        for (Integer2IntegerKeyValue edge : edges) {
             // 必须排序
-            forwardDependencies[keyValue.getValue()].add(keyValue.getKey());
-            backwardDependencies[keyValue.getKey()].add(keyValue.getValue());
+            forwardDependencies[edge.getValue()].add(edge.getKey());
+            backwardDependencies[edge.getKey()].add(edge.getValue());
         }
 
         // Now: do topological sort
@@ -147,7 +148,7 @@ public class GraphConfigurator {
         return vertices;
     }
 
-    public Set<KeyValue<Integer, Integer>> getEdges() {
+    public Set<Integer2IntegerKeyValue> getEdges() {
         return edges;
     }
 

@@ -2,7 +2,7 @@ package com.jstarcraft.ai.utility;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class Int2FloatKeyValue {
+public class Integer2FloatKeyValue {
 
 	/** 键 */
 	private int key;
@@ -10,10 +10,10 @@ public class Int2FloatKeyValue {
 	/** 值 */
 	private float value;
 
-	Int2FloatKeyValue() {
+	Integer2FloatKeyValue() {
 	}
 
-	public Int2FloatKeyValue(int key, float value) {
+	public Integer2FloatKeyValue(int key, float value) {
 		this.key = key;
 		this.value = value;
 	}
@@ -68,7 +68,7 @@ public class Int2FloatKeyValue {
 			return false;
 		if (getClass() != object.getClass())
 			return false;
-		Int2FloatKeyValue that = (Int2FloatKeyValue) object;
+		Integer2FloatKeyValue that = (Integer2FloatKeyValue) object;
 		if (this.key != that.key) {
 			return false;
 		}
