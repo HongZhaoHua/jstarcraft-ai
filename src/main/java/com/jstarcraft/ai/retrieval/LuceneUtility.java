@@ -12,9 +12,9 @@ public class LuceneUtility {
      * @param object
      * @return
      */
-    public static Document convert(IdentityObject<?> object) {
+    public static Document convert(IdentityObject<? extends Comparable<?>> object) {
         Document document = new Document();
-        Class<?> clazz = object.getClass();
+        Class<? extends IdentityObject> clazz = object.getClass();
 
         return document;
     }

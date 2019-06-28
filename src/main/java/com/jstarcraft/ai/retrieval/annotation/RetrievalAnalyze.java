@@ -6,11 +6,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.apache.lucene.analysis.TokenStream;
+
 /**
  * 检索分词
  * 
  * <pre>
- *  仅作用于{@link String}/{@link Reader}类型字段的注解.
+ *  仅作用于{@link Reader},{@link String},{@link TokenStream}类型字段的注解.
  * </pre>
  * 
  * @author Birdy
