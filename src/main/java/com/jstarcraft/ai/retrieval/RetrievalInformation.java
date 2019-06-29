@@ -1,6 +1,9 @@
 package com.jstarcraft.ai.retrieval;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Map;
@@ -26,11 +29,30 @@ import com.jstarcraft.ai.retrieval.annotation.RetrievalStore;
 import com.jstarcraft.ai.retrieval.annotation.RetrievalTerm;
 import com.jstarcraft.core.codec.specification.CodecSpecification;
 import com.jstarcraft.core.common.reflection.ReflectionUtility;
+import com.jstarcraft.core.common.reflection.TypeUtility;
 import com.jstarcraft.core.utility.ClassUtility;
 
 public class RetrievalInformation<T> {
 
     private Map<Field, RetrievalConverter<Object>> converters;
+
+    private RetrievalConverter<Object> arrayConverter(String name, Type type, RetrievalAnalyze analyze, RetrievalIndex index, RetrievalSort sort, RetrievalStore store) {
+        if (type instanceof Class) {
+            Class<?> clazz = TypeUtility.getRawType(type, null);
+            type = TypeUtility.getArrayComponentType(type);
+        } else if (type instanceof GenericArrayType) {
+            type = TypeUtility.getArrayComponentType(type);
+        }
+        return null;
+    }
+
+    private RetrievalConverter<Object> collectionConverter(String name, Type type, RetrievalAnalyze analyze, RetrievalIndex index, RetrievalSort sort, RetrievalStore store) {
+        if (type instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            Type[] types = parameterizedType.getActualTypeArguments();
+        }
+        return null;
+    }
 
     private RetrievalConverter<Object> numberConverter(String name, Class<?> clazz, RetrievalAnalyze analyze, RetrievalIndex index, RetrievalSort sort, RetrievalStore store) {
         clazz = ClassUtility.primitiveToWrapper(clazz);
@@ -105,47 +127,47 @@ public class RetrievalInformation<T> {
     }
 
     private RetrievalConverter<Object> stringConverter(String name, Class<?> clazz, RetrievalAnalyze analyze, RetrievalIndex index, RetrievalSort sort, RetrievalStore store) {
-        FieldType type = new FieldType();
+        FieldType configuration = new FieldType();
         if (index != null) {
-            type.setIndexOptions(IndexOptions.DOCS);
+            configuration.setIndexOptions(IndexOptions.DOCS);
         }
 
         if (analyze != null) {
-            type.setTokenized(true);
+            configuration.setTokenized(true);
 
             if (index != null) {
                 RetrievalTerm negative = analyze.negative();
                 if (negative.offset()) {
-                    type.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+                    configuration.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
                 } else if (negative.position()) {
-                    type.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
+                    configuration.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS);
                 } else if (negative.frequency()) {
-                    type.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
+                    configuration.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
                 }
             }
 
             RetrievalTerm positive = analyze.positive();
             if (positive.offset()) {
-                type.setStoreTermVectorOffsets(true);
+                configuration.setStoreTermVectorOffsets(true);
             }
             if (positive.position()) {
-                type.setStoreTermVectorPositions(true);
+                configuration.setStoreTermVectorPositions(true);
             }
             if (positive.frequency()) {
-                type.setStoreTermVectors(true);
+                configuration.setStoreTermVectors(true);
             }
         } else if (sort != null) {
             // 注意:分词字段存储docValue没有意义
-            type.setDocValuesType(DocValuesType.SORTED);
+            configuration.setDocValuesType(DocValuesType.SORTED);
         }
 
         if (store != null) {
-            type.setStored(true);
+            configuration.setStored(true);
         }
 
         RetrievalConverter<Object> converter = (data) -> {
             Collection<IndexableField> fields = new LinkedList<>();
-            fields.add(new org.apache.lucene.document.Field(name, (String) data, type));
+            fields.add(new org.apache.lucene.document.Field(name, (String) data, configuration));
             return fields;
         };
         return converter;
