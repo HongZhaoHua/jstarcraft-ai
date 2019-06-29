@@ -21,6 +21,15 @@ https://github.com/NLPchina/ansj_seg
 IK中文分词:
 https://github.com/magese/ik-analyzer-solr
 
+mmseg4j中文分词:
+https://github.com/chenlb/mmseg4j-core
+
+jieba中文分词:
+https://github.com/huaban/jieba-analysis
+
+PKUSeg中文分词:
+https://github.com/lancopku/PKUSeg-python
+
 实时搜索引擎Elasticsearch:
 http://blog.csdn.net/xialei199023/article/details/47680401
 
