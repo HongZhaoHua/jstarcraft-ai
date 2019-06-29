@@ -8,6 +8,10 @@ import java.lang.annotation.Target;
 /**
  * 检索排序
  * 
+ * <pre>
+ * 注意:分词字段存储DocValues没有意义
+ * </pre>
+ * 
  * @author Birdy
  *
  */
