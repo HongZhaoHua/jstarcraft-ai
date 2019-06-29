@@ -1,18 +1,20 @@
 package com.jstarcraft.ai.model.neuralnetwork;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
 import com.jstarcraft.ai.utility.Integer2IntegerKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * 图配置器
@@ -79,7 +81,7 @@ public class GraphConfigurator {
      * @return
      */
     // https://en.wikipedia.org/wiki/Topological_sorting#Kahn.27s_algorithm
-    public KeyValue<int[], KeyValue<List<Integer>[], List<Integer>[]>> calculateTopologicalOrder() {
+    public KeyValue<int[], KeyValue<IntList[], IntList[]>> calculateTopologicalOrder() {
         int position = 0;
         int size = vertices.size();
         // 拓扑排序
@@ -89,22 +91,22 @@ public class GraphConfigurator {
         // Map<Integer,Set<Integer>>, where map represents edges i -> j
         // key represents j, set is set of i (inputs) for vertices j
         // 节点的入度与出度
-        Set<Integer>[] inputEdges = new Set[size];
-        Set<Integer>[] outputEdges = new Set[size];
+        IntSet[] inputEdges = new IntSet[size];
+        IntSet[] outputEdges = new IntSet[size];
         for (int index = 0; index < size; index++) {
-            inputEdges[index] = new HashSet<>();
-            outputEdges[index] = new HashSet<>();
+            inputEdges[index] = new IntOpenHashSet();
+            outputEdges[index] = new IntOpenHashSet();
         }
         for (Integer2IntegerKeyValue edge : edges) {
             inputEdges[edge.getValue()].add(edge.getKey());
             outputEdges[edge.getKey()].add(edge.getValue());
         }
         // 正向依赖与反向依赖
-        List<Integer>[] forwardDependencies = new List[size];
-        List<Integer>[] backwardDependencies = new List[size];
+        IntList[] forwardDependencies = new IntList[size];
+        IntList[] backwardDependencies = new IntList[size];
         for (int index = 0; index < size; index++) {
-            forwardDependencies[index] = new ArrayList<>(inputEdges[index].size());
-            backwardDependencies[index] = new ArrayList<>(outputEdges[index].size());
+            forwardDependencies[index] = new IntArrayList(inputEdges[index].size());
+            backwardDependencies[index] = new IntArrayList(outputEdges[index].size());
         }
         for (Integer2IntegerKeyValue edge : edges) {
             // 必须排序
@@ -117,7 +119,7 @@ public class GraphConfigurator {
         // vertices)
         LinkedList<Integer> zeroEdges = new LinkedList<>();
         for (int index = 0; index < size; index++) {
-            Set<Integer> dependencies = inputEdges[index];
+            IntSet dependencies = inputEdges[index];
             if (dependencies.isEmpty()) {
                 zeroEdges.addLast(index);
             }
@@ -126,7 +128,7 @@ public class GraphConfigurator {
         while (!zeroEdges.isEmpty()) {
             int index = zeroEdges.removeFirst();
             topologicalOrder[position++] = index; // Add to sorted list
-            Set<Integer> dependencies = outputEdges[index];
+            IntSet dependencies = outputEdges[index];
 
             // Remove edges next -> vertexOuputsTo[...] from graph;
             for (Integer dependency : dependencies) {

@@ -27,6 +27,8 @@ import com.jstarcraft.ai.modem.ModemDefinition;
 import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.StringUtility;
 
+import it.unimi.dsi.fastutil.ints.IntList;
+
 /**
  * 计算图
  * 
@@ -56,9 +58,9 @@ public class Graph implements ModemCycle {
 	/** 拓扑排序 */
 	private int[] topologicalOrder;
 	/** 正向依赖 */
-	private List<Integer>[] forwardDependencies;
+	private IntList[] forwardDependencies;
 	/** 反向依赖 */
-	private List<Integer>[] backwardDependencies;
+	private IntList[] backwardDependencies;
 
 	protected Semaphore[] semaphores;
 
@@ -71,7 +73,7 @@ public class Graph implements ModemCycle {
 	}
 
 	public Graph(GraphConfigurator configurator, Optimizer optimizer, LossFunction... lossFunctions) {
-		KeyValue<int[], KeyValue<List<Integer>[], List<Integer>[]>> configuration = configurator.calculateTopologicalOrder();
+		KeyValue<int[], KeyValue<IntList[], IntList[]>> configuration = configurator.calculateTopologicalOrder();
 		this.topologicalOrder = configuration.getKey();
 		this.forwardDependencies = configuration.getValue().getKey();
 		this.backwardDependencies = configuration.getValue().getValue();
@@ -187,8 +189,8 @@ public class Graph implements ModemCycle {
 		latch = new CountDownLatch(topologicalOrder.length);
 		for (int index = topologicalOrder.length - 1; index > -1; index--) {
 			Semaphore semaphore = semaphores[index];
-			List<Integer> inputDependencies = backwardDependencies[index];
-			List<Integer> outputDependencies = forwardDependencies[index];
+			IntList inputDependencies = backwardDependencies[index];
+			IntList outputDependencies = forwardDependencies[index];
 			List<Integer> beforeDependencies = new LinkedList<>();
 			List<Integer> afterDependencies = new LinkedList<>();
 			// 此处在单线程会存在死锁.需要重新排序topologicalOrder
