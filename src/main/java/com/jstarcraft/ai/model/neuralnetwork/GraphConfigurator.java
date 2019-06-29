@@ -3,7 +3,6 @@ package com.jstarcraft.ai.model.neuralnetwork;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,6 +10,7 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
 import com.jstarcraft.ai.utility.Integer2IntegerKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 
+import it.unimi.dsi.fastutil.ints.IntArrayFIFOQueue;
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
@@ -117,24 +117,24 @@ public class GraphConfigurator {
         // Now: do topological sort
         // Set of all nodes with no incoming edges: (this would be: input
         // vertices)
-        LinkedList<Integer> zeroEdges = new LinkedList<>();
+        IntArrayFIFOQueue zeroEdges = new IntArrayFIFOQueue(size);
         for (int index = 0; index < size; index++) {
             IntSet dependencies = inputEdges[index];
             if (dependencies.isEmpty()) {
-                zeroEdges.addLast(index);
+                zeroEdges.enqueue(index);
             }
         }
 
         while (!zeroEdges.isEmpty()) {
-            int index = zeroEdges.removeFirst();
+            int index = zeroEdges.dequeueInt();
             topologicalOrder[position++] = index; // Add to sorted list
             IntSet dependencies = outputEdges[index];
 
             // Remove edges next -> vertexOuputsTo[...] from graph;
-            for (Integer dependency : dependencies) {
+            for (int dependency : dependencies) {
                 inputEdges[dependency].remove(index);
                 if (inputEdges[dependency].isEmpty()) {
-                    zeroEdges.addLast(dependency);
+                    zeroEdges.enqueue(dependency);
                 }
             }
         }
