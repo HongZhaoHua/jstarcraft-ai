@@ -21,9 +21,9 @@ import com.jstarcraft.core.codec.json.JsonContentCodec;
 import com.jstarcraft.core.codec.kryo.KryoContentCodec;
 import com.jstarcraft.core.codec.protocolbufferx.ProtocolContentCodec;
 import com.jstarcraft.core.codec.specification.CodecDefinition;
-import com.jstarcraft.core.codec.specification.CodecSpecification;
 import com.jstarcraft.core.common.conversion.json.JsonUtility;
 import com.jstarcraft.core.common.reflection.ReflectionUtility;
+import com.jstarcraft.core.common.reflection.Specification;
 import com.jstarcraft.core.common.reflection.TypeUtility;
 import com.jstarcraft.core.utility.StringUtility;
 
@@ -76,12 +76,12 @@ public enum ModemCodec {
 			if (clazz.isArray()) {
 				// 处理数组类型
 				Class<?> type = clazz.getComponentType();
-				CodecSpecification specification = CodecSpecification.getSpecification(type);
-				while (specification == CodecSpecification.ARRAY) {
+				Specification specification = Specification.getSpecification(type);
+				while (specification == Specification.ARRAY) {
 					type = type.getComponentType();
-					specification = CodecSpecification.getSpecification(type);
+					specification = Specification.getSpecification(type);
 				}
-				if (specification == CodecSpecification.BOOLEAN || specification == CodecSpecification.NUMBER || specification == CodecSpecification.STRING || specification == CodecSpecification.INSTANT) {
+				if (specification == Specification.BOOLEAN || specification == Specification.NUMBER || specification == Specification.STRING || specification == Specification.INSTANT) {
 					valueData = codec.encode(clazz, model);
 				} else {
 					size = Array.getLength(model);
@@ -157,12 +157,12 @@ public enum ModemCodec {
 			if (clazz.isArray()) {
 				// 处理数组类型
 				Class<?> type = clazz.getComponentType();
-				CodecSpecification specification = CodecSpecification.getSpecification(type);
-				while (specification == CodecSpecification.ARRAY) {
+				Specification specification = Specification.getSpecification(type);
+				while (specification == Specification.ARRAY) {
 					type = type.getComponentType();
-					specification = CodecSpecification.getSpecification(type);
+					specification = Specification.getSpecification(type);
 				}
-				if (specification == CodecSpecification.BOOLEAN || specification == CodecSpecification.NUMBER || specification == CodecSpecification.STRING || specification == CodecSpecification.INSTANT) {
+				if (specification == Specification.BOOLEAN || specification == Specification.NUMBER || specification == Specification.STRING || specification == Specification.INSTANT) {
 					Object array = codec.decode(clazz, valueData);
 					return array;
 				} else {
