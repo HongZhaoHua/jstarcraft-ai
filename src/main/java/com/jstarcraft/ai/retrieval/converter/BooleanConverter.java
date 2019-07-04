@@ -3,6 +3,7 @@ package com.jstarcraft.ai.retrieval.converter;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.NumericDocValuesField;
@@ -29,10 +30,10 @@ public class BooleanConverter implements RetrievalConverter {
     public Collection<IndexableField> convert(String name, Type type, Object data, RetrievalAnalyze analyze, RetrievalIndex index, RetrievalSort sort, RetrievalStore store) {
         Class<?> clazz = TypeUtility.getRawType(type, null);
         clazz = ClassUtility.primitiveToWrapper(clazz);
-        if (Short.class == clazz) {
+        if (AtomicBoolean.class == clazz) {
 
         }
-        if (Integer.class == clazz) {
+        if (Boolean.class == clazz) {
             Collection<IndexableField> fields = new LinkedList<>();
             if (index != null) {
                 fields.add(new IntPoint(name, (Integer) data));
