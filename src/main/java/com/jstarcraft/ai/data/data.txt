@@ -15,6 +15,7 @@ http://blog.csdn.net/u012162613/article/details/45920827
 
 各领域公开数据集:
 https://zhuanlan.zhihu.com/p/25138563
+https://github.com/awesomedata/awesome-public-datasets
 
 推荐领域数据集:
 https://www.cnblogs.com/startover/p/3261476.html
