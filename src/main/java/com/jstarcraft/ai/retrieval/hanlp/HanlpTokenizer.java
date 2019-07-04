@@ -31,8 +31,6 @@ public class HanlpTokenizer extends Tokenizer {
 
     private SegmentWrapper segment;
     private BinTrie<String> filter;
-    private boolean enablePorterStemming;
-    private final PorterStemmer stemmer = new PorterStemmer();
 
     /**
      * 单文档当前所在的总offset,当reset(切换multi-value fields中的value)的时候不清零,在end(切换field)时清零
@@ -44,7 +42,7 @@ public class HanlpTokenizer extends Tokenizer {
      * @param filter               停用词
      * @param enablePorterStemming 英文原型转换
      */
-    public HanlpTokenizer(Segment segment, Set<String> filter, boolean enablePorterStemming) {
+    public HanlpTokenizer(Segment segment, Set<String> filter) {
         super();
         this.segment = new SegmentWrapper(input, segment);
         if (filter != null && filter.size() > 0) {
@@ -53,7 +51,6 @@ public class HanlpTokenizer extends Tokenizer {
                 this.filter.put(stopWord, null);
             }
         }
-        this.enablePorterStemming = enablePorterStemming;
     }
 
     @Override
@@ -70,9 +67,6 @@ public class HanlpTokenizer extends Tokenizer {
             if (TextUtility.isBlank(term.word)) {
                 // 过滤掉空白符,提高索引效率
                 continue;
-            }
-            if (enablePorterStemming && term.nature == Nature.nx) {
-                term.word = stemmer.stem(term.word);
             }
 
             if (filter != null && filter.containsKey(term.word)) {

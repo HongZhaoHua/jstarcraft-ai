@@ -18,7 +18,6 @@ import com.hankcs.hanlp.tokenizer.TraditionalChineseTokenizer;
 public class HanlpTokenizerFactory extends TokenizerFactory {
 
     private boolean enableIndexMode;
-    private boolean enablePorterStemming;
     private boolean enableNumberQuantifierRecognize;
     private boolean enableCustomDictionary;
     private boolean enableCustomDictionaryForcing;
@@ -39,7 +38,6 @@ public class HanlpTokenizerFactory extends TokenizerFactory {
     public HanlpTokenizerFactory(Map<String, String> args) {
         super(args);
         enableIndexMode = getBoolean(args, "enableIndexMode", true);
-        enablePorterStemming = getBoolean(args, "enablePorterStemming", false);
         enableNumberQuantifierRecognize = getBoolean(args, "enableNumberQuantifierRecognize", false);
         enableCustomDictionary = getBoolean(args, "enableCustomDictionary", true);
         enableCustomDictionaryForcing = getBoolean(args, "enableCustomDictionaryForcing", true);
@@ -86,7 +84,7 @@ public class HanlpTokenizerFactory extends TokenizerFactory {
             };
         }
 
-        return new HanlpTokenizer(segment, stopWordDictionary, enablePorterStemming);
+        return new HanlpTokenizer(segment, stopWordDictionary);
     }
 
 }

@@ -1,10 +1,14 @@
 package com.jstarcraft.ai.retrieval.hanlp;
 
-import com.hankcs.hanlp.HanLP;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.Tokenizer;
-
 import java.util.Set;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.LowerCaseFilter;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.en.PorterStemFilter;
+
+import com.hankcs.hanlp.HanLP;
 
 /**
  * HanLP索引分析器(仅用于索引)
@@ -14,23 +18,10 @@ import java.util.Set;
  */
 public class HanlpIndexAnalyzer extends Analyzer {
 
-    private boolean pstemming;
     private Set<String> filter;
 
-    /**
-     * @param filter    停用词
-     * @param pstemming 是否分析词干
-     */
-    public HanlpIndexAnalyzer(Set<String> filter, boolean pstemming) {
+    public HanlpIndexAnalyzer(Set<String> filter) {
         this.filter = filter;
-        this.pstemming = pstemming;
-    }
-
-    /**
-     * @param pstemming 是否分析词干.进行单复数,时态的转换
-     */
-    public HanlpIndexAnalyzer(boolean pstemming) {
-        this.pstemming = pstemming;
     }
 
     public HanlpIndexAnalyzer() {
@@ -39,8 +30,10 @@ public class HanlpIndexAnalyzer extends Analyzer {
 
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableIndexMode(true), filter, pstemming);
-        return new TokenStreamComponents(tokenizer);
+        Tokenizer from = new HanlpTokenizer(HanLP.newSegment().enableIndexMode(true), filter);
+        TokenStream to = new LowerCaseFilter(from);
+        to = new PorterStemFilter(to);
+        return new TokenStreamComponents(from, to);
     }
 
 }

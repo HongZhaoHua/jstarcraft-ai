@@ -1,10 +1,14 @@
 package com.jstarcraft.ai.retrieval.hanlp;
 
-import com.hankcs.hanlp.HanLP;
-import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.Tokenizer;
-
 import java.util.Set;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.LowerCaseFilter;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.Tokenizer;
+import org.apache.lucene.analysis.en.PorterStemFilter;
+
+import com.hankcs.hanlp.HanLP;
 
 /**
  * HanLP查询分析器(仅用于查询)
@@ -14,23 +18,10 @@ import java.util.Set;
  */
 public class HanlpQueryAnalyzer extends Analyzer {
 
-    private boolean enablePorterStemming;
     private Set<String> filter;
 
-    /**
-     * @param filter               停用词
-     * @param enablePorterStemming 是否分析词干(仅限英文)
-     */
-    public HanlpQueryAnalyzer(Set<String> filter, boolean enablePorterStemming) {
+    public HanlpQueryAnalyzer(Set<String> filter) {
         this.filter = filter;
-        this.enablePorterStemming = enablePorterStemming;
-    }
-
-    /**
-     * @param enablePorterStemming 是否分析词干.进行单复数,时态的转换
-     */
-    public HanlpQueryAnalyzer(boolean enablePorterStemming) {
-        this.enablePorterStemming = enablePorterStemming;
     }
 
     public HanlpQueryAnalyzer() {
@@ -42,8 +33,10 @@ public class HanlpQueryAnalyzer extends Analyzer {
      */
     @Override
     protected TokenStreamComponents createComponents(String fieldName) {
-        Tokenizer tokenizer = new HanlpTokenizer(HanLP.newSegment().enableOffset(true), filter, enablePorterStemming);
-        return new TokenStreamComponents(tokenizer);
+        Tokenizer from = new HanlpTokenizer(HanLP.newSegment().enableOffset(true), filter);
+        TokenStream to = new LowerCaseFilter(from);
+        to = new PorterStemFilter(to);
+        return new TokenStreamComponents(from, to);
     }
 
 }
