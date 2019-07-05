@@ -40,6 +40,12 @@ import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.WildcardQuery;
+import org.apache.lucene.search.spans.SpanFirstQuery;
+import org.apache.lucene.search.spans.SpanNearQuery;
+import org.apache.lucene.search.spans.SpanNotQuery;
+import org.apache.lucene.search.spans.SpanOrQuery;
+import org.apache.lucene.search.spans.SpanQuery;
+import org.apache.lucene.search.spans.SpanTermQuery;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.BytesRef;
@@ -114,8 +120,8 @@ public class SearcherTestCase {
 
     @Test
     public void testTermQuery() throws Exception {
-        Term term = new Term("title", "Toy");
-        TopDocs search = searcher.search(new TermQuery(term), 1000);
+        Query query = new TermQuery(new Term("title", "Toy"));
+        TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(1, search.totalHits.value);
     }
 
@@ -157,7 +163,7 @@ public class SearcherTestCase {
         // 正则搜索
         RegexpQuery query = new RegexpQuery(new Term("title", "To[a-z]"));
         TopDocs search = searcher.search(query, 1000);
-        Assert.assertEquals(22, search.totalHits.value);
+        Assert.assertEquals(7, search.totalHits.value);
     }
 
     @Test
@@ -177,7 +183,6 @@ public class SearcherTestCase {
         PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("title", "Story")).add(new Term("title", "The")).build();
         TopDocs search = searcher.search(build, 1000);
         Assert.assertEquals(2, search.totalHits.value);
-
     }
 
     @Test
@@ -189,6 +194,78 @@ public class SearcherTestCase {
         MultiPhraseQuery multiPhraseQuery = new MultiPhraseQuery.Builder().add(terms).add(term).setSlop(3).build();
         TopDocs search = searcher.search(multiPhraseQuery, 1000);
         Assert.assertEquals(2, search.totalHits.value);
+    }
+
+    @Test
+    public void testSpanTermQuery() throws Exception {
+        // 跨度搜索
+        Query query = new SpanTermQuery(new Term("title", "Toy"));
+        TopDocs search = searcher.search(query, 1000);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
+    @Test
+    public void testSpanFirstQuery() throws Exception {
+        SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Story"));
+        SpanFirstQuery firstQuery = new SpanFirstQuery(spanQuery, 5);
+        TopDocs search = searcher.search(firstQuery, 1000);
+        Assert.assertEquals(5, search.totalHits.value);
+    }
+
+    @Test
+    public void testSpanNearQuery() throws Exception {
+        SpanQuery[] spanQueries = new SpanQuery[] { new SpanTermQuery(new Term("title", "The")), new SpanTermQuery(new Term("title", "Story")) };
+        {
+            // 不考虑顺序的情况
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, false);
+            TopDocs search = searcher.search(nearQuery, 1000);
+            Assert.assertEquals(3, search.totalHits.value);
+        }
+        {
+            // 考虑顺序的情况
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
+            TopDocs search = searcher.search(nearQuery, 1000);
+            Assert.assertEquals(1, search.totalHits.value);
+        }
+    }
+
+    @Test
+    public void testSpanNotQuery() throws Exception {
+        SpanQuery[] spanQueries = new SpanQuery[] { new SpanTermQuery(new Term("title", "The")), new SpanTermQuery(new Term("title", "Story")) };
+        {
+            SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Angels"));
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
+            SpanNotQuery notQuery = new SpanNotQuery(nearQuery, spanQuery);
+            TopDocs search = searcher.search(notQuery, 1000);
+            Assert.assertEquals(1, search.totalHits.value);
+        }
+        {
+            SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Day"));
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
+            SpanNotQuery notQuery = new SpanNotQuery(nearQuery, spanQuery);
+            TopDocs search = searcher.search(notQuery, 1000);
+            Assert.assertEquals(0, search.totalHits.value);
+        }
+    }
+
+    @Test
+    public void testSpanOrQuery() throws Exception {
+        SpanQuery[] spanQueries = new SpanQuery[] { new SpanTermQuery(new Term("title", "The")), new SpanTermQuery(new Term("title", "Story")) };
+        SpanNotQuery leftQuery = null;
+        {
+            SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Angels"));
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
+            leftQuery = new SpanNotQuery(nearQuery, spanQuery);
+        }
+        SpanNotQuery rightQuery = null;
+        {
+            SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Day"));
+            SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
+            rightQuery = new SpanNotQuery(nearQuery, spanQuery);
+        }
+        SpanOrQuery orQuery = new SpanOrQuery(new SpanQuery[] { leftQuery, rightQuery });
+        TopDocs search = searcher.search(orQuery, 1000);
+        Assert.assertEquals(1, search.totalHits.value);
     }
 
     // 数值查询
