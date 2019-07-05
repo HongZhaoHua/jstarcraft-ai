@@ -24,14 +24,12 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.RAMDirectory;
+import org.junit.Assert;
+import org.junit.Test;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanlpQueryAnalyzer;
-import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizerFactory;
+public class HanlpQueryAnalyzerTest {
 
-import junit.framework.TestCase;
-
-public class HanlpQueryAnalyzerTest extends TestCase {
-
+    @Test
     public void testCreateComponents() throws Exception {
         String text = "中华人民共和国很辽阔";
         for (int i = 0; i < text.length(); ++i) {
@@ -53,6 +51,7 @@ public class HanlpQueryAnalyzerTest extends TestCase {
         }
     }
 
+    @Test
     public void testIndexAndSearch() throws Exception {
         Analyzer analyzer = new HanlpQueryAnalyzer();////////////////////////////////////////////////////
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
@@ -80,13 +79,14 @@ public class HanlpQueryAnalyzerTest extends TestCase {
         QueryParser parser = new QueryParser("content", analyzer);
         Query query = parser.parse("和服");
         ScoreDoc[] hits = isearcher.search(query, 300000).scoreDocs;
-        assertEquals(1, hits.length);
+        Assert.assertEquals(1, hits.length);
         for (ScoreDoc scoreDoc : hits) {
             Document targetDoc = isearcher.doc(scoreDoc.doc);
             System.out.println(targetDoc.getField("content").stringValue());
         }
     }
 
+    @Test
     public void testIssue() throws Exception {
         Map<String, String> args = new TreeMap<>();
         args.put("enableTraditionalChineseMode", "true");

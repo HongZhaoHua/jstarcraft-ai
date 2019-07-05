@@ -10,24 +10,23 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.hankcs.hanlp.HanLP;
-import com.jstarcraft.ai.retrieval.hanlp.HanlpPinyinTokenFilterFactory;
-import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizer;
 
-import junit.framework.TestCase;
-
-public class HanlpTokenizerTest extends TestCase {
+public class HanlpTokenizerTest {
 
     Tokenizer tokenizer;
 
-    @Override
+    @Before
     public void setUp() throws Exception {
         tokenizer = new HanlpTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null);
         tokenizer.setReader(new StringReader("林志玲亮相网友:确定不是波多野结衣？"));
         tokenizer.reset();
     }
 
+    @Test
     public void testIncrementToken() throws Exception {
         while (tokenizer.incrementToken()) {
             CharTermAttribute attribute = tokenizer.getAttribute(CharTermAttribute.class);
@@ -41,6 +40,7 @@ public class HanlpTokenizerTest extends TestCase {
         }
     }
 
+    @Test
     public void testMultiText() throws Exception {
         String[] sentences = new String[] { "中华人民共和国", "地大物博" };
         tokenizer = new HanlpTokenizer(HanLP.newSegment().enableJapaneseNameRecognize(true).enableIndexMode(true), null);
@@ -52,6 +52,7 @@ public class HanlpTokenizerTest extends TestCase {
         }
     }
 
+    @Test
     public void testPinyinTokenFilter() throws Exception {
         Map<String, String> args = new HashMap<>();
         args.put("original", "true");

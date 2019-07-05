@@ -10,13 +10,11 @@ import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
 import org.apache.lucene.analysis.util.TokenizerFactory;
+import org.junit.Test;
 
-import com.jstarcraft.ai.retrieval.hanlp.HanlpTokenizerFactory;
+public class HanlpTokenizerFactoryTest  {
 
-import junit.framework.TestCase;
-
-public class HanlpTokenizerFactoryTest extends TestCase {
-
+    @Test
     public void testCreate() throws Exception {
         Map<String, String> args = new TreeMap<>();
         args.put("enableTraditionalChineseMode", "true");

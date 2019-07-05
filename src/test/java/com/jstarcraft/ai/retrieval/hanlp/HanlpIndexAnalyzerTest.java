@@ -6,13 +6,13 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
-
-import com.jstarcraft.ai.retrieval.hanlp.HanlpIndexAnalyzer;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
 public class HanlpIndexAnalyzerTest extends TestCase {
 
+    @Test
     public void testCreateComponents() throws Exception {
         String text = "中华人民共和国很辽阔";
         for (int i = 0; i < text.length(); ++i) {
