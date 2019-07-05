@@ -35,6 +35,7 @@ import org.apache.lucene.search.MultiPhraseQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.RegexpQuery;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
@@ -152,6 +153,14 @@ public class SearcherTestCase {
     }
 
     @Test
+    public void testRegexpQuery() throws Exception {
+        // 正则搜索
+        RegexpQuery query = new RegexpQuery(new Term("title", "To[a-z]"));
+        TopDocs search = searcher.search(query, 1000);
+        Assert.assertEquals(22, search.totalHits.value);
+    }
+
+    @Test
     public void testFuzzyQuery() throws Exception {
         // 模糊搜索
         Query query = new FuzzyQuery(new Term("title", "Stori"));
@@ -186,7 +195,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointExactQuery() throws Exception {
-        // 精确查询
+        // 精确搜索
         Query exactQuery = IntPoint.newExactQuery("id", 1);
         TopDocs search = searcher.search(exactQuery, 1000);
         Assert.assertEquals(1, search.totalHits.value);
@@ -194,7 +203,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointRangeQuery() throws Exception {
-        // 范围查询
+        // 范围搜索
         Query rangeQuery = IntPoint.newRangeQuery("id", 501, 1000);
         TopDocs search = searcher.search(rangeQuery, 1000);
         Assert.assertEquals(500, search.totalHits.value);
@@ -202,7 +211,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointSetQuery() throws Exception {
-        // 集合查询
+        // 集合搜索
         Query setQuery = IntPoint.newSetQuery("id", 1, 10, 100, 1000);
         TopDocs search = searcher.search(setQuery, 1000);
         Assert.assertEquals(4, search.totalHits.value);
