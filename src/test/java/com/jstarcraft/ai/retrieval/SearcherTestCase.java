@@ -1,7 +1,5 @@
 package com.jstarcraft.ai.retrieval;
 
-import java.io.IOException;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -73,14 +71,14 @@ public class SearcherTestCase {
     // 测试查询
 
     @Test
-    public void testMatchAllDocsQuery() throws IOException {
+    public void testMatchAllDocsQuery() throws Exception {
         Query query = new MatchAllDocsQuery();
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(2, search.totalHits.value);
     }
 
     @Test
-    public void testMatchNoDocsQuery() throws IOException {
+    public void testMatchNoDocsQuery() throws Exception {
         Query query = new MatchNoDocsQuery();
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(0, search.totalHits.value);
@@ -89,14 +87,14 @@ public class SearcherTestCase {
     // 词项查询
 
     @Test
-    public void testTermQuery() throws IOException {
+    public void testTermQuery() throws Exception {
         Term term = new Term("id", "2");
         TopDocs search = searcher.search(new TermQuery(term), 10);
         Assert.assertEquals(1, search.totalHits.value);
     }
 
     @Test
-    public void testTermRangeQuery() throws IOException {
+    public void testTermRangeQuery() throws Exception {
         // 搜索起始字母范围从A到Z的city
         Query query = new TermRangeQuery("city", new BytesRef("A"), new BytesRef("Z"), true, true);
         TopDocs search = searcher.search(query, 10);
@@ -104,7 +102,7 @@ public class SearcherTestCase {
     }
 
     @Test
-    public void testPrefixQuery() throws IOException {
+    public void testPrefixQuery() throws Exception {
         // 使用前缀搜索以It打头的国家名，显然只有Italy符合
         PrefixQuery query = new PrefixQuery(new Term("country", "It"));
         TopDocs search = searcher.search(query, 10);
@@ -112,7 +110,7 @@ public class SearcherTestCase {
     }
 
     @Test
-    public void testWildcardQuery() throws IOException {
+    public void testWildcardQuery() throws Exception {
         // *代表0个或者多个字母
         Query query = new WildcardQuery(new Term("content", "*dam"));
         TopDocs search = searcher.search(query, 10);
@@ -127,7 +125,7 @@ public class SearcherTestCase {
     }
 
     @Test
-    public void testFuzzyQuery() throws IOException, ParseException {
+    public void testFuzzyQuery() throws Exception, ParseException {
         // 注意是区分大小写的，同时默认的编辑距离的值是2
         // 注意两个Term之间的编辑距离必须小于两者中最小者的长度：the edit distance between the terms must be less
         // than the minimum length term
@@ -139,7 +137,7 @@ public class SearcherTestCase {
     // 短语查询
 
     @Test
-    public void testPhraseQuery() throws IOException {
+    public void testPhraseQuery() throws Exception {
         // 设置两个短语之间的跨度为2，也就是说has和bridges之间的短语小于等于均可检索到
         PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("content", "has")).add(new Term("content", "bridges")).build();
         TopDocs search = searcher.search(build, 10);
@@ -150,7 +148,7 @@ public class SearcherTestCase {
     }
 
     @Test
-    public void testMultiPhraseQuery() throws IOException {
+    public void testMultiPhraseQuery() throws Exception {
         Term[] terms = new Term[] { new Term("content", "has"), new Term("content", "lots") };
         Term term2 = new Term("content", "bridges");
         // 多个add之间认为是OR操作，即(has lots)和bridges之间的slop不大于3，不计算标点
@@ -164,7 +162,7 @@ public class SearcherTestCase {
     // 组合查询
 
     @Test
-    public void testBooleanQuery() throws IOException {
+    public void testBooleanQuery() throws Exception {
         Query termQuery = new TermQuery(new Term("country", "Beijing"));
         Query termQuery1 = new TermQuery(new Term("city", "Venice"));
         // 测试OR查询，或者出现Beijing或者出现Venice
@@ -180,7 +178,7 @@ public class SearcherTestCase {
 
     // 使用BooleanQuery类模拟MultiPhraseQuery类的功能
     @Test
-    public void testBooleanQueryImitateMultiPhraseQuery() throws IOException {
+    public void testBooleanQueryImitateMultiPhraseQuery() throws Exception {
         PhraseQuery first = new PhraseQuery.Builder().setSlop(3).add(new Term("content", "Amsterdam")).add(new Term("content", "bridges")).build();
         PhraseQuery second = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).build();
         BooleanQuery booleanQuery = new BooleanQuery.Builder().add(first, BooleanClause.Occur.SHOULD).add(second, BooleanClause.Occur.SHOULD).build();
@@ -191,7 +189,7 @@ public class SearcherTestCase {
     // 功能查询
 
     @Test
-    public void testQueryParser() throws ParseException, IOException {
+    public void testQueryParser() throws Exception {
         // 使用WhitespaceAnalyzer分析器不会忽略大小写，也就是说大小写敏感
         QueryParser queryParser = new QueryParser("content", new WhitespaceAnalyzer());
         Query query = queryParser.parse("+lots +has");
