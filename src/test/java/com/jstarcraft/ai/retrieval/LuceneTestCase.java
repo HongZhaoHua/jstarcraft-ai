@@ -3,7 +3,6 @@ package com.jstarcraft.ai.retrieval;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
@@ -15,8 +14,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
@@ -44,28 +41,6 @@ import com.jstarcraft.ai.retrieval.hanlp.HanlpQueryAnalyzer;
 import com.jstarcraft.core.utility.StringUtility;
 
 public class LuceneTestCase {
-
-    private static void doToken(TokenStream ts) throws IOException {
-        ts.reset();
-        CharTermAttribute cta = ts.getAttribute(CharTermAttribute.class);
-        while (ts.incrementToken()) {
-            System.out.print(cta.toString() + "|");
-        }
-        System.out.println();
-        ts.end();
-        ts.close();
-    }
-
-    @Test
-    public void main() throws Exception {
-        String etext = "FairyTale: A True Storys";
-        // Lucene 的中文分词器 SmartChineseAnalyzer
-        try (Analyzer smart = new HanlpIndexAnalyzer()) {
-            TokenStream ts = smart.tokenStream("content", etext);
-            System.out.println("smart中文分词器，英文分词效果：");
-            doToken(ts);
-        }
-    }
 
     @Test
     public void test() throws Exception {
