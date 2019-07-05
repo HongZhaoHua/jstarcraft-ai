@@ -17,8 +17,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
+import org.apache.lucene.document.IntPoint;
 import org.apache.lucene.document.SortedDocValuesField;
-import org.apache.lucene.document.StoredField;
 import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -61,7 +61,7 @@ public class LuceneTestCase {
                         CSVRecord datas = iterator.next();
                         Document document = new Document();
                         // 电影标识
-                        Field idField = new StoredField("id", datas.get(0));
+                        Field idField = new IntPoint("id", Integer.parseInt(datas.get(0)));
                         document.add(idField);
                         // 电影标题
                         Field titleField = new TextField("title", datas.get(1), Store.YES);
@@ -92,7 +92,7 @@ public class LuceneTestCase {
             TopDocs topDocs = indexSearcher.search(query, 10, sort);
             Assert.assertEquals(8, topDocs.totalHits.value);
             Document document = indexSearcher.doc(topDocs.scoreDocs[0].doc);
-            Assert.assertEquals("308", document.get("id"));
+            Assert.assertEquals("FairyTale: A True Story (1997)", document.get("title"));
             indexReader.close();
         }
     }
