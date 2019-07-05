@@ -187,19 +187,6 @@ public class SearcherTestCase {
     }
 
     @Test
-    public void testToken() throws IOException {
-        Analyzer analyzer = new StandardAnalyzer();
-        TokenStream tokenStream = analyzer.tokenStream("myfield", new StringReader("Some text content for my test!"));
-        OffsetAttribute offsetAttribute = tokenStream.addAttribute(OffsetAttribute.class);
-        tokenStream.reset();
-        while (tokenStream.incrementToken()) {
-            System.out.println("token: " + tokenStream.reflectAsString(true).toString());
-            System.out.println("token start offset: " + offsetAttribute.startOffset());
-            System.out.println("token end offset: " + offsetAttribute.endOffset());
-        }
-    }
-
-    @Test
     public void testMultiPhraseQuery() throws IOException {
         Term[] terms = new Term[] { new Term("content", "has"), new Term("content", "lots") };
         Term term2 = new Term("content", "bridges");
