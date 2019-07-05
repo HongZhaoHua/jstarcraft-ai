@@ -1,13 +1,10 @@
 package com.jstarcraft.ai.retrieval;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -73,11 +70,13 @@ public class SearcherTestCase {
         }
     }
 
+    // 测试查询
+
     @Test
-    public void testTermQuery() throws IOException {
-        Term term = new Term("id", "2");
-        TopDocs search = searcher.search(new TermQuery(term), 10);
-        Assert.assertEquals(1, search.totalHits.value);
+    public void testMatchAllDocsQuery() throws IOException {
+        Query query = new MatchAllDocsQuery();
+        TopDocs search = searcher.search(query, 10);
+        Assert.assertEquals(2, search.totalHits.value);
     }
 
     @Test
@@ -87,6 +86,15 @@ public class SearcherTestCase {
         Assert.assertEquals(0, search.totalHits.value);
     }
 
+    // 词项查询
+
+    @Test
+    public void testTermQuery() throws IOException {
+        Term term = new Term("id", "2");
+        TopDocs search = searcher.search(new TermQuery(term), 10);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
     @Test
     public void testTermRangeQuery() throws IOException {
         // 搜索起始字母范围从A到Z的city
@@ -94,6 +102,93 @@ public class SearcherTestCase {
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(2, search.totalHits.value);
     }
+
+    @Test
+    public void testPrefixQuery() throws IOException {
+        // 使用前缀搜索以It打头的国家名，显然只有Italy符合
+        PrefixQuery query = new PrefixQuery(new Term("country", "It"));
+        TopDocs search = searcher.search(query, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
+    @Test
+    public void testWildcardQuery() throws IOException {
+        // *代表0个或者多个字母
+        Query query = new WildcardQuery(new Term("content", "*dam"));
+        TopDocs search = searcher.search(query, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+        // ?代表0个或者1个字母
+        query = new WildcardQuery(new Term("content", "?ridges"));
+        search = searcher.search(query, 10);
+        Assert.assertEquals(2, search.totalHits.value);
+        query = new WildcardQuery(new Term("content", "b*s"));
+        search = searcher.search(query, 10);
+        Assert.assertEquals(2, search.totalHits.value);
+    }
+
+    @Test
+    public void testFuzzyQuery() throws IOException, ParseException {
+        // 注意是区分大小写的，同时默认的编辑距离的值是2
+        // 注意两个Term之间的编辑距离必须小于两者中最小者的长度：the edit distance between the terms must be less
+        // than the minimum length term
+        Query query = new FuzzyQuery(new Term("city", "Veni"));
+        TopDocs search = searcher.search(query, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
+    // 短语查询
+
+    @Test
+    public void testPhraseQuery() throws IOException {
+        // 设置两个短语之间的跨度为2，也就是说has和bridges之间的短语小于等于均可检索到
+        PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("content", "has")).add(new Term("content", "bridges")).build();
+        TopDocs search = searcher.search(build, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+        build = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).add(new Term("content", "canals")).build();
+        search = searcher.search(build, 10);
+        Assert.assertNotEquals(1, search.totalHits.value);
+    }
+
+    @Test
+    public void testMultiPhraseQuery() throws IOException {
+        Term[] terms = new Term[] { new Term("content", "has"), new Term("content", "lots") };
+        Term term2 = new Term("content", "bridges");
+        // 多个add之间认为是OR操作，即(has lots)和bridges之间的slop不大于3，不计算标点
+        MultiPhraseQuery multiPhraseQuery = new MultiPhraseQuery.Builder().add(terms).add(term2).setSlop(3).build();
+        TopDocs search = searcher.search(multiPhraseQuery, 10);
+        Assert.assertEquals(2, search.totalHits.value);
+    }
+
+    // 数值查询
+
+    // 组合查询
+
+    @Test
+    public void testBooleanQuery() throws IOException {
+        Query termQuery = new TermQuery(new Term("country", "Beijing"));
+        Query termQuery1 = new TermQuery(new Term("city", "Venice"));
+        // 测试OR查询，或者出现Beijing或者出现Venice
+        BooleanQuery build = new BooleanQuery.Builder().add(termQuery, BooleanClause.Occur.SHOULD).add(termQuery1, BooleanClause.Occur.SHOULD).build();
+        TopDocs search = searcher.search(build, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+        // 使用BooleanQuery实现 国家是(Italy OR Netherlands) AND contents中包含(Amsterdam)操作
+        BooleanQuery build1 = new BooleanQuery.Builder().add(new TermQuery(new Term("country", "Italy")), BooleanClause.Occur.SHOULD).add(new TermQuery(new Term("country", "Netherlands")), BooleanClause.Occur.SHOULD).build();
+        BooleanQuery build2 = new BooleanQuery.Builder().add(build1, BooleanClause.Occur.MUST).add(new TermQuery(new Term("content", "Amsterdam")), BooleanClause.Occur.MUST).build();
+        search = searcher.search(build2, 10);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
+    // 使用BooleanQuery类模拟MultiPhraseQuery类的功能
+    @Test
+    public void testBooleanQueryImitateMultiPhraseQuery() throws IOException {
+        PhraseQuery first = new PhraseQuery.Builder().setSlop(3).add(new Term("content", "Amsterdam")).add(new Term("content", "bridges")).build();
+        PhraseQuery second = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).build();
+        BooleanQuery booleanQuery = new BooleanQuery.Builder().add(first, BooleanClause.Occur.SHOULD).add(second, BooleanClause.Occur.SHOULD).build();
+        TopDocs search = searcher.search(booleanQuery, 10);
+        Assert.assertEquals(2, search.totalHits.value);
+    }
+
+    // 功能查询
 
     @Test
     public void testQueryParser() throws ParseException, IOException {
@@ -118,92 +213,6 @@ public class SearcherTestCase {
         query = parser.parse("Venic~2");
         search = searcher.search(query, 10);
         Assert.assertEquals(1, search.totalHits.value);
-    }
-
-    @Test
-    public void testBooleanQuery() throws IOException {
-        Query termQuery = new TermQuery(new Term("country", "Beijing"));
-        Query termQuery1 = new TermQuery(new Term("city", "Venice"));
-        // 测试OR查询，或者出现Beijing或者出现Venice
-        BooleanQuery build = new BooleanQuery.Builder().add(termQuery, BooleanClause.Occur.SHOULD).add(termQuery1, BooleanClause.Occur.SHOULD).build();
-        TopDocs search = searcher.search(build, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-        // 使用BooleanQuery实现 国家是(Italy OR Netherlands) AND contents中包含(Amsterdam)操作
-        BooleanQuery build1 = new BooleanQuery.Builder().add(new TermQuery(new Term("country", "Italy")), BooleanClause.Occur.SHOULD).add(new TermQuery(new Term("country", "Netherlands")), BooleanClause.Occur.SHOULD).build();
-        BooleanQuery build2 = new BooleanQuery.Builder().add(build1, BooleanClause.Occur.MUST).add(new TermQuery(new Term("content", "Amsterdam")), BooleanClause.Occur.MUST).build();
-        search = searcher.search(build2, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-    }
-
-    @Test
-    public void testPhraseQuery() throws IOException {
-        // 设置两个短语之间的跨度为2，也就是说has和bridges之间的短语小于等于均可检索到
-        PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("content", "has")).add(new Term("content", "bridges")).build();
-        TopDocs search = searcher.search(build, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-        build = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).add(new Term("content", "canals")).build();
-        search = searcher.search(build, 10);
-        Assert.assertNotEquals(1, search.totalHits.value);
-    }
-
-    @Test
-    public void testMatchAllDocsQuery() throws IOException {
-        Query query = new MatchAllDocsQuery();
-        TopDocs search = searcher.search(query, 10);
-        Assert.assertEquals(2, search.totalHits.value);
-    }
-
-    @Test
-    public void testFuzzyQuery() throws IOException, ParseException {
-        // 注意是区分大小写的，同时默认的编辑距离的值是2
-        // 注意两个Term之间的编辑距离必须小于两者中最小者的长度：the edit distance between the terms must be less
-        // than the minimum length term
-        Query query = new FuzzyQuery(new Term("city", "Veni"));
-        TopDocs search = searcher.search(query, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-    }
-
-    @Test
-    public void testWildcardQuery() throws IOException {
-        // *代表0个或者多个字母
-        Query query = new WildcardQuery(new Term("content", "*dam"));
-        TopDocs search = searcher.search(query, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-        // ?代表0个或者1个字母
-        query = new WildcardQuery(new Term("content", "?ridges"));
-        search = searcher.search(query, 10);
-        Assert.assertEquals(2, search.totalHits.value);
-        query = new WildcardQuery(new Term("content", "b*s"));
-        search = searcher.search(query, 10);
-        Assert.assertEquals(2, search.totalHits.value);
-    }
-
-    @Test
-    public void testPrefixQuery() throws IOException {
-        // 使用前缀搜索以It打头的国家名，显然只有Italy符合
-        PrefixQuery query = new PrefixQuery(new Term("country", "It"));
-        TopDocs search = searcher.search(query, 10);
-        Assert.assertEquals(1, search.totalHits.value);
-    }
-
-    @Test
-    public void testMultiPhraseQuery() throws IOException {
-        Term[] terms = new Term[] { new Term("content", "has"), new Term("content", "lots") };
-        Term term2 = new Term("content", "bridges");
-        // 多个add之间认为是OR操作，即(has lots)和bridges之间的slop不大于3，不计算标点
-        MultiPhraseQuery multiPhraseQuery = new MultiPhraseQuery.Builder().add(terms).add(term2).setSlop(3).build();
-        TopDocs search = searcher.search(multiPhraseQuery, 10);
-        Assert.assertEquals(2, search.totalHits.value);
-    }
-
-    // 使用BooleanQuery类模拟MultiPhraseQuery类的功能
-    @Test
-    public void testBooleanQueryImitateMultiPhraseQuery() throws IOException {
-        PhraseQuery first = new PhraseQuery.Builder().setSlop(3).add(new Term("content", "Amsterdam")).add(new Term("content", "bridges")).build();
-        PhraseQuery second = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).build();
-        BooleanQuery booleanQuery = new BooleanQuery.Builder().add(first, BooleanClause.Occur.SHOULD).add(second, BooleanClause.Occur.SHOULD).build();
-        TopDocs search = searcher.search(booleanQuery, 10);
-        Assert.assertEquals(2, search.totalHits.value);
     }
 
 }
