@@ -95,7 +95,7 @@ public class SearcherTestCase {
 
     @Test
     public void testTermRangeQuery() throws Exception {
-        // 搜索起始字母范围从A到Z的city
+        // 范围搜索
         Query query = new TermRangeQuery("city", new BytesRef("A"), new BytesRef("Z"), true, true);
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(2, search.totalHits.value);
@@ -103,7 +103,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPrefixQuery() throws Exception {
-        // 使用前缀搜索以It打头的国家名，显然只有Italy符合
+        // 前缀搜索
         PrefixQuery query = new PrefixQuery(new Term("country", "It"));
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(1, search.totalHits.value);
@@ -111,6 +111,7 @@ public class SearcherTestCase {
 
     @Test
     public void testWildcardQuery() throws Exception {
+        // 通配符搜索
         // *代表0个或者多个字母
         Query query = new WildcardQuery(new Term("content", "*dam"));
         TopDocs search = searcher.search(query, 10);
@@ -126,9 +127,7 @@ public class SearcherTestCase {
 
     @Test
     public void testFuzzyQuery() throws Exception, ParseException {
-        // 注意是区分大小写的，同时默认的编辑距离的值是2
-        // 注意两个Term之间的编辑距离必须小于两者中最小者的长度：the edit distance between the terms must be less
-        // than the minimum length term
+        // 模糊搜索
         Query query = new FuzzyQuery(new Term("city", "Veni"));
         TopDocs search = searcher.search(query, 10);
         Assert.assertEquals(1, search.totalHits.value);
@@ -138,7 +137,8 @@ public class SearcherTestCase {
 
     @Test
     public void testPhraseQuery() throws Exception {
-        // 设置两个短语之间的跨度为2，也就是说has和bridges之间的短语小于等于均可检索到
+        // 短语搜索
+        // 设置短语之间的跨度为2,也就是说has和bridges之间的短语小于等于均可检索
         PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("content", "has")).add(new Term("content", "bridges")).build();
         TopDocs search = searcher.search(build, 10);
         Assert.assertEquals(1, search.totalHits.value);
@@ -149,6 +149,7 @@ public class SearcherTestCase {
 
     @Test
     public void testMultiPhraseQuery() throws Exception {
+        // 多短语搜索
         Term[] terms = new Term[] { new Term("content", "has"), new Term("content", "lots") };
         Term term2 = new Term("content", "bridges");
         // 多个add之间认为是OR操作，即(has lots)和bridges之间的slop不大于3，不计算标点
@@ -163,6 +164,7 @@ public class SearcherTestCase {
 
     @Test
     public void testBooleanQuery() throws Exception {
+        // 与或搜索
         Query termQuery = new TermQuery(new Term("country", "Beijing"));
         Query termQuery1 = new TermQuery(new Term("city", "Venice"));
         // 测试OR查询，或者出现Beijing或者出现Venice
@@ -176,9 +178,9 @@ public class SearcherTestCase {
         Assert.assertEquals(1, search.totalHits.value);
     }
 
-    // 使用BooleanQuery类模拟MultiPhraseQuery类的功能
     @Test
     public void testBooleanQueryImitateMultiPhraseQuery() throws Exception {
+        // 使用BooleanQuery+PhraseQuery模拟MultiPhraseQuery功能
         PhraseQuery first = new PhraseQuery.Builder().setSlop(3).add(new Term("content", "Amsterdam")).add(new Term("content", "bridges")).build();
         PhraseQuery second = new PhraseQuery.Builder().setSlop(1).add(new Term("content", "Venice")).add(new Term("content", "lots")).build();
         BooleanQuery booleanQuery = new BooleanQuery.Builder().add(first, BooleanClause.Occur.SHOULD).add(second, BooleanClause.Occur.SHOULD).build();
@@ -187,6 +189,8 @@ public class SearcherTestCase {
     }
 
     // 功能查询
+
+    // 查询解析器
 
     @Test
     public void testQueryParser() throws Exception {
