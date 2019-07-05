@@ -184,6 +184,30 @@ public class SearcherTestCase {
 
     // 数值查询
 
+    @Test
+    public void testPointExactQuery() throws Exception {
+        // 精确查询
+        Query exactQuery = IntPoint.newExactQuery("id", 1);
+        TopDocs search = searcher.search(exactQuery, 1000);
+        Assert.assertEquals(1, search.totalHits.value);
+    }
+
+    @Test
+    public void testPointRangeQuery() throws Exception {
+        // 范围查询
+        Query rangeQuery = IntPoint.newRangeQuery("id", 501, 1000);
+        TopDocs search = searcher.search(rangeQuery, 1000);
+        Assert.assertEquals(500, search.totalHits.value);
+    }
+
+    @Test
+    public void testPointSetQuery() throws Exception {
+        // 集合查询
+        Query setQuery = IntPoint.newSetQuery("id", 1, 10, 100, 1000);
+        TopDocs search = searcher.search(setQuery, 1000);
+        Assert.assertEquals(4, search.totalHits.value);
+    }
+
     // 组合查询
 
     @Test
