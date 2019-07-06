@@ -18,23 +18,29 @@ https://blog.csdn.net/fendouaini/article/details/82027310
 中文分词器分词效果评估对比:
 https://github.com/ysc/cws_evaluation
 
-Java分布式中文分词组件 - word分词:
-https://github.com/ysc/word
-
 Ansj中文分词:
 https://github.com/NLPchina/ansj_seg
+
+HanLP中文分词:
+https://github.com/hankcs/hanlp-lucene-plugin
 
 IK中文分词:
 https://github.com/magese/ik-analyzer-solr
 
-mmseg4j中文分词:
-https://github.com/chenlb/mmseg4j-core
-
 jieba中文分词:
 https://github.com/huaban/jieba-analysis
 
-PKUSeg中文分词:
-https://github.com/lancopku/PKUSeg-python
+Jcseg中文分词:
+https://github.com/lionsoul2014/jcseg
+
+mmseg4j中文分词:
+https://github.com/chenlb/mmseg4j-core
+
+NLPIR中文分词:
+https://github.com/NLPIR-team/nlpir-analysis-cn-ictclas
+
+Java分布式中文分词组件 - word分词:
+https://github.com/ysc/word
 
 实时搜索引擎Elasticsearch:
 http://blog.csdn.net/xialei199023/article/details/47680401
