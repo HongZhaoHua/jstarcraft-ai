@@ -108,6 +108,7 @@ public class SearcherTestCase {
 
     @Test
     public void testMatchAllDocsQuery() throws Exception {
+        // 全部匹配查询
         Query query = new MatchAllDocsQuery();
         TopDocs search = searcher.search(query, 1000000);
         Assert.assertEquals(1681, search.totalHits.value);
@@ -115,6 +116,7 @@ public class SearcherTestCase {
 
     @Test
     public void testMatchNoDocsQuery() throws Exception {
+        // 全不匹配查询
         Query query = new MatchNoDocsQuery();
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(0, search.totalHits.value);
