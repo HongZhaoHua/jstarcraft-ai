@@ -16,6 +16,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.document.FeatureField;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.IntPoint;
@@ -27,6 +28,7 @@ import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.BoostQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.MatchAllDocsQuery;
@@ -36,6 +38,7 @@ import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.RegexpQuery;
+import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
@@ -87,8 +90,9 @@ public class SearcherTestCase {
                         LocalDate date = LocalDate.parse(datas.get(2), formatter);
                         Field dateField = new SortedDocValuesField("date", new BytesRef(date.toString()));
                         document.add(dateField);
-                        // 电影URL
-                        datas.get(4);
+                        // 电影特征
+                        Field feature = new FeatureField("feature", "score", Float.parseFloat(datas.get(0)));
+                        document.add(feature);
                         indexWriter.addDocument(document);
                     }
                 }
@@ -316,19 +320,40 @@ public class SearcherTestCase {
     @Test
     public void testBooleanQuery() throws Exception {
         // 与或搜索
-        Query leftQuery = new TermQuery(new Term("title", "Toy"));
-        Query rightQuery = new TermQuery(new Term("title", "Story"));
+        Query leftQuery = new TermQuery(new Term("title", "Story"));
+        Query rightQuery = new TermQuery(new Term("title", "Toy"));
         {
             // 与查询
-            BooleanQuery query = new BooleanQuery.Builder().add(leftQuery, Occur.MUST).add(rightQuery, Occur.MUST).build();
-            TopDocs search = searcher.search(query, 1000);
+            BooleanQuery booleanQuery = new BooleanQuery.Builder().add(leftQuery, Occur.MUST).add(rightQuery, Occur.MUST).build();
+            TopDocs search = searcher.search(booleanQuery, 1000);
             Assert.assertEquals(1, search.totalHits.value);
         }
         {
             // 或查询
-            BooleanQuery query = new BooleanQuery.Builder().add(leftQuery, Occur.SHOULD).add(rightQuery, Occur.SHOULD).build();
-            TopDocs search = searcher.search(query, 1000);
+            BooleanQuery booleanQuery = new BooleanQuery.Builder().add(leftQuery, Occur.SHOULD).add(rightQuery, Occur.SHOULD).build();
+            TopDocs search = searcher.search(booleanQuery, 1000);
             Assert.assertEquals(6, search.totalHits.value);
+        }
+    }
+
+    @Test
+    public void testBoostQuery() throws Exception {
+        Query leftQuery = new TermQuery(new Term("title", "Ace"));
+        Query rightQuery = new TermQuery(new Term("title", "Toy"));
+        // 两次查询排序相反
+        Query booleanQuery = new BooleanQuery.Builder().add(leftQuery, Occur.SHOULD).add(rightQuery, Occur.SHOULD).build();
+        {
+            TopDocs search = searcher.search(booleanQuery, 1000);
+            Assert.assertEquals(3, search.totalHits.value);
+            Assert.assertEquals(0, search.scoreDocs[0].doc);
+        }
+        Query featureQuery = FeatureField.newSaturationQuery("feature", "score");
+        Query boostedQuery = new BoostQuery(featureQuery, 10F);
+        booleanQuery = new BooleanQuery.Builder().add(booleanQuery, Occur.MUST).add(boostedQuery, Occur.MUST).build();
+        {
+            TopDocs search = searcher.search(booleanQuery, 1000);
+            Assert.assertEquals(3, search.totalHits.value);
+            Assert.assertEquals(0, search.scoreDocs[2].doc);
         }
     }
 
