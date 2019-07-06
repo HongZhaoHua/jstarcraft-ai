@@ -36,6 +36,7 @@ import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.RegexpQuery;
+import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
@@ -226,6 +227,23 @@ public class SearcherTestCase {
             SpanNearQuery nearQuery = new SpanNearQuery(spanQueries, 5, true);
             TopDocs search = searcher.search(nearQuery, 1000);
             Assert.assertEquals(1, search.totalHits.value);
+        }
+        {
+            // 考虑间隔的情况
+            {
+                SpanNearQuery.Builder builder = SpanNearQuery.newOrderedNearQuery("title");
+                builder.addClause(spanQueries[0]).addGap(2).setSlop(5).addClause(spanQueries[1]);
+                SpanNearQuery nearQuery = builder.build();
+                TopDocs search = searcher.search(nearQuery, 1000);
+                Assert.assertEquals(1, search.totalHits.value);
+            }
+            {
+                SpanNearQuery.Builder builder = SpanNearQuery.newOrderedNearQuery("title");
+                builder.addClause(spanQueries[0]).addGap(3).setSlop(5).addClause(spanQueries[1]);
+                SpanNearQuery nearQuery = builder.build();
+                TopDocs search = searcher.search(nearQuery, 1000);
+                Assert.assertEquals(0, search.totalHits.value);
+            }
         }
     }
 
