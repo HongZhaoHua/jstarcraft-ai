@@ -124,6 +124,7 @@ public class SearcherTestCase {
 
     @Test
     public void testTermQuery() throws Exception {
+        // 词项查询
         Query query = new TermQuery(new Term("title", "Toy"));
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(1, search.totalHits.value);
@@ -131,7 +132,7 @@ public class SearcherTestCase {
 
     @Test
     public void testTermRangeQuery() throws Exception {
-        // 范围搜索
+        // 范围查询
         Query query = new TermRangeQuery("title", new BytesRef("Toa"), new BytesRef("Toz"), true, true);
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(22, search.totalHits.value);
@@ -139,7 +140,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPrefixQuery() throws Exception {
-        // 前缀搜索
+        // 前缀查询
         PrefixQuery query = new PrefixQuery(new Term("title", "Touc"));
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(2, search.totalHits.value);
@@ -147,7 +148,7 @@ public class SearcherTestCase {
 
     @Test
     public void testWildcardQuery() throws Exception {
-        // 通配符搜索
+        // 通配符查询
         {
             // *代表0个或者多个字母
             Query query = new WildcardQuery(new Term("title", "*ouc*"));
@@ -164,7 +165,7 @@ public class SearcherTestCase {
 
     @Test
     public void testRegexpQuery() throws Exception {
-        // 正则搜索
+        // 正则查询
         RegexpQuery query = new RegexpQuery(new Term("title", "To[a-z]"));
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(7, search.totalHits.value);
@@ -172,7 +173,7 @@ public class SearcherTestCase {
 
     @Test
     public void testFuzzyQuery() throws Exception {
-        // 模糊搜索
+        // 模糊查询
         Query query = new FuzzyQuery(new Term("title", "Stori"));
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(32, search.totalHits.value);
@@ -182,7 +183,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPhraseQuery() throws Exception {
-        // 短语搜索
+        // 短语查询
         // 设置短语之间的跨度为2,也就是说Story和The之间的短语小于等于均可检索
         PhraseQuery build = new PhraseQuery.Builder().setSlop(2).add(new Term("title", "Story")).add(new Term("title", "The")).build();
         TopDocs search = searcher.search(build, 1000);
@@ -191,7 +192,7 @@ public class SearcherTestCase {
 
     @Test
     public void testMultiPhraseQuery() throws Exception {
-        // 多短语搜索
+        // 多短语查询
         Term[] terms = new Term[] { new Term("title", "NeverEnding"), new Term("title", "Xinghua,") };
         Term term = new Term("title", "The");
         // add之间认为是OR操作,即"NeverEnding", "Xinghua,"和"The"之间的slop不大于3
@@ -202,7 +203,7 @@ public class SearcherTestCase {
 
     @Test
     public void testSpanTermQuery() throws Exception {
-        // 跨度搜索
+        // 相当于TermQuery,区别是使用SpanTermQuery可以得到词项的跨度信息
         Query query = new SpanTermQuery(new Term("title", "Toy"));
         TopDocs search = searcher.search(query, 1000);
         Assert.assertEquals(1, search.totalHits.value);
@@ -210,6 +211,7 @@ public class SearcherTestCase {
 
     @Test
     public void testSpanFirstQuery() throws Exception {
+        // 临近查询(匹配域中[0,n]范围内的词项)
         SpanQuery spanQuery = new SpanTermQuery(new Term("title", "Story"));
         SpanFirstQuery firstQuery = new SpanFirstQuery(spanQuery, 5);
         TopDocs search = searcher.search(firstQuery, 1000);
@@ -218,6 +220,7 @@ public class SearcherTestCase {
 
     @Test
     public void testSpanNearQuery() throws Exception {
+        // 跨度查询
         SpanQuery[] spanQueries = new SpanQuery[] { new SpanTermQuery(new Term("title", "The")), new SpanTermQuery(new Term("title", "Story")) };
         {
             // 不考虑顺序的情况
@@ -293,7 +296,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointExactQuery() throws Exception {
-        // 精确搜索
+        // 精确查询
         Query exactQuery = IntPoint.newExactQuery("id", 1);
         TopDocs search = searcher.search(exactQuery, 1000);
         Assert.assertEquals(1, search.totalHits.value);
@@ -301,7 +304,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointRangeQuery() throws Exception {
-        // 范围搜索
+        // 范围查询
         Query rangeQuery = IntPoint.newRangeQuery("id", 501, 1000);
         TopDocs search = searcher.search(rangeQuery, 1000);
         Assert.assertEquals(500, search.totalHits.value);
@@ -309,7 +312,7 @@ public class SearcherTestCase {
 
     @Test
     public void testPointSetQuery() throws Exception {
-        // 集合搜索
+        // 集合查询
         Query setQuery = IntPoint.newSetQuery("id", 1, 10, 100, 1000);
         TopDocs search = searcher.search(setQuery, 1000);
         Assert.assertEquals(4, search.totalHits.value);
@@ -319,7 +322,7 @@ public class SearcherTestCase {
 
     @Test
     public void testBooleanQuery() throws Exception {
-        // 与或搜索
+        // 与或查询
         Query leftQuery = new TermQuery(new Term("title", "Story"));
         Query rightQuery = new TermQuery(new Term("title", "Toy"));
         {
