@@ -25,7 +25,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanClause.Occur;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.FuzzyQuery;
 import org.apache.lucene.search.IndexSearcher;
@@ -36,7 +36,6 @@ import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.PrefixQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.RegexpQuery;
-import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.search.TopDocs;
@@ -321,14 +320,14 @@ public class SearcherTestCase {
         Query rightQuery = new TermQuery(new Term("title", "Story"));
         {
             // 与查询
-            BooleanQuery build = new BooleanQuery.Builder().add(leftQuery, BooleanClause.Occur.MUST).add(rightQuery, BooleanClause.Occur.MUST).build();
-            TopDocs search = searcher.search(build, 1000);
+            BooleanQuery query = new BooleanQuery.Builder().add(leftQuery, Occur.MUST).add(rightQuery, Occur.MUST).build();
+            TopDocs search = searcher.search(query, 1000);
             Assert.assertEquals(1, search.totalHits.value);
         }
         {
             // 或查询
-            BooleanQuery build = new BooleanQuery.Builder().add(leftQuery, BooleanClause.Occur.SHOULD).add(rightQuery, BooleanClause.Occur.SHOULD).build();
-            TopDocs search = searcher.search(build, 1000);
+            BooleanQuery query = new BooleanQuery.Builder().add(leftQuery, Occur.SHOULD).add(rightQuery, Occur.SHOULD).build();
+            TopDocs search = searcher.search(query, 1000);
             Assert.assertEquals(6, search.totalHits.value);
         }
     }
