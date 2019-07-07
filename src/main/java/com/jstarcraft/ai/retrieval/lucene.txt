@@ -39,6 +39,10 @@ https://github.com/chenlb/mmseg4j-core
 NLPIR中文分词:
 https://github.com/NLPIR-team/nlpir-analysis-cn-ictclas
 
+THULAC中文分词:
+https://github.com/thunlp/THULAC-Java
+https://github.com/yizhiru/thulac4j
+
 Java分布式中文分词组件 - word分词:
 https://github.com/ysc/word
 
