@@ -19,16 +19,16 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class CacheMatrix implements MathMatrix {
 
-    private ConcurrentLinkedHashMap<Object, Object> cache;
+    private ConcurrentLinkedHashMap<Integer, MathVector> cache;
 
     public CacheMatrix(int minimunSize, int maximunSize, int concurrencyLevel) {
-        Builder<Object, Object> builder = new Builder<>();
+        Builder<Integer, MathVector> builder = new Builder<>();
         builder.initialCapacity(minimunSize);
         builder.maximumWeightedCapacity(maximunSize);
         builder.concurrencyLevel(concurrencyLevel);
-        builder.listener(new EvictionListener<Object, Object>() {
+        builder.listener(new EvictionListener<Integer, MathVector>() {
 
-            public void onEviction(Object key, Object value) {
+            public void onEviction(Integer key, MathVector value) {
             };
 
         });
