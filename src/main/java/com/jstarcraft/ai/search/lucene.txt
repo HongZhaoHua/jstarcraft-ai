@@ -1,3 +1,6 @@
+实时搜索引擎Elasticsearch:
+http://blog.csdn.net/xialei199023/article/details/47680401
+
 Lucene解析 - 基本概念:
 https://www.jianshu.com/p/fbb171e73721?from=timeline&isappinstalled=0
 
@@ -46,8 +49,15 @@ https://github.com/yizhiru/thulac4j
 Java分布式中文分词组件 - word分词:
 https://github.com/ysc/word
 
-实时搜索引擎Elasticsearch:
-http://blog.csdn.net/xialei199023/article/details/47680401
+索引
+
+MySQL和Lucene索引对比分析:
+https://www.cnblogs.com/luxiaoxun/p/5452502.html
+
+时间序列数据库的秘密:
+https://www.infoq.cn/article/database-timestamp-01
+https://www.infoq.cn/article/database-timestamp-02
+https://www.infoq.cn/article/database-timestamp-03
 
 Lucene 索引文件宏观结构:
 http://blog.sina.com.cn/s/blog_48a45b950100kqc0.html
