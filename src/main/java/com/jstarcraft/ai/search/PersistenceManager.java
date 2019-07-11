@@ -54,20 +54,25 @@ public class PersistenceManager implements LuceneManager {
         this.deletedIds.addAll(deletedIds);
 
         this.transienceManager = transienceManager;
-        for (String id : deletedIds) {
-            Term term = new Term("id", id.toString());
-            this.writer.deleteDocuments(term);
-        }
+        Term[] terms = new Term[updatedIds.size() + updatedIds.size()];
+        int index = 0;
         for (String id : updatedIds.keySet()) {
-            Term term = new Term("id", id.toString());
-            this.writer.deleteDocuments(term);
+            terms[index++] = new Term(LuceneSearcher.ID, id.toString());
         }
+        for (String id : deletedIds) {
+            terms[index++] = new Term(LuceneSearcher.ID, id.toString());
+        }
+        this.writer.deleteDocuments(terms);
         this.writer.addIndexes(this.transienceManager.getDirectory());
         this.transienceManager = null;
+
+        this.createdIds.clear();
+        this.updatedIds.clear();
+        this.deletedIds.clear();
     }
 
     public IndexReader getReader() throws Exception {
-        if (changed.compareAndSet(true, false)) {
+        if (this.changed.compareAndSet(true, false)) {
             if (this.transienceManager != null) {
                 IndexReader reader = DirectoryReader.open(this.transienceManager.getDirectory());
                 reader = new MultiReader(reader, this.reader);
@@ -84,13 +89,12 @@ public class PersistenceManager implements LuceneManager {
 
     @Override
     public boolean isChanged() {
-        return changed.get();
+        return this.changed.get();
     }
 
     @Override
     public IndexWriter getWriter() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.writer;
     }
 
 }

@@ -1,7 +1,9 @@
 package com.jstarcraft.ai.search;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,11 +14,13 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.MultiReader;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.CollectorManager;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.TopFieldDocs;
+import org.apache.lucene.search.TotalHitCountCollector;
 
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
@@ -66,9 +70,9 @@ public class CacheSearcher implements LuceneSearcher {
         IndexWriter writer = this.transienceManager.getWriter();
         for (Document document : documents) {
             String id = getId(document);
-            long instant = getInstant(document);
             if (this.deletedIds.remove(id)) {
-                this.updatedIds.put(id, instant);
+                long version = getVersion(document);
+                this.updatedIds.put(id, version);
             } else {
                 this.createdIds.add(id);
             }
@@ -81,8 +85,8 @@ public class CacheSearcher implements LuceneSearcher {
         IndexWriter writer = this.transienceManager.getWriter();
         for (Document document : documents) {
             String id = getId(document);
-            long instant = getInstant(document);
-            this.updatedIds.put(id, instant);
+            long version = getVersion(document);
+            this.updatedIds.put(id, version);
             writer.addDocument(document);
         }
     }
@@ -116,10 +120,10 @@ public class CacheSearcher implements LuceneSearcher {
             if (this.deletedIds.contains(id)) {
                 continue;
             }
-            long version = this.updatedIds.get(id);
-            if (version != 0) {
-                long instant = getInstant(document);
-                if (version != instant) {
+            long newVersion = this.updatedIds.get(id);
+            if (newVersion != 0) {
+                long oldVersion = getVersion(document);
+                if (newVersion != oldVersion) {
                     continue;
                 }
             }
@@ -134,8 +138,50 @@ public class CacheSearcher implements LuceneSearcher {
 
     @Override
     public int countDocuments(Query query) throws Exception {
-        // TODO Auto-generated method stub
-        return 0;
+        if (this.transienceManager.isChanged() || this.persistenceManager.isChanged()) {
+            IndexReader reader = new MultiReader(this.transienceManager.getReader(), this.persistenceManager.getReader());
+            this.searcher = new IndexSearcher(reader);
+        }
+
+        final CollectorManager<CountCollector, Integer> collectorManager = new CollectorManager<CountCollector, Integer>() {
+
+            @Override
+            public CountCollector newCollector() throws IOException {
+                CountCollector collector = new CountCollector() {
+
+                    @Override
+                    public void collect(int index) throws IOException {
+                        this.ids.advanceExact(index);
+                        String id = this.ids.binaryValue().utf8ToString();
+                        if (CacheSearcher.this.deletedIds.contains(id)) {
+                            return;
+                        }
+                        long newVersion = CacheSearcher.this.updatedIds.get(id);
+                        if (newVersion != 0) {
+                            this.versions.advanceExact(index);
+                            long oldVersion = this.versions.longValue();
+                            if (newVersion != oldVersion) {
+                                return;
+                            }
+                        }
+                        this.count++;
+                    }
+
+                };
+                return collector;
+            }
+
+            @Override
+            public Integer reduce(Collection<CountCollector> collectors) throws IOException {
+                int count = 0;
+                for (CountCollector collector : collectors) {
+                    count += collector.getCount();
+                }
+                return count;
+            }
+
+        };
+        return this.searcher.search(query, collectorManager);
     }
 
 }

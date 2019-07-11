@@ -19,22 +19,22 @@ public interface LuceneSearcher {
 
     static final String ID = "id";
 
-    static final String INSTANT = "instant";
+    static final String VERSION = "version";
 
     default String getId(Document document) {
         return document.get(ID);
     }
 
-    default long getInstant(Document document) {
-        BytesRef bytes = document.getBinaryValue(INSTANT);
-        long instant = NumericUtils.sortableBytesToLong(bytes.bytes, bytes.offset);
-        return instant;
+    default long getVersion(Document document) {
+        BytesRef bytes = document.getBinaryValue(VERSION);
+        long version = NumericUtils.sortableBytesToLong(bytes.bytes, bytes.offset);
+        return version;
     }
 
-    default void setInstant(Document document, long instant) {
+    default void setVersion(Document document, long version) {
         byte[] bytes = new byte[Long.BYTES];
-        NumericUtils.longToSortableBytes(instant, bytes, 0);
-        StoredField field = new StoredField(INSTANT, bytes);
+        NumericUtils.longToSortableBytes(version, bytes, 0);
+        StoredField field = new StoredField(VERSION, bytes);
         document.add(field);
     }
 
