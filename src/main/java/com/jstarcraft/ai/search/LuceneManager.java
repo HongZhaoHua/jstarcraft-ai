@@ -54,17 +54,17 @@ public interface LuceneManager {
     Directory getDirectory();
 
     /**
-     * 获取写入器
-     * 
-     * @return
-     */
-    IndexWriter getWriter() throws Exception;
-
-    /**
      * 获取读取器
      * 
      * @return
      */
     IndexReader getReader() throws Exception;
+
+    /**
+     * 获取写入器
+     * 
+     * @return
+     */
+    IndexWriter getWriter() throws Exception;
 
 }
