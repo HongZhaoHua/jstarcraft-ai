@@ -3,9 +3,8 @@ package com.jstarcraft.ai.search;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.IndexReaderContext;
 import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.index.MultiReader;
 import org.apache.lucene.search.BulkScorer;
 import org.apache.lucene.search.CollectionTerminatedException;
 import org.apache.lucene.search.Collector;
@@ -15,16 +14,11 @@ import org.apache.lucene.search.Weight;
 
 public class LuceneSearcher extends IndexSearcher {
 
-    private TransienceManager[] transienceManagers;
+    private LuceneManager[] luceneManagers;
 
-    public LuceneSearcher(IndexReader reader, TransienceManager... transienceManagers) {
-        super(reader);
-        this.transienceManagers = transienceManagers;
-    }
-
-    public LuceneSearcher(IndexReaderContext context, TransienceManager... transienceManagers) {
-        super(context);
-        this.transienceManagers = transienceManagers;
+    public LuceneSearcher(TransienceManager transienceManager, PersistenceManager persistenceManager) throws Exception {
+        super(new MultiReader(transienceManager.getReader(), persistenceManager.getReader()));
+        this.luceneManagers = new LuceneManager[] { persistenceManager, transienceManager };
     }
 
     @Override
@@ -34,8 +28,8 @@ public class LuceneSearcher extends IndexSearcher {
             try {
                 // 此处刻意通过TransienceManager重载LeafCollector.
                 instance = collector.getLeafCollector(context);
-                for (TransienceManager transienceManager : transienceManagers) {
-                    instance = transienceManager.getCollector(context, instance);
+                for (LuceneManager luceneManager : luceneManagers) {
+                    instance = luceneManager.getCollector(context, instance);
                 }
             } catch (CollectionTerminatedException exception) {
                 continue;

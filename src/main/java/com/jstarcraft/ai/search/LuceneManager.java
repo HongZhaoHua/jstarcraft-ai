@@ -1,9 +1,12 @@
 package com.jstarcraft.ai.search;
 
+import java.io.IOException;
 import java.util.Set;
 
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.search.LeafCollector;
 import org.apache.lucene.store.Directory;
 
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
@@ -34,25 +37,14 @@ public interface LuceneManager {
     boolean isChanged();
 
     /**
-     * 获取已创建标识
+     * 获取采集器
      * 
+     * @param context
+     * @param collector
      * @return
+     * @throws IOException
      */
-    Set<String> getCreatedIds();
-
-    /**
-     * 获取已变更标识
-     * 
-     * @return
-     */
-    Object2LongMap<String> getUpdatedIds();
-
-    /**
-     * 获取已删除标识
-     * 
-     * @return
-     */
-    Set<String> getDeletedIds();
+    LeafCollector getCollector(LeafReaderContext context, LeafCollector collector) throws IOException;
 
     /**
      * 获取目录

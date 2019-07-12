@@ -29,9 +29,7 @@ public class Searcher {
     public Searcher(IndexWriterConfig config, Path path) throws Exception {
         this.transienceManager = new TransienceManager(config);
         this.persistenceManager = new PersistenceManager(config, path);
-
-        IndexReader reader = new MultiReader(this.transienceManager.getReader(), this.persistenceManager.getReader());
-        this.searcher = new LuceneSearcher(reader);
+        this.searcher = new LuceneSearcher(this.transienceManager, this.persistenceManager);
     }
 
     /**
@@ -75,8 +73,7 @@ public class Searcher {
      */
     public TopDocs retrieveDocuments(Query query, Sort sort, int size) throws Exception {
         if (this.transienceManager.isChanged() || this.persistenceManager.isChanged()) {
-            IndexReader reader = new MultiReader(this.transienceManager.getReader(), this.persistenceManager.getReader());
-            this.searcher = new LuceneSearcher(reader);
+            this.searcher = new LuceneSearcher(this.transienceManager, this.persistenceManager);
         }
 
         return this.searcher.search(query, size, sort);
@@ -91,8 +88,7 @@ public class Searcher {
      */
     public int countDocuments(Query query) throws Exception {
         if (this.transienceManager.isChanged() || this.persistenceManager.isChanged()) {
-            IndexReader reader = new MultiReader(this.transienceManager.getReader(), this.persistenceManager.getReader());
-            this.searcher = new LuceneSearcher(reader);
+            this.searcher = new LuceneSearcher(this.transienceManager, this.persistenceManager);
         }
         return this.searcher.count(query);
     }

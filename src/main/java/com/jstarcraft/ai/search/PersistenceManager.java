@@ -1,15 +1,23 @@
 package com.jstarcraft.ai.search;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.lucene.index.BinaryDocValues;
 import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.DocValues;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.LeafReader;
+import org.apache.lucene.index.LeafReaderContext;
 import org.apache.lucene.index.MultiReader;
+import org.apache.lucene.index.NumericDocValues;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.LeafCollector;
+import org.apache.lucene.search.Scorable;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
@@ -27,12 +35,6 @@ public class PersistenceManager implements LuceneManager {
 
     private TransienceManager transienceManager;
 
-    private Set<String> createdIds;
-
-    private Object2LongMap<String> updatedIds;
-
-    private Set<String> deletedIds;
-
     private IndexWriterConfig config;
 
     private Directory directory;
@@ -48,27 +50,23 @@ public class PersistenceManager implements LuceneManager {
         this.reader = DirectoryReader.open(this.writer);
     }
 
-    synchronized void mergeInstances(Set<String> createdIds, Object2LongMap<String> updatedIds, Set<String> deletedIds, TransienceManager transienceManager) throws Exception {
-        this.createdIds.addAll(createdIds);
-        this.updatedIds.putAll(updatedIds);
-        this.deletedIds.addAll(deletedIds);
-
+    synchronized void merge(TransienceManager transienceManager) throws Exception {
         this.transienceManager = transienceManager;
-        Term[] terms = new Term[updatedIds.size() + updatedIds.size()];
+        this.changed.set(true);
+
+        Term[] terms = new Term[transienceManager.getUpdatedIds().size() + transienceManager.getDeletedIds().size()];
         int index = 0;
-        for (String id : updatedIds.keySet()) {
+        for (String id : transienceManager.getUpdatedIds().keySet()) {
             terms[index++] = new Term(TransienceManager.ID, id.toString());
         }
-        for (String id : deletedIds) {
+        for (String id : transienceManager.getDeletedIds()) {
             terms[index++] = new Term(TransienceManager.ID, id.toString());
         }
         this.writer.deleteDocuments(terms);
         this.writer.addIndexes(this.transienceManager.getDirectory());
-        this.transienceManager = null;
 
-        this.createdIds.clear();
-        this.updatedIds.clear();
-        this.deletedIds.clear();
+        this.transienceManager = null;
+        this.changed.set(true);
     }
 
     @Override
@@ -89,21 +87,44 @@ public class PersistenceManager implements LuceneManager {
     }
 
     @Override
-    public Set<String> getCreatedIds() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+    public LeafCollector getCollector(LeafReaderContext context, LeafCollector collector) throws IOException {
+        if (this.transienceManager == null) {
+            return collector;
+        }
 
-    @Override
-    public Object2LongMap<String> getUpdatedIds() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+        LeafReader reader = context.reader();
+        BinaryDocValues ids = DocValues.getBinary(reader, TransienceManager.ID);
+        NumericDocValues versions = DocValues.getNumeric(reader, TransienceManager.VERSION);
 
-    @Override
-    public Set<String> getDeletedIds() {
-        // TODO Auto-generated method stub
-        return null;
+        Object2LongMap<String> updatedIds = this.transienceManager.getUpdatedIds();
+        Set<String> deletedIds = this.transienceManager.getDeletedIds();
+
+        return new LeafCollector() {
+
+            @Override
+            public void setScorer(Scorable scorer) throws IOException {
+                collector.setScorer(scorer);
+            }
+
+            @Override
+            public void collect(int index) throws IOException {
+                ids.advanceExact(index);
+                String id = ids.binaryValue().utf8ToString();
+                if (deletedIds.contains(id)) {
+                    return;
+                }
+                long newVersion = updatedIds.get(id);
+                if (newVersion != 0) {
+                    versions.advanceExact(index);
+                    long oldVersion = versions.longValue();
+                    if (newVersion != oldVersion) {
+                        return;
+                    }
+                }
+                collector.collect(index);
+            }
+
+        };
     }
 
     @Override

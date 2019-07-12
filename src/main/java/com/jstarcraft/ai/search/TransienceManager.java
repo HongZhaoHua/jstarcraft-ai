@@ -88,6 +88,23 @@ public class TransienceManager implements LuceneManager {
         this.writer = new IndexWriter(this.directory, this.config);
         this.reader = DirectoryReader.open(this.writer);
     }
+    
+    Set<String> getCreatedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
+    Object2LongMap<String> getUpdatedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    
+    Set<String> getDeletedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     void createDocuments(Document... documents) throws Exception {
         for (Document document : documents) {
@@ -122,11 +139,25 @@ public class TransienceManager implements LuceneManager {
         }
     }
 
-    boolean check() {
-        return false;
+    @Override
+    public void open() {
+        // TODO Auto-generated method stub
+
     }
 
-    LeafCollector getCollector(LeafReaderContext context, LeafCollector collector) throws IOException {
+    @Override
+    public void close() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isChanged() {
+        return changed.get();
+    }
+
+    @Override
+    public LeafCollector getCollector(LeafReaderContext context, LeafCollector collector) throws IOException {
         LeafReader reader = context.reader();
         BinaryDocValues ids = DocValues.getBinary(reader, TransienceManager.ID);
         NumericDocValues versions = DocValues.getNumeric(reader, TransienceManager.VERSION);
@@ -157,41 +188,6 @@ public class TransienceManager implements LuceneManager {
             }
 
         };
-    }
-
-    @Override
-    public void open() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void close() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public boolean isChanged() {
-        return changed.get();
-    }
-
-    @Override
-    public Set<String> getCreatedIds() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Object2LongMap<String> getUpdatedIds() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Set<String> getDeletedIds() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
     @Override
