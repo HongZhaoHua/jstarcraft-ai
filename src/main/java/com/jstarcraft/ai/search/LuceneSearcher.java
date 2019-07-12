@@ -26,7 +26,7 @@ public class LuceneSearcher extends IndexSearcher {
         for (LeafReaderContext context : leaves) {
             LeafCollector instance;
             try {
-                // 此处刻意通过TransienceManager重载LeafCollector.
+                // 此处刻意通过LuceneManager重载LeafCollector.
                 instance = collector.getLeafCollector(context);
                 for (LuceneManager luceneManager : luceneManagers) {
                     instance = luceneManager.getCollector(context, instance);
