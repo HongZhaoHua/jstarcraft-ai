@@ -1,10 +1,7 @@
 package com.jstarcraft.ai.evaluate;
 
-import java.util.List;
-
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
-
-import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * 面向排名预测的评估器
@@ -12,7 +9,7 @@ import it.unimi.dsi.fastutil.ints.IntCollection;
  * @author Birdy
  *
  */
-public abstract class RankingEvaluator extends AbstractEvaluator<IntCollection> {
+public abstract class RankingEvaluator extends AbstractEvaluator<IntSet, IntList> {
 
 	/** 大小 */
 	protected int size;
@@ -22,7 +19,7 @@ public abstract class RankingEvaluator extends AbstractEvaluator<IntCollection> 
 	}
 
 	@Override
-	protected int count(IntCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
+	protected int count(IntSet checkCollection, IntList rankList) {
 		return 1;
 	}
 

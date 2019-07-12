@@ -6,6 +6,8 @@ import com.jstarcraft.ai.evaluate.RankingEvaluator;
 import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
 import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * 平均准确率均值评估器
@@ -25,20 +27,20 @@ public class MAPEvaluator extends RankingEvaluator {
 	}
 
 	@Override
-	protected float measure(IntCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
-		if (recommendList.size() > size) {
-			recommendList = recommendList.subList(0, size);
+	protected float measure(IntSet checkCollection, IntList rankList) {
+		if (rankList.size() > size) {
+		    rankList = rankList.subList(0, size);
 		}
 		int count = 0;
 		float map = 0F;
-		for (int index = 0; index < recommendList.size(); index++) {
-			int key = recommendList.get(index).getKey();
-			if (checkCollection.contains(key)) {
+		for (int index = 0; index < rankList.size(); index++) {
+			int itemIndex = rankList.get(index);
+			if (checkCollection.contains(itemIndex)) {
 				count++;
 				map += 1F * count / (index + 1);
 			}
 		}
-		return map / (checkCollection.size() < recommendList.size() ? checkCollection.size() : recommendList.size());
+		return map / (checkCollection.size() < rankList.size() ? checkCollection.size() : rankList.size());
 	}
 
 }

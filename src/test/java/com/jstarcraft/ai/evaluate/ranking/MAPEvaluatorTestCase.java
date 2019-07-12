@@ -2,15 +2,15 @@ package com.jstarcraft.ai.evaluate.ranking;
 
 import com.jstarcraft.ai.evaluate.AbstractRankingEvaluatorTestCase;
 import com.jstarcraft.ai.evaluate.Evaluator;
-import com.jstarcraft.ai.evaluate.ranking.MAPEvaluator;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 
-import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 public class MAPEvaluatorTestCase extends AbstractRankingEvaluatorTestCase {
 
     @Override
-    protected Evaluator<IntCollection> getEvaluator(SparseMatrix featureMatrix) {
+    protected Evaluator<IntSet, IntList> getEvaluator(SparseMatrix featureMatrix) {
         return new MAPEvaluator(10);
     }
 

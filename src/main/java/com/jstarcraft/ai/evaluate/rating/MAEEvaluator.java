@@ -1,12 +1,10 @@
 package com.jstarcraft.ai.evaluate.rating;
 
 import java.util.Iterator;
-import java.util.List;
 
 import com.jstarcraft.ai.evaluate.RatingEvaluator;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
-import it.unimi.dsi.fastutil.floats.FloatCollection;
+import it.unimi.dsi.fastutil.floats.FloatList;
 
 /**
  * 平均绝对误差评估器
@@ -19,16 +17,15 @@ import it.unimi.dsi.fastutil.floats.FloatCollection;
  */
 public class MAEEvaluator extends RatingEvaluator {
 
-	@Override
-	protected float measure(FloatCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
-		float value = 0F;
-		Iterator<Float> iterator = checkCollection.iterator();
-		for (Integer2FloatKeyValue keyValue : recommendList) {
-			float score = iterator.next();
-			float estimate = keyValue.getValue();
-			value += Math.abs(score - estimate);
-		}
-		return value;
-	}
+    @Override
+    protected float measure(FloatList checkCollection, FloatList rateList) {
+        float value = 0F;
+        Iterator<Float> iterator = checkCollection.iterator();
+        for (float estimate : rateList) {
+            float score = iterator.next();
+            value += Math.abs(score - estimate);
+        }
+        return value;
+    }
 
 }

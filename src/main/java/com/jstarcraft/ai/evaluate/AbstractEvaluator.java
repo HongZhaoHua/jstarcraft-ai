@@ -2,6 +2,7 @@ package com.jstarcraft.ai.evaluate;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
 /**
@@ -10,29 +11,29 @@ import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
  * @author Birdy
  *
  */
-public abstract class AbstractEvaluator<T> implements Evaluator<T> {
+public abstract class AbstractEvaluator<L, R> implements Evaluator<L, R> {
 
 	/**
-	 * 统计列表
+	 * 统计
 	 * 
-	 * @param checkCollection
-	 * @param recommendList
+	 * @param collection
+	 * @param list
 	 * @return
 	 */
-	protected abstract int count(T checkCollection, List<Integer2FloatKeyValue> recommendList);
+	protected abstract int count(L collection, R list);
 
 	/**
-	 * 测量列表
+	 * 测量
 	 * 
-	 * @param checkCollection
-	 * @param recommendList
+	 * @param collection
+	 * @param list
 	 * @return
 	 */
-	protected abstract float measure(T checkCollection, List<Integer2FloatKeyValue> recommendList);
+	protected abstract float measure(L collection, R list);
 
 	@Override
-	public final Integer2FloatKeyValue evaluate(T checkCollection, List<Integer2FloatKeyValue> recommendList) {
-		return new Integer2FloatKeyValue(count(checkCollection, recommendList), measure(checkCollection, recommendList));
+    public final Integer2FloatKeyValue evaluate(L collection, R list) {
+		return new Integer2FloatKeyValue(count(collection, list), measure(collection, list));
 	}
 
 }

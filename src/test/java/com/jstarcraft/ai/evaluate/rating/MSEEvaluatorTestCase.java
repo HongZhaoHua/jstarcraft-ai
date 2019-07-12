@@ -2,15 +2,14 @@ package com.jstarcraft.ai.evaluate.rating;
 
 import com.jstarcraft.ai.evaluate.AbstractRatingEvaluatorTestCase;
 import com.jstarcraft.ai.evaluate.Evaluator;
-import com.jstarcraft.ai.evaluate.rating.MSEEvaluator;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 
-import it.unimi.dsi.fastutil.floats.FloatCollection;
+import it.unimi.dsi.fastutil.floats.FloatList;
 
 public class MSEEvaluatorTestCase extends AbstractRatingEvaluatorTestCase {
 
     @Override
-    protected Evaluator<FloatCollection> getEvaluator(SparseMatrix featureMatrix) {
+    protected Evaluator<FloatList, FloatList> getEvaluator(SparseMatrix featureMatrix) {
         return new MSEEvaluator();
     }
 

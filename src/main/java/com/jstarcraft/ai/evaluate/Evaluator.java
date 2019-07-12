@@ -1,7 +1,5 @@
 package com.jstarcraft.ai.evaluate;
 
-import java.util.List;
-
 import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
 /**
@@ -10,15 +8,15 @@ import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
  * @author Birdy
  *
  */
-public interface Evaluator<T> {
+public interface Evaluator<L, R> {
 
 	/**
 	 * 评估
 	 * 
-	 * @param checkCollection
-	 * @param recommendList
+	 * @param collection
+	 * @param list
 	 * @return
 	 */
-	Integer2FloatKeyValue evaluate(T checkCollection, List<Integer2FloatKeyValue> recommendList);
+	Integer2FloatKeyValue evaluate(L collection, R list);
 
 }

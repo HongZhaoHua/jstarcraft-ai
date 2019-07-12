@@ -8,6 +8,8 @@ import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 import com.jstarcraft.ai.utility.MathUtility;
 
 import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * <pre>
@@ -31,15 +33,15 @@ public class NDCGEvaluator extends RankingEvaluator {
 	}
 
 	@Override
-	protected float measure(IntCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
-		if (recommendList.size() > size) {
-			recommendList = recommendList.subList(0, size);
+	protected float measure(IntSet checkCollection, IntList rankList) {
+		if (rankList.size() > size) {
+		    rankList = rankList.subList(0, size);
 		}
 		float dcg = 0F;
 		// calculate DCG
-		int size = recommendList.size();
+		int size = rankList.size();
 		for (int index = 0; index < size; index++) {
-			int itemIndex = recommendList.get(index).getKey();
+			int itemIndex = rankList.get(index);
 			if (!checkCollection.contains(itemIndex)) {
 				continue;
 			}

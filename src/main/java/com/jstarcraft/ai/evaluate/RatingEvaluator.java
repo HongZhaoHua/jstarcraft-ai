@@ -1,10 +1,6 @@
 package com.jstarcraft.ai.evaluate;
 
-import java.util.List;
-
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
-
-import it.unimi.dsi.fastutil.floats.FloatCollection;
+import it.unimi.dsi.fastutil.floats.FloatList;
 
 /**
  * 面向评分预测的评估器
@@ -12,10 +8,10 @@ import it.unimi.dsi.fastutil.floats.FloatCollection;
  * @author Birdy
  *
  */
-public abstract class RatingEvaluator extends AbstractEvaluator<FloatCollection> {
+public abstract class RatingEvaluator extends AbstractEvaluator<FloatList, FloatList> {
 
 	@Override
-	protected int count(FloatCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
+	protected int count(FloatList checkCollection, FloatList rateList) {
 		return checkCollection.size();
 	}
 

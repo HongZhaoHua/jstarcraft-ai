@@ -8,6 +8,8 @@ import com.jstarcraft.ai.evaluate.RankingEvaluator;
 import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
 import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * ROC曲线下的面积评估器
@@ -26,24 +28,24 @@ public class AUCEvaluator extends RankingEvaluator {
 	}
 
 	@Override
-	protected float measure(IntCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
+	protected float measure(IntSet checkCollection, IntList rankList) {
 		// 推荐物品集合(大小不能超过TopN)
-		int evaluateSize = recommendList.size();
+		int evaluateSize = rankList.size();
 		if (evaluateSize > size) {
-			recommendList = recommendList.subList(0, size);
+		    rankList = rankList.subList(0, size);
 		}
 		int hitCount = 0, missCount = 0;
 		Set<Integer> recommendItems = new HashSet<>();
-		for (Integer2FloatKeyValue keyValue : recommendList) {
-			recommendItems.add(keyValue.getKey());
-			if (checkCollection.contains(keyValue.getKey())) {
+		for (int itemIndex : rankList) {
+			recommendItems.add(itemIndex);
+			if (checkCollection.contains(itemIndex)) {
 				hitCount++;
 			} else {
 				missCount++;
 			}
 		}
 
-		int evaluateSum = (checkCollection.size() + evaluateSize - recommendList.size() - hitCount) * hitCount;
+		int evaluateSum = (checkCollection.size() + evaluateSize - rankList.size() - hitCount) * hitCount;
 		if (evaluateSum == 0) {
 			return 0.5F;
 		}

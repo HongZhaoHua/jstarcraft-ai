@@ -1,21 +1,19 @@
 package com.jstarcraft.ai.evaluate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
-public abstract class AbstractRankingEvaluatorTestCase extends AbstractEvaluatorTestCase<IntCollection> {
+public abstract class AbstractRankingEvaluatorTestCase extends AbstractEvaluatorTestCase<IntSet, IntList> {
 
     @Override
-    protected IntCollection check(MathVector vector) {
+    protected IntSet getLeft(MathVector vector) {
         IntSet itemSet = new IntOpenHashSet();
         for (VectorScalar scalar : vector) {
             if (RandomUtility.randomFloat(1F) < 0.5F) {
@@ -26,11 +24,11 @@ public abstract class AbstractRankingEvaluatorTestCase extends AbstractEvaluator
     }
 
     @Override
-    protected List<Integer2FloatKeyValue> recommend(MathVector vector) {
-        List<Integer2FloatKeyValue> recommendList = new ArrayList<>(vector.getElementSize());
+    protected IntList getRight(MathVector vector) {
+        IntList recommendList = new IntArrayList(vector.getElementSize());
         for (VectorScalar scalar : vector) {
             if (RandomUtility.randomFloat(1F) < 0.5F) {
-                recommendList.add(new Integer2FloatKeyValue(scalar.getIndex(), scalar.getValue()));
+                recommendList.add(scalar.getIndex());
             }
         }
         return recommendList;

@@ -1,12 +1,10 @@
 package com.jstarcraft.ai.evaluate.rating;
 
 import java.util.Iterator;
-import java.util.List;
 
 import com.jstarcraft.ai.evaluate.RatingEvaluator;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
-import it.unimi.dsi.fastutil.floats.FloatCollection;
+import it.unimi.dsi.fastutil.floats.FloatList;
 
 /**
  * 平均相对误差评估器
@@ -26,12 +24,11 @@ public class MPEEvaluator extends RatingEvaluator {
 	}
 
 	@Override
-	protected float measure(FloatCollection checkCollection, List<Integer2FloatKeyValue> recommendList) {
+	protected float measure(FloatList checkCollection, FloatList rateList) {
 		float value = 0F;
 		Iterator<Float> iterator = checkCollection.iterator();
-		for (Integer2FloatKeyValue keyValue : recommendList) {
+		for (float estimate : rateList) {
 			float score = iterator.next();
-			float estimate = keyValue.getValue();
 			if (Math.abs(score - estimate) > mpe) {
 				value++;
 			}
