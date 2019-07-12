@@ -48,7 +48,7 @@ public class PersistenceManager implements LuceneManager {
         this.reader = DirectoryReader.open(this.writer);
     }
 
-    public synchronized void mergeInstances(Set<String> createdIds, Object2LongMap<String> updatedIds, Set<String> deletedIds, TransienceManager transienceManager) throws Exception {
+    synchronized void mergeInstances(Set<String> createdIds, Object2LongMap<String> updatedIds, Set<String> deletedIds, TransienceManager transienceManager) throws Exception {
         this.createdIds.addAll(createdIds);
         this.updatedIds.putAll(updatedIds);
         this.deletedIds.addAll(deletedIds);
@@ -57,10 +57,10 @@ public class PersistenceManager implements LuceneManager {
         Term[] terms = new Term[updatedIds.size() + updatedIds.size()];
         int index = 0;
         for (String id : updatedIds.keySet()) {
-            terms[index++] = new Term(LuceneSearcher.ID, id.toString());
+            terms[index++] = new Term(TransienceManager.ID, id.toString());
         }
         for (String id : deletedIds) {
-            terms[index++] = new Term(LuceneSearcher.ID, id.toString());
+            terms[index++] = new Term(TransienceManager.ID, id.toString());
         }
         this.writer.deleteDocuments(terms);
         this.writer.addIndexes(this.transienceManager.getDirectory());
@@ -69,6 +69,47 @@ public class PersistenceManager implements LuceneManager {
         this.createdIds.clear();
         this.updatedIds.clear();
         this.deletedIds.clear();
+    }
+
+    @Override
+    public void open() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void close() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isChanged() {
+        return this.changed.get();
+    }
+
+    @Override
+    public Set<String> getCreatedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Object2LongMap<String> getUpdatedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Set<String> getDeletedIds() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Directory getDirectory() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
     public IndexReader getReader() throws Exception {
@@ -85,11 +126,6 @@ public class PersistenceManager implements LuceneManager {
             this.reader = reader;
         }
         return this.reader;
-    }
-
-    @Override
-    public boolean isChanged() {
-        return this.changed.get();
     }
 
     @Override

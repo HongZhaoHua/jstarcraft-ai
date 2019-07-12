@@ -1,4 +1,4 @@
-package com.jstarcraft.ai.search;
+package com.jstarcraft.ai.search.converter;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -13,16 +13,6 @@ import com.jstarcraft.ai.search.annotation.RetrievalAnalyze;
 import com.jstarcraft.ai.search.annotation.RetrievalIndex;
 import com.jstarcraft.ai.search.annotation.RetrievalSort;
 import com.jstarcraft.ai.search.annotation.RetrievalStore;
-import com.jstarcraft.ai.search.converter.ArrayConverter;
-import com.jstarcraft.ai.search.converter.BooleanConverter;
-import com.jstarcraft.ai.search.converter.CollectionConverter;
-import com.jstarcraft.ai.search.converter.EnumerationConverter;
-import com.jstarcraft.ai.search.converter.InstantConverter;
-import com.jstarcraft.ai.search.converter.MapConverter;
-import com.jstarcraft.ai.search.converter.NumberConverter;
-import com.jstarcraft.ai.search.converter.ObjectConverter;
-import com.jstarcraft.ai.search.converter.RetrievalConverter;
-import com.jstarcraft.ai.search.converter.StringConverter;
 import com.jstarcraft.ai.search.exception.RetrievalException;
 import com.jstarcraft.core.common.reflection.ReflectionUtility;
 import com.jstarcraft.core.common.reflection.Specification;
