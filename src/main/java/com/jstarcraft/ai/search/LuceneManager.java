@@ -15,6 +15,10 @@ import org.apache.lucene.util.NumericUtils;
 /**
  * Lucene管理器
  * 
+ * <pre>
+ * 用于管理{@link LeafCollector},{@link IndexReader},{@link IndexWriter}的变更与获取
+ * </pre>
+ * 
  * @author Birdy
  *
  */
