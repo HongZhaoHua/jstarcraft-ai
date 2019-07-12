@@ -31,17 +31,17 @@ import it.unimi.dsi.fastutil.objects.Object2LongMap;
  */
 public class PersistenceManager implements LuceneManager {
 
-    private AtomicBoolean changed = new AtomicBoolean(false);
-
     private TransienceManager transienceManager;
+
+    private AtomicBoolean changed = new AtomicBoolean(false);
 
     private IndexWriterConfig config;
 
     private Directory directory;
 
-    private IndexWriter writer;
-
     private DirectoryReader reader;
+
+    private IndexWriter writer;
 
     public PersistenceManager(IndexWriterConfig config, Path path) throws Exception {
         this.config = config;
@@ -57,10 +57,10 @@ public class PersistenceManager implements LuceneManager {
         Term[] terms = new Term[transienceManager.getUpdatedIds().size() + transienceManager.getDeletedIds().size()];
         int index = 0;
         for (String id : transienceManager.getUpdatedIds().keySet()) {
-            terms[index++] = new Term(TransienceManager.ID, id.toString());
+            terms[index++] = new Term(ID, id.toString());
         }
         for (String id : transienceManager.getDeletedIds()) {
-            terms[index++] = new Term(TransienceManager.ID, id.toString());
+            terms[index++] = new Term(ID, id.toString());
         }
         this.writer.deleteDocuments(terms);
         this.writer.addIndexes(this.transienceManager.getDirectory());

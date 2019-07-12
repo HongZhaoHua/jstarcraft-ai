@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.lucene.document.Document;
-import org.apache.lucene.document.StoredField;
 import org.apache.lucene.index.BinaryDocValues;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.DocValues;
@@ -21,8 +20,6 @@ import org.apache.lucene.search.LeafCollector;
 import org.apache.lucene.search.Scorable;
 import org.apache.lucene.store.ByteBuffersDirectory;
 import org.apache.lucene.store.Directory;
-import org.apache.lucene.util.BytesRef;
-import org.apache.lucene.util.NumericUtils;
 
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
@@ -34,27 +31,6 @@ import it.unimi.dsi.fastutil.objects.Object2LongOpenHashMap;
  *
  */
 public class TransienceManager implements LuceneManager {
-
-    static final String ID = "id";
-
-    static final String VERSION = "version";
-
-    private String getId(Document document) {
-        return document.get(ID);
-    }
-
-    private long getVersion(Document document) {
-        BytesRef bytes = document.getBinaryValue(VERSION);
-        long version = NumericUtils.sortableBytesToLong(bytes.bytes, bytes.offset);
-        return version;
-    }
-
-    private void setVersion(Document document, long version) {
-        byte[] bytes = new byte[Long.BYTES];
-        NumericUtils.longToSortableBytes(version, bytes, 0);
-        StoredField field = new StoredField(VERSION, bytes);
-        document.add(field);
-    }
 
     private AtomicBoolean changed = new AtomicBoolean(false);
 
@@ -74,9 +50,9 @@ public class TransienceManager implements LuceneManager {
 
     private Directory directory;
 
-    private IndexWriter writer;
-
     private DirectoryReader reader;
+
+    private IndexWriter writer;
 
     public TransienceManager(IndexWriterConfig config) throws Exception {
         this.createdIds = new HashSet<>();
@@ -88,19 +64,17 @@ public class TransienceManager implements LuceneManager {
         this.writer = new IndexWriter(this.directory, this.config);
         this.reader = DirectoryReader.open(this.writer);
     }
-    
+
     Set<String> getCreatedIds() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    
     Object2LongMap<String> getUpdatedIds() {
         // TODO Auto-generated method stub
         return null;
     }
 
-    
     Set<String> getDeletedIds() {
         // TODO Auto-generated method stub
         return null;
