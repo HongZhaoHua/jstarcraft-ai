@@ -102,7 +102,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	int getSize();
 
 	/**
-	 * 获取指定外部索引的属性投影(true代表离散,false代表连续)
+	 * 获取指定外部维度的属性投影(true代表离散,false代表连续)
 	 * 
 	 * @param index
 	 * @return
@@ -110,7 +110,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	Entry<Integer, KeyValue<String, Boolean>> getOuterKeyValue(int index);
 
 	/**
-	 * 获取指定离散属性的内部索引
+	 * 获取指定离散属性的内部维度
 	 * 
 	 * @param name
 	 * @return
@@ -118,7 +118,7 @@ public interface DataModule extends Iterable<DataInstance> {
 	int getQualityInner(String name);
 
 	/**
-	 * 获取指定连续属性的内部索引
+	 * 获取指定连续属性的内部维度
 	 * 
 	 * @param name
 	 * @return

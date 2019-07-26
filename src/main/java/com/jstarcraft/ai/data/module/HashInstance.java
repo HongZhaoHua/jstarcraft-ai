@@ -63,13 +63,13 @@ public class HashInstance implements DataInstance {
     }
 
     @Override
-    public int getQualityFeature(int index) {
-        return this.qualityFeatures.get(index);
+    public int getQualityFeature(int dimension) {
+        return this.qualityFeatures.get(dimension);
     }
 
     @Override
-    public float getQuantityFeature(int index) {
-        return this.quantityFeatures.get(index);
+    public float getQuantityFeature(int dimension) {
+        return this.quantityFeatures.get(dimension);
     }
 
     @Override

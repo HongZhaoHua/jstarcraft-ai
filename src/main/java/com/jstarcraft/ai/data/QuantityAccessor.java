@@ -11,9 +11,9 @@ public interface QuantityAccessor {
 	/**
 	 * 访问特征
 	 * 
-	 * @param index
+	 * @param dimension
 	 * @param value
 	 */
-	void accessorFeature(int index, float value);
+	void accessorFeature(int dimension, float value);
 
 }

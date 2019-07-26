@@ -60,19 +60,19 @@ public class DenseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityFeature(int index) {
-		return qualityValues[index].getData(cursor);
+	public int getQualityFeature(int dimension) {
+		return qualityValues[dimension].getData(cursor);
 	}
 
 	@Override
-	public float getQuantityFeature(int index) {
-		return quantityValues[index].getData(cursor);
+	public float getQuantityFeature(int dimension) {
+		return quantityValues[dimension].getData(cursor);
 	}
 
 	@Override
 	public DenseInstance iterateQualityFeatures(QualityAccessor accessor) {
-		for (int index = 0; index < qualityOrder; index++) {
-			accessor.accessorFeature(index, qualityValues[index].getData(cursor));
+		for (int dimension = 0; dimension < qualityOrder; dimension++) {
+			accessor.accessorFeature(dimension, qualityValues[dimension].getData(cursor));
 		}
 		return this;
 	}

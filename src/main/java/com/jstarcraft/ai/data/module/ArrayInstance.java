@@ -38,11 +38,11 @@ public class ArrayInstance implements DataInstance {
         this.quantityOrder = quantityOrder;
         this.qualityFeatures = new int[qualityOrder];
         this.quantityFeatures = new float[quantityOrder];
-        for (int index = 0; index < qualityOrder; index++) {
-            this.qualityFeatures[index] = DataInstance.defaultInteger;
+        for (int dimension = 0; dimension < qualityOrder; dimension++) {
+            this.qualityFeatures[dimension] = DataInstance.defaultInteger;
         }
-        for (int index = 0; index < quantityOrder; index++) {
-            this.quantityFeatures[index] = DataInstance.defaultFloat;
+        for (int dimension = 0; dimension < quantityOrder; dimension++) {
+            this.quantityFeatures[dimension] = DataInstance.defaultFloat;
         }
         this.qualityMark = defaultInteger;
         this.quantityMark = defaultFloat;
@@ -60,27 +60,27 @@ public class ArrayInstance implements DataInstance {
     }
 
     @Override
-    public int getQualityFeature(int index) {
-        return this.qualityFeatures[index];
+    public int getQualityFeature(int dimension) {
+        return this.qualityFeatures[dimension];
     }
 
     @Override
-    public float getQuantityFeature(int index) {
-        return this.quantityFeatures[index];
+    public float getQuantityFeature(int dimension) {
+        return this.quantityFeatures[dimension];
     }
 
     @Override
     public ArrayInstance iterateQualityFeatures(QualityAccessor accessor) {
-        for (int index = 0; index < qualityOrder; index++) {
-            accessor.accessorFeature(index, this.qualityFeatures[index]);
+        for (int dimension = 0; dimension < qualityOrder; dimension++) {
+            accessor.accessorFeature(dimension, this.qualityFeatures[dimension]);
         }
         return this;
     }
 
     @Override
     public ArrayInstance iterateQuantityFeatures(QuantityAccessor accessor) {
-        for (int index = 0; index < quantityOrder; index++) {
-            accessor.accessorFeature(index, this.quantityFeatures[index]);
+        for (int dimension = 0; dimension < quantityOrder; dimension++) {
+            accessor.accessorFeature(dimension, this.quantityFeatures[dimension]);
         }
         return this;
     }

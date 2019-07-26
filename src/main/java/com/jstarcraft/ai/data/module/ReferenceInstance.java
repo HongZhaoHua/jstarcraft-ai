@@ -41,13 +41,13 @@ public class ReferenceInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityFeature(int index) {
-		return instance.getQualityFeature(index);
+	public int getQualityFeature(int dimension) {
+		return instance.getQualityFeature(dimension);
 	}
 
 	@Override
-	public float getQuantityFeature(int index) {
-		return instance.getQuantityFeature(index);
+	public float getQuantityFeature(int dimension) {
+		return instance.getQuantityFeature(dimension);
 	}
 
 	@Override

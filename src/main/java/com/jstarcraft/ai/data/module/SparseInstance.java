@@ -28,7 +28,7 @@ public class SparseInstance implements DataInstance {
 
 	private IntegerArray qualityPoints;
 
-	private IntegerArray qualityIndexes;
+	private IntegerArray qualityDimensions;
 
 	private IntegerArray qualityValues;
 
@@ -37,7 +37,7 @@ public class SparseInstance implements DataInstance {
 
 	private IntegerArray quantityPoints;
 
-	private IntegerArray quantityIndexes;
+	private IntegerArray quantityDimensions;
 
 	private FloatArray quantityValues;
 
@@ -61,7 +61,7 @@ public class SparseInstance implements DataInstance {
 			}
 		}
 		this.qualityPoints = module.getQualityPoints();
-		this.qualityIndexes = module.getQualityIndexes();
+		this.qualityDimensions = module.getQualityIndexes();
 		this.qualityValues = module.getQualityValues();
 		this.quantityFeatures = new float[module.getQuantityOrder()];
 		{
@@ -70,13 +70,13 @@ public class SparseInstance implements DataInstance {
 			}
 		}
 		this.quantityPoints = module.getquantityPoints();
-		this.quantityIndexes = module.getquantityIndexes();
+		this.quantityDimensions = module.getquantityIndexes();
 		this.quantityValues = module.getquantityValues();
 		{
 			int from = this.qualityPoints.getData(this.cursor);
 			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int position = from; position < to; position++) {
-				int index = this.qualityIndexes.getData(position);
+				int index = this.qualityDimensions.getData(position);
 				this.qualityFeatures[index] = this.qualityValues.getData(position);
 			}
 		}
@@ -84,7 +84,7 @@ public class SparseInstance implements DataInstance {
 			int from = this.quantityPoints.getData(this.cursor);
 			int to = this.quantityPoints.getData(this.cursor + 1);
 			for (int position = from; position < to; position++) {
-				int index = this.quantityIndexes.getData(position);
+				int index = this.quantityDimensions.getData(position);
 				this.quantityFeatures[index] = this.quantityValues.getData(position);
 			}
 		}
@@ -99,16 +99,16 @@ public class SparseInstance implements DataInstance {
 			int from = this.qualityPoints.getData(this.cursor);
 			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.qualityIndexes.getData(current);
-				this.qualityFeatures[index] = DataInstance.defaultInteger;
+				int dimension = this.qualityDimensions.getData(current);
+				this.qualityFeatures[dimension] = DataInstance.defaultInteger;
 			}
 		}
 		{
 			int from = this.quantityPoints.getData(this.cursor);
 			int to = this.quantityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.quantityIndexes.getData(current);
-				this.quantityFeatures[index] = DataInstance.defaultFloat;
+				int dimension = this.quantityDimensions.getData(current);
+				this.quantityFeatures[dimension] = DataInstance.defaultFloat;
 			}
 		}
 		this.cursor = cursor;
@@ -116,16 +116,16 @@ public class SparseInstance implements DataInstance {
 			int from = this.qualityPoints.getData(this.cursor);
 			int to = this.qualityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.qualityIndexes.getData(current);
-				this.qualityFeatures[index] = this.qualityValues.getData(current);
+				int dimension = this.qualityDimensions.getData(current);
+				this.qualityFeatures[dimension] = this.qualityValues.getData(current);
 			}
 		}
 		{
 			int from = this.quantityPoints.getData(this.cursor);
 			int to = this.quantityPoints.getData(this.cursor + 1);
 			for (int current = from; current < to; current++) {
-				int index = this.quantityIndexes.getData(current);
-				this.quantityFeatures[index] = this.quantityValues.getData(current);
+				int dimension = this.quantityDimensions.getData(current);
+				this.quantityFeatures[dimension] = this.quantityValues.getData(current);
 			}
 		}
 	}
@@ -136,13 +136,13 @@ public class SparseInstance implements DataInstance {
 	}
 
 	@Override
-	public int getQualityFeature(int index) {
-		return this.qualityFeatures[index];
+	public int getQualityFeature(int dimension) {
+		return this.qualityFeatures[dimension];
 	}
 
 	@Override
-	public float getQuantityFeature(int index) {
-		return this.quantityFeatures[index];
+	public float getQuantityFeature(int dimension) {
+		return this.quantityFeatures[dimension];
 	}
 
 	@Override
@@ -150,8 +150,8 @@ public class SparseInstance implements DataInstance {
 		int from = this.qualityPoints.getData(this.cursor);
 		int to = this.qualityPoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
-			int index = this.qualityIndexes.getData(position);
-			accessor.accessorFeature(index, this.qualityFeatures[index]);
+			int dimension = this.qualityDimensions.getData(position);
+			accessor.accessorFeature(dimension, this.qualityFeatures[dimension]);
 		}
 		return this;
 	}
@@ -161,8 +161,8 @@ public class SparseInstance implements DataInstance {
 		int from = this.quantityPoints.getData(this.cursor);
 		int to = this.quantityPoints.getData(this.cursor + 1);
 		for (int position = from; position < to; position++) {
-			int index = this.quantityIndexes.getData(position);
-			accessor.accessorFeature(index, this.quantityFeatures[index]);
+			int dimension = this.quantityDimensions.getData(position);
+			accessor.accessorFeature(dimension, this.quantityFeatures[dimension]);
 		}
 		return this;
 	}

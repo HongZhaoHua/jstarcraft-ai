@@ -29,20 +29,20 @@ public interface DataInstance {
 	int getCursor();
 
 	/**
-	 * 获取指定索引的离散特征
+	 * 获取指定维度的离散特征
 	 * 
-	 * @param index
+	 * @param dimension
 	 * @return
 	 */
-	int getQualityFeature(int index);
+	int getQualityFeature(int dimension);
 
 	/**
-	 * 获取指定索引的连续特征
+	 * 获取指定维度的连续特征
 	 * 
-	 * @param index
+	 * @param dimension
 	 * @return
 	 */
-	float getQuantityFeature(int index);
+	float getQuantityFeature(int dimension);
 
 	/**
 	 * 遍历离散特征

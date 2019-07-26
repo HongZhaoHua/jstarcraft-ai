@@ -11,9 +11,9 @@ public interface QualityAccessor {
 	/**
 	 * 访问特征
 	 * 
-	 * @param index
+	 * @param dimension
 	 * @param value
 	 */
-	void accessorFeature(int index, int value);
+	void accessorFeature(int dimension, int value);
 
 }
