@@ -1,0 +1,35 @@
+Model接口(规定基本流程)
+Model => Layer接口(单输入/单输出,有参数,有激活函数)
+Model => Vertex接口(多输入/单输出)
+Model => Graph接口(组合Vertex,多输入/多输出,有损失函数)
+
+Optimizer.optimize => 
+	Graph.doForward => 
+		for(Vertex.doForward)
+		LossFunction.doForward
+	Graph.doBackward => 
+		LossFunction.doBackward
+		for(Vertex.doBackward)
+		for(Layer.learn) => 
+			
+	Graph.updateGradients => 
+		Normalization(Gradient)
+		Learner(Gradient)
+	Searcher.searchStep(Gradient)
+	Graph.updateParameters => 
+		StepFunction(Parameter,Gradient,Step)
+
+
+拓扑排序的原理及其实现:
+http://blog.csdn.net/dm_vincent/article/details/7714519
+
+拓扑排序(Java):
+http://www.cnblogs.com/liuzhen1995/p/6389366.html
+
+拓扑排序的两种实现：Kahn算法和DFS算法:
+http://blog.csdn.net/qinzhaokun/article/details/48541117
+
+DL4J博客:
+http://blog.csdn.net/wangongxi
+http://blog.csdn.net/u011669700
+https://github.com/sjsdfg/deeplearning4j-issues
