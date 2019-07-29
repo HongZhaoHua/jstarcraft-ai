@@ -1,2 +1,0 @@
-condition相当于early stop
-考虑作为机器学习的基础整理到其它推荐算法中.
