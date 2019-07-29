@@ -1,0 +1,11 @@
+CUDA官方安装教程:
+https://docs.nvidia.com/cuda/index.html
+
+CUDA官方下载地址:
+https://developer.nvidia.com/cuda-toolkit-archive
+
+cuDNN官方安装教程:
+https://developer.nvidia.com/rdp/cudnn-archive
+
+cuDNN官方下载地址:
+https://docs.nvidia.com/deeplearning/sdk/index.html

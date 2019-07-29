@@ -1,0 +1,17 @@
+SVM入门:
+SVM入门（一）至（三）Refresh
+http://www.blogjava.net/zhenandaci/archive/2009/02/13/254519.html
+SVM入门（四）线性分类器的求解——问题的描述Part1
+http://www.blogjava.net/zhenandaci/archive/2009/02/13/254578.html
+SVM入门（五）线性分类器的求解——问题的描述Part2
+http://www.blogjava.net/zhenandaci/archive/2009/02/14/254630.html
+SVM入门（六）线性分类器的求解——问题的转化，直观角度
+http://www.blogjava.net/zhenandaci/archive/2009/03/01/257237.html
+SVM入门（七）为何需要核函数
+http://www.blogjava.net/zhenandaci/archive/2009/03/06/258288.html
+SVM入门（八）松弛变量
+http://www.blogjava.net/zhenandaci/archive/2009/03/15/259786.html
+SVM入门（九）松弛变量（续）
+http://www.blogjava.net/zhenandaci/archive/2009/03/17/260315.html
+SVM入门（十）将SVM用于多类分类
+http://www.blogjava.net/zhenandaci/archive/2009/03/26/262113.html

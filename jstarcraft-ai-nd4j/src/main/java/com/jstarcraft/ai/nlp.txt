@@ -1,0 +1,5 @@
+word2vec java版本的一个实现:
+https://github.com/NLPchina/Word2VEC_java
+
+中文自然语言处理工具集:
+https://github.com/kidden/nlp4han
