@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>jstarcraft-ai-environment-nd4j</artifactId>
+    <artifactId>jstarcraft-ai-environment-java</artifactId>
     <packaging>jar</packaging>
 
     <build>
@@ -26,10 +26,10 @@
     </build>
 
     <dependencies>
-        <!-- 核心框架依赖 -->
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-core-cache</artifactId>
+            <artifactId>jstarcraft-ai-environment-api</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
@@ -46,16 +46,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-core</artifactId>
         </dependency>
 
         <dependency>
@@ -92,14 +82,6 @@
             <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-native-platform</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <version>1.0.0-beta3</version> <scope>test</scope> </dependency> -->
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>

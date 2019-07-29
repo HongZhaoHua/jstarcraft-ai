@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
@@ -48,7 +49,7 @@ public class ColumnHashMatrixTestCase extends HashMatrixTestCase {
 
     @Override
     public void testProduct() throws Exception {
-        EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+        EnvironmentContext context = EnvironmentFactory.getContext();
         Future<?> task = context.doTask(() -> {
             int dimension = 10;
             MathMatrix leftMatrix = getRandomMatrix(dimension);

@@ -12,10 +12,10 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.GradientUpdater;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.neuralnetwork.learn.Learner;
 import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.utility.MathUtility;
 
@@ -46,7 +46,7 @@ public abstract class LearnerTestCase {
 
 	@Test
 	public void testGradient() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		Future<?> task = context.doTask(() -> {
 			long[] shape = { 5L, 2L };
 			INDArray array = Nd4j.linspace(-2.5D, 2.0D, 10).reshape(shape);

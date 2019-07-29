@@ -15,6 +15,7 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.primitives.Pair;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.DenseCache;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.MathCalculator;
@@ -59,7 +60,7 @@ public abstract class LayerTestCase {
 
 	@Test
 	public void testPropagate() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		LayerWorkspaceMgr space = LayerWorkspaceMgr.noWorkspacesImmutable();
 		Future<?> task = context.doTask(() -> {
 			INDArray array = getData();

@@ -11,10 +11,10 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
 import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
@@ -50,7 +50,7 @@ public abstract class VertexTestCase {
 
 	@Test
 	public void testPropagate() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		LayerWorkspaceMgr space = LayerWorkspaceMgr.noWorkspacesImmutable();
 		Future<?> task = context.doTask(() -> {
 			int size = getSize();

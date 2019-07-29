@@ -5,12 +5,9 @@ import java.util.concurrent.Future;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.jstarcraft.ai.environment.EnvironmentContext;
-import com.jstarcraft.ai.environment.EnvironmentThread;
+public class Nd4jEnvironmentContextTestCase {
 
-public class EnvironmentManagerTestCase {
-
-	private EnvironmentContext[] managers = new EnvironmentContext[] { EnvironmentContext.CPU, EnvironmentContext.GPU };
+	private EnvironmentContext[] managers = new EnvironmentContext[] { EnvironmentFactory.CPU, EnvironmentFactory.GPU };
 
 	@Test
 	public void testGetInstance() throws Exception {

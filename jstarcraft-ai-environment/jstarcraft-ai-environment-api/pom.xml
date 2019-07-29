@@ -8,7 +8,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>jstarcraft-ai-environment-nd4j</artifactId>
+    <artifactId>jstarcraft-ai-environment-api</artifactId>
     <packaging>jar</packaging>
 
     <build>
@@ -20,6 +20,17 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>animal-sniffer-maven-plugin</artifactId>
+                <configuration>
+                    <ignores>
+                        <ignore>com.jstarcraft.ai.environment.EnvironmentFactory</ignore>
+                        <ignore>com.jstarcraft.ai.environment.EnvironmentThread</ignore>
+                    </ignores>
                 </configuration>
             </plugin>
         </plugins>

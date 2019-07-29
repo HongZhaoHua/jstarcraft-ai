@@ -14,13 +14,13 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.lossfunctions.ILossFunction;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.model.neuralnetwork.activation.ActivationFunction;
 import com.jstarcraft.ai.model.neuralnetwork.activation.SigmoidActivationFunction;
 import com.jstarcraft.ai.model.neuralnetwork.activation.SoftMaxActivationFunction;
-import com.jstarcraft.ai.model.neuralnetwork.loss.LossFunction;
 import com.jstarcraft.ai.modem.ModemCodec;
 import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.KeyValue;
@@ -52,7 +52,7 @@ public abstract class LossFunctionTestCase {
 
 	@Test
 	public void testScore() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		Future<?> task = context.doTask(() -> {
 			LinkedList<KeyValue<IActivation, ActivationFunction>> activetionList = new LinkedList<>();
 			activetionList.add(new KeyValue<>(new ActivationSigmoid(), new SigmoidActivationFunction()));
@@ -84,7 +84,7 @@ public abstract class LossFunctionTestCase {
 
 	@Test
 	public void testGradient() throws Exception {
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		Future<?> task = context.doTask(() -> {
 			LinkedList<KeyValue<IActivation, ActivationFunction>> activetionList = new LinkedList<>();
 			activetionList.add(new KeyValue<>(new ActivationSigmoid(), new SigmoidActivationFunction()));

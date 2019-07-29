@@ -12,13 +12,13 @@ import com.jstarcraft.core.utility.StringUtility;
  * @author Birdy
  *
  */
-class EnvironmentThreadFactory extends NameThreadFactory {
+class Nd4jEnvironmentThreadFactory extends NameThreadFactory {
 
 	private static final AffinityManager manager = Nd4j.getAffinityManager();
 
 	private EnvironmentContext context;
 
-	public EnvironmentThreadFactory(EnvironmentContext context) {
+	public Nd4jEnvironmentThreadFactory(EnvironmentContext context) {
 		super(context.getClass().getName());
 		this.context = context;
 	}

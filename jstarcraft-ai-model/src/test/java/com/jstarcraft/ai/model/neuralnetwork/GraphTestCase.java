@@ -25,6 +25,7 @@ import org.nd4j.linalg.learning.config.Sgd;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.Nd4jCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
@@ -125,7 +126,7 @@ public class GraphTestCase {
 	public void testPropagate() throws Exception {
 		MathCache factory = new Nd4jCache();
 
-		EnvironmentContext context = Nd4j.getAffinityManager().getClass().getSimpleName().equals("CpuAffinityManager") ? EnvironmentContext.CPU : EnvironmentContext.GPU;
+		EnvironmentContext context = EnvironmentFactory.getContext();
 		Future<?> task = context.doTask(() -> {
 			ComputationGraph oldGraph = getOldFunction();
 			Graph graph = getNewFunction(factory, oldGraph);

@@ -19,7 +19,7 @@ class GpuEnvironmentContext extends EnvironmentContext {
 	static {
 		INSTANCE = new GpuEnvironmentContext();
 		int numberOfThreads = Nd4j.getAffinityManager().getNumberOfDevices();
-		EnvironmentThreadFactory factory = new EnvironmentThreadFactory(INSTANCE);
+		Nd4jEnvironmentThreadFactory factory = new Nd4jEnvironmentThreadFactory(INSTANCE);
 		INSTANCE.executor = Executors.newFixedThreadPool(numberOfThreads, factory);
 	}
 

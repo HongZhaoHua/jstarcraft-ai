@@ -10,32 +10,32 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.core.utility.HashUtility;
 
 /**
- * CPU环境上下文
+ * Java环境上下文
  * 
  * @author Birdy
  *
  */
-class CpuEnvironmentContext extends EnvironmentContext {
+class JavaEnvironmentContext extends EnvironmentContext {
 
-	static final CpuEnvironmentContext INSTANCE;
+	static final JavaEnvironmentContext INSTANCE;
 
 	static {
-		INSTANCE = new CpuEnvironmentContext();
+		INSTANCE = new JavaEnvironmentContext();
 		INSTANCE.numberOfThreads = Runtime.getRuntime().availableProcessors();
 		{
 			int numberOfTasks = 1;
-			Nd4jEnvironmentThreadFactory factory = new Nd4jEnvironmentThreadFactory(INSTANCE);
+			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
 			INSTANCE.taskExecutor = Executors.newFixedThreadPool(numberOfTasks, factory);
 		}
 		{
-			Nd4jEnvironmentThreadFactory factory = new Nd4jEnvironmentThreadFactory(INSTANCE);
+			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
 			INSTANCE.algorithmExecutors = new ExecutorService[INSTANCE.numberOfThreads];
 			for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
 				INSTANCE.algorithmExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
 			}
 		}
 		{
-			Nd4jEnvironmentThreadFactory factory = new Nd4jEnvironmentThreadFactory(INSTANCE);
+			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
 			INSTANCE.structureExecutors = new ExecutorService[INSTANCE.numberOfThreads];
 			for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
 				INSTANCE.structureExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
@@ -51,38 +51,13 @@ class CpuEnvironmentContext extends EnvironmentContext {
 
 	private ExecutorService[] structureExecutors;
 
-	private CpuEnvironmentContext() {
+	private JavaEnvironmentContext() {
 	}
 
 	@Override
 	public Future<?> doTask(Runnable command) {
 		Future<?> task = taskExecutor.submit(() -> {
-			int size = 1024 * 1024 * 10;
-			{
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.constructCache(size);
-			}
-			doAlgorithmByEvery(() -> {
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.constructCache(size);
-			});
-			doStructureByEvery(() -> {
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.constructCache(size);
-			});
-			command.run();
-			doStructureByEvery(() -> {
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.destroyCache();
-			});
-			doAlgorithmByEvery(() -> {
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.destroyCache();
-			});
-			{
-				EnvironmentThread thread = EnvironmentThread.currentThread();
-				thread.destroyCache();
-			}
+		    command.run();
 			// 必须触发垃圾回收.
 			System.gc();
 		});
