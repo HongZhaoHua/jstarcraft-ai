@@ -14,6 +14,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentThread;
+import com.jstarcraft.ai.environment.Nd4jEnvironmentThread;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
@@ -125,7 +126,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 		// 保证内存与显存同步
 		manager.ensureLocation(matrix, Location.HOST);
 		manager.tagLocation(matrix, Location.HOST);
-		EnvironmentThread thread = EnvironmentThread.currentThread();
+		Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 		data = thread.getArray();
 		FloatPointer pointer = (FloatPointer) matrix.data().pointer();
 		pointer.get(data, 0, rowSize * columnSize);
@@ -277,7 +278,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix addMatrix(MathMatrix matrix, boolean transpose) {
 		if (matrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jMatrix.class.cast(matrix).getArray();
@@ -292,7 +293,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix subtractMatrix(MathMatrix matrix, boolean transpose) {
 		if (matrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jMatrix.class.cast(matrix).getArray();
@@ -307,7 +308,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix multiplyMatrix(MathMatrix matrix, boolean transpose) {
 		if (matrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jMatrix.class.cast(matrix).getArray();
@@ -322,7 +323,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix divideMatrix(MathMatrix matrix, boolean transpose) {
 		if (matrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jMatrix.class.cast(matrix).getArray();
@@ -337,7 +338,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix copyMatrix(MathMatrix matrix, boolean transpose) {
 		if (matrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jMatrix.class.cast(matrix).getArray();
@@ -352,7 +353,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix addRowVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -367,7 +368,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix subtractRowVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -382,7 +383,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix multiplyRowVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -397,7 +398,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix divideRowVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -412,7 +413,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix copyRowVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -427,7 +428,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix addColumnVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -442,7 +443,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix subtractColumnVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -457,7 +458,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix multiplyColumnVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -472,7 +473,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix divideColumnVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -487,7 +488,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix copyColumnVector(MathVector vector) {
 		if (vector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray thisArray = this.getArray();
 				INDArray thatArray = Nd4jVector.class.cast(vector).getArray();
@@ -502,7 +503,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix dotProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
 		if (leftMatrix instanceof Nd4jMatrix && rightMatrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = leftTranspose ? Nd4jMatrix.class.cast(leftMatrix).getArray().transpose() : Nd4jMatrix.class.cast(leftMatrix).getArray();
 				INDArray rightArray = rightTranspose ? Nd4jMatrix.class.cast(rightMatrix).getArray().transpose() : Nd4jMatrix.class.cast(rightMatrix).getArray();
@@ -518,7 +519,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix dotProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
 		if (rowVector instanceof Nd4jVector && columnVector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = Nd4jVector.class.cast(rowVector).getArray();
 				// TODO 此处需要想方案优化,可能存在性能问题.
@@ -549,7 +550,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix accumulateProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
 		if (leftMatrix instanceof Nd4jMatrix && rightMatrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = leftTranspose ? Nd4jMatrix.class.cast(leftMatrix).getArray().transpose() : Nd4jMatrix.class.cast(leftMatrix).getArray();
 				INDArray rightArray = rightTranspose ? Nd4jMatrix.class.cast(rightMatrix).getArray().transpose() : Nd4jMatrix.class.cast(rightMatrix).getArray();
@@ -567,7 +568,7 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
 	@Override
 	public MathMatrix accumulateProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
 		if (rowVector instanceof Nd4jVector && columnVector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = Nd4jVector.class.cast(rowVector).getArray();
 				// TODO 此处需要想方案优化,否则存在性能问题.

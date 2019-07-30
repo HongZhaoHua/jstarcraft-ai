@@ -34,7 +34,7 @@
     
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-environment-nd4j</artifactId>
+            <artifactId>jstarcraft-ai-environment</artifactId>
             <version>1.0</version>
         </dependency>
 

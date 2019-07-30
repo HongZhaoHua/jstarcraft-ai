@@ -52,7 +52,7 @@ public abstract class EnvironmentContext {
     abstract public void doStructureByEvery(Runnable command);
 
     public static EnvironmentContext getContext() {
-        EnvironmentThread thread = EnvironmentThread.currentThread();
+        EnvironmentThread thread = EnvironmentThread.getThread(EnvironmentThread.class);
         return thread.getContext();
     }
 

@@ -14,6 +14,7 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentThread;
+import com.jstarcraft.ai.environment.Nd4jEnvironmentThread;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
@@ -235,7 +236,7 @@ public class Nd4jVector implements MathVector, ModemCycle {
 	@Override
 	public MathVector dotProduct(MathMatrix leftMatrix, boolean transpose, MathVector rightVector, MathCalculator mode) {
 		if (leftMatrix instanceof Nd4jMatrix && rightVector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = transpose ? Nd4jMatrix.class.cast(leftMatrix).getArray().transpose() : Nd4jMatrix.class.cast(leftMatrix).getArray();
 				INDArray rightArray = Nd4jVector.class.cast(rightVector).getArray();
@@ -251,7 +252,7 @@ public class Nd4jVector implements MathVector, ModemCycle {
 	@Override
 	public MathVector dotProduct(MathVector leftVector, MathMatrix rightMatrix, boolean transpose, MathCalculator mode) {
 		if (leftVector instanceof Nd4jVector && rightMatrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = Nd4jVector.class.cast(leftVector).getArray();
 				if (leftArray.isView()) {
@@ -276,7 +277,7 @@ public class Nd4jVector implements MathVector, ModemCycle {
 	@Override
 	public MathVector accumulateProduct(MathMatrix leftMatrix, boolean transpose, MathVector rightVector, MathCalculator mode) {
 		if (leftMatrix instanceof Nd4jMatrix && rightVector instanceof Nd4jVector) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = transpose ? Nd4jMatrix.class.cast(leftMatrix).getArray().transpose() : Nd4jMatrix.class.cast(leftMatrix).getArray();
 				INDArray rightArray = Nd4jVector.class.cast(rightVector).getArray();
@@ -294,7 +295,7 @@ public class Nd4jVector implements MathVector, ModemCycle {
 	@Override
 	public MathVector accumulateProduct(MathVector leftVector, MathMatrix rightMatrix, boolean transpose, MathCalculator mode) {
 		if (leftVector instanceof Nd4jVector && rightMatrix instanceof Nd4jMatrix) {
-			EnvironmentThread thread = EnvironmentThread.currentThread();
+			Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
 			try (MemoryWorkspace workspace = thread.getSpace()) {
 				INDArray leftArray = Nd4jVector.class.cast(leftVector).getArray();
 				if (leftArray.isView()) {
