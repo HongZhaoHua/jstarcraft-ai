@@ -3,7 +3,7 @@ package com.jstarcraft.ai.math.algorithm.similarity;
 import java.util.List;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
  * Pearson Correlation Coefficient相似度

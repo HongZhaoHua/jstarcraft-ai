@@ -5,8 +5,8 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.utility.FloatArray;
-import com.jstarcraft.ai.utility.IntegerArray;
+import com.jstarcraft.ai.data.FloatArray;
+import com.jstarcraft.ai.data.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**

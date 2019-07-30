@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.jstarcraft.ai.model.neuralnetwork.vertex.Vertex;
-import com.jstarcraft.ai.utility.Integer2IntegerKeyValue;
+import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.ints.IntArrayFIFOQueue;

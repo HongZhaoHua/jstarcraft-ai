@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.message.BoundaryMessage;
@@ -15,8 +16,7 @@ import com.jstarcraft.ai.math.structure.message.SumMessage;
 import com.jstarcraft.ai.math.structure.message.VarianceMessage;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
-import com.jstarcraft.ai.utility.MathUtility;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 

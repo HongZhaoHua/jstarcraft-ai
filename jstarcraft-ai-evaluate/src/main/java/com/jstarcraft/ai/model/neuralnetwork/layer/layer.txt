@@ -1,5 +1,0 @@
-变分自编码器(Variational Auto-Encoder VAE)
-http://blog.csdn.net/jackytintin/article/details/53641885
-
-AutoEncoder及其相关模型
-https://zhuanlan.zhihu.com/p/27865705

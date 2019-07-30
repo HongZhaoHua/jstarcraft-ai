@@ -1,4 +1,0 @@
-路线图:
-1.支持NDimensionMatrix,NDimensionTensor,NDimensionVector.(代理ND4J)
-2.支持GlobalMatrix,LocalMatrix,GlobalTensor,LocalMatrix,GlobalVector,LocalVector.
-3.支持SessionMatrix,SessionTensor,SessionVector(代理Spark)

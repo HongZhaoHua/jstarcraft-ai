@@ -13,11 +13,11 @@ import org.nd4j.linalg.learning.GradientUpdater;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.modem.ModemCodec;
-import com.jstarcraft.ai.utility.MathUtility;
 
 public abstract class LearnerTestCase {
 

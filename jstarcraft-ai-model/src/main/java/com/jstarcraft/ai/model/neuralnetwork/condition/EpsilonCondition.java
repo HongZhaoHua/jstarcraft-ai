@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.apache.commons.math3.util.FastMath;
 
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.utility.MathUtility;
 
 /**
  * Epsilon条件

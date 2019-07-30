@@ -2,7 +2,6 @@ package com.jstarcraft.ai.evaluate;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;

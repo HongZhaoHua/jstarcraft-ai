@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jstarcraft.ai.evaluate.RankingEvaluator;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
-import com.jstarcraft.ai.utility.MathUtility;
+import com.jstarcraft.ai.math.MathUtility;
 
-import it.unimi.dsi.fastutil.ints.IntCollection;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntSet;
 

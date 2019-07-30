@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 
 import org.apache.commons.math3.util.FastMath;
 
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 import com.jstarcraft.core.utility.KeyValue;
 
 /**

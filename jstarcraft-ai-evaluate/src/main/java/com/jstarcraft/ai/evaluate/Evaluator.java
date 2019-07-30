@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.evaluate;
 
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
+import com.jstarcraft.core.utility.Integer2FloatKeyValue;
 
 /**
  * 评估器

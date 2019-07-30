@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.jstarcraft.ai.math.structure.matrix.HashMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
+import com.jstarcraft.core.utility.Integer2FloatKeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;

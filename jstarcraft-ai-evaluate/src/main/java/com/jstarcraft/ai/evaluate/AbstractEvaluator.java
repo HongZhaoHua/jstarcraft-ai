@@ -1,9 +1,6 @@
 package com.jstarcraft.ai.evaluate;
 
-import java.util.List;
-
-import com.baomidou.mybatisplus.extension.api.R;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
+import com.jstarcraft.core.utility.Integer2FloatKeyValue;
 
 /**
  * 抽象评估器

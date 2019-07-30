@@ -2,10 +2,10 @@ package com.jstarcraft.ai.model.neuralnetwork.loss;
 
 import org.apache.commons.math3.util.FastMath;
 
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
-import com.jstarcraft.ai.utility.MathUtility;
 
 /**
  * Binary XENT目标函数

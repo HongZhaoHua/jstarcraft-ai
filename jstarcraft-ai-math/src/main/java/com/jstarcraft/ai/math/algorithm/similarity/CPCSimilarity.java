@@ -6,7 +6,7 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
  * Constrained Pearson Correlation相似度

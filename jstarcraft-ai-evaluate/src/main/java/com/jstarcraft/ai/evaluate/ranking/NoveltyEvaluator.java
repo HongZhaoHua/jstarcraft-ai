@@ -1,12 +1,8 @@
 package com.jstarcraft.ai.evaluate.ranking;
 
-import java.util.List;
-
 import com.jstarcraft.ai.evaluate.RankingEvaluator;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
-import com.jstarcraft.ai.utility.Integer2FloatKeyValue;
 
-import it.unimi.dsi.fastutil.ints.IntCollection;
 import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntSet;
 

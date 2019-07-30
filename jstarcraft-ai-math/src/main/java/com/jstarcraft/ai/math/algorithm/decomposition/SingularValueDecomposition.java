@@ -1,10 +1,10 @@
 package com.jstarcraft.ai.math.algorithm.decomposition;
 
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.matrix.DenseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
-import com.jstarcraft.ai.utility.MathUtility;
 
 /**
  * 奇异值分解

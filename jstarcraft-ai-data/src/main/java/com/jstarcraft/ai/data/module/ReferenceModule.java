@@ -5,7 +5,7 @@ import java.util.Map.Entry;
 
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
-import com.jstarcraft.ai.utility.IntegerArray;
+import com.jstarcraft.ai.data.IntegerArray;
 import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;

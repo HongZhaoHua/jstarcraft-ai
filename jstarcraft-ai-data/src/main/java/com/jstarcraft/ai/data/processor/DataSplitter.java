@@ -2,8 +2,8 @@ package com.jstarcraft.ai.data.processor;
 
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
+import com.jstarcraft.ai.data.IntegerArray;
 import com.jstarcraft.ai.data.module.ReferenceModule;
-import com.jstarcraft.ai.utility.IntegerArray;
 
 /**
  * 数据划分器

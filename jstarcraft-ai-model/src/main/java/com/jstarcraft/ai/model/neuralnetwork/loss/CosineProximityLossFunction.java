@@ -1,9 +1,9 @@
 package com.jstarcraft.ai.model.neuralnetwork.loss;
 
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.ai.utility.MathUtility;
 
 /**
  * Cosine Proximity目标函数

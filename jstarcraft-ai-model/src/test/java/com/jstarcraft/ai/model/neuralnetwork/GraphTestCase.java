@@ -26,6 +26,7 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
+import com.jstarcraft.ai.math.MathUtility;
 import com.jstarcraft.ai.math.structure.MathCache;
 import com.jstarcraft.ai.math.structure.Nd4jCache;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
@@ -45,7 +46,6 @@ import com.jstarcraft.ai.model.neuralnetwork.schedule.Schedule;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.LayerVertex;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.Nd4jVertex;
 import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.HorizontalAttachVertex;
-import com.jstarcraft.ai.utility.MathUtility;
 import com.jstarcraft.core.utility.RandomUtility;
 
 public class GraphTestCase {

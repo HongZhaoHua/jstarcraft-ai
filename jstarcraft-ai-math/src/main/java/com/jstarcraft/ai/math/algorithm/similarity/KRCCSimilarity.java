@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
  * Kendall Rank Correlation相似度

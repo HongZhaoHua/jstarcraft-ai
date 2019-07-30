@@ -8,7 +8,7 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.ai.utility.Float2FloatKeyValue;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 public abstract class AbstractSimilarity implements Similarity {
 

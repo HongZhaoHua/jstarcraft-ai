@@ -2,9 +2,9 @@ package com.jstarcraft.ai.data.module;
 
 import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
+import com.jstarcraft.ai.data.FloatArray;
+import com.jstarcraft.ai.data.IntegerArray;
 import com.jstarcraft.ai.data.QualityAccessor;
-import com.jstarcraft.ai.utility.FloatArray;
-import com.jstarcraft.ai.utility.IntegerArray;
 
 /**
  * 稠密实例

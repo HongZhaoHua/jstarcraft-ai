@@ -3,8 +3,8 @@ package com.jstarcraft.ai.data.module;
 import com.jstarcraft.ai.data.QuantityAccessor;
 import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
+import com.jstarcraft.ai.data.IntegerArray;
 import com.jstarcraft.ai.data.QualityAccessor;
-import com.jstarcraft.ai.utility.IntegerArray;
 
 /**
  * 引用实例
