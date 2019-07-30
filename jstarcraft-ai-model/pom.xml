@@ -29,13 +29,7 @@
         <!-- 核心框架依赖 -->
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-data</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-math</artifactId>
+            <artifactId>jstarcraft-ai-evaluate</artifactId>
             <version>1.0</version>
         </dependency>
 

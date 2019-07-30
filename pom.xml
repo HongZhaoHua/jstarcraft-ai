@@ -8,7 +8,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>jstarcraft-ai-common</module>
         <module>jstarcraft-ai-data</module>
         <module>jstarcraft-ai-environment</module>
         <module>jstarcraft-ai-evaluate</module>

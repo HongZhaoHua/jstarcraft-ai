@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-common</artifactId>
+            <artifactId>jstarcraft-ai-data</artifactId>
             <version>1.0</version>
         </dependency>
     

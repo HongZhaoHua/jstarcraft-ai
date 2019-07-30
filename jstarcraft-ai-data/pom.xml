@@ -26,10 +26,20 @@
     </build>
 
     <dependencies>
+        <!-- 核心框架依赖 -->
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-common</artifactId>
-            <version>1.0</version>
+            <artifactId>jstarcraft-core-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jstarcraft</groupId>
+            <artifactId>jstarcraft-core-codec</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jstarcraft</groupId>
+            <artifactId>jstarcraft-core-orm</artifactId>
         </dependency>
 
         <!-- 机器学习框架依赖 -->
