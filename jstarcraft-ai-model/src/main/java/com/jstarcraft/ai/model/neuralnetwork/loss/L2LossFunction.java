@@ -68,7 +68,7 @@ public class L2LossFunction implements LossFunction {
 			INDArray trainArray = Nd4jMatrix.class.cast(trains).getArray();
 			INDArray gradientArray = Nd4jMatrix.class.cast(gradients).getArray();
 			trainArray.sub(testArray, gradientArray);
-			gradientArray.muli(2D);
+			gradientArray.muli(2F);
 		} else {
 			gradients.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
 				int row = scalar.getRow();
