@@ -24,97 +24,97 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class DenseModule extends AbstractModule {
 
-	/** 离散特征 */
-	private IntegerArray[] qualityValues;
+    /** 离散特征 */
+    private IntegerArray[] qualityValues;
 
-	/** 连续特征 */
-	private FloatArray[] quantityValues;
+    /** 连续特征 */
+    private FloatArray[] quantityValues;
 
-	public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
-		super(name, definition, capacity);
-		this.qualityValues = new IntegerArray[qualityOrder];
-		for (int index = 0; index < qualityOrder; index++) {
-			this.qualityValues[index] = new IntegerArray(1000, capacity);
-		}
-		this.quantityValues = new FloatArray[quantityOrder];
-		for (int index = 0; index < quantityOrder; index++) {
-			this.quantityValues[index] = new FloatArray(1000, capacity);
-		}
-	}
+    public DenseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
+        super(name, definition, capacity);
+        this.qualityValues = new IntegerArray[qualityOrder];
+        for (int index = 0; index < qualityOrder; index++) {
+            this.qualityValues[index] = new IntegerArray(1000, capacity);
+        }
+        this.quantityValues = new FloatArray[quantityOrder];
+        for (int index = 0; index < quantityOrder; index++) {
+            this.quantityValues[index] = new FloatArray(1000, capacity);
+        }
+    }
 
-	IntegerArray[] getQualityValues() {
-		return qualityValues;
-	}
+    IntegerArray[] getQualityValues() {
+        return qualityValues;
+    }
 
-	FloatArray[] getQuantityValues() {
-		return quantityValues;
-	}
+    FloatArray[] getQuantityValues() {
+        return quantityValues;
+    }
 
-	@Override
-	public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark, float weight) {
-		if (capacity == size) {
-			throw new DataCapacityException();
-		}
-		if (!qualityFeatures.isEmpty() && (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder)) {
+    @Override
+    public void associateInstance(Int2IntSortedMap qualityFeatures, Int2FloatSortedMap quantityFeatures, int qualityMark, float quantityMark, float weight) {
+        if (capacity == size) {
+            throw new DataCapacityException();
+        }
+        if (!qualityFeatures.isEmpty() && (qualityFeatures.firstIntKey() < 0 || qualityFeatures.lastIntKey() >= qualityOrder)) {
             throw new DataException();
         }
         if (!quantityFeatures.isEmpty() && (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder)) {
             throw new DataException();
         }
-		assert qualityOrder == qualityFeatures.size();
-		assert quantityOrder == quantityFeatures.size();
-		for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
-			qualityValues[term.getIntKey()].associateData(term.getIntValue());
-		}
-		for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
-			quantityValues[term.getIntKey()].associateData(term.getFloatValue());
-		}
-		qualityMarks.associateData(qualityMark);
-		quantityMarks.associateData(quantityMark);
-		weights.associateData(weight);
-		size++;
-	}
+        assert qualityOrder == qualityFeatures.size();
+        assert quantityOrder == quantityFeatures.size();
+        for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
+            qualityValues[term.getIntKey()].associateData(term.getIntValue());
+        }
+        for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
+            quantityValues[term.getIntKey()].associateData(term.getFloatValue());
+        }
+        qualityMarks.associateData(qualityMark);
+        quantityMarks.associateData(quantityMark);
+        weights.associateData(weight);
+        size++;
+    }
 
-	@Override
-	public DataInstance getInstance(int cursor) {
-		if (cursor < 0 && cursor >= size) {
-			throw new DataCursorException();
-		}
-		return new DenseInstance(cursor, this);
-	}
+    @Override
+    public DataInstance getInstance(int cursor) {
+        if (cursor < 0 && cursor >= size) {
+            throw new DataCursorException();
+        }
+        return new DenseInstance(cursor, this);
+    }
 
-	@Override
-	public int getSize() {
-		return size;
-	}
+    @Override
+    public int getSize() {
+        return size;
+    }
 
-	@Override
-	public Iterator<DataInstance> iterator() {
-		return new DenseModuleIterator();
-	}
+    @Override
+    public Iterator<DataInstance> iterator() {
+        return new DenseModuleIterator();
+    }
 
-	private class DenseModuleIterator implements Iterator<DataInstance> {
+    private class DenseModuleIterator implements Iterator<DataInstance> {
 
-		private int cursor;
+        private int cursor;
 
-		private DataInstance term = new DenseInstance(cursor, DenseModule.this);
+        private DataInstance term = cursor < size ? new DenseInstance(cursor, DenseModule.this) : null;
 
-		@Override
-		public boolean hasNext() {
-			return cursor < size;
-		}
+        @Override
+        public boolean hasNext() {
+            return cursor < size;
+        }
 
-		@Override
-		public DataInstance next() {
-			term.setCursor(cursor++);
-			return term;
-		}
+        @Override
+        public DataInstance next() {
+            term.setCursor(cursor++);
+            return term;
+        }
 
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
 
-	}
+    }
 
 }
