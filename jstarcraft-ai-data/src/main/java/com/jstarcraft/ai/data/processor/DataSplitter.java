@@ -28,7 +28,7 @@ public interface DataSplitter {
 	 * @param number
 	 * @return
 	 */
-	default DataModule[] split(DataModule module, int number) {
+	default ReferenceModule[] split(DataModule module, int number) {
 		int size = module.getSize();
 		int maximum = size;
 		int minimum = 1000;

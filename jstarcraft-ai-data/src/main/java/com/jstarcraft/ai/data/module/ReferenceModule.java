@@ -25,6 +25,15 @@ public class ReferenceModule implements DataModule {
     /** 模型 */
     private DataModule module;
 
+    public ReferenceModule(DataModule module) {
+        int size = module.getSize();
+        this.references = new IntegerArray(size, size);
+        for (int index = 0; index < size; index++) {
+            this.references.associateData(index);
+        }
+        this.module = module;
+    }
+
     public ReferenceModule(IntegerArray references, DataModule module) {
         this.references = references;
         this.module = module;
@@ -73,6 +82,14 @@ public class ReferenceModule implements DataModule {
     @Override
     public Iterator<DataInstance> iterator() {
         return new ReferenceModuleIterator();
+    }
+
+    public DataModule getModule() {
+        return module;
+    }
+
+    public IntegerArray getReference() {
+        return references;
     }
 
     private class ReferenceModuleIterator implements Iterator<DataInstance> {
