@@ -30,14 +30,18 @@ public class IntegerArray implements CapacityArray {
     public IntegerArray(int minimumCapacity, int maximumCapacity) {
         this.minimumCapacity = minimumCapacity;
         this.maximumCapacity = maximumCapacity;
-        this.datas = new ArrayList<>(maximumCapacity / minimumCapacity + (maximumCapacity % minimumCapacity == 0 ? 0 : 1));
+        if (minimumCapacity == 0 && maximumCapacity == 0) {
+            this.datas = new ArrayList<>(0);
+        } else {
+            this.datas = new ArrayList<>(maximumCapacity / minimumCapacity + (maximumCapacity % minimumCapacity == 0 ? 0 : 1));
+        }
         this.size = 0;
     }
 
     public void associateData(int data) {
         int position = size++ % minimumCapacity;
         if (position == 0) {
-            if (size >= maximumCapacity) {
+            if (size > maximumCapacity) {
                 current = null;
                 throw new IllegalStateException();
             } else {
