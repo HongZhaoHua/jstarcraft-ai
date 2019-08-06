@@ -10,7 +10,7 @@ public class MAEEvaluatorTestCase extends AbstractRatingEvaluatorTestCase {
 
     @Override
     protected Evaluator<FloatList, FloatList> getEvaluator(SparseMatrix featureMatrix) {
-        return new MAEEvaluator();
+        return new MAEEvaluator(0F, 1F);
     }
 
     @Override

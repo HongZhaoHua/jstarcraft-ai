@@ -17,23 +17,30 @@ import it.unimi.dsi.fastutil.floats.FloatList;
  */
 public class MPEEvaluator extends RatingEvaluator {
 
-	private float mpe;
+    private float mpe;
 
-	public MPEEvaluator(float mpe) {
-		this.mpe = mpe;
-	}
+    public MPEEvaluator(float minimum, float maximum, float mpe) {
+        super(minimum, maximum);
+        this.mpe = mpe;
+    }
 
-	@Override
-	protected float measure(FloatList checkCollection, FloatList rateList) {
-		float value = 0F;
-		Iterator<Float> iterator = checkCollection.iterator();
-		for (float estimate : rateList) {
-			float score = iterator.next();
-			if (Math.abs(score - estimate) > mpe) {
-				value++;
-			}
-		}
-		return value;
-	}
+    @Override
+    protected float measure(FloatList checkCollection, FloatList rateList) {
+        float value = 0F;
+        Iterator<Float> iterator = checkCollection.iterator();
+        for (float estimate : rateList) {
+            float score = iterator.next();
+            if (estimate > maximum) {
+                estimate = maximum;
+            }
+            if (estimate < minimum) {
+                estimate = minimum;
+            }
+            if (Math.abs(score - estimate) > mpe) {
+                value++;
+            }
+        }
+        return value;
+    }
 
 }

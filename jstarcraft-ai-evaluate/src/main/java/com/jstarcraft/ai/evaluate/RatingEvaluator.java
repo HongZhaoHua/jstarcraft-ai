@@ -10,9 +10,17 @@ import it.unimi.dsi.fastutil.floats.FloatList;
  */
 public abstract class RatingEvaluator extends AbstractEvaluator<FloatList, FloatList> {
 
-	@Override
-	protected int count(FloatList checkCollection, FloatList rateList) {
-		return checkCollection.size();
-	}
+    /** 大小 */
+    protected float minimum, maximum;
+
+    protected RatingEvaluator(float minimum, float maximum) {
+        this.minimum = minimum;
+        this.maximum = maximum;
+    }
+
+    @Override
+    protected int count(FloatList checkCollection, FloatList rateList) {
+        return checkCollection.size();
+    }
 
 }

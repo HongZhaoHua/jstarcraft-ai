@@ -10,7 +10,7 @@ public class MPEEvaluatorTestCase extends AbstractRatingEvaluatorTestCase {
 
     @Override
     protected Evaluator<FloatList, FloatList> getEvaluator(SparseMatrix featureMatrix) {
-        return new MPEEvaluator(0.01F);
+        return new MPEEvaluator(0F, 1F, 0.01F);
     }
 
     @Override
