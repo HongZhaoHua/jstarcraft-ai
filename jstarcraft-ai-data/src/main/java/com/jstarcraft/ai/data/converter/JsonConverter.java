@@ -43,7 +43,7 @@ public class JsonConverter extends StreamConverter {
     }
 
     @Override
-    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException {
+    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException {
         int count = 0;
         Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
         Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
@@ -72,9 +72,9 @@ public class JsonConverter extends StreamConverter {
                         quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                     }
                 }
-                int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(datas.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
-                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
-                float weight = weightOrder != null ? ConversionUtility.convert(datas.get(weightOrder), float.class) : DataInstance.defaultWeight;
+                int qualityMark = qualityMarkDimension != null ? ConversionUtility.convert(datas.get(qualityMarkDimension), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkDimension != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkDimension), float.class) : DataInstance.defaultFloat;
+                float weight = weightDimension != null ? ConversionUtility.convert(datas.get(weightDimension), float.class) : DataInstance.defaultWeight;
                 module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
                 qualityFeatures.clear();
                 quantityFeatures.clear();
@@ -95,15 +95,15 @@ public class JsonConverter extends StreamConverter {
                     int index = element.getIntKey();
                     Object value = element.getValue();
 
-                    if (qualityMarkOrder != null && qualityMarkOrder == index) {
+                    if (qualityMarkDimension != null && qualityMarkDimension == index) {
                         qualityMark = ConversionUtility.convert(value, int.class);
                         continue;
                     }
-                    if (quantityMarkOrder != null && quantityMarkOrder == index) {
+                    if (quantityMarkDimension != null && quantityMarkDimension == index) {
                         quantityMark = ConversionUtility.convert(value, float.class);
                         continue;
                     }
-                    if (weightOrder != null && weightOrder == index) {
+                    if (weightDimension != null && weightDimension == index) {
                         weight = ConversionUtility.convert(value, float.class);
                         continue;
                     }

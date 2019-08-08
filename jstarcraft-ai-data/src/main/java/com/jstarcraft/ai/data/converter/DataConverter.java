@@ -19,11 +19,11 @@ public interface DataConverter<T> {
      * 
      * @param module
      * @param iterator
-     * @param qualityMarkOrder
-     * @param quantityMarkOrder
-     * @param weightOrder
+     * @param qualityMarkDimension
+     * @param quantityMarkDimension
+     * @param weightDimension
      * @return
      */
-    int convert(DataModule module, T iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder);
+    int convert(DataModule module, T iterator, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension);
 
 }

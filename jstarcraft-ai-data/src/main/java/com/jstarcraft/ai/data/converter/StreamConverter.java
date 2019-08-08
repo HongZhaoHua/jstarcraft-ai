@@ -23,13 +23,13 @@ public abstract class StreamConverter extends AbstractConverter<InputStream> {
 		super(qualityAttributes, quantityAttributes);
 	}
 
-	protected abstract int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException;
+	protected abstract int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException;
 
 	@Override
-	public int convert(DataModule module, InputStream iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) {
+	public int convert(DataModule module, InputStream iterator, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) {
 		try {
 			try (InputStreamReader reader = new InputStreamReader(iterator); BufferedReader buffer = new BufferedReader(reader)) {
-				return parseData(module, buffer, qualityMarkOrder, quantityMarkOrder, weightOrder);
+				return parseData(module, buffer, qualityMarkDimension, quantityMarkDimension, weightDimension);
 			}
 		} catch (Exception exception) {
 			// TODO 处理日志.

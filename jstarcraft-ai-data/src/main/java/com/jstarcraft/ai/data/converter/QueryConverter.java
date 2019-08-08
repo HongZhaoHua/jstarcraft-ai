@@ -31,7 +31,7 @@ public class QueryConverter extends AbstractConverter<ScrollableResults> {
 	}
 
 	@Override
-	public int convert(DataModule module, ScrollableResults iterator, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) {
+	public int convert(DataModule module, ScrollableResults iterator, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) {
 		int count = 0;
 		Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
 		Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
@@ -57,9 +57,9 @@ public class QueryConverter extends AbstractConverter<ScrollableResults> {
 						quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
 					}
 				}
-				int qualityMark = qualityMarkOrder != null ? ConversionUtility.convert(iterator.get(qualityMarkOrder), int.class) : DataInstance.defaultInteger;
-                float quantityMark = quantityMarkOrder != null ? quantityMark = ConversionUtility.convert(iterator.get(quantityMarkOrder), float.class) : DataInstance.defaultFloat;
-                float weight = weightOrder != null ? ConversionUtility.convert(iterator.get(weightOrder), float.class) : DataInstance.defaultWeight;
+				int qualityMark = qualityMarkDimension != null ? ConversionUtility.convert(iterator.get(qualityMarkDimension), int.class) : DataInstance.defaultInteger;
+                float quantityMark = quantityMarkDimension != null ? quantityMark = ConversionUtility.convert(iterator.get(quantityMarkDimension), float.class) : DataInstance.defaultFloat;
+                float weight = weightDimension != null ? ConversionUtility.convert(iterator.get(weightDimension), float.class) : DataInstance.defaultWeight;
                 module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
                 qualityFeatures.clear();
 				quantityFeatures.clear();

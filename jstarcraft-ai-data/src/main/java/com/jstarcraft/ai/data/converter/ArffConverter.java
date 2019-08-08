@@ -43,13 +43,13 @@ public class ArffConverter extends CsvConverter {
     }
 
     @Override
-    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkOrder, Integer quantityMarkOrder, Integer weightOrder) throws IOException {
+    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException {
         int count = 0;
         boolean mark = false;
         if (module instanceof DenseModule) {
             while (true) {
                 if (mark) {
-                    count += super.parseData(module, buffer, qualityMarkOrder, quantityMarkOrder, weightOrder);
+                    count += super.parseData(module, buffer, qualityMarkDimension, quantityMarkDimension, weightDimension);
                     break;
                 } else {
                     String line = buffer.readLine();
@@ -92,15 +92,15 @@ public class ArffConverter extends CsvConverter {
                             int index = Integer.parseInt(data[0]) - 1;
                             Object value = data[1];
 
-                            if (qualityMarkOrder != null && qualityMarkOrder == index) {
+                            if (qualityMarkDimension != null && qualityMarkDimension == index) {
                                 qualityMark = ConversionUtility.convert(value, int.class);
                                 continue;
                             }
-                            if (quantityMarkOrder != null && quantityMarkOrder == index) {
+                            if (quantityMarkDimension != null && quantityMarkDimension == index) {
                                 quantityMark = ConversionUtility.convert(value, float.class);
                                 continue;
                             }
-                            if (weightOrder != null && weightOrder == index) {
+                            if (weightDimension != null && weightDimension == index) {
                                 weight = ConversionUtility.convert(value, float.class);
                                 continue;
                             }
