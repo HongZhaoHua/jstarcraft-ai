@@ -10,7 +10,6 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
-import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -39,7 +38,7 @@ public class CsvConverter extends StreamConverter {
     }
 
     @Override
-    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException {
+    protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
         int count = 0;
         Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
         Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
@@ -64,10 +63,7 @@ public class CsvConverter extends StreamConverter {
                         quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                     }
                 }
-                int qualityMark = qualityMarkDimension != null ? ConversionUtility.convert(datas.get(qualityMarkDimension), int.class) : DataInstance.defaultInteger;
-                float quantityMark = quantityMarkDimension != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkDimension), float.class) : DataInstance.defaultFloat;
-                float weight = weightDimension != null ? ConversionUtility.convert(datas.get(weightDimension), float.class) : DataInstance.defaultWeight;
-                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                module.associateInstance(qualityFeatures, quantityFeatures);
                 qualityFeatures.clear();
                 quantityFeatures.clear();
                 count++;

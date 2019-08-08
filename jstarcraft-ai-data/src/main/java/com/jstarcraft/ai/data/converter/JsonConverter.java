@@ -43,7 +43,7 @@ public class JsonConverter extends StreamConverter {
     }
 
     @Override
-    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException {
+    protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
         int count = 0;
         Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
         Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
@@ -72,10 +72,7 @@ public class JsonConverter extends StreamConverter {
                         quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                     }
                 }
-                int qualityMark = qualityMarkDimension != null ? ConversionUtility.convert(datas.get(qualityMarkDimension), int.class) : DataInstance.defaultInteger;
-                float quantityMark = quantityMarkDimension != null ? quantityMark = ConversionUtility.convert(datas.get(quantityMarkDimension), float.class) : DataInstance.defaultFloat;
-                float weight = weightDimension != null ? ConversionUtility.convert(datas.get(weightDimension), float.class) : DataInstance.defaultWeight;
-                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                module.associateInstance(qualityFeatures, quantityFeatures);
                 qualityFeatures.clear();
                 quantityFeatures.clear();
                 count++;
@@ -94,20 +91,6 @@ public class JsonConverter extends StreamConverter {
                 for (Int2ObjectMap.Entry<Object> element : datas.int2ObjectEntrySet()) {
                     int index = element.getIntKey();
                     Object value = element.getValue();
-
-                    if (qualityMarkDimension != null && qualityMarkDimension == index) {
-                        qualityMark = ConversionUtility.convert(value, int.class);
-                        continue;
-                    }
-                    if (quantityMarkDimension != null && quantityMarkDimension == index) {
-                        quantityMark = ConversionUtility.convert(value, float.class);
-                        continue;
-                    }
-                    if (weightDimension != null && weightDimension == index) {
-                        weight = ConversionUtility.convert(value, float.class);
-                        continue;
-                    }
-
                     Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
                     KeyValue<String, Boolean> keyValue = term.getValue();
                     if (keyValue.getValue()) {

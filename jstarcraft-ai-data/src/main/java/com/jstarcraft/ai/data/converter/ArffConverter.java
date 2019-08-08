@@ -2,7 +2,6 @@ package com.jstarcraft.ai.data.converter;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map.Entry;
 
@@ -15,7 +14,6 @@ import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.module.DenseModule;
 import com.jstarcraft.ai.data.module.SparseModule;
 import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
-import com.jstarcraft.core.common.conversion.json.JsonUtility;
 import com.jstarcraft.core.utility.KeyValue;
 import com.jstarcraft.core.utility.StringUtility;
 
@@ -23,7 +21,6 @@ import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 import it.unimi.dsi.fastutil.ints.Int2IntRBTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 
 /**
  * Attribute-Relation File Format转换器
@@ -43,13 +40,13 @@ public class ArffConverter extends CsvConverter {
     }
 
     @Override
-    protected int parseData(DataModule module, BufferedReader buffer, Integer qualityMarkDimension, Integer quantityMarkDimension, Integer weightDimension) throws IOException {
+    protected int parseData(DataModule module, BufferedReader buffer) throws IOException {
         int count = 0;
         boolean mark = false;
         if (module instanceof DenseModule) {
             while (true) {
                 if (mark) {
-                    count += super.parseData(module, buffer, qualityMarkDimension, quantityMarkDimension, weightDimension);
+                    count += super.parseData(module, buffer);
                     break;
                 } else {
                     String line = buffer.readLine();
@@ -91,20 +88,6 @@ public class ArffConverter extends CsvConverter {
                             String[] data = element.split(StringUtility.SPACE);
                             int index = Integer.parseInt(data[0]) - 1;
                             Object value = data[1];
-
-                            if (qualityMarkDimension != null && qualityMarkDimension == index) {
-                                qualityMark = ConversionUtility.convert(value, int.class);
-                                continue;
-                            }
-                            if (quantityMarkDimension != null && quantityMarkDimension == index) {
-                                quantityMark = ConversionUtility.convert(value, float.class);
-                                continue;
-                            }
-                            if (weightDimension != null && weightDimension == index) {
-                                weight = ConversionUtility.convert(value, float.class);
-                                continue;
-                            }
-
                             Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
                             KeyValue<String, Boolean> keyValue = term.getValue();
                             if (keyValue.getValue()) {

@@ -64,7 +64,7 @@ public class QueryConverterTestCase {
             }
             Query query = session.createQuery(selectDataHql);
             ScrollableResults iterator = query.scroll();
-            int count = converter.convert(dense, iterator, null, null, null);
+            int count = converter.convert(dense, iterator);
             Assert.assertEquals(5, count);
             iterator.close();
             {
@@ -94,7 +94,7 @@ public class QueryConverterTestCase {
             }
             Query query = session.createQuery(selectDataHql);
             ScrollableResults iterator = query.scroll();
-            int count = converter.convert(sparse, iterator, null, null, null);
+            int count = converter.convert(sparse, iterator);
             Assert.assertEquals(5, count);
             iterator.close();
             {
@@ -140,7 +140,7 @@ public class QueryConverterTestCase {
             }
             Query query = session.createSQLQuery(selectDataSql);
             ScrollableResults iterator = query.scroll();
-            int count = converter.convert(dense, iterator, null, null, null);
+            int count = converter.convert(dense, iterator);
             Assert.assertEquals(5, count);
             iterator.close();
             {
@@ -170,7 +170,7 @@ public class QueryConverterTestCase {
             }
             Query query = session.createSQLQuery(selectDataSql);
             ScrollableResults iterator = query.scroll();
-            int count = converter.convert(sparse, iterator, null, null, null);
+            int count = converter.convert(sparse, iterator);
             Assert.assertEquals(5, count);
             iterator.close();
             {
