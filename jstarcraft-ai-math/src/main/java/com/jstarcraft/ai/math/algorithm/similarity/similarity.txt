@@ -15,3 +15,6 @@ http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html
 
 使用SimHash进行海量文本去重:
 https://www.cnblogs.com/maybe2030/p/5203186.html
+
+similarity(相似度计算工具包,java编写)
+https://github.com/shibing624/similarity
