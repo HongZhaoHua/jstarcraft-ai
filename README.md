@@ -88,7 +88,9 @@ JStarCraft AI框架各个模块之间的关系:
 * [8.无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 聚类
     * 关联
-* 9.工具(utility)
+* [9.丰富的评估指标](#评估指标)
+    * [排序指标](#排序指标)
+    * [评分指标](#评分指标)
 
 *****
 
@@ -360,3 +362,22 @@ session.close();
 ```java
 
 ```
+
+****
+
+## 评估指标
+
+#### 排序指标
+- AUC
+- Diversity
+- MAP
+- MRR
+- NDCG
+- Novelty
+- Precision
+- Recall
+
+#### 评分指标
+- MAE
+- MPE
+- MSE/RMSE
