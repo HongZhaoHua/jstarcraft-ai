@@ -1,11 +1,12 @@
-JStarCraft AI
-==========
+# JStarCraft AI
+
+****
 
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 希望路过的同学,顺手给JStarCraft框架点个Star,算是对作者的一种鼓励吧!
 
-*****
+****
 
 **JStarCraft AI是一个机器学习的轻量级框架.遵循Apache 2.0协议.**
 
@@ -21,14 +22,14 @@ JStarCraft AI是一个基于Java语言的机器学习工具包,由一系列的�
 |---|---
 |E-mail|110399057@qq.com, jstarcraft@gmail.com
 
-*****
+****
 
 ## JStarCraft AI架构
 
 JStarCraft AI框架各个模块之间的关系:
 ![ai](https://github.com/HongZhaoHua/jstarcraft-tutorial/blob/master/ai/JStarCraft%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A1%86%E6%9E%B6%E7%BB%84%E4%BB%B6%E5%9B%BE.png "JStarCraft AI架构")
 
-*****
+****
 
 ## JStarCraft AI特性
 * [1.数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%95%B0%E6%8D%AE)
@@ -92,7 +93,7 @@ JStarCraft AI框架各个模块之间的关系:
     * [排序指标](#排序指标)
     * [评分指标](#评分指标)
 
-*****
+****
 
 ## JStarCraft AI教程
 
