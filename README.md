@@ -26,12 +26,12 @@ JStarCraft AI是一个基于Java语言的机器学习工具包,由一系列的�
 ## JStarCraft AI架构
 
 JStarCraft AI框架各个模块之间的关系:
-![ai](https://github.com/HongZhaoHua/jstarcraft-reference/blob/master/ai/JStarCraft%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A1%86%E6%9E%B6%E7%BB%84%E4%BB%B6%E5%9B%BE.png "JStarCraft AI架构")
+![ai](https://github.com/HongZhaoHua/jstarcraft-tutorial/blob/master/ai/JStarCraft%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A1%86%E6%9E%B6%E7%BB%84%E4%BB%B6%E5%9B%BE.png "JStarCraft AI架构")
 
 *****
 
 ## JStarCraft AI特性
-* [1.数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%95%B0%E6%8D%AE)
+* [1.数据(data)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%95%B0%E6%8D%AE)
     * 属性与特征
         * 连续
         * 离散
@@ -56,7 +56,7 @@ JStarCraft AI框架各个模块之间的关系:
         * 单元
         * 表单
 * 4.调制解调(modem)
-* [5.模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%A8%A1%E5%9E%8B)
+* [5.模型(model)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%A8%A1%E5%9E%8B)
     * 线性模型(linear)
     * 近邻模型(nearest neighbor)
     * 矩阵分解模型(matrix factorization)
@@ -77,15 +77,15 @@ JStarCraft AI框架各个模块之间的关系:
         * 随机梯度下降
     * 牛顿法和拟牛顿法(newton method/quasi newton method)
     * 共轭梯度法(conjugate gradient)
-    * [试探法(heuristics)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
+    * [试探法(heuristics)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
         * 模拟退火算法
         * 遗传算法
         * 蚁群算法
         * 粒子群算法
-* [7.有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
+* [7.有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 分类
     * 回归
-* [8.无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai-1.0/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
+* [8.无监督学习(unsupervised)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 聚类
     * 关联
 * [9.丰富的评估指标](#评估指标)
@@ -239,7 +239,7 @@ Future<?> task = context.doTask(() - > {
 
 JStarCraft AI框架各个转换器与其它系统之间的关系: 
 
-![converter](https://github.com/HongZhaoHua/jstarcraft-reference/blob/master/ai/%E8%BD%AC%E6%8D%A2%E5%99%A8%E7%B1%BB%E5%9B%BE.png "转换器")
+![converter](https://github.com/HongZhaoHua/jstarcraft-tutorial/blob/master/ai/%E8%BD%AC%E6%8D%A2%E5%99%A8%E7%B1%BB%E5%9B%BE.png "转换器")
 
 * 定义数据属性
 
