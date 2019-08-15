@@ -1,0 +1,5 @@
+高效的多维空间点索引算法 - Geohash 和 Google S2:
+https://www.cnblogs.com/mafeng/p/7910129.html
+
+Google S2 常用操作:
+https://blog.csdn.net/deng0515001/article/details/88031153
