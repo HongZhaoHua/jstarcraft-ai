@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.csv.CSVFormat;
 
-import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -81,9 +80,6 @@ public class ArffConverter extends CsvConverter {
                         }
                         line = line.substring(1, line.length() - 1);
                         String[] elements = line.split(",\\s*");
-                        int qualityMark = DataInstance.defaultInteger;
-                        float quantityMark = DataInstance.defaultFloat;
-                        float weight = DataInstance.defaultWeight;
                         for (String element : elements) {
                             String[] data = element.split(StringUtility.SPACE);
                             int index = Integer.parseInt(data[0]) - 1;
@@ -102,7 +98,7 @@ public class ArffConverter extends CsvConverter {
                                 quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                             }
                         }
-                        module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                        module.associateInstance(qualityFeatures, quantityFeatures);
                         qualityFeatures.clear();
                         quantityFeatures.clear();
                         count++;

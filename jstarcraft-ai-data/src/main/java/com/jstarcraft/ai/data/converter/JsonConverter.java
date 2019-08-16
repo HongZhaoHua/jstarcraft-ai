@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map.Entry;
 
-import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -85,9 +84,6 @@ public class JsonConverter extends StreamConverter {
                     continue;
                 }
                 Int2ObjectOpenHashMap<Object> datas = JsonUtility.string2Object(line, sparseType);
-                int qualityMark = DataInstance.defaultInteger;
-                float quantityMark = DataInstance.defaultFloat;
-                float weight = DataInstance.defaultWeight;
                 for (Int2ObjectMap.Entry<Object> element : datas.int2ObjectEntrySet()) {
                     int index = element.getIntKey();
                     Object value = element.getValue();
@@ -105,7 +101,7 @@ public class JsonConverter extends StreamConverter {
                         quantityFeatures.put(module.getQuantityInner(keyValue.getKey()) + index - term.getKey(), feature);
                     }
                 }
-                module.associateInstance(qualityFeatures, quantityFeatures, qualityMark, quantityMark, weight);
+                module.associateInstance(qualityFeatures, quantityFeatures);
                 qualityFeatures.clear();
                 quantityFeatures.clear();
                 count++;
