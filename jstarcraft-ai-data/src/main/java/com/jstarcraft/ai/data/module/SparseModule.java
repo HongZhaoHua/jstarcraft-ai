@@ -41,11 +41,23 @@ public class SparseModule extends AbstractModule {
     public SparseModule(String name, List<KeyValue<KeyValue<String, Boolean>, Integer>> definition, int capacity) {
         super(name, definition, capacity);
         this.qualityPoints = new IntegerArray(1000, capacity + 1);
-        this.qualityIndexes = new IntegerArray(1000, capacity * qualityOrder);
-        this.qualityValues = new IntegerArray(1000, capacity * qualityOrder);
+        // 防止溢出
+        if(qualityOrder > 1000) {
+            this.qualityIndexes = new IntegerArray(1000, Integer.MAX_VALUE);
+            this.qualityValues = new IntegerArray(1000, Integer.MAX_VALUE);
+        } else {
+            this.qualityIndexes = new IntegerArray(1000, capacity * qualityOrder);
+            this.qualityValues = new IntegerArray(1000, capacity * qualityOrder);
+        }
         this.quantityPoints = new IntegerArray(1000, capacity + 1);
-        this.quantityIndexes = new IntegerArray(1000, capacity * quantityOrder);
-        this.quantityValues = new FloatArray(1000, capacity * quantityOrder);
+     // 防止溢出
+        if (quantityOrder > 1000) {
+            this.quantityIndexes = new IntegerArray(1000, Integer.MAX_VALUE);
+            this.quantityValues = new FloatArray(1000, Integer.MAX_VALUE);
+        } else {
+            this.quantityIndexes = new IntegerArray(1000, capacity * quantityOrder);
+            this.quantityValues = new FloatArray(1000, capacity * quantityOrder);
+        }
         this.qualityPoints.associateData(0);
         this.quantityPoints.associateData(0);
     }
