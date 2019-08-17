@@ -42,7 +42,7 @@ public class SparseModule extends AbstractModule {
         super(name, definition, capacity);
         this.qualityPoints = new IntegerArray(1000, capacity + 1);
         // 防止溢出
-        if(qualityOrder > 1000) {
+        if (qualityOrder > 1000) {
             this.qualityIndexes = new IntegerArray(1000, Integer.MAX_VALUE);
             this.qualityValues = new IntegerArray(1000, Integer.MAX_VALUE);
         } else {
@@ -50,7 +50,7 @@ public class SparseModule extends AbstractModule {
             this.qualityValues = new IntegerArray(1000, capacity * qualityOrder);
         }
         this.quantityPoints = new IntegerArray(1000, capacity + 1);
-     // 防止溢出
+        // 防止溢出
         if (quantityOrder > 1000) {
             this.quantityIndexes = new IntegerArray(1000, Integer.MAX_VALUE);
             this.quantityValues = new FloatArray(1000, Integer.MAX_VALUE);
