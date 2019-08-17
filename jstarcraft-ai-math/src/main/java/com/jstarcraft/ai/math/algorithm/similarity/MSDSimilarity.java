@@ -23,7 +23,7 @@ public class MSDSimilarity extends AbstractSimilarity {
 		}
 		float similarity = count / sum;
 		if (Float.isInfinite(similarity)) {
-			similarity = 1F;
+			similarity = 0F;
 		}
 		return similarity;
 	}
