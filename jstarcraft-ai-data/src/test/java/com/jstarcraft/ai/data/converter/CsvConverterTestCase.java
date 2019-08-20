@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.apache.commons.csv.CSVFormat;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class CsvConverterTestCase {
         configuration.put(4, "item");
         configuration.put(5, "score");
 
-        CsvConverter converter = new CsvConverter(',', space.getQualityAttributes(), space.getQuantityAttributes());
+        CsvConverter converter = new CsvConverter(CSVFormat.DEFAULT.withDelimiter(','), space.getQualityAttributes(), space.getQuantityAttributes());
         {
             DataModule dense = space.makeDenseModule("dense", configuration, 1000);
             File file = new File(this.getClass().getResource("dense.csv").toURI());

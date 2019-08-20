@@ -29,12 +29,11 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
  */
 public class CsvConverter extends StreamConverter {
 
-    /** 分隔符 */
-    protected char delimiter;
+    private CSVFormat format;
 
-    public CsvConverter(char delimiter, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+    public CsvConverter(CSVFormat format, Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
         super(qualityAttributes, quantityAttributes);
-        this.delimiter = delimiter;
+        this.format = format;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class CsvConverter extends StreamConverter {
         Int2IntSortedMap qualityFeatures = new Int2IntRBTreeMap();
         Int2FloatSortedMap quantityFeatures = new Int2FloatRBTreeMap();
         int size = module.getQualityOrder() + module.getQuantityOrder();
-        try (CSVParser parser = new CSVParser(buffer, CSVFormat.newFormat(delimiter))) {
+        try (CSVParser parser = new CSVParser(buffer, format)) {
             Iterator<CSVRecord> iterator = parser.iterator();
             while (iterator.hasNext()) {
                 CSVRecord datas = iterator.next();

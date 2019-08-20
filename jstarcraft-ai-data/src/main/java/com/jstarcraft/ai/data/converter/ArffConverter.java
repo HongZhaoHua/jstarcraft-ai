@@ -35,7 +35,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 public class ArffConverter extends CsvConverter {
 
     public ArffConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
-        super(CSVFormat.DEFAULT.getDelimiter(), qualityAttributes, quantityAttributes);
+        super(CSVFormat.DEFAULT, qualityAttributes, quantityAttributes);
     }
 
     @Override
