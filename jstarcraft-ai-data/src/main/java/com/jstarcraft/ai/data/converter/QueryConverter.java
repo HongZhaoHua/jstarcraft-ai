@@ -6,7 +6,6 @@ import java.util.Map.Entry;
 import org.hibernate.HibernateException;
 import org.hibernate.ScrollableResults;
 
-import com.jstarcraft.ai.data.DataInstance;
 import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
@@ -19,7 +18,7 @@ import it.unimi.dsi.fastutil.ints.Int2IntRBTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 
 /**
- * 查询转换器
+ * 行式转换器
  * 
  * @author Birdy
  *

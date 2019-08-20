@@ -12,7 +12,7 @@ import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.exception.DataException;
 
 /**
- * 流转换器
+ * 流式转换器
  * 
  * @author Birdy
  *
