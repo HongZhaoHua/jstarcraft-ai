@@ -5,7 +5,6 @@ import java.util.concurrent.Future;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
-import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
@@ -15,13 +14,13 @@ import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatRBTreeMap;
 
 public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected ColumnArrayMatrix getRandomMatrix(int dimension) {
-		HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = new HashMatrix(true, dimension, dimension, new Long2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				if (RandomUtility.randomBoolean()) {
@@ -43,7 +42,7 @@ public class ColumnArrayMatrixTestCase extends MatrixTestCase {
 
 	@Override
 	protected ColumnArrayMatrix getZeroMatrix(int dimension) {
-		HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
+		HashMatrix table = new HashMatrix(true, dimension, dimension, new Long2FloatRBTreeMap());
 		for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
 			for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
 				table.setValue(rowIndex, columnIndex, 0F);

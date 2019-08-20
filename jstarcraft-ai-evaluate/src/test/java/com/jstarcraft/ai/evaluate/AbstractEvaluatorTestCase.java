@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Integer2FloatKeyValue;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatRBTreeMap;
 
 public abstract class AbstractEvaluatorTestCase<L, R> {
 
@@ -23,7 +23,7 @@ public abstract class AbstractEvaluatorTestCase<L, R> {
         RandomUtility.setSeed(0L);
         int rowSize = 1000;
         int columnSize = 1000;
-        HashMatrix featureTable = new HashMatrix(true, rowSize, columnSize, new Int2FloatRBTreeMap());
+        HashMatrix featureTable = new HashMatrix(true, rowSize, columnSize, new Long2FloatRBTreeMap());
         for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
             for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
                 if (RandomUtility.randomFloat(1F) < 0.5F) {

@@ -11,14 +11,13 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
+import com.jstarcraft.ai.math.structure.MathMonitor;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.modem.ModemCycle;
 import com.jstarcraft.ai.modem.ModemDefinition;
-import com.jstarcraft.ai.math.structure.MathMonitor;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatMap;
-import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
-import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatMap.Entry;
+import it.unimi.dsi.fastutil.longs.Long2FloatSortedMap;
 
 /**
  * 随机向量
@@ -29,29 +28,29 @@ import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
 @ModemDefinition(value = { "shift", "capacity", "clazz", "keys", "values" })
 public class HashVector implements MathVector, ModemCycle {
 
-    private int shift;
+    private long shift;
 
     private int capacity;
 
     private String clazz;
 
-    private int[] keys;
+    private long[] keys;
 
     private float[] values;
 
-    private transient Int2FloatSortedMap keyValues;
+    private transient Long2FloatSortedMap keyValues;
 
     private transient WeakHashMap<MathMonitor<VectorScalar>, Object> monitors = new WeakHashMap<>();
 
     HashVector() {
     }
 
-    public HashVector(int shift, int capacity, Int2FloatSortedMap data) {
+    public HashVector(long shift, int capacity, Long2FloatSortedMap data) {
         data.defaultReturnValue(Float.NaN);
         assert shift >= 0;
         if (!data.isEmpty()) {
-            assert data.firstIntKey() - shift >= 0;
-            assert data.lastIntKey() - shift < capacity;
+            assert data.firstLongKey() - shift >= 0;
+            assert data.lastLongKey() - shift < capacity;
         }
         this.shift = shift;
         this.capacity = capacity;
@@ -78,7 +77,7 @@ public class HashVector implements MathVector, ModemCycle {
         switch (mode) {
         case SERIAL: {
             RandomVectorScalar scalar = new RandomVectorScalar();
-            for (Entry element : keyValues.int2FloatEntrySet()) {
+            for (Entry element : keyValues.long2FloatEntrySet()) {
                 scalar.update(element);
                 for (MathAccessor<VectorScalar> accessor : accessors) {
                     accessor.accessElement(scalar);
@@ -89,10 +88,10 @@ public class HashVector implements MathVector, ModemCycle {
         default: {
             EnvironmentContext context = EnvironmentContext.getContext();
             Semaphore semaphore = MathCalculator.getSemaphore();
-            for (Entry element : keyValues.int2FloatEntrySet()) {
+            for (Entry element : keyValues.long2FloatEntrySet()) {
                 RandomVectorScalar scalar = new RandomVectorScalar();
                 scalar.update(element);
-                context.doStructureByAny(element.getIntKey(), () -> {
+                context.doStructureByAny((int) element.getLongKey(), () -> {
                     for (MathAccessor<VectorScalar> accessor : accessors) {
                         accessor.accessElement(scalar);
                     }
@@ -125,7 +124,7 @@ public class HashVector implements MathVector, ModemCycle {
                 }
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 term.setValue(value);
             }
         }
@@ -134,7 +133,7 @@ public class HashVector implements MathVector, ModemCycle {
 
     @Override
     public HashVector scaleValues(float value) {
-        for (Entry term : keyValues.int2FloatEntrySet()) {
+        for (Entry term : keyValues.long2FloatEntrySet()) {
             term.setValue(term.getFloatValue() * value);
         }
         return this;
@@ -142,7 +141,7 @@ public class HashVector implements MathVector, ModemCycle {
 
     @Override
     public HashVector shiftValues(float value) {
-        for (Entry term : keyValues.int2FloatEntrySet()) {
+        for (Entry term : keyValues.long2FloatEntrySet()) {
             term.setValue(term.getFloatValue() + value);
         }
         return this;
@@ -152,11 +151,11 @@ public class HashVector implements MathVector, ModemCycle {
     public float getSum(boolean absolute) {
         float sum = 0F;
         if (absolute) {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 sum += FastMath.abs(term.getFloatValue());
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 sum += term.getFloatValue();
             }
         }
@@ -235,10 +234,10 @@ public class HashVector implements MathVector, ModemCycle {
     public void beforeSave() {
         clazz = keyValues.getClass().getName();
         int index = 0;
-        keys = new int[keyValues.size()];
+        keys = new long[keyValues.size()];
         values = new float[keyValues.size()];
-        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-            keys[index] = term.getIntKey();
+        for (Entry term : keyValues.long2FloatEntrySet()) {
+            keys[index] = term.getLongKey();
             values[index] = term.getFloatValue();
             index++;
         }
@@ -247,7 +246,7 @@ public class HashVector implements MathVector, ModemCycle {
     @Override
     public void afterLoad() {
         try {
-            keyValues = (Int2FloatSortedMap) Class.forName(clazz).newInstance();
+            keyValues = (Long2FloatSortedMap) Class.forName(clazz).newInstance();
             for (int index = 0, size = keys.length; index < size; index++) {
                 keyValues.put(keys[index], values[index]);
             }
@@ -294,7 +293,7 @@ public class HashVector implements MathVector, ModemCycle {
 
     private class RandomVectorIterator implements Iterator<VectorScalar> {
 
-        private Iterator<Entry> iterator = keyValues.int2FloatEntrySet().iterator();
+        private Iterator<Entry> iterator = keyValues.long2FloatEntrySet().iterator();
 
         private final RandomVectorScalar term = new RandomVectorScalar();
 
@@ -326,7 +325,7 @@ public class HashVector implements MathVector, ModemCycle {
 
         @Override
         public int getIndex() {
-            return element.getIntKey() - shift;
+            return (int) (element.getLongKey() - shift);
         }
 
         @Override
@@ -348,7 +347,7 @@ public class HashVector implements MathVector, ModemCycle {
                 int newElementSize = oldElementSize - 1;
                 int newKnownSize = oldKnownSize - 1;
                 int newUnknownSize = oldUnknownSize + 1;
-                keyValues.remove(element.getIntKey());
+                keyValues.remove(element.getLongKey());
                 for (MathMonitor<VectorScalar> monitor : monitors.keySet()) {
                     monitor.notifySizeChanged(HashVector.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
                 }

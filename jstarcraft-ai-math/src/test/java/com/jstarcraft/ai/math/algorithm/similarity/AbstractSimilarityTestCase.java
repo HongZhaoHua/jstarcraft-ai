@@ -14,7 +14,7 @@ import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatRBTreeMap;
 
 public abstract class AbstractSimilarityTestCase {
 
@@ -28,7 +28,7 @@ public abstract class AbstractSimilarityTestCase {
     public void test() {
         int rowSize = 50;
         int columnSize = 100;
-        HashMatrix table = new HashMatrix(true, rowSize, columnSize, new Int2FloatRBTreeMap());
+        HashMatrix table = new HashMatrix(true, rowSize, columnSize, new Long2FloatRBTreeMap());
         for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
             for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
                 if (RandomUtility.randomBoolean()) {

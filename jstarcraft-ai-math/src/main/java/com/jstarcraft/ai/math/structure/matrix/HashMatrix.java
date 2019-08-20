@@ -20,9 +20,8 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.ai.modem.ModemCycle;
 import com.jstarcraft.ai.modem.ModemDefinition;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatMap;
-import it.unimi.dsi.fastutil.ints.Int2FloatMap.Entry;
-import it.unimi.dsi.fastutil.ints.Int2FloatSortedMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatMap.Entry;
+import it.unimi.dsi.fastutil.longs.Long2FloatSortedMap;
 
 /**
  * 哈希矩阵
@@ -38,11 +37,11 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     private String clazz;
 
-    private int[] keys;
+    private long[] keys;
 
     private float[] values;
 
-    private transient Int2FloatSortedMap keyValues;
+    private transient Long2FloatSortedMap keyValues;
 
     private int rowSize, columnSize;
 
@@ -71,7 +70,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
         switch (mode) {
         case SERIAL: {
             RandomMatrixScalar scalar = new RandomMatrixScalar();
-            for (Entry element : keyValues.int2FloatEntrySet()) {
+            for (Entry element : keyValues.long2FloatEntrySet()) {
                 scalar.update(element);
                 for (MathAccessor<MatrixScalar> accessor : accessors) {
                     accessor.accessElement(scalar);
@@ -88,9 +87,9 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                     int rowIndex = index;
                     context.doStructureByAny(index, () -> {
                         RandomMatrixScalar scalar = new RandomMatrixScalar();
-                        int from = rowIndex * columnSize;
-                        int to = rowIndex * columnSize + columnSize;
-                        for (Entry element : keyValues.subMap(from, to).int2FloatEntrySet()) {
+                        long from = 1L * rowIndex * columnSize;
+                        long to = 1L * rowIndex * columnSize + columnSize;
+                        for (Entry element : keyValues.subMap(from, to).long2FloatEntrySet()) {
                             scalar.update(element);
                             for (MathAccessor<MatrixScalar> accessor : accessors) {
                                 accessor.accessElement(scalar);
@@ -115,7 +114,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                         RandomMatrixScalar scalar = new RandomMatrixScalar();
                         int from = columnIndex * rowSize;
                         int to = columnIndex * rowSize + rowSize;
-                        for (Entry element : keyValues.subMap(from, to).int2FloatEntrySet()) {
+                        for (Entry element : keyValues.subMap(from, to).long2FloatEntrySet()) {
                             scalar.update(element);
                             for (MathAccessor<MatrixScalar> accessor : accessors) {
                                 accessor.accessElement(scalar);
@@ -151,7 +150,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                 }
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 term.setValue(value);
             }
         }
@@ -174,7 +173,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                 }
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 term.setValue(term.getFloatValue() * value);
             }
         }
@@ -197,7 +196,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                 }
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 term.setValue(term.getFloatValue() + value);
             }
         }
@@ -786,11 +785,11 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     public float getSum(boolean absolute) {
         float sum = 0F;
         if (absolute) {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 sum += FastMath.abs(term.getFloatValue());
             }
         } else {
-            for (Entry term : keyValues.int2FloatEntrySet()) {
+            for (Entry term : keyValues.long2FloatEntrySet()) {
                 sum += term.getFloatValue();
             }
         }
@@ -820,8 +819,8 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     @Override
     public HashVector getRowVector(int rowIndex) {
         if (orientation) {
-            int from = rowIndex * columnSize;
-            int to = rowIndex * columnSize + columnSize;
+            long from = 1L * rowIndex * columnSize;
+            long to = 1L * rowIndex * columnSize + columnSize;
             return new HashVector(rowIndex * columnSize, columnSize, keyValues.subMap(from, to));
         } else {
             throw new UnsupportedOperationException();
@@ -833,9 +832,9 @@ public class HashMatrix implements MathMatrix, ModemCycle {
         if (orientation) {
             throw new UnsupportedOperationException();
         } else {
-            int from = columnIndex * rowSize;
-            int to = columnIndex * rowSize + rowSize;
-            return new HashVector(columnIndex * rowSize, rowSize, keyValues.subMap(from, to));
+            long from = 1L * columnIndex * rowSize;
+            long to = 1L * columnIndex * rowSize + rowSize;
+            return new HashVector(1L * columnIndex * rowSize, rowSize, keyValues.subMap(from, to));
         }
     }
 
@@ -847,19 +846,19 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     @Override
     public float getValue(int rowIndex, int columnIndex) {
         if (orientation) {
-            return keyValues.get(rowIndex * columnSize + columnIndex);
+            return keyValues.get(1L * rowIndex * columnSize + columnIndex);
         } else {
-            return keyValues.get(columnIndex * rowSize + rowIndex);
+            return keyValues.get(1L * columnIndex * rowSize + rowIndex);
         }
     }
 
     @Override
     public void setValue(int rowIndex, int columnIndex, float value) {
-        int index;
+        long index = 0L;
         if (orientation) {
-            index = rowIndex * columnSize + columnIndex;
+            index = 1L * rowIndex * columnSize + columnIndex;
         } else {
-            index = columnIndex * rowSize + rowIndex;
+            index = 1L * columnIndex * rowSize + rowIndex;
         }
         if (Float.isNaN(value)) {
             keyValues.remove(index);
@@ -870,11 +869,11 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     @Override
     public void scaleValue(int rowIndex, int columnIndex, float value) {
-        int index = 0;
+        long index = 0L;
         if (orientation) {
-            index = rowIndex * columnSize + columnIndex;
+            index = 1L * rowIndex * columnSize + columnIndex;
         } else {
-            index = columnIndex * rowSize + rowIndex;
+            index = 1L * columnIndex * rowSize + rowIndex;
         }
         if (Float.isNaN(value)) {
             keyValues.remove(index);
@@ -885,11 +884,11 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     @Override
     public void shiftValue(int rowIndex, int columnIndex, float value) {
-        int index = 0;
+        long index = 0L;
         if (orientation) {
-            index = rowIndex * columnSize + columnIndex;
+            index = 1L * rowIndex * columnSize + columnIndex;
         } else {
-            index = columnIndex * rowSize + rowIndex;
+            index = 1L * columnIndex * rowSize + rowIndex;
         }
         if (Float.isNaN(value)) {
             keyValues.remove(index);
@@ -902,10 +901,10 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     public void beforeSave() {
         clazz = keyValues.getClass().getName();
         int index = 0;
-        keys = new int[keyValues.size()];
+        keys = new long[keyValues.size()];
         values = new float[keyValues.size()];
-        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-            keys[index] = term.getIntKey();
+        for (Entry term : keyValues.long2FloatEntrySet()) {
+            keys[index] = term.getLongKey();
             values[index] = term.getFloatValue();
             index++;
         }
@@ -914,7 +913,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     @Override
     public void afterLoad() {
         try {
-            keyValues = (Int2FloatSortedMap) Class.forName(clazz).newInstance();
+            keyValues = (Long2FloatSortedMap) Class.forName(clazz).newInstance();
             for (int index = 0, size = keys.length; index < size; index++) {
                 keyValues.put(keys[index], values[index]);
             }
@@ -959,7 +958,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     private class RandomMatrixIterator implements Iterator<MatrixScalar> {
 
-        private Iterator<Entry> iterator = keyValues.int2FloatEntrySet().iterator();
+        private Iterator<Entry> iterator = keyValues.long2FloatEntrySet().iterator();
 
         private final RandomMatrixScalar term = new RandomMatrixScalar();
 
@@ -991,12 +990,12 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
         @Override
         public int getRow() {
-            return orientation ? element.getIntKey() / columnSize : element.getIntKey() % rowSize;
+            return (int) (orientation ? element.getLongKey() / columnSize : element.getLongKey() % rowSize);
         }
 
         @Override
         public int getColumn() {
-            return orientation ? element.getIntKey() % columnSize : element.getIntKey() / rowSize;
+            return (int) (orientation ? element.getLongKey() % columnSize : element.getLongKey() / rowSize);
         }
 
         @Override
@@ -1018,7 +1017,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
                 int newElementSize = oldElementSize - 1;
                 int newKnownSize = oldKnownSize - 1;
                 int newUnknownSize = oldUnknownSize + 1;
-                keyValues.remove(element.getIntKey());
+                keyValues.remove(element.getLongKey());
                 for (MathMonitor<MatrixScalar> monitor : monitors.keySet()) {
                     monitor.notifySizeChanged(HashMatrix.this, oldElementSize, newElementSize, oldKnownSize, newKnownSize, oldUnknownSize, newUnknownSize);
                 }
@@ -1034,7 +1033,7 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     }
 
-    public HashMatrix(boolean orientation, int rowSize, int columnSize, Int2FloatSortedMap keyValues) {
+    public HashMatrix(boolean orientation, int rowSize, int columnSize, Long2FloatSortedMap keyValues) {
         keyValues.defaultReturnValue(Float.NaN);
         this.orientation = orientation;
         this.rowSize = rowSize;

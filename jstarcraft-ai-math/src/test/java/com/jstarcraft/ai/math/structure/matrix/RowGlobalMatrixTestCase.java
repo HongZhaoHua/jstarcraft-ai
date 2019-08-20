@@ -7,14 +7,14 @@ import org.junit.Test;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatRBTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatRBTreeMap;
 
 public class RowGlobalMatrixTestCase extends MatrixTestCase {
 
     @Override
     protected RowGlobalMatrix getRandomMatrix(int dimension) {
         MathMatrix from = DenseMatrix.valueOf(1, dimension);
-        HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
+        HashMatrix table = new HashMatrix(true, dimension, dimension, new Long2FloatRBTreeMap());
         for (int rowIndex = 0; rowIndex < dimension - 1; rowIndex++) {
             for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
                 if (RandomUtility.randomBoolean()) {
@@ -33,7 +33,7 @@ public class RowGlobalMatrixTestCase extends MatrixTestCase {
     @Override
     protected RowGlobalMatrix getZeroMatrix(int dimension) {
         MathMatrix from = DenseMatrix.valueOf(1, dimension);
-        HashMatrix table = new HashMatrix(true, dimension, dimension, new Int2FloatRBTreeMap());
+        HashMatrix table = new HashMatrix(true, dimension, dimension, new Long2FloatRBTreeMap());
         for (int rowIndex = 0; rowIndex < dimension - 1; rowIndex++) {
             for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
                 table.setValue(rowIndex, columnIndex, 0F);

@@ -4,7 +4,6 @@ import java.util.concurrent.Future;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
@@ -12,20 +11,20 @@ import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.RandomUtility;
 
-import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
+import it.unimi.dsi.fastutil.longs.Long2FloatRBTreeMap;
 
 public class ColumnHashMatrixTestCase extends HashMatrixTestCase {
 
     @Test
     public void testDefault() {
         int dimension = 10;
-        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Int2FloatAVLTreeMap());
+        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Long2FloatRBTreeMap());
         Assert.assertTrue(Float.isNaN(matrix.getValue(0, 0)));
     }
 
     @Override
     protected HashMatrix getRandomMatrix(int dimension) {
-        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Int2FloatAVLTreeMap());
+        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Long2FloatRBTreeMap());
         for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
             for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
                 if (RandomUtility.randomBoolean()) {
@@ -38,7 +37,7 @@ public class ColumnHashMatrixTestCase extends HashMatrixTestCase {
 
     @Override
     protected HashMatrix getZeroMatrix(int dimension) {
-        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Int2FloatAVLTreeMap());
+        HashMatrix matrix = new HashMatrix(false, dimension, dimension, new Long2FloatRBTreeMap());
         for (int columnIndex = 0; columnIndex < dimension; columnIndex++) {
             for (int rowIndex = 0; rowIndex < dimension; rowIndex++) {
                 matrix.setValue(rowIndex, columnIndex, 0F);
