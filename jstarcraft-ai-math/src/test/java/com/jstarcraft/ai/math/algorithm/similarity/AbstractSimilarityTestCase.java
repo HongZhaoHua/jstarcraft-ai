@@ -3,10 +3,14 @@ package com.jstarcraft.ai.math.algorithm.similarity;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.concurrent.Future;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.math.structure.matrix.HashMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
@@ -26,41 +30,49 @@ public abstract class AbstractSimilarityTestCase {
 
     @Test
     public void test() {
-        int rowSize = 50;
-        int columnSize = 100;
-        HashMatrix table = new HashMatrix(true, rowSize, columnSize, new Long2FloatRBTreeMap());
-        for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
-            for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
-                if (RandomUtility.randomBoolean()) {
-                    table.setValue(rowIndex, columnIndex, RandomUtility.randomFloat(1F));
+        EnvironmentContext context = EnvironmentFactory.getContext();
+        Future<?> future = context.doTask(() -> {
+            int rowSize = 50;
+            int columnSize = 100;
+            HashMatrix table = new HashMatrix(true, rowSize, columnSize, new Long2FloatRBTreeMap());
+            for (int rowIndex = 0; rowIndex < rowSize; rowIndex++) {
+                for (int columnIndex = 0; columnIndex < columnSize; columnIndex++) {
+                    if (RandomUtility.randomBoolean()) {
+                        table.setValue(rowIndex, columnIndex, RandomUtility.randomFloat(1F));
+                    }
                 }
             }
-        }
-        SparseMatrix scoreMatrix = SparseMatrix.valueOf(rowSize, columnSize, table);
+            SparseMatrix scoreMatrix = SparseMatrix.valueOf(rowSize, columnSize, table);
 
-        Similarity similarity = getSimilarity();
-        SymmetryMatrix similarityMatrix = similarity.makeSimilarityMatrix(scoreMatrix, false, 0F);
-        assertEquals(rowSize, similarityMatrix.getRowSize());
-        for (MatrixScalar term : similarityMatrix) {
-            assertTrue(checkCorrelation(term.getValue()));
-        }
-        
-        // 判断相等的情况.
-        for (int index = 0, size = rowSize; index < size; index++) {
-            Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
-            MathVector rowVector = scoreMatrix.getRowVector(index);
-            Assert.assertEquals(getIdentical(), similarity.getCorrelation(rowVector, rowVector, 0F), 0.001F);
-            MathVector columnVector = scoreMatrix.getColumnVector(index);
-            Assert.assertEquals(getIdentical(), similarity.getCorrelation(columnVector, columnVector, 0F), 0.001F);
-        }
+            Similarity similarity = getSimilarity();
+            SymmetryMatrix similarityMatrix = similarity.makeSimilarityMatrix(scoreMatrix, false, 0F);
+            assertEquals(rowSize, similarityMatrix.getRowSize());
+            for (MatrixScalar term : similarityMatrix) {
+                assertTrue(checkCorrelation(term.getValue()));
+            }
 
-        similarityMatrix = similarity.makeSimilarityMatrix(scoreMatrix, true, 0F);
-        assertEquals(columnSize, similarityMatrix.getRowSize());
-        for (MatrixScalar term : similarityMatrix) {
-            assertTrue(checkCorrelation(term.getValue()));
-        }
-        for (int index = 0, size = columnSize; index < size; index++) {
-            Assert.assertThat(similarityMatrix.getValue(index, index), CoreMatchers.equalTo(getIdentical()));
+            // 判断相等的情况.
+            for (int index = 0, size = rowSize; index < size; index++) {
+                Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
+                MathVector rowVector = scoreMatrix.getRowVector(index);
+                Assert.assertEquals(getIdentical(), similarity.getCorrelation(rowVector, rowVector, 0F), 0.001F);
+                MathVector columnVector = scoreMatrix.getColumnVector(index);
+                Assert.assertEquals(getIdentical(), similarity.getCorrelation(columnVector, columnVector, 0F), 0.001F);
+            }
+
+            similarityMatrix = similarity.makeSimilarityMatrix(scoreMatrix, true, 0F);
+            assertEquals(columnSize, similarityMatrix.getRowSize());
+            for (MatrixScalar term : similarityMatrix) {
+                assertTrue(checkCorrelation(term.getValue()));
+            }
+            for (int index = 0, size = columnSize; index < size; index++) {
+                Assert.assertThat(similarityMatrix.getValue(index, index), CoreMatchers.equalTo(getIdentical()));
+            }
+        });
+        try {
+            future.get();
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
         }
     }
 
