@@ -33,16 +33,18 @@ public class JsonConverterTestCase {
         {
             DataModule dense = space.makeDenseModule("dense", configuration, 1000);
             File file = new File(this.getClass().getResource("dense.js").toURI());
-            InputStream stream = new FileInputStream(file);
-            int count = converter.convert(dense, stream);
-            Assert.assertEquals(5, count);
+            try (InputStream stream = new FileInputStream(file)) {
+                int count = converter.convert(dense, stream);
+                Assert.assertEquals(5, count);
+            }
         }
         {
             DataModule sparse = space.makeSparseModule("sparse", configuration, 1000);
             File file = new File(this.getClass().getResource("sparse.js").toURI());
-            InputStream stream = new FileInputStream(file);
-            int count = converter.convert(sparse, stream);
-            Assert.assertEquals(5, count);
+            try (InputStream stream = new FileInputStream(file)) {
+                int count = converter.convert(sparse, stream);
+                Assert.assertEquals(5, count);
+            }
         }
     }
 
