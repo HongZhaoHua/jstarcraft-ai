@@ -19,6 +19,8 @@ Optimizer.optimize =>
 	Graph.updateParameters => 
 		StepFunction(Parameter,Gradient,Step)
 
+A Java implement of Deep Neural Network.(CNN,RNN)
+https://github.com/1036225283/xws
 
 拓扑排序的原理及其实现:
 http://blog.csdn.net/dm_vincent/article/details/7714519
