@@ -1,17 +1,8 @@
 package com.jstarcraft.ai.math.structure.tensor;
 
-import java.util.Iterator;
-import java.util.concurrent.CountDownLatch;
-
-import com.jstarcraft.ai.environment.EnvironmentContext;
-import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
-import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
-public interface MathTensor extends ScalarIterator<MatrixScalar> {
+public interface MathTensor extends ScalarIterator<TensorScalar> {
 
     /**
      * 获取形状

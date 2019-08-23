@@ -6,7 +6,6 @@ import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathIterator;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 
 public class DenseTensor implements MathTensor {
 
@@ -311,19 +310,19 @@ public class DenseTensor implements MathTensor {
 //    }
 
     @Override
-    public ScalarIterator<MatrixScalar> scaleValues(float value) {
+    public ScalarIterator<TensorScalar> scaleValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ScalarIterator<MatrixScalar> setValues(float value) {
+    public ScalarIterator<TensorScalar> setValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ScalarIterator<MatrixScalar> shiftValues(float value) {
+    public ScalarIterator<TensorScalar> shiftValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -344,13 +343,13 @@ public class DenseTensor implements MathTensor {
     }
 
     @Override
-    public MathIterator<MatrixScalar> iterateElement(MathCalculator mode, MathAccessor<MatrixScalar>... accessors) {
+    public MathIterator<TensorScalar> iterateElement(MathCalculator mode, MathAccessor<TensorScalar>... accessors) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public Iterator<MatrixScalar> iterator() {
+    public Iterator<TensorScalar> iterator() {
         // TODO Auto-generated method stub
         return null;
     }
