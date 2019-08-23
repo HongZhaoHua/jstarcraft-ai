@@ -38,7 +38,7 @@ public class DenseTensor implements MathTensor {
             }
         }
     }
-    
+
     public DenseTensor(boolean orientation, int[] shape) {
         this.orientation = orientation;
         this.shape = shape;
@@ -378,44 +378,57 @@ public class DenseTensor implements MathTensor {
 
     @Override
     public int getOrderSize() {
-        // TODO Auto-generated method stub
-        return 0;
+        return shape.length;
     }
 
     @Override
     public int getDimensionSize(int dimension) {
-        // TODO Auto-generated method stub
-        return 0;
+        return shape[dimension];
     }
 
     @Override
     public boolean isIndexed() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
-    public float getValue(int rowIndex, int columnIndex) {
-        // TODO Auto-generated method stub
-        return 0;
+    public float getValue(int[] indices) {
+        assert indices.length == stride.length;
+        int cursor = 0;
+        for (int index = 0, size = stride.length; index < size; index++) {
+            cursor += indices[index] * stride[index];
+        }
+        return values[cursor];
     }
 
     @Override
-    public void setValue(int rowIndex, int columnIndex, float value) {
-        // TODO Auto-generated method stub
-
+    public void setValue(int[] indices, float value) {
+        assert indices.length == stride.length;
+        int cursor = 0;
+        for (int index = 0, size = stride.length; index < size; index++) {
+            cursor += indices[index] * stride[index];
+        }
+        values[cursor] = value;
     }
 
     @Override
-    public void scaleValue(int rowIndex, int columnIndex, float value) {
-        // TODO Auto-generated method stub
-
+    public void scaleValue(int[] indices, float value) {
+        assert indices.length == stride.length;
+        int cursor = 0;
+        for (int index = 0, size = stride.length; index < size; index++) {
+            cursor += indices[index] * stride[index];
+        }
+        values[cursor] *= value;
     }
 
     @Override
-    public void shiftValue(int rowIndex, int columnIndex, float value) {
-        // TODO Auto-generated method stub
-
+    public void shiftValue(int[] indices, float value) {
+        assert indices.length == stride.length;
+        int cursor = 0;
+        for (int index = 0, size = stride.length; index < size; index++) {
+            cursor += indices[index] * stride[index];
+        }
+        values[cursor] += value;
     }
 
 }

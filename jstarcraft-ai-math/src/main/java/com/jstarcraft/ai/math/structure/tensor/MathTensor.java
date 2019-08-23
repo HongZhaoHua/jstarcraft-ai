@@ -66,7 +66,7 @@ public interface MathTensor extends ScalarIterator<MatrixScalar> {
      * @param columnIndex
      * @return
      */
-    float getValue(int rowIndex, int columnIndex);
+    float getValue(int[] indices);
 
     /**
      * 设置指定索引标量的值
@@ -75,7 +75,7 @@ public interface MathTensor extends ScalarIterator<MatrixScalar> {
      * @param columnIndex
      * @param value
      */
-    void setValue(int rowIndex, int columnIndex, float value);
+    void setValue(int[] indices, float value);
 
     /**
      * 缩放指定索引标量的值
@@ -84,7 +84,7 @@ public interface MathTensor extends ScalarIterator<MatrixScalar> {
      * @param columnIndex
      * @param value
      */
-    void scaleValue(int rowIndex, int columnIndex, float value);
+    void scaleValue(int[] indices, float value);
 
     /**
      * 偏移指定索引标量的值
@@ -93,7 +93,7 @@ public interface MathTensor extends ScalarIterator<MatrixScalar> {
      * @param columnIndex
      * @param value
      */
-    void shiftValue(int rowIndex, int columnIndex, float value);
+    void shiftValue(int[] indices, float value);
 
 //    /**
 //     * 矩阵加法运算
