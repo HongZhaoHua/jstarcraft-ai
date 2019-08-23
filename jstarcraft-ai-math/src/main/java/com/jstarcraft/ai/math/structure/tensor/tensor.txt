@@ -1,2 +1,6 @@
+ND4J用户指南:
+https://blog.csdn.net/bewithme/article/details/86538852
+https://deeplearning4j.org/docs/latest/nd4j-overview
+
 Java Machine Learning Library:
 https://github.com/Daniel-Liu-c0deb0t/Java-Machine-Learning/blob/master/src/javamachinelearning/utils/Tensor.java
