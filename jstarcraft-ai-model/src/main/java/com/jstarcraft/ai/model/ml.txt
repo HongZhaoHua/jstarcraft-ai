@@ -1,2 +1,5 @@
 25个Java机器学习工具和库:
 http://www.codeceo.com/article/25-java-machine-learning-tools.html
+
+Java Machine Learning Library:
+https://github.com/AbeelLab/javaml
