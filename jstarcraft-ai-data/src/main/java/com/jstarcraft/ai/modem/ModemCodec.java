@@ -54,7 +54,7 @@ public enum ModemCodec {
 	ModemCodec(Class<? extends ContentCodec> mode) {
 		try {
 			this.codecConstructor = mode.getDeclaredConstructor(CodecDefinition.class);
-			this.codecConstructor.setAccessible(true);
+			ReflectionUtility.makeAccessible(this.codecConstructor);
 			Collection<Type> classes = new LinkedList<>();
 			classes.add(ModemData.class);
 			CodecDefinition definition = CodecDefinition.instanceOf(classes);
@@ -198,7 +198,7 @@ public enum ModemCodec {
 				Object model = null;
 				if (annotation != null) {
 					Constructor<?> constructor = clazz.getDeclaredConstructor();
-					constructor.setAccessible(true);
+					ReflectionUtility.makeAccessible(constructor);
 					model = constructor.newInstance();
 					ModemData[] datas = (ModemData[]) codec.decode(ModemData[].class, valueData);
 					int index = 0;
