@@ -86,106 +86,76 @@ public interface MathTensor extends ScalarIterator<TensorScalar> {
      */
     void shiftValue(int[] indices, float value);
 
-//    /**
-//     * 矩阵加法运算
-//     * 
-//     * @param matrix
-//     * @param transpose
-//     * @return
-//     */
-//    default MathMatrix addTensor(MathMatrix matrix, boolean transpose) {
-//        if (getColumnSize() <= getRowSize()) {
-//            for (int index = 0, size = getColumnSize(); index < size; index++) {
-//                getColumnVector(index).addVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
-//            }
-//        } else {
-//            for (int index = 0, size = getRowSize(); index < size; index++) {
-//                getRowVector(index).addVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
-//            }
-//        }
-//        return this;
-//    }
-//
-//    /**
-//     * 矩阵减法运算
-//     * 
-//     * @param matrix
-//     * @param transpose
-//     * @return
-//     */
-//    default MathMatrix subtractTensor(MathMatrix matrix, boolean transpose) {
-//        if (getColumnSize() <= getRowSize()) {
-//            for (int index = 0, size = getColumnSize(); index < size; index++) {
-//                getColumnVector(index).subtractVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
-//            }
-//        } else {
-//            for (int index = 0, size = getRowSize(); index < size; index++) {
-//                getRowVector(index).subtractVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
-//            }
-//        }
-//        return this;
-//    }
-//
-//    /**
-//     * 矩阵乘法运算
-//     * 
-//     * @param matrix
-//     * @param transpose
-//     * @return
-//     */
-//    default MathMatrix multiplyTensor(MathMatrix matrix, boolean transpose) {
-//        if (getColumnSize() <= getRowSize()) {
-//            for (int index = 0, size = getColumnSize(); index < size; index++) {
-//                getColumnVector(index).multiplyVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
-//            }
-//        } else {
-//            for (int index = 0, size = getRowSize(); index < size; index++) {
-//                getRowVector(index).multiplyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
-//            }
-//        }
-//        return this;
-//    }
-//
-//    /**
-//     * 矩阵除法运算
-//     * 
-//     * @param matrix
-//     * @param transpose
-//     * @return
-//     */
-//    default MathMatrix divideTensor(MathMatrix matrix, boolean transpose) {
-//        if (getColumnSize() <= getRowSize()) {
-//            for (int index = 0, size = getColumnSize(); index < size; index++) {
-//                getColumnVector(index).divideVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
-//            }
-//        } else {
-//            for (int index = 0, size = getRowSize(); index < size; index++) {
-//                getRowVector(index).divideVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
-//            }
-//        }
-//        return this;
-//    }
-//
-//    /**
-//     * 矩阵拷贝运算
-//     * 
-//     * @param matrix
-//     * @param transpose
-//     * @return
-//     */
-//    default MathMatrix copyTensor(MathMatrix matrix, boolean transpose) {
-//        if (getColumnSize() <= getRowSize()) {
-//            for (int index = 0, size = getColumnSize(); index < size; index++) {
-//                getColumnVector(index).copyVector(transpose ? matrix.getRowVector(index) : matrix.getColumnVector(index));
-//            }
-//        } else {
-//            for (int index = 0, size = getRowSize(); index < size; index++) {
-//                getRowVector(index).copyVector(transpose ? matrix.getColumnVector(index) : matrix.getRowVector(index));
-//            }
-//        }
-//        return this;
-//    }
-//
+    /**
+     * 张量加法运算
+     * 
+     * @param tensor
+     * @return
+     */
+    default MathTensor addTensor(MathTensor tensor) {
+        for (TensorScalar scalar : tensor) {
+            int[] indices = scalar.getIndexes();
+            shiftValue(indices, scalar.getValue());
+        }
+        return this;
+    }
+
+    /**
+     * 张量减法运算
+     * 
+     * @param tensor
+     * @return
+     */
+    default MathTensor subtractTensor(MathTensor tensor) {
+        for (TensorScalar scalar : tensor) {
+            int[] indices = scalar.getIndexes();
+            shiftValue(indices, -scalar.getValue());
+        }
+        return this;
+    }
+
+    /**
+     * 张量乘法运算
+     * 
+     * @param tensor
+     * @return
+     */
+    default MathTensor multiplyTensor(MathTensor tensor) {
+        for (TensorScalar scalar : tensor) {
+            int[] indices = scalar.getIndexes();
+            scaleValue(indices, scalar.getValue());
+        }
+        return this;
+    }
+
+    /**
+     * 张量除法运算
+     * 
+     * @param tensor
+     * @return
+     */
+    default MathTensor divideTensor(MathTensor tensor) {
+        for (TensorScalar scalar : tensor) {
+            int[] indices = scalar.getIndexes();
+            scaleValue(indices, 1F / scalar.getValue());
+        }
+        return this;
+    }
+
+    /**
+     * 张量拷贝运算
+     * 
+     * @param tensor
+     * @return
+     */
+    default MathTensor copyTensor(MathTensor tensor) {
+        for (TensorScalar scalar : tensor) {
+            int[] indices = scalar.getIndexes();
+            setValue(indices, scalar.getValue());
+        }
+        return this;
+    }
+
 //    /**
 //     * 矩阵点积运算
 //     * 

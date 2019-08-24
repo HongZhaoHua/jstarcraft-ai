@@ -1,11 +1,13 @@
 package com.jstarcraft.ai.math.structure.tensor;
 
 import java.util.Iterator;
+import java.util.concurrent.Semaphore;
 
+import com.jstarcraft.ai.environment.EnvironmentContext;
+import com.jstarcraft.ai.environment.EnvironmentThread;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathIterator;
-import com.jstarcraft.ai.math.structure.ScalarIterator;
 
 public class DenseTensor implements MathTensor {
 
@@ -310,19 +312,19 @@ public class DenseTensor implements MathTensor {
 //    }
 
     @Override
-    public ScalarIterator<TensorScalar> scaleValues(float value) {
+    public DenseTensor scaleValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ScalarIterator<TensorScalar> setValues(float value) {
+    public DenseTensor setValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public ScalarIterator<TensorScalar> shiftValues(float value) {
+    public DenseTensor shiftValues(float value) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -342,10 +344,103 @@ public class DenseTensor implements MathTensor {
         return 0;
     }
 
+    private class DenseTensorScalar implements TensorScalar {
+
+        private int cursor;
+
+        private int[] indexes = new int[shape.length];
+
+        private float[] data;
+
+        private DenseTensorScalar(float[] data) {
+            this.data = data;
+        }
+
+        private void update(int cursor) {
+            this.cursor = cursor;
+        }
+
+        @Override
+        public int[] getIndexes() {
+            int cursor = this.cursor;
+            if (orientation) {
+                for (int dimension = 0, size = shape.length; dimension < size; dimension++) {
+                    int index = cursor / stride[dimension];
+                    cursor -= index * stride[dimension];
+                    indexes[dimension] = index;
+                }
+            } else {
+                for (int dimension = shape.length - 1; dimension > -1; dimension--) {
+                    int index = cursor / stride[dimension];
+                    cursor -= index * stride[dimension];
+                    indexes[dimension] = index;
+                }
+            }
+            return indexes;
+        }
+
+        @Override
+        public float getValue() {
+            return data[cursor];
+        }
+
+        @Override
+        public void scaleValue(float value) {
+            data[cursor] *= value;
+        }
+
+        @Override
+        public void setValue(float value) {
+            data[cursor] = value;
+        }
+
+        @Override
+        public void shiftValue(float value) {
+            data[cursor] += value;
+        }
+
+    }
+
     @Override
     public MathIterator<TensorScalar> iterateElement(MathCalculator mode, MathAccessor<TensorScalar>... accessors) {
-        // TODO Auto-generated method stub
-        return null;
+        switch (mode) {
+        case SERIAL: {
+            DenseTensorScalar scalar = new DenseTensorScalar(values);
+            for (int cursor = 0; cursor < length; cursor++) {
+                scalar.update(cursor);
+                for (MathAccessor<TensorScalar> accessor : accessors) {
+                    accessor.accessElement(scalar);
+                }
+            }
+            return this;
+        }
+        default: {
+            int size = shape[0];
+            EnvironmentThread thread = EnvironmentThread.getThread(EnvironmentThread.class);
+            EnvironmentContext context = thread.getContext();
+            Semaphore semaphore = MathCalculator.getSemaphore();
+            for (int index = 0; index < size; index++) {
+                int from = index * stride[0];
+                int to = from + stride[0];
+                context.doStructureByAny(index, () -> {
+                    DenseTensorScalar scalar = new DenseTensorScalar(values);
+                    for (int cursor = from; cursor < to; cursor++) {
+                        scalar.update(cursor);
+                        for (MathAccessor<TensorScalar> accessor : accessors) {
+                            accessor.accessElement(scalar);
+                        }
+                    }
+                    semaphore.release();
+                });
+            }
+            try {
+                semaphore.acquire(size);
+            } catch (Exception exception) {
+                throw new RuntimeException(exception);
+            }
+            return this;
+        }
+        }
     }
 
     @Override

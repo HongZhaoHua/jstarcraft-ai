@@ -9,6 +9,6 @@ public interface TensorScalar extends MathScalar {
      * 
      * @return
      */
-    int getIndex(int dimension);
+    int[] getIndexes();
 
 }
