@@ -37,6 +37,8 @@ public class Nd4jTensor implements MathTensor {
 
     public Nd4jTensor(INDArray tensor) {
         this.orientation = tensor.ordering() == 'c';
+        this.tensor = tensor;
+        this.length = (int) tensor.length();
         int order = tensor.rank();
         this.shape = new int[order];
         this.stride = new int[order];
@@ -44,18 +46,16 @@ public class Nd4jTensor implements MathTensor {
             this.shape[dimension] = (int) tensor.shape()[dimension];
             this.stride[dimension] = (int) tensor.stride()[dimension];
         }
-        this.length = (int) tensor.length();
-        this.tensor = tensor;
     }
 
     @Override
-    public Nd4jTensor scaleValues(float value) {
+    public Nd4jTensor setValues(float value) {
         tensor.assign(value);
         return this;
     }
 
     @Override
-    public Nd4jTensor setValues(float value) {
+    public Nd4jTensor scaleValues(float value) {
         tensor.muli(value);
         return this;
     }
@@ -109,13 +109,19 @@ public class Nd4jTensor implements MathTensor {
         @Override
         public int[] getIndexes() {
             int cursor = this.cursor;
-            int size = shape.length - 1;
-            for (int dimension = 0; dimension < size; dimension++) {
-                int index = cursor / stride[dimension];
-                cursor -= index * stride[dimension];
-                indexes[dimension] = index;
+            if (orientation) {
+                for (int dimension = 0, size = shape.length; dimension < size; dimension++) {
+                    int index = cursor / stride[dimension];
+                    cursor -= index * stride[dimension];
+                    indexes[dimension] = index;
+                }
+            } else {
+                for (int dimension = shape.length - 1; dimension > -1; dimension--) {
+                    int index = cursor / stride[dimension];
+                    cursor -= index * stride[dimension];
+                    indexes[dimension] = index;
+                }
             }
-            indexes[size] = cursor % stride[size];
             return indexes;
         }
 
@@ -199,62 +205,60 @@ public class Nd4jTensor implements MathTensor {
 
     @Override
     public int[] getShape() {
-        // TODO Auto-generated method stub
-        return null;
+        return shape;
     }
 
     @Override
     public void setShape(int... shape) {
-        // TODO Auto-generated method stub
-
+        this.tensor = tensor.reshape(shape);
+        this.length = (int) tensor.length();
+        int order = tensor.rank();
+        this.shape = new int[order];
+        this.stride = new int[order];
+        for (int dimension = 0; dimension < order; dimension++) {
+            this.shape[dimension] = (int) tensor.shape()[dimension];
+            this.stride[dimension] = (int) tensor.stride()[dimension];
+        }
     }
 
     @Override
     public int[] getStride() {
-        // TODO Auto-generated method stub
-        return null;
+        return stride;
     }
 
     @Override
     public int getOrderSize() {
-        // TODO Auto-generated method stub
-        return 0;
+        return tensor.rank();
     }
 
     @Override
     public int getDimensionSize(int dimension) {
-        // TODO Auto-generated method stub
-        return 0;
+        return shape[dimension];
     }
 
     @Override
     public boolean isIndexed() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public float getValue(int[] indices) {
-        // TODO Auto-generated method stub
-        return 0;
+        return tensor.getFloat(indices);
     }
 
     @Override
     public void setValue(int[] indices, float value) {
-        // TODO Auto-generated method stub
-
+        tensor.putScalar(indices, value);
     }
 
     @Override
     public void scaleValue(int[] indices, float value) {
-        // TODO Auto-generated method stub
-
+        tensor.putScalar(indices, tensor.getFloat(indices) * value);
     }
 
     @Override
     public void shiftValue(int[] indices, float value) {
-        // TODO Auto-generated method stub
-
+        tensor.putScalar(indices, tensor.getFloat(indices) + value);
     }
 
 }

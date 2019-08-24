@@ -312,21 +312,27 @@ public class DenseTensor implements MathTensor {
 //    }
 
     @Override
-    public DenseTensor scaleValues(float value) {
-        // TODO Auto-generated method stub
-        return null;
+    public DenseTensor setValues(float value) {
+        for (int cursor = 0; cursor < length; cursor++) {
+            values[cursor] = value;
+        }
+        return this;
     }
 
     @Override
-    public DenseTensor setValues(float value) {
-        // TODO Auto-generated method stub
-        return null;
+    public DenseTensor scaleValues(float value) {
+        for (int cursor = 0; cursor < length; cursor++) {
+            values[cursor] *= value;
+        }
+        return this;
     }
 
     @Override
     public DenseTensor shiftValues(float value) {
-        // TODO Auto-generated method stub
-        return null;
+        for (int cursor = 0; cursor < length; cursor++) {
+            values[cursor] += value;
+        }
+        return this;
     }
 
     @Override
