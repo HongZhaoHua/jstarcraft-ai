@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 public class BinarySimilarity extends AbstractSimilarity {
 
 	@Override
-	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
+	public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
 		DefaultScalar scalar = DefaultScalar.getInstance();
 		float numerator = scalar.dotProduct(leftVector, rightVector).getValue();
 		float denominator = 0F;

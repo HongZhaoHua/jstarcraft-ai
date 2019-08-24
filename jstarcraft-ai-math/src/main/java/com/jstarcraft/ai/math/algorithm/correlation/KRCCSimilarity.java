@@ -35,7 +35,7 @@ public class KRCCSimilarity extends AbstractSimilarity {
 	}
 
 	@Override
-	public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
+	public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
 		// compute similarity
 		List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
 		int count = scoreList.size();

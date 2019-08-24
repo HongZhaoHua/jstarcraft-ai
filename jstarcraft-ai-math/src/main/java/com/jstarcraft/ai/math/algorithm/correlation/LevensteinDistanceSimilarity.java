@@ -15,7 +15,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 public class LevensteinDistanceSimilarity extends AbstractSimilarity {
 
     @Override
-    public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
+    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
         int leftSize = leftVector.getElementSize();
         int rightSize = rightVector.getElementSize();
 

@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
-import com.jstarcraft.ai.math.algorithm.correlation.Similarity;
+import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 import com.jstarcraft.ai.math.algorithm.correlation.TanimotoSimilarity;
 
 public class TanimotoSimilarityTestCase extends AbstractSimilarityTestCase {
@@ -16,7 +16,7 @@ public class TanimotoSimilarityTestCase extends AbstractSimilarityTestCase {
 	}
 
 	@Override
-	protected Similarity getSimilarity() {
+	protected Correlation getSimilarity() {
 		return new TanimotoSimilarity();
 	}
 

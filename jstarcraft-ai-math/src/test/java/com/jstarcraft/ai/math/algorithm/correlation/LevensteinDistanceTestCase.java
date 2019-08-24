@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.jstarcraft.ai.math.algorithm.correlation.LevensteinDistanceSimilarity;
-import com.jstarcraft.ai.math.algorithm.correlation.Similarity;
+import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
@@ -21,7 +21,7 @@ public class LevensteinDistanceTestCase extends AbstractSimilarityTestCase {
     }
 
     @Override
-    protected Similarity getSimilarity() {
+    protected Correlation getSimilarity() {
         return new LevensteinDistanceSimilarity();
     }
 
@@ -40,14 +40,14 @@ public class LevensteinDistanceTestCase extends AbstractSimilarityTestCase {
     public void testSimilarity() {
         LevensteinDistanceSimilarity distance = new LevensteinDistanceSimilarity();
 
-        Assert.assertEquals(1F, distance.getCorrelation(getVector("JStarCraft"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.9090909F, distance.getCorrelation(getVector("JStarCraft"), getVector("LJStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.9090909F, distance.getCorrelation(getVector("JStarCraft"), getVector("JStarCraftR"), 0F), 0F);
-        Assert.assertEquals(0.9090909F, distance.getCorrelation(getVector("LJStarCraft"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.9090909F, distance.getCorrelation(getVector("JStarCraftR"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.39999998F, distance.getCorrelation(getVector("JStarCraft"), getVector("Star"), 0F), 0F);
-        Assert.assertEquals(0.19999999F, distance.getCorrelation(getVector("JStarCraft"), getVector("SC"), 0F), 0F);
-        Assert.assertEquals(0.0F, distance.getCorrelation(getVector("JStarCraft"), getVector("HongZhaoHua"), 0F), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraft"), 0F), 0F);
+        Assert.assertEquals(0.9090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft"), 0F), 0F);
+        Assert.assertEquals(0.9090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraftR"), 0F), 0F);
+        Assert.assertEquals(0.9090909F, distance.getCoefficient(getVector("LJStarCraft"), getVector("JStarCraft"), 0F), 0F);
+        Assert.assertEquals(0.9090909F, distance.getCoefficient(getVector("JStarCraftR"), getVector("JStarCraft"), 0F), 0F);
+        Assert.assertEquals(0.39999998F, distance.getCoefficient(getVector("JStarCraft"), getVector("Star"), 0F), 0F);
+        Assert.assertEquals(0.19999999F, distance.getCoefficient(getVector("JStarCraft"), getVector("SC"), 0F), 0F);
+        Assert.assertEquals(0.0F, distance.getCoefficient(getVector("JStarCraft"), getVector("HongZhaoHua"), 0F), 0F);
     }
 
 }

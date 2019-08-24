@@ -1,7 +1,7 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
 import com.jstarcraft.ai.math.algorithm.correlation.EuclideanDistanceSimilarity;
-import com.jstarcraft.ai.math.algorithm.correlation.Similarity;
+import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 
 public class EuclideanDistanceSimilarityTestCase extends AbstractSimilarityTestCase {
 
@@ -16,7 +16,7 @@ public class EuclideanDistanceSimilarityTestCase extends AbstractSimilarityTestC
 	}
 
 	@Override
-	protected Similarity getSimilarity() {
+	protected Correlation getSimilarity() {
 		return new EuclideanDistanceSimilarity();
 	}
 

@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
-public abstract class AbstractSimilarity implements Correlation {
+public abstract class AbstractDistance implements Correlation {
 
     protected final List<Float2FloatKeyValue> getScoreList(MathVector leftVector, MathVector rightVector) {
         LinkedList<Float2FloatKeyValue> scoreList = new LinkedList<>();

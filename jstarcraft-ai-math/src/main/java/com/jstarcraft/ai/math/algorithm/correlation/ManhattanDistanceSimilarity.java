@@ -20,7 +20,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 public class ManhattanDistanceSimilarity extends AbstractSimilarity {
 
     @Override
-    public float getCorrelation(MathVector leftVector, MathVector rightVector, float scale) {
+    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
         // compute similarity
         float similarity = 0F;
         int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();

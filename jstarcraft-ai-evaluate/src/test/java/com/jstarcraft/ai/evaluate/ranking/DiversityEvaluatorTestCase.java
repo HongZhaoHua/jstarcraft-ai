@@ -3,7 +3,7 @@ package com.jstarcraft.ai.evaluate.ranking;
 import com.jstarcraft.ai.evaluate.AbstractRankingEvaluatorTestCase;
 import com.jstarcraft.ai.evaluate.Evaluator;
 import com.jstarcraft.ai.math.algorithm.correlation.CosineSimilarity;
-import com.jstarcraft.ai.math.algorithm.correlation.Similarity;
+import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 
@@ -15,8 +15,8 @@ public class DiversityEvaluatorTestCase extends AbstractRankingEvaluatorTestCase
     @Override
     protected Evaluator<IntSet, IntList> getEvaluator(SparseMatrix featureMatrix) {
         // Item Similarity Matrix
-        Similarity similarity = new CosineSimilarity();
-        SymmetryMatrix similarityMatrix = similarity.makeSimilarityMatrix(featureMatrix, true, 0F);
+        Correlation similarity = new CosineSimilarity();
+        SymmetryMatrix similarityMatrix = similarity.makeCorrelationMatrix(featureMatrix, true, 0F);
         return new DiversityEvaluator(10, similarityMatrix);
     }
 
