@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public class LevensteinDistanceSimilarity extends AbstractSimilarity {
+public class LevensteinDistance extends AbstractDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
@@ -45,7 +45,7 @@ public class LevensteinDistanceSimilarity extends AbstractSimilarity {
             next = exchange;
         }
 
-        return 1F - (float) previous[leftSize] / Math.max(rightSize, leftSize);
+        return (float) previous[leftSize] / Math.max(rightSize, leftSize);
     }
 
 }

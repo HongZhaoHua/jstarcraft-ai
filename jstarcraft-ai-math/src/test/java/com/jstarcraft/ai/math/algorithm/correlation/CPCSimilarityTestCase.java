@@ -16,7 +16,7 @@ public class CPCSimilarityTestCase extends AbstractSimilarityTestCase {
 	}
 
 	@Override
-	protected Correlation getSimilarity() {
+	protected Correlation getCorrelation() {
 		return new CPCSimilarity();
 	}
 

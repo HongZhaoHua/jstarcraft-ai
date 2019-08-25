@@ -16,7 +16,7 @@ public class JaccardSimilarityTestCase extends AbstractSimilarityTestCase {
 	}
 	
 	@Override
-	protected Correlation getSimilarity() {
+	protected Correlation getCorrelation() {
 		return new JaccardSimilarity();
 	}
 

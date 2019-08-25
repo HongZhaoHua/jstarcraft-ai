@@ -17,7 +17,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  * @author Birdy
  *
  */
-public class EuclideanDistanceSimilarity extends AbstractSimilarity {
+public class EuclideanDistance extends AbstractDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
@@ -50,11 +50,11 @@ public class EuclideanDistanceSimilarity extends AbstractSimilarity {
                 similarity += distance * distance;
             }
         }
-        // 处理相等的情况
         if (similarity == 0F) {
-            similarity = 1F;
+            return similarity;
+        } else {
+            return (float) FastMath.sqrt(similarity);
         }
-        return 1F / (scale + (float) FastMath.sqrt(similarity));
     }
 
 }

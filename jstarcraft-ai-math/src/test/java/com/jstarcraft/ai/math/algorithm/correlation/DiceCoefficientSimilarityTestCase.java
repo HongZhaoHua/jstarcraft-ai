@@ -16,7 +16,7 @@ public class DiceCoefficientSimilarityTestCase extends AbstractSimilarityTestCas
 	}
 	
 	@Override
-	protected Correlation getSimilarity() {
+	protected Correlation getCorrelation() {
 		return new DiceCoefficientSimilarity();
 	}
 

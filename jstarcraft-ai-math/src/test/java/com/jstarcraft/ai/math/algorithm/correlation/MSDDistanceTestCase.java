@@ -1,9 +1,9 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
-import com.jstarcraft.ai.math.algorithm.correlation.MSDSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.MSDDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 
-public class MSDSimilarityTestCase extends AbstractSimilarityTestCase {
+public class MSDDistanceTestCase extends AbstractSimilarityTestCase {
 
 	@Override
 	protected boolean checkCorrelation(float correlation) {
@@ -17,8 +17,8 @@ public class MSDSimilarityTestCase extends AbstractSimilarityTestCase {
 
 	// TODO 注意MSD与MSE相似度是计算两个向量的均方误差,范围是0-正无穷.且if (row == column) value = 0D;
 	@Override
-	protected Correlation getSimilarity() {
-		return new MSDSimilarity();
+	protected Correlation getCorrelation() {
+		return new MSDDistance();
 	}
 
 }

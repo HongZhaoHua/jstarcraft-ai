@@ -11,7 +11,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class MSESimilarity extends AbstractSimilarity {
+public class MSEDistance extends AbstractSimilarity {
 
     private float getSimilarity(int count, List<Float2FloatKeyValue> scoreList) {
         if (count == 0) {

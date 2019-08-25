@@ -15,19 +15,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
         DiceCoefficientSimilarityTestCase.class,
 
-        EuclideanDistanceSimilarityTestCase.class,
-
         JaccardSimilarityTestCase.class,
 
         KRCCSimilarityTestCase.class,
-
-        LevensteinDistanceTestCase.class,
-
-        ManhattanDistanceSimilarityTestCase.class,
-
-        MSDSimilarityTestCase.class,
-
-        MSESimilarityTestCase.class,
 
         PCCSimilarityTestCase.class,
 
