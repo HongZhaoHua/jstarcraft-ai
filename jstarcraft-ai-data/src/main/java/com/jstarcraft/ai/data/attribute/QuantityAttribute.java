@@ -11,16 +11,19 @@ import com.jstarcraft.ai.data.DataAttribute;
  */
 public interface QuantityAttribute<T extends Number> extends DataAttribute<T> {
 
-	/**
-	 * 转换属性值
-	 * 
-	 * @param data
-	 * @return
-	 */
-	float convertData(T data);
+    /**
+     * 转换属性值
+     * 
+     * @param data
+     * @return
+     */
+    float convertData(T data);
 
-	float getMaximum();
+    float getMaximum();
 
-	float getMinimum();
+    float getMinimum();
+
+    // TODO 准备重构为基于Flaot2IntMap计算中位数
+//	float getMedian();
 
 }

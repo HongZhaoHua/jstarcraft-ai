@@ -84,6 +84,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
      * 
      * @return
      */
+    // TODO 准备重构为基于Flaot2IntMap计算中位数
     default float getMedian(boolean absolute) {
         int count = 0;
         PriorityQueue<Float> minimumQueue = new PriorityQueue<>(new Comparator<Float>() {
