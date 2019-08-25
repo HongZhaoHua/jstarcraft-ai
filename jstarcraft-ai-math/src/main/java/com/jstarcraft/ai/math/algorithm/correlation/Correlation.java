@@ -37,8 +37,6 @@ public interface Correlation {
      * 
      * @return
      */
-    default float getIdentical() {
-        return 1F;
-    }
+    float getIdentical();
 
 }
