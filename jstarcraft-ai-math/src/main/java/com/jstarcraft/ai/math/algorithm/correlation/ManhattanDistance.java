@@ -23,7 +23,7 @@ public class ManhattanDistance extends AbstractDistance {
     public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
         // compute similarity
         float similarity = 0F;
-        int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+        int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
         if (leftSize != 0 && rightSize != 0) {
             Iterator<VectorScalar> leftIterator = leftVector.iterator();
             Iterator<VectorScalar> rightIterator = rightVector.iterator();
@@ -31,21 +31,21 @@ public class ManhattanDistance extends AbstractDistance {
             VectorScalar rightTerm = rightIterator.next();
             // 判断两个有序数组中是否存在相同的数字
             float distance = 0F;
-            while (leftIndex < leftSize && rightIndex < rightSize) {
+            while (leftCursor < leftSize && rightCursor < rightSize) {
                 if (leftTerm.getIndex() == rightTerm.getIndex()) {
                     distance = leftTerm.getValue() - rightTerm.getValue();
                     leftTerm = leftIterator.next();
                     rightTerm = rightIterator.next();
-                    leftIndex++;
-                    rightIndex++;
+                    leftCursor++;
+                    rightCursor++;
                 } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
                     distance = rightTerm.getValue();
                     rightTerm = rightIterator.next();
-                    rightIndex++;
+                    rightCursor++;
                 } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
                     distance = leftTerm.getValue();
                     leftTerm = leftIterator.next();
-                    leftIndex++;
+                    leftCursor++;
                 }
                 similarity += FastMath.abs(distance);
             }

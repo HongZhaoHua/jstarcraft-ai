@@ -159,14 +159,14 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 				float columnValue = term.getValue();
 				MathVector leftVector = this.getColumnVector(term.getIndex());
 				MathVector rightVector = rowVector;
-				int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+				int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 				if (leftSize != 0 && rightSize != 0) {
 					Iterator<VectorScalar> leftIterator = leftVector.iterator();
 					Iterator<VectorScalar> rightIterator = rightVector.iterator();
 					VectorScalar leftTerm = leftIterator.next();
 					VectorScalar rightTerm = rightIterator.next();
 					// 判断两个有序数组中是否存在相同的数字
-					while (leftIndex < leftSize && rightIndex < rightSize) {
+					while (leftCursor < leftSize && rightCursor < rightSize) {
 						if (leftTerm.getIndex() == rightTerm.getIndex()) {
 							leftTerm.setValue(columnValue * rightTerm.getValue());
 							if (leftIterator.hasNext()) {
@@ -175,18 +175,18 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 							if (rightIterator.hasNext()) {
 								rightTerm = rightIterator.next();
 							}
-							leftIndex++;
-							rightIndex++;
+							leftCursor++;
+							rightCursor++;
 						} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 							if (rightIterator.hasNext()) {
 								rightTerm = rightIterator.next();
 							}
-							rightIndex++;
+							rightCursor++;
 						} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 							if (leftIterator.hasNext()) {
 								leftTerm = leftIterator.next();
 							}
-							leftIndex++;
+							leftCursor++;
 						}
 					}
 				}
@@ -202,14 +202,14 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 				MathVector leftVector = this.getColumnVector(term.getIndex());
 				MathVector rightVector = rowVector;
 				context.doStructureByAny(term.getIndex(), () -> {
-					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+					int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 					if (leftSize != 0 && rightSize != 0) {
 						Iterator<VectorScalar> leftIterator = leftVector.iterator();
 						Iterator<VectorScalar> rightIterator = rightVector.iterator();
 						VectorScalar leftTerm = leftIterator.next();
 						VectorScalar rightTerm = rightIterator.next();
 						// 判断两个有序数组中是否存在相同的数字
-						while (leftIndex < leftSize && rightIndex < rightSize) {
+						while (leftCursor < leftSize && rightCursor < rightSize) {
 							if (leftTerm.getIndex() == rightTerm.getIndex()) {
 								leftTerm.setValue(columnValue * rightTerm.getValue());
 								if (leftIterator.hasNext()) {
@@ -218,18 +218,18 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 								if (rightIterator.hasNext()) {
 									rightTerm = rightIterator.next();
 								}
-								leftIndex++;
-								rightIndex++;
+								leftCursor++;
+								rightCursor++;
 							} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 								if (rightIterator.hasNext()) {
 									rightTerm = rightIterator.next();
 								}
-								rightIndex++;
+								rightCursor++;
 							} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 								if (leftIterator.hasNext()) {
 									leftTerm = leftIterator.next();
 								}
-								leftIndex++;
+								leftCursor++;
 							}
 						}
 					}
@@ -297,14 +297,14 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 				float columnValue = term.getValue();
 				MathVector leftVector = this.getColumnVector(term.getIndex());
 				MathVector rightVector = rowVector;
-				int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+				int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 				if (leftSize != 0 && rightSize != 0) {
 					Iterator<VectorScalar> leftIterator = leftVector.iterator();
 					Iterator<VectorScalar> rightIterator = rightVector.iterator();
 					VectorScalar leftTerm = leftIterator.next();
 					VectorScalar rightTerm = rightIterator.next();
 					// 判断两个有序数组中是否存在相同的数字
-					while (leftIndex < leftSize && rightIndex < rightSize) {
+					while (leftCursor < leftSize && rightCursor < rightSize) {
 						if (leftTerm.getIndex() == rightTerm.getIndex()) {
 							leftTerm.shiftValue(columnValue * rightTerm.getValue());
 							if (leftIterator.hasNext()) {
@@ -313,18 +313,18 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 							if (rightIterator.hasNext()) {
 								rightTerm = rightIterator.next();
 							}
-							leftIndex++;
-							rightIndex++;
+							leftCursor++;
+							rightCursor++;
 						} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 							if (rightIterator.hasNext()) {
 								rightTerm = rightIterator.next();
 							}
-							rightIndex++;
+							rightCursor++;
 						} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 							if (leftIterator.hasNext()) {
 								leftTerm = leftIterator.next();
 							}
-							leftIndex++;
+							leftCursor++;
 						}
 					}
 				}
@@ -340,14 +340,14 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 				MathVector leftVector = this.getColumnVector(term.getIndex());
 				MathVector rightVector = rowVector;
 				context.doStructureByAny(term.getIndex(), () -> {
-					int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+					int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 					if (leftSize != 0 && rightSize != 0) {
 						Iterator<VectorScalar> leftIterator = leftVector.iterator();
 						Iterator<VectorScalar> rightIterator = rightVector.iterator();
 						VectorScalar leftTerm = leftIterator.next();
 						VectorScalar rightTerm = rightIterator.next();
 						// 判断两个有序数组中是否存在相同的数字
-						while (leftIndex < leftSize && rightIndex < rightSize) {
+						while (leftCursor < leftSize && rightCursor < rightSize) {
 							if (leftTerm.getIndex() == rightTerm.getIndex()) {
 								leftTerm.shiftValue(columnValue * rightTerm.getValue());
 								if (leftIterator.hasNext()) {
@@ -356,18 +356,18 @@ public class ColumnArrayMatrix extends ArrayMatrix {
 								if (rightIterator.hasNext()) {
 									rightTerm = rightIterator.next();
 								}
-								leftIndex++;
-								rightIndex++;
+								leftCursor++;
+								rightCursor++;
 							} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 								if (rightIterator.hasNext()) {
 									rightTerm = rightIterator.next();
 								}
-								rightIndex++;
+								rightCursor++;
 							} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 								if (leftIterator.hasNext()) {
 									leftTerm = leftIterator.next();
 								}
-								leftIndex++;
+								leftCursor++;
 							}
 						}
 					}

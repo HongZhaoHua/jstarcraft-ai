@@ -66,14 +66,14 @@ public interface MathScalar {
 				value += leftVector.getValue(position) * rightVector.getValue(position);
 			}
 		} else if (!leftVector.isConstant() && !rightVector.isConstant()) {
-			int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+			int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 			if (leftSize != 0 && rightSize != 0) {
 				Iterator<VectorScalar> leftIterator = leftVector.iterator();
 				Iterator<VectorScalar> rightIterator = rightVector.iterator();
 				VectorScalar leftTerm = leftIterator.next();
 				VectorScalar rightTerm = rightIterator.next();
 				// 判断两个有序数组中是否存在相同的数字
-				while (leftIndex < leftSize && rightIndex < rightSize) {
+				while (leftCursor < leftSize && rightCursor < rightSize) {
 					if (leftTerm.getIndex() == rightTerm.getIndex()) {
 						value += leftTerm.getValue() * rightTerm.getValue();
 						if (leftIterator.hasNext()) {
@@ -82,18 +82,18 @@ public interface MathScalar {
 						if (rightIterator.hasNext()) {
 							rightTerm = rightIterator.next();
 						}
-						leftIndex++;
-						rightIndex++;
+						leftCursor++;
+						rightCursor++;
 					} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 						if (rightIterator.hasNext()) {
 							rightTerm = rightIterator.next();
 						}
-						rightIndex++;
+						rightCursor++;
 					} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 						if (leftIterator.hasNext()) {
 							leftTerm = leftIterator.next();
 						}
-						leftIndex++;
+						leftCursor++;
 					}
 				}
 			}
@@ -132,14 +132,14 @@ public interface MathScalar {
 				value += leftVector.getValue(position) * rightVector.getValue(position);
 			}
 		} else if (!leftVector.isConstant() && !rightVector.isConstant()) {
-			int leftIndex = 0, rightIndex = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+			int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 			if (leftSize != 0 && rightSize != 0) {
 				Iterator<VectorScalar> leftIterator = leftVector.iterator();
 				Iterator<VectorScalar> rightIterator = rightVector.iterator();
 				VectorScalar leftTerm = leftIterator.next();
 				VectorScalar rightTerm = rightIterator.next();
 				// 判断两个有序数组中是否存在相同的数字
-				while (leftIndex < leftSize && rightIndex < rightSize) {
+				while (leftCursor < leftSize && rightCursor < rightSize) {
 					if (leftTerm.getIndex() == rightTerm.getIndex()) {
 						value += leftTerm.getValue() * rightTerm.getValue();
 						if (leftIterator.hasNext()) {
@@ -148,18 +148,18 @@ public interface MathScalar {
 						if (rightIterator.hasNext()) {
 							rightTerm = rightIterator.next();
 						}
-						leftIndex++;
-						rightIndex++;
+						leftCursor++;
+						rightCursor++;
 					} else if (leftTerm.getIndex() > rightTerm.getIndex()) {
 						if (rightIterator.hasNext()) {
 							rightTerm = rightIterator.next();
 						}
-						rightIndex++;
+						rightCursor++;
 					} else if (leftTerm.getIndex() < rightTerm.getIndex()) {
 						if (leftIterator.hasNext()) {
 							leftTerm = leftIterator.next();
 						}
-						leftIndex++;
+						leftCursor++;
 					}
 				}
 			}
