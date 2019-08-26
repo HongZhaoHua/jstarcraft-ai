@@ -1,1 +1,5 @@
-更多矩阵分解实现将参考weka.core.matrix
+Weka矩阵分解:
+https://github.com/Waikato/weka-trunk/tree/master/weka/src/main/java/weka/core/matrix
+
+JAMA矩阵分解:
+https://math.nist.gov/javanumerics/jama/
