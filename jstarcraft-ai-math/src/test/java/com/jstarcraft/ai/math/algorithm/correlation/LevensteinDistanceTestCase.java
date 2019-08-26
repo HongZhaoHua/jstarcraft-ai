@@ -8,17 +8,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class LevensteinDistanceTestCase extends AbstractSimilarityTestCase {
-
-    @Override
-    protected boolean checkCorrelation(float correlation) {
-        return correlation >= 0F && correlation < Float.POSITIVE_INFINITY;
-    }
-
-    @Override
-    protected float getIdentical() {
-        return 0F;
-    }
+public class LevensteinDistanceTestCase extends AbstractDistanceTestCase {
 
     @Override
     protected Correlation getCorrelation() {

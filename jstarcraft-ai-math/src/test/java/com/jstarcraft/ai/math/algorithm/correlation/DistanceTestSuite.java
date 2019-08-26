@@ -7,6 +7,10 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
         // 距离测试集
+        AngularDistanceTestCase.class,
+
+        ChebychevDistanceTestCase.class,
+
         EuclideanDistanceTestCase.class,
 
         LevensteinDistanceTestCase.class,
