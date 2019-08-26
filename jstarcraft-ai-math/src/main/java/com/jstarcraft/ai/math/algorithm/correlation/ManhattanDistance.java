@@ -1,60 +1,49 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
-import java.util.Iterator;
+import java.util.List;
 
 import org.apache.commons.math3.util.FastMath;
 
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.VectorScalar;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
- * Manhattan Distance相似度
- * 
- * <pre>
- * Manhattan Distance(曼哈顿距离)
- * </pre>
+ * Manhattan Distance曼哈顿距离
  * 
  * @author Birdy
  *
  */
 public class ManhattanDistance extends AbstractDistance {
 
-    @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
-        // compute similarity
+    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
+        if (count == 0) {
+            return Float.NaN;
+        }
         float similarity = 0F;
-        int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
-        if (leftSize != 0 && rightSize != 0) {
-            Iterator<VectorScalar> leftIterator = leftVector.iterator();
-            Iterator<VectorScalar> rightIterator = rightVector.iterator();
-            VectorScalar leftTerm = leftIterator.next();
-            VectorScalar rightTerm = rightIterator.next();
-            // 判断两个有序数组中是否存在相同的数字
-            float distance = 0F;
-            while (leftCursor < leftSize && rightCursor < rightSize) {
-                if (leftTerm.getIndex() == rightTerm.getIndex()) {
-                    distance = leftTerm.getValue() - rightTerm.getValue();
-                    leftTerm = leftIterator.next();
-                    rightTerm = rightIterator.next();
-                    leftCursor++;
-                    rightCursor++;
-                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
-                    distance = rightTerm.getValue();
-                    rightTerm = rightIterator.next();
-                    rightCursor++;
-                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
-                    distance = leftTerm.getValue();
-                    leftTerm = leftIterator.next();
-                    leftCursor++;
-                }
-                similarity += FastMath.abs(distance);
-            }
+        for (Float2FloatKeyValue term : scoreList) {
+            float distance = term.getKey() - term.getValue();
+            similarity += FastMath.abs(distance);
         }
         if (similarity == 0F) {
             return similarity;
         } else {
             return (float) FastMath.sqrt(similarity);
         }
+    }
+
+    @Override
+    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
+        // compute similarity
+        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
+        int count = scoreList.size();
+        float similarity = getCoefficient(count, scoreList);
+        // shrink to account for vector size
+        if (!Double.isNaN(similarity)) {
+            if (scale > 0) {
+                similarity *= count / (count + scale);
+            }
+        }
+        return similarity;
     }
 
 }

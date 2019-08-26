@@ -6,12 +6,12 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
- * Mean Square Error相似度
+ * Mean Square Error距离
  * 
  * @author Birdy
  *
  */
-public class MSEDistance extends AbstractSimilarity {
+public class MSEDistance extends AbstractDistance {
 
     private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
         if (count == 0) {
@@ -19,8 +19,8 @@ public class MSEDistance extends AbstractSimilarity {
         }
         float similarity = 0F;
         for (Float2FloatKeyValue term : scoreList) {
-            float delta = term.getKey() - term.getValue();
-            similarity += Math.pow(delta, 2);
+            float distance = term.getKey() - term.getValue();
+            similarity += distance * distance;
         }
         return similarity / count;
     }
@@ -38,11 +38,6 @@ public class MSEDistance extends AbstractSimilarity {
             }
         }
         return similarity;
-    }
-
-    @Override
-    public float getIdentical() {
-        return 0F;
     }
 
 }

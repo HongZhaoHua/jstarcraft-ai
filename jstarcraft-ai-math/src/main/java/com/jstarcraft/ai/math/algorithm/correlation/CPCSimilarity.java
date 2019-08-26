@@ -34,7 +34,7 @@ public class CPCSimilarity extends AbstractSimilarity {
 		return super.makeCorrelationMatrix(trainMatrix, transpose, scale);
 	}
 
-	private float getSimilarity(int count, List<Float2FloatKeyValue> scoreList) {
+	private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
 		// compute similarity
 		if (count == 0) {
 			return Float.NaN;
@@ -55,7 +55,7 @@ public class CPCSimilarity extends AbstractSimilarity {
 		// compute similarity
 		List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
 		int count = scoreList.size();
-		float similarity = getSimilarity(count, scoreList);
+		float similarity = getCoefficient(count, scoreList);
 		// shrink to account for vector size
 		if (!Double.isNaN(similarity)) {
 			if (scale > 0) {
