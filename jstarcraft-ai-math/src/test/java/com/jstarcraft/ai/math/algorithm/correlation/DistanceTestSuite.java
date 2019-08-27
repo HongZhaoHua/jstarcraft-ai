@@ -19,7 +19,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
         MSDDistanceTestCase.class,
 
-        MSEDistanceTestCase.class })
+        MSEDistanceTestCase.class,
+
+        NormDistanceTestCase.class })
 public class DistanceTestSuite {
 
 }
