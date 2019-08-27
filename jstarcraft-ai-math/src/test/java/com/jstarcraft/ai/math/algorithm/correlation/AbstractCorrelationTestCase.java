@@ -54,11 +54,11 @@ public abstract class AbstractCorrelationTestCase {
 
             // 判断相等的情况.
             for (int index = 0, size = rowSize; index < size; index++) {
-                Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
                 MathVector rowVector = scoreMatrix.getRowVector(index);
                 Assert.assertEquals(getIdentical(), similarity.getCoefficient(rowVector, rowVector, 0F), 0.001F);
                 MathVector columnVector = scoreMatrix.getColumnVector(index);
                 Assert.assertEquals(getIdentical(), similarity.getCoefficient(columnVector, columnVector, 0F), 0.001F);
+                Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
             }
 
             similarityMatrix = similarity.makeCorrelationMatrix(scoreMatrix, true, 0F);

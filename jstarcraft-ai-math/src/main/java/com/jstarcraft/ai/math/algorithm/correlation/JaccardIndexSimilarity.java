@@ -11,7 +11,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  * @author Birdy
  *
  */
-public class JaccardSimilarity extends AbstractSimilarity {
+public class JaccardIndexSimilarity extends AbstractSimilarity {
 
 	@Override
 	public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {

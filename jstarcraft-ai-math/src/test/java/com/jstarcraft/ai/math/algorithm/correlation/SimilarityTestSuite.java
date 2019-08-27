@@ -9,13 +9,15 @@ import org.junit.runners.Suite.SuiteClasses;
         // 相似度测试集
         BinarySimilarityTestCase.class,
 
+        ConsistencyIndexSimilarityTestCase.class,
+
         CosineSimilarityTestCase.class,
 
         CPCSimilarityTestCase.class,
 
         DiceCoefficientSimilarityTestCase.class,
 
-        JaccardSimilarityTestCase.class,
+        JaccardIndexSimilarityTestCase.class,
 
         KRCCSimilarityTestCase.class,
 
