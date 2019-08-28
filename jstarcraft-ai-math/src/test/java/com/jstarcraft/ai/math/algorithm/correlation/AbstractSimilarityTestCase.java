@@ -4,7 +4,7 @@ public abstract class AbstractSimilarityTestCase extends AbstractCorrelationTest
 
     @Override
     protected boolean checkCorrelation(float correlation) {
-        return correlation < 1.00001F;
+        return correlation >= -1F && correlation <= 1F;
     }
 
     @Override

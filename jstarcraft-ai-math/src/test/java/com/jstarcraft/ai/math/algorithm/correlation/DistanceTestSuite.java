@@ -21,7 +21,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
         MSEDistanceTestCase.class,
 
-        NormDistanceTestCase.class })
+        NormDistanceTestCase.class,
+
+        SpearmanFootruleDistanceTestCase.class })
 public class DistanceTestSuite {
 
 }

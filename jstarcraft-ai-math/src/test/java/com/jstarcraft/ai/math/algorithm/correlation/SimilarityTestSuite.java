@@ -23,6 +23,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
         PCCSimilarityTestCase.class,
 
+        SpearmanRankCorrelationTestCase.class,
+
         TanimotoSimilarityTestCase.class })
 public class SimilarityTestSuite {
 
