@@ -3,3 +3,6 @@ http://www.codeceo.com/article/25-java-machine-learning-tools.html
 
 Java Machine Learning Library:
 https://github.com/AbeelLab/javaml
+
+Java Statistical Analysis Tool, a Java library for Machine Learning:
+https://github.com/EdwardRaff/JSAT
