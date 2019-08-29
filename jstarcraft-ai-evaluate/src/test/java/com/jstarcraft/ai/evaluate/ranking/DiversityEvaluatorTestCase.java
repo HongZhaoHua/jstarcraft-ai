@@ -2,8 +2,8 @@ package com.jstarcraft.ai.evaluate.ranking;
 
 import com.jstarcraft.ai.evaluate.AbstractRankingEvaluatorTestCase;
 import com.jstarcraft.ai.evaluate.Evaluator;
-import com.jstarcraft.ai.math.algorithm.correlation.CosineSimilarity;
 import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
+import com.jstarcraft.ai.math.algorithm.correlation.similarity.CosineSimilarity;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 
