@@ -13,6 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
         EuclideanDistanceTestCase.class,
 
+        HammingDistanceTestCase.class,
+
         LevensteinDistanceTestCase.class,
 
         ManhattanDistanceTestCase.class,
