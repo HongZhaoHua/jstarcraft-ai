@@ -1,0 +1,206 @@
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Genetic search.
+	Start set: no attributes
+	Population size: 20
+	Number of generations: 20
+	Probability of crossover:  0.6  
+	Probability of mutation:  0.033
+	Report frequency: 20
+	Random number seed: 1
+
+Initial population
+merit   	scaled  	subset
+ 0.7949 	 0.86056	2 
+ 0.7949 	 0.86056	2 
+ 0.1697 	 0      	4 
+ 0.1697 	 0      	1 2 3 4 
+ 0.1697 	 0      	2 3 4 
+ 0.1697 	 0      	2 3 4 
+ 0.1697 	 0      	1 4 
+ 0.98638	 1.12413	1 2 3 
+ 0.99235	 1.13236	3 
+ 0.7949 	 0.86056	2 
+ 0.98638	 1.12413	1 2 3 
+ 0.87021	 0.96423	1 2 
+ 0.71341	 0.7484 	1 
+ 0.99235	 1.13236	3 
+ 0.1697 	 0      	4 
+ 0.71341	 0.7484 	1 
+ 0.1697 	 0      	1 4 
+ 0.99235	 1.13236	3 
+ 0.7949 	 0.86056	2 
+ 0.7949 	 0.86056	2 
+
+Generation: 20
+merit   	scaled  	subset
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0.98524	 0.98524	1 3 
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0      	 0      	
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+ 0.98524	 0.98524	1 3 
+ 0.99235	 0.99235	3 
+ 0.98838	 0.98838	2 3 
+ 0.99235	 0.99235	3 
+ 0.98838	 0.98838	2 3 
+ 0.99235	 0.99235	3 
+ 0.1697 	 0.1697 	3 4 
+ 0.99235	 0.99235	3 
+ 0.99235	 0.99235	3 
+
+Attribute Subset Evaluator (supervised, Class (numeric): 5 Class):
+	CFS Subset Evaluator
+	Including locally predictive attributes
+
+Selected attributes: 1,2,3 : 3
+                     Nominal1
+                     Nominal2
+                     Numeric1
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Genetic search.
+	Start set: no attributes
+	Population size: 20
+	Number of generations: 20
+	Probability of crossover:  0.6  
+	Probability of mutation:  0.033
+	Report frequency: 20
+	Random number seed: 1
+
+Initial population
+merit   	scaled  	subset
+ 0.61898	 0.61898	2 
+ 0.61898	 0.61898	2 
+ 0      	 0      	4 
+ 0.57087	 0.57087	1 2 3 4 
+ 0.56407	 0.56407	2 3 4 
+ 0.56407	 0.56407	2 3 4 
+ 0.19938	 0.19938	1 4 
+ 0.86095	 0.86095	1 2 3 
+ 1      	 1      	3 
+ 0.61898	 0.61898	2 
+ 0.86095	 0.86095	1 2 3 
+ 0.64927	 0.64927	1 2 
+ 0.39875	 0.39875	1 
+ 1      	 1      	3 
+ 0      	 0      	4 
+ 0.39875	 0.39875	1 
+ 0.19938	 0.19938	1 4 
+ 1      	 1      	3 
+ 0.61898	 0.61898	2 
+ 0.61898	 0.61898	2 
+
+Generation: 20
+merit   	scaled  	subset
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 0.83629	 0.83629	1 3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 0      	 0      	
+ 1      	 1      	3 
+ 0.89972	 0.89972	2 3 
+ 0.83629	 0.83629	1 3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 0.39875	 0.39875	1 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+
+Attribute Subset Evaluator (supervised, Class (nominal): 5 Class):
+	CFS Subset Evaluator
+	Including locally predictive attributes
+
+Selected attributes: 1,2,3 : 3
+                     Nominal1
+                     Nominal2
+                     Numeric1
+
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Genetic search.
+	Start set: no attributes
+	Population size: 20
+	Number of generations: 20
+	Probability of crossover:  0.6  
+	Probability of mutation:  0.033
+	Report frequency: 20
+	Random number seed: 1
+
+Initial population
+merit   	scaled  	subset
+ 0.00323	 0.06446	2 
+ 0.00323	 0.06446	2 
+ 0.12312	 0.16843	4 
+ 0.96599	 0.8994 	1 2 3 4 
+ 0.96599	 0.8994 	2 3 4 
+ 0.96599	 0.8994 	2 3 4 
+ 0.12312	 0.16843	1 4 
+ 1      	 0.92889	1 2 3 
+ 1      	 0.92889	3 
+ 0.00323	 0.06446	2 
+ 1      	 0.92889	1 2 3 
+ 0.17859	 0.21654	1 2 
+ 0.35189	 0.36684	1 
+ 1      	 0.92889	3 
+ 0.12312	 0.16843	4 
+ 0.35189	 0.36684	1 
+ 0.12312	 0.16843	1 4 
+ 1      	 0.92889	3 
+ 0.00323	 0.06446	2 
+ 0.00323	 0.06446	2 
+
+Generation: 13
+merit   	scaled  	subset
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	1 3 
+ 1      	 1      	2 3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	1 3 
+ 1      	 1      	3 
+ 1      	 1      	1 2 3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	1 2 3 
+ 1      	 1      	3 
+ 1      	 1      	3 
+ 1      	 1      	2 3 
+
+Attribute Subset Evaluator (supervised, Class (numeric): 5 Class):
+	CFS Subset Evaluator
+	Including locally predictive attributes
+
+Selected attributes: 1,3 : 2
+                     Nominal1
+                     Numeric1
+

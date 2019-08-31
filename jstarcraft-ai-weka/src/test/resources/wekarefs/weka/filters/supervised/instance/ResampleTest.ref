@@ -1,0 +1,21 @@
+@relation FilterTest-weka.filters.supervised.instance.Resample-B0.0-S1-Z50.0
+
+@attribute StringAtt1 string
+@attribute NominalAtt1 {r,g,b}
+@attribute NumericAtt1 numeric
+@attribute StringAtt2 string
+@attribute NominalAtt2 {a,b,c,d}
+@attribute NumericAtt2 numeric
+@attribute DateAtt1 date yyyy-MM-dd
+
+@data
+all,r,8.5,lazy,d,-2.3,2001-06-06
+a,r,9.4,?,?,-9,2001-05-04
+the,r,4.3,fox,d,-5.3,2001-05-05
+all,r,8.5,lazy,d,-2.3,2001-06-06
+wall,r,6,over,b,-7.3,2001-04-04
+a,r,9.4,?,?,-9,2001-05-04
+kings,g,5.3,jumped,?,-5.6,2001-05-06
+horses,b,6.5,over,b,-4.3,2001-05-06
+horses,b,6.5,over,b,-4.3,2001-05-06
+horses,b,6.5,over,b,-4.3,2001-05-06
