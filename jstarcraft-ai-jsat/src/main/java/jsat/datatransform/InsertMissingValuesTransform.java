@@ -29,68 +29,60 @@ import jsat.utils.random.XORWOW;
  *
  * @author edwardraff
  */
-public class InsertMissingValuesTransform implements InPlaceTransform
-{
+public class InsertMissingValuesTransform implements InPlaceTransform {
     private double prob;
     private Random rand;
-    
+
     /**
      * 
      * @param prob the probability of setting each feature to missing
      */
-    public InsertMissingValuesTransform(double prob)
-    {
+    public InsertMissingValuesTransform(double prob) {
         this(prob, RandomUtil.getRandom());
     }
 
     /**
      * 
      * @param prob the probability of setting each feature to missing
-     * @param rand the source of randomness 
+     * @param rand the source of randomness
      */
-    public InsertMissingValuesTransform(double prob, Random rand)
-    {
+    public InsertMissingValuesTransform(double prob, Random rand) {
         this.prob = Math.min(1, Math.max(0, prob));
         this.rand = rand;
     }
 
     @Override
-    public void fit(DataSet data)
-    {
-        //no-op, nothing to do
+    public void fit(DataSet data) {
+        // no-op, nothing to do
     }
 
     @Override
-    public void mutableTransform(DataPoint dp)
-    {
+    public void mutableTransform(DataPoint dp) {
         Vec v = dp.getNumericalValues();
-        for(int i = 0; i < v.length(); i++)
-            if(rand.nextDouble() < prob)
+        for (int i = 0; i < v.length(); i++)
+            if (rand.nextDouble() < prob)
                 v.set(i, Double.NaN);
         int[] cats = dp.getCategoricalValues();
-        for(int i = 0; i < cats.length; i++)
-            if(rand.nextDouble() < prob)
+        for (int i = 0; i < cats.length; i++)
+            if (rand.nextDouble() < prob)
                 cats[i] = -1;
     }
 
     @Override
-    public boolean mutatesNominal()
-    {
+    public boolean mutatesNominal() {
         return true;
     }
 
     @Override
-    public DataPoint transform(DataPoint dp)
-    {
+    public DataPoint transform(DataPoint dp) {
         DataPoint ndp = dp.clone();
         mutableTransform(ndp);
         return ndp;
     }
 
     @Override
-    public InsertMissingValuesTransform clone()
-    {
+    public InsertMissingValuesTransform clone() {
         return new InsertMissingValuesTransform(prob, rand);
     }
-    
+
 }

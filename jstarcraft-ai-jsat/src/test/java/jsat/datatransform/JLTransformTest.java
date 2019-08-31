@@ -21,85 +21,74 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Tests for JL are inherently probabilistic, so occasional failures can be 
- * tolerated. 
+ * Tests for JL are inherently probabilistic, so occasional failures can be
+ * tolerated.
  * 
  * @author Edward Raff
  */
-public class JLTransformTest
-{
+public class JLTransformTest {
     static DataSet ds;
     static double eps = 0.2;
-    
-    public JLTransformTest()
-    {
+
+    public JLTransformTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
         List<DataPoint> dps = new ArrayList<DataPoint>(100);
         Random rand = RandomUtil.getRandom();
-        
-        for(int i = 0; i < 100; i++)
-        {
+
+        for (int i = 0; i < 100; i++) {
             Vec v = DenseVector.random(2000, rand);
             dps.add(new DataPoint(v, new int[0], new CategoricalData[0]));
         }
-        
+
         ds = new SimpleDataSet(dps);
-        
+
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of transform method, of class JLTransform.
      */
     @Test
-    public void testTransform()
-    {
+    public void testTransform() {
         System.out.println("transform");
         Random rand = new XORWOW(124);
         int k = 550;
-        
+
         List<Vec> transformed = new ArrayList<Vec>(ds.size());
-        for( JLTransform.TransformMode mode : JLTransform.TransformMode.values())
-        {
+        for (JLTransform.TransformMode mode : JLTransform.TransformMode.values()) {
             JLTransform jl = new JLTransform(k, mode, true);
             jl.fit(ds);
-            
+
             jl = jl.clone();
 
             transformed.clear();
-            for(int i = 0; i < ds.size(); i++)
+            for (int i = 0; i < ds.size(); i++)
                 transformed.add(jl.transform(ds.getDataPoint(i)).getNumericalValues());
-            
+
             int violations = 0;
             int count = 0;
 
             EuclideanDistance d = new EuclideanDistance();
-            for(int i = 0; i < ds.size(); i++)
-            {
+            for (int i = 0; i < ds.size(); i++) {
                 DataPoint dpi = ds.getDataPoint(i);
                 Vec vi = dpi.getNumericalValues();
                 Vec vti = transformed.get(i);
 
-                for(int j = i+1; j < ds.size(); j++)
-                {
+                for (int j = i + 1; j < ds.size(); j++) {
                     count++;
 
                     DataPoint dpj = ds.getDataPoint(j);
@@ -109,15 +98,14 @@ public class JLTransformTest
                     double trueDist = Math.pow(d.dist(vi, vj), 2);
                     double embDist = Math.pow(d.dist(vti, vtj), 2);
 
-                    double err = (embDist-trueDist)/trueDist;
-                    if( Math.abs(err) > eps)
+                    double err = (embDist - trueDist) / trueDist;
+                    if (Math.abs(err) > eps)
                         violations++;
                 }
             }
 
             assertTrue("Too many violations occured", violations < 150);
         }
-        
-        
+
     }
 }

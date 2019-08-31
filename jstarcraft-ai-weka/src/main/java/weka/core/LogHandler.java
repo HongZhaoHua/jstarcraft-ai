@@ -30,17 +30,17 @@ import weka.gui.Logger;
  */
 public interface LogHandler {
 
-  /**
-   * Set the log to use
-   * 
-   * @param log the log to use
-   */
-  void setLog(Logger log);
+    /**
+     * Set the log to use
+     * 
+     * @param log the log to use
+     */
+    void setLog(Logger log);
 
-  /**
-   * Get the log in use
-   * 
-   * @return the log in use
-   */
-  Logger getLog();
+    /**
+     * Get the log in use
+     * 
+     * @return the log in use
+     */
+    Logger getLog();
 }

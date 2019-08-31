@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for KohonenMap element declaration.
+ * <p>
+ * Java class for KohonenMap element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="KohonenMap">
@@ -43,9 +44,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "KohonenMap")
 public class KohonenMap {
 
@@ -62,21 +61,21 @@ public class KohonenMap {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -90,10 +89,8 @@ public class KohonenMap {
     /**
      * Gets the value of the coord1 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
+     * @return possible object is {@link Float }
+     * 
      */
     public Float getCoord1() {
         return coord1;
@@ -102,10 +99,8 @@ public class KohonenMap {
     /**
      * Sets the value of the coord1 property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
+     * @param value allowed object is {@link Float }
+     * 
      */
     public void setCoord1(Float value) {
         this.coord1 = value;
@@ -114,10 +109,8 @@ public class KohonenMap {
     /**
      * Gets the value of the coord2 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
+     * @return possible object is {@link Float }
+     * 
      */
     public Float getCoord2() {
         return coord2;
@@ -126,10 +119,8 @@ public class KohonenMap {
     /**
      * Sets the value of the coord2 property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
+     * @param value allowed object is {@link Float }
+     * 
      */
     public void setCoord2(Float value) {
         this.coord2 = value;
@@ -138,10 +129,8 @@ public class KohonenMap {
     /**
      * Gets the value of the coord3 property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Float }
-     *     
+     * @return possible object is {@link Float }
+     * 
      */
     public Float getCoord3() {
         return coord3;
@@ -150,10 +139,8 @@ public class KohonenMap {
     /**
      * Sets the value of the coord3 property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Float }
-     *     
+     * @param value allowed object is {@link Float }
+     * 
      */
     public void setCoord3(Float value) {
         this.coord3 = value;

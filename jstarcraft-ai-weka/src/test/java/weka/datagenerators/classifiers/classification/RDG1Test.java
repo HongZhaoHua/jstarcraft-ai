@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RDG1. Run from the command line with:<p/>
+ * Tests RDG1. Run from the command line with:
+ * <p/>
  * java weka.datagenerators.classifiers.classification.RDG1Test
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RDG1Test 
-  extends AbstractDataGeneratorTest {
+public class RDG1Test extends AbstractDataGeneratorTest {
 
-  public RDG1Test(String name) { 
-    super(name);  
-  }
+    public RDG1Test(String name) {
+        super(name);
+    }
 
-  /** Creates a default RDG1 */
-  public DataGenerator getGenerator() {
-    return new RDG1();
-  }
+    /** Creates a default RDG1 */
+    public DataGenerator getGenerator() {
+        return new RDG1();
+    }
 
-  public static Test suite() {
-    return new TestSuite(RDG1Test.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RDG1Test.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

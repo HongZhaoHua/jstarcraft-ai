@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,11 +13,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Level element declaration.
+ * <p>
+ * Java class for Level element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Level">
@@ -48,10 +49,8 @@ public class Level {
     /**
      * Gets the value of the alpha property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getAlpha() {
         return alpha;
@@ -60,10 +59,8 @@ public class Level {
     /**
      * Sets the value of the alpha property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setAlpha(Double value) {
         this.alpha = value;
@@ -72,10 +69,8 @@ public class Level {
     /**
      * Gets the value of the smoothedValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getSmoothedValue() {
         return smoothedValue;
@@ -84,10 +79,8 @@ public class Level {
     /**
      * Sets the value of the smoothedValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setSmoothedValue(Double value) {
         this.smoothedValue = value;

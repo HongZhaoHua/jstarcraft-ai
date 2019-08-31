@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SMOreg. Run from the command line with:<p>
+ * Tests SMOreg. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.SMOregTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class SMOregTest extends AbstractClassifierTest {
 
-  public SMOregTest(String name) { super(name);  }
+    public SMOregTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default SMOreg */
-  public Classifier getClassifier() {
-    return new SMOreg();
-  }
+    /** Creates a default SMOreg */
+    public Classifier getClassifier() {
+        return new SMOreg();
+    }
 
-  public static Test suite() {
-    return new TestSuite(SMOregTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SMOregTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

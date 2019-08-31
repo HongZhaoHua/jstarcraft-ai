@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Regression element declaration.
+ * <p>
+ * Java class for Regression element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Regression">
@@ -50,15 +51,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "output",
-    "modelStats",
-    "targets",
-    "localTransformations",
-    "resultField",
-    "regressionTable"
-})
+@XmlType(name = "", propOrder = { "extension", "output", "modelStats", "targets", "localTransformations", "resultField", "regressionTable" })
 @XmlRootElement(name = "Regression")
 public class Regression {
 
@@ -89,21 +82,21 @@ public class Regression {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -117,10 +110,8 @@ public class Regression {
     /**
      * Gets the value of the output property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Output }
-     *     
+     * @return possible object is {@link Output }
+     * 
      */
     public Output getOutput() {
         return output;
@@ -129,10 +120,8 @@ public class Regression {
     /**
      * Sets the value of the output property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Output }
-     *     
+     * @param value allowed object is {@link Output }
+     * 
      */
     public void setOutput(Output value) {
         this.output = value;
@@ -141,10 +130,8 @@ public class Regression {
     /**
      * Gets the value of the modelStats property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ModelStats }
-     *     
+     * @return possible object is {@link ModelStats }
+     * 
      */
     public ModelStats getModelStats() {
         return modelStats;
@@ -153,10 +140,8 @@ public class Regression {
     /**
      * Sets the value of the modelStats property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ModelStats }
-     *     
+     * @param value allowed object is {@link ModelStats }
+     * 
      */
     public void setModelStats(ModelStats value) {
         this.modelStats = value;
@@ -165,10 +150,8 @@ public class Regression {
     /**
      * Gets the value of the targets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Targets }
-     *     
+     * @return possible object is {@link Targets }
+     * 
      */
     public Targets getTargets() {
         return targets;
@@ -177,10 +160,8 @@ public class Regression {
     /**
      * Sets the value of the targets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Targets }
-     *     
+     * @param value allowed object is {@link Targets }
+     * 
      */
     public void setTargets(Targets value) {
         this.targets = value;
@@ -189,10 +170,8 @@ public class Regression {
     /**
      * Gets the value of the localTransformations property.
      * 
-     * @return
-     *     possible object is
-     *     {@link LocalTransformations }
-     *     
+     * @return possible object is {@link LocalTransformations }
+     * 
      */
     public LocalTransformations getLocalTransformations() {
         return localTransformations;
@@ -201,10 +180,8 @@ public class Regression {
     /**
      * Sets the value of the localTransformations property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link LocalTransformations }
-     *     
+     * @param value allowed object is {@link LocalTransformations }
+     * 
      */
     public void setLocalTransformations(LocalTransformations value) {
         this.localTransformations = value;
@@ -214,21 +191,21 @@ public class Regression {
      * Gets the value of the resultField property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resultField property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the resultField property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getResultField().add(newItem);
+     * getResultField().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ResultField }
+     * Objects of the following type(s) are allowed in the list {@link ResultField }
      * 
      * 
      */
@@ -243,15 +220,16 @@ public class Regression {
      * Gets the value of the regressionTable property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the regressionTable property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the regressionTable property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getRegressionTable().add(newItem);
+     * getRegressionTable().add(newItem);
      * </pre>
      * 
      * 
@@ -271,10 +249,8 @@ public class Regression {
     /**
      * Gets the value of the algorithmName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlgorithmName() {
         return algorithmName;
@@ -283,10 +259,8 @@ public class Regression {
     /**
      * Sets the value of the algorithmName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlgorithmName(String value) {
         this.algorithmName = value;
@@ -295,10 +269,8 @@ public class Regression {
     /**
      * Gets the value of the functionName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @return possible object is {@link MININGFUNCTION }
+     * 
      */
     public MININGFUNCTION getFunctionName() {
         return functionName;
@@ -307,10 +279,8 @@ public class Regression {
     /**
      * Sets the value of the functionName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @param value allowed object is {@link MININGFUNCTION }
+     * 
      */
     public void setFunctionName(MININGFUNCTION value) {
         this.functionName = value;
@@ -319,10 +289,8 @@ public class Regression {
     /**
      * Gets the value of the modelName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelName() {
         return modelName;
@@ -331,10 +299,8 @@ public class Regression {
     /**
      * Sets the value of the modelName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelName(String value) {
         this.modelName = value;
@@ -343,10 +309,8 @@ public class Regression {
     /**
      * Gets the value of the normalizationMethod property.
      * 
-     * @return
-     *     possible object is
-     *     {@link REGRESSIONNORMALIZATIONMETHOD }
-     *     
+     * @return possible object is {@link REGRESSIONNORMALIZATIONMETHOD }
+     * 
      */
     public REGRESSIONNORMALIZATIONMETHOD getNormalizationMethod() {
         if (normalizationMethod == null) {
@@ -359,10 +323,8 @@ public class Regression {
     /**
      * Sets the value of the normalizationMethod property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link REGRESSIONNORMALIZATIONMETHOD }
-     *     
+     * @param value allowed object is {@link REGRESSIONNORMALIZATIONMETHOD }
+     * 
      */
     public void setNormalizationMethod(REGRESSIONNORMALIZATIONMETHOD value) {
         this.normalizationMethod = value;

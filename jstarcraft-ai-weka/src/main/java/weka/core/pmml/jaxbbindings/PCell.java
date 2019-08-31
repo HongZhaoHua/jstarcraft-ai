@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for PCell element declaration.
+ * <p>
+ * Java class for PCell element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="PCell">
@@ -45,9 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "PCell")
 public class PCell {
 
@@ -61,35 +60,36 @@ public class PCell {
     protected String parameterName;
     @XmlAttribute
     protected String targetCategory;
-    
-    public PCell() {}
-    
+
+    public PCell() {
+    }
+
     public PCell(String targetCategory, String parameterName, BigInteger df, double beta) {
-    	this.targetCategory = targetCategory;
-    	this.parameterName = parameterName;
-    	this.df = df;
-    	this.beta = beta;
+        this.targetCategory = targetCategory;
+        this.parameterName = parameterName;
+        this.df = df;
+        this.beta = beta;
     }
 
     /**
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -119,10 +119,8 @@ public class PCell {
     /**
      * Gets the value of the df property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getDf() {
         return df;
@@ -131,10 +129,8 @@ public class PCell {
     /**
      * Sets the value of the df property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setDf(BigInteger value) {
         this.df = value;
@@ -143,10 +139,8 @@ public class PCell {
     /**
      * Gets the value of the parameterName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getParameterName() {
         return parameterName;
@@ -155,10 +149,8 @@ public class PCell {
     /**
      * Sets the value of the parameterName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setParameterName(String value) {
         this.parameterName = value;
@@ -167,10 +159,8 @@ public class PCell {
     /**
      * Gets the value of the targetCategory property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTargetCategory() {
         return targetCategory;
@@ -179,10 +169,8 @@ public class PCell {
     /**
      * Sets the value of the targetCategory property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTargetCategory(String value) {
         this.targetCategory = value;

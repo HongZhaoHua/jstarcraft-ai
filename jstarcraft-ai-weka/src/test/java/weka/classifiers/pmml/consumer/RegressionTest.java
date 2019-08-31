@@ -32,25 +32,25 @@ import junit.framework.TestSuite;
  */
 public class RegressionTest extends AbstractPMMLClassifierTest {
 
-  public RegressionTest(String name) {
-    super(name);
-  }
+    public RegressionTest(String name) {
+        super(name);
+    }
 
-  @Override
-  protected void setUp() throws Exception {
-    m_modelNames = new ArrayList<String>();
-    m_dataSetNames = new ArrayList<String>();
-    m_modelNames.add("linear_regression_model.xml");
-    m_modelNames.add("ELNINO_REGRESSION_SIMPLE.xml");
-    m_dataSetNames.add("Elnino_small.arff");
-    m_dataSetNames.add("Elnino_small.arff");
-  }
+    @Override
+    protected void setUp() throws Exception {
+        m_modelNames = new ArrayList<String>();
+        m_dataSetNames = new ArrayList<String>();
+        m_modelNames.add("linear_regression_model.xml");
+        m_modelNames.add("ELNINO_REGRESSION_SIMPLE.xml");
+        m_dataSetNames.add("Elnino_small.arff");
+        m_dataSetNames.add("Elnino_small.arff");
+    }
 
-  public static Test suite() {
-    return new TestSuite(weka.classifiers.pmml.consumer.RegressionTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(weka.classifiers.pmml.consumer.RegressionTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

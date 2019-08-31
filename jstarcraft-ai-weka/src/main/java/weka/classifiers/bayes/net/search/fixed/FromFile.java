@@ -54,142 +54,135 @@ import weka.core.Utils;
  */
 public class FromFile extends SearchAlgorithm {
 
-  /** for serialization */
-  static final long serialVersionUID = 7334358169507619525L;
+    /** for serialization */
+    static final long serialVersionUID = 7334358169507619525L;
 
-  /** name of file to read structure from **/
-  String m_sBIFFile = "";
+    /** name of file to read structure from **/
+    String m_sBIFFile = "";
 
-  /**
-   * Returns a string describing this object
-   * 
-   * @return a description of the classifier suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "The FromFile reads the structure of a Bayes net from a file "
-      + "in BIFF format.";
-  }
-
-  /**
-   * 
-   * @param bayesNet
-   * @param instances the instances to work with
-   * @throws Exception if attribute from BIF file could not be found
-   */
-  @Override
-  public void buildStructure(BayesNet bayesNet, Instances instances)
-    throws Exception {
-    // read network structure in BIF format
-    BIFReader bifReader = new BIFReader();
-    bifReader.processFile(m_sBIFFile);
-    // copy parent sets
-    for (int iAttribute = 0; iAttribute < instances.numAttributes(); iAttribute++) {
-      int iBIFAttribute = bifReader.getNode(bayesNet.getNodeName(iAttribute));
-      ParentSet bifParentSet = bifReader.getParentSet(iBIFAttribute);
-      for (int iBIFParent = 0; iBIFParent < bifParentSet.getNrOfParents(); iBIFParent++) {
-        String sParent = bifReader.getNodeName(bifParentSet
-          .getParent(iBIFParent));
-        int iParent = 0;
-        while (iParent < instances.numAttributes()
-          && !bayesNet.getNodeName(iParent).equals(sParent)) {
-          iParent++;
-        }
-        if (iParent >= instances.numAttributes()) {
-          throw new Exception("Could not find attribute " + sParent
-            + " from BIF file in data");
-        }
-        bayesNet.getParentSet(iAttribute).addParent(iParent, instances);
-      }
+    /**
+     * Returns a string describing this object
+     * 
+     * @return a description of the classifier suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
+        return "The FromFile reads the structure of a Bayes net from a file " + "in BIFF format.";
     }
-  } // buildStructure
 
-  /**
-   * Set name of network in BIF file to read structure from
-   * 
-   * @param sBIFFile the name of the BIF file
-   */
-  public void setBIFFile(String sBIFFile) {
-    m_sBIFFile = sBIFFile;
-  }
+    /**
+     * 
+     * @param bayesNet
+     * @param instances the instances to work with
+     * @throws Exception if attribute from BIF file could not be found
+     */
+    @Override
+    public void buildStructure(BayesNet bayesNet, Instances instances) throws Exception {
+        // read network structure in BIF format
+        BIFReader bifReader = new BIFReader();
+        bifReader.processFile(m_sBIFFile);
+        // copy parent sets
+        for (int iAttribute = 0; iAttribute < instances.numAttributes(); iAttribute++) {
+            int iBIFAttribute = bifReader.getNode(bayesNet.getNodeName(iAttribute));
+            ParentSet bifParentSet = bifReader.getParentSet(iBIFAttribute);
+            for (int iBIFParent = 0; iBIFParent < bifParentSet.getNrOfParents(); iBIFParent++) {
+                String sParent = bifReader.getNodeName(bifParentSet.getParent(iBIFParent));
+                int iParent = 0;
+                while (iParent < instances.numAttributes() && !bayesNet.getNodeName(iParent).equals(sParent)) {
+                    iParent++;
+                }
+                if (iParent >= instances.numAttributes()) {
+                    throw new Exception("Could not find attribute " + sParent + " from BIF file in data");
+                }
+                bayesNet.getParentSet(iAttribute).addParent(iParent, instances);
+            }
+        }
+    } // buildStructure
 
-  /**
-   * Get name of network in BIF file to read structure from
-   * 
-   * @return BIF file name
-   */
-  public String getBIFFile() {
-    return m_sBIFFile;
-  }
+    /**
+     * Set name of network in BIF file to read structure from
+     * 
+     * @param sBIFFile the name of the BIF file
+     */
+    public void setBIFFile(String sBIFFile) {
+        m_sBIFFile = sBIFFile;
+    }
 
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> newVector = new Vector<Option>();
+    /**
+     * Get name of network in BIF file to read structure from
+     * 
+     * @return BIF file name
+     */
+    public String getBIFFile() {
+        return m_sBIFFile;
+    }
 
-    newVector.addElement(new Option(
-      "\tName of file containing network structure in BIF format\n", "B", 1,
-      "-B <BIF File>"));
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> newVector = new Vector<Option>();
 
-    newVector.addAll(Collections.list(super.listOptions()));
+        newVector.addElement(new Option("\tName of file containing network structure in BIF format\n", "B", 1, "-B <BIF File>"));
 
-    return newVector.elements();
-  }
+        newVector.addAll(Collections.list(super.listOptions()));
 
-  /**
-   * Parses a given list of options.
-   * <p/>
-   * 
-   * <!-- options-start --> Valid options are:
-   * <p/>
-   * 
-   * <pre>
-   * -B &lt;BIF File&gt;
-   *  Name of file containing network structure in BIF format
-   * </pre>
-   * 
-   * <!-- options-end -->
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    setBIFFile(Utils.getOption('B', options));
+        return newVector.elements();
+    }
 
-    super.setOptions(options);
-  }
+    /**
+     * Parses a given list of options.
+     * <p/>
+     * 
+     * <!-- options-start --> Valid options are:
+     * <p/>
+     * 
+     * <pre>
+     * -B &lt;BIF File&gt;
+     *  Name of file containing network structure in BIF format
+     * </pre>
+     * 
+     * <!-- options-end -->
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        setBIFFile(Utils.getOption('B', options));
 
-  /**
-   * Gets the current settings of the search algorithm.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
+        super.setOptions(options);
+    }
 
-    Vector<String> options = new Vector<String>();
+    /**
+     * Gets the current settings of the search algorithm.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
 
-    options.add("-B");
-    options.add("" + getBIFFile());
+        Vector<String> options = new Vector<String>();
 
-    Collections.addAll(options, super.getOptions());
+        options.add("-B");
+        options.add("" + getBIFFile());
 
-    return options.toArray(new String[0]);
-  }
+        Collections.addAll(options, super.getOptions());
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        return options.toArray(new String[0]);
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 
 } // class FromFile

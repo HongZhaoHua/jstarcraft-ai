@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for OptimumLiftGraph element declaration.
+ * <p>
+ * Java class for OptimumLiftGraph element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="OptimumLiftGraph">
@@ -40,10 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "liftGraph"
-})
+@XmlType(name = "", propOrder = { "extension", "liftGraph" })
 @XmlRootElement(name = "OptimumLiftGraph")
 public class OptimumLiftGraph {
 
@@ -56,21 +54,21 @@ public class OptimumLiftGraph {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -84,10 +82,8 @@ public class OptimumLiftGraph {
     /**
      * Gets the value of the liftGraph property.
      * 
-     * @return
-     *     possible object is
-     *     {@link LiftGraph }
-     *     
+     * @return possible object is {@link LiftGraph }
+     * 
      */
     public LiftGraph getLiftGraph() {
         return liftGraph;
@@ -96,10 +92,8 @@ public class OptimumLiftGraph {
     /**
      * Sets the value of the liftGraph property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link LiftGraph }
-     *     
+     * @param value allowed object is {@link LiftGraph }
+     * 
      */
     public void setLiftGraph(LiftGraph value) {
         this.liftGraph = value;

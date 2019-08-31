@@ -38,31 +38,31 @@ import java.io.Serializable;
  */
 public abstract class Split implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 5390368487675958092L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 5390368487675958092L;
 
-  /** name(s) of attribute(s) involved in the split */
-  protected List<String> m_splitAttNames = new ArrayList<String>();
+    /** name(s) of attribute(s) involved in the split */
+    protected List<String> m_splitAttNames = new ArrayList<String>();
 
-  /**
-   * Returns the name of the branch that the supplied instance would go down
-   * 
-   * @param inst the instance to find the branch for
-   * @return the name of the branch that the instance would go down
-   */
-  public abstract String branchForInstance(Instance inst);
+    /**
+     * Returns the name of the branch that the supplied instance would go down
+     * 
+     * @param inst the instance to find the branch for
+     * @return the name of the branch that the instance would go down
+     */
+    public abstract String branchForInstance(Instance inst);
 
-  /**
-   * Returns the condition for the supplied branch name
-   * 
-   * @param branch the name of the branch to get the condition for
-   * @return the condition (test) that corresponds to the named branch
-   */
-  public abstract String conditionForBranch(String branch);
+    /**
+     * Returns the condition for the supplied branch name
+     * 
+     * @param branch the name of the branch to get the condition for
+     * @return the condition (test) that corresponds to the named branch
+     */
+    public abstract String conditionForBranch(String branch);
 
-  public List<String> splitAttributes() {
-    return m_splitAttNames;
-  }
+    public List<String> splitAttributes() {
+        return m_splitAttNames;
+    }
 }

@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests StringKernel. Run from the command line with:<p/>
+ * Tests StringKernel. Run from the command line with:
+ * <p/>
  * java weka.classifiers.functions.supportVector.StringKernelTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class StringKernelTest 
-  extends AbstractKernelTest {
+public class StringKernelTest extends AbstractKernelTest {
 
-  public StringKernelTest(String name) { 
-    super(name);  
-  }
+    public StringKernelTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default StringKernel */
-  public Kernel getKernel() {
-    return new StringKernel();
-  }
+    /** Creates a default StringKernel */
+    public Kernel getKernel() {
+        return new StringKernel();
+    }
 
-  public static Test suite() {
-    return new TestSuite(StringKernelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(StringKernelTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

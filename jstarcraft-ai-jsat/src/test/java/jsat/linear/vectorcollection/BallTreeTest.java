@@ -36,50 +36,41 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class BallTreeTest
-{
-    
-    
-    public BallTreeTest()
-    {
+public class BallTreeTest {
+
+    public BallTreeTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testSearch_Vec_double()
-    {
+    public void testSearch_Vec_double() {
         System.out.println("search");
         Random rand = RandomUtil.getRandom();
-        
+
         VectorArray<Vec> vecCol = new VectorArray<>(new EuclideanDistance());
-        for(int i = 0; i < 250; i++)
+        for (int i = 0; i < 250; i++)
             vecCol.add(DenseVector.random(3, rand));
-        
-        for(int leaf_size : new int[]{2, 10, 40})
+
+        for (int leaf_size : new int[] { 2, 10, 40 })
             for (BallTree.PivotSelection pm : BallTree.PivotSelection.values())
                 for (BallTree.ConstructionMethod cm : BallTree.ConstructionMethod.values())
-                    for (boolean parallel : new boolean[]{true, false})
-                    {
-                        
+                    for (boolean parallel : new boolean[] { true, false }) {
+
                         BallTree<Vec> collection0 = new BallTree<>(new EuclideanDistance(), cm, pm);
                         collection0.setLeafSize(leaf_size);
                         collection0 = collection0.clone();
@@ -93,8 +84,7 @@ public class BallTreeTest
                         DoubleList foundNN_dists = new DoubleList();
 
                         for (int iters = 0; iters < 10; iters++)
-                            for (double range : new double[]{0.25, 0.5, 0.75, 2.0})
-                            {
+                            for (double range : new double[] { 0.25, 0.5, 0.75, 2.0 }) {
                                 int randIndex = rand.nextInt(vecCol.size());
                                 Vec query = vecCol.get(randIndex);
 
@@ -104,33 +94,29 @@ public class BallTreeTest
                                 assertEquals(trueNN.size(), foundNN.size());
                                 assertEquals(trueNN_dists.size(), foundNN_dists.size());
 
-                                for (int i = 0; i < trueNN.size(); i++)
-                                {
+                                for (int i = 0; i < trueNN.size(); i++) {
                                     assertEquals(trueNN.get(i), foundNN.get(i));
                                     assertEquals(trueNN_dists.get(i), trueNN_dists.get(i), 0.0);
                                 }
 
                             }
                     }
-        
+
     }
-    
+
     @Test
-    public void testSearch_Vec_int()
-    {
+    public void testSearch_Vec_int() {
         System.out.println("search");
         Random rand = RandomUtil.getRandom();
-        
+
         VectorArray<Vec> vecCol = new VectorArray<>(new EuclideanDistance());
-        for(int i = 0; i < 250; i++)
+        for (int i = 0; i < 250; i++)
             vecCol.add(DenseVector.random(3, rand));
-        
-                
-        for(int leaf_size : new int[]{2, 10, 40})
+
+        for (int leaf_size : new int[] { 2, 10, 40 })
             for (BallTree.PivotSelection pm : BallTree.PivotSelection.values())
                 for (BallTree.ConstructionMethod cm : BallTree.ConstructionMethod.values())
-                    for (boolean parallel : new boolean[]{true, false})
-                    {
+                    for (boolean parallel : new boolean[] { true, false }) {
 
                         BallTree<Vec> collection0 = new BallTree<>(new EuclideanDistance(), cm, pm);
                         collection0.setLeafSize(leaf_size);
@@ -144,10 +130,9 @@ public class BallTreeTest
                         IntList foundNN = new IntList();
                         DoubleList foundNN_dists = new DoubleList();
 
-                        for(int iters = 0; iters < 10; iters++)
-                            for(int neighbours : new int[]{1, 2, 4, 10, 20})
-                            {
-                                int randIndex=  rand.nextInt(vecCol.size());
+                        for (int iters = 0; iters < 10; iters++)
+                            for (int neighbours : new int[] { 1, 2, 4, 10, 20 }) {
+                                int randIndex = rand.nextInt(vecCol.size());
 
                                 Vec query = vecCol.get(randIndex);
 
@@ -157,33 +142,30 @@ public class BallTreeTest
                                 assertEquals(trueNN.size(), foundNN.size());
                                 assertEquals(trueNN_dists.size(), foundNN_dists.size());
 
-                                for (int i = 0; i < trueNN.size(); i++)
-                                {
+                                for (int i = 0; i < trueNN.size(); i++) {
                                     assertEquals(trueNN.get(i), foundNN.get(i));
                                     assertEquals(trueNN_dists.get(i), trueNN_dists.get(i), 0.0);
                                 }
                             }
-        }
-        
+                    }
+
     }
-    
+
     @Test
-    public void testSearch_Vec_int_incramental()
-    {
+    public void testSearch_Vec_int_incramental() {
         System.out.println("search");
         Random rand = RandomUtil.getRandom();
-        
+
         VectorArray<Vec> vecCol = new VectorArray<>(new EuclideanDistance());
-        for(int i = 0; i < 1000; i++)
+        for (int i = 0; i < 1000; i++)
             vecCol.add(DenseVector.random(3, rand));
-        
-        for(int leaf_size : new int[]{2, 10, 40})
+
+        for (int leaf_size : new int[] { 2, 10, 40 })
             for (BallTree.PivotSelection pm : BallTree.PivotSelection.values())
-                for (BallTree.ConstructionMethod cm : BallTree.ConstructionMethod.values())
-                {
+                for (BallTree.ConstructionMethod cm : BallTree.ConstructionMethod.values()) {
                     BallTree<Vec> collection0 = new BallTree(new EuclideanDistance(), cm, pm);
                     collection0.setLeafSize(leaf_size);
-                    for(Vec v : vecCol)
+                    for (Vec v : vecCol)
                         collection0.insert(v);
 
                     IntList trueNN = new IntList();
@@ -191,10 +173,9 @@ public class BallTreeTest
 
                     IntList foundNN = new IntList();
                     DoubleList foundNN_dists = new DoubleList();
-                    for(int iters = 0; iters < 10; iters++)
-                        for(int neighbours : new int[]{1, 2, 5, 10, 20})
-                        {
-                            int randIndex=  rand.nextInt(vecCol.size());
+                    for (int iters = 0; iters < 10; iters++)
+                        for (int neighbours : new int[] { 1, 2, 5, 10, 20 }) {
+                            int randIndex = rand.nextInt(vecCol.size());
 
                             Vec query = vecCol.get(randIndex);
 
@@ -204,8 +185,7 @@ public class BallTreeTest
                             assertEquals(trueNN.size(), foundNN.size());
                             assertEquals(trueNN_dists.size(), foundNN_dists.size());
 
-                            for (int i = 0; i < trueNN.size(); i++)
-                            {
+                            for (int i = 0; i < trueNN.size(); i++) {
                                 assertEquals(trueNN.get(i), foundNN.get(i));
                                 assertEquals(trueNN_dists.get(i), trueNN_dists.get(i), 0.0);
                             }

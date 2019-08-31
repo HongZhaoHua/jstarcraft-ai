@@ -44,10 +44,11 @@ import weka.filters.UnsupervisedFilter;
 
 /**
  * <!-- globalinfo-start --> Modify numeric attributes according to a given
- * mathematical expression. Supported operators are +, -, *,
- * /, pow, log, abs, cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), MEAN, MAX, MIN, SD, COUNT, SUM,
- * SUMSQUARED, ifelse. The 'A' letter refers to the value of the attribute being processed. Other attribute
- * values (numeric only) can be accessed through the variables A1, A2, A3, ...
+ * mathematical expression. Supported operators are +, -, *, /, pow, log, abs,
+ * cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), MEAN, MAX, MIN, SD, COUNT,
+ * SUM, SUMSQUARED, ifelse. The 'A' letter refers to the value of the attribute
+ * being processed. Other attribute values (numeric only) can be accessed
+ * through the variables A1, A2, A3, ...
  *
  * Example: pow(A,6)/(MEAN+MAX)*ifelse(A<0,0,sqrt(A))+ifelse(![A>9 && A<15])
  * <p/>
@@ -85,520 +86,472 @@ import weka.filters.UnsupervisedFilter;
  * @author Prados Julien (julien.prados@cui.unige.ch)
  * @version $Revision$
  */
-public class MathExpression extends PotentialClassIgnorer implements
-  UnsupervisedFilter, WeightedInstancesHandler, WeightedAttributesHandler {
+public class MathExpression extends PotentialClassIgnorer implements UnsupervisedFilter, WeightedInstancesHandler, WeightedAttributesHandler {
 
-  /** for serialization */
-  static final long serialVersionUID = -3713222714671997901L;
+    /** for serialization */
+    static final long serialVersionUID = -3713222714671997901L;
 
-  /** Stores which columns to select as a funky range */
-  protected Range m_SelectCols = new Range();
+    /** Stores which columns to select as a funky range */
+    protected Range m_SelectCols = new Range();
 
-  /** The default modification expression */
-  public static final String m_defaultExpression = "(A-MIN)/(MAX-MIN)";
+    /** The default modification expression */
+    public static final String m_defaultExpression = "(A-MIN)/(MAX-MIN)";
 
-  /** The modification expression */
-  private String m_expression = m_defaultExpression;
-  
-  /** The compiled modification expression */
-  private DoubleExpression m_CompiledExpression;
+    /** The modification expression */
+    private String m_expression = m_defaultExpression;
 
-  /** Attributes statistics */
-  private Stats[] m_attStats;
+    /** The compiled modification expression */
+    private DoubleExpression m_CompiledExpression;
 
-  /** InstancesHelpers for different indices */
-  private InstancesHelper m_InstancesHelper;
-  
-  /** StatsHelpers for different indices */
-  private StatsHelper m_StatsHelper;
-  
-  /** VariableInitializer for the current value 'A' in an expression */
-  private VariableInitializer m_CurrentValue;
+    /** Attributes statistics */
+    private Stats[] m_attStats;
 
-  /**
-   * Constructor
-   */
-  public MathExpression() {
-    super();
-    setInvertSelection(false);
-  }
+    /** InstancesHelpers for different indices */
+    private InstancesHelper m_InstancesHelper;
 
-  /**
-   * Returns a string describing this filter
-   * 
-   * @return a description of the filter suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
+    /** StatsHelpers for different indices */
+    private StatsHelper m_StatsHelper;
 
-    return "Modify numeric attributes according to a given mathematical expression. Supported operators are +, -, *, " +
-            "/, pow, log, abs, cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), MEAN, MAX, MIN, SD, COUNT, SUM, " +
-            "SUMSQUARED, ifelse. The 'A' letter refers to the value of the attribute being processed. Other attribute " +
-            "values (numeric only) can be accessed through the variables A1, A2, A3, ... \n\nExample:" +
-            "pow(A,6)/(MEAN+MAX)*ifelse(A<0,0,sqrt(A))+ifelse(![A>9 && A<15])";
-  }
+    /** VariableInitializer for the current value 'A' in an expression */
+    private VariableInitializer m_CurrentValue;
 
-  /**
-   * Returns the Capabilities of this filter.
-   * 
-   * @return the capabilities of this object
-   * @see Capabilities
-   */
-  @Override
-  public Capabilities getCapabilities() {
-    Capabilities result = super.getCapabilities();
-    result.disableAll();
-
-    // attributes
-    result.enableAllAttributes();
-    result.enable(Capability.MISSING_VALUES);
-
-    // class
-    result.enableAllClasses();
-    result.enable(Capability.MISSING_CLASS_VALUES);
-    result.enable(Capability.NO_CLASS);
-
-    return result;
-  }
-
-  /**
-   * Sets the format of the input instances.
-   * 
-   * @param instanceInfo an Instances object containing the input instance
-   *          structure (any instances contained in the object are ignored -
-   *          only the structure is required).
-   * @return true if the outputFormat may be collected immediately
-   * @throws Exception if the input format can't be set successfully
-   */
-  @Override
-  public boolean setInputFormat(Instances instanceInfo) throws Exception {
-    m_SelectCols.setUpper(instanceInfo.numAttributes() - 1);
-    super.setInputFormat(instanceInfo);
-    setOutputFormat(instanceInfo);
-
-    m_attStats = new Stats[instanceInfo.numAttributes()];
-    
-    for (int i = 0; i < instanceInfo.numAttributes(); i++) {
-      if (m_SelectCols.isInRange(i)
-          && instanceInfo.attribute(i).isNumeric()
-          && (instanceInfo.classIndex() != i) || getIgnoreClass()) {
-        
-        m_attStats[i] = new Stats();
-      }
+    /**
+     * Constructor
+     */
+    public MathExpression() {
+        super();
+        setInvertSelection(false);
     }
-    
-    if (instanceInfo != null)
-      compile();
 
-    return true;
-  }
-  
-  /**
-   * Compiles the expression
-   * Requires that the input format is set and not null
-   * 
-   * @throws Exception if a compilation error occurs
-   */
-  private void compile() throws Exception {
+    /**
+     * Returns a string describing this filter
+     * 
+     * @return a description of the filter suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
 
-    m_InstancesHelper = new InstancesHelper(getInputFormat());
-    m_StatsHelper = new StatsHelper();
-    SimpleVariableDeclarations currentValueDeclaration = new SimpleVariableDeclarations();
-    currentValueDeclaration.addDouble("A");
-
-    Node node = Parser.parse(
-        // expression
-        m_expression,
-        // variables
-        new VariableDeclarationsCompositor(
-            m_InstancesHelper,
-            m_StatsHelper,
-            currentValueDeclaration
-            ),
-        // macros
-        new MacroDeclarationsCompositor(
-            m_InstancesHelper,
-            new MathFunctions(),
-            new IfElseMacro(),
-            new JavaMacro()
-            )
-        );
-
-    if (!(node instanceof DoubleExpression))
-      throw new Exception("Expression must be of type double!");
-    
-    m_CurrentValue = currentValueDeclaration.getInitializer();
-
-    m_CompiledExpression = (DoubleExpression) node;
-    
-  }
-
-  /**
-   * Input an instance for filtering. Filter requires all training instances be
-   * read before producing output.
-   * 
-   * @param instance the input instance
-   * @return true if the filtered instance may now be collected with output().
-   * @throws IllegalStateException if no input format has been set.
-   */
-  @Override
-  public boolean input(Instance instance) throws Exception {
-
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
+        return "Modify numeric attributes according to a given mathematical expression. Supported operators are +, -, *, " + "/, pow, log, abs, cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), MEAN, MAX, MIN, SD, COUNT, SUM, " + "SUMSQUARED, ifelse. The 'A' letter refers to the value of the attribute being processed. Other attribute " + "values (numeric only) can be accessed through the variables A1, A2, A3, ... \n\nExample:" + "pow(A,6)/(MEAN+MAX)*ifelse(A<0,0,sqrt(A))+ifelse(![A>9 && A<15])";
     }
-    if (m_NewBatch) {
-      resetQueue();
-      m_NewBatch = false;
-    }
-    if (!m_FirstBatchDone) {
-      for (int i = 0; i < instance.numAttributes(); i++) {
-        if (m_SelectCols.isInRange(i)
-            && instance.attribute(i).isNumeric()
-            && (getInputFormat().classIndex() != i)
-            && (!instance.isMissing(i))) {
 
-          m_attStats[i].add(instance.value(i), instance.weight());
+    /**
+     * Returns the Capabilities of this filter.
+     * 
+     * @return the capabilities of this object
+     * @see Capabilities
+     */
+    @Override
+    public Capabilities getCapabilities() {
+        Capabilities result = super.getCapabilities();
+        result.disableAll();
+
+        // attributes
+        result.enableAllAttributes();
+        result.enable(Capability.MISSING_VALUES);
+
+        // class
+        result.enableAllClasses();
+        result.enable(Capability.MISSING_CLASS_VALUES);
+        result.enable(Capability.NO_CLASS);
+
+        return result;
+    }
+
+    /**
+     * Sets the format of the input instances.
+     * 
+     * @param instanceInfo an Instances object containing the input instance
+     *                     structure (any instances contained in the object are
+     *                     ignored - only the structure is required).
+     * @return true if the outputFormat may be collected immediately
+     * @throws Exception if the input format can't be set successfully
+     */
+    @Override
+    public boolean setInputFormat(Instances instanceInfo) throws Exception {
+        m_SelectCols.setUpper(instanceInfo.numAttributes() - 1);
+        super.setInputFormat(instanceInfo);
+        setOutputFormat(instanceInfo);
+
+        m_attStats = new Stats[instanceInfo.numAttributes()];
+
+        for (int i = 0; i < instanceInfo.numAttributes(); i++) {
+            if (m_SelectCols.isInRange(i) && instanceInfo.attribute(i).isNumeric() && (instanceInfo.classIndex() != i) || getIgnoreClass()) {
+
+                m_attStats[i] = new Stats();
+            }
         }
-      }
-     
-      bufferInput(instance);
-      return false;
-    } else {
-      convertInstance(instance);
-      return true;
+
+        if (instanceInfo != null)
+            compile();
+
+        return true;
     }
-  }
 
-  /**
-   * Signify that this batch of input to the filter is finished. If the filter
-   * requires all instances prior to filtering, output() may now be called to
-   * retrieve the filtered instances.
-   * 
-   * @return true if there are instances pending output
-   * @throws IllegalStateException if no input structure has been defined
-   */
-  @Override
-  public boolean batchFinished() throws Exception {
+    /**
+     * Compiles the expression Requires that the input format is set and not null
+     * 
+     * @throws Exception if a compilation error occurs
+     */
+    private void compile() throws Exception {
 
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
+        m_InstancesHelper = new InstancesHelper(getInputFormat());
+        m_StatsHelper = new StatsHelper();
+        SimpleVariableDeclarations currentValueDeclaration = new SimpleVariableDeclarations();
+        currentValueDeclaration.addDouble("A");
+
+        Node node = Parser.parse(
+                // expression
+                m_expression,
+                // variables
+                new VariableDeclarationsCompositor(m_InstancesHelper, m_StatsHelper, currentValueDeclaration),
+                // macros
+                new MacroDeclarationsCompositor(m_InstancesHelper, new MathFunctions(), new IfElseMacro(), new JavaMacro()));
+
+        if (!(node instanceof DoubleExpression))
+            throw new Exception("Expression must be of type double!");
+
+        m_CurrentValue = currentValueDeclaration.getInitializer();
+
+        m_CompiledExpression = (DoubleExpression) node;
+
     }
-    if (!m_FirstBatchDone) {
-      
-      Instances input = getInputFormat();
 
-      for (int i = 0; i < input.numAttributes(); i++) {
-        if (m_SelectCols.isInRange(i)
-            && input.attribute(i).isNumeric()
-            && input.classIndex() != i) {
+    /**
+     * Input an instance for filtering. Filter requires all training instances be
+     * read before producing output.
+     * 
+     * @param instance the input instance
+     * @return true if the filtered instance may now be collected with output().
+     * @throws IllegalStateException if no input format has been set.
+     */
+    @Override
+    public boolean input(Instance instance) throws Exception {
 
-          m_attStats[i].calculateDerived();
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
         }
-      }
-      
+        if (m_NewBatch) {
+            resetQueue();
+            m_NewBatch = false;
+        }
+        if (!m_FirstBatchDone) {
+            for (int i = 0; i < instance.numAttributes(); i++) {
+                if (m_SelectCols.isInRange(i) && instance.attribute(i).isNumeric() && (getInputFormat().classIndex() != i) && (!instance.isMissing(i))) {
 
-      // Convert pending input instances
-      for (int i = 0; i < input.numInstances(); i++) {
-        convertInstance(input.instance(i));
-      }
-    }
-    // Free memory
-    flushInput();
+                    m_attStats[i].add(instance.value(i), instance.weight());
+                }
+            }
 
-    m_NewBatch = true;
-    m_FirstBatchDone = true;
-    return (numPendingOutput() != 0);
-  }
-
-  /**
-   * Convert a single instance over. The converted instance is added to the end
-   * of the output queue.
-   * 
-   * @param instance the instance to convert
-   * @throws Exception if instance cannot be converted
-   */
-  private void convertInstance(Instance instance) throws Exception {
-
-    double[] vals = instance.toDoubleArray();
-    for (int i = 0; i < instance.numAttributes(); i++) {
-
-      if (
-          m_SelectCols.isInRange(i)
-          && instance.attribute(i).isNumeric()
-          && !Utils.isMissingValue(vals[i])
-          && getInputFormat().classIndex() != i
-          ) {
-
-        // setup program
-        m_InstancesHelper.setInstance(instance);
-        m_StatsHelper.setStats(m_attStats[i]);
-        if (m_CurrentValue.hasVariable("A"))
-          m_CurrentValue.setDouble("A", vals[i]);
-
-        // compute
-        double value = m_CompiledExpression.evaluate();
-
-        // set new value
-        if (Double.isNaN(value) || Double.isInfinite(value) ||
-            m_InstancesHelper.missingAccessed()) {
-          System.err
-          .println("WARNING:Error in evaluating the expression: missing value set");
-          vals[i] = Utils.missingValue();
+            bufferInput(instance);
+            return false;
         } else {
-          vals[i] = value;
+            convertInstance(instance);
+            return true;
+        }
+    }
+
+    /**
+     * Signify that this batch of input to the filter is finished. If the filter
+     * requires all instances prior to filtering, output() may now be called to
+     * retrieve the filtered instances.
+     * 
+     * @return true if there are instances pending output
+     * @throws IllegalStateException if no input structure has been defined
+     */
+    @Override
+    public boolean batchFinished() throws Exception {
+
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
+        }
+        if (!m_FirstBatchDone) {
+
+            Instances input = getInputFormat();
+
+            for (int i = 0; i < input.numAttributes(); i++) {
+                if (m_SelectCols.isInRange(i) && input.attribute(i).isNumeric() && input.classIndex() != i) {
+
+                    m_attStats[i].calculateDerived();
+                }
+            }
+
+            // Convert pending input instances
+            for (int i = 0; i < input.numInstances(); i++) {
+                convertInstance(input.instance(i));
+            }
+        }
+        // Free memory
+        flushInput();
+
+        m_NewBatch = true;
+        m_FirstBatchDone = true;
+        return (numPendingOutput() != 0);
+    }
+
+    /**
+     * Convert a single instance over. The converted instance is added to the end of
+     * the output queue.
+     * 
+     * @param instance the instance to convert
+     * @throws Exception if instance cannot be converted
+     */
+    private void convertInstance(Instance instance) throws Exception {
+
+        double[] vals = instance.toDoubleArray();
+        for (int i = 0; i < instance.numAttributes(); i++) {
+
+            if (m_SelectCols.isInRange(i) && instance.attribute(i).isNumeric() && !Utils.isMissingValue(vals[i]) && getInputFormat().classIndex() != i) {
+
+                // setup program
+                m_InstancesHelper.setInstance(instance);
+                m_StatsHelper.setStats(m_attStats[i]);
+                if (m_CurrentValue.hasVariable("A"))
+                    m_CurrentValue.setDouble("A", vals[i]);
+
+                // compute
+                double value = m_CompiledExpression.evaluate();
+
+                // set new value
+                if (Double.isNaN(value) || Double.isInfinite(value) || m_InstancesHelper.missingAccessed()) {
+                    System.err.println("WARNING:Error in evaluating the expression: missing value set");
+                    vals[i] = Utils.missingValue();
+                } else {
+                    vals[i] = value;
+                }
+
+            }
         }
 
-      }
+        Instance outInstance;
+        if (instance instanceof SparseInstance) {
+            outInstance = new SparseInstance(instance.weight(), vals);
+        } else {
+            outInstance = new DenseInstance(instance.weight(), vals);
+        }
+        outInstance.setDataset(instance.dataset());
+        push(outInstance, false); // No need to copy instance
     }
 
-    Instance outInstance;
-    if (instance instanceof SparseInstance) {
-      outInstance = new SparseInstance(instance.weight(), vals);
-    } else {
-      outInstance = new DenseInstance(instance.weight(), vals);
-    }
-    outInstance.setDataset(instance.dataset());
-    push(outInstance, false); // No need to copy instance
-  }
+    /**
+     * Parses a given list of options.
+     * <p/>
+     * 
+     * <!-- options-start --> Valid options are:
+     * <p/>
+     * 
+     * <pre>
+     * -unset-class-temporarily
+     *  Unsets the class index temporarily before the filter is
+     *  applied to the data.
+     *  (default: no)
+     * </pre>
+     * 
+     * <pre>
+     * -E &lt;expression&gt;
+     *  Specify the expression to apply.
+     * </pre>
+     * 
+     * <pre>
+     * -R &lt;index1,index2-index4,...&gt;
+     *  Specify list of columns to ignore. First and last are valid
+     *  indexes. (default none)
+     * </pre>
+     * 
+     * <pre>
+     * -V
+     *  Invert matching sense (i.e. only modify specified columns)
+     * </pre>
+     * 
+     * <!-- options-end -->
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
 
-  /**
-   * Parses a given list of options.
-   * <p/>
-   * 
-   * <!-- options-start --> Valid options are:
-   * <p/>
-   * 
-   * <pre>
-   * -unset-class-temporarily
-   *  Unsets the class index temporarily before the filter is
-   *  applied to the data.
-   *  (default: no)
-   * </pre>
-   * 
-   * <pre>
-   * -E &lt;expression&gt;
-   *  Specify the expression to apply.
-   * </pre>
-   * 
-   * <pre>
-   * -R &lt;index1,index2-index4,...&gt;
-   *  Specify list of columns to ignore. First and last are valid
-   *  indexes. (default none)
-   * </pre>
-   * 
-   * <pre>
-   * -V
-   *  Invert matching sense (i.e. only modify specified columns)
-   * </pre>
-   * 
-   * <!-- options-end -->
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
+        String expString = Utils.getOption('E', options);
+        if (expString.length() != 0) {
+            setExpression(expString);
+        } else {
+            setExpression(m_defaultExpression);
+        }
 
-    String expString = Utils.getOption('E', options);
-    if (expString.length() != 0) {
-      setExpression(expString);
-    } else {
-      setExpression(m_defaultExpression);
-    }
+        String ignoreList = Utils.getOption('R', options);
+        if (ignoreList.length() != 0) {
+            setIgnoreRange(ignoreList);
+        }
 
-    String ignoreList = Utils.getOption('R', options);
-    if (ignoreList.length() != 0) {
-      setIgnoreRange(ignoreList);
+        setInvertSelection(Utils.getFlag('V', options));
+
+        super.setOptions(options);
+
+        Utils.checkForRemainingOptions(options);
     }
 
-    setInvertSelection(Utils.getFlag('V', options));
+    /**
+     * Gets the current settings of the filter.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
 
-    super.setOptions(options);
+        Vector<String> result = new Vector<String>();
 
-    Utils.checkForRemainingOptions(options);
-  }
+        result.add("-E");
+        result.add(getExpression());
 
-  /**
-   * Gets the current settings of the filter.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
+        if (getInvertSelection()) {
+            result.add("-V");
+        }
 
-    Vector<String> result = new Vector<String>();
+        if (!getIgnoreRange().equals("")) {
+            result.add("-R");
+            result.add(getIgnoreRange());
+        }
 
-    result.add("-E");
-    result.add(getExpression());
+        Collections.addAll(result, super.getOptions());
 
-    if (getInvertSelection()) {
-      result.add("-V");
+        return result.toArray(new String[result.size()]);
     }
 
-    if (!getIgnoreRange().equals("")) {
-      result.add("-R");
-      result.add(getIgnoreRange());
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+
+        Vector<Option> result = new Vector<Option>();
+
+        result.addElement(new Option("\tSpecify the expression to apply. Eg. pow(A,6)/(MEAN+MAX)" + "\n\tSupported operators are +, -, *, /, pow, log," + "\n\tabs, cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), " + "\n\tMEAN, MAX, MIN, SD, COUNT, SUM, SUMSQUARED, ifelse. The 'A'" + "\n\tletter refers to the value of the attribute being processed." + "\n\tOther attribute values (numeric only) can be accessed through" + "\n\tthe variables A1, A2, A3, ...", "E", 1, "-E <expression>"));
+
+        result.addElement(new Option("\tSpecify list of columns to ignore. First and last are valid\n" + "\tindexes. (default none)", "R", 1, "-R <index1,index2-index4,...>"));
+
+        result.addElement(new Option("\tInvert matching sense (i.e. only modify specified columns)", "V", 0, "-V"));
+
+        result.addAll(Collections.list(super.listOptions()));
+
+        return result.elements();
     }
 
-    Collections.addAll(result, super.getOptions());
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String expressionTipText() {
+        return "Specify the expression to apply.";
+    }
 
-    return result.toArray(new String[result.size()]);
-  }
+    /**
+     * Set the expression to apply
+     * 
+     * @param expr a mathematical expression to apply
+     * @throws Exception if the input format is set and there is a problem with the
+     *                   expression
+     */
+    public void setExpression(String expr) throws Exception {
+        m_expression = expr;
+        if (getInputFormat() != null)
+            compile();
+    }
 
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
+    /**
+     * Get the expression
+     * 
+     * @return the expression
+     */
+    public String getExpression() {
+        return m_expression;
+    }
 
-    Vector<Option> result = new Vector<Option>();
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String invertSelectionTipText() {
 
-    result.addElement(new Option(
-      "\tSpecify the expression to apply. Eg. pow(A,6)/(MEAN+MAX)"
-        + "\n\tSupported operators are +, -, *, /, pow, log,"
-        + "\n\tabs, cos, exp, sqrt, tan, sin, ceil, floor, rint, (, ), "
-        + "\n\tMEAN, MAX, MIN, SD, COUNT, SUM, SUMSQUARED, ifelse. The 'A'"
-        + "\n\tletter refers to the value of the attribute being processed."
-        + "\n\tOther attribute values (numeric only) can be accessed through"
-        + "\n\tthe variables A1, A2, A3, ...", "E", 1, "-E <expression>"));
+        return "Determines whether action is to select or unselect." + " If set to true, only the specified attributes will be modified;" + " If set to false, specified attributes will not be modified.";
+    }
 
-    result
-      .addElement(new Option(
-        "\tSpecify list of columns to ignore. First and last are valid\n"
-          + "\tindexes. (default none)", "R", 1,
-        "-R <index1,index2-index4,...>"));
+    /**
+     * Get whether the supplied columns are to be select or unselect
+     * 
+     * @return true if the supplied columns will be kept
+     */
+    public boolean getInvertSelection() {
 
-    result.addElement(new Option(
-      "\tInvert matching sense (i.e. only modify specified columns)", "V", 0,
-      "-V"));
+        return !m_SelectCols.getInvert();
+    }
 
-    result.addAll(Collections.list(super.listOptions()));
+    /**
+     * Set whether selected columns should be select or unselect. If true the
+     * selected columns are modified. If false the selected columns are not
+     * modified.
+     * 
+     * @param invert the new invert setting
+     */
+    public void setInvertSelection(boolean invert) {
 
-    return result.elements();
-  }
+        m_SelectCols.setInvert(!invert);
+    }
 
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String expressionTipText() {
-    return "Specify the expression to apply.";
-  }
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String ignoreRangeTipText() {
 
-  /**
-   * Set the expression to apply
-   * 
-   * @param expr a mathematical expression to apply
-   * @throws Exception if the input format is set and there is a problem with the expression
-   */
-  public void setExpression(String expr) throws Exception {
-    m_expression = expr;
-    if (getInputFormat() != null)
-      compile();
-  }
+        return "Specify range of attributes to ignore." + " This is a comma separated list of attribute indices, with" + " \"first\" and \"last\" valid values. Specify an inclusive" + " range with \"-\". E.g: \"first-3,5,6-10,last\".";
+    }
 
-  /**
-   * Get the expression
-   * 
-   * @return the expression
-   */
-  public String getExpression() {
-    return m_expression;
-  }
+    /**
+     * Get the current range selection.
+     * 
+     * @return a string containing a comma separated list of ranges
+     */
+    public String getIgnoreRange() {
 
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String invertSelectionTipText() {
+        return m_SelectCols.getRanges();
+    }
 
-    return "Determines whether action is to select or unselect."
-      + " If set to true, only the specified attributes will be modified;"
-      + " If set to false, specified attributes will not be modified.";
-  }
+    /**
+     * Set which attributes are to be ignored
+     * 
+     * @param rangeList a string representing the list of attributes. Since the
+     *                  string will typically come from a user, attributes are
+     *                  indexed from 1. <br/>
+     *                  eg: first-3,5,6-last
+     */
+    public void setIgnoreRange(String rangeList) {
 
-  /**
-   * Get whether the supplied columns are to be select or unselect
-   * 
-   * @return true if the supplied columns will be kept
-   */
-  public boolean getInvertSelection() {
+        m_SelectCols.setRanges(rangeList);
+    }
 
-    return !m_SelectCols.getInvert();
-  }
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 
-  /**
-   * Set whether selected columns should be select or unselect. If true the
-   * selected columns are modified. If false the selected columns are not
-   * modified.
-   * 
-   * @param invert the new invert setting
-   */
-  public void setInvertSelection(boolean invert) {
-
-    m_SelectCols.setInvert(!invert);
-  }
-
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String ignoreRangeTipText() {
-
-    return "Specify range of attributes to ignore."
-      + " This is a comma separated list of attribute indices, with"
-      + " \"first\" and \"last\" valid values. Specify an inclusive"
-      + " range with \"-\". E.g: \"first-3,5,6-10,last\".";
-  }
-
-  /**
-   * Get the current range selection.
-   * 
-   * @return a string containing a comma separated list of ranges
-   */
-  public String getIgnoreRange() {
-
-    return m_SelectCols.getRanges();
-  }
-
-  /**
-   * Set which attributes are to be ignored
-   * 
-   * @param rangeList a string representing the list of attributes. Since the
-   *          string will typically come from a user, attributes are indexed
-   *          from 1. <br/>
-   *          eg: first-3,5,6-last
-   */
-  public void setIgnoreRange(String rangeList) {
-
-    m_SelectCols.setRanges(rangeList);
-  }
-
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
-
-  /**
-   * Main method for testing this class.
-   * 
-   * @param argv should contain arguments to the filter: use -h for help
-   */
-  public static void main(String[] argv) {
-    runFilter(new MathExpression(), argv);
-  }
+    /**
+     * Main method for testing this class.
+     * 
+     * @param argv should contain arguments to the filter: use -h for help
+     */
+    public static void main(String[] argv) {
+        runFilter(new MathExpression(), argv);
+    }
 }

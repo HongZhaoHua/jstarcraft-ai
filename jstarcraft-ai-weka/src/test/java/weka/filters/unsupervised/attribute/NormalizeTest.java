@@ -27,49 +27,49 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Normalize. Run from the command line with:<p>
+ * Tests Normalize. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.attribute.NormalizeTest
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
 public class NormalizeTest extends AbstractFilterTest {
-  
-  public NormalizeTest(String name) { super(name);  }
 
-  /** Creates an example Normalize */
-  public Filter getFilter() {
-    Normalize f = new Normalize();
-    return f;
-  }
-
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-
-    // Check conversion is OK
-    for (int j = 0; j < result.numAttributes(); j++) {
-      if (result.attribute(j).isNumeric()) {
-        for (int i = 0; i < result.numInstances(); i++) {
-          if (!result.instance(i).isMissing(j)) {
-            assertTrue("Value should be between 0 and 1",
-                   (result.instance(i).value(j) >= 0) &&
-                   (result.instance(i).value(j) <= 1));
-          }
-        }
-      }
+    public NormalizeTest(String name) {
+        super(name);
     }
-  }
 
+    /** Creates an example Normalize */
+    public Filter getFilter() {
+        Normalize f = new Normalize();
+        return f;
+    }
 
-  public static Test suite() {
-    return new TestSuite(NormalizeTest.class);
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        // Check conversion is OK
+        for (int j = 0; j < result.numAttributes(); j++) {
+            if (result.attribute(j).isNumeric()) {
+                for (int i = 0; i < result.numInstances(); i++) {
+                    if (!result.instance(i).isMissing(j)) {
+                        assertTrue("Value should be between 0 and 1", (result.instance(i).value(j) >= 0) && (result.instance(i).value(j) <= 1));
+                    }
+                }
+            }
+        }
+    }
+
+    public static Test suite() {
+        return new TestSuite(NormalizeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

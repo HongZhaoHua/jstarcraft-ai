@@ -30,36 +30,29 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class SAMMETest
-{
-    
-    public SAMMETest()
-    {
+public class SAMMETest {
+
+    public SAMMETest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
         SAMME instance = new SAMME(new DecisionTree(2, 2, TreePruner.PruningMethod.NONE, 0.1), 50);
@@ -74,8 +67,7 @@ public class SAMMETest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
         SAMME instance = new SAMME(new DecisionTree(2, 2, TreePruner.PruningMethod.NONE, 0.1), 50);
@@ -85,14 +77,13 @@ public class SAMMETest
 
         ClassificationModelEvaluation cme = new ClassificationModelEvaluation(instance, train);
         cme.evaluateTestSet(test);
-        
+
         assertTrue(cme.getErrorRate() <= 0.15);
 
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         SAMME instance = new SAMME(new DecisionTree(10, 10, TreePruner.PruningMethod.NONE, 0.1), 50);
@@ -101,26 +92,26 @@ public class SAMMETest
         ClassificationDataSet t2 = FixedProblems.getCircles(1000, 0.1, 10.0);
 
         int errors;
-        
+
         instance = instance.clone();
 
         instance.train(t1);
 
         SAMME result = instance.clone();
-        
+
         errors = 0;
         for (int i = 0; i < t1.size(); i++)
-            errors += Math.abs(t1.getDataPointCategory(i) -  result.classify(t1.getDataPoint(i)).mostLikely());
+            errors += Math.abs(t1.getDataPointCategory(i) - result.classify(t1.getDataPoint(i)).mostLikely());
         assertTrue(errors < 100);
         result.train(t2);
 
         for (int i = 0; i < t1.size(); i++)
-            errors += Math.abs(t1.getDataPointCategory(i) -  instance.classify(t1.getDataPoint(i)).mostLikely());
+            errors += Math.abs(t1.getDataPointCategory(i) - instance.classify(t1.getDataPoint(i)).mostLikely());
         assertTrue(errors < 100);
 
         for (int i = 0; i < t2.size(); i++)
-            errors += Math.abs(t2.getDataPointCategory(i) -  result.classify(t2.getDataPoint(i)).mostLikely());
+            errors += Math.abs(t2.getDataPointCategory(i) - result.classify(t2.getDataPoint(i)).mostLikely());
         assertTrue(errors < 100);
     }
-    
+
 }

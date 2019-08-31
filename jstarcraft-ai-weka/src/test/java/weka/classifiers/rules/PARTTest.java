@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests PART. Run from the command line with:<p>
+ * Tests PART. Run from the command line with:
+ * <p>
  * java weka.classifiers.rules.PARTTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class PARTTest extends AbstractClassifierTest {
 
-  public PARTTest(String name) { super(name);  }
+    public PARTTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default PART */
-  public Classifier getClassifier() {
-    return new PART();
-  }
+    /** Creates a default PART */
+    public Classifier getClassifier() {
+        return new PART();
+    }
 
-  public static Test suite() {
-    return new TestSuite(PARTTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(PARTTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

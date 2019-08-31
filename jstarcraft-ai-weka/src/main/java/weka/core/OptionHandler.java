@@ -23,7 +23,7 @@ package weka.core;
 
 import java.util.Enumeration;
 
-/** 
+/**
  * Interface to something that understands options.
  *
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
@@ -32,65 +32,58 @@ import java.util.Enumeration;
  */
 public interface OptionHandler {
 
-  /**
-   * Returns an enumeration of all the available options..
-   *
-   * @return an enumeration of all available options.
-   */
-  Enumeration<Option> listOptions();
+    /**
+     * Returns an enumeration of all the available options..
+     *
+     * @return an enumeration of all available options.
+     */
+    Enumeration<Option> listOptions();
 
-  /**
-   * Sets the OptionHandler's options using the given list. All options
-   * will be set (or reset) during this call (i.e. incremental setting
-   * of options is not possible).
-   *
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  //@ requires options != null;
-  //@ requires \nonnullelements(options);
-  void setOptions(String[] options) throws Exception;
+    /**
+     * Sets the OptionHandler's options using the given list. All options will be
+     * set (or reset) during this call (i.e. incremental setting of options is not
+     * possible).
+     *
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    // @ requires options != null;
+    // @ requires \nonnullelements(options);
+    void setOptions(String[] options) throws Exception;
 
-  /**
-   * Gets the current option settings for the OptionHandler.
-   *
-   * @return the list of current option settings as an array of strings
-   */
-  //@ ensures \result != null;
-  //@ ensures \nonnullelements(\result);
-  /*@pure@*/ String[] getOptions();
+    /**
+     * Gets the current option settings for the OptionHandler.
+     *
+     * @return the list of current option settings as an array of strings
+     */
+    // @ ensures \result != null;
+    // @ ensures \nonnullelements(\result);
+    /* @pure@ */ String[] getOptions();
 
-  /**
-   * Creates an instance of the class that the given option handler belongs to and sets the options for this
-   * new instance by taking the option settings from the given option handler.
-   *
-   * If an exception is thrown when this process is performed, the fall back is to take a standard deep copy
-   * of the given option handler object. If that also fails, an exception is thrown by this method.
-   *
-   * A message will be printed to the standard error if the object is deep copied. A stack trace is also output
-   * in this case.
-   *
-   * @param toCopy the option handler to copy
-   *
-   * @exception Exception if the object could not be deep copied either
-   */
-  static OptionHandler makeCopy(OptionHandler toCopy) throws Exception {
+    /**
+     * Creates an instance of the class that the given option handler belongs to and
+     * sets the options for this new instance by taking the option settings from the
+     * given option handler.
+     *
+     * If an exception is thrown when this process is performed, the fall back is to
+     * take a standard deep copy of the given option handler object. If that also
+     * fails, an exception is thrown by this method.
+     *
+     * A message will be printed to the standard error if the object is deep copied.
+     * A stack trace is also output in this case.
+     *
+     * @param toCopy the option handler to copy
+     *
+     * @exception Exception if the object could not be deep copied either
+     */
+    static OptionHandler makeCopy(OptionHandler toCopy) throws Exception {
 
-    try {
-      return (OptionHandler)Utils.forName(Object.class, toCopy.getClass().getCanonicalName(), toCopy.getOptions());
-    } catch (Exception ex) {
-      System.err.println("WARNING: failed to copy option handler " + toCopy.getClass().getCanonicalName() + " with " +
-              "options " + String.join(" ", toCopy.getOptions()) + " --- trying deep copy instead");
-      ex.printStackTrace();
-      return (OptionHandler) (new SerializedObject(toCopy)).getObject();
+        try {
+            return (OptionHandler) Utils.forName(Object.class, toCopy.getClass().getCanonicalName(), toCopy.getOptions());
+        } catch (Exception ex) {
+            System.err.println("WARNING: failed to copy option handler " + toCopy.getClass().getCanonicalName() + " with " + "options " + String.join(" ", toCopy.getOptions()) + " --- trying deep copy instead");
+            ex.printStackTrace();
+            return (OptionHandler) (new SerializedObject(toCopy)).getObject();
+        }
     }
-  }
 }
-
-
-
-
-
-
-
-

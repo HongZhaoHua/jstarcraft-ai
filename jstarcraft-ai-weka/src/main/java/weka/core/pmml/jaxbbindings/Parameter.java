@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Parameter element declaration.
+ * <p>
+ * Java class for Parameter element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Parameter">
@@ -43,9 +44,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "Parameter")
 public class Parameter {
 
@@ -62,21 +61,21 @@ public class Parameter {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -90,10 +89,8 @@ public class Parameter {
     /**
      * Gets the value of the label property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getLabel() {
         return label;
@@ -102,10 +99,8 @@ public class Parameter {
     /**
      * Sets the value of the label property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setLabel(String value) {
         this.label = value;
@@ -114,10 +109,8 @@ public class Parameter {
     /**
      * Gets the value of the name property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getName() {
         return name;
@@ -126,10 +119,8 @@ public class Parameter {
     /**
      * Sets the value of the name property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setName(String value) {
         this.name = value;
@@ -138,14 +129,12 @@ public class Parameter {
     /**
      * Gets the value of the referencePoint property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getReferencePoint() {
         if (referencePoint == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return referencePoint;
         }
@@ -154,10 +143,8 @@ public class Parameter {
     /**
      * Sets the value of the referencePoint property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setReferencePoint(Double value) {
         this.referencePoint = value;

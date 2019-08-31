@@ -32,26 +32,25 @@ import junit.framework.TestSuite;
  */
 public class GeneralRegressionTest extends AbstractPMMLClassifierTest {
 
-  public GeneralRegressionTest(String name) {
-    super(name);
-  }
+    public GeneralRegressionTest(String name) {
+        super(name);
+    }
 
-  @Override
-  protected void setUp() throws Exception {
-    m_modelNames = new ArrayList<String>();
-    m_dataSetNames = new ArrayList<String>();
-    m_modelNames.add("polynomial_regression_model.xml");
-    m_modelNames.add("HEART_NOMREG.xml");
-    m_dataSetNames.add("Elnino_small.arff");
-    m_dataSetNames.add("heart-c.arff");
-  }
+    @Override
+    protected void setUp() throws Exception {
+        m_modelNames = new ArrayList<String>();
+        m_dataSetNames = new ArrayList<String>();
+        m_modelNames.add("polynomial_regression_model.xml");
+        m_modelNames.add("HEART_NOMREG.xml");
+        m_dataSetNames.add("Elnino_small.arff");
+        m_dataSetNames.add("heart-c.arff");
+    }
 
-  public static Test suite() {
-    return new TestSuite(
-      weka.classifiers.pmml.consumer.GeneralRegressionTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(weka.classifiers.pmml.consumer.GeneralRegressionTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

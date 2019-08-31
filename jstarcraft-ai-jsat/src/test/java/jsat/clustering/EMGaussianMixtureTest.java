@@ -30,59 +30,48 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class EMGaussianMixtureTest
-{
+public class EMGaussianMixtureTest {
     static private SimpleDataSet easyData;
-    
-    public EMGaussianMixtureTest()
-    {
-        
+
+    public EMGaussianMixtureTest() {
+
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
-    
- 
+
     @Test
-    public void testCluster_3args_2()
-    {
+    public void testCluster_3args_2() {
         System.out.println("cluster(dataset, int, threadpool)");
-        
+
         boolean good = false;
         int count = 0;
-        do
-        {
+        do {
             GridDataGenerator gdg = new GridDataGenerator(new NormalClampedSample(0, 0.05), RandomUtil.getRandom(), 2, 2);
             easyData = gdg.generateData(50);
 
             good = true;
-            for (boolean parallel : new boolean[]{true, false})
-            {
+            for (boolean parallel : new boolean[] { true, false }) {
                 EMGaussianMixture em = new EMGaussianMixture(SeedSelectionMethods.SeedSelection.FARTHEST_FIRST);
 
                 List<List<DataPoint>> clusters = em.cluster(easyData, 4, parallel);
                 assertEquals(4, clusters.size());
                 good = good & checkClusteringByCat(clusters);
             }
-        }
-        while (!good && count++ < 3);
+        } while (!good && count++ < 3);
         assertTrue(good);
     }
 

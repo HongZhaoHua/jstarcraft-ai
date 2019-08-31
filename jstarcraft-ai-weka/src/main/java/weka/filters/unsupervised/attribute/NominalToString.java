@@ -49,274 +49,269 @@ import weka.filters.UnsupervisedFilter;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class NominalToString extends Filter implements UnsupervisedFilter,
-  OptionHandler, WeightedInstancesHandler, WeightedAttributesHandler {
+public class NominalToString extends Filter implements UnsupervisedFilter, OptionHandler, WeightedInstancesHandler, WeightedAttributesHandler {
 
-  /** for serialization */
-  static final long serialVersionUID = 8655492378380068939L;
+    /** for serialization */
+    static final long serialVersionUID = 8655492378380068939L;
 
-  /** The attribute's index setting. */
-  private final Range m_AttIndex = new Range("last");
+    /** The attribute's index setting. */
+    private final Range m_AttIndex = new Range("last");
 
-  /**
-   * Returns a string describing this filter
-   * 
-   * @return a description of the filter suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "Converts a nominal attribute (that is, a set number of values) to string "
-      + "(that is, an unspecified number of values).";
-  }
-
-  /**
-   * Returns the Capabilities of this filter.
-   * 
-   * @return the capabilities of this object
-   * @see Capabilities
-   */
-  @Override
-  public Capabilities getCapabilities() {
-    Capabilities result = super.getCapabilities();
-    result.disableAll();
-
-    // attributes
-    result.enableAllAttributes();
-    result.enable(Capability.MISSING_VALUES);
-
-    // class
-    result.enableAllClasses();
-    result.enable(Capability.MISSING_CLASS_VALUES);
-    result.enable(Capability.NO_CLASS);
-
-    return result;
-  }
-
-  /**
-   * Sets the format of the input instances.
-   * 
-   * @param instanceInfo an Instances object containing the input instance
-   *          structure (any instances contained in the object are ignored -
-   *          only the structure is required).
-   * @return true if the outputFormat may be collected immediately.
-   * @throws UnsupportedAttributeTypeException if the selected attribute a
-   *           string attribute.
-   * @throws Exception if the input format can't be set successfully.
-   */
-  @Override
-  public boolean setInputFormat(Instances instanceInfo) throws Exception {
-    super.setInputFormat(instanceInfo);
-
-    m_AttIndex.setUpper(instanceInfo.numAttributes() - 1);
-
-    /*
-     * if (!instanceInfo.attribute(m_AttIndex.getIndex()).isNominal()) throw new
-     * UnsupportedAttributeTypeException("Chosen attribute is not of " +
-     * "type nominal.");
+    /**
+     * Returns a string describing this filter
+     * 
+     * @return a description of the filter suitable for displaying in the
+     *         explorer/experimenter gui
      */
-
-    return false;
-  }
-
-  /**
-   * Input an instance for filtering. The instance is processed and made
-   * available for output immediately.
-   * 
-   * @param instance the input instance.
-   * @return true if the filtered instance may now be collected with output().
-   * @throws IllegalStateException if no input structure has been defined.
-   */
-  @Override
-  public boolean input(Instance instance) {
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
+    public String globalInfo() {
+        return "Converts a nominal attribute (that is, a set number of values) to string " + "(that is, an unspecified number of values).";
     }
 
-    if (m_NewBatch) {
-      resetQueue();
-      m_NewBatch = false;
+    /**
+     * Returns the Capabilities of this filter.
+     * 
+     * @return the capabilities of this object
+     * @see Capabilities
+     */
+    @Override
+    public Capabilities getCapabilities() {
+        Capabilities result = super.getCapabilities();
+        result.disableAll();
+
+        // attributes
+        result.enableAllAttributes();
+        result.enable(Capability.MISSING_VALUES);
+
+        // class
+        result.enableAllClasses();
+        result.enable(Capability.MISSING_CLASS_VALUES);
+        result.enable(Capability.NO_CLASS);
+
+        return result;
     }
 
-    if (isOutputFormatDefined()) {
-      Instance newInstance = (Instance) instance.copy();
-      push(newInstance, false); // No need to copy
-      return true;
+    /**
+     * Sets the format of the input instances.
+     * 
+     * @param instanceInfo an Instances object containing the input instance
+     *                     structure (any instances contained in the object are
+     *                     ignored - only the structure is required).
+     * @return true if the outputFormat may be collected immediately.
+     * @throws UnsupportedAttributeTypeException if the selected attribute a string
+     *                                           attribute.
+     * @throws Exception                         if the input format can't be set
+     *                                           successfully.
+     */
+    @Override
+    public boolean setInputFormat(Instances instanceInfo) throws Exception {
+        super.setInputFormat(instanceInfo);
+
+        m_AttIndex.setUpper(instanceInfo.numAttributes() - 1);
+
+        /*
+         * if (!instanceInfo.attribute(m_AttIndex.getIndex()).isNominal()) throw new
+         * UnsupportedAttributeTypeException("Chosen attribute is not of " +
+         * "type nominal.");
+         */
+
+        return false;
     }
 
-    bufferInput(instance);
-    return false;
-  }
+    /**
+     * Input an instance for filtering. The instance is processed and made available
+     * for output immediately.
+     * 
+     * @param instance the input instance.
+     * @return true if the filtered instance may now be collected with output().
+     * @throws IllegalStateException if no input structure has been defined.
+     */
+    @Override
+    public boolean input(Instance instance) {
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
+        }
 
-  /**
-   * Signifies that this batch of input to the filter is finished. If the filter
-   * requires all instances prior to filtering, output() may now be called to
-   * retrieve the filtered instances.
-   * 
-   * @return true if there are instances pending output.
-   * @throws IllegalStateException if no input structure has been defined.
-   */
-  @Override
-  public boolean batchFinished() {
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
+        if (m_NewBatch) {
+            resetQueue();
+            m_NewBatch = false;
+        }
+
+        if (isOutputFormatDefined()) {
+            Instance newInstance = (Instance) instance.copy();
+            push(newInstance, false); // No need to copy
+            return true;
+        }
+
+        bufferInput(instance);
+        return false;
     }
 
-    if (!isOutputFormatDefined()) {
-      setOutputFormat();
+    /**
+     * Signifies that this batch of input to the filter is finished. If the filter
+     * requires all instances prior to filtering, output() may now be called to
+     * retrieve the filtered instances.
+     * 
+     * @return true if there are instances pending output.
+     * @throws IllegalStateException if no input structure has been defined.
+     */
+    @Override
+    public boolean batchFinished() {
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
+        }
 
-      // Convert pending input instances
-      for (int i = 0; i < getInputFormat().numInstances(); i++) {
-        push((Instance) getInputFormat().instance(i).copy(), false); // No need to copy
-      }
+        if (!isOutputFormatDefined()) {
+            setOutputFormat();
+
+            // Convert pending input instances
+            for (int i = 0; i < getInputFormat().numInstances(); i++) {
+                push((Instance) getInputFormat().instance(i).copy(), false); // No need to copy
+            }
+        }
+
+        flushInput();
+        m_NewBatch = true;
+
+        return (numPendingOutput() != 0);
     }
 
-    flushInput();
-    m_NewBatch = true;
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
 
-    return (numPendingOutput() != 0);
-  }
+        Vector<Option> result = new Vector<Option>();
 
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
+        result.addElement(new Option("\tSets the range of attributes to convert (default last).", "C", 1, "-C <col>"));
 
-    Vector<Option> result = new Vector<Option>();
-
-    result.addElement(new Option(
-      "\tSets the range of attributes to convert (default last).", "C", 1,
-      "-C <col>"));
-
-    return result.elements();
-  }
-
-  /**
-   * Parses a given list of options.
-   * <p/>
-   * 
-   * <!-- options-start --> Valid options are:
-   * <p/>
-   * 
-   * <pre>
-   * -C &lt;col&gt;
-   *  Sets the range of attributes to convert (default last).
-   * </pre>
-   * 
-   * <!-- options-end -->
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-
-    String tmpStr = Utils.getOption('C', options);
-    if (tmpStr.length() != 0) {
-      setAttributeIndexes(tmpStr);
-    } else {
-      setAttributeIndexes("last");
+        return result.elements();
     }
 
-    if (getInputFormat() != null) {
-      setInputFormat(getInputFormat());
+    /**
+     * Parses a given list of options.
+     * <p/>
+     * 
+     * <!-- options-start --> Valid options are:
+     * <p/>
+     * 
+     * <pre>
+     * -C &lt;col&gt;
+     *  Sets the range of attributes to convert (default last).
+     * </pre>
+     * 
+     * <!-- options-end -->
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+
+        String tmpStr = Utils.getOption('C', options);
+        if (tmpStr.length() != 0) {
+            setAttributeIndexes(tmpStr);
+        } else {
+            setAttributeIndexes("last");
+        }
+
+        if (getInputFormat() != null) {
+            setInputFormat(getInputFormat());
+        }
+
+        Utils.checkForRemainingOptions(options);
     }
 
-    Utils.checkForRemainingOptions(options);
-  }
+    /**
+     * Gets the current settings of the filter.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
 
-  /**
-   * Gets the current settings of the filter.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
+        Vector<String> result = new Vector<String>();
 
-    Vector<String> result = new Vector<String>();
+        result.add("-C");
+        result.add("" + (getAttributeIndexes()));
 
-    result.add("-C");
-    result.add("" + (getAttributeIndexes()));
-
-    return result.toArray(new String[result.size()]);
-  }
-
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String attributeIndexesTipText() {
-    return "Sets a range attributes to process. Any non-nominal "
-      + "attributes in the range are left untouched (\"first\" and \"last\" are valid values)";
-  }
-
-  /**
-   * Get the index of the attribute used.
-   * 
-   * @return the index of the attribute
-   */
-  public String getAttributeIndexes() {
-    // return m_AttIndex.getSingleIndex();
-    return m_AttIndex.getRanges();
-  }
-
-  /**
-   * Sets index of the attribute used.
-   * 
-   * @param attIndex the index of the attribute
-   */
-  public void setAttributeIndexes(String attIndex) {
-    // m_AttIndex.setSingleIndex(attIndex);
-    m_AttIndex.setRanges(attIndex);
-  }
-
-  /**
-   * Set the output format. Takes the current average class values and
-   * m_InputFormat and calls setOutputFormat(Instances) appropriately.
-   */
-  private void setOutputFormat() {
-    Instances newData;
-    ArrayList<Attribute> newAtts = new ArrayList<Attribute>(getInputFormat()
-      .numAttributes());
-    for (int j = 0; j < getInputFormat().numAttributes(); j++) {
-      Attribute att = getInputFormat().attribute(j);
-
-      if (!att.isNominal() || !m_AttIndex.isInRange(j)) {
-        newAtts.add(att);
-      } else {
-        Attribute newAtt = new Attribute(att.name(), (ArrayList<String>) null);
-        newAtt.setWeight(getInputFormat().attribute(j).weight());
-        newAtts.add(newAtt);
-      }
+        return result.toArray(new String[result.size()]);
     }
 
-    // Construct new header
-    newData = new Instances(getInputFormat().relationName(), newAtts, 0);
-    newData.setClassIndex(getInputFormat().classIndex());
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String attributeIndexesTipText() {
+        return "Sets a range attributes to process. Any non-nominal " + "attributes in the range are left untouched (\"first\" and \"last\" are valid values)";
+    }
 
-    setOutputFormat(newData);
-  }
+    /**
+     * Get the index of the attribute used.
+     * 
+     * @return the index of the attribute
+     */
+    public String getAttributeIndexes() {
+        // return m_AttIndex.getSingleIndex();
+        return m_AttIndex.getRanges();
+    }
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Sets index of the attribute used.
+     * 
+     * @param attIndex the index of the attribute
+     */
+    public void setAttributeIndexes(String attIndex) {
+        // m_AttIndex.setSingleIndex(attIndex);
+        m_AttIndex.setRanges(attIndex);
+    }
 
-  /**
-   * Main method for testing this class.
-   * 
-   * @param args should contain arguments to the filter: use -h for help
-   */
-  public static void main(String[] args) {
-    runFilter(new NominalToString(), args);
-  }
+    /**
+     * Set the output format. Takes the current average class values and
+     * m_InputFormat and calls setOutputFormat(Instances) appropriately.
+     */
+    private void setOutputFormat() {
+        Instances newData;
+        ArrayList<Attribute> newAtts = new ArrayList<Attribute>(getInputFormat().numAttributes());
+        for (int j = 0; j < getInputFormat().numAttributes(); j++) {
+            Attribute att = getInputFormat().attribute(j);
+
+            if (!att.isNominal() || !m_AttIndex.isInRange(j)) {
+                newAtts.add(att);
+            } else {
+                Attribute newAtt = new Attribute(att.name(), (ArrayList<String>) null);
+                newAtt.setWeight(getInputFormat().attribute(j).weight());
+                newAtts.add(newAtt);
+            }
+        }
+
+        // Construct new header
+        newData = new Instances(getInputFormat().relationName(), newAtts, 0);
+        newData.setClassIndex(getInputFormat().classIndex());
+
+        setOutputFormat(newData);
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Main method for testing this class.
+     * 
+     * @param args should contain arguments to the filter: use -h for help
+     */
+    public static void main(String[] args) {
+        runFilter(new NominalToString(), args);
+    }
 }

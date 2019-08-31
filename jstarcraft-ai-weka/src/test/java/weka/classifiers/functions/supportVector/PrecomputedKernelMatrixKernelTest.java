@@ -36,31 +36,30 @@ import weka.core.matrix.Matrix;
  */
 public class PrecomputedKernelMatrixKernelTest extends AbstractKernelTest {
 
-  public PrecomputedKernelMatrixKernelTest(String name) {
-    super(name);
-  }
-
-  /** Creates a default PrecomputedKernelMatrixKernell */
-  @Override
-  public Kernel getKernel() {
-    PrecomputedKernelMatrixKernel pc = new PrecomputedKernelMatrixKernel();
-
-    // load kernel matrix
-    try {
-      pc.setKernelMatrix(new Matrix(new InputStreamReader(ClassLoader
-        .getSystemResourceAsStream("weka/classifiers/data/test.matrix"))));
-    } catch (Exception e) {
-      e.printStackTrace();
+    public PrecomputedKernelMatrixKernelTest(String name) {
+        super(name);
     }
 
-    return pc;
-  }
+    /** Creates a default PrecomputedKernelMatrixKernell */
+    @Override
+    public Kernel getKernel() {
+        PrecomputedKernelMatrixKernel pc = new PrecomputedKernelMatrixKernel();
 
-  public static Test suite() {
-    return new TestSuite(PrecomputedKernelMatrixKernelTest.class);
-  }
+        // load kernel matrix
+        try {
+            pc.setKernelMatrix(new Matrix(new InputStreamReader(ClassLoader.getSystemResourceAsStream("weka/classifiers/data/test.matrix"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        return pc;
+    }
+
+    public static Test suite() {
+        return new TestSuite(PrecomputedKernelMatrixKernelTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

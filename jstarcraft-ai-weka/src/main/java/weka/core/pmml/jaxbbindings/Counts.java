@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Counts element declaration.
+ * <p>
+ * Java class for Counts element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Counts">
@@ -45,9 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "Counts")
 public class Counts {
 
@@ -66,21 +65,21 @@ public class Counts {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -94,10 +93,8 @@ public class Counts {
     /**
      * Gets the value of the cardinality property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getCardinality() {
         return cardinality;
@@ -106,10 +103,8 @@ public class Counts {
     /**
      * Sets the value of the cardinality property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setCardinality(BigInteger value) {
         this.cardinality = value;
@@ -118,10 +113,8 @@ public class Counts {
     /**
      * Gets the value of the invalidFreq property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getInvalidFreq() {
         return invalidFreq;
@@ -130,10 +123,8 @@ public class Counts {
     /**
      * Sets the value of the invalidFreq property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setInvalidFreq(Double value) {
         this.invalidFreq = value;
@@ -142,10 +133,8 @@ public class Counts {
     /**
      * Gets the value of the missingFreq property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMissingFreq() {
         return missingFreq;
@@ -154,10 +143,8 @@ public class Counts {
     /**
      * Sets the value of the missingFreq property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMissingFreq(Double value) {
         this.missingFreq = value;

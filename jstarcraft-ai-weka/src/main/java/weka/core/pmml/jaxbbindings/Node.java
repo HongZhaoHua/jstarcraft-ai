@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Node element declaration.
+ * <p>
+ * Java class for Node element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Node">
@@ -54,25 +55,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "Node")
 public class Node {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "Regression", namespace = "http://www.dmg.org/PMML-4_1", type = Regression.class),
-        @XmlElementRef(name = "SimplePredicate", namespace = "http://www.dmg.org/PMML-4_1", type = SimplePredicate.class),
-        @XmlElementRef(name = "SimpleSetPredicate", namespace = "http://www.dmg.org/PMML-4_1", type = SimpleSetPredicate.class),
-        @XmlElementRef(name = "False", namespace = "http://www.dmg.org/PMML-4_1", type = False.class),
-        @XmlElementRef(name = "Node", namespace = "http://www.dmg.org/PMML-4_1", type = Node.class),
-        @XmlElementRef(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_1", type = ScoreDistribution.class),
-        @XmlElementRef(name = "DecisionTree", namespace = "http://www.dmg.org/PMML-4_1", type = DecisionTree.class),
-        @XmlElementRef(name = "CompoundPredicate", namespace = "http://www.dmg.org/PMML-4_1", type = CompoundPredicate.class),
-        @XmlElementRef(name = "True", namespace = "http://www.dmg.org/PMML-4_1", type = True.class),
-        @XmlElementRef(name = "Partition", namespace = "http://www.dmg.org/PMML-4_1", type = Partition.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "Regression", namespace = "http://www.dmg.org/PMML-4_1", type = Regression.class), @XmlElementRef(name = "SimplePredicate", namespace = "http://www.dmg.org/PMML-4_1", type = SimplePredicate.class), @XmlElementRef(name = "SimpleSetPredicate", namespace = "http://www.dmg.org/PMML-4_1", type = SimpleSetPredicate.class), @XmlElementRef(name = "False", namespace = "http://www.dmg.org/PMML-4_1", type = False.class), @XmlElementRef(name = "Node", namespace = "http://www.dmg.org/PMML-4_1", type = Node.class), @XmlElementRef(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_1", type = ScoreDistribution.class), @XmlElementRef(name = "DecisionTree", namespace = "http://www.dmg.org/PMML-4_1", type = DecisionTree.class), @XmlElementRef(name = "CompoundPredicate", namespace = "http://www.dmg.org/PMML-4_1", type = CompoundPredicate.class), @XmlElementRef(name = "True", namespace = "http://www.dmg.org/PMML-4_1", type = True.class),
+            @XmlElementRef(name = "Partition", namespace = "http://www.dmg.org/PMML-4_1", type = Partition.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class) })
     protected List<Object> content;
     @XmlAttribute
     protected String defaultChild;
@@ -84,44 +72,37 @@ public class Node {
     protected String score;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Extension" is used by two different parts of a schema. See: 
-     * line 1845 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 1658 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Extension" is used by two different parts of a schema. See:
+     * line 1845 of file:/home/david/workspace/weka/pmml-4-1.xsd line 1658 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Regression }
-     * {@link SimpleSetPredicate }
-     * {@link SimplePredicate }
-     * {@link False }
-     * {@link Node }
-     * {@link ScoreDistribution }
-     * {@link DecisionTree }
-     * {@link True }
-     * {@link CompoundPredicate }
-     * {@link Extension }
-     * {@link Partition }
+     * Objects of the following type(s) are allowed in the list {@link Regression }
+     * {@link SimpleSetPredicate } {@link SimplePredicate } {@link False }
+     * {@link Node } {@link ScoreDistribution } {@link DecisionTree } {@link True }
+     * {@link CompoundPredicate } {@link Extension } {@link Partition }
      * 
      * 
      */
@@ -135,10 +116,8 @@ public class Node {
     /**
      * Gets the value of the defaultChild property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDefaultChild() {
         return defaultChild;
@@ -147,10 +126,8 @@ public class Node {
     /**
      * Sets the value of the defaultChild property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDefaultChild(String value) {
         this.defaultChild = value;
@@ -159,10 +136,8 @@ public class Node {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -171,10 +146,8 @@ public class Node {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -183,10 +156,8 @@ public class Node {
     /**
      * Gets the value of the recordCount property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getRecordCount() {
         return recordCount;
@@ -195,10 +166,8 @@ public class Node {
     /**
      * Sets the value of the recordCount property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setRecordCount(Double value) {
         this.recordCount = value;
@@ -207,10 +176,8 @@ public class Node {
     /**
      * Gets the value of the score property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getScore() {
         return score;
@@ -219,10 +186,8 @@ public class Node {
     /**
      * Sets the value of the score property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setScore(String value) {
         this.score = value;

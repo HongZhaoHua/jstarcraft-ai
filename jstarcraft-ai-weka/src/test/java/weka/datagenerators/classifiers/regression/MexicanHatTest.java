@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests MexicanHat. Run from the command line with:<p/>
+ * Tests MexicanHat. Run from the command line with:
+ * <p/>
  * java weka.datagenerators.classifiers.regression.MexicanHatTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class MexicanHatTest 
-  extends AbstractDataGeneratorTest {
+public class MexicanHatTest extends AbstractDataGeneratorTest {
 
-  public MexicanHatTest(String name) { 
-    super(name);  
-  }
+    public MexicanHatTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default MexicanHat */
-  public DataGenerator getGenerator() {
-    return new MexicanHat();
-  }
+    /** Creates a default MexicanHat */
+    public DataGenerator getGenerator() {
+        return new MexicanHat();
+    }
 
-  public static Test suite() {
-    return new TestSuite(MexicanHatTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(MexicanHatTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

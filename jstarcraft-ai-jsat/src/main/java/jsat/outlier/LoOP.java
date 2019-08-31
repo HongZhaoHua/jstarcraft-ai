@@ -31,154 +31,131 @@ import jsat.utils.IntList;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**
- * This class implements the Local Outlier Probabilities (LoOP) algorithm for outlier detection. 
+ * This class implements the Local Outlier Probabilities (LoOP) algorithm for
+ * outlier detection.
+ * 
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class LoOP implements Outlier
-{
+public class LoOP implements Outlier {
     int minPnts;
     private double lambda = 3;
     private DistanceMetric distanceMetric;
     VectorCollection<Vec> vc = new DefaultVectorCollection<>();
-    
-    
+
     /**
      * Stores the "standard distance" of an index in X to its nearest neighbors
      */
     private double[] standard_distance;
     private double nPLOF;
 
-    public LoOP()
-    {
+    public LoOP() {
         this(20);
     }
-    
-    public LoOP(int minPnts)
-    {
+
+    public LoOP(int minPnts) {
         this(minPnts, new EuclideanDistance());
     }
-    
-    public LoOP(int minPnts, DistanceMetric dm)
-    {
+
+    public LoOP(int minPnts, DistanceMetric dm) {
         setMinPnts(minPnts);
         setDistanceMetric(dm);
     }
 
-    public void setMinPnts(int minPnts)
-    {
+    public void setMinPnts(int minPnts) {
         this.minPnts = minPnts;
     }
 
-    public int getMinPnts()
-    {
+    public int getMinPnts() {
         return minPnts;
     }
 
-    public void setLambda(double lambda)
-    {
+    public void setLambda(double lambda) {
         this.lambda = lambda;
     }
 
-    public double getLambda()
-    {
+    public double getLambda() {
         return lambda;
     }
-    
-    public void setDistanceMetric(DistanceMetric distanceMetric)
-    {
+
+    public void setDistanceMetric(DistanceMetric distanceMetric) {
         this.distanceMetric = distanceMetric;
     }
 
-    public DistanceMetric getDistanceMetric()
-    {
+    public DistanceMetric getDistanceMetric() {
         return distanceMetric;
     }
-    
-    
-    
 
     @Override
-    public void fit(DataSet d, boolean parallel)
-    {
+    public void fit(DataSet d, boolean parallel) {
         List<Vec> X = d.getDataVectors();
         vc.build(parallel, X, distanceMetric);
-        
+
         int N = X.size();
         standard_distance = new double[N];
         List<List<Integer>> all_knn = new ArrayList<>();
         List<List<Double>> all_knn_dists = new ArrayList<>();
-        
-        vc.search(X, minPnts+1, all_knn, all_knn_dists, parallel);//+1 to avoid self distance
-        
-        ParallelUtils.run(parallel, N, (start, end)->
-        {
-            for(int i = start; i < end; i++)
-                standard_distance[i] = Math.sqrt(all_knn_dists.get(i).stream()
-                        .mapToDouble(z->z*z).sum()/minPnts+1e-6);
+
+        vc.search(X, minPnts + 1, all_knn, all_knn_dists, parallel);// +1 to avoid self distance
+
+        ParallelUtils.run(parallel, N, (start, end) -> {
+            for (int i = start; i < end; i++)
+                standard_distance[i] = Math.sqrt(all_knn_dists.get(i).stream().mapToDouble(z -> z * z).sum() / minPnts + 1e-6);
         });
-        
+
         double[] plof_internal = new double[N];
-        
-        nPLOF = ParallelUtils.run(parallel, N, (start, end)->
-        {
+
+        nPLOF = ParallelUtils.run(parallel, N, (start, end) -> {
             double sqrdPLOF = 0;
-            for(int i = start; i < end; i++)
-            {
+            for (int i = start; i < end; i++) {
                 double neighborSD = 0;
 
-                for(int j_indx = 1; j_indx < minPnts+1; j_indx++)
-                {
+                for (int j_indx = 1; j_indx < minPnts + 1; j_indx++) {
                     int neighbor = all_knn.get(i).get(j_indx);
                     neighborSD += standard_distance[neighbor];
                 }
-                
-                plof_internal[i] = standard_distance[i]/(neighborSD/minPnts) - 1;
-                sqrdPLOF += plof_internal[i]*plof_internal[i];
+
+                plof_internal[i] = standard_distance[i] / (neighborSD / minPnts) - 1;
+                sqrdPLOF += plof_internal[i] * plof_internal[i];
             }
-            
+
             return sqrdPLOF;
-        }, (a,b)->a+b);
-        
-        nPLOF = Math.sqrt(nPLOF/N);
-        
-        
+        }, (a, b) -> a + b);
+
+        nPLOF = Math.sqrt(nPLOF / N);
+
     }
-    
+
     @Override
-    public double score(DataPoint x)
-    {
+    public double score(DataPoint x) {
         IntList knn = new IntList(minPnts);
         DoubleList dists = new DoubleList(minPnts);
-        
+
         vc.search(x.getNumericalValues(), minPnts, knn, dists);
-        
-        
-        
+
         double e_pdist = 0;
         double stndDist_q = 0;
-        for(int i_indx = 0; i_indx < minPnts; i_indx++)
-        {
+        for (int i_indx = 0; i_indx < minPnts; i_indx++) {
             int neighbor = knn.get(i_indx);
             double dist = dists.get(i_indx);
-            
+
             e_pdist += standard_distance[neighbor];
-            
-            stndDist_q += dist*dist;
+
+            stndDist_q += dist * dist;
         }
-        
-        //lrd_x now has the local reachability distance of the query x
-        stndDist_q = Math.sqrt(stndDist_q/minPnts+1e-6);
-        //normalize pdist of neighbors
+
+        // lrd_x now has the local reachability distance of the query x
+        stndDist_q = Math.sqrt(stndDist_q / minPnts + 1e-6);
+        // normalize pdist of neighbors
         e_pdist /= minPnts;
-        
-        double plof_os = stndDist_q/e_pdist - 1;
-        
-        double loop = Math.max(0, SpecialMath.erf(plof_os/(lambda * nPLOF * Math.sqrt(2))));
-        
-        //loop, > 1/2 indicates outlier, <= 1/2 indicates inlier. 
-        //to map to interface (negative = outlier), -1*(loop-1/2)
-        
-        return -(loop-0.5);
+
+        double plof_os = stndDist_q / e_pdist - 1;
+
+        double loop = Math.max(0, SpecialMath.erf(plof_os / (lambda * nPLOF * Math.sqrt(2))));
+
+        // loop, > 1/2 indicates outlier, <= 1/2 indicates inlier.
+        // to map to interface (negative = outlier), -1*(loop-1/2)
+
+        return -(loop - 0.5);
     }
-    
+
 }

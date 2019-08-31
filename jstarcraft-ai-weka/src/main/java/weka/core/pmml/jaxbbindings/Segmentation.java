@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Segmentation element declaration.
+ * <p>
+ * Java class for Segmentation element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Segmentation">
@@ -42,10 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "segment"
-})
+@XmlType(name = "", propOrder = { "extension", "segment" })
 @XmlRootElement(name = "Segmentation")
 public class Segmentation {
 
@@ -60,21 +58,21 @@ public class Segmentation {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -89,21 +87,21 @@ public class Segmentation {
      * Gets the value of the segment property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the segment property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the segment property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getSegment().add(newItem);
+     * getSegment().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Segment }
+     * Objects of the following type(s) are allowed in the list {@link Segment }
      * 
      * 
      */
@@ -117,10 +115,8 @@ public class Segmentation {
     /**
      * Gets the value of the multipleModelMethod property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MULTIPLEMODELMETHOD }
-     *     
+     * @return possible object is {@link MULTIPLEMODELMETHOD }
+     * 
      */
     public MULTIPLEMODELMETHOD getMultipleModelMethod() {
         return multipleModelMethod;
@@ -129,10 +125,8 @@ public class Segmentation {
     /**
      * Sets the value of the multipleModelMethod property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MULTIPLEMODELMETHOD }
-     *     
+     * @param value allowed object is {@link MULTIPLEMODELMETHOD }
+     * 
      */
     public void setMultipleModelMethod(MULTIPLEMODELMETHOD value) {
         this.multipleModelMethod = value;

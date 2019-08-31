@@ -32,15 +32,13 @@ import java.beans.SimpleBeanInfo;
  */
 public class AddUserFieldsBeanInfo extends SimpleBeanInfo {
 
-  /**
-   * Get the bean descriptor for this bean
-   * 
-   * @return a <code>BeanDescriptor</code> value
-   */
-  @Override
-  public BeanDescriptor getBeanDescriptor() {
-    return new BeanDescriptor(
-        weka.filters.unsupervised.attribute.AddUserFields.class,
-        weka.gui.filters.AddUserFieldsCustomizer.class);
-  }
+    /**
+     * Get the bean descriptor for this bean
+     * 
+     * @return a <code>BeanDescriptor</code> value
+     */
+    @Override
+    public BeanDescriptor getBeanDescriptor() {
+        return new BeanDescriptor(weka.filters.unsupervised.attribute.AddUserFields.class, weka.gui.filters.AddUserFieldsCustomizer.class);
+    }
 }

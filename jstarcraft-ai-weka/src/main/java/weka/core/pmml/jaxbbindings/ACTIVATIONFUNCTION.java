@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for ACTIVATION-FUNCTION.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for ACTIVATION-FUNCTION.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="ACTIVATION-FUNCTION">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -42,30 +44,18 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum ACTIVATIONFUNCTION {
 
     @XmlEnumValue("arctan")
-    ARCTAN("arctan"),
-    @XmlEnumValue("cosine")
-    COSINE("cosine"),
-    @XmlEnumValue("Elliott")
-    ELLIOTT("Elliott"),
-    @XmlEnumValue("exponential")
-    EXPONENTIAL("exponential"),
-    @XmlEnumValue("Gauss")
-    GAUSS("Gauss"),
-    @XmlEnumValue("identity")
-    IDENTITY("identity"),
-    @XmlEnumValue("logistic")
-    LOGISTIC("logistic"),
-    @XmlEnumValue("radialBasis")
-    RADIAL_BASIS("radialBasis"),
-    @XmlEnumValue("reciprocal")
-    RECIPROCAL("reciprocal"),
-    @XmlEnumValue("sine")
-    SINE("sine"),
-    @XmlEnumValue("square")
-    SQUARE("square"),
-    @XmlEnumValue("tanh")
-    TANH("tanh"),
-    @XmlEnumValue("threshold")
+    ARCTAN("arctan"), @XmlEnumValue("cosine")
+    COSINE("cosine"), @XmlEnumValue("Elliott")
+    ELLIOTT("Elliott"), @XmlEnumValue("exponential")
+    EXPONENTIAL("exponential"), @XmlEnumValue("Gauss")
+    GAUSS("Gauss"), @XmlEnumValue("identity")
+    IDENTITY("identity"), @XmlEnumValue("logistic")
+    LOGISTIC("logistic"), @XmlEnumValue("radialBasis")
+    RADIAL_BASIS("radialBasis"), @XmlEnumValue("reciprocal")
+    RECIPROCAL("reciprocal"), @XmlEnumValue("sine")
+    SINE("sine"), @XmlEnumValue("square")
+    SQUARE("square"), @XmlEnumValue("tanh")
+    TANH("tanh"), @XmlEnumValue("threshold")
     THRESHOLD("threshold");
     private final String value;
 
@@ -78,7 +68,7 @@ public enum ACTIVATIONFUNCTION {
     }
 
     public static ACTIVATIONFUNCTION fromValue(String v) {
-        for (ACTIVATIONFUNCTION c: ACTIVATIONFUNCTION.values()) {
+        for (ACTIVATIONFUNCTION c : ACTIVATIONFUNCTION.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

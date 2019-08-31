@@ -35,284 +35,282 @@ import weka.core.Attribute;
  */
 public abstract class FieldMetaInfo implements Serializable {
 
-  /** ID added to avoid warning */
-  private static final long serialVersionUID = -6116715567129830143L;
-
-  /**
-   * Inner class for Values
-   */
-  public static class Value implements Serializable {
+    /** ID added to avoid warning */
+    private static final long serialVersionUID = -6116715567129830143L;
 
     /**
-     * For serialization
+     * Inner class for Values
      */
-    private static final long serialVersionUID = -3981030320273649739L;
+    public static class Value implements Serializable {
 
-    /** The value */
-    protected String m_value;
+        /**
+         * For serialization
+         */
+        private static final long serialVersionUID = -3981030320273649739L;
 
-    /**
-     * The display value (might hold a human readable value - e.g. product name
-     * instead of cryptic code).
-     */
-    protected String m_displayValue;
+        /** The value */
+        protected String m_value;
 
-    /**
-     * Enumerated type for the property. A value can be valid, invalid or
-     * indicate a value that should be considered as "missing".
-     */
-    public enum Property {
-      VALID("valid"), INVALID("invalid"), MISSING("missing");
+        /**
+         * The display value (might hold a human readable value - e.g. product name
+         * instead of cryptic code).
+         */
+        protected String m_displayValue;
 
-      private final String m_stringVal;
+        /**
+         * Enumerated type for the property. A value can be valid, invalid or indicate a
+         * value that should be considered as "missing".
+         */
+        public enum Property {
+            VALID("valid"), INVALID("invalid"), MISSING("missing");
 
-      Property(String name) {
-        m_stringVal = name;
-      }
+            private final String m_stringVal;
 
-      @Override
-      public String toString() {
-        return m_stringVal;
-      }
+            Property(String name) {
+                m_stringVal = name;
+            }
+
+            @Override
+            public String toString() {
+                return m_stringVal;
+            }
+        }
+
+        protected Property m_property = Property.VALID;
+
+        /**
+         * Construct a value.
+         * 
+         * @param value the Element containing the value
+         * @throws Exception if there is a problem constucting the value
+         */
+        protected Value(Element value) throws Exception {
+            m_value = value.getAttribute("value");
+            String displayV = value.getAttribute("displayValue");
+            if (displayV != null && displayV.length() > 0) {
+                m_displayValue = displayV;
+            }
+            String property = value.getAttribute("property");
+            if (property != null && property.length() > 0) {
+                for (Property p : Property.values()) {
+                    if (p.toString().equals(property)) {
+                        m_property = p;
+                        break;
+                    }
+                }
+            }
+        }
+
+        @Override
+        public String toString() {
+            String retV = m_value;
+            if (m_displayValue != null) {
+                retV += "(" + m_displayValue + "): " + m_property.toString();
+            }
+            return retV;
+        }
+
+        public String getValue() {
+            return m_value;
+        }
+
+        public String getDisplayValue() {
+            return m_displayValue;
+        }
+
+        public Property getProperty() {
+            return m_property;
+        }
     }
 
-    protected Property m_property = Property.VALID;
+    /**
+     * Inner class for an Interval.
+     */
+    public static class Interval implements Serializable {
+
+        /**
+         * For serialization
+         */
+        private static final long serialVersionUID = -7339790632684638012L;
+
+        /** The left boundary value */
+        protected double m_leftMargin = Double.NEGATIVE_INFINITY;
+
+        /** The right boundary value */
+        protected double m_rightMargin = Double.POSITIVE_INFINITY;
+
+        /**
+         * Enumerated type for the closure.
+         */
+        public enum Closure {
+            OPENCLOSED("openClosed", "(", "]"), OPENOPEN("openOpen", "(", ")"), CLOSEDOPEN("closedOpen", "[", ")"), CLOSEDCLOSED("closedClosed", "[", "]");
+
+            private final String m_stringVal;
+            private final String m_left;
+            private final String m_right;
+
+            Closure(String name, String left, String right) {
+                m_stringVal = name;
+                m_left = left;
+                m_right = right;
+            }
+
+            @Override
+            public String toString() {
+                return m_stringVal;
+            }
+
+            public String toString(double leftMargin, double rightMargin) {
+                return m_left + leftMargin + "-" + rightMargin + m_right;
+            }
+        }
+
+        protected Closure m_closure = Closure.OPENOPEN;
+
+        /**
+         * Construct an interval.
+         * 
+         * @param interval the Element containing the interval
+         * @throws Exception if there is a problem constructing the interval
+         */
+        protected Interval(Element interval) throws Exception {
+            String leftM = interval.getAttribute("leftMargin");
+            try {
+                m_leftMargin = Double.parseDouble(leftM);
+            } catch (IllegalArgumentException ex) {
+                throw new Exception("[Interval] Can't parse left margin as a number");
+            }
+
+            String rightM = interval.getAttribute("rightMargin");
+            try {
+                m_rightMargin = Double.parseDouble(rightM);
+            } catch (IllegalArgumentException ex) {
+                throw new Exception("[Interval] Can't parse right margin as a number");
+            }
+
+            String closure = interval.getAttribute("closure");
+            if (closure == null || closure.length() == 0) {
+                throw new Exception("[Interval] No closure specified!");
+            }
+            for (Closure c : Closure.values()) {
+                if (c.toString().equals(closure)) {
+                    m_closure = c;
+                    break;
+                }
+            }
+        }
+
+        /**
+         * Returns true if this interval contains the supplied value.
+         * 
+         * @param value the value to check
+         * @return true if the interval contains the supplied value
+         */
+        public boolean containsValue(double value) {
+            boolean result = false;
+
+            switch (m_closure) {
+            case OPENCLOSED:
+                if (value > m_leftMargin && value <= m_rightMargin) {
+                    result = true;
+                }
+                break;
+            case OPENOPEN:
+                if (value > m_leftMargin && value < m_rightMargin) {
+                    result = true;
+                }
+                break;
+            case CLOSEDOPEN:
+                if (value >= m_leftMargin && value < m_rightMargin) {
+                    result = true;
+                }
+                break;
+            case CLOSEDCLOSED:
+                if (value >= m_leftMargin && value <= m_rightMargin) {
+                    result = true;
+                }
+                break;
+            default:
+                result = false;
+                break;
+            }
+
+            return result;
+        }
+
+        @Override
+        public String toString() {
+            return m_closure.toString(m_leftMargin, m_rightMargin);
+        }
+    }
+
+    // -----------------------------
+
+    /** the name of the field */
+    protected String m_fieldName;
 
     /**
-     * Construct a value.
+     * Enumerated type for the Optype
+     */
+    public enum Optype {
+        NONE("none"), CONTINUOUS("continuous"), CATEGORICAL("categorical"), ORDINAL("ordinal");
+
+        private final String m_stringVal;
+
+        Optype(String name) {
+            m_stringVal = name;
+        }
+
+        @Override
+        public String toString() {
+            return m_stringVal;
+        }
+    }
+
+    /** The optype for the target */
+    protected Optype m_optype = Optype.NONE;
+
+    /**
+     * Get the optype.
      * 
-     * @param value the Element containing the value
-     * @throws Exception if there is a problem constucting the value
+     * @return the optype
      */
-    protected Value(Element value) throws Exception {
-      m_value = value.getAttribute("value");
-      String displayV = value.getAttribute("displayValue");
-      if (displayV != null && displayV.length() > 0) {
-        m_displayValue = displayV;
-      }
-      String property = value.getAttribute("property");
-      if (property != null && property.length() > 0) {
-        for (Property p : Property.values()) {
-          if (p.toString().equals(property)) {
-            m_property = p;
-            break;
-          }
-        }
-      }
+    public Optype getOptype() {
+        return m_optype;
     }
-
-    @Override
-    public String toString() {
-      String retV = m_value;
-      if (m_displayValue != null) {
-        retV += "(" + m_displayValue + "): " + m_property.toString();
-      }
-      return retV;
-    }
-
-    public String getValue() {
-      return m_value;
-    }
-
-    public String getDisplayValue() {
-      return m_displayValue;
-    }
-
-    public Property getProperty() {
-      return m_property;
-    }
-  }
-
-  /**
-   * Inner class for an Interval.
-   */
-  public static class Interval implements Serializable {
 
     /**
-     * For serialization
-     */
-    private static final long serialVersionUID = -7339790632684638012L;
-
-    /** The left boundary value */
-    protected double m_leftMargin = Double.NEGATIVE_INFINITY;
-
-    /** The right boundary value */
-    protected double m_rightMargin = Double.POSITIVE_INFINITY;
-
-    /**
-     * Enumerated type for the closure.
-     */
-    public enum Closure {
-      OPENCLOSED("openClosed", "(", "]"), OPENOPEN("openOpen", "(", ")"), CLOSEDOPEN(
-        "closedOpen", "[", ")"), CLOSEDCLOSED("closedClosed", "[", "]");
-
-      private final String m_stringVal;
-      private final String m_left;
-      private final String m_right;
-
-      Closure(String name, String left, String right) {
-        m_stringVal = name;
-        m_left = left;
-        m_right = right;
-      }
-
-      @Override
-      public String toString() {
-        return m_stringVal;
-      }
-
-      public String toString(double leftMargin, double rightMargin) {
-        return m_left + leftMargin + "-" + rightMargin + m_right;
-      }
-    }
-
-    protected Closure m_closure = Closure.OPENOPEN;
-
-    /**
-     * Construct an interval.
+     * Get the name of this field.
      * 
-     * @param interval the Element containing the interval
-     * @throws Exception if there is a problem constructing the interval
+     * @return the name of this field
      */
-    protected Interval(Element interval) throws Exception {
-      String leftM = interval.getAttribute("leftMargin");
-      try {
-        m_leftMargin = Double.parseDouble(leftM);
-      } catch (IllegalArgumentException ex) {
-        throw new Exception("[Interval] Can't parse left margin as a number");
-      }
-
-      String rightM = interval.getAttribute("rightMargin");
-      try {
-        m_rightMargin = Double.parseDouble(rightM);
-      } catch (IllegalArgumentException ex) {
-        throw new Exception("[Interval] Can't parse right margin as a number");
-      }
-
-      String closure = interval.getAttribute("closure");
-      if (closure == null || closure.length() == 0) {
-        throw new Exception("[Interval] No closure specified!");
-      }
-      for (Closure c : Closure.values()) {
-        if (c.toString().equals(closure)) {
-          m_closure = c;
-          break;
-        }
-      }
+    public String getFieldName() {
+        return m_fieldName;
     }
 
     /**
-     * Returns true if this interval contains the supplied value.
+     * Construct a new FieldMetaInfo.
      * 
-     * @param value the value to check
-     * @return true if the interval contains the supplied value
+     * @param field the Element containing the field
      */
-    public boolean containsValue(double value) {
-      boolean result = false;
+    public FieldMetaInfo(Element field) {
+        m_fieldName = field.getAttribute("name");
 
-      switch (m_closure) {
-      case OPENCLOSED:
-        if (value > m_leftMargin && value <= m_rightMargin) {
-          result = true;
+        String opType = field.getAttribute("optype");
+        if (opType != null && opType.length() > 0) {
+            for (Optype o : Optype.values()) {
+                if (o.toString().equals(opType)) {
+                    m_optype = o;
+                    break;
+                }
+            }
         }
-        break;
-      case OPENOPEN:
-        if (value > m_leftMargin && value < m_rightMargin) {
-          result = true;
-        }
-        break;
-      case CLOSEDOPEN:
-        if (value >= m_leftMargin && value < m_rightMargin) {
-          result = true;
-        }
-        break;
-      case CLOSEDCLOSED:
-        if (value >= m_leftMargin && value <= m_rightMargin) {
-          result = true;
-        }
-        break;
-      default:
-        result = false;
-        break;
-      }
-
-      return result;
     }
 
-    @Override
-    public String toString() {
-      return m_closure.toString(m_leftMargin, m_rightMargin);
-    }
-  }
-
-  // -----------------------------
-
-  /** the name of the field */
-  protected String m_fieldName;
-
-  /**
-   * Enumerated type for the Optype
-   */
-  public enum Optype {
-    NONE("none"), CONTINUOUS("continuous"), CATEGORICAL("categorical"), ORDINAL(
-      "ordinal");
-
-    private final String m_stringVal;
-
-    Optype(String name) {
-      m_stringVal = name;
-    }
-
-    @Override
-    public String toString() {
-      return m_stringVal;
-    }
-  }
-
-  /** The optype for the target */
-  protected Optype m_optype = Optype.NONE;
-
-  /**
-   * Get the optype.
-   * 
-   * @return the optype
-   */
-  public Optype getOptype() {
-    return m_optype;
-  }
-
-  /**
-   * Get the name of this field.
-   * 
-   * @return the name of this field
-   */
-  public String getFieldName() {
-    return m_fieldName;
-  }
-
-  /**
-   * Construct a new FieldMetaInfo.
-   * 
-   * @param field the Element containing the field
-   */
-  public FieldMetaInfo(Element field) {
-    m_fieldName = field.getAttribute("name");
-
-    String opType = field.getAttribute("optype");
-    if (opType != null && opType.length() > 0) {
-      for (Optype o : Optype.values()) {
-        if (o.toString().equals(opType)) {
-          m_optype = o;
-          break;
-        }
-      }
-    }
-  }
-
-  /**
-   * Return this field as an Attribute.
-   * 
-   * @return an Attribute for this field.
-   */
-  public abstract Attribute getFieldAsAttribute();
+    /**
+     * Return this field as an Attribute.
+     * 
+     * @return an Attribute for this field.
+     */
+    public abstract Attribute getFieldAsAttribute();
 }

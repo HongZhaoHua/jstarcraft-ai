@@ -26,66 +26,66 @@ import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
 /**
- * Tests the WordsFromFile stopwords algorithm. Run from commandline as follows:<br/>
- *   java weka.core.stopwords.WordsFromFileTest
+ * Tests the WordsFromFile stopwords algorithm. Run from commandline as
+ * follows:<br/>
+ * java weka.core.stopwords.WordsFromFileTest
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class WordsFromFileTest
-  extends AbstractStopwordsTest {
+public class WordsFromFileTest extends AbstractStopwordsTest {
 
-  /**
-   * Constructs the test.
-   * 
-   * @param name the name of the test
-   */
-  public WordsFromFileTest(String name) {
-    super(name);
-  }
+    /**
+     * Constructs the test.
+     * 
+     * @param name the name of the test
+     */
+    public WordsFromFileTest(String name) {
+        super(name);
+    }
 
-  /**
-   * Used to create an instance of a specific stopwords scheme.
-   * 
-   * @return a suitably configured <code>StopwordsHandler</code> value
-   */
-  @Override
-  public StopwordsHandler getStopwords() {
-    WordsFromFile	result;
-    
-    result = new WordsFromFile();
-    result.setStopwords(new File(getTmpDirectory() + File.separator + "WordsFromFile.txt"));
-    
-    return result;
-  }
+    /**
+     * Used to create an instance of a specific stopwords scheme.
+     * 
+     * @return a suitably configured <code>StopwordsHandler</code> value
+     */
+    @Override
+    public StopwordsHandler getStopwords() {
+        WordsFromFile result;
 
-  /**
-   * Called by JUnit before each test method.
-   * 
-   * @exception Exception if an error occurs reading the example instances.
-   */
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    copyResourceToTmp("WordsFromFile.txt");
-  }
+        result = new WordsFromFile();
+        result.setStopwords(new File(getTmpDirectory() + File.separator + "WordsFromFile.txt"));
 
-  /** 
-   * Called by JUnit after each test method.
-   */
-  @Override
-  protected void tearDown() {
-    deleteFileFromTmp("WordsFromFile.txt");
-    
-    super.tearDown();
-  }
-  
-  public static Test suite() {
-    return new TestSuite(WordsFromFileTest.class);
-  }
+        return result;
+    }
 
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+    /**
+     * Called by JUnit before each test method.
+     * 
+     * @exception Exception if an error occurs reading the example instances.
+     */
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        copyResourceToTmp("WordsFromFile.txt");
+    }
+
+    /**
+     * Called by JUnit after each test method.
+     */
+    @Override
+    protected void tearDown() {
+        deleteFileFromTmp("WordsFromFile.txt");
+
+        super.tearDown();
+    }
+
+    public static Test suite() {
+        return new TestSuite(WordsFromFileTest.class);
+    }
+
+    public static void main(String[] args) {
+        TestRunner.run(suite());
+    }
 }

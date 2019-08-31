@@ -22,16 +22,15 @@
 package weka.knowledgeflow;
 
 /**
- * Callback interface for receiving notification of a flow finishing
- * execution
+ * Callback interface for receiving notification of a flow finishing execution
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
 public interface ExecutionFinishedCallback {
 
-  /**
-   * Notification of the finish of execution
-   */
-  void executionFinished();
+    /**
+     * Notification of the finish of execution
+     */
+    void executionFinished();
 }

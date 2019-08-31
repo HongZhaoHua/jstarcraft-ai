@@ -32,24 +32,23 @@ import junit.framework.TestSuite;
  */
 public class SupportVectorMachineModelTest extends AbstractPMMLClassifierTest {
 
-  public SupportVectorMachineModelTest(String name) {
-    super(name);
-  }
+    public SupportVectorMachineModelTest(String name) {
+        super(name);
+    }
 
-  @Override
-  protected void setUp() throws Exception {
-    m_modelNames = new ArrayList<String>();
-    m_dataSetNames = new ArrayList<String>();
-    m_modelNames.add("Audit_SVM.xml");
-    m_dataSetNames.add("Audit_SVM_small.arff");
-  }
+    @Override
+    protected void setUp() throws Exception {
+        m_modelNames = new ArrayList<String>();
+        m_dataSetNames = new ArrayList<String>();
+        m_modelNames.add("Audit_SVM.xml");
+        m_dataSetNames.add("Audit_SVM_small.arff");
+    }
 
-  public static Test suite() {
-    return new TestSuite(
-      weka.classifiers.pmml.consumer.SupportVectorMachineModelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(weka.classifiers.pmml.consumer.SupportVectorMachineModelTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

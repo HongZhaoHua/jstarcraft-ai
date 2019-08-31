@@ -39,82 +39,79 @@ import weka.knowledgeflow.StepManager;
  * @version $Revision: $
  * @see ASEvaluator
  */
-@KFStep(name = "ASSearchStrategy", category = "AttSelection",
-  toolTipText = "Weka attribute selection search wrapper", iconPath = "")
+@KFStep(name = "ASSearchStrategy", category = "AttSelection", toolTipText = "Weka attribute selection search wrapper", iconPath = "")
 public class ASSearchStrategy extends WekaAlgorithmWrapper {
-  private static final long serialVersionUID = 5038697382280884975L;
+    private static final long serialVersionUID = 5038697382280884975L;
 
-  /**
-   * Initialize the step
-   */
-  @Override
-  public void stepInit() {
-    // nothing to do - we are just an "info" step
-  }
+    /**
+     * Initialize the step
+     */
+    @Override
+    public void stepInit() {
+        // nothing to do - we are just an "info" step
+    }
 
-  /**
-   * Get a list of incoming connections that this step accepts. This step is an
-   * info only step, so no incoming connections are allowed
-   * 
-   * @return a list of connections that this step accepts
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    // no incoming connections allowed
-    return new ArrayList<String>();
-  }
+    /**
+     * Get a list of incoming connections that this step accepts. This step is an
+     * info only step, so no incoming connections are allowed
+     * 
+     * @return a list of connections that this step accepts
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        // no incoming connections allowed
+        return new ArrayList<String>();
+    }
 
-  /**
-   * Get a list of outgoing connections from this step. This step is an info
-   * only step, so the only outgoing connection is of type "info".
-   * 
-   * @return a list of outgoing connections
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return Arrays.asList(StepManager.CON_INFO);
-  }
+    /**
+     * Get a list of outgoing connections from this step. This step is an info only
+     * step, so the only outgoing connection is of type "info".
+     * 
+     * @return a list of outgoing connections
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return Arrays.asList(StepManager.CON_INFO);
+    }
 
-  /**
-   * Get the class of the algorithm wrapped by this wrapper step (ASSearch in
-   * this case).
-   * 
-   * @return the class of the wrapped algorithm
-   */
-  @Override
-  public Class getWrappedAlgorithmClass() {
-    return weka.attributeSelection.ASSearch.class;
-  }
+    /**
+     * Get the class of the algorithm wrapped by this wrapper step (ASSearch in this
+     * case).
+     * 
+     * @return the class of the wrapped algorithm
+     */
+    @Override
+    public Class getWrappedAlgorithmClass() {
+        return weka.attributeSelection.ASSearch.class;
+    }
 
-  /**
-   * Set the actual algorithm wrapped by this instance
-   * 
-   * @param algo the algorithm wrapped
-   */
-  @Override
-  public void setWrappedAlgorithm(Object algo) {
-    super.setWrappedAlgorithm(algo);
-    m_defaultIconPath =
-      StepVisual.BASE_ICON_PATH
-        + "filters.supervised.attribute.AttributeSelection.gif";
-  }
+    /**
+     * Set the actual algorithm wrapped by this instance
+     * 
+     * @param algo the algorithm wrapped
+     */
+    @Override
+    public void setWrappedAlgorithm(Object algo) {
+        super.setWrappedAlgorithm(algo);
+        m_defaultIconPath = StepVisual.BASE_ICON_PATH + "filters.supervised.attribute.AttributeSelection.gif";
+    }
 
-  /**
-   * Set the search strategy wrapped by this step (calls setWrappedAlgorithm)
-   *
-   * @param searchStrategy the search strategy to wrap
-   */
-  @ProgrammaticProperty
-  public void setSearchStrategy(ASSearch searchStrategy) {
-    setWrappedAlgorithm(searchStrategy);
-  }
+    /**
+     * Set the search strategy wrapped by this step (calls setWrappedAlgorithm)
+     *
+     * @param searchStrategy the search strategy to wrap
+     */
+    @ProgrammaticProperty
+    public void setSearchStrategy(ASSearch searchStrategy) {
+        setWrappedAlgorithm(searchStrategy);
+    }
 
-  /**
-   * Get the search strategy wrapped by this step
-   *
-   * @return
-   */
-  public ASSearch getSearchStrategy() {
-    return (ASSearch) getWrappedAlgorithm();
-  }
+    /**
+     * Get the search strategy wrapped by this step
+     *
+     * @return
+     */
+    public ASSearch getSearchStrategy() {
+        return (ASSearch) getWrappedAlgorithm();
+    }
 }

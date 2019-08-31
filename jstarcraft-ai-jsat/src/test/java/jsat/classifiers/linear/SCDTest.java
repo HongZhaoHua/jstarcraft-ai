@@ -17,74 +17,64 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class SCDTest
-{
-    
-    public SCDTest()
-    {
+public class SCDTest {
+
+    public SCDTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of train method, of class SCD.
      */
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        
+
         ClassificationDataSet train = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
-        
+
         SCD scd = new SCD(new LogisticLoss(), 1e-6, 100);
         scd.train(train);
-        
+
         ClassificationDataSet test = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
-        {
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList()) {
             assertEquals(dpp.getPair().longValue(), scd.classify(dpp.getDataPoint()).mostLikely());
         }
-        
+
     }
 
     /**
      * Test of train method, of class SCD.
      */
     @Test
-    public void testTrain_RegressionDataSet()
-    {
+    public void testTrain_RegressionDataSet() {
         System.out.println("train");
         Random rand = new Random(123);
-        
-        SCD scd = new SCD(new SquaredLoss(), 1e-6, 1000);//needs more iters for regression
+
+        SCD scd = new SCD(new SquaredLoss(), 1e-6, 1000);// needs more iters for regression
         scd.train(FixedProblems.getLinearRegression(500, rand));
-        
-        for(DataPointPair<Double> dpp : FixedProblems.getLinearRegression(100, rand).getAsDPPList())
-        {
+
+        for (DataPointPair<Double> dpp : FixedProblems.getLinearRegression(100, rand).getAsDPPList()) {
             double truth = dpp.getPair();
             double pred = scd.regress(dpp.getDataPoint());
-            
-            double relErr = (truth-pred)/truth;
-            assertEquals(0.0, relErr, 0.1);//Give it a decent wiggle room b/c of regularization
+
+            double relErr = (truth - pred) / truth;
+            assertEquals(0.0, relErr, 0.1);// Give it a decent wiggle room b/c of regularization
         }
     }
 }

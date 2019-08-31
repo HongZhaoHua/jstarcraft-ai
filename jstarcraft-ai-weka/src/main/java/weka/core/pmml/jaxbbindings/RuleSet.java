@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for RuleSet element declaration.
+ * <p>
+ * Java class for RuleSet element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="RuleSet">
@@ -48,12 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "ruleSelectionMethod",
-    "scoreDistribution",
-    "rule"
-})
+@XmlType(name = "", propOrder = { "extension", "ruleSelectionMethod", "scoreDistribution", "rule" })
 @XmlRootElement(name = "RuleSet")
 public class RuleSet {
 
@@ -63,10 +59,7 @@ public class RuleSet {
     protected List<RuleSelectionMethod> ruleSelectionMethod;
     @XmlElement(name = "ScoreDistribution", namespace = "http://www.dmg.org/PMML-4_1", required = true)
     protected List<ScoreDistribution> scoreDistribution;
-    @XmlElements({
-        @XmlElement(name = "SimpleRule", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SimpleRule.class),
-        @XmlElement(name = "CompoundRule", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = CompoundRule.class)
-    })
+    @XmlElements({ @XmlElement(name = "SimpleRule", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SimpleRule.class), @XmlElement(name = "CompoundRule", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = CompoundRule.class) })
     protected List<Object> rule;
     @XmlAttribute
     protected Double defaultConfidence;
@@ -81,21 +74,21 @@ public class RuleSet {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -110,15 +103,16 @@ public class RuleSet {
      * Gets the value of the ruleSelectionMethod property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ruleSelectionMethod property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the ruleSelectionMethod property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getRuleSelectionMethod().add(newItem);
+     * getRuleSelectionMethod().add(newItem);
      * </pre>
      * 
      * 
@@ -139,15 +133,16 @@ public class RuleSet {
      * Gets the value of the scoreDistribution property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scoreDistribution property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the scoreDistribution property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getScoreDistribution().add(newItem);
+     * getScoreDistribution().add(newItem);
      * </pre>
      * 
      * 
@@ -168,21 +163,21 @@ public class RuleSet {
      * Gets the value of the rule property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rule property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the rule property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getRule().add(newItem);
+     * getRule().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SimpleRule }
+     * Objects of the following type(s) are allowed in the list {@link SimpleRule }
      * {@link CompoundRule }
      * 
      * 
@@ -197,10 +192,8 @@ public class RuleSet {
     /**
      * Gets the value of the defaultConfidence property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getDefaultConfidence() {
         return defaultConfidence;
@@ -209,10 +202,8 @@ public class RuleSet {
     /**
      * Sets the value of the defaultConfidence property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setDefaultConfidence(Double value) {
         this.defaultConfidence = value;
@@ -221,10 +212,8 @@ public class RuleSet {
     /**
      * Gets the value of the defaultScore property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDefaultScore() {
         return defaultScore;
@@ -233,10 +222,8 @@ public class RuleSet {
     /**
      * Sets the value of the defaultScore property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDefaultScore(String value) {
         this.defaultScore = value;
@@ -245,10 +232,8 @@ public class RuleSet {
     /**
      * Gets the value of the nbCorrect property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getNbCorrect() {
         return nbCorrect;
@@ -257,10 +242,8 @@ public class RuleSet {
     /**
      * Sets the value of the nbCorrect property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setNbCorrect(Double value) {
         this.nbCorrect = value;
@@ -269,10 +252,8 @@ public class RuleSet {
     /**
      * Gets the value of the recordCount property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getRecordCount() {
         return recordCount;
@@ -281,10 +262,8 @@ public class RuleSet {
     /**
      * Sets the value of the recordCount property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setRecordCount(Double value) {
         this.recordCount = value;

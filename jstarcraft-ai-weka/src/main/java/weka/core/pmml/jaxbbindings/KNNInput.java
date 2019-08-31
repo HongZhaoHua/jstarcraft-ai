@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for KNNInput element declaration.
+ * <p>
+ * Java class for KNNInput element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="KNNInput">
@@ -43,9 +44,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "KNNInput")
 public class KNNInput {
 
@@ -62,21 +61,21 @@ public class KNNInput {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -90,10 +89,8 @@ public class KNNInput {
     /**
      * Gets the value of the compareFunction property.
      * 
-     * @return
-     *     possible object is
-     *     {@link COMPAREFUNCTION }
-     *     
+     * @return possible object is {@link COMPAREFUNCTION }
+     * 
      */
     public COMPAREFUNCTION getCompareFunction() {
         return compareFunction;
@@ -102,10 +99,8 @@ public class KNNInput {
     /**
      * Sets the value of the compareFunction property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link COMPAREFUNCTION }
-     *     
+     * @param value allowed object is {@link COMPAREFUNCTION }
+     * 
      */
     public void setCompareFunction(COMPAREFUNCTION value) {
         this.compareFunction = value;
@@ -114,10 +109,8 @@ public class KNNInput {
     /**
      * Gets the value of the field property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getField() {
         return field;
@@ -126,10 +119,8 @@ public class KNNInput {
     /**
      * Sets the value of the field property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setField(String value) {
         this.field = value;
@@ -138,14 +129,12 @@ public class KNNInput {
     /**
      * Gets the value of the fieldWeight property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getFieldWeight() {
         if (fieldWeight == null) {
-            return  1.0D;
+            return 1.0D;
         } else {
             return fieldWeight;
         }
@@ -154,10 +143,8 @@ public class KNNInput {
     /**
      * Sets the value of the fieldWeight property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setFieldWeight(Double value) {
         this.fieldWeight = value;

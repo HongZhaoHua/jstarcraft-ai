@@ -30,91 +30,91 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests KernelFilter. Run from the command line with: <p/>
+ * Tests KernelFilter. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.KernelFilterTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class KernelFilterTest 
-  extends AbstractFilterTest {
-  
-  public KernelFilterTest(String name) { 
-    super(name);  
-  }
+public class KernelFilterTest extends AbstractFilterTest {
 
-  /** Creates a default KernelFilter */
-  public Filter getFilter() {
-    return new KernelFilter();
-  }
+    public KernelFilterTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the configured FilteredClassifier. Since the base classifier is
-   * determined heuristically, derived tests might need to adjust it.
-   * 
-   * @return the configured FilteredClassifier
-   */
-  protected FilteredClassifier getFilteredClassifier() {
-    FilteredClassifier	result;
-    
-    result = new FilteredClassifier();
-    
-    result.setFilter(getFilter());
-    result.setClassifier(new weka.classifiers.trees.J48());
-    
-    return result;
-  }
-  
-  /**
-   * returns data generated for the FilteredClassifier test
-   * 
-   * @return		the dataset for the FilteredClassifier
-   * @throws Exception	if generation of data fails
-   */
-  protected Instances getFilteredClassifierData() throws Exception{
-    TestInstances	test;
-    Instances		result;
+    /** Creates a default KernelFilter */
+    public Filter getFilter() {
+        return new KernelFilter();
+    }
 
-    test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
-    test.setClassIndex(TestInstances.CLASS_IS_LAST);
+    /**
+     * returns the configured FilteredClassifier. Since the base classifier is
+     * determined heuristically, derived tests might need to adjust it.
+     * 
+     * @return the configured FilteredClassifier
+     */
+    protected FilteredClassifier getFilteredClassifier() {
+        FilteredClassifier result;
 
-    result = test.generate();
-    
-    return result;
-  }
+        result = new FilteredClassifier();
 
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default filter to test and loads a test set of Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
+        result.setFilter(getFilter());
+        result.setClassifier(new weka.classifiers.trees.J48());
 
-    TestInstances test = new TestInstances();
-    test.setNumNominal(0);
-    test.setNumNumeric(2);
-    test.setClassType(Attribute.NUMERIC);
-    m_Instances = test.generate();
-  }
+        return result;
+    }
 
-  /**
-   * performs a typical test
-   */
-  public void testTypical() {
-    Instances icopy = new Instances(m_Instances);
-    
-    m_Filter = getFilter();
-    Instances result = useFilter();
-    assertEquals(result.numAttributes(), icopy.numInstances() + 1);
-  }
+    /**
+     * returns data generated for the FilteredClassifier test
+     * 
+     * @return the dataset for the FilteredClassifier
+     * @throws Exception if generation of data fails
+     */
+    protected Instances getFilteredClassifierData() throws Exception {
+        TestInstances test;
+        Instances result;
 
-  public static Test suite() {
-    return new TestSuite(KernelFilterTest.class);
-  }
+        test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
+        test.setClassIndex(TestInstances.CLASS_IS_LAST);
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        result = test.generate();
+
+        return result;
+    }
+
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default filter to test and loads a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        TestInstances test = new TestInstances();
+        test.setNumNominal(0);
+        test.setNumNumeric(2);
+        test.setClassType(Attribute.NUMERIC);
+        m_Instances = test.generate();
+    }
+
+    /**
+     * performs a typical test
+     */
+    public void testTypical() {
+        Instances icopy = new Instances(m_Instances);
+
+        m_Filter = getFilter();
+        Instances result = useFilter();
+        assertEquals(result.numAttributes(), icopy.numInstances() + 1);
+    }
+
+    public static Test suite() {
+        return new TestSuite(KernelFilterTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests CorrelationAttributeEval. Run from the command line with:<p/>
+ * Tests CorrelationAttributeEval. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.CorrelationAttributeEvalTest
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class CorrelationAttributeEvalTest 
-  extends AbstractEvaluatorTest {
+public class CorrelationAttributeEvalTest extends AbstractEvaluatorTest {
 
-  public CorrelationAttributeEvalTest(String name) { 
-    super(name);  
-  }
+    public CorrelationAttributeEvalTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Ranker */
-  public ASSearch getSearch() {
-    return new Ranker();
-  }
+    /** Creates a default Ranker */
+    public ASSearch getSearch() {
+        return new Ranker();
+    }
 
-  /** Creates a default InfoGainAttributeEval */
-  public ASEvaluation getEvaluator() {
-    return new CorrelationAttributeEval();
-  }
+    /** Creates a default InfoGainAttributeEval */
+    public ASEvaluation getEvaluator() {
+        return new CorrelationAttributeEval();
+    }
 
-  public static Test suite() {
-    return new TestSuite(CorrelationAttributeEvalTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(CorrelationAttributeEvalTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

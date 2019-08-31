@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Apply element declaration.
+ * <p>
+ * Java class for Apply element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Apply">
@@ -45,25 +46,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "expression"
-})
+@XmlType(name = "", propOrder = { "extension", "expression" })
 @XmlRootElement(name = "Apply")
 public class Apply {
 
     @XmlElement(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", required = true)
     protected List<Extension> extension;
-    @XmlElements({
-        @XmlElement(name = "Apply", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Apply.class),
-        @XmlElement(name = "Discretize", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Discretize.class),
-        @XmlElement(name = "NormContinuous", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NormContinuous.class),
-        @XmlElement(name = "MapValues", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = MapValues.class),
-        @XmlElement(name = "Constant", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Constant.class),
-        @XmlElement(name = "Aggregate", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Aggregate.class),
-        @XmlElement(name = "FieldRef", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = FieldRef.class),
-        @XmlElement(name = "NormDiscrete", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NormDiscrete.class)
-    })
+    @XmlElements({ @XmlElement(name = "Apply", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Apply.class), @XmlElement(name = "Discretize", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Discretize.class), @XmlElement(name = "NormContinuous", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NormContinuous.class), @XmlElement(name = "MapValues", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = MapValues.class), @XmlElement(name = "Constant", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Constant.class), @XmlElement(name = "Aggregate", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Aggregate.class), @XmlElement(name = "FieldRef", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = FieldRef.class), @XmlElement(name = "NormDiscrete", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NormDiscrete.class) })
     protected List<Object> expression;
     @XmlAttribute(required = true)
     protected String function;
@@ -76,21 +65,21 @@ public class Apply {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -105,28 +94,23 @@ public class Apply {
      * Gets the value of the expression property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the expression property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the expression property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getEXPRESSION().add(newItem);
+     * getEXPRESSION().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Apply }
-     * {@link Discretize }
-     * {@link NormContinuous }
-     * {@link MapValues }
-     * {@link Constant }
-     * {@link Aggregate }
-     * {@link FieldRef }
-     * {@link NormDiscrete }
+     * Objects of the following type(s) are allowed in the list {@link Apply }
+     * {@link Discretize } {@link NormContinuous } {@link MapValues }
+     * {@link Constant } {@link Aggregate } {@link FieldRef } {@link NormDiscrete }
      * 
      * 
      */
@@ -140,10 +124,8 @@ public class Apply {
     /**
      * Gets the value of the function property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getFunction() {
         return function;
@@ -152,10 +134,8 @@ public class Apply {
     /**
      * Sets the value of the function property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setFunction(String value) {
         this.function = value;
@@ -164,10 +144,8 @@ public class Apply {
     /**
      * Gets the value of the invalidValueTreatment property.
      * 
-     * @return
-     *     possible object is
-     *     {@link INVALIDVALUETREATMENTMETHOD }
-     *     
+     * @return possible object is {@link INVALIDVALUETREATMENTMETHOD }
+     * 
      */
     public INVALIDVALUETREATMENTMETHOD getInvalidValueTreatment() {
         if (invalidValueTreatment == null) {
@@ -180,10 +158,8 @@ public class Apply {
     /**
      * Sets the value of the invalidValueTreatment property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link INVALIDVALUETREATMENTMETHOD }
-     *     
+     * @param value allowed object is {@link INVALIDVALUETREATMENTMETHOD }
+     * 
      */
     public void setInvalidValueTreatment(INVALIDVALUETREATMENTMETHOD value) {
         this.invalidValueTreatment = value;
@@ -192,10 +168,8 @@ public class Apply {
     /**
      * Gets the value of the mapMissingTo property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getMapMissingTo() {
         return mapMissingTo;
@@ -204,10 +178,8 @@ public class Apply {
     /**
      * Sets the value of the mapMissingTo property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setMapMissingTo(String value) {
         this.mapMissingTo = value;

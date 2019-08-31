@@ -23,29 +23,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BallTree. Run from the command line with: <p/>
+ * Tests BallTree. Run from the command line with:
+ * <p/>
  * java weka.core.neighboursearch.BallTreeTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class BallTreeTest
-  extends AbstractNearestNeighbourSearchTest {
+public class BallTreeTest extends AbstractNearestNeighbourSearchTest {
 
-  public BallTreeTest(String name) {
-    super(name);
-  }
+    public BallTreeTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default BallTree */
-  public NearestNeighbourSearch getNearestNeighbourSearch() {
-    return new BallTree();
-  }
-  
-  public static Test suite() {
-    return new TestSuite(BallTreeTest.class);
-  }
+    /** Creates a default BallTree */
+    public NearestNeighbourSearch getNearestNeighbourSearch() {
+        return new BallTree();
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(BallTreeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -21,7 +21,6 @@ package jsat.utils.concurrent;
  * @author Edward Raff
  * @param <T> The object type that the IndexReducer will return
  */
-public interface IndexReducer<T>
-{
+public interface IndexReducer<T> {
     public T run(int indx);
 }

@@ -30,8 +30,8 @@ package weka.filters;
 
 public interface SupervisedFilter {
 
-  /**
-   * Empty interface, to be used as a hint of the filters behaviour.
-   */
+    /**
+     * Empty interface, to be used as a hint of the filters behaviour.
+     */
 
 }

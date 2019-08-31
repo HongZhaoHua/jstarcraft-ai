@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for SequenceRule element declaration.
+ * <p>
+ * Java class for SequenceRule element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="SequenceRule">
@@ -53,19 +54,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "SequenceRule")
 public class SequenceRule {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "Time", namespace = "http://www.dmg.org/PMML-4_1", type = Time.class),
-        @XmlElementRef(name = "Delimiter", namespace = "http://www.dmg.org/PMML-4_1", type = Delimiter.class),
-        @XmlElementRef(name = "AntecedentSequence", namespace = "http://www.dmg.org/PMML-4_1", type = AntecedentSequence.class),
-        @XmlElementRef(name = "ConsequentSequence", namespace = "http://www.dmg.org/PMML-4_1", type = ConsequentSequence.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "Time", namespace = "http://www.dmg.org/PMML-4_1", type = Time.class), @XmlElementRef(name = "Delimiter", namespace = "http://www.dmg.org/PMML-4_1", type = Delimiter.class), @XmlElementRef(name = "AntecedentSequence", namespace = "http://www.dmg.org/PMML-4_1", type = AntecedentSequence.class), @XmlElementRef(name = "ConsequentSequence", namespace = "http://www.dmg.org/PMML-4_1", type = ConsequentSequence.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class) })
     protected List<Object> content;
     @XmlAttribute(required = true)
     protected double confidence;
@@ -81,38 +74,36 @@ public class SequenceRule {
     protected double support;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Time" is used by two different parts of a schema. See: 
-     * line 466 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 464 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Time" is used by two different parts of a schema. See: line
+     * 466 of file:/home/david/workspace/weka/pmml-4-1.xsd line 464 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ConsequentSequence }
-     * {@link Delimiter }
-     * {@link Time }
-     * {@link AntecedentSequence }
-     * {@link Extension }
+     * {@link ConsequentSequence } {@link Delimiter } {@link Time }
+     * {@link AntecedentSequence } {@link Extension }
      * 
      * 
      */
@@ -142,10 +133,8 @@ public class SequenceRule {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -154,10 +143,8 @@ public class SequenceRule {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -166,10 +153,8 @@ public class SequenceRule {
     /**
      * Gets the value of the lift property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getLift() {
         return lift;
@@ -178,10 +163,8 @@ public class SequenceRule {
     /**
      * Sets the value of the lift property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setLift(Double value) {
         this.lift = value;
@@ -190,10 +173,8 @@ public class SequenceRule {
     /**
      * Gets the value of the numberOfSets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfSets() {
         return numberOfSets;
@@ -202,10 +183,8 @@ public class SequenceRule {
     /**
      * Sets the value of the numberOfSets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfSets(BigInteger value) {
         this.numberOfSets = value;
@@ -214,10 +193,8 @@ public class SequenceRule {
     /**
      * Gets the value of the occurrence property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getOccurrence() {
         return occurrence;
@@ -226,10 +203,8 @@ public class SequenceRule {
     /**
      * Sets the value of the occurrence property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setOccurrence(BigInteger value) {
         this.occurrence = value;

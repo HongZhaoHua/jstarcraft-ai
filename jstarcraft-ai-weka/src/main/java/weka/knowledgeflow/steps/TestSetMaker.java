@@ -36,116 +36,106 @@ import java.util.List;
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  */
-@KFStep(name = "TestSetMaker", category = "Evaluation",
-  toolTipText = "Make an incoming dataSet or trainingSet into a testSet",
-  iconPath = KFGUIConsts.BASE_ICON_PATH + "TestSetMaker.gif")
+@KFStep(name = "TestSetMaker", category = "Evaluation", toolTipText = "Make an incoming dataSet or trainingSet into a testSet", iconPath = KFGUIConsts.BASE_ICON_PATH + "TestSetMaker.gif")
 public class TestSetMaker extends BaseStep {
 
-  private static final long serialVersionUID = 6384920860783839811L;
+    private static final long serialVersionUID = 6384920860783839811L;
 
-  /**
-   * Initialize the step
-   */
-  @Override
-  public void stepInit() {
-    // nothing to do
-  }
-
-  /**
-   * Process an incoming data payload (if the step accepts incoming connections)
-   *
-   * @param data the data to process
-   * @throws WekaException if a problem occurs
-   */
-  @Override
-  public void processIncoming(Data data) throws WekaException {
-    getStepManager().processing();
-    String incomingConnName = data.getConnectionName();
-    Instances insts = (Instances) data.getPayloadElement(incomingConnName);
-    if (insts == null) {
-      throw new WekaException("Incoming instances should not be null!");
+    /**
+     * Initialize the step
+     */
+    @Override
+    public void stepInit() {
+        // nothing to do
     }
 
-    getStepManager().logBasic(
-      "Creating a test set for relation " + insts.relationName());
-    Data newData = new Data();
-    newData.setPayloadElement(StepManager.CON_TESTSET, insts);
-    newData.setPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
-    newData.setPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
-    if (!isStopRequested()) {
-      getStepManager().outputData(StepManager.CON_TESTSET, newData);
-    }
-    getStepManager().finished();
-  }
+    /**
+     * Process an incoming data payload (if the step accepts incoming connections)
+     *
+     * @param data the data to process
+     * @throws WekaException if a problem occurs
+     */
+    @Override
+    public void processIncoming(Data data) throws WekaException {
+        getStepManager().processing();
+        String incomingConnName = data.getConnectionName();
+        Instances insts = (Instances) data.getPayloadElement(incomingConnName);
+        if (insts == null) {
+            throw new WekaException("Incoming instances should not be null!");
+        }
 
-  /**
-   * Get a list of incoming connection types that this step can accept. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and any existing incoming connections. E.g. a step might be able to accept
-   * one (and only one) incoming batch data connection.
-   *
-   * @return a list of incoming connections that this step can accept given its
-   *         current state
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    if (getStepManager().numIncomingConnections() == 0) {
-      return Arrays
-        .asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET);
+        getStepManager().logBasic("Creating a test set for relation " + insts.relationName());
+        Data newData = new Data();
+        newData.setPayloadElement(StepManager.CON_TESTSET, insts);
+        newData.setPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
+        newData.setPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
+        if (!isStopRequested()) {
+            getStepManager().outputData(StepManager.CON_TESTSET, newData);
+        }
+        getStepManager().finished();
     }
 
-    return new ArrayList<String>();
-  }
+    /**
+     * Get a list of incoming connection types that this step can accept. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * any existing incoming connections. E.g. a step might be able to accept one
+     * (and only one) incoming batch data connection.
+     *
+     * @return a list of incoming connections that this step can accept given its
+     *         current state
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        if (getStepManager().numIncomingConnections() == 0) {
+            return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET);
+        }
 
-  /**
-   * Get a list of outgoing connection types that this step can produce. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and the incoming connections. E.g. depending on what incoming connection is
-   * present, a step might be able to produce a trainingSet output, a testSet
-   * output or neither, but not both.
-   *
-   * @return a list of outgoing connections that this step can produce
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    if (getStepManager().numIncomingConnections() > 0) {
-      return Arrays.asList(StepManager.CON_TESTSET);
-    }
-    return new ArrayList<String>();
-  }
-
-  /**
-   * If possible, get the output structure for the named connection type as a
-   * header-only set of instances. Can return null if the specified connection
-   * type is not representable as Instances or cannot be determined at present.
-   *
-   * @param connectionName the name of the connection type to get the output
-   *          structure for
-   * @return the output structure as a header-only Instances object
-   * @throws WekaException if a problem occurs
-   */
-  @Override
-  public Instances outputStructureForConnectionType(String connectionName)
-    throws WekaException {
-    if (!connectionName.equals(StepManager.CON_TESTSET)
-      || getStepManager().numIncomingConnections() == 0) {
-      return null;
+        return new ArrayList<String>();
     }
 
-    Instances strucForDatasetCon =
-      getStepManager().getIncomingStructureForConnectionType(
-        StepManager.CON_DATASET);
-    if (strucForDatasetCon != null) {
-      return strucForDatasetCon;
+    /**
+     * Get a list of outgoing connection types that this step can produce. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * the incoming connections. E.g. depending on what incoming connection is
+     * present, a step might be able to produce a trainingSet output, a testSet
+     * output or neither, but not both.
+     *
+     * @return a list of outgoing connections that this step can produce
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        if (getStepManager().numIncomingConnections() > 0) {
+            return Arrays.asList(StepManager.CON_TESTSET);
+        }
+        return new ArrayList<String>();
     }
 
-    Instances strucForTrainingSetCon =
-      getStepManager().getIncomingStructureForConnectionType(
-        StepManager.CON_TRAININGSET);
-    if (strucForTrainingSetCon != null) {
-      return strucForTrainingSetCon;
-    }
+    /**
+     * If possible, get the output structure for the named connection type as a
+     * header-only set of instances. Can return null if the specified connection
+     * type is not representable as Instances or cannot be determined at present.
+     *
+     * @param connectionName the name of the connection type to get the output
+     *                       structure for
+     * @return the output structure as a header-only Instances object
+     * @throws WekaException if a problem occurs
+     */
+    @Override
+    public Instances outputStructureForConnectionType(String connectionName) throws WekaException {
+        if (!connectionName.equals(StepManager.CON_TESTSET) || getStepManager().numIncomingConnections() == 0) {
+            return null;
+        }
 
-    return null;
-  }
+        Instances strucForDatasetCon = getStepManager().getIncomingStructureForConnectionType(StepManager.CON_DATASET);
+        if (strucForDatasetCon != null) {
+            return strucForDatasetCon;
+        }
+
+        Instances strucForTrainingSetCon = getStepManager().getIncomingStructureForConnectionType(StepManager.CON_TRAININGSET);
+        if (strucForTrainingSetCon != null) {
+            return strucForTrainingSetCon;
+        }
+
+        return null;
+    }
 }

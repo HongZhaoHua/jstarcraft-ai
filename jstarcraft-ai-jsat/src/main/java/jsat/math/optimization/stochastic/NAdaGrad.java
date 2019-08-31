@@ -27,10 +27,10 @@ import jsat.linear.*;
  * of the training data. If the gradient given us a {@link ScaledVector}, where
  * the base vector is the datum, then NAdaGrad will work. If not the case,
  * NAdaGrad will degenerate into something similar to normal {@link AdaGrad}.
- * <br><br>
- * The current implementation assumes that the bias term is always scaled
- * correctly, and does normal AdaGrad on it.
  * <br>
+ * <br>
+ * The current implementation assumes that the bias term is always scaled
+ * correctly, and does normal AdaGrad on it. <br>
  * See: Ross, S., Mineiro, P., & Langford, J. (2013). Normalized online
  * learning. In Twenty-Ninth Conference on Uncertainty in Artificial
  * Intelligence. Retrieved from
@@ -38,13 +38,12 @@ import jsat.linear.*;
  *
  * @author Edward Raff
  */
-public class NAdaGrad implements GradientUpdater
-{
+public class NAdaGrad implements GradientUpdater {
 
     private static final long serialVersionUID = 5138675613579751777L;
     private double[] G;
     private double[] S;
-    
+
     private double N;
     private double biasG;
     private long t;
@@ -52,105 +51,94 @@ public class NAdaGrad implements GradientUpdater
     /**
      * Creates a new NAdaGrad updater
      */
-    public NAdaGrad()
-    {
+    public NAdaGrad() {
     }
 
     /**
      * Copy constructor
+     * 
      * @param toCopy the object to copy
      */
-    public NAdaGrad(NAdaGrad toCopy)
-    {
-        if(toCopy.G != null)
+    public NAdaGrad(NAdaGrad toCopy) {
+        if (toCopy.G != null)
             this.G = Arrays.copyOf(toCopy.G, toCopy.G.length);
-        if(toCopy.S != null)
+        if (toCopy.S != null)
             this.S = Arrays.copyOf(toCopy.S, toCopy.S.length);
         this.biasG = toCopy.biasG;
         this.N = toCopy.N;
         this.t = toCopy.t;
     }
-    
 
     @Override
-    public void update(Vec w, Vec grad, double eta)
-    {
+    public void update(Vec w, Vec grad, double eta) {
         update(w, grad, eta, 0, 0);
     }
 
     @Override
-    public double update(Vec w, Vec grad, double eta, double bias, double biasGrad)
-    {
-        
-        if(grad instanceof ScaledVector)
-        {
+    public double update(Vec w, Vec grad, double eta, double bias, double biasGrad) {
+
+        if (grad instanceof ScaledVector) {
             t++;
-            //decompone our gradient back into parts, the multipler and raw datum
-            Vec x = ((ScaledVector)grad).getBase();
-            
-            for(IndexValue iv : x)
-            {
+            // decompone our gradient back into parts, the multipler and raw datum
+            Vec x = ((ScaledVector) grad).getBase();
+
+            for (IndexValue iv : x) {
 
                 final int indx = iv.getIndex();
                 final double abs_x_i = Math.abs(iv.getValue());
-                
-                if(abs_x_i > S[indx])//(a)
+
+                if (abs_x_i > S[indx])// (a)
                 {
-                    w.set(indx, (w.get(indx)*S[indx])/abs_x_i);
+                    w.set(indx, (w.get(indx) * S[indx]) / abs_x_i);
                     S[indx] = abs_x_i;
                 }
-                //skip step (b) for simplicity since grad was already given to us
-                //(c)
-                N += abs_x_i*abs_x_i/(S[indx]*S[indx]);
-            }
-            
-            double eta_roled = -eta*Math.sqrt(t/(N+1e-6));
-            for(IndexValue iv : grad)
-            {
-                final int indx = iv.getIndex();
-                final double grad_i = iv.getValue();
-                G[indx] += grad_i*grad_i;
-                final double g_ii = G[indx];
-                w.increment(indx, eta_roled*grad_i/(S[indx]*Math.sqrt(g_ii)));
-                
+                // skip step (b) for simplicity since grad was already given to us
+                // (c)
+                N += abs_x_i * abs_x_i / (S[indx] * S[indx]);
             }
 
-            double biasUpdate = eta*biasGrad/Math.sqrt(biasG);
-            biasG += biasGrad*biasGrad;
+            double eta_roled = -eta * Math.sqrt(t / (N + 1e-6));
+            for (IndexValue iv : grad) {
+                final int indx = iv.getIndex();
+                final double grad_i = iv.getValue();
+                G[indx] += grad_i * grad_i;
+                final double g_ii = G[indx];
+                w.increment(indx, eta_roled * grad_i / (S[indx] * Math.sqrt(g_ii)));
+
+            }
+
+            double biasUpdate = eta * biasGrad / Math.sqrt(biasG);
+            biasG += biasGrad * biasGrad;
             return biasUpdate;
-        }
-        else//lets degenerate into something at least similar to AdaGrad
+        } else// lets degenerate into something at least similar to AdaGrad
         {
-            double eta_roled = -eta*Math.sqrt((t+1)/Math.max(N, t+1));
-            for(IndexValue iv : grad)
-            {
+            double eta_roled = -eta * Math.sqrt((t + 1) / Math.max(N, t + 1));
+            for (IndexValue iv : grad) {
                 final int indx = iv.getIndex();
                 final double grad_i = iv.getValue();
-                G[indx] += grad_i*grad_i;
+                G[indx] += grad_i * grad_i;
                 final double g_ii = G[indx];
-                w.increment(indx, eta_roled*grad_i/(Math.max(S[indx], 1.0)*Math.sqrt(g_ii)));
-                
+                w.increment(indx, eta_roled * grad_i / (Math.max(S[indx], 1.0) * Math.sqrt(g_ii)));
+
             }
 
-            double biasUpdate = eta*biasGrad/Math.sqrt(biasG);
-            biasG += biasGrad*biasGrad;
+            double biasUpdate = eta * biasGrad / Math.sqrt(biasG);
+            biasG += biasGrad * biasGrad;
             return biasUpdate;
         }
     }
 
     @Override
-    public NAdaGrad clone()
-    {
+    public NAdaGrad clone() {
         return new NAdaGrad(this);
     }
 
     @Override
-    public void setup(int d)
-    {
+    public void setup(int d) {
         G = new double[d];
         S = new double[d];
         biasG = 1;
         t = 0;
     }
-    
+
 }

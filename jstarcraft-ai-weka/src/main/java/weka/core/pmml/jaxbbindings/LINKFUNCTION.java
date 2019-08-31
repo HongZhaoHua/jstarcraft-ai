@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for LINK-FUNCTION.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for LINK-FUNCTION.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="LINK-FUNCTION">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -39,24 +41,15 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum LINKFUNCTION {
 
     @XmlEnumValue("cloglog")
-    CLOGLOG("cloglog"),
-    @XmlEnumValue("identity")
-    IDENTITY("identity"),
-    @XmlEnumValue("log")
-    LOG("log"),
-    @XmlEnumValue("logc")
-    LOGC("logc"),
-    @XmlEnumValue("logit")
-    LOGIT("logit"),
-    @XmlEnumValue("loglog")
-    LOGLOG("loglog"),
-    @XmlEnumValue("negbin")
-    NEGBIN("negbin"),
-    @XmlEnumValue("oddspower")
-    ODDSPOWER("oddspower"),
-    @XmlEnumValue("power")
-    POWER("power"),
-    @XmlEnumValue("probit")
+    CLOGLOG("cloglog"), @XmlEnumValue("identity")
+    IDENTITY("identity"), @XmlEnumValue("log")
+    LOG("log"), @XmlEnumValue("logc")
+    LOGC("logc"), @XmlEnumValue("logit")
+    LOGIT("logit"), @XmlEnumValue("loglog")
+    LOGLOG("loglog"), @XmlEnumValue("negbin")
+    NEGBIN("negbin"), @XmlEnumValue("oddspower")
+    ODDSPOWER("oddspower"), @XmlEnumValue("power")
+    POWER("power"), @XmlEnumValue("probit")
     PROBIT("probit");
     private final String value;
 
@@ -69,7 +62,7 @@ public enum LINKFUNCTION {
     }
 
     public static LINKFUNCTION fromValue(String v) {
-        for (LINKFUNCTION c: LINKFUNCTION.values()) {
+        for (LINKFUNCTION c : LINKFUNCTION.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

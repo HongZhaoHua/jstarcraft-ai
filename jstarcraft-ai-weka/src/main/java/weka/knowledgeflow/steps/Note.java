@@ -32,65 +32,65 @@ import java.util.List;
  */
 public class Note extends BaseStep {
 
-  /** The text of the note */
-  protected String m_noteText = "New note";
+    /** The text of the note */
+    protected String m_noteText = "New note";
 
-  /**
-   * Initialize - does nothing in the case of a note :-)
-   */
-  @Override
-  public void stepInit() {
-    // nothing to do
-  }
+    /**
+     * Initialize - does nothing in the case of a note :-)
+     */
+    @Override
+    public void stepInit() {
+        // nothing to do
+    }
 
-  /**
-   * Set the text of the note
-   *
-   * @param text the text
-   */
-  public void setNoteText(String text) {
-    m_noteText = text;
-  }
+    /**
+     * Set the text of the note
+     *
+     * @param text the text
+     */
+    public void setNoteText(String text) {
+        m_noteText = text;
+    }
 
-  /**
-   * Get the text of the note
-   *
-   * @return the text
-   */
-  public String getNoteText() {
-    return m_noteText;
-  }
+    /**
+     * Get the text of the note
+     *
+     * @return the text
+     */
+    public String getNoteText() {
+        return m_noteText;
+    }
 
-  /**
-   * Get incoming connections accepted - none in the case of a note :-)
-   *
-   * @return a list of incoming connections
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    return new ArrayList<String>();
-  }
+    /**
+     * Get incoming connections accepted - none in the case of a note :-)
+     *
+     * @return a list of incoming connections
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        return new ArrayList<String>();
+    }
 
-  /**
-   * Get outgoing connections produced - none in the case of a note :-)
-   *
-   * @return a list of outgoing connections
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return new ArrayList<String>();
-  }
+    /**
+     * Get outgoing connections produced - none in the case of a note :-)
+     *
+     * @return a list of outgoing connections
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return new ArrayList<String>();
+    }
 
-  /**
-   * Return the fully qualified name of a custom editor component (JComponent)
-   * to use for editing the properties of the step. This method can return null,
-   * in which case the system will dynamically generate an editor using the
-   * GenericObjectEditor
-   *
-   * @return the fully qualified name of a step editor component
-   */
-  @Override
-  public String getCustomEditorForStep() {
-    return "weka.gui.knowledgeflow.steps.NoteEditorDialog";
-  }
+    /**
+     * Return the fully qualified name of a custom editor component (JComponent) to
+     * use for editing the properties of the step. This method can return null, in
+     * which case the system will dynamically generate an editor using the
+     * GenericObjectEditor
+     *
+     * @return the fully qualified name of a step editor component
+     */
+    @Override
+    public String getCustomEditorForStep() {
+        return "weka.gui.knowledgeflow.steps.NoteEditorDialog";
+    }
 }

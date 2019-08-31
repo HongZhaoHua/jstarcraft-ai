@@ -12,113 +12,91 @@ import java.util.concurrent.TimeoutException;
 
 /**
  *
- * Provides a fake {@link ExecutorService} that immediatly runs any 
- * given runnable on the main thread. This will not use any given 
- * threads and will never create a thread. 
+ * Provides a fake {@link ExecutorService} that immediatly runs any given
+ * runnable on the main thread. This will not use any given threads and will
+ * never create a thread.
  * 
  * @author Edward Raff
  */
-public class FakeExecutor implements ExecutorService
-{
+public class FakeExecutor implements ExecutorService {
 
-    public void shutdown()
-    {
-        
+    public void shutdown() {
+
     }
 
-    public List<Runnable> shutdownNow()
-    {
-       return null;
+    public List<Runnable> shutdownNow() {
+        return null;
     }
 
-    public boolean isShutdown()
-    {
+    public boolean isShutdown() {
         return false;
     }
 
-    public boolean isTerminated()
-    {
+    public boolean isTerminated() {
         return false;
     }
 
-    public boolean awaitTermination(long l, TimeUnit tu) throws InterruptedException
-    {
+    public boolean awaitTermination(long l, TimeUnit tu) throws InterruptedException {
         return true;
     }
 
-    public <T> Future<T> submit(final Callable<T> clbl)
-    {
+    public <T> Future<T> submit(final Callable<T> clbl) {
         return new Future<T>() {
 
-            public boolean cancel(boolean bln)
-            {
+            public boolean cancel(boolean bln) {
                 return false;
             }
 
-            public boolean isCancelled()
-            {
+            public boolean isCancelled() {
                 return false;
             }
 
-            public boolean isDone()
-            {
+            public boolean isDone() {
                 return false;
             }
 
-            public T get() throws InterruptedException, ExecutionException
-            {
-                try
-                {
+            public T get() throws InterruptedException, ExecutionException {
+                try {
                     return clbl.call();
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     return null;
                 }
             }
 
-            public T get(long l, TimeUnit tu) throws InterruptedException, ExecutionException, TimeoutException
-            {
+            public T get(long l, TimeUnit tu) throws InterruptedException, ExecutionException, TimeoutException {
                 return get();
             }
         };
     }
 
-    public <T> Future<T> submit(Runnable r, T t)
-    {
+    public <T> Future<T> submit(Runnable r, T t) {
         r.run();
         return null;
     }
 
-    public Future<?> submit(Runnable r)
-    {
+    public Future<?> submit(Runnable r) {
         r.run();
         return null;
     }
 
-    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> clctn) throws InterruptedException
-    {
+    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> clctn) throws InterruptedException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> clctn, long l, TimeUnit tu) throws InterruptedException
-    {
+    public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> clctn, long l, TimeUnit tu) throws InterruptedException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public <T> T invokeAny(Collection<? extends Callable<T>> clctn) throws InterruptedException, ExecutionException
-    {
+    public <T> T invokeAny(Collection<? extends Callable<T>> clctn) throws InterruptedException, ExecutionException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public <T> T invokeAny(Collection<? extends Callable<T>> clctn, long l, TimeUnit tu) throws InterruptedException, ExecutionException, TimeoutException
-    {
+    public <T> T invokeAny(Collection<? extends Callable<T>> clctn, long l, TimeUnit tu) throws InterruptedException, ExecutionException, TimeoutException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void execute(Runnable r)
-    {
+    public void execute(Runnable r) {
         r.run();
     }
-    
+
 }

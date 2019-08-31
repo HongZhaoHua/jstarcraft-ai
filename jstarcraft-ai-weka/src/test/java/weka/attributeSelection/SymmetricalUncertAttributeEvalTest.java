@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BestFirst. Run from the command line with:<p/>
+ * Tests BestFirst. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.SymmetricalUncertAttributeEvalTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SymmetricalUncertAttributeEvalTest 
-  extends AbstractEvaluatorTest {
+public class SymmetricalUncertAttributeEvalTest extends AbstractEvaluatorTest {
 
-  public SymmetricalUncertAttributeEvalTest(String name) { 
-    super(name);  
-  }
+    public SymmetricalUncertAttributeEvalTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Ranker */
-  public ASSearch getSearch() {
-    return new Ranker();
-  }
+    /** Creates a default Ranker */
+    public ASSearch getSearch() {
+        return new Ranker();
+    }
 
-  /** Creates a default SymmetricalUncertAttributeEval */
-  public ASEvaluation getEvaluator() {
-    return new SymmetricalUncertAttributeEval();
-  }
+    /** Creates a default SymmetricalUncertAttributeEval */
+    public ASEvaluation getEvaluator() {
+        return new SymmetricalUncertAttributeEval();
+    }
 
-  public static Test suite() {
-    return new TestSuite(SymmetricalUncertAttributeEvalTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SymmetricalUncertAttributeEvalTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

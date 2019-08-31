@@ -22,7 +22,8 @@
 package weka.core.expressionlanguage.core;
 
 /**
- * Interface for compile time macros to enable meta programming</p>
+ * Interface for compile time macros to enable meta programming
+ * </p>
  * 
  * Because macros have direct access to the AST (abstract syntax tree) they can
  * rewrite it as they please.
@@ -31,12 +32,12 @@ package weka.core.expressionlanguage.core;
  * @version $Revision: 1000 $
  */
 public interface Macro {
-  /**
-   * Applies a macro to a set of parameter nodes.
-   * 
-   * @param nodes the nodes this macro should be applied to
-   * @return an AST node returned by the macro
-   * @throws SemanticException
-   */
-  Node evaluate(Node... nodes) throws SemanticException;
+    /**
+     * Applies a macro to a set of parameter nodes.
+     * 
+     * @param nodes the nodes this macro should be applied to
+     * @return an AST node returned by the macro
+     * @throws SemanticException
+     */
+    Node evaluate(Node... nodes) throws SemanticException;
 }

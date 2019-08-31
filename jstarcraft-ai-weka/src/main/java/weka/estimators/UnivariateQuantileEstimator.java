@@ -22,27 +22,27 @@
 package weka.estimators;
 
 /**
- * Interface that can be implemented by simple weighted univariate
- * quantile estimators.
+ * Interface that can be implemented by simple weighted univariate quantile
+ * estimators.
  *
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
 public interface UnivariateQuantileEstimator {
 
-  /**
-   * Adds a value to the interval estimator.
-   *
-   * @param value the value to add
-   * @param weight the weight of the value
-   */
-  void addValue(double value, double weight);
+    /**
+     * Adds a value to the interval estimator.
+     *
+     * @param value  the value to add
+     * @param weight the weight of the value
+     */
+    void addValue(double value, double weight);
 
-  /**
-   * Returns the quantile for the given percentage
-   *
-   * @param value the value at which to evaluate
-   * @return the quantile
-   */
-  double predictQuantile(double quantile);
+    /**
+     * Returns the quantile for the given percentage
+     *
+     * @param value the value at which to evaluate
+     * @return the quantile
+     */
+    double predictQuantile(double quantile);
 }

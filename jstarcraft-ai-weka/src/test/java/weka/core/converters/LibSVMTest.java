@@ -23,70 +23,69 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests LibSVMLoader/LibSVMSaver. Run from the command line with:<p/>
+ * Tests LibSVMLoader/LibSVMSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.LibSVMTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class LibSVMTest 
-  extends AbstractFileConverterTest {
+public class LibSVMTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>LibSVMTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public LibSVMTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>LibSVMTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public LibSVMTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests.
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new LibSVMLoader();
-  }
+    /**
+     * returns the loader used in the tests.
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new LibSVMLoader();
+    }
 
-  /**
-   * returns the saver used in the tests.
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new LibSVMSaver();
-  }
-  
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default loader/saver to test and generates a test set of Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_CheckHeader = false;
-  }
+    /**
+     * returns the saver used in the tests.
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new LibSVMSaver();
+    }
 
-  /**
-   * returns a test suite.
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(LibSVMTest.class);
-  }
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default loader/saver to test and generates a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  /**
-   * for running the test from commandline.
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        m_CheckHeader = false;
+    }
+
+    /**
+     * returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(LibSVMTest.class);
+    }
+
+    /**
+     * for running the test from commandline.
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 /**
- * <p>Java class for Seasonality_ExpoSmooth element declaration.
+ * <p>
+ * Java class for Seasonality_ExpoSmooth element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Seasonality_ExpoSmooth">
@@ -53,9 +54,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "array"
-})
+@XmlType(name = "", propOrder = { "array" })
 @XmlRootElement(name = "Seasonality_ExpoSmooth")
 public class SeasonalityExpoSmooth {
 
@@ -76,10 +75,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the array property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ArrayType }
-     *     
+     * @return possible object is {@link ArrayType }
+     * 
      */
     public ArrayType getArray() {
         return array;
@@ -88,10 +85,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the array property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayType }
-     *     
+     * @param value allowed object is {@link ArrayType }
+     * 
      */
     public void setArray(ArrayType value) {
         this.array = value;
@@ -100,10 +95,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the delta property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getDelta() {
         return delta;
@@ -112,10 +105,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the delta property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setDelta(Double value) {
         this.delta = value;
@@ -124,10 +115,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the period property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getPeriod() {
         return period;
@@ -136,10 +125,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the period property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setPeriod(BigInteger value) {
         this.period = value;
@@ -148,10 +135,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the phase property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getPhase() {
         return phase;
@@ -160,10 +145,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the phase property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setPhase(BigInteger value) {
         this.phase = value;
@@ -172,10 +155,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the type property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getType() {
         return type;
@@ -184,10 +165,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the type property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setType(String value) {
         this.type = value;
@@ -196,10 +175,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Gets the value of the unit property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getUnit() {
         return unit;
@@ -208,10 +185,8 @@ public class SeasonalityExpoSmooth {
     /**
      * Sets the value of the unit property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setUnit(String value) {
         this.unit = value;

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for INT-SparseArray element declaration.
+ * <p>
+ * Java class for INT-SparseArray element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="INT-SparseArray">
@@ -45,10 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "indices",
-    "intEntries"
-})
+@XmlType(name = "", propOrder = { "indices", "intEntries" })
 @XmlRootElement(name = "INT-SparseArray")
 public class INTSparseArray {
 
@@ -67,21 +65,21 @@ public class INTSparseArray {
      * Gets the value of the indices property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the indices property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the indices property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getIndices().add(newItem);
+     * getIndices().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
+     * Objects of the following type(s) are allowed in the list {@link Integer }
      * 
      * 
      */
@@ -96,21 +94,21 @@ public class INTSparseArray {
      * Gets the value of the intEntries property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the intEntries property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the intEntries property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getINTEntries().add(newItem);
+     * getINTEntries().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
+     * Objects of the following type(s) are allowed in the list {@link Integer }
      * 
      * 
      */
@@ -124,10 +122,8 @@ public class INTSparseArray {
     /**
      * Gets the value of the defaultValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getDefaultValue() {
         if (defaultValue == null) {
@@ -140,10 +136,8 @@ public class INTSparseArray {
     /**
      * Sets the value of the defaultValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setDefaultValue(BigInteger value) {
         this.defaultValue = value;
@@ -152,10 +146,8 @@ public class INTSparseArray {
     /**
      * Gets the value of the n property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getN() {
         return n;
@@ -164,10 +156,8 @@ public class INTSparseArray {
     /**
      * Sets the value of the n property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setN(BigInteger value) {
         this.n = value;

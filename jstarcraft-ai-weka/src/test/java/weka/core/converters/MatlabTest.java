@@ -25,80 +25,80 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests MatlabLoader/MatlabSaver. Run from the command line with:<p/>
+ * Tests MatlabLoader/MatlabSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.MatlabTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class MatlabTest 
-  extends AbstractFileConverterTest {
+public class MatlabTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>MatlabTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public MatlabTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>MatlabTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public MatlabTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests.
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new MatlabLoader();
-  }
+    /**
+     * returns the loader used in the tests.
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new MatlabLoader();
+    }
 
-  /**
-   * returns the saver used in the tests.
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new MatlabSaver();
-  }
+    /**
+     * returns the saver used in the tests.
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new MatlabSaver();
+    }
 
-  /**
-   * returns the test data generator.
-   * 
-   * @return 	the configured test data generator
-   */
-  protected TestInstances getTestInstances() {
-    return TestInstances.forCapabilities(new MatlabSaver().getCapabilities());
-  }
-  
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default loader/saver to test and generates a test set of Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_MaxDiffValues  = 1E-6;
-    m_MaxDiffWeights = 0.0;
-    m_CheckHeader    = false;
-  }
+    /**
+     * returns the test data generator.
+     * 
+     * @return the configured test data generator
+     */
+    protected TestInstances getTestInstances() {
+        return TestInstances.forCapabilities(new MatlabSaver().getCapabilities());
+    }
 
-  /**
-   * returns a test suite.
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(MatlabTest.class);
-  }
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default loader/saver to test and generates a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  /**
-   * for running the test from commandline.
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        m_MaxDiffValues = 1E-6;
+        m_MaxDiffWeights = 0.0;
+        m_CheckHeader = false;
+    }
+
+    /**
+     * returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(MatlabTest.class);
+    }
+
+    /**
+     * for running the test from commandline.
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

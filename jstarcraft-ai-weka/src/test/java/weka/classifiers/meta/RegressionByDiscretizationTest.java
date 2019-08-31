@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RegressionByDiscretization. Run from the command line with:<p>
+ * Tests RegressionByDiscretization. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.RegressionByDiscretizationTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class RegressionByDiscretizationTest extends AbstractClassifierTest {
 
-  public RegressionByDiscretizationTest(String name) { super(name);  }
+    public RegressionByDiscretizationTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default RegressionByDiscretization */
-  public Classifier getClassifier() {
-    return new RegressionByDiscretization();
-  }
+    /** Creates a default RegressionByDiscretization */
+    public Classifier getClassifier() {
+        return new RegressionByDiscretization();
+    }
 
-  public static Test suite() {
-    return new TestSuite(RegressionByDiscretizationTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RegressionByDiscretizationTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

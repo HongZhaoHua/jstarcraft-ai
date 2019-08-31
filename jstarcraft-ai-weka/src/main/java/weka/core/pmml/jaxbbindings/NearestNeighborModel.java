@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for NearestNeighborModel element declaration.
+ * <p>
+ * Java class for NearestNeighborModel element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="NearestNeighborModel">
@@ -62,25 +63,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "NearestNeighborModel")
 public class NearestNeighborModel {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class),
-        @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class),
-        @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class),
-        @XmlElementRef(name = "TrainingInstances", namespace = "http://www.dmg.org/PMML-4_1", type = TrainingInstances.class),
-        @XmlElementRef(name = "ComparisonMeasure", namespace = "http://www.dmg.org/PMML-4_1", type = ComparisonMeasure.class),
-        @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class),
-        @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class),
-        @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class),
-        @XmlElementRef(name = "KNNInputs", namespace = "http://www.dmg.org/PMML-4_1", type = KNNInputs.class),
-        @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class), @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class), @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class), @XmlElementRef(name = "TrainingInstances", namespace = "http://www.dmg.org/PMML-4_1", type = TrainingInstances.class), @XmlElementRef(name = "ComparisonMeasure", namespace = "http://www.dmg.org/PMML-4_1", type = ComparisonMeasure.class), @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class), @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class), @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class),
+            @XmlElementRef(name = "KNNInputs", namespace = "http://www.dmg.org/PMML-4_1", type = KNNInputs.class), @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class) })
     protected List<Object> content;
     @XmlAttribute
     protected String algorithmName;
@@ -102,44 +90,38 @@ public class NearestNeighborModel {
     protected Double threshold;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Extension" is used by two different parts of a schema. See: 
-     * line 814 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 803 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Extension" is used by two different parts of a schema. See:
+     * line 814 of file:/home/david/workspace/weka/pmml-4-1.xsd line 803 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ModelExplanation }
-     * {@link ModelStats }
-     * {@link TrainingInstances }
-     * {@link Output }
-     * {@link ComparisonMeasure }
-     * {@link LocalTransformations }
-     * {@link Targets }
-     * {@link KNNInputs }
-     * {@link MiningSchema }
-     * {@link ModelVerification }
-     * {@link Extension }
+     * {@link ModelExplanation } {@link ModelStats } {@link TrainingInstances }
+     * {@link Output } {@link ComparisonMeasure } {@link LocalTransformations }
+     * {@link Targets } {@link KNNInputs } {@link MiningSchema }
+     * {@link ModelVerification } {@link Extension }
      * 
      * 
      */
@@ -153,10 +135,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the algorithmName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlgorithmName() {
         return algorithmName;
@@ -165,10 +145,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the algorithmName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlgorithmName(String value) {
         this.algorithmName = value;
@@ -177,10 +155,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the categoricalScoringMethod property.
      * 
-     * @return
-     *     possible object is
-     *     {@link CATSCORINGMETHOD }
-     *     
+     * @return possible object is {@link CATSCORINGMETHOD }
+     * 
      */
     public CATSCORINGMETHOD getCategoricalScoringMethod() {
         if (categoricalScoringMethod == null) {
@@ -193,10 +169,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the categoricalScoringMethod property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link CATSCORINGMETHOD }
-     *     
+     * @param value allowed object is {@link CATSCORINGMETHOD }
+     * 
      */
     public void setCategoricalScoringMethod(CATSCORINGMETHOD value) {
         this.categoricalScoringMethod = value;
@@ -205,10 +179,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the continuousScoringMethod property.
      * 
-     * @return
-     *     possible object is
-     *     {@link CONTSCORINGMETHOD }
-     *     
+     * @return possible object is {@link CONTSCORINGMETHOD }
+     * 
      */
     public CONTSCORINGMETHOD getContinuousScoringMethod() {
         if (continuousScoringMethod == null) {
@@ -221,10 +193,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the continuousScoringMethod property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link CONTSCORINGMETHOD }
-     *     
+     * @param value allowed object is {@link CONTSCORINGMETHOD }
+     * 
      */
     public void setContinuousScoringMethod(CONTSCORINGMETHOD value) {
         this.continuousScoringMethod = value;
@@ -233,10 +203,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the functionName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @return possible object is {@link MININGFUNCTION }
+     * 
      */
     public MININGFUNCTION getFunctionName() {
         return functionName;
@@ -245,10 +213,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the functionName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @param value allowed object is {@link MININGFUNCTION }
+     * 
      */
     public void setFunctionName(MININGFUNCTION value) {
         this.functionName = value;
@@ -257,10 +223,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the instanceIdVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getInstanceIdVariable() {
         return instanceIdVariable;
@@ -269,10 +233,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the instanceIdVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setInstanceIdVariable(String value) {
         this.instanceIdVariable = value;
@@ -281,10 +243,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the isScorable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsScorable() {
         if (isScorable == null) {
@@ -297,10 +257,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the isScorable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsScorable(Boolean value) {
         this.isScorable = value;
@@ -309,10 +267,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the modelName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelName() {
         return modelName;
@@ -321,10 +277,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the modelName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelName(String value) {
         this.modelName = value;
@@ -333,10 +287,8 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the numberOfNeighbors property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfNeighbors() {
         return numberOfNeighbors;
@@ -345,10 +297,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the numberOfNeighbors property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfNeighbors(BigInteger value) {
         this.numberOfNeighbors = value;
@@ -357,14 +307,12 @@ public class NearestNeighborModel {
     /**
      * Gets the value of the threshold property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getThreshold() {
         if (threshold == null) {
-            return  0.001D;
+            return 0.001D;
         } else {
             return threshold;
         }
@@ -373,10 +321,8 @@ public class NearestNeighborModel {
     /**
      * Sets the value of the threshold property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setThreshold(Double value) {
         this.threshold = value;

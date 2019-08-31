@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Logistic. Run from the command line with:<p>
+ * Tests Logistic. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.LogisticTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class LogisticTest extends AbstractClassifierTest {
 
-  public LogisticTest(String name) { super(name);  }
+    public LogisticTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Logistic */
-  public Classifier getClassifier() {
-    return new Logistic();
-  }
+    /** Creates a default Logistic */
+    public Classifier getClassifier() {
+        return new Logistic();
+    }
 
-  public static Test suite() {
-    return new TestSuite(LogisticTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(LogisticTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

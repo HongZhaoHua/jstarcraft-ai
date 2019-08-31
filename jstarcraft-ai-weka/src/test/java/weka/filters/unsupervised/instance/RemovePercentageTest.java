@@ -27,60 +27,58 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RemovePercentage. Run from the command line with: <p/>
+ * Tests RemovePercentage. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.instance.RemovePercentageTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RemovePercentageTest 
-  extends AbstractFilterTest {
-  
-  public RemovePercentageTest(String name) { 
-    super(name);  
-  }
+public class RemovePercentageTest extends AbstractFilterTest {
 
-  /** Need to remove non-nominal attributes, set class index */
-  protected void setUp() throws Exception {
-    super.setUp();
+    public RemovePercentageTest(String name) {
+        super(name);
+    }
 
-    m_Instances.setClassIndex(1);
-  }
-  
-  /** Creates a default RemovePercentage */
-  public Filter getFilter() {
-    RemovePercentage f = new RemovePercentage();
-    return f;
-  }
+    /** Need to remove non-nominal attributes, set class index */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  public void testTypical() {
-    m_Filter = getFilter();
-    Instances result = useFilter();
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-  }
+        m_Instances.setClassIndex(1);
+    }
 
-  public void testInverting() {
-    // non-inverted
-    m_Filter = getFilter();
-    ((RemovePercentage) m_Filter).setPercentage(20.0);
-    Instances result = useFilter();
+    /** Creates a default RemovePercentage */
+    public Filter getFilter() {
+        RemovePercentage f = new RemovePercentage();
+        return f;
+    }
 
-    // inverted
-    m_Filter = getFilter();
-    ((RemovePercentage) m_Filter).setPercentage(20.0);
-    ((RemovePercentage) m_Filter).setInvertSelection(true);
-    Instances resultInv = useFilter();
+    public void testTypical() {
+        m_Filter = getFilter();
+        Instances result = useFilter();
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+    }
 
-    assertEquals(
-        m_Instances.numInstances(), 
-        result.numInstances() + resultInv.numInstances());
-  }
+    public void testInverting() {
+        // non-inverted
+        m_Filter = getFilter();
+        ((RemovePercentage) m_Filter).setPercentage(20.0);
+        Instances result = useFilter();
 
-  public static Test suite() {
-    return new TestSuite(RemovePercentageTest.class);
-  }
+        // inverted
+        m_Filter = getFilter();
+        ((RemovePercentage) m_Filter).setPercentage(20.0);
+        ((RemovePercentage) m_Filter).setInvertSelection(true);
+        Instances resultInv = useFilter();
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        assertEquals(m_Instances.numInstances(), result.numInstances() + resultInv.numInstances());
+    }
+
+    public static Test suite() {
+        return new TestSuite(RemovePercentageTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

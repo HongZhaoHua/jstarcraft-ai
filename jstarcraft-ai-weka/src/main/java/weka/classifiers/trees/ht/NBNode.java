@@ -37,78 +37,76 @@ import weka.core.Instances;
  */
 public class NBNode extends ActiveHNode implements LearningNode, Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -1872415764817690961L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -1872415764817690961L;
 
-  /** The naive Bayes model at the node */
-  protected NaiveBayesUpdateable m_bayes;
+    /** The naive Bayes model at the node */
+    protected NaiveBayesUpdateable m_bayes;
 
-  /**
-   * The weight of instances that need to be seen by this node before allowing
-   * naive Bayes to make predictions
-   */
-  protected double m_nbWeightThreshold;
+    /**
+     * The weight of instances that need to be seen by this node before allowing
+     * naive Bayes to make predictions
+     */
+    protected double m_nbWeightThreshold;
 
-  /**
-   * Construct a new NBNode
-   * 
-   * @param header the instances structure of the data we're learning from
-   * @param nbWeightThreshold the weight mass to see before allowing naive Bayes
-   *          to predict
-   * @throws Exception if a problem occurs
-   */
-  public NBNode(Instances header, double nbWeightThreshold) throws Exception {
-    m_nbWeightThreshold = nbWeightThreshold;
-    m_bayes = new NaiveBayesUpdateable();
-    m_bayes.buildClassifier(header);
-  }
-
-  @Override
-  public void updateNode(Instance inst) throws Exception {
-    super.updateNode(inst);
-
-    try {
-      m_bayes.updateClassifier(inst);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
-  protected double[] bypassNB(Instance inst, Attribute classAtt)
-      throws Exception {
-    return super.getDistribution(inst, classAtt);
-  }
-
-  @Override
-  public double[] getDistribution(Instance inst, Attribute classAtt)
-      throws Exception {
-
-    // totalWeight - m_weightSeenAtLastSplitEval is the weight mass
-    // observed by this node's NB model
-
-    boolean doNB = m_nbWeightThreshold == 0 ? true : (totalWeight()
-        - m_weightSeenAtLastSplitEval > m_nbWeightThreshold);
-
-    if (doNB) {
-      return m_bayes.distributionForInstance(inst);
+    /**
+     * Construct a new NBNode
+     * 
+     * @param header            the instances structure of the data we're learning
+     *                          from
+     * @param nbWeightThreshold the weight mass to see before allowing naive Bayes
+     *                          to predict
+     * @throws Exception if a problem occurs
+     */
+    public NBNode(Instances header, double nbWeightThreshold) throws Exception {
+        m_nbWeightThreshold = nbWeightThreshold;
+        m_bayes = new NaiveBayesUpdateable();
+        m_bayes.buildClassifier(header);
     }
 
-    return super.getDistribution(inst, classAtt);
-  }
+    @Override
+    public void updateNode(Instance inst) throws Exception {
+        super.updateNode(inst);
 
-  @Override
-  protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
-    leafCount = super.dumpTree(depth, leafCount, buff);
+        try {
+            m_bayes.updateClassifier(inst);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-    buff.append(" NB" + m_leafNum);
+    protected double[] bypassNB(Instance inst, Attribute classAtt) throws Exception {
+        return super.getDistribution(inst, classAtt);
+    }
 
-    return leafCount;
-  }
+    @Override
+    public double[] getDistribution(Instance inst, Attribute classAtt) throws Exception {
 
-  @Override
-  protected void printLeafModels(StringBuffer buff) {
-    buff.append("NB" + m_leafNum).append("\n").append(m_bayes.toString());
-  }
+        // totalWeight - m_weightSeenAtLastSplitEval is the weight mass
+        // observed by this node's NB model
+
+        boolean doNB = m_nbWeightThreshold == 0 ? true : (totalWeight() - m_weightSeenAtLastSplitEval > m_nbWeightThreshold);
+
+        if (doNB) {
+            return m_bayes.distributionForInstance(inst);
+        }
+
+        return super.getDistribution(inst, classAtt);
+    }
+
+    @Override
+    protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
+        leafCount = super.dumpTree(depth, leafCount, buff);
+
+        buff.append(" NB" + m_leafNum);
+
+        return leafCount;
+    }
+
+    @Override
+    protected void printLeafModels(StringBuffer buff) {
+        buff.append("NB" + m_leafNum).append("\n").append(m_bayes.toString());
+    }
 }

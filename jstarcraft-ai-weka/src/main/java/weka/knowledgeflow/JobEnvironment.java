@@ -40,130 +40,128 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class JobEnvironment extends Environment {
 
-  /** Map of non-incremental result data */
-  protected Map<String, LinkedHashSet<Data>> m_resultData = new ConcurrentHashMap<>();
+    /** Map of non-incremental result data */
+    protected Map<String, LinkedHashSet<Data>> m_resultData = new ConcurrentHashMap<>();
 
-  /**
-   * Map of properties for various base schemes owned by scheme-specific
-   * (WekaAlgorithmWrapper) steps. Outer map is keyed by step name, inner map by
-   * property name
-   */
-  protected Map<String, Map<String, String>> m_stepProperties =
-    new ConcurrentHashMap<>();
+    /**
+     * Map of properties for various base schemes owned by scheme-specific
+     * (WekaAlgorithmWrapper) steps. Outer map is keyed by step name, inner map by
+     * property name
+     */
+    protected Map<String, Map<String, String>> m_stepProperties = new ConcurrentHashMap<>();
 
-  /**
-   * Constructor
-   */
-  public JobEnvironment() {
-    super();
-  }
-
-  /**
-   * Construct a JobEnvironment by copying the contents of a standard
-   * Environment
-   * 
-   * @param env the Environment to copy into this JobEnvironment
-   */
-  public JobEnvironment(Environment env) {
-    super(env);
-
-    if (env instanceof JobEnvironment) {
-      m_stepProperties.putAll(((JobEnvironment) env).m_stepProperties);
+    /**
+     * Constructor
+     */
+    public JobEnvironment() {
+        super();
     }
-  }
 
-  /**
-   * Add a non-incremental data object to the result
-   * 
-   * @param data the data to add
-   */
-  public void addToResult(Data data) {
-    if (!data.isIncremental()) {
-      LinkedHashSet<Data> dataList = m_resultData.get(data.getConnectionName());
-      if (dataList == null) {
-        dataList = new LinkedHashSet<>();
-        m_resultData.put(data.getConnectionName(), dataList);
-      }
-      dataList.add(data);
+    /**
+     * Construct a JobEnvironment by copying the contents of a standard Environment
+     * 
+     * @param env the Environment to copy into this JobEnvironment
+     */
+    public JobEnvironment(Environment env) {
+        super(env);
+
+        if (env instanceof JobEnvironment) {
+            m_stepProperties.putAll(((JobEnvironment) env).m_stepProperties);
+        }
     }
-  }
 
-  /**
-   * Add all the results from the supplied map to this environment's results
-   *
-   * @param otherResults the results to add
-   */
-  public void addAllResults(Map<String, LinkedHashSet<Data>> otherResults) {
-    for (Map.Entry<String, LinkedHashSet<Data>> e : otherResults.entrySet()) {
-      if (!m_resultData.containsKey(e.getKey())) {
-        m_resultData.put(e.getKey(), e.getValue());
-      } else {
-        LinkedHashSet<Data> toAddTo = m_resultData.get(e.getKey());
-        toAddTo.addAll(e.getValue());
-      }
+    /**
+     * Add a non-incremental data object to the result
+     * 
+     * @param data the data to add
+     */
+    public void addToResult(Data data) {
+        if (!data.isIncremental()) {
+            LinkedHashSet<Data> dataList = m_resultData.get(data.getConnectionName());
+            if (dataList == null) {
+                dataList = new LinkedHashSet<>();
+                m_resultData.put(data.getConnectionName(), dataList);
+            }
+            dataList.add(data);
+        }
     }
-  }
 
-  /**
-   * Get a list of any result data objects of the supplied connection type
-   * 
-   * @param connName the name of the connection to get result data objects for
-   * @return a list of result data objects for the specified connection type, or
-   *         null if none exist
-   */
-  public LinkedHashSet<Data> getResultDataOfType(String connName) {
-    LinkedHashSet<Data> results = m_resultData.remove(connName);
-    return results;
-  }
+    /**
+     * Add all the results from the supplied map to this environment's results
+     *
+     * @param otherResults the results to add
+     */
+    public void addAllResults(Map<String, LinkedHashSet<Data>> otherResults) {
+        for (Map.Entry<String, LinkedHashSet<Data>> e : otherResults.entrySet()) {
+            if (!m_resultData.containsKey(e.getKey())) {
+                m_resultData.put(e.getKey(), e.getValue());
+            } else {
+                LinkedHashSet<Data> toAddTo = m_resultData.get(e.getKey());
+                toAddTo.addAll(e.getValue());
+            }
+        }
+    }
 
-  /**
-   * Returns true if the results contain data of a particular connection type
-   *
-   * @param connName the name of the connection to check for data
-   * @return true if the results contain data of the supplied connection type
-   */
-  public boolean hasResultDataOfType(String connName) {
-    return m_resultData.containsKey(connName);
-  }
+    /**
+     * Get a list of any result data objects of the supplied connection type
+     * 
+     * @param connName the name of the connection to get result data objects for
+     * @return a list of result data objects for the specified connection type, or
+     *         null if none exist
+     */
+    public LinkedHashSet<Data> getResultDataOfType(String connName) {
+        LinkedHashSet<Data> results = m_resultData.remove(connName);
+        return results;
+    }
 
-  /**
-   * Get a map of all the result data objects
-   * 
-   * @return a map of all result data
-   */
-  public Map<String, LinkedHashSet<Data>> getResultData() {
-    return m_resultData;
-  }
+    /**
+     * Returns true if the results contain data of a particular connection type
+     *
+     * @param connName the name of the connection to check for data
+     * @return true if the results contain data of the supplied connection type
+     */
+    public boolean hasResultDataOfType(String connName) {
+        return m_resultData.containsKey(connName);
+    }
 
-  public void clearResultData() {
-    m_resultData.clear();
-  }
+    /**
+     * Get a map of all the result data objects
+     * 
+     * @return a map of all result data
+     */
+    public Map<String, LinkedHashSet<Data>> getResultData() {
+        return m_resultData;
+    }
 
-  /**
-   * Get the step properties for a named step
-   * 
-   * @param stepName the name of the step to get properties for
-   * @return a map of properties for the named step
-   */
-  public Map<String, String> getStepProperties(String stepName) {
-    return m_stepProperties.get(stepName);
-  }
+    public void clearResultData() {
+        m_resultData.clear();
+    }
 
-  /**
-   * Clear all step properties
-   */
-  public void clearStepProperties() {
-    m_stepProperties.clear();
-  }
+    /**
+     * Get the step properties for a named step
+     * 
+     * @param stepName the name of the step to get properties for
+     * @return a map of properties for the named step
+     */
+    public Map<String, String> getStepProperties(String stepName) {
+        return m_stepProperties.get(stepName);
+    }
 
-  /**
-   * Add the supplied map of step properties. The map contains properties for
-   * various base schemes owned by scheme-specific (WekaAlgorithmWrapper) steps.
-   * Outer map is keyed by step name, inner map by property name.
-   * 
-   * @param propsToAdd properties to add
-   */
-  public void addToStepProperties(Map<String, Map<String, String>> propsToAdd) {
-    m_stepProperties.putAll(propsToAdd);
-  }
+    /**
+     * Clear all step properties
+     */
+    public void clearStepProperties() {
+        m_stepProperties.clear();
+    }
+
+    /**
+     * Add the supplied map of step properties. The map contains properties for
+     * various base schemes owned by scheme-specific (WekaAlgorithmWrapper) steps.
+     * Outer map is keyed by step name, inner map by property name.
+     * 
+     * @param propsToAdd properties to add
+     */
+    public void addToStepProperties(Map<String, Map<String, String>> propsToAdd) {
+        m_stepProperties.putAll(propsToAdd);
+    }
 }

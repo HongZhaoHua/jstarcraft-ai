@@ -49,231 +49,202 @@ import java.util.zip.GZIPOutputStream;
  */
 public class SerializedObject implements Serializable, RevisionHandler {
 
-  /** for serialization */
-  private static final long serialVersionUID = 6635502953928860434L;
+    /** for serialization */
+    private static final long serialVersionUID = 6635502953928860434L;
 
-  /** The array storing the object. */
-  private byte[] m_storedObjectArray;
+    /** The array storing the object. */
+    private byte[] m_storedObjectArray;
 
-  /** Whether or not the object is compressed. */
-  private boolean m_isCompressed;
+    /** Whether or not the object is compressed. */
+    private boolean m_isCompressed;
 
-  /** Whether it is a Jython object or not */
-  private boolean m_isJython;
+    /** Whether it is a Jython object or not */
+    private boolean m_isJython;
 
-  /**
-   * Creates a new serialized object (without compression).
-   *
-   * @param toStore the object to store
-   * @exception Exception if the object couldn't be serialized
-   */
-  public SerializedObject(Object toStore) throws Exception {
+    /**
+     * Creates a new serialized object (without compression).
+     *
+     * @param toStore the object to store
+     * @exception Exception if the object couldn't be serialized
+     */
+    public SerializedObject(Object toStore) throws Exception {
 
-    this(toStore, false);
-  }
-
-  /**
-   * Creates a new serialized object.
-   *
-   * @param toStore the object to store
-   * @param compress whether or not to use compression
-   * @exception Exception if the object couldn't be serialized
-   */
-  public SerializedObject(Object toStore, boolean compress) throws Exception {
-
-    ByteArrayOutputStream ostream = new ByteArrayOutputStream();
-    OutputStream os = ostream;
-    ObjectOutputStream p;
-    if (!compress)
-      p = new ObjectOutputStream(new BufferedOutputStream(os));
-    else
-      p =
-        new ObjectOutputStream(new BufferedOutputStream(
-          new GZIPOutputStream(os)));
-    p.writeObject(toStore);
-    p.flush();
-    p.close(); // used to be ostream.close() !
-    m_storedObjectArray = ostream.toByteArray();
-
-    m_isCompressed = compress;
-    m_isJython = (toStore instanceof JythonSerializableObject);
-  }
-
-  /*
-   * Checks to see whether this object is equal to another.
-   * 
-   * @param compareTo the object to compare to
-   * 
-   * @return whether or not the objects are equal
-   */
-  public final boolean equals(Object compareTo) {
-
-    if (compareTo == null)
-      return false;
-    if (!compareTo.getClass().equals(this.getClass()))
-      return false;
-    byte[] compareArray = ((SerializedObject) compareTo).m_storedObjectArray;
-    if (compareArray.length != m_storedObjectArray.length)
-      return false;
-    for (int i = 0; i < compareArray.length; i++) {
-      if (compareArray[i] != m_storedObjectArray[i])
-        return false;
+        this(toStore, false);
     }
-    return true;
-  }
 
-  /**
-   * Returns a hashcode for this object.
-   *
-   * @return the hashcode
-   */
-  public int hashCode() {
+    /**
+     * Creates a new serialized object.
+     *
+     * @param toStore  the object to store
+     * @param compress whether or not to use compression
+     * @exception Exception if the object couldn't be serialized
+     */
+    public SerializedObject(Object toStore, boolean compress) throws Exception {
 
-    return m_storedObjectArray.length;
-  }
-
-  /**
-   * Returns a serialized object. Uses org.python.util.PythonObjectInputStream
-   * for Jython objects (read <a
-   * href="http://aspn.activestate.com/ASPN/Mail/Message/Jython-users/1001401"
-   * >here</a> for more details).
-   *
-   * @return the restored object
-   */
-  public Object getObject() {
-    try {
-      ByteArrayInputStream istream =
-        new ByteArrayInputStream(m_storedObjectArray);
-      ObjectInputStream p;
-      Object toReturn = null;
-      if (m_isJython) {
-        if (!m_isCompressed)
-          toReturn = Jython.deserialize(new BufferedInputStream(istream));
+        ByteArrayOutputStream ostream = new ByteArrayOutputStream();
+        OutputStream os = ostream;
+        ObjectOutputStream p;
+        if (!compress)
+            p = new ObjectOutputStream(new BufferedOutputStream(os));
         else
-          toReturn =
-            Jython.deserialize(new BufferedInputStream(new GZIPInputStream(
-              istream)));
-      } else {
-        if (!m_isCompressed)
-          p = new ObjectInputStream(new BufferedInputStream(istream)) {
-            protected Set<WekaPackageLibIsolatingClassLoader> m_thirdPartyLoaders =
-              new LinkedHashSet<>();
+            p = new ObjectOutputStream(new BufferedOutputStream(new GZIPOutputStream(os)));
+        p.writeObject(toStore);
+        p.flush();
+        p.close(); // used to be ostream.close() !
+        m_storedObjectArray = ostream.toByteArray();
 
-            @Override
-            protected Class<?> resolveClass(ObjectStreamClass desc)
-              throws IOException, ClassNotFoundException {
+        m_isCompressed = compress;
+        m_isJython = (toStore instanceof JythonSerializableObject);
+    }
 
-              // make sure that the type descriptor for arrays gets removed from
-              // what we're going to look up!
-              String arrayStripped =
-                desc.getName().replace("[L", "").replace("[", "")
-                  .replace(";", "");
-              ClassLoader cl =
-                WekaPackageClassLoaderManager
-                  .getWekaPackageClassLoaderManager().getLoaderForClass(
-                    arrayStripped);
-              if (cl instanceof WekaPackageLibIsolatingClassLoader) {
-                // might be third-party classes involved, store the classloader
-                m_thirdPartyLoaders
-                  .add((WekaPackageLibIsolatingClassLoader) cl);
-              }
+    /*
+     * Checks to see whether this object is equal to another.
+     * 
+     * @param compareTo the object to compare to
+     * 
+     * @return whether or not the objects are equal
+     */
+    public final boolean equals(Object compareTo) {
 
-              Class<?> result = null;
-              try {
-                result = Class.forName(desc.getName(), true, cl);
-              } catch (ClassNotFoundException ex) {
-                for (WekaPackageLibIsolatingClassLoader l : m_thirdPartyLoaders) {
-                  ClassLoader checked =
-                    SerializationHelper.checkForThirdPartyClass(arrayStripped,
-                      l);
-                  if (checked != null) {
-                    result = Class.forName(desc.getName(), true, checked);
-                  }
-                }
-              }
+        if (compareTo == null)
+            return false;
+        if (!compareTo.getClass().equals(this.getClass()))
+            return false;
+        byte[] compareArray = ((SerializedObject) compareTo).m_storedObjectArray;
+        if (compareArray.length != m_storedObjectArray.length)
+            return false;
+        for (int i = 0; i < compareArray.length; i++) {
+            if (compareArray[i] != m_storedObjectArray[i])
+                return false;
+        }
+        return true;
+    }
 
-              if (result == null) {
-                result = super.resolveClass(desc);
-                if (result == null) {
-                  throw new ClassNotFoundException("Unable to find class "
-                    + arrayStripped);
-                }
-              }
+    /**
+     * Returns a hashcode for this object.
+     *
+     * @return the hashcode
+     */
+    public int hashCode() {
 
-              return result;
+        return m_storedObjectArray.length;
+    }
+
+    /**
+     * Returns a serialized object. Uses org.python.util.PythonObjectInputStream for
+     * Jython objects (read
+     * <a href="http://aspn.activestate.com/ASPN/Mail/Message/Jython-users/1001401"
+     * >here</a> for more details).
+     *
+     * @return the restored object
+     */
+    public Object getObject() {
+        try {
+            ByteArrayInputStream istream = new ByteArrayInputStream(m_storedObjectArray);
+            ObjectInputStream p;
+            Object toReturn = null;
+            if (m_isJython) {
+                if (!m_isCompressed)
+                    toReturn = Jython.deserialize(new BufferedInputStream(istream));
+                else
+                    toReturn = Jython.deserialize(new BufferedInputStream(new GZIPInputStream(istream)));
+            } else {
+                if (!m_isCompressed)
+                    p = new ObjectInputStream(new BufferedInputStream(istream)) {
+                        protected Set<WekaPackageLibIsolatingClassLoader> m_thirdPartyLoaders = new LinkedHashSet<>();
+
+                        @Override
+                        protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+
+                            // make sure that the type descriptor for arrays gets removed from
+                            // what we're going to look up!
+                            String arrayStripped = desc.getName().replace("[L", "").replace("[", "").replace(";", "");
+                            ClassLoader cl = WekaPackageClassLoaderManager.getWekaPackageClassLoaderManager().getLoaderForClass(arrayStripped);
+                            if (cl instanceof WekaPackageLibIsolatingClassLoader) {
+                                // might be third-party classes involved, store the classloader
+                                m_thirdPartyLoaders.add((WekaPackageLibIsolatingClassLoader) cl);
+                            }
+
+                            Class<?> result = null;
+                            try {
+                                result = Class.forName(desc.getName(), true, cl);
+                            } catch (ClassNotFoundException ex) {
+                                for (WekaPackageLibIsolatingClassLoader l : m_thirdPartyLoaders) {
+                                    ClassLoader checked = SerializationHelper.checkForThirdPartyClass(arrayStripped, l);
+                                    if (checked != null) {
+                                        result = Class.forName(desc.getName(), true, checked);
+                                    }
+                                }
+                            }
+
+                            if (result == null) {
+                                result = super.resolveClass(desc);
+                                if (result == null) {
+                                    throw new ClassNotFoundException("Unable to find class " + arrayStripped);
+                                }
+                            }
+
+                            return result;
+                        }
+                    };
+                else
+                    p = new ObjectInputStream(new BufferedInputStream(new GZIPInputStream(istream))) {
+
+                        protected Set<WekaPackageLibIsolatingClassLoader> m_thirdPartyLoaders = new LinkedHashSet<>();
+                        protected WekaPackageLibIsolatingClassLoader m_firstLoader = null;
+
+                        @Override
+                        protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+
+                            // make sure that the type descriptor for arrays gets removed
+                            // from what we're going to look up!
+                            String arrayStripped = desc.getName().replace("[L", "").replace("[", "").replace(";", "");
+                            ClassLoader cl = WekaPackageClassLoaderManager.getWekaPackageClassLoaderManager().getLoaderForClass(arrayStripped);
+
+                            if (cl instanceof WekaPackageLibIsolatingClassLoader) {
+                                // might be third-party classes involved, store the
+                                // classloader
+                                m_thirdPartyLoaders.add((WekaPackageLibIsolatingClassLoader) cl);
+                            }
+
+                            Class<?> result = null;
+                            try {
+                                result = Class.forName(desc.getName(), true, cl);
+                            } catch (ClassNotFoundException ex) {
+                                for (WekaPackageLibIsolatingClassLoader l : m_thirdPartyLoaders) {
+                                    ClassLoader checked = SerializationHelper.checkForThirdPartyClass(arrayStripped, l);
+                                    if (checked != null) {
+                                        result = Class.forName(desc.getName(), true, checked);
+                                    }
+                                }
+                            }
+
+                            if (result == null) {
+                                result = super.resolveClass(desc);
+                                if (result == null) {
+                                    throw new ClassNotFoundException("Unable to find class " + arrayStripped);
+                                }
+                            }
+
+                            return result;
+                        }
+                    };
+                toReturn = p.readObject();
             }
-          };
-        else
-          p =
-            new ObjectInputStream(new BufferedInputStream(new GZIPInputStream(
-              istream))) {
-
-              protected Set<WekaPackageLibIsolatingClassLoader> m_thirdPartyLoaders =
-                new LinkedHashSet<>();
-              protected WekaPackageLibIsolatingClassLoader m_firstLoader = null;
-
-              @Override
-              protected Class<?> resolveClass(ObjectStreamClass desc)
-                throws IOException, ClassNotFoundException {
-
-                // make sure that the type descriptor for arrays gets removed
-                // from what we're going to look up!
-                String arrayStripped =
-                  desc.getName().replace("[L", "").replace("[", "")
-                    .replace(";", "");
-                ClassLoader cl =
-                  WekaPackageClassLoaderManager
-                    .getWekaPackageClassLoaderManager().getLoaderForClass(
-                      arrayStripped);
-
-                if (cl instanceof WekaPackageLibIsolatingClassLoader) {
-                  // might be third-party classes involved, store the
-                  // classloader
-                  m_thirdPartyLoaders
-                    .add((WekaPackageLibIsolatingClassLoader) cl);
-                }
-
-                Class<?> result = null;
-                try {
-                  result = Class.forName(desc.getName(), true, cl);
-                } catch (ClassNotFoundException ex) {
-                  for (WekaPackageLibIsolatingClassLoader l : m_thirdPartyLoaders) {
-                    ClassLoader checked =
-                      SerializationHelper.checkForThirdPartyClass(
-                        arrayStripped, l);
-                    if (checked != null) {
-                      result = Class.forName(desc.getName(), true, checked);
-                    }
-                  }
-                }
-
-                if (result == null) {
-                  result = super.resolveClass(desc);
-                  if (result == null) {
-                    throw new ClassNotFoundException("Unable to find class "
-                      + arrayStripped);
-                  }
-                }
-
-                return result;
-              }
-            };
-        toReturn = p.readObject();
-      }
-      istream.close();
-      return toReturn;
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
+            istream.close();
+            return toReturn;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
-  }
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

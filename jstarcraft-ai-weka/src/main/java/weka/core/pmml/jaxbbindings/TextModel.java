@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TextModel element declaration.
+ * <p>
+ * Java class for TextModel element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TextModel">
@@ -61,27 +62,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "TextModel")
 public class TextModel {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class),
-        @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class),
-        @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class),
-        @XmlElementRef(name = "TextCorpus", namespace = "http://www.dmg.org/PMML-4_1", type = TextCorpus.class),
-        @XmlElementRef(name = "DocumentTermMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = DocumentTermMatrix.class),
-        @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class),
-        @XmlElementRef(name = "TextModelSimiliarity", namespace = "http://www.dmg.org/PMML-4_1", type = TextModelSimiliarity.class),
-        @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class),
-        @XmlElementRef(name = "TextDictionary", namespace = "http://www.dmg.org/PMML-4_1", type = TextDictionary.class),
-        @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class),
-        @XmlElementRef(name = "TextModelNormalization", namespace = "http://www.dmg.org/PMML-4_1", type = TextModelNormalization.class),
-        @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class), @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class), @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class), @XmlElementRef(name = "TextCorpus", namespace = "http://www.dmg.org/PMML-4_1", type = TextCorpus.class), @XmlElementRef(name = "DocumentTermMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = DocumentTermMatrix.class), @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class), @XmlElementRef(name = "TextModelSimiliarity", namespace = "http://www.dmg.org/PMML-4_1", type = TextModelSimiliarity.class), @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class),
+            @XmlElementRef(name = "TextDictionary", namespace = "http://www.dmg.org/PMML-4_1", type = TextDictionary.class), @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class), @XmlElementRef(name = "TextModelNormalization", namespace = "http://www.dmg.org/PMML-4_1", type = TextModelNormalization.class), @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class) })
     protected List<Object> content;
     @XmlAttribute
     protected String algorithmName;
@@ -97,45 +83,38 @@ public class TextModel {
     protected BigInteger numberOfTerms;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Extension" is used by two different parts of a schema. See: 
-     * line 1527 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 1514 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Extension" is used by two different parts of a schema. See:
+     * line 1527 of file:/home/david/workspace/weka/pmml-4-1.xsd line 1514 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ModelExplanation }
-     * {@link ModelStats }
-     * {@link Output }
-     * {@link TextCorpus }
-     * {@link DocumentTermMatrix }
-     * {@link TextModelSimiliarity }
-     * {@link LocalTransformations }
-     * {@link Targets }
-     * {@link TextModelNormalization }
-     * {@link MiningSchema }
-     * {@link TextDictionary }
-     * {@link ModelVerification }
+     * {@link ModelExplanation } {@link ModelStats } {@link Output }
+     * {@link TextCorpus } {@link DocumentTermMatrix } {@link TextModelSimiliarity }
+     * {@link LocalTransformations } {@link Targets } {@link TextModelNormalization
+     * } {@link MiningSchema } {@link TextDictionary } {@link ModelVerification }
      * {@link Extension }
      * 
      * 
@@ -150,10 +129,8 @@ public class TextModel {
     /**
      * Gets the value of the algorithmName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlgorithmName() {
         return algorithmName;
@@ -162,10 +139,8 @@ public class TextModel {
     /**
      * Sets the value of the algorithmName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlgorithmName(String value) {
         this.algorithmName = value;
@@ -174,10 +149,8 @@ public class TextModel {
     /**
      * Gets the value of the functionName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @return possible object is {@link MININGFUNCTION }
+     * 
      */
     public MININGFUNCTION getFunctionName() {
         return functionName;
@@ -186,10 +159,8 @@ public class TextModel {
     /**
      * Sets the value of the functionName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @param value allowed object is {@link MININGFUNCTION }
+     * 
      */
     public void setFunctionName(MININGFUNCTION value) {
         this.functionName = value;
@@ -198,10 +169,8 @@ public class TextModel {
     /**
      * Gets the value of the isScorable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsScorable() {
         if (isScorable == null) {
@@ -214,10 +183,8 @@ public class TextModel {
     /**
      * Sets the value of the isScorable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsScorable(Boolean value) {
         this.isScorable = value;
@@ -226,10 +193,8 @@ public class TextModel {
     /**
      * Gets the value of the modelName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelName() {
         return modelName;
@@ -238,10 +203,8 @@ public class TextModel {
     /**
      * Sets the value of the modelName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelName(String value) {
         this.modelName = value;
@@ -250,10 +213,8 @@ public class TextModel {
     /**
      * Gets the value of the numberOfDocuments property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfDocuments() {
         return numberOfDocuments;
@@ -262,10 +223,8 @@ public class TextModel {
     /**
      * Sets the value of the numberOfDocuments property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfDocuments(BigInteger value) {
         this.numberOfDocuments = value;
@@ -274,10 +233,8 @@ public class TextModel {
     /**
      * Gets the value of the numberOfTerms property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfTerms() {
         return numberOfTerms;
@@ -286,10 +243,8 @@ public class TextModel {
     /**
      * Sets the value of the numberOfTerms property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfTerms(BigInteger value) {
         this.numberOfTerms = value;

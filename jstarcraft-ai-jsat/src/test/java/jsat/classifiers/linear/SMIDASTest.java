@@ -16,75 +16,66 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class SMIDASTest
-{
-    
-    public SMIDASTest()
-    {
+public class SMIDASTest {
+
+    public SMIDASTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of train method, of class SMIDAS.
      */
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        
+
         ClassificationDataSet train = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
-        
+
         SMIDAS smidas = new SMIDAS(0.1);
         smidas.setLoss(StochasticSTLinearL1.Loss.LOG);
         smidas.train(train);
-        
+
         ClassificationDataSet test = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smidas.classify(dpp.getDataPoint()).mostLikely());
-        
+
     }
 
     /**
      * Test of train method, of class SMIDAS.
      */
     @Test
-    public void testTrain_RegressionDataSet()
-    {
+    public void testTrain_RegressionDataSet() {
         System.out.println("train");
         Random rand = new Random(123);
-        
+
         SMIDAS smidas = new SMIDAS(0.02);
         smidas.setMinScaled(-1);
         smidas.setLoss(StochasticSTLinearL1.Loss.SQUARED);
         smidas.train(FixedProblems.getLinearRegression(500, rand));
-        
-        for(DataPointPair<Double> dpp : FixedProblems.getLinearRegression(100, rand).getAsDPPList())
-        {
+
+        for (DataPointPair<Double> dpp : FixedProblems.getLinearRegression(100, rand).getAsDPPList()) {
             double truth = dpp.getPair();
             double pred = smidas.regress(dpp.getDataPoint());
-            
-            double relErr = (truth-pred)/truth;
-            assertEquals(0.0, relErr, 0.1);//Give it a decent wiggle room b/c of regularization
+
+            double relErr = (truth - pred) / truth;
+            assertEquals(0.0, relErr, 0.1);// Give it a decent wiggle room b/c of regularization
         }
     }
 }

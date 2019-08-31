@@ -30,102 +30,100 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests PartitionMembership. Run from the command line with: <p/>
+ * Tests PartitionMembership. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.PartitionMembershipTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PartitionMembershipTest 
-  extends AbstractFilterTest {
-  
-  public PartitionMembershipTest(String name) { 
-    super(name);  
-  }
+public class PartitionMembershipTest extends AbstractFilterTest {
 
-  /** Need to remove non-nominal/numeric attributes, set class index */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    // remove attributes that are not nominal/numeric
-    int i = 0;
-    while (i < m_Instances.numAttributes()) {
-      if (   (    !m_Instances.attribute(i).isNominal()
-               && !m_Instances.attribute(i).isNumeric() )
-          || m_Instances.attribute(i).isDate() )
-        m_Instances.deleteAttributeAt(i);
-      else
-        i++;
+    public PartitionMembershipTest(String name) {
+        super(name);
     }
 
-    // class index
-    m_Instances.setClassIndex(0);
-  }
-  
-  /** Creates a default PartitionMembership */
-  public Filter getFilter() {
-    PartitionMembership f = new PartitionMembership();
-    return f;
-  }
+    /** Need to remove non-nominal/numeric attributes, set class index */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  /**
-   * returns the configured FilteredClassifier. Since the base classifier is
-   * determined heuristically, derived tests might need to adjust it.
-   * 
-   * @return the configured FilteredClassifier
-   */
-  protected FilteredClassifier getFilteredClassifier() {
-    FilteredClassifier	result;
-    
-    result = new FilteredClassifier();
-    
-    result.setFilter(getFilter());
-    result.setClassifier(new weka.classifiers.trees.J48());
-    
-    return result;
-  }
-  
-  /**
-   * returns data generated for the FilteredClassifier test
-   * 
-   * @return		the dataset for the FilteredClassifier
-   * @throws Exception	if generation of data fails
-   */
-  protected Instances getFilteredClassifierData() throws Exception{
-    TestInstances	test;
-    Instances		result;
+        // remove attributes that are not nominal/numeric
+        int i = 0;
+        while (i < m_Instances.numAttributes()) {
+            if ((!m_Instances.attribute(i).isNominal() && !m_Instances.attribute(i).isNumeric()) || m_Instances.attribute(i).isDate())
+                m_Instances.deleteAttributeAt(i);
+            else
+                i++;
+        }
 
-    test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
-    test.setClassIndex(TestInstances.CLASS_IS_LAST);
+        // class index
+        m_Instances.setClassIndex(0);
+    }
 
-    result = test.generate();
-    
-    return result;
-  }
+    /** Creates a default PartitionMembership */
+    public Filter getFilter() {
+        PartitionMembership f = new PartitionMembership();
+        return f;
+    }
 
-  public void testNominal() {
-    m_Filter = getFilter();
-    m_Instances.setClassIndex(0);
-    Instances result = useFilter();
-    // classes must be still the same
-    assertEquals(m_Instances.numClasses(), result.numClasses());
-    // at least one attribute besides class
-    assertTrue(result.numAttributes() >= 1 + 1);
-  }
+    /**
+     * returns the configured FilteredClassifier. Since the base classifier is
+     * determined heuristically, derived tests might need to adjust it.
+     * 
+     * @return the configured FilteredClassifier
+     */
+    protected FilteredClassifier getFilteredClassifier() {
+        FilteredClassifier result;
 
-  public void testNumeric() {
-    m_Filter = getFilter();
-    m_Instances.setClassIndex(2);
-    Instances result = useFilter();
-    // at least one attribute besides class
-    assertTrue(result.numAttributes() >= 1 + 1);
-  }
+        result = new FilteredClassifier();
 
-  public static Test suite() {
-    return new TestSuite(PartitionMembershipTest.class);
-  }
+        result.setFilter(getFilter());
+        result.setClassifier(new weka.classifiers.trees.J48());
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        return result;
+    }
+
+    /**
+     * returns data generated for the FilteredClassifier test
+     * 
+     * @return the dataset for the FilteredClassifier
+     * @throws Exception if generation of data fails
+     */
+    protected Instances getFilteredClassifierData() throws Exception {
+        TestInstances test;
+        Instances result;
+
+        test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
+        test.setClassIndex(TestInstances.CLASS_IS_LAST);
+
+        result = test.generate();
+
+        return result;
+    }
+
+    public void testNominal() {
+        m_Filter = getFilter();
+        m_Instances.setClassIndex(0);
+        Instances result = useFilter();
+        // classes must be still the same
+        assertEquals(m_Instances.numClasses(), result.numClasses());
+        // at least one attribute besides class
+        assertTrue(result.numAttributes() >= 1 + 1);
+    }
+
+    public void testNumeric() {
+        m_Filter = getFilter();
+        m_Instances.setClassIndex(2);
+        Instances result = useFilter();
+        // at least one attribute besides class
+        assertTrue(result.numAttributes() >= 1 + 1);
+    }
+
+    public static Test suite() {
+        return new TestSuite(PartitionMembershipTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

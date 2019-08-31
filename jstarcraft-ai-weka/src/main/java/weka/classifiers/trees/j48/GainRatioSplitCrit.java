@@ -33,87 +33,86 @@ import weka.core.Utils;
  */
 public final class GainRatioSplitCrit extends EntropyBasedSplitCrit {
 
-  /** for serialization */
-  private static final long serialVersionUID = -433336694718670930L;
+    /** for serialization */
+    private static final long serialVersionUID = -433336694718670930L;
 
-  /**
-   * This method is a straightforward implementation of the gain ratio criterion
-   * for the given distribution.
-   */
-  @Override
-  public final double splitCritValue(Distribution bags) {
+    /**
+     * This method is a straightforward implementation of the gain ratio criterion
+     * for the given distribution.
+     */
+    @Override
+    public final double splitCritValue(Distribution bags) {
 
-    double numerator;
-    double denumerator;
+        double numerator;
+        double denumerator;
 
-    numerator = oldEnt(bags) - newEnt(bags);
+        numerator = oldEnt(bags) - newEnt(bags);
 
-    // Splits with no gain are useless.
-    if (Utils.eq(numerator, 0)) {
-      return Double.MAX_VALUE;
+        // Splits with no gain are useless.
+        if (Utils.eq(numerator, 0)) {
+            return Double.MAX_VALUE;
+        }
+        denumerator = splitEnt(bags);
+
+        // Test if split is trivial.
+        if (Utils.eq(denumerator, 0)) {
+            return Double.MAX_VALUE;
+        }
+
+        // We take the reciprocal value because we want to minimize the
+        // splitting criterion's value.
+        return denumerator / numerator;
     }
-    denumerator = splitEnt(bags);
 
-    // Test if split is trivial.
-    if (Utils.eq(denumerator, 0)) {
-      return Double.MAX_VALUE;
+    /**
+     * This method computes the gain ratio in the same way C4.5 does.
+     * 
+     * @param bags        the distribution
+     * @param totalnoInst the weight of ALL instances
+     * @param numerator   the info gain
+     */
+    public final double splitCritValue(Distribution bags, double totalnoInst, double numerator) {
+
+        double denumerator;
+        // Compute split info.
+        denumerator = splitEnt(bags, totalnoInst);
+
+        // Test if split is trivial.
+        if (Utils.eq(denumerator, 0)) {
+            return 0;
+        }
+        denumerator = denumerator / totalnoInst;
+
+        return numerator / denumerator;
     }
 
-    // We take the reciprocal value because we want to minimize the
-    // splitting criterion's value.
-    return denumerator / numerator;
-  }
+    /**
+     * Help method for computing the split entropy.
+     */
+    private final double splitEnt(Distribution bags, double totalnoInst) {
 
-  /**
-   * This method computes the gain ratio in the same way C4.5 does.
-   * 
-   * @param bags the distribution
-   * @param totalnoInst the weight of ALL instances
-   * @param numerator the info gain
-   */
-  public final double splitCritValue(Distribution bags, double totalnoInst,
-    double numerator) {
+        double returnValue = 0;
+        double noUnknown;
+        int i;
 
-    double denumerator;
-    // Compute split info.
-    denumerator = splitEnt(bags, totalnoInst);
-
-    // Test if split is trivial.
-    if (Utils.eq(denumerator, 0)) {
-      return 0;
+        noUnknown = totalnoInst - bags.total();
+        if (Utils.gr(bags.total(), 0)) {
+            for (i = 0; i < bags.numBags(); i++) {
+                returnValue = returnValue - lnFunc(bags.perBag(i));
+            }
+            returnValue = returnValue - lnFunc(noUnknown);
+            returnValue = returnValue + lnFunc(totalnoInst);
+        }
+        return returnValue / ContingencyTables.log2;
     }
-    denumerator = denumerator / totalnoInst;
 
-    return numerator / denumerator;
-  }
-
-  /**
-   * Help method for computing the split entropy.
-   */
-  private final double splitEnt(Distribution bags, double totalnoInst) {
-
-    double returnValue = 0;
-    double noUnknown;
-    int i;
-
-    noUnknown = totalnoInst - bags.total();
-    if (Utils.gr(bags.total(), 0)) {
-      for (i = 0; i < bags.numBags(); i++) {
-        returnValue = returnValue - lnFunc(bags.perBag(i));
-      }
-      returnValue = returnValue - lnFunc(noUnknown);
-      returnValue = returnValue + lnFunc(totalnoInst);
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
     }
-    return returnValue / ContingencyTables.log2;
-  }
-
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
 }

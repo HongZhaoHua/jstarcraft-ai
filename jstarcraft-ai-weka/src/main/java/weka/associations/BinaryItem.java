@@ -25,57 +25,53 @@ import java.io.Serializable;
 
 import weka.core.Attribute;
 
-  
-  /**
-   * Class that encapsulates an item whose backing Attribute is
-   * binary or unary.
-   * 
-   * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
-   * @version $Revision; $
-   */
-  public class BinaryItem extends NominalItem 
-    implements Serializable {
-    
+/**
+ * Class that encapsulates an item whose backing Attribute is binary or unary.
+ * 
+ * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
+ * @version $Revision; $
+ */
+public class BinaryItem extends NominalItem implements Serializable {
+
     /** For serialization */
-    private static final long serialVersionUID = -3372941834914147669L;    
-    
+    private static final long serialVersionUID = -3372941834914147669L;
+
     /**
      * Constructor.
      * 
-     * @param att the attribute that backs this item.
+     * @param att        the attribute that backs this item.
      * @param valueIndex the index of the value for this item.
      * @throws Exception if the backing attribute is not binary or unary.
      */
     public BinaryItem(Attribute att, int valueIndex) throws Exception {
-      super(att, valueIndex);
-      
-      if (att.isNumeric() || (att.isNominal() && att.numValues() > 2)) {
-        throw new Exception("BinaryItem must be constructed using a nominal attribute" +
-        		" with at most 2 values!");
-      }
+        super(att, valueIndex);
+
+        if (att.isNumeric() || (att.isNominal() && att.numValues() > 2)) {
+            throw new Exception("BinaryItem must be constructed using a nominal attribute" + " with at most 2 values!");
+        }
     }
-       
+
     /**
      * Equals. Just compares attribute and valueIndex.
+     * 
      * @return true if this BinaryItem is equal to the argument.
      */
     public boolean equals(Object compareTo) {
-      if (!(compareTo instanceof BinaryItem)) {
-        return false;
-      }
-      
-      BinaryItem b = (BinaryItem)compareTo;
-      if (m_attribute.equals(b.getAttribute()) && 
+        if (!(compareTo instanceof BinaryItem)) {
+            return false;
+        }
+
+        BinaryItem b = (BinaryItem) compareTo;
+        if (m_attribute.equals(b.getAttribute()) &&
 //          m_frequency == b.getFrequency() &&
-          m_valueIndex == b.getValueIndex()) {
-        return true;
-      }
-      
-      return false;
+                m_valueIndex == b.getValueIndex()) {
+            return true;
+        }
+
+        return false;
     }
-    
+
     public int hashCode() {
-      return (m_attribute.name().hashCode() ^ 
-          m_attribute.numValues()) * m_frequency;
+        return (m_attribute.name().hashCode() ^ m_attribute.numValues()) * m_frequency;
     }
-  }
+}

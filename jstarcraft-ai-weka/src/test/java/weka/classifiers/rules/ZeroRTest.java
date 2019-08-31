@@ -26,27 +26,30 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests ZeroR. Run from the command line with:<p>
+ * Tests ZeroR. Run from the command line with:
+ * <p>
  * java weka.classifiers.rules.ZeroRTest
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
 public class ZeroRTest extends AbstractClassifierTest {
-  
-  public ZeroRTest(String name) { super(name);  }
 
-  /** Creates a default ZeroR */
-  public Classifier getClassifier() {
-    return new ZeroR();
-  }
+    public ZeroRTest(String name) {
+        super(name);
+    }
 
-  public static Test suite() {
-    return new TestSuite(ZeroRTest.class);
-  }
+    /** Creates a default ZeroR */
+    public Classifier getClassifier() {
+        return new ZeroR();
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(ZeroRTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

@@ -38,82 +38,81 @@ import weka.core.Instances;
  */
 public abstract class AbstractLoader implements Loader {
 
-  /** ID to avoid warning */
-  private static final long serialVersionUID = 2425432084900694551L;
-  /** The current retrieval mode */
-  protected int m_retrieval;
+    /** ID to avoid warning */
+    private static final long serialVersionUID = 2425432084900694551L;
+    /** The current retrieval mode */
+    protected int m_retrieval;
 
-  /**
-   * Sets the retrieval mode.
-   * 
-   * @param mode the retrieval mode
-   */
-  @Override
-  public void setRetrieval(int mode) {
+    /**
+     * Sets the retrieval mode.
+     * 
+     * @param mode the retrieval mode
+     */
+    @Override
+    public void setRetrieval(int mode) {
 
-    m_retrieval = mode;
-  }
+        m_retrieval = mode;
+    }
 
-  /**
-   * Gets the retrieval mode.
-   * 
-   * @return the retrieval mode
-   */
-  protected int getRetrieval() {
+    /**
+     * Gets the retrieval mode.
+     * 
+     * @return the retrieval mode
+     */
+    protected int getRetrieval() {
 
-    return m_retrieval;
-  }
+        return m_retrieval;
+    }
 
-  /**
-   * Default implementation throws an IOException.
-   * 
-   * @param file the File
-   * @exception IOException always
-   */
-  @Override
-  public void setSource(File file) throws IOException {
+    /**
+     * Default implementation throws an IOException.
+     * 
+     * @param file the File
+     * @exception IOException always
+     */
+    @Override
+    public void setSource(File file) throws IOException {
 
-    throw new IOException("Setting File as source not supported");
-  }
+        throw new IOException("Setting File as source not supported");
+    }
 
-  /**
-   * Default implementation sets retrieval mode to NONE
-   * 
-   * @exception never.
-   */
-  @Override
-  public void reset() throws Exception {
-    m_retrieval = NONE;
-  }
+    /**
+     * Default implementation sets retrieval mode to NONE
+     * 
+     * @exception never.
+     */
+    @Override
+    public void reset() throws Exception {
+        m_retrieval = NONE;
+    }
 
-  /**
-   * Default implementation throws an IOException.
-   * 
-   * @param input the input stream
-   * @exception IOException always
-   */
-  @Override
-  public void setSource(InputStream input) throws IOException {
+    /**
+     * Default implementation throws an IOException.
+     * 
+     * @param input the input stream
+     * @exception IOException always
+     */
+    @Override
+    public void setSource(InputStream input) throws IOException {
 
-    throw new IOException("Setting InputStream as source not supported");
-  }
+        throw new IOException("Setting InputStream as source not supported");
+    }
 
-  /*
-   * To be overridden.
-   */
-  @Override
-  public abstract Instances getStructure() throws IOException;
+    /*
+     * To be overridden.
+     */
+    @Override
+    public abstract Instances getStructure() throws IOException;
 
-  /*
-   * To be overridden.
-   */
-  @Override
-  public abstract Instances getDataSet() throws IOException;
+    /*
+     * To be overridden.
+     */
+    @Override
+    public abstract Instances getDataSet() throws IOException;
 
-  /*
-   * To be overridden.
-   */
-  @Override
-  public abstract Instance getNextInstance(Instances structure)
-    throws IOException;
+    /*
+     * To be overridden.
+     */
+    @Override
+    public abstract Instance getNextInstance(Instances structure) throws IOException;
 }

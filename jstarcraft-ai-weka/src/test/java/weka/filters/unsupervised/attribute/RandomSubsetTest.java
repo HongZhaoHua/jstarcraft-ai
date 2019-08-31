@@ -27,104 +27,102 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RandomSubset. Run from the command line with: <p/>
+ * Tests RandomSubset. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.RandomSubsetTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RandomSubsetTest 
-  extends AbstractFilterTest {
-  
-  /**
-   * Initializes the test.
-   * 
-   * @param name	the name of the test
-   */
-  public RandomSubsetTest(String name) { 
-    super(name);  
-  }
+public class RandomSubsetTest extends AbstractFilterTest {
 
-  /**
-   * Creates a default RandomSubset.
-   * 
-   * @return		the filter
-   */
-  public Filter getFilter() {
-    return new RandomSubset();
-  }
-
-  /**
-   * Creates a specialized RandomSubset.
-   * 
-   * @param num		the number of attributes
-   * @return		the filter
-   */
-  public Filter getFilter(double num) {
-    RandomSubset result = new RandomSubset();
-    result.setNumAttributes(num);
-    return result;
-  }
-
-  /**
-   * performs the actual test.
-   * 
-   * @param numSel	the number of attributes to select
-   * @param numOut	the number of attributes that are expected
-   */
-  protected void performTest(double numSel, int numOut) {
-    m_Filter         = getFilter(numSel);
-    Instances icopy  = new Instances(m_Instances);
-    Instances result = null;
-    try {
-      m_Filter.setInputFormat(icopy);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
-    }
-    try {
-      result = Filter.useFilter(icopy, m_Filter);
-      assertNotNull(result);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+    /**
+     * Initializes the test.
+     * 
+     * @param name the name of the test
+     */
+    public RandomSubsetTest(String name) {
+        super(name);
     }
 
-    assertEquals(numOut, result.numAttributes());
-    assertEquals(icopy.numInstances(), m_Instances.numInstances());
-  }
+    /**
+     * Creates a default RandomSubset.
+     * 
+     * @return the filter
+     */
+    public Filter getFilter() {
+        return new RandomSubset();
+    }
 
-  /**
-   * Tests a percentage.
-   */
-  public void testPercentage() {
-    performTest(0.5, 4);
-  }
+    /**
+     * Creates a specialized RandomSubset.
+     * 
+     * @param num the number of attributes
+     * @return the filter
+     */
+    public Filter getFilter(double num) {
+        RandomSubset result = new RandomSubset();
+        result.setNumAttributes(num);
+        return result;
+    }
 
-  /**
-   * Tests an absolute number.
-   */
-  public void testAbsolute() {
-    performTest(5, 5);
-  }
+    /**
+     * performs the actual test.
+     * 
+     * @param numSel the number of attributes to select
+     * @param numOut the number of attributes that are expected
+     */
+    protected void performTest(double numSel, int numOut) {
+        m_Filter = getFilter(numSel);
+        Instances icopy = new Instances(m_Instances);
+        Instances result = null;
+        try {
+            m_Filter.setInputFormat(icopy);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
+        }
+        try {
+            result = Filter.useFilter(icopy, m_Filter);
+            assertNotNull(result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+        }
 
-  /**
-   * Returns a test suite.
-   * 
-   * @return		the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(RandomSubsetTest.class);
-  }
+        assertEquals(numOut, result.numAttributes());
+        assertEquals(icopy.numInstances(), m_Instances.numInstances());
+    }
 
-  /**
-   * Runs the test from commandline.
-   * 
-   * @param args	ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * Tests a percentage.
+     */
+    public void testPercentage() {
+        performTest(0.5, 4);
+    }
+
+    /**
+     * Tests an absolute number.
+     */
+    public void testAbsolute() {
+        performTest(5, 5);
+    }
+
+    /**
+     * Returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(RandomSubsetTest.class);
+    }
+
+    /**
+     * Runs the test from commandline.
+     * 
+     * @param args ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

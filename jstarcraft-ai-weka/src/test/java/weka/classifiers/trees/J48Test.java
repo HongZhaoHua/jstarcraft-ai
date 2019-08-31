@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests J48. Run from the command line with:<p>
+ * Tests J48. Run from the command line with:
+ * <p>
  * java weka.classifiers.trees.J48Test
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class J48Test extends AbstractClassifierTest {
 
-  public J48Test(String name) { super(name);  }
+    public J48Test(String name) {
+        super(name);
+    }
 
-  /** Creates a default J48 */
-  public Classifier getClassifier() {
-    return new J48();
-  }
+    /** Creates a default J48 */
+    public Classifier getClassifier() {
+        return new J48();
+    }
 
-  public static Test suite() {
-    return new TestSuite(J48Test.class);
-  }
+    public static Test suite() {
+        return new TestSuite(J48Test.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

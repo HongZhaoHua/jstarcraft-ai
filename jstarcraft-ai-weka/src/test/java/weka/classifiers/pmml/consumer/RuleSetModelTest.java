@@ -32,23 +32,23 @@ import junit.framework.TestSuite;
  */
 public class RuleSetModelTest extends AbstractPMMLClassifierTest {
 
-  public RuleSetModelTest(String name) {
-    super(name);
-  }
+    public RuleSetModelTest(String name) {
+        super(name);
+    }
 
-  @Override
-  protected void setUp() throws Exception {
-    m_modelNames = new ArrayList<String>();
-    m_dataSetNames = new ArrayList<String>();
-    m_modelNames.add("HEART_RULESET.xml");
-    m_dataSetNames.add("heart-c.arff");
-  }
+    @Override
+    protected void setUp() throws Exception {
+        m_modelNames = new ArrayList<String>();
+        m_dataSetNames = new ArrayList<String>();
+        m_modelNames.add("HEART_RULESET.xml");
+        m_dataSetNames.add("heart-c.arff");
+    }
 
-  public static Test suite() {
-    return new TestSuite(weka.classifiers.pmml.consumer.RuleSetModelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(weka.classifiers.pmml.consumer.RuleSetModelTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

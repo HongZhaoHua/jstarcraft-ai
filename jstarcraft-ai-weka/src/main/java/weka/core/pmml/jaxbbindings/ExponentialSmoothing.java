@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-
 /**
- * <p>Java class for ExponentialSmoothing element declaration.
+ * <p>
+ * Java class for ExponentialSmoothing element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="ExponentialSmoothing">
@@ -55,12 +56,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "level",
-    "trendExpoSmooth",
-    "seasonalityExpoSmooth",
-    "timeValue"
-})
+@XmlType(name = "", propOrder = { "level", "trendExpoSmooth", "seasonalityExpoSmooth", "timeValue" })
 @XmlRootElement(name = "ExponentialSmoothing")
 public class ExponentialSmoothing {
 
@@ -81,10 +77,8 @@ public class ExponentialSmoothing {
     /**
      * Gets the value of the level property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Level }
-     *     
+     * @return possible object is {@link Level }
+     * 
      */
     public Level getLevel() {
         return level;
@@ -93,10 +87,8 @@ public class ExponentialSmoothing {
     /**
      * Sets the value of the level property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Level }
-     *     
+     * @param value allowed object is {@link Level }
+     * 
      */
     public void setLevel(Level value) {
         this.level = value;
@@ -105,10 +97,8 @@ public class ExponentialSmoothing {
     /**
      * Gets the value of the trendExpoSmooth property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TrendExpoSmooth }
-     *     
+     * @return possible object is {@link TrendExpoSmooth }
+     * 
      */
     public TrendExpoSmooth getTrendExpoSmooth() {
         return trendExpoSmooth;
@@ -117,10 +107,8 @@ public class ExponentialSmoothing {
     /**
      * Sets the value of the trendExpoSmooth property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TrendExpoSmooth }
-     *     
+     * @param value allowed object is {@link TrendExpoSmooth }
+     * 
      */
     public void setTrendExpoSmooth(TrendExpoSmooth value) {
         this.trendExpoSmooth = value;
@@ -129,10 +117,8 @@ public class ExponentialSmoothing {
     /**
      * Gets the value of the seasonalityExpoSmooth property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SeasonalityExpoSmooth }
-     *     
+     * @return possible object is {@link SeasonalityExpoSmooth }
+     * 
      */
     public SeasonalityExpoSmooth getSeasonalityExpoSmooth() {
         return seasonalityExpoSmooth;
@@ -141,10 +127,8 @@ public class ExponentialSmoothing {
     /**
      * Sets the value of the seasonalityExpoSmooth property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SeasonalityExpoSmooth }
-     *     
+     * @param value allowed object is {@link SeasonalityExpoSmooth }
+     * 
      */
     public void setSeasonalityExpoSmooth(SeasonalityExpoSmooth value) {
         this.seasonalityExpoSmooth = value;
@@ -154,21 +138,21 @@ public class ExponentialSmoothing {
      * Gets the value of the timeValue property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the timeValue property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the timeValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getTimeValue().add(newItem);
+     * getTimeValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TimeValue }
+     * Objects of the following type(s) are allowed in the list {@link TimeValue }
      * 
      * 
      */
@@ -182,10 +166,8 @@ public class ExponentialSmoothing {
     /**
      * Gets the value of the rmse property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getRMSE() {
         return rmse;
@@ -194,10 +176,8 @@ public class ExponentialSmoothing {
     /**
      * Sets the value of the rmse property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setRMSE(Double value) {
         this.rmse = value;
@@ -206,10 +186,8 @@ public class ExponentialSmoothing {
     /**
      * Gets the value of the transformation property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTransformation() {
         if (transformation == null) {
@@ -222,10 +200,8 @@ public class ExponentialSmoothing {
     /**
      * Sets the value of the transformation property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTransformation(String value) {
         this.transformation = value;

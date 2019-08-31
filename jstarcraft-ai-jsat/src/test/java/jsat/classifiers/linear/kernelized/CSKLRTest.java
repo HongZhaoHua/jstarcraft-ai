@@ -20,44 +20,35 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class CSKLRTest
-{
-    
-    public CSKLRTest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
+public class CSKLRTest {
+
+    public CSKLRTest() {
     }
 
-    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values())
-        {
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
             CSKLR instance = new CSKLR(0.5, new RBFKernel(0.5), 10, mode);
             instance.setMode(mode);
-            
+
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
 
@@ -70,14 +61,12 @@ public class CSKLRTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values())
-        {
+
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
             CSKLR instance = new CSKLR(0.5, new RBFKernel(0.5), 10, mode);
-        
+
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
 
@@ -90,12 +79,11 @@ public class CSKLRTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         CSKLR instance = new CSKLR(0.5, new RBFKernel(0.5), 10, CSKLR.UpdateMode.MARGIN);
-        
+
         ClassificationDataSet t1 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom());
         ClassificationDataSet t2 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom(), 2.0, 10.0);
 

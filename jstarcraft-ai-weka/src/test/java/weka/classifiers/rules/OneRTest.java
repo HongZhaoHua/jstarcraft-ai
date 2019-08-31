@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests OneR. Run from the command line with:<p>
+ * Tests OneR. Run from the command line with:
+ * <p>
  * java weka.classifiers.rules.OneRTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class OneRTest extends AbstractClassifierTest {
 
-  public OneRTest(String name) { super(name);  }
+    public OneRTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default OneR */
-  public Classifier getClassifier() {
-    return new OneR();
-  }
+    /** Creates a default OneR */
+    public Classifier getClassifier() {
+        return new OneR();
+    }
 
-  public static Test suite() {
-    return new TestSuite(OneRTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(OneRTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

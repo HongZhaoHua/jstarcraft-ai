@@ -20,8 +20,7 @@ import jsat.math.rootfinding.Zeroin;
  *
  * @author Edward Raff
  */
-public abstract class ContinuousDistribution extends Distribution
-{
+public abstract class ContinuousDistribution extends Distribution {
 
     private static final long serialVersionUID = -5079392926462355615L;
 
@@ -35,216 +34,207 @@ public abstract class ContinuousDistribution extends Distribution
      * @param x the value to get the log(PDF) of
      * @return the value of log(PDF(x))
      */
-    public double logPdf(double x)
-    {
+    public double logPdf(double x) {
         double pdf = pdf(x);
-        if(pdf <= 0)
+        if (pdf <= 0)
             return -Double.MAX_VALUE;
         return Math.log(pdf);
     }
-    
+
     /**
-     * Computes the value of the Probability Density Function (PDF) at the given point
-     * @param x the value to get the PDF 
+     * Computes the value of the Probability Density Function (PDF) at the given
+     * point
+     * 
+     * @param x the value to get the PDF
      * @return the PDF(x)
      */
     abstract public double pdf(double x);
 
     @Override
-    public double cdf(double x)
-    {
+    public double cdf(double x) {
         double intMin = getIntegrationMin();
-        
-        return Romberg.romb((z)->this.pdf(z), intMin, x);
+
+        return Romberg.romb((z) -> this.pdf(z), intMin, x);
     }
-    
+
     @Override
-    public double invCdf(final double p)
-    {
+    public double invCdf(final double p) {
         if (p < 0 || p > 1)
             throw new ArithmeticException("Value of p must be in the range [0,1], not " + p);
         double a = getIntegrationMin();
         double b = getIntegrationMax();
 
-        //default case, lets just do a root finding on the CDF for the specific value of p
+        // default case, lets just do a root finding on the CDF for the specific value
+        // of p
         return Zeroin.root(a, b, (x) -> this.cdf(x) - p);
     }
 
     @Override
-    public double mean()
-    {
+    public double mean() {
         double intMin = getIntegrationMin();
-        
+
         double intMax = getIntegrationMax();
 
-        return Romberg.romb((double x) -> x*pdf(x), intMin, intMax);
+        return Romberg.romb((double x) -> x * pdf(x), intMin, intMax);
     }
 
     @Override
-    public double variance()
-    {
+    public double variance() {
         double intMin = getIntegrationMin();
-        
+
         double intMax = getIntegrationMax();
         final double mean = mean();
 
-        return Romberg.romb((x)->Math.pow(x-mean, 2)*pdf(x), intMin, intMax);
+        return Romberg.romb((x) -> Math.pow(x - mean, 2) * pdf(x), intMin, intMax);
     }
-    
-    
 
     @Override
-    public double skewness()
-    {
+    public double skewness() {
         double intMin = getIntegrationMin();
-        
+
         double intMax = getIntegrationMax();
         final double mean = mean();
 
-        return Romberg.romb((x)->Math.pow((x-mean), 3)*pdf(x), intMin, intMax)/Math.pow(variance(), 3.0/2);
+        return Romberg.romb((x) -> Math.pow((x - mean), 3) * pdf(x), intMin, intMax) / Math.pow(variance(), 3.0 / 2);
     }
-    
+
     @Override
-    public double mode()
-    {
+    public double mode() {
         double intMin = getIntegrationMin();
-        
+
         double intMax = getIntegrationMax();
 
-        return GoldenSearch.findMin(intMin, intMax, (x)->-pdf(x), 1e-6, 1000);
+        return GoldenSearch.findMin(intMin, intMax, (x) -> -pdf(x), 1e-6, 1000);
     }
-    
-    protected double getIntegrationMin()
-    {
+
+    protected double getIntegrationMin() {
         double intMin = min();
-        if(Double.isInfinite(intMin))
-        {
-            intMin = -Double.MAX_VALUE/4;
-            //Lets find a suitbly small PDF starting value for this 
-            //first, lets take big steps
-            for(int i = 0; i < 8; i++)
-            {
+        if (Double.isInfinite(intMin)) {
+            intMin = -Double.MAX_VALUE / 4;
+            // Lets find a suitbly small PDF starting value for this
+            // first, lets take big steps
+            for (int i = 0; i < 8; i++) {
                 double sqrt = Math.sqrt(-intMin);
-                if(pdf(sqrt) < 1e-5)
+                if (pdf(sqrt) < 1e-5)
                     intMin = -sqrt;
                 else
-                    break;//no more big steps
+                    break;// no more big steps
             }
-            
-            //keep going until it looks like we should switch signs
-            while(pdf(intMin) < 1e-5 && intMin < -0.1)
-            {
-                intMin/=2;
+
+            // keep going until it looks like we should switch signs
+            while (pdf(intMin) < 1e-5 && intMin < -0.1) {
+                intMin /= 2;
             }
-            
-            if(pdf(intMin) < 1e-5)//still?
-                intMin *=-1;
-            //ok, search positive... keep multiplying till we get there
-            while(pdf(intMin) < 1e-5)
-            {
+
+            if (pdf(intMin) < 1e-5)// still?
+                intMin *= -1;
+            // ok, search positive... keep multiplying till we get there
+            while (pdf(intMin) < 1e-5) {
                 intMin *= 2;
             }
         }
         return intMin;
     }
-    
-    protected double getIntegrationMax()
-    {
+
+    protected double getIntegrationMax() {
         double intMax = max();
-        if(Double.isInfinite(intMax))
-        {
+        if (Double.isInfinite(intMax)) {
             intMax = Double.MAX_VALUE / 4;
-            //Lets find a suitbly small PDF starting value for this 
-            //first, lets take big steps
-            for (int i = 0; i < 8; i++)
-            {
+            // Lets find a suitbly small PDF starting value for this
+            // first, lets take big steps
+            for (int i = 0; i < 8; i++) {
                 double sqrt = Math.sqrt(intMax);
                 if (pdf(sqrt) < 1e-5)
                     intMax = sqrt;
                 else
-                    break;//no more big steps
+                    break;// no more big steps
             }
 
-            //keep going until it looks like we should switch signs
-            while (pdf(intMax) < 1e-5 && intMax > 0.1)
-            {
+            // keep going until it looks like we should switch signs
+            while (pdf(intMax) < 1e-5 && intMax > 0.1) {
                 intMax /= 2;
             }
 
-            if (pdf(intMax) < 1e-5)//still?
+            if (pdf(intMax) < 1e-5)// still?
                 intMax *= -1;
-            //ok, search negative... keep multiplying till we get there
-            while (pdf(intMax) < 1e-5)
-            {
+            // ok, search negative... keep multiplying till we get there
+            while (pdf(intMax) < 1e-5) {
                 intMax *= 2;
             }
         }
         return intMax;
     }
-    
+
     /**
-     * The descriptive name of a distribution returns the name of the distribution, followed by the parameters of the distribution and their values. 
+     * The descriptive name of a distribution returns the name of the distribution,
+     * followed by the parameters of the distribution and their values.
+     * 
      * @return the name of the distribution that includes parameter values
      */
-    public String getDescriptiveName()
-    {
+    public String getDescriptiveName() {
         StringBuilder sb = new StringBuilder(getDistributionName());
         sb.append("(");
         String[] vars = getVariables();
         double[] vals = getCurrentVariableValues();
-        
+
         sb.append(vars[0]).append(" = ").append(vals[0]);
-        
-        for(int i  = 1; i < vars.length; i++)
+
+        for (int i = 1; i < vars.length; i++)
             sb.append(", ").append(vars[i]).append(" = ").append(vals[i]);
-        
+
         sb.append(")");
-        
+
         return sb.toString();
     }
 
     /**
-     * Return the name of the distribution. 
-     * @return the name of the distribution. 
+     * Return the name of the distribution.
+     * 
+     * @return the name of the distribution.
      */
     abstract public String getDistributionName();
 
     /**
-     * Returns an array, where each value contains the name of a parameter in the distribution. 
-     * The order must always be the same, and match up with the values returned by {@link #getCurrentVariableValues() }
+     * Returns an array, where each value contains the name of a parameter in the
+     * distribution. The order must always be the same, and match up with the values
+     * returned by {@link #getCurrentVariableValues() }
      * 
      * @return a string of the variable names this distribution uses
      */
     abstract public String[] getVariables();
 
     /**
-     * Returns an array, where each value contains the value of a parameter in the distribution. 
-     * The order must always be the same, and match up with the values returned by {@link #getVariables() }
-     * @return the current values of the parameters used by this distribution, in the same order as their names are returned by {@link #getVariables() }
+     * Returns an array, where each value contains the value of a parameter in the
+     * distribution. The order must always be the same, and match up with the values
+     * returned by {@link #getVariables() }
+     * 
+     * @return the current values of the parameters used by this distribution, in
+     *         the same order as their names are returned by
+     *         {@link #getVariables() }
      */
     abstract public double[] getCurrentVariableValues();
 
     /**
-     * Sets one of the variables of this distribution by the name. 
-     * @param var the variable to set
-     * @param value  the value to set 
+     * Sets one of the variables of this distribution by the name.
+     * 
+     * @param var   the variable to set
+     * @param value the value to set
      */
     abstract public void setVariable(String var, double value);
-    
+
     @Override
     abstract public ContinuousDistribution clone();
 
     /**
-     * Attempts to set the variables used by this distribution based on population sample data, 
-     * assuming the sample data is from this type of distribution.
+     * Attempts to set the variables used by this distribution based on population
+     * sample data, assuming the sample data is from this type of distribution.
      * 
      * @param data the data to use to attempt to fit against
      */
     abstract public void setUsingData(Vec data);
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return getDistributionName();
     }
 

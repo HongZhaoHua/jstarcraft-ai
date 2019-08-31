@@ -35,30 +35,30 @@ import weka.filters.Filter;
  */
 public class ClassConditionalProbabilitiesTest extends AbstractFilterTest {
 
-  public ClassConditionalProbabilitiesTest(String name) {
-    super(name);
-  }
+    public ClassConditionalProbabilitiesTest(String name) {
+        super(name);
+    }
 
-  @Override
-  public Filter getFilter() {
-    return new ClassConditionalProbabilities();
-  }
+    @Override
+    public Filter getFilter() {
+        return new ClassConditionalProbabilities();
+    }
 
-  protected void setUp() throws Exception {
-    super.setUp();
+    protected void setUp() throws Exception {
+        super.setUp();
 
-    m_Instances.deleteAttributeType(Attribute.STRING);
-    m_Instances.deleteAttributeType(Attribute.DATE);
-    m_FilteredClassifier = null;
+        m_Instances.deleteAttributeType(Attribute.STRING);
+        m_Instances.deleteAttributeType(Attribute.DATE);
+        m_FilteredClassifier = null;
 
-    m_Instances.setClassIndex(0);
-  }
+        m_Instances.setClassIndex(0);
+    }
 
-  public static Test suite() {
-    return new TestSuite(ClassConditionalProbabilitiesTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(ClassConditionalProbabilitiesTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

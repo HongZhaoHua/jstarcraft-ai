@@ -23,29 +23,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests LinearNNSearch. Run from the command line with: <p/>
+ * Tests LinearNNSearch. Run from the command line with:
+ * <p/>
  * java weka.core.neighboursearch.LinearNNSearchTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class LinearNNSearchTest
-  extends AbstractNearestNeighbourSearchTest {
+public class LinearNNSearchTest extends AbstractNearestNeighbourSearchTest {
 
-  public LinearNNSearchTest(String name) {
-    super(name);
-  }
+    public LinearNNSearchTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default LinearNNSearch */
-  public NearestNeighbourSearch getNearestNeighbourSearch() {
-    return new LinearNNSearch();
-  }
-  
-  public static Test suite() {
-    return new TestSuite(LinearNNSearchTest.class);
-  }
+    /** Creates a default LinearNNSearch */
+    public NearestNeighbourSearch getNearestNeighbourSearch() {
+        return new LinearNNSearch();
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(LinearNNSearchTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

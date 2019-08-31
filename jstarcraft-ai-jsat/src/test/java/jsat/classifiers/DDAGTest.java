@@ -32,39 +32,31 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class DDAGTest
-{
-    
-    public DDAGTest()
-    {
+public class DDAGTest {
+
+    public DDAGTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
-        for(boolean conc : new boolean[]{true, false})
-        {
+        for (boolean conc : new boolean[] { true, false }) {
             DDAG instance = new DDAG(new DCDs(), conc);
 
             ClassificationDataSet train = FixedProblems.getSimpleKClassLinear(1000, 7);
@@ -76,13 +68,11 @@ public class DDAGTest
             assertTrue(cme.getErrorRate() <= 0.001);
         }
     }
-    
+
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        for(boolean conc : new boolean[]{true, false})
-        {
+        for (boolean conc : new boolean[] { true, false }) {
             DDAG instance = new DDAG(new DCDs(), conc);
 
             ClassificationDataSet train = FixedProblems.getSimpleKClassLinear(1000, 7);
@@ -96,30 +86,29 @@ public class DDAGTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
-        
+
         ClassificationDataSet t1 = FixedProblems.getSimpleKClassLinear(1000, 7);
         ClassificationDataSet t2 = FixedProblems.getSimpleKClassLinear(1000, 9);
-        
+
         DDAG instance = new DDAG(new DCDs());
-        
+
         instance = instance.clone();
-                
+
         instance.train(t1);
 
         DDAG result = instance.clone();
-        for(int i = 0; i < t1.size(); i++)
+        for (int i = 0; i < t1.size(); i++)
             assertEquals(t1.getDataPointCategory(i), result.classify(t1.getDataPoint(i)).mostLikely());
         result.train(t2);
-        
-        for(int i = 0; i < t1.size(); i++)
+
+        for (int i = 0; i < t1.size(); i++)
             assertEquals(t1.getDataPointCategory(i), instance.classify(t1.getDataPoint(i)).mostLikely());
-        
-        for(int i = 0; i < t2.size(); i++)
+
+        for (int i = 0; i < t2.size(); i++)
             assertEquals(t2.getDataPointCategory(i), result.classify(t2.getDataPoint(i)).mostLikely());
-        
+
     }
-    
+
 }

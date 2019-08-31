@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for ROCGraph element declaration.
+ * <p>
+ * Java class for ROCGraph element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="ROCGraph">
@@ -42,12 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "xCoordinates",
-    "yCoordinates",
-    "boundaryValues"
-})
+@XmlType(name = "", propOrder = { "extension", "xCoordinates", "yCoordinates", "boundaryValues" })
 @XmlRootElement(name = "ROCGraph")
 public class ROCGraph {
 
@@ -64,21 +60,21 @@ public class ROCGraph {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -92,10 +88,8 @@ public class ROCGraph {
     /**
      * Gets the value of the xCoordinates property.
      * 
-     * @return
-     *     possible object is
-     *     {@link XCoordinates }
-     *     
+     * @return possible object is {@link XCoordinates }
+     * 
      */
     public XCoordinates getXCoordinates() {
         return xCoordinates;
@@ -104,10 +98,8 @@ public class ROCGraph {
     /**
      * Sets the value of the xCoordinates property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link XCoordinates }
-     *     
+     * @param value allowed object is {@link XCoordinates }
+     * 
      */
     public void setXCoordinates(XCoordinates value) {
         this.xCoordinates = value;
@@ -116,10 +108,8 @@ public class ROCGraph {
     /**
      * Gets the value of the yCoordinates property.
      * 
-     * @return
-     *     possible object is
-     *     {@link YCoordinates }
-     *     
+     * @return possible object is {@link YCoordinates }
+     * 
      */
     public YCoordinates getYCoordinates() {
         return yCoordinates;
@@ -128,10 +118,8 @@ public class ROCGraph {
     /**
      * Sets the value of the yCoordinates property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link YCoordinates }
-     *     
+     * @param value allowed object is {@link YCoordinates }
+     * 
      */
     public void setYCoordinates(YCoordinates value) {
         this.yCoordinates = value;
@@ -140,10 +128,8 @@ public class ROCGraph {
     /**
      * Gets the value of the boundaryValues property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BoundaryValues }
-     *     
+     * @return possible object is {@link BoundaryValues }
+     * 
      */
     public BoundaryValues getBoundaryValues() {
         return boundaryValues;
@@ -152,10 +138,8 @@ public class ROCGraph {
     /**
      * Sets the value of the boundaryValues property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BoundaryValues }
-     *     
+     * @param value allowed object is {@link BoundaryValues }
+     * 
      */
     public void setBoundaryValues(BoundaryValues value) {
         this.boundaryValues = value;

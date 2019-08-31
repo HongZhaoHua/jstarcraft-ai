@@ -26,91 +26,88 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SVMLightLoader/SVMLightSaver. Run from the command line with:<p/>
+ * Tests SVMLightLoader/SVMLightSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.SVMLightTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SVMLightTest 
-  extends AbstractFileConverterTest {
+public class SVMLightTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>SVMLightTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public SVMLightTest(String name) { 
-    super(name);  
-  }
-
-  /**
-   * returns the loader used in the tests.
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new SVMLightLoader();
-  }
-
-  /**
-   * returns the saver used in the tests.
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new SVMLightSaver();
-  }
-  
-  /**
-   * Compare two datasets to see if they differ. Skips the equalHeaders
-   * method, since the SVMLight format doesn't have any notion of attribute
-   * names.
-   *
-   * @param data1 one set of instances
-   * @param data2 the other set of instances
-   * @throws Exception if the datasets differ
-   */
-  protected void compareDatasets(Instances data1, Instances data2)
-    throws Exception {
-    
-    if (!(data2.numInstances() == data1.numInstances())) {
-      throw new Exception("number of instances has changed");
+    /**
+     * Constructs the <code>SVMLightTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public SVMLightTest(String name) {
+        super(name);
     }
-    for (int i = 0; i < data2.numInstances(); i++) {
-      Instance orig = data1.instance(i);
-      Instance copy = data2.instance(i);
-      for (int j = 0; j < orig.numAttributes(); j++) {
-        if (orig.isMissing(j)) {
-          if (!copy.isMissing(j)) {
-            throw new Exception("instances have changed");
-          }
-        } else if (orig.value(j) != copy.value(j)) {
-          throw new Exception("instances have changed");
+
+    /**
+     * returns the loader used in the tests.
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new SVMLightLoader();
+    }
+
+    /**
+     * returns the saver used in the tests.
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new SVMLightSaver();
+    }
+
+    /**
+     * Compare two datasets to see if they differ. Skips the equalHeaders method,
+     * since the SVMLight format doesn't have any notion of attribute names.
+     *
+     * @param data1 one set of instances
+     * @param data2 the other set of instances
+     * @throws Exception if the datasets differ
+     */
+    protected void compareDatasets(Instances data1, Instances data2) throws Exception {
+
+        if (!(data2.numInstances() == data1.numInstances())) {
+            throw new Exception("number of instances has changed");
         }
-        if (orig.weight() != copy.weight()) {
-          throw new Exception("instance weights have changed");
-        }	  
-      }
+        for (int i = 0; i < data2.numInstances(); i++) {
+            Instance orig = data1.instance(i);
+            Instance copy = data2.instance(i);
+            for (int j = 0; j < orig.numAttributes(); j++) {
+                if (orig.isMissing(j)) {
+                    if (!copy.isMissing(j)) {
+                        throw new Exception("instances have changed");
+                    }
+                } else if (orig.value(j) != copy.value(j)) {
+                    throw new Exception("instances have changed");
+                }
+                if (orig.weight() != copy.weight()) {
+                    throw new Exception("instance weights have changed");
+                }
+            }
+        }
     }
-  }
 
-  /**
-   * returns a test suite.
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(SVMLightTest.class);
-  }
+    /**
+     * returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(SVMLightTest.class);
+    }
 
-  /**
-   * for running the test from commandline.
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * for running the test from commandline.
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

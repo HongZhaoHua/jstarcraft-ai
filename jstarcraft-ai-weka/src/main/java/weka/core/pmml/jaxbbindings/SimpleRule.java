@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for SimpleRule element declaration.
+ * <p>
+ * Java class for SimpleRule element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="SimpleRule">
@@ -48,15 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "simplePredicate",
-    "compoundPredicate",
-    "simpleSetPredicate",
-    "_true",
-    "_false",
-    "scoreDistribution"
-})
+@XmlType(name = "", propOrder = { "extension", "simplePredicate", "compoundPredicate", "simpleSetPredicate", "_true", "_false", "scoreDistribution" })
 @XmlRootElement(name = "SimpleRule")
 public class SimpleRule {
 
@@ -91,21 +84,21 @@ public class SimpleRule {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -119,10 +112,8 @@ public class SimpleRule {
     /**
      * Gets the value of the simplePredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SimplePredicate }
-     *     
+     * @return possible object is {@link SimplePredicate }
+     * 
      */
     public SimplePredicate getSimplePredicate() {
         return simplePredicate;
@@ -131,10 +122,8 @@ public class SimpleRule {
     /**
      * Sets the value of the simplePredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SimplePredicate }
-     *     
+     * @param value allowed object is {@link SimplePredicate }
+     * 
      */
     public void setSimplePredicate(SimplePredicate value) {
         this.simplePredicate = value;
@@ -143,10 +132,8 @@ public class SimpleRule {
     /**
      * Gets the value of the compoundPredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link CompoundPredicate }
-     *     
+     * @return possible object is {@link CompoundPredicate }
+     * 
      */
     public CompoundPredicate getCompoundPredicate() {
         return compoundPredicate;
@@ -155,10 +142,8 @@ public class SimpleRule {
     /**
      * Sets the value of the compoundPredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link CompoundPredicate }
-     *     
+     * @param value allowed object is {@link CompoundPredicate }
+     * 
      */
     public void setCompoundPredicate(CompoundPredicate value) {
         this.compoundPredicate = value;
@@ -167,10 +152,8 @@ public class SimpleRule {
     /**
      * Gets the value of the simpleSetPredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SimpleSetPredicate }
-     *     
+     * @return possible object is {@link SimpleSetPredicate }
+     * 
      */
     public SimpleSetPredicate getSimpleSetPredicate() {
         return simpleSetPredicate;
@@ -179,10 +162,8 @@ public class SimpleRule {
     /**
      * Sets the value of the simpleSetPredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SimpleSetPredicate }
-     *     
+     * @param value allowed object is {@link SimpleSetPredicate }
+     * 
      */
     public void setSimpleSetPredicate(SimpleSetPredicate value) {
         this.simpleSetPredicate = value;
@@ -191,10 +172,8 @@ public class SimpleRule {
     /**
      * Gets the value of the true property.
      * 
-     * @return
-     *     possible object is
-     *     {@link True }
-     *     
+     * @return possible object is {@link True }
+     * 
      */
     public True getTrue() {
         return _true;
@@ -203,10 +182,8 @@ public class SimpleRule {
     /**
      * Sets the value of the true property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link True }
-     *     
+     * @param value allowed object is {@link True }
+     * 
      */
     public void setTrue(True value) {
         this._true = value;
@@ -215,10 +192,8 @@ public class SimpleRule {
     /**
      * Gets the value of the false property.
      * 
-     * @return
-     *     possible object is
-     *     {@link False }
-     *     
+     * @return possible object is {@link False }
+     * 
      */
     public False getFalse() {
         return _false;
@@ -227,10 +202,8 @@ public class SimpleRule {
     /**
      * Sets the value of the false property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link False }
-     *     
+     * @param value allowed object is {@link False }
+     * 
      */
     public void setFalse(False value) {
         this._false = value;
@@ -240,15 +213,16 @@ public class SimpleRule {
      * Gets the value of the scoreDistribution property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scoreDistribution property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the scoreDistribution property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getScoreDistribution().add(newItem);
+     * getScoreDistribution().add(newItem);
      * </pre>
      * 
      * 
@@ -268,10 +242,8 @@ public class SimpleRule {
     /**
      * Gets the value of the confidence property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getConfidence() {
         return confidence;
@@ -280,10 +252,8 @@ public class SimpleRule {
     /**
      * Sets the value of the confidence property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setConfidence(Double value) {
         this.confidence = value;
@@ -292,10 +262,8 @@ public class SimpleRule {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -304,10 +272,8 @@ public class SimpleRule {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -316,10 +282,8 @@ public class SimpleRule {
     /**
      * Gets the value of the nbCorrect property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getNbCorrect() {
         return nbCorrect;
@@ -328,10 +292,8 @@ public class SimpleRule {
     /**
      * Sets the value of the nbCorrect property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setNbCorrect(Double value) {
         this.nbCorrect = value;
@@ -340,10 +302,8 @@ public class SimpleRule {
     /**
      * Gets the value of the recordCount property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getRecordCount() {
         return recordCount;
@@ -352,10 +312,8 @@ public class SimpleRule {
     /**
      * Sets the value of the recordCount property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setRecordCount(Double value) {
         this.recordCount = value;
@@ -364,10 +322,8 @@ public class SimpleRule {
     /**
      * Gets the value of the score property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getScore() {
         return score;
@@ -376,10 +332,8 @@ public class SimpleRule {
     /**
      * Sets the value of the score property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setScore(String value) {
         this.score = value;
@@ -388,10 +342,8 @@ public class SimpleRule {
     /**
      * Gets the value of the weight property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getWeight() {
         return weight;
@@ -400,10 +352,8 @@ public class SimpleRule {
     /**
      * Sets the value of the weight property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setWeight(Double value) {
         this.weight = value;

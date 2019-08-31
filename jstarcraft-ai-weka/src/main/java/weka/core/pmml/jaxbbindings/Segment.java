@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Segment element declaration.
+ * <p>
+ * Java class for Segment element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Segment">
@@ -44,30 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "simplePredicate",
-    "compoundPredicate",
-    "simpleSetPredicate",
-    "_true",
-    "_false",
-    "associationModel",
-    "baselineModel",
-    "clusteringModel",
-    "generalRegressionModel",
-    "miningModel",
-    "naiveBayesModel",
-    "nearestNeighborModel",
-    "neuralNetwork",
-    "regressionModel",
-    "ruleSetModel",
-    "sequenceModel",
-    "scorecard",
-    "supportVectorMachineModel",
-    "textModel",
-    "timeSeriesModel",
-    "treeModel"
-})
+@XmlType(name = "", propOrder = { "extension", "simplePredicate", "compoundPredicate", "simpleSetPredicate", "_true", "_false", "associationModel", "baselineModel", "clusteringModel", "generalRegressionModel", "miningModel", "naiveBayesModel", "nearestNeighborModel", "neuralNetwork", "regressionModel", "ruleSetModel", "sequenceModel", "scorecard", "supportVectorMachineModel", "textModel", "timeSeriesModel", "treeModel" })
 @XmlRootElement(name = "Segment")
 public class Segment {
 
@@ -124,21 +102,21 @@ public class Segment {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -152,10 +130,8 @@ public class Segment {
     /**
      * Gets the value of the simplePredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SimplePredicate }
-     *     
+     * @return possible object is {@link SimplePredicate }
+     * 
      */
     public SimplePredicate getSimplePredicate() {
         return simplePredicate;
@@ -164,10 +140,8 @@ public class Segment {
     /**
      * Sets the value of the simplePredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SimplePredicate }
-     *     
+     * @param value allowed object is {@link SimplePredicate }
+     * 
      */
     public void setSimplePredicate(SimplePredicate value) {
         this.simplePredicate = value;
@@ -176,10 +150,8 @@ public class Segment {
     /**
      * Gets the value of the compoundPredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link CompoundPredicate }
-     *     
+     * @return possible object is {@link CompoundPredicate }
+     * 
      */
     public CompoundPredicate getCompoundPredicate() {
         return compoundPredicate;
@@ -188,10 +160,8 @@ public class Segment {
     /**
      * Sets the value of the compoundPredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link CompoundPredicate }
-     *     
+     * @param value allowed object is {@link CompoundPredicate }
+     * 
      */
     public void setCompoundPredicate(CompoundPredicate value) {
         this.compoundPredicate = value;
@@ -200,10 +170,8 @@ public class Segment {
     /**
      * Gets the value of the simpleSetPredicate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SimpleSetPredicate }
-     *     
+     * @return possible object is {@link SimpleSetPredicate }
+     * 
      */
     public SimpleSetPredicate getSimpleSetPredicate() {
         return simpleSetPredicate;
@@ -212,10 +180,8 @@ public class Segment {
     /**
      * Sets the value of the simpleSetPredicate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SimpleSetPredicate }
-     *     
+     * @param value allowed object is {@link SimpleSetPredicate }
+     * 
      */
     public void setSimpleSetPredicate(SimpleSetPredicate value) {
         this.simpleSetPredicate = value;
@@ -224,10 +190,8 @@ public class Segment {
     /**
      * Gets the value of the true property.
      * 
-     * @return
-     *     possible object is
-     *     {@link True }
-     *     
+     * @return possible object is {@link True }
+     * 
      */
     public True getTrue() {
         return _true;
@@ -236,10 +200,8 @@ public class Segment {
     /**
      * Sets the value of the true property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link True }
-     *     
+     * @param value allowed object is {@link True }
+     * 
      */
     public void setTrue(True value) {
         this._true = value;
@@ -248,10 +210,8 @@ public class Segment {
     /**
      * Gets the value of the false property.
      * 
-     * @return
-     *     possible object is
-     *     {@link False }
-     *     
+     * @return possible object is {@link False }
+     * 
      */
     public False getFalse() {
         return _false;
@@ -260,10 +220,8 @@ public class Segment {
     /**
      * Sets the value of the false property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link False }
-     *     
+     * @param value allowed object is {@link False }
+     * 
      */
     public void setFalse(False value) {
         this._false = value;
@@ -272,10 +230,8 @@ public class Segment {
     /**
      * Gets the value of the associationModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link AssociationModel }
-     *     
+     * @return possible object is {@link AssociationModel }
+     * 
      */
     public AssociationModel getAssociationModel() {
         return associationModel;
@@ -284,10 +240,8 @@ public class Segment {
     /**
      * Sets the value of the associationModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link AssociationModel }
-     *     
+     * @param value allowed object is {@link AssociationModel }
+     * 
      */
     public void setAssociationModel(AssociationModel value) {
         this.associationModel = value;
@@ -296,10 +250,8 @@ public class Segment {
     /**
      * Gets the value of the baselineModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BaselineModel }
-     *     
+     * @return possible object is {@link BaselineModel }
+     * 
      */
     public BaselineModel getBaselineModel() {
         return baselineModel;
@@ -308,10 +260,8 @@ public class Segment {
     /**
      * Sets the value of the baselineModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BaselineModel }
-     *     
+     * @param value allowed object is {@link BaselineModel }
+     * 
      */
     public void setBaselineModel(BaselineModel value) {
         this.baselineModel = value;
@@ -320,10 +270,8 @@ public class Segment {
     /**
      * Gets the value of the clusteringModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ClusteringModel }
-     *     
+     * @return possible object is {@link ClusteringModel }
+     * 
      */
     public ClusteringModel getClusteringModel() {
         return clusteringModel;
@@ -332,10 +280,8 @@ public class Segment {
     /**
      * Sets the value of the clusteringModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ClusteringModel }
-     *     
+     * @param value allowed object is {@link ClusteringModel }
+     * 
      */
     public void setClusteringModel(ClusteringModel value) {
         this.clusteringModel = value;
@@ -344,10 +290,8 @@ public class Segment {
     /**
      * Gets the value of the generalRegressionModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link GeneralRegressionModel }
-     *     
+     * @return possible object is {@link GeneralRegressionModel }
+     * 
      */
     public GeneralRegressionModel getGeneralRegressionModel() {
         return generalRegressionModel;
@@ -356,10 +300,8 @@ public class Segment {
     /**
      * Sets the value of the generalRegressionModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link GeneralRegressionModel }
-     *     
+     * @param value allowed object is {@link GeneralRegressionModel }
+     * 
      */
     public void setGeneralRegressionModel(GeneralRegressionModel value) {
         this.generalRegressionModel = value;
@@ -368,10 +310,8 @@ public class Segment {
     /**
      * Gets the value of the miningModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MiningModel }
-     *     
+     * @return possible object is {@link MiningModel }
+     * 
      */
     public MiningModel getMiningModel() {
         return miningModel;
@@ -380,10 +320,8 @@ public class Segment {
     /**
      * Sets the value of the miningModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MiningModel }
-     *     
+     * @param value allowed object is {@link MiningModel }
+     * 
      */
     public void setMiningModel(MiningModel value) {
         this.miningModel = value;
@@ -392,10 +330,8 @@ public class Segment {
     /**
      * Gets the value of the naiveBayesModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NaiveBayesModel }
-     *     
+     * @return possible object is {@link NaiveBayesModel }
+     * 
      */
     public NaiveBayesModel getNaiveBayesModel() {
         return naiveBayesModel;
@@ -404,10 +340,8 @@ public class Segment {
     /**
      * Sets the value of the naiveBayesModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NaiveBayesModel }
-     *     
+     * @param value allowed object is {@link NaiveBayesModel }
+     * 
      */
     public void setNaiveBayesModel(NaiveBayesModel value) {
         this.naiveBayesModel = value;
@@ -416,10 +350,8 @@ public class Segment {
     /**
      * Gets the value of the nearestNeighborModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NearestNeighborModel }
-     *     
+     * @return possible object is {@link NearestNeighborModel }
+     * 
      */
     public NearestNeighborModel getNearestNeighborModel() {
         return nearestNeighborModel;
@@ -428,10 +360,8 @@ public class Segment {
     /**
      * Sets the value of the nearestNeighborModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NearestNeighborModel }
-     *     
+     * @param value allowed object is {@link NearestNeighborModel }
+     * 
      */
     public void setNearestNeighborModel(NearestNeighborModel value) {
         this.nearestNeighborModel = value;
@@ -440,10 +370,8 @@ public class Segment {
     /**
      * Gets the value of the neuralNetwork property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NeuralNetwork }
-     *     
+     * @return possible object is {@link NeuralNetwork }
+     * 
      */
     public NeuralNetwork getNeuralNetwork() {
         return neuralNetwork;
@@ -452,10 +380,8 @@ public class Segment {
     /**
      * Sets the value of the neuralNetwork property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NeuralNetwork }
-     *     
+     * @param value allowed object is {@link NeuralNetwork }
+     * 
      */
     public void setNeuralNetwork(NeuralNetwork value) {
         this.neuralNetwork = value;
@@ -464,10 +390,8 @@ public class Segment {
     /**
      * Gets the value of the regressionModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link RegressionModel }
-     *     
+     * @return possible object is {@link RegressionModel }
+     * 
      */
     public RegressionModel getRegressionModel() {
         return regressionModel;
@@ -476,10 +400,8 @@ public class Segment {
     /**
      * Sets the value of the regressionModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link RegressionModel }
-     *     
+     * @param value allowed object is {@link RegressionModel }
+     * 
      */
     public void setRegressionModel(RegressionModel value) {
         this.regressionModel = value;
@@ -488,10 +410,8 @@ public class Segment {
     /**
      * Gets the value of the ruleSetModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link RuleSetModel }
-     *     
+     * @return possible object is {@link RuleSetModel }
+     * 
      */
     public RuleSetModel getRuleSetModel() {
         return ruleSetModel;
@@ -500,10 +420,8 @@ public class Segment {
     /**
      * Sets the value of the ruleSetModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link RuleSetModel }
-     *     
+     * @param value allowed object is {@link RuleSetModel }
+     * 
      */
     public void setRuleSetModel(RuleSetModel value) {
         this.ruleSetModel = value;
@@ -512,10 +430,8 @@ public class Segment {
     /**
      * Gets the value of the sequenceModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SequenceModel }
-     *     
+     * @return possible object is {@link SequenceModel }
+     * 
      */
     public SequenceModel getSequenceModel() {
         return sequenceModel;
@@ -524,10 +440,8 @@ public class Segment {
     /**
      * Sets the value of the sequenceModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SequenceModel }
-     *     
+     * @param value allowed object is {@link SequenceModel }
+     * 
      */
     public void setSequenceModel(SequenceModel value) {
         this.sequenceModel = value;
@@ -536,10 +450,8 @@ public class Segment {
     /**
      * Gets the value of the scorecard property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Scorecard }
-     *     
+     * @return possible object is {@link Scorecard }
+     * 
      */
     public Scorecard getScorecard() {
         return scorecard;
@@ -548,10 +460,8 @@ public class Segment {
     /**
      * Sets the value of the scorecard property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Scorecard }
-     *     
+     * @param value allowed object is {@link Scorecard }
+     * 
      */
     public void setScorecard(Scorecard value) {
         this.scorecard = value;
@@ -560,10 +470,8 @@ public class Segment {
     /**
      * Gets the value of the supportVectorMachineModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SupportVectorMachineModel }
-     *     
+     * @return possible object is {@link SupportVectorMachineModel }
+     * 
      */
     public SupportVectorMachineModel getSupportVectorMachineModel() {
         return supportVectorMachineModel;
@@ -572,10 +480,8 @@ public class Segment {
     /**
      * Sets the value of the supportVectorMachineModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SupportVectorMachineModel }
-     *     
+     * @param value allowed object is {@link SupportVectorMachineModel }
+     * 
      */
     public void setSupportVectorMachineModel(SupportVectorMachineModel value) {
         this.supportVectorMachineModel = value;
@@ -584,10 +490,8 @@ public class Segment {
     /**
      * Gets the value of the textModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TextModel }
-     *     
+     * @return possible object is {@link TextModel }
+     * 
      */
     public TextModel getTextModel() {
         return textModel;
@@ -596,10 +500,8 @@ public class Segment {
     /**
      * Sets the value of the textModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TextModel }
-     *     
+     * @param value allowed object is {@link TextModel }
+     * 
      */
     public void setTextModel(TextModel value) {
         this.textModel = value;
@@ -608,10 +510,8 @@ public class Segment {
     /**
      * Gets the value of the timeSeriesModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TimeSeriesModel }
-     *     
+     * @return possible object is {@link TimeSeriesModel }
+     * 
      */
     public TimeSeriesModel getTimeSeriesModel() {
         return timeSeriesModel;
@@ -620,10 +520,8 @@ public class Segment {
     /**
      * Sets the value of the timeSeriesModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeSeriesModel }
-     *     
+     * @param value allowed object is {@link TimeSeriesModel }
+     * 
      */
     public void setTimeSeriesModel(TimeSeriesModel value) {
         this.timeSeriesModel = value;
@@ -632,10 +530,8 @@ public class Segment {
     /**
      * Gets the value of the treeModel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TreeModel }
-     *     
+     * @return possible object is {@link TreeModel }
+     * 
      */
     public TreeModel getTreeModel() {
         return treeModel;
@@ -644,10 +540,8 @@ public class Segment {
     /**
      * Sets the value of the treeModel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TreeModel }
-     *     
+     * @param value allowed object is {@link TreeModel }
+     * 
      */
     public void setTreeModel(TreeModel value) {
         this.treeModel = value;
@@ -656,10 +550,8 @@ public class Segment {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -668,10 +560,8 @@ public class Segment {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -680,14 +570,12 @@ public class Segment {
     /**
      * Gets the value of the weight property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getWeight() {
         if (weight == null) {
-            return  1.0D;
+            return 1.0D;
         } else {
             return weight;
         }
@@ -696,10 +584,8 @@ public class Segment {
     /**
      * Sets the value of the weight property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setWeight(Double value) {
         this.weight = value;

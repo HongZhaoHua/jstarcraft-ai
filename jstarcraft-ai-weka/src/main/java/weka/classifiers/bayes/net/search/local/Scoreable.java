@@ -28,24 +28,20 @@ package weka.classifiers.bayes.net.search.local;
  */
 public interface Scoreable {
 
-  /**
-   * score types
-   */
-  int BAYES = 0;
-  int BDeu = 1;
-  int MDL = 2;
-  int ENTROPY = 3;
-  int AIC = 4;
+    /**
+     * score types
+     */
+    int BAYES = 0;
+    int BDeu = 1;
+    int MDL = 2;
+    int ENTROPY = 3;
+    int AIC = 4;
 
-  /**
-   * Returns log-score
-   * 
-   * @param nType the score type
-   * @return the log-score
-   */
-  double logScore(int nType, int nCardinality);
-}    // interface Scoreable
-
-
-
-
+    /**
+     * Returns log-score
+     * 
+     * @param nType the score type
+     * @return the log-score
+     */
+    double logScore(int nType, int nCardinality);
+} // interface Scoreable

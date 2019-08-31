@@ -21,22 +21,21 @@
 package weka.core;
 
 /**
- * Multi-Instance classifiers can specify an additional Capabilities object
- * for the data in the relational attribute, since the format of multi-instance
- * data is fixed to "bag/NOMINAL,data/RELATIONAL,class".
+ * Multi-Instance classifiers can specify an additional Capabilities object for
+ * the data in the relational attribute, since the format of multi-instance data
+ * is fixed to "bag/NOMINAL,data/RELATIONAL,class".
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public interface MultiInstanceCapabilitiesHandler
-  extends CapabilitiesHandler {
+public interface MultiInstanceCapabilitiesHandler extends CapabilitiesHandler {
 
-  /**
-   * Returns the capabilities of this multi-instance classifier for the
-   * relational data (i.e., the bags).
-   *
-   * @return            the capabilities of this object
-   * @see               Capabilities
-   */
-  public Capabilities getMultiInstanceCapabilities();
+    /**
+     * Returns the capabilities of this multi-instance classifier for the relational
+     * data (i.e., the bags).
+     *
+     * @return the capabilities of this object
+     * @see Capabilities
+     */
+    public Capabilities getMultiInstanceCapabilities();
 }

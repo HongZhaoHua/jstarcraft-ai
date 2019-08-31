@@ -29,7 +29,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests CostSensitiveClassifier. Run from the command line with:<p>
+ * Tests CostSensitiveClassifier. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.CostSensitiveClassifierTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -37,48 +38,44 @@ import junit.framework.TestSuite;
  */
 public class CostSensitiveClassifierTest extends AbstractClassifierTest {
 
-  public CostSensitiveClassifierTest(String name) { 
-    super(name);  
-  }
-
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default classifier to test and loads a test set of Instances.
-   *
-   * @exception Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-
-    // can handle only as much classes as there are in the CostMatrix!
-    m_NClasses = ((CostSensitiveClassifier) getClassifier()).getCostMatrix().numRows();
-  }
-
-  /** Creates a default CostSensitiveClassifier */
-  public Classifier getClassifier() {
-
-    CostSensitiveClassifier cl = new CostSensitiveClassifier();
-    
-    // load costmatrix
-    try {
-      cl.setCostMatrix(
-          new CostMatrix(
-            new InputStreamReader(ClassLoader.getSystemResourceAsStream(
-                  "weka/classifiers/data/ClassifierTest.cost"))));
+    public CostSensitiveClassifierTest(String name) {
+        super(name);
     }
-    catch (Exception e) {
-      e.printStackTrace();
+
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default classifier to test and loads a test set of Instances.
+     *
+     * @exception Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        // can handle only as much classes as there are in the CostMatrix!
+        m_NClasses = ((CostSensitiveClassifier) getClassifier()).getCostMatrix().numRows();
     }
-    
-    return cl;
-  }
 
-  public static Test suite() {
-    return new TestSuite(CostSensitiveClassifierTest.class);
-  }
+    /** Creates a default CostSensitiveClassifier */
+    public Classifier getClassifier() {
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        CostSensitiveClassifier cl = new CostSensitiveClassifier();
+
+        // load costmatrix
+        try {
+            cl.setCostMatrix(new CostMatrix(new InputStreamReader(ClassLoader.getSystemResourceAsStream("weka/classifiers/data/ClassifierTest.cost"))));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cl;
+    }
+
+    public static Test suite() {
+        return new TestSuite(CostSensitiveClassifierTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

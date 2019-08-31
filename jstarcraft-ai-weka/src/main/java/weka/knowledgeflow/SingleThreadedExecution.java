@@ -28,9 +28,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Class annotation that can be used to indicate that something should
- * be executed in a non-parallel manner - i.e. only one instance of
- * the class should be executing at any one time in the JVM
+ * Class annotation that can be used to indicate that something should be
+ * executed in a non-parallel manner - i.e. only one instance of the class
+ * should be executing at any one time in the JVM
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $

@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SGD. Run from the command line with:<p>
+ * Tests SGD. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.SGDTest
  *
  * @author Mark Hall
@@ -34,24 +35,26 @@ import junit.framework.TestSuite;
  */
 public class SGDTest extends AbstractClassifierTest {
 
-  public SGDTest(String name) { super(name);  }
+    public SGDTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default SGD */
-  public Classifier getClassifier() {
-    SGD p = new SGD();
-    p.setDontNormalize(true);
-    p.setDontReplaceMissing(true);
-    p.setEpochs(1);
-    p.setLearningRate(0.001);
-    return p;
-  }
+    /** Creates a default SGD */
+    public Classifier getClassifier() {
+        SGD p = new SGD();
+        p.setDontNormalize(true);
+        p.setDontReplaceMissing(true);
+        p.setEpochs(1);
+        p.setLearningRate(0.001);
+        return p;
+    }
 
-  public static Test suite() {
-    return new TestSuite(SGDTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SGDTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

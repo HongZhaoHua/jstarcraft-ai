@@ -32,19 +32,18 @@ import junit.framework.TestSuite;
  * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite result = new TestSuite();
+    public static Test suite() {
+        TestSuite result = new TestSuite();
 
-    result.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
-    // more...
-    
-    return result;
-  }
+        result.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
+        // more...
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for DerivedField element declaration.
+ * <p>
+ * Java class for DerivedField element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="DerivedField">
@@ -46,18 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "constant",
-    "fieldRef",
-    "normContinuous",
-    "normDiscrete",
-    "discretize",
-    "mapValues",
-    "apply",
-    "aggregate",
-    "value"
-})
+@XmlType(name = "", propOrder = { "extension", "constant", "fieldRef", "normContinuous", "normDiscrete", "discretize", "mapValues", "apply", "aggregate", "value" })
 @XmlRootElement(name = "DerivedField")
 public class DerivedField {
 
@@ -90,33 +80,34 @@ public class DerivedField {
     @XmlAttribute(required = true)
     protected OPTYPE optype;
 
-    public DerivedField() {}
-    
-    public DerivedField(String name, DATATYPE dataType, OPTYPE optype) {
-    	this.name = name;
-    	this.dataType = dataType;
-    	this.optype = optype;
+    public DerivedField() {
     }
-    
+
+    public DerivedField(String name, DATATYPE dataType, OPTYPE optype) {
+        this.name = name;
+        this.dataType = dataType;
+        this.optype = optype;
+    }
+
     /**
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -130,10 +121,8 @@ public class DerivedField {
     /**
      * Gets the value of the constant property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Constant }
-     *     
+     * @return possible object is {@link Constant }
+     * 
      */
     public Constant getConstant() {
         return constant;
@@ -142,10 +131,8 @@ public class DerivedField {
     /**
      * Sets the value of the constant property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Constant }
-     *     
+     * @param value allowed object is {@link Constant }
+     * 
      */
     public void setConstant(Constant value) {
         this.constant = value;
@@ -154,10 +141,8 @@ public class DerivedField {
     /**
      * Gets the value of the fieldRef property.
      * 
-     * @return
-     *     possible object is
-     *     {@link FieldRef }
-     *     
+     * @return possible object is {@link FieldRef }
+     * 
      */
     public FieldRef getFieldRef() {
         return fieldRef;
@@ -166,10 +151,8 @@ public class DerivedField {
     /**
      * Sets the value of the fieldRef property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link FieldRef }
-     *     
+     * @param value allowed object is {@link FieldRef }
+     * 
      */
     public void setFieldRef(FieldRef value) {
         this.fieldRef = value;
@@ -178,10 +161,8 @@ public class DerivedField {
     /**
      * Gets the value of the normContinuous property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NormContinuous }
-     *     
+     * @return possible object is {@link NormContinuous }
+     * 
      */
     public NormContinuous getNormContinuous() {
         return normContinuous;
@@ -190,10 +171,8 @@ public class DerivedField {
     /**
      * Sets the value of the normContinuous property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NormContinuous }
-     *     
+     * @param value allowed object is {@link NormContinuous }
+     * 
      */
     public void setNormContinuous(NormContinuous value) {
         this.normContinuous = value;
@@ -202,10 +181,8 @@ public class DerivedField {
     /**
      * Gets the value of the normDiscrete property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NormDiscrete }
-     *     
+     * @return possible object is {@link NormDiscrete }
+     * 
      */
     public NormDiscrete getNormDiscrete() {
         return normDiscrete;
@@ -214,10 +191,8 @@ public class DerivedField {
     /**
      * Sets the value of the normDiscrete property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NormDiscrete }
-     *     
+     * @param value allowed object is {@link NormDiscrete }
+     * 
      */
     public void setNormDiscrete(NormDiscrete value) {
         this.normDiscrete = value;
@@ -226,10 +201,8 @@ public class DerivedField {
     /**
      * Gets the value of the discretize property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Discretize }
-     *     
+     * @return possible object is {@link Discretize }
+     * 
      */
     public Discretize getDiscretize() {
         return discretize;
@@ -238,10 +211,8 @@ public class DerivedField {
     /**
      * Sets the value of the discretize property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Discretize }
-     *     
+     * @param value allowed object is {@link Discretize }
+     * 
      */
     public void setDiscretize(Discretize value) {
         this.discretize = value;
@@ -250,10 +221,8 @@ public class DerivedField {
     /**
      * Gets the value of the mapValues property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MapValues }
-     *     
+     * @return possible object is {@link MapValues }
+     * 
      */
     public MapValues getMapValues() {
         return mapValues;
@@ -262,10 +231,8 @@ public class DerivedField {
     /**
      * Sets the value of the mapValues property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MapValues }
-     *     
+     * @param value allowed object is {@link MapValues }
+     * 
      */
     public void setMapValues(MapValues value) {
         this.mapValues = value;
@@ -274,10 +241,8 @@ public class DerivedField {
     /**
      * Gets the value of the apply property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Apply }
-     *     
+     * @return possible object is {@link Apply }
+     * 
      */
     public Apply getApply() {
         return apply;
@@ -286,10 +251,8 @@ public class DerivedField {
     /**
      * Sets the value of the apply property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Apply }
-     *     
+     * @param value allowed object is {@link Apply }
+     * 
      */
     public void setApply(Apply value) {
         this.apply = value;
@@ -298,10 +261,8 @@ public class DerivedField {
     /**
      * Gets the value of the aggregate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Aggregate }
-     *     
+     * @return possible object is {@link Aggregate }
+     * 
      */
     public Aggregate getAggregate() {
         return aggregate;
@@ -310,10 +271,8 @@ public class DerivedField {
     /**
      * Sets the value of the aggregate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Aggregate }
-     *     
+     * @param value allowed object is {@link Aggregate }
+     * 
      */
     public void setAggregate(Aggregate value) {
         this.aggregate = value;
@@ -323,21 +282,21 @@ public class DerivedField {
      * Gets the value of the value property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the value property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getValue().add(newItem);
+     * getValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Value }
+     * Objects of the following type(s) are allowed in the list {@link Value }
      * 
      * 
      */
@@ -351,10 +310,8 @@ public class DerivedField {
     /**
      * Gets the value of the dataType property.
      * 
-     * @return
-     *     possible object is
-     *     {@link DATATYPE }
-     *     
+     * @return possible object is {@link DATATYPE }
+     * 
      */
     public DATATYPE getDataType() {
         return dataType;
@@ -363,10 +320,8 @@ public class DerivedField {
     /**
      * Sets the value of the dataType property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DATATYPE }
-     *     
+     * @param value allowed object is {@link DATATYPE }
+     * 
      */
     public void setDataType(DATATYPE value) {
         this.dataType = value;
@@ -375,10 +330,8 @@ public class DerivedField {
     /**
      * Gets the value of the displayName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -387,10 +340,8 @@ public class DerivedField {
     /**
      * Sets the value of the displayName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDisplayName(String value) {
         this.displayName = value;
@@ -399,10 +350,8 @@ public class DerivedField {
     /**
      * Gets the value of the name property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getName() {
         return name;
@@ -411,10 +360,8 @@ public class DerivedField {
     /**
      * Sets the value of the name property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setName(String value) {
         this.name = value;
@@ -423,10 +370,8 @@ public class DerivedField {
     /**
      * Gets the value of the optype property.
      * 
-     * @return
-     *     possible object is
-     *     {@link OPTYPE }
-     *     
+     * @return possible object is {@link OPTYPE }
+     * 
      */
     public OPTYPE getOptype() {
         return optype;
@@ -435,10 +380,8 @@ public class DerivedField {
     /**
      * Sets the value of the optype property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link OPTYPE }
-     *     
+     * @param value allowed object is {@link OPTYPE }
+     * 
      */
     public void setOptype(OPTYPE value) {
         this.optype = value;

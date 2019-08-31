@@ -27,41 +27,43 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RemoveFolds. Run from the command line with:<p>
+ * Tests RemoveFolds. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.instance.RemoveFoldsTest
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
 public class RemoveFoldsTest extends AbstractFilterTest {
-  
-  public RemoveFoldsTest(String name) { super(name);  }
 
-  /** Creates a default RemoveFolds */
-  public Filter getFilter() {
-    RemoveFolds f = new RemoveFolds();
-    return f;
-  }
-
-  public void testAllFolds() {
-    
-    int totInstances = 0;
-    for (int i = 0; i < 10; i++) {
-      ((RemoveFolds)m_Filter).setFold(i + 1);
-      Instances result = useFilter();
-      assertEquals(m_Instances.numAttributes(), result.numAttributes());
-      totInstances += result.numInstances();
+    public RemoveFoldsTest(String name) {
+        super(name);
     }
-    assertEquals("Expecting output number of instances to match",
-                 m_Instances.numInstances(),  totInstances);
-  }
 
-  public static Test suite() {
-    return new TestSuite(RemoveFoldsTest.class);
-  }
+    /** Creates a default RemoveFolds */
+    public Filter getFilter() {
+        RemoveFolds f = new RemoveFolds();
+        return f;
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public void testAllFolds() {
+
+        int totInstances = 0;
+        for (int i = 0; i < 10; i++) {
+            ((RemoveFolds) m_Filter).setFold(i + 1);
+            Instances result = useFilter();
+            assertEquals(m_Instances.numAttributes(), result.numAttributes());
+            totInstances += result.numInstances();
+        }
+        assertEquals("Expecting output number of instances to match", m_Instances.numInstances(), totInstances);
+    }
+
+    public static Test suite() {
+        return new TestSuite(RemoveFoldsTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

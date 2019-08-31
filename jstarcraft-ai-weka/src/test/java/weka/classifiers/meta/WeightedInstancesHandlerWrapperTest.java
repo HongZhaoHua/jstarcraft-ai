@@ -26,29 +26,29 @@ import weka.classifiers.AbstractClassifierTest;
 import weka.classifiers.Classifier;
 
 /**
- * Tests WeightedInstancesHandlerWrapper. Run from the command line with:<p/>
+ * Tests WeightedInstancesHandlerWrapper. Run from the command line with:
+ * <p/>
  * java weka.classifiers.meta.WeightedInstancesHandlerWrapperTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class WeightedInstancesHandlerWrapperTest 
-  extends AbstractClassifierTest {
+public class WeightedInstancesHandlerWrapperTest extends AbstractClassifierTest {
 
-  public WeightedInstancesHandlerWrapperTest(String name) { 
-    super(name);  
-  }
+    public WeightedInstancesHandlerWrapperTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default WeightedInstancesHandlerWrapper */
-  public Classifier getClassifier() {
-    return new WeightedInstancesHandlerWrapper();
-  }
+    /** Creates a default WeightedInstancesHandlerWrapper */
+    public Classifier getClassifier() {
+        return new WeightedInstancesHandlerWrapper();
+    }
 
-  public static Test suite() {
-    return new TestSuite(WeightedInstancesHandlerWrapperTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(WeightedInstancesHandlerWrapperTest.class);
+    }
 
-  public static void main(String[] args){
-    TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        TestRunner.run(suite());
+    }
 }

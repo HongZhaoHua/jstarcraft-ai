@@ -96,36 +96,36 @@ import weka.core.Instances;
  * 
  * public class SimpleStream extends SimpleStreamFilter {
  * 
- *   public String globalInfo() {
- *     return &quot;A simple stream filter that adds an attribute 'bla' at the end containing a random number.&quot;;
- *   }
+ *     public String globalInfo() {
+ *         return &quot;A simple stream filter that adds an attribute 'bla' at the end containing a random number.&quot;;
+ *     }
  * 
- *   public Capabilities getCapabilities() {
- *     Capabilities result = super.getCapabilities();
- *     result.enableAllAttributes();
- *     result.enableAllClasses();
- *     result.enable(Capability.NO_CLASS); // filter doesn't need class to be set
- *     return result;
- *   }
+ *     public Capabilities getCapabilities() {
+ *         Capabilities result = super.getCapabilities();
+ *         result.enableAllAttributes();
+ *         result.enableAllClasses();
+ *         result.enable(Capability.NO_CLASS); // filter doesn't need class to be set
+ *         return result;
+ *     }
  * 
- *   protected Instances determineOutputFormat(Instances inputFormat) {
- *     Instances result = new Instances(inputFormat, 0);
- *     result.insertAttributeAt(new Attribute(&quot;bla&quot;), result.numAttributes());
- *     return result;
- *   }
+ *     protected Instances determineOutputFormat(Instances inputFormat) {
+ *         Instances result = new Instances(inputFormat, 0);
+ *         result.insertAttributeAt(new Attribute(&quot;bla&quot;), result.numAttributes());
+ *         return result;
+ *     }
  * 
- *   protected Instance process(Instance inst) {
- *     double[] values = new double[inst.numAttributes() + 1];
- *     for (int n = 0; n &lt; inst.numAttributes(); n++)
- *       values[n] = inst.value(n);
- *     values[values.length - 1] = new Random().nextInt();
- *     Instance result = new DenseInstance(1, values);
- *     return result;
- *   }
+ *     protected Instance process(Instance inst) {
+ *         double[] values = new double[inst.numAttributes() + 1];
+ *         for (int n = 0; n &lt; inst.numAttributes(); n++)
+ *             values[n] = inst.value(n);
+ *         values[values.length - 1] = new Random().nextInt();
+ *         Instance result = new DenseInstance(1, values);
+ *         return result;
+ *     }
  * 
- *   public static void main(String[] args) {
- *     runFilter(new SimpleStream(), args);
- *   }
+ *     public static void main(String[] args) {
+ *         runFilter(new SimpleStream(), args);
+ *     }
  * }
  * 
  * </pre>
@@ -146,174 +146,172 @@ import weka.core.Instances;
  * @see #batchFinished()
  * @see #m_FirstBatchDone
  */
-public abstract class SimpleStreamFilter extends SimpleFilter implements
-  StreamableFilter {
+public abstract class SimpleStreamFilter extends SimpleFilter implements StreamableFilter {
 
-  /** for serialization */
-  private static final long serialVersionUID = 2754882676192747091L;
+    /** for serialization */
+    private static final long serialVersionUID = 2754882676192747091L;
 
-  /**
-   * Returns true if the output format is immediately available after the input
-   * format has been set and not only after all the data has been seen (see
-   * batchFinished()). This method should normally return true for a stream
-   * filter, since the data will be processed in a batch manner instead (or at
-   * least for the second batch of files, see m_FirstBatchDone).
-   * 
-   * @return true if the output format is immediately available
-   * @see #batchFinished()
-   * @see #setInputFormat(Instances)
-   * @see #m_FirstBatchDone
-   */
-  @Override
-  protected boolean hasImmediateOutputFormat() {
-    return true;
-  }
-
-  /**
-   * Determines the output format based on the input format and returns this. In
-   * case the output format cannot be returned immediately, i.e.,
-   * hasImmediateOutputFormat() returns false, then this method will called from
-   * batchFinished() after the call of preprocess(Instances), in which, e.g.,
-   * statistics for the actual processing step can be gathered.
-   * 
-   * @param inputFormat the input format to base the output format on
-   * @return the output format
-   * @throws Exception in case the determination goes wrong
-   * @see #hasImmediateOutputFormat()
-   * @see #batchFinished()
-   * @see #preprocess(Instances)
-   */
-  @Override
-  protected abstract Instances determineOutputFormat(Instances inputFormat)
-    throws Exception;
-
-  /**
-   * processes the given instance (may change the provided instance) and returns
-   * the modified version.
-   * 
-   * @param instance the instance to process
-   * @return the modified data
-   * @throws Exception in case the processing goes wrong
-   */
-  protected abstract Instance process(Instance instance) throws Exception;
-
-  /**
-   * Processes the given data (may change the provided dataset) and returns the
-   * modified version. This method is called in batchFinished(). This
-   * implementation only calls process(Instance) for each instance in the given
-   * dataset.
-   * 
-   * @param instances the data to process
-   * @return the modified data
-   * @throws Exception in case the processing goes wrong
-   * @see #batchFinished()
-   * @see #process(Instance)
-   */
-  @Override
-  protected Instances process(Instances instances) throws Exception {
-    Instances result;
-    int i;
-
-    result = new Instances(getOutputFormat(), 0);
-
-    for (i = 0; i < instances.numInstances(); i++) {
-      result.add(process(instances.instance(i)));
+    /**
+     * Returns true if the output format is immediately available after the input
+     * format has been set and not only after all the data has been seen (see
+     * batchFinished()). This method should normally return true for a stream
+     * filter, since the data will be processed in a batch manner instead (or at
+     * least for the second batch of files, see m_FirstBatchDone).
+     * 
+     * @return true if the output format is immediately available
+     * @see #batchFinished()
+     * @see #setInputFormat(Instances)
+     * @see #m_FirstBatchDone
+     */
+    @Override
+    protected boolean hasImmediateOutputFormat() {
+        return true;
     }
 
-    return result;
-  }
+    /**
+     * Determines the output format based on the input format and returns this. In
+     * case the output format cannot be returned immediately, i.e.,
+     * hasImmediateOutputFormat() returns false, then this method will called from
+     * batchFinished() after the call of preprocess(Instances), in which, e.g.,
+     * statistics for the actual processing step can be gathered.
+     * 
+     * @param inputFormat the input format to base the output format on
+     * @return the output format
+     * @throws Exception in case the determination goes wrong
+     * @see #hasImmediateOutputFormat()
+     * @see #batchFinished()
+     * @see #preprocess(Instances)
+     */
+    @Override
+    protected abstract Instances determineOutputFormat(Instances inputFormat) throws Exception;
 
-  /**
-   * In case the output format cannot be returned immediately, this method is
-   * called before the actual processing of the instances. Derived classes can
-   * implement specific behavior here.
-   * 
-   * @param instances the instances to work on
-   * @see #hasImmediateOutputFormat()
-   * @see #determineOutputFormat(Instances)
-   */
-  protected void preprocess(Instances instances) {
-  }
+    /**
+     * processes the given instance (may change the provided instance) and returns
+     * the modified version.
+     * 
+     * @param instance the instance to process
+     * @return the modified data
+     * @throws Exception in case the processing goes wrong
+     */
+    protected abstract Instance process(Instance instance) throws Exception;
 
-  /**
-   * Input an instance for filtering. Filter requires all training instances be
-   * read before producing output.
-   * 
-   * @param instance the input instance
-   * @return true if the filtered instance may now be collected with output().
-   * @throws IllegalStateException if no input structure has been defined
-   * @throws Exception if something goes wrong
-   */
-  @Override
-  public boolean input(Instance instance) throws Exception {
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
-    }
+    /**
+     * Processes the given data (may change the provided dataset) and returns the
+     * modified version. This method is called in batchFinished(). This
+     * implementation only calls process(Instance) for each instance in the given
+     * dataset.
+     * 
+     * @param instances the data to process
+     * @return the modified data
+     * @throws Exception in case the processing goes wrong
+     * @see #batchFinished()
+     * @see #process(Instance)
+     */
+    @Override
+    protected Instances process(Instances instances) throws Exception {
+        Instances result;
+        int i;
 
-    if (m_NewBatch) {
-      resetQueue();
-      m_NewBatch = false;
-    }
+        result = new Instances(getOutputFormat(), 0);
 
-    try {
-      if (hasImmediateOutputFormat() || isFirstBatchDone()) {
-        Instance processed = process((Instance) instance.copy());
-        if (processed != null) {
-          push(processed, false); // No need to copy instance
-          return true;
+        for (i = 0; i < instances.numInstances(); i++) {
+            result.add(process(instances.instance(i)));
         }
-        return false;
-      } else {
-        bufferInput(instance);
-        return false;
-      }
-    } catch (Exception e) {
-      return false;
-    }
-  }
 
-  /**
-   * Signify that this batch of input to the filter is finished. If the filter
-   * requires all instances prior to filtering, output() may now be called to
-   * retrieve the filtered instances. Any subsequent instances filtered should
-   * be filtered based on setting obtained from the first batch (unless the
-   * setInputFormat has been re-assigned or new options have been set).
-   * 
-   * @return true if there are instances pending output
-   * @throws IllegalStateException if no input format has been set.
-   */
-  @Override
-  public boolean batchFinished() throws Exception {
-    int i;
-    Instances inst;
-
-    if (getInputFormat() == null) {
-      throw new IllegalStateException("No input instance format defined");
+        return result;
     }
 
-    inst = new Instances(getInputFormat());
-    flushInput();
-
-    if (!hasImmediateOutputFormat()) {
-      preprocess(inst);
+    /**
+     * In case the output format cannot be returned immediately, this method is
+     * called before the actual processing of the instances. Derived classes can
+     * implement specific behavior here.
+     * 
+     * @param instances the instances to work on
+     * @see #hasImmediateOutputFormat()
+     * @see #determineOutputFormat(Instances)
+     */
+    protected void preprocess(Instances instances) {
     }
 
-    // process data
-    inst = process(inst);
+    /**
+     * Input an instance for filtering. Filter requires all training instances be
+     * read before producing output.
+     * 
+     * @param instance the input instance
+     * @return true if the filtered instance may now be collected with output().
+     * @throws IllegalStateException if no input structure has been defined
+     * @throws Exception             if something goes wrong
+     */
+    @Override
+    public boolean input(Instance instance) throws Exception {
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
+        }
 
-    // if output format hasn't been set yet, do it now
-    if (!hasImmediateOutputFormat() && !isFirstBatchDone()) {
-      setOutputFormat(inst);
+        if (m_NewBatch) {
+            resetQueue();
+            m_NewBatch = false;
+        }
+
+        try {
+            if (hasImmediateOutputFormat() || isFirstBatchDone()) {
+                Instance processed = process((Instance) instance.copy());
+                if (processed != null) {
+                    push(processed, false); // No need to copy instance
+                    return true;
+                }
+                return false;
+            } else {
+                bufferInput(instance);
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    // move data to the output
-    for (i = 0; i < inst.numInstances(); i++) {
-      push(inst.instance(i), false); // No need to copy instance
+    /**
+     * Signify that this batch of input to the filter is finished. If the filter
+     * requires all instances prior to filtering, output() may now be called to
+     * retrieve the filtered instances. Any subsequent instances filtered should be
+     * filtered based on setting obtained from the first batch (unless the
+     * setInputFormat has been re-assigned or new options have been set).
+     * 
+     * @return true if there are instances pending output
+     * @throws IllegalStateException if no input format has been set.
+     */
+    @Override
+    public boolean batchFinished() throws Exception {
+        int i;
+        Instances inst;
+
+        if (getInputFormat() == null) {
+            throw new IllegalStateException("No input instance format defined");
+        }
+
+        inst = new Instances(getInputFormat());
+        flushInput();
+
+        if (!hasImmediateOutputFormat()) {
+            preprocess(inst);
+        }
+
+        // process data
+        inst = process(inst);
+
+        // if output format hasn't been set yet, do it now
+        if (!hasImmediateOutputFormat() && !isFirstBatchDone()) {
+            setOutputFormat(inst);
+        }
+
+        // move data to the output
+        for (i = 0; i < inst.numInstances(); i++) {
+            push(inst.instance(i), false); // No need to copy instance
+        }
+
+        m_NewBatch = true;
+        m_FirstBatchDone = true;
+
+        return (numPendingOutput() != 0);
     }
-
-    m_NewBatch = true;
-    m_FirstBatchDone = true;
-
-    return (numPendingOutput() != 0);
-  }
 }

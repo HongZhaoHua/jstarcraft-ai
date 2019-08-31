@@ -46,13 +46,12 @@ import jsat.utils.random.XORWOW;
  * the distance matrix. MDS is a non-convex problem, so different runs can
  * produce different results. <br>
  * <br>
- * MDS can be used on arbitrary dissimilarity matrices by calling {@link #transform(jsat.linear.Matrix, java.util.concurrent.ExecutorService)
- * }.
+ * MDS can be used on arbitrary dissimilarity matrices by calling
+ * {@link #transform(jsat.linear.Matrix, java.util.concurrent.ExecutorService) }.
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class MDS implements VisualizationTransform
-{
+public class MDS implements VisualizationTransform {
     private static DistanceMetric embedMetric = new EuclideanDistance();
     private DistanceMetric dm = new EuclideanDistance();
     private double tolerance = 1e-3;
@@ -60,196 +59,174 @@ public class MDS implements VisualizationTransform
     private int targetSize = 2;
 
     /**
-     * Sets the tolerance parameter for determining convergence. 
+     * Sets the tolerance parameter for determining convergence.
+     * 
      * @param tolerance the tolerance for declaring convergence
      */
-    public void setTolerance(double tolerance)
-    {
-        if(tolerance < 0 || Double.isInfinite(tolerance) || Double.isNaN(tolerance))
+    public void setTolerance(double tolerance) {
+        if (tolerance < 0 || Double.isInfinite(tolerance) || Double.isNaN(tolerance))
             throw new IllegalArgumentException("tolerance must be a non-negative value, not " + tolerance);
         this.tolerance = tolerance;
     }
 
     /**
      * 
-     * @return the tolerance parameter 
+     * @return the tolerance parameter
      */
-    public double getTolerance()
-    {
+    public double getTolerance() {
         return tolerance;
     }
 
     /**
      * Sets the distance metric to use when creating the initial dissimilarity
-     * matrix of a new dataset. By default the {@link EuclideanDistance Euclidean
-     * } distance is used, but any distance may be substituted.The chosen
-     * distance need not be a valid metric, its only requirement is symmetry.
+     * matrix of a new dataset. By default the {@link EuclideanDistance Euclidean }
+     * distance is used, but any distance may be substituted.The chosen distance
+     * need not be a valid metric, its only requirement is symmetry.
      *
-     * @param embedMetric the distance metric to use when creating the
-     * dissimilarity matrix.
+     * @param embedMetric the distance metric to use when creating the dissimilarity
+     *                    matrix.
      */
-    public void setEmbeddingMetric(DistanceMetric embedMetric)
-    {
+    public void setEmbeddingMetric(DistanceMetric embedMetric) {
         this.embedMetric = embedMetric;
     }
-    
+
     /**
      * 
      * @return the distance metric used when creating a dissimilarity matrix
      */
-    public DistanceMetric getEmbeddingMetric()
-    {
+    public DistanceMetric getEmbeddingMetric() {
         return embedMetric;
     }
-    
+
     @Override
-    public <Type extends DataSet> Type transform(final DataSet<Type> d, boolean parallel)
-    {
+    public <Type extends DataSet> Type transform(final DataSet<Type> d, boolean parallel) {
         final List<Vec> orig_vecs = d.getDataVectors();
         final List<Double> orig_distCache = dm.getAccelerationCache(orig_vecs, parallel);
         final int N = orig_vecs.size();
-        
-        //Delta is the true disimilarity matrix
+
+        // Delta is the true disimilarity matrix
         final Matrix delta = new DenseMatrix(N, N);
 
-        
-        OnLineStatistics avg = ParallelUtils.run(parallel, N, (i)->
-        {
+        OnLineStatistics avg = ParallelUtils.run(parallel, N, (i) -> {
             OnLineStatistics local_avg = new OnLineStatistics();
-            for(int j = i+1; j < d.size(); j++)
-            {
+            for (int j = i + 1; j < d.size(); j++) {
                 double dist = dm.dist(i, j, orig_vecs, orig_distCache);
                 local_avg.add(dist);
                 delta.set(i, j, dist);
                 delta.set(j, i, dist);
-            } 
+            }
             return local_avg;
-        }, (a,b)->OnLineStatistics.add(a, b));
-        
+        }, (a, b) -> OnLineStatistics.add(a, b));
 
         SimpleDataSet embeded = transform(delta, parallel);
 
-        //place the solution in a dataset of the correct type
+        // place the solution in a dataset of the correct type
         DataSet<Type> transformed = d.shallowClone();
         transformed.replaceNumericFeatures(embeded.getDataVectors());
         return (Type) transformed;
     }
 
-    public SimpleDataSet transform(Matrix delta)
-    {
+    public SimpleDataSet transform(Matrix delta) {
         return transform(delta, false);
     }
-    
-    public SimpleDataSet transform(final Matrix delta, boolean parallel)
-    {
+
+    public SimpleDataSet transform(final Matrix delta, boolean parallel) {
         final int N = delta.rows();
         Random rand = RandomUtil.getRandom();
-        
+
         final Matrix X = new DenseMatrix(N, targetSize);
         final List<Vec> X_views = new ArrayList<>();
-        for(int i = 0; i < N; i++)
-        {
-            for(int j = 0; j < targetSize; j++)
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < targetSize; j++)
                 X.set(i, j, rand.nextDouble());
             X_views.add(X.getRowView(i));
         }
         final List<Double> X_rowCache = embedMetric.getAccelerationCache(X_views, parallel);
-        
-        //TODO, special case solution when all weights are the same, want to add general case as well
+
+        // TODO, special case solution when all weights are the same, want to add
+        // general case as well
         Matrix V_inv = new DenseMatrix(N, N);
-        for(int i = 0; i < N; i++)
-            for(int j = 0; j < N; j++)
-            {
-                if(i == j)
-                    V_inv.set(i, j, (1.0-1.0/N)/N);
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++) {
+                if (i == j)
+                    V_inv.set(i, j, (1.0 - 1.0 / N) / N);
                 else
-                    V_inv.set(i, j, (0.0-1.0/N)/N);
+                    V_inv.set(i, j, (0.0 - 1.0 / N) / N);
             }
-        
+
         double stressChange = Double.POSITIVE_INFINITY;
         double oldStress = stress(X_views, X_rowCache, delta, parallel);
-        
-        //the gutman transform matrix
+
+        // the gutman transform matrix
         final Matrix B = new DenseMatrix(N, N);
         final Matrix X_new = new DenseMatrix(X.rows(), X.cols());
-                
-        for(int iter = 0; iter < maxIterations && stressChange > tolerance; iter++ )
-        {
-            ParallelUtils.run(parallel, B.rows(), (i)->
-            {
-                for (int j = i + 1; j < B.rows(); j++)
-                {
+
+        for (int iter = 0; iter < maxIterations && stressChange > tolerance; iter++) {
+            ParallelUtils.run(parallel, B.rows(), (i) -> {
+                for (int j = i + 1; j < B.rows(); j++) {
                     double d_ij = embedMetric.dist(i, j, X_views, X_rowCache);
 
-                    if(d_ij > 1e-5)//avoid creating silly huge values
+                    if (d_ij > 1e-5)// avoid creating silly huge values
                     {
-                        double b_ij = -delta.get(i, j)/d_ij;//-w_ij if we support weights in the future
+                        double b_ij = -delta.get(i, j) / d_ij;// -w_ij if we support weights in the future
                         B.set(i, j, b_ij);
                         B.set(j, i, b_ij);
-                    }
-                    else
-                    {
+                    } else {
                         B.set(i, j, 0);
                         B.set(j, i, 0);
                     }
                 }
             });
-            
+
             X_new.zeroOut();
-            
-            //set the diagonal values
-            for(int i = 0; i < B.rows(); i++)
-            {   
+
+            // set the diagonal values
+            for (int i = 0; i < B.rows(); i++) {
                 B.set(i, i, 0);
                 for (int k = 0; k < B.cols(); k++)
                     if (k != i)
                         B.increment(i, i, -B.get(i, k));
             }
-            
+
 //            Matrix X_new = V_inv.multiply(B, ex).multiply(X, ex);
-            
+
             B.multiply(X, X_new, ParallelUtils.CACHED_THREAD_POOL);
-            X_new.mutableMultiply(1.0/N);
-            
+            X_new.mutableMultiply(1.0 / N);
+
             X_new.copyTo(X);
             X_rowCache.clear();
             X_rowCache.addAll(embedMetric.getAccelerationCache(X_views, parallel));
-            
+
             double newStress = stress(X_views, X_rowCache, delta, parallel);
-            stressChange = Math.abs(oldStress-newStress);
+            stressChange = Math.abs(oldStress - newStress);
             oldStress = newStress;
         }
-        
+
         SimpleDataSet sds = new SimpleDataSet(targetSize, new CategoricalData[0]);
-        for(Vec v : X_views)
+        for (Vec v : X_views)
             sds.add(new DataPoint(v));
         return sds;
     }
-    
-    private static double stress(final List<Vec> X_views, final List<Double> X_rowCache, final Matrix delta, boolean parallel)
-    {
-        return ParallelUtils.run(parallel, delta.rows(), (i)->
-        {
+
+    private static double stress(final List<Vec> X_views, final List<Double> X_rowCache, final Matrix delta, boolean parallel) {
+        return ParallelUtils.run(parallel, delta.rows(), (i) -> {
             double localStress = 0;
-            for(int j = i+1; j < delta.rows(); j++)
-            {
-                double tmp = embedMetric.dist(i, j, X_views, X_rowCache)-delta.get(i, j);
-                localStress += tmp*tmp;
+            for (int j = i + 1; j < delta.rows(); j++) {
+                double tmp = embedMetric.dist(i, j, X_views, X_rowCache) - delta.get(i, j);
+                localStress += tmp * tmp;
             }
             return localStress;
-        }, (a,b)->a+b);
+        }, (a, b) -> a + b);
     }
 
     @Override
-    public int getTargetDimension()
-    {
+    public int getTargetDimension() {
         return targetSize;
     }
 
     @Override
-    public boolean setTargetDimension(int target)
-    {
-        if(target < 1)
+    public boolean setTargetDimension(int target) {
+        if (target < 1)
             return false;
         this.targetSize = target;
         return true;

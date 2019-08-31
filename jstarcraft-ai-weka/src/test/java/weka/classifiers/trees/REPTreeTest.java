@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests REPTree. Run from the command line with:<p>
+ * Tests REPTree. Run from the command line with:
+ * <p>
  * java weka.classifiers.trees.REPTreeTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class REPTreeTest extends AbstractClassifierTest {
 
-  public REPTreeTest(String name) { super(name);  }
+    public REPTreeTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default REPTree */
-  public Classifier getClassifier() {
-    return new REPTree();
-  }
+    /** Creates a default REPTree */
+    public Classifier getClassifier() {
+        return new REPTree();
+    }
 
-  public static Test suite() {
-    return new TestSuite(REPTreeTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(REPTreeTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

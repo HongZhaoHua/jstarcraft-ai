@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests AdditiveRegression. Run from the command line with:<p>
+ * Tests AdditiveRegression. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.AdditiveRegressionTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class AdditiveRegressionTest extends AbstractClassifierTest {
 
-  public AdditiveRegressionTest(String name) { super(name);  }
+    public AdditiveRegressionTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default AdditiveRegression */
-  public Classifier getClassifier() {
-    return new AdditiveRegression();
-  }
+    /** Creates a default AdditiveRegression */
+    public Classifier getClassifier() {
+        return new AdditiveRegression();
+    }
 
-  public static Test suite() {
-    return new TestSuite(AdditiveRegressionTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(AdditiveRegressionTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

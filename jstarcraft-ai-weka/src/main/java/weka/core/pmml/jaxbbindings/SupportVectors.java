@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for SupportVectors element declaration.
+ * <p>
+ * Java class for SupportVectors element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="SupportVectors">
@@ -44,10 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "supportVector"
-})
+@XmlType(name = "", propOrder = { "extension", "supportVector" })
 @XmlRootElement(name = "SupportVectors")
 public class SupportVectors {
 
@@ -64,21 +62,21 @@ public class SupportVectors {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -93,21 +91,22 @@ public class SupportVectors {
      * Gets the value of the supportVector property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the supportVector property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the supportVector property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getSupportVector().add(newItem);
+     * getSupportVector().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SupportVector }
+     * Objects of the following type(s) are allowed in the list {@link SupportVector
+     * }
      * 
      * 
      */
@@ -121,10 +120,8 @@ public class SupportVectors {
     /**
      * Gets the value of the numberOfAttributes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfAttributes() {
         return numberOfAttributes;
@@ -133,10 +130,8 @@ public class SupportVectors {
     /**
      * Sets the value of the numberOfAttributes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfAttributes(BigInteger value) {
         this.numberOfAttributes = value;
@@ -145,10 +140,8 @@ public class SupportVectors {
     /**
      * Gets the value of the numberOfSupportVectors property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfSupportVectors() {
         return numberOfSupportVectors;
@@ -157,10 +150,8 @@ public class SupportVectors {
     /**
      * Sets the value of the numberOfSupportVectors property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfSupportVectors(BigInteger value) {
         this.numberOfSupportVectors = value;

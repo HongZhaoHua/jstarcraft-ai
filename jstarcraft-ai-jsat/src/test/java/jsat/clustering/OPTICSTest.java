@@ -22,11 +22,9 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class OPTICSTest
-{
-    
-    public OPTICSTest()
-    {
+public class OPTICSTest {
+
+    public OPTICSTest() {
     }
 
     static private OPTICS optics;
@@ -34,60 +32,51 @@ public class OPTICSTest
     static private SimpleDataSet easyData10;
 
     @BeforeClass
-    public static void setUpClass() throws Exception
-    {
+    public static void setUpClass() throws Exception {
         optics = new OPTICS();
         GridDataGenerator gdg = new GridDataGenerator(new Normal(0, 0.05), new Random(12), 2, 5);
         easyData10 = gdg.generateData(100);
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception
-    {
+    public static void tearDownClass() throws Exception {
     }
-    
+
     @Before
-    public void setUp()
-    {
-        
+    public void setUp() {
+
     }
 
     @Test
-    public void testCluster_DataSet()
-    {
+    public void testCluster_DataSet() {
         System.out.println("cluster(dataset)");
-        for(OPTICS.ExtractionMethod method : toTest)
-        {
+        for (OPTICS.ExtractionMethod method : toTest) {
 
             optics.setExtractionMethod(method);
             List<List<DataPoint>> clusters = optics.cluster(easyData10);
             assertEquals(10, clusters.size());
             Set<Integer> seenBefore = new IntSet();
-            for(List<DataPoint> cluster :  clusters)
-            {
+            for (List<DataPoint> cluster : clusters) {
                 int thisClass = cluster.get(0).getCategoricalValue(0);
                 assertFalse(seenBefore.contains(thisClass));
-                for(DataPoint dp : cluster)
+                for (DataPoint dp : cluster)
                     assertEquals(thisClass, dp.getCategoricalValue(0));
             }
         }
     }
-    
+
     @Test
-    public void testCluster_DataSet_ExecutorService()
-    {
-        for(OPTICS.ExtractionMethod method : toTest)
-        {
+    public void testCluster_DataSet_ExecutorService() {
+        for (OPTICS.ExtractionMethod method : toTest) {
             optics.setExtractionMethod(method);
             System.out.println("cluster(dataset, ExecutorService)");
             List<List<DataPoint>> clusters = optics.cluster(easyData10, true);
             assertEquals(10, clusters.size());
             Set<Integer> seenBefore = new IntSet();
-            for(List<DataPoint> cluster :  clusters)
-            {
+            for (List<DataPoint> cluster : clusters) {
                 int thisClass = cluster.get(0).getCategoricalValue(0);
                 assertFalse(seenBefore.contains(thisClass));
-                for(DataPoint dp : cluster)
+                for (DataPoint dp : cluster)
                     assertEquals(thisClass, dp.getCategoricalValue(0));
             }
         }

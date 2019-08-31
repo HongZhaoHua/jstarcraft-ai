@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for MISSING-VALUE-TREATMENT-METHOD.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for MISSING-VALUE-TREATMENT-METHOD.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="MISSING-VALUE-TREATMENT-METHOD">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -34,14 +36,10 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum MISSINGVALUETREATMENTMETHOD {
 
     @XmlEnumValue("asIs")
-    AS_IS("asIs"),
-    @XmlEnumValue("asMean")
-    AS_MEAN("asMean"),
-    @XmlEnumValue("asMedian")
-    AS_MEDIAN("asMedian"),
-    @XmlEnumValue("asMode")
-    AS_MODE("asMode"),
-    @XmlEnumValue("asValue")
+    AS_IS("asIs"), @XmlEnumValue("asMean")
+    AS_MEAN("asMean"), @XmlEnumValue("asMedian")
+    AS_MEDIAN("asMedian"), @XmlEnumValue("asMode")
+    AS_MODE("asMode"), @XmlEnumValue("asValue")
     AS_VALUE("asValue");
     private final String value;
 
@@ -54,7 +52,7 @@ public enum MISSINGVALUETREATMENTMETHOD {
     }
 
     public static MISSINGVALUETREATMENTMETHOD fromValue(String v) {
-        for (MISSINGVALUETREATMENTMETHOD c: MISSINGVALUETREATMENTMETHOD.values()) {
+        for (MISSINGVALUETREATMENTMETHOD c : MISSINGVALUETREATMENTMETHOD.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

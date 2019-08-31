@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for DELIMITER.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for DELIMITER.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="DELIMITER">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -31,8 +33,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum DELIMITER2 {
 
     @XmlEnumValue("acrossTimeWindows")
-    ACROSS_TIME_WINDOWS("acrossTimeWindows"),
-    @XmlEnumValue("sameTimeWindow")
+    ACROSS_TIME_WINDOWS("acrossTimeWindows"), @XmlEnumValue("sameTimeWindow")
     SAME_TIME_WINDOW("sameTimeWindow");
     private final String value;
 
@@ -45,7 +46,7 @@ public enum DELIMITER2 {
     }
 
     public static DELIMITER2 fromValue(String v) {
-        for (DELIMITER2 c: DELIMITER2.values()) {
+        for (DELIMITER2 c : DELIMITER2.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

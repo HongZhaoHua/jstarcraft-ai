@@ -29,17 +29,14 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class PorterStemmerTest
-{
+public class PorterStemmerTest {
     private static final Map<String, String> testCases = new LinkedHashMap<String, String>();
-    
-    public PorterStemmerTest()
-    {
+
+    public PorterStemmerTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
         testCases.put("a", "a");
         testCases.put("caresses", "caress");
         testCases.put("ponies", "poni");
@@ -105,32 +102,28 @@ public class PorterStemmerTest
         testCases.put("roll", "roll");
         testCases.put("ions", "ion");
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of stem method, of class PorterStemmer.
      */
     @Test
-    public void testStem()
-    {
+    public void testStem() {
         System.out.println("stem");
         PorterStemmer instance = new PorterStemmer();
-        for(Map.Entry<String, String> entry : testCases.entrySet())
+        for (Map.Entry<String, String> entry : testCases.entrySet())
             assertEquals("Looking for '" + entry.getValue() + "' from '" + entry.getKey() + "'", entry.getValue(), instance.stem(entry.getKey()));
     }
-    
+
 }

@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests MultiClassClassifier. Run from the command line with:<p>
+ * Tests MultiClassClassifier. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.MultiClassClassifierTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class MultiClassClassifierTest extends AbstractClassifierTest {
 
-  public MultiClassClassifierTest(String name) { super(name);  }
+    public MultiClassClassifierTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default MultiClassClassifier */
-  public Classifier getClassifier() {
-    return new MultiClassClassifier();
-  }
+    /** Creates a default MultiClassClassifier */
+    public Classifier getClassifier() {
+        return new MultiClassClassifier();
+    }
 
-  public static Test suite() {
-    return new TestSuite(MultiClassClassifierTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(MultiClassClassifierTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

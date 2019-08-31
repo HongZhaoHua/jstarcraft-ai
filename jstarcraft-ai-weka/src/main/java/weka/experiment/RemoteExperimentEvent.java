@@ -29,36 +29,35 @@ import java.io.Serializable;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class RemoteExperimentEvent
-  implements Serializable {
+public class RemoteExperimentEvent implements Serializable {
 
-  /** for serialization */
-  private static final long serialVersionUID = 7000867987391866451L;
+    /** for serialization */
+    private static final long serialVersionUID = 7000867987391866451L;
 
-  /** A status type message */
-  public boolean m_statusMessage;
+    /** A status type message */
+    public boolean m_statusMessage;
 
-  /** A log type message */
-  public boolean m_logMessage;
+    /** A log type message */
+    public boolean m_logMessage;
 
-  /** The message */
-  public String m_messageString;
+    /** The message */
+    public String m_messageString;
 
-  /** True if a remote experiment has finished */
-  public boolean m_experimentFinished;
+    /** True if a remote experiment has finished */
+    public boolean m_experimentFinished;
 
-  /**
-   * Constructor
-   * @param status true for status type messages
-   * @param log true for log type messages
-   * @param finished true if experiment has finished
-   * @param message the message
-   */
-  public RemoteExperimentEvent(boolean status, boolean log, boolean finished,
-			       String message) {
-    m_statusMessage = status;
-    m_logMessage = log;
-    m_experimentFinished = finished;
-    m_messageString = message;
-  }
+    /**
+     * Constructor
+     * 
+     * @param status   true for status type messages
+     * @param log      true for log type messages
+     * @param finished true if experiment has finished
+     * @param message  the message
+     */
+    public RemoteExperimentEvent(boolean status, boolean log, boolean finished, String message) {
+        m_statusMessage = status;
+        m_logMessage = log;
+        m_experimentFinished = finished;
+        m_messageString = message;
+    }
 }

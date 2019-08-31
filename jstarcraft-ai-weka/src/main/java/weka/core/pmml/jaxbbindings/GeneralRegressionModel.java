@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for GeneralRegressionModel element declaration.
+ * <p>
+ * Java class for GeneralRegressionModel element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="GeneralRegressionModel">
@@ -103,30 +104,12 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "GeneralRegressionModel")
 public class GeneralRegressionModel {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class),
-        @XmlElementRef(name = "EventValues", namespace = "http://www.dmg.org/PMML-4_1", type = EventValues.class),
-        @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class),
-        @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class),
-        @XmlElementRef(name = "PPMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = PPMatrix.class),
-        @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class),
-        @XmlElementRef(name = "ParameterList", namespace = "http://www.dmg.org/PMML-4_1", type = ParameterList.class),
-        @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class),
-        @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class),
-        @XmlElementRef(name = "CovariateList", namespace = "http://www.dmg.org/PMML-4_1", type = CovariateList.class),
-        @XmlElementRef(name = "BaseCumHazardTables", namespace = "http://www.dmg.org/PMML-4_1", type = BaseCumHazardTables.class),
-        @XmlElementRef(name = "PCovMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = PCovMatrix.class),
-        @XmlElementRef(name = "FactorList", namespace = "http://www.dmg.org/PMML-4_1", type = FactorList.class),
-        @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class),
-        @XmlElementRef(name = "ParamMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = ParamMatrix.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class), @XmlElementRef(name = "EventValues", namespace = "http://www.dmg.org/PMML-4_1", type = EventValues.class), @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class), @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class), @XmlElementRef(name = "PPMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = PPMatrix.class), @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class), @XmlElementRef(name = "ParameterList", namespace = "http://www.dmg.org/PMML-4_1", type = ParameterList.class), @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class),
+            @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class), @XmlElementRef(name = "CovariateList", namespace = "http://www.dmg.org/PMML-4_1", type = CovariateList.class), @XmlElementRef(name = "BaseCumHazardTables", namespace = "http://www.dmg.org/PMML-4_1", type = BaseCumHazardTables.class), @XmlElementRef(name = "PCovMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = PCovMatrix.class), @XmlElementRef(name = "FactorList", namespace = "http://www.dmg.org/PMML-4_1", type = FactorList.class), @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class), @XmlElementRef(name = "ParamMatrix", namespace = "http://www.dmg.org/PMML-4_1", type = ParamMatrix.class) })
     protected List<Object> content;
     @XmlAttribute
     protected String algorithmName;
@@ -174,48 +157,39 @@ public class GeneralRegressionModel {
     protected String trialsVariable;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Extension" is used by two different parts of a schema. See: 
-     * line 2515 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 2499 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Extension" is used by two different parts of a schema. See:
+     * line 2515 of file:/home/david/workspace/weka/pmml-4-1.xsd line 2499 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ModelExplanation }
-     * {@link EventValues }
-     * {@link Output }
-     * {@link LocalTransformations }
-     * {@link PPMatrix }
-     * {@link Targets }
-     * {@link ParameterList }
-     * {@link ModelVerification }
-     * {@link Extension }
-     * {@link ModelStats }
-     * {@link CovariateList }
-     * {@link BaseCumHazardTables }
-     * {@link PCovMatrix }
-     * {@link FactorList }
-     * {@link MiningSchema }
+     * {@link ModelExplanation } {@link EventValues } {@link Output }
+     * {@link LocalTransformations } {@link PPMatrix } {@link Targets }
+     * {@link ParameterList } {@link ModelVerification } {@link Extension }
+     * {@link ModelStats } {@link CovariateList } {@link BaseCumHazardTables }
+     * {@link PCovMatrix } {@link FactorList } {@link MiningSchema }
      * {@link ParamMatrix }
      * 
      * 
@@ -226,7 +200,7 @@ public class GeneralRegressionModel {
         }
         return this.content;
     }
-    
+
     public void addContent(Object object) {
         if (content == null) {
             content = new ArrayList<Object>();
@@ -237,10 +211,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the algorithmName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlgorithmName() {
         return algorithmName;
@@ -249,10 +221,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the algorithmName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlgorithmName(String value) {
         this.algorithmName = value;
@@ -261,10 +231,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the baselineStrataVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getBaselineStrataVariable() {
         return baselineStrataVariable;
@@ -273,10 +241,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the baselineStrataVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setBaselineStrataVariable(String value) {
         this.baselineStrataVariable = value;
@@ -285,10 +251,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the cumulativeLink property.
      * 
-     * @return
-     *     possible object is
-     *     {@link CUMULATIVELINKFUNCTION }
-     *     
+     * @return possible object is {@link CUMULATIVELINKFUNCTION }
+     * 
      */
     public CUMULATIVELINKFUNCTION getCumulativeLink() {
         return cumulativeLink;
@@ -297,10 +261,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the cumulativeLink property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link CUMULATIVELINKFUNCTION }
-     *     
+     * @param value allowed object is {@link CUMULATIVELINKFUNCTION }
+     * 
      */
     public void setCumulativeLink(CUMULATIVELINKFUNCTION value) {
         this.cumulativeLink = value;
@@ -309,10 +271,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the distParameter property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getDistParameter() {
         return distParameter;
@@ -321,10 +281,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the distParameter property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setDistParameter(Double value) {
         this.distParameter = value;
@@ -333,10 +291,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the distribution property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDistribution() {
         return distribution;
@@ -345,10 +301,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the distribution property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDistribution(String value) {
         this.distribution = value;
@@ -357,10 +311,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the endTimeVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getEndTimeVariable() {
         return endTimeVariable;
@@ -369,10 +321,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the endTimeVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setEndTimeVariable(String value) {
         this.endTimeVariable = value;
@@ -381,10 +331,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the functionName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @return possible object is {@link MININGFUNCTION }
+     * 
      */
     public MININGFUNCTION getFunctionName() {
         return functionName;
@@ -393,10 +341,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the functionName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @param value allowed object is {@link MININGFUNCTION }
+     * 
      */
     public void setFunctionName(MININGFUNCTION value) {
         this.functionName = value;
@@ -405,10 +351,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the isScorable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsScorable() {
         if (isScorable == null) {
@@ -421,10 +365,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the isScorable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsScorable(Boolean value) {
         this.isScorable = value;
@@ -433,10 +375,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the linkFunction property.
      * 
-     * @return
-     *     possible object is
-     *     {@link LINKFUNCTION }
-     *     
+     * @return possible object is {@link LINKFUNCTION }
+     * 
      */
     public LINKFUNCTION getLinkFunction() {
         return linkFunction;
@@ -445,10 +385,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the linkFunction property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link LINKFUNCTION }
-     *     
+     * @param value allowed object is {@link LINKFUNCTION }
+     * 
      */
     public void setLinkFunction(LINKFUNCTION value) {
         this.linkFunction = value;
@@ -457,10 +395,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the linkParameter property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getLinkParameter() {
         return linkParameter;
@@ -469,10 +405,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the linkParameter property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setLinkParameter(Double value) {
         this.linkParameter = value;
@@ -481,10 +415,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the modelDF property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getModelDF() {
         return modelDF;
@@ -493,10 +425,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the modelDF property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setModelDF(Double value) {
         this.modelDF = value;
@@ -505,10 +435,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the modelName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelName() {
         return modelName;
@@ -517,10 +445,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the modelName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelName(String value) {
         this.modelName = value;
@@ -529,10 +455,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the modelType property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelType() {
         return modelType;
@@ -541,10 +465,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the modelType property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelType(String value) {
         this.modelType = value;
@@ -553,10 +475,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the offsetValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getOffsetValue() {
         return offsetValue;
@@ -565,10 +485,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the offsetValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setOffsetValue(Double value) {
         this.offsetValue = value;
@@ -577,10 +495,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the offsetVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getOffsetVariable() {
         return offsetVariable;
@@ -589,10 +505,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the offsetVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setOffsetVariable(String value) {
         this.offsetVariable = value;
@@ -601,10 +515,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the startTimeVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getStartTimeVariable() {
         return startTimeVariable;
@@ -613,10 +525,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the startTimeVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setStartTimeVariable(String value) {
         this.startTimeVariable = value;
@@ -625,10 +535,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the statusVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getStatusVariable() {
         return statusVariable;
@@ -637,10 +545,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the statusVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setStatusVariable(String value) {
         this.statusVariable = value;
@@ -649,10 +555,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the subjectIDVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getSubjectIDVariable() {
         return subjectIDVariable;
@@ -661,10 +565,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the subjectIDVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setSubjectIDVariable(String value) {
         this.subjectIDVariable = value;
@@ -673,10 +575,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the targetReferenceCategory property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTargetReferenceCategory() {
         return targetReferenceCategory;
@@ -685,10 +585,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the targetReferenceCategory property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTargetReferenceCategory(String value) {
         this.targetReferenceCategory = value;
@@ -697,10 +595,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the targetVariableName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTargetVariableName() {
         return targetVariableName;
@@ -709,10 +605,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the targetVariableName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTargetVariableName(String value) {
         this.targetVariableName = value;
@@ -721,10 +615,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the trialsValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getTrialsValue() {
         return trialsValue;
@@ -733,10 +625,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the trialsValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setTrialsValue(BigInteger value) {
         this.trialsValue = value;
@@ -745,10 +635,8 @@ public class GeneralRegressionModel {
     /**
      * Gets the value of the trialsVariable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTrialsVariable() {
         return trialsVariable;
@@ -757,10 +645,8 @@ public class GeneralRegressionModel {
     /**
      * Sets the value of the trialsVariable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTrialsVariable(String value) {
         this.trialsVariable = value;

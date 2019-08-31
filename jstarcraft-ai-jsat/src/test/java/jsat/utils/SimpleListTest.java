@@ -12,81 +12,65 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class SimpleListTest
-{
+public class SimpleListTest {
 
-    public SimpleListTest()
-    {
+    public SimpleListTest() {
     }
 
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
 
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of get method, of class SimpleList.
      */
     @Test
-    public void testGet()
-    {
+    public void testGet() {
         System.out.println("get");
         SimpleList instance = new SimpleList();
-        try
-        {
+        try {
             Object obj = instance.get(0);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
         instance.add("a");
         instance.add("b");
         assertEquals("a", instance.get(0));
         assertEquals("b", instance.get(1));
-        
+
         assertEquals("a", instance.remove(0));
-        
+
         assertEquals("b", instance.get(0));
-        try
-        {
+        try {
             Object obj = instance.get(1);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
         instance.add("c");
         instance.add("d");
-        
+
         assertEquals("b", instance.get(0));
         assertEquals("c", instance.get(1));
         assertEquals("d", instance.get(2));
-        try
-        {
+        try {
             Object obj = instance.get(3);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
     }
 
@@ -94,8 +78,7 @@ public class SimpleListTest
      * Test of size method, of class SimpleList.
      */
     @Test
-    public void testSize()
-    {
+    public void testSize() {
         System.out.println("size");
         SimpleList instance = new SimpleList();
         assertEquals(0, instance.size());
@@ -110,8 +93,7 @@ public class SimpleListTest
     }
 
     @Test
-    public void testAdd()
-    {
+    public void testAdd() {
         System.out.println("add");
         SimpleList<String> instance = new SimpleList<String>();
         instance.add("a");
@@ -121,23 +103,19 @@ public class SimpleListTest
         assertEquals("b", instance.get(1));
         assertEquals("a", instance.get(2));
     }
-    
+
     /**
      * Test of set method, of class SimpleList.
      */
     @Test
-    public void testSet()
-    {
+    public void testSet() {
         System.out.println("set");
         SimpleList<String> instance = new SimpleList<String>();
-        try
-        {
+        try {
             Object obj = instance.get(0);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
         instance.add("A");
         instance.add("B");
@@ -145,35 +123,29 @@ public class SimpleListTest
         instance.set(1, instance.get(1).toLowerCase());
         assertEquals("a", instance.get(0));
         assertEquals("b", instance.get(1));
-        
+
         assertEquals("a", instance.remove(0));
-        
+
         assertEquals("b", instance.get(0));
-        try
-        {
+        try {
             Object obj = instance.get(1);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
         instance.add("C");
         instance.add("D");
-        
+
         instance.set(1, instance.get(1).toLowerCase());
         instance.set(2, instance.get(2).toLowerCase());
         assertEquals("b", instance.get(0));
         assertEquals("c", instance.get(1));
         assertEquals("d", instance.get(2));
-        try
-        {
+        try {
             Object obj = instance.get(3);
             fail("Should not have been able to obtain " + obj);
-        }
-        catch(Exception ex)
-        {
-            
+        } catch (Exception ex) {
+
         }
     }
 }

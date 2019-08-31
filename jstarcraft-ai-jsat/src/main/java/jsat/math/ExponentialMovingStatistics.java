@@ -31,19 +31,17 @@ import java.io.Serializable;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class ExponentialMovingStatistics implements Serializable, Cloneable
-{
+public class ExponentialMovingStatistics implements Serializable, Cloneable {
     private double mean;
     private double variance;
     private double smoothing;
-    
+
     /**
      * Creates a new object for keeping an exponential estimate of the mean and
      * variance. Uses a relatively low smoothing factor of 0.1
      *
      */
-    public ExponentialMovingStatistics()
-    {
+    public ExponentialMovingStatistics() {
         this(0.1);
     }
 
@@ -53,8 +51,7 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      *
      * @param smoothing the {@link #smoothing smoothing} parameter to use
      */
-    public ExponentialMovingStatistics(double smoothing)
-    {
+    public ExponentialMovingStatistics(double smoothing) {
         this(smoothing, Double.NaN, 0);
     }
 
@@ -63,13 +60,12 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      * variance
      *
      * @param smoothing the {@link #smoothing smoothing} parameter to use
-     * @param mean an initial mean. May be {@link Double#NaN NaN} to indicate no
-     * initial mean.
-     * @param variance an initial variance. May be {@link Double#NaN NaN} to
-     * indicate no initial mean.
+     * @param mean      an initial mean. May be {@link Double#NaN NaN} to indicate
+     *                  no initial mean.
+     * @param variance  an initial variance. May be {@link Double#NaN NaN} to
+     *                  indicate no initial mean.
      */
-    public ExponentialMovingStatistics(double smoothing, double mean, double variance)
-    {
+    public ExponentialMovingStatistics(double smoothing, double mean, double variance) {
         this.mean = mean;
         this.variance = variance;
         setSmoothing(smoothing);
@@ -77,14 +73,13 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
 
     /**
      * Sets the smoothing parameter value to use. Must be in the range (0, 1].
-     * Changing this value will impact how quickly the statistics adapt to
-     * changes, with larger values increasing rate of change and smaller values
-     * decreasing it.
+     * Changing this value will impact how quickly the statistics adapt to changes,
+     * with larger values increasing rate of change and smaller values decreasing
+     * it.
      *
      * @param smoothing the smoothing value to use
      */
-    public void setSmoothing(double smoothing)
-    {
+    public void setSmoothing(double smoothing) {
         if (smoothing <= 0 || smoothing > 1 || Double.isNaN(smoothing))
             throw new IllegalArgumentException("Smoothing must be in (0, 1], not " + smoothing);
         this.smoothing = smoothing;
@@ -94,8 +89,7 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      *
      * @return the smoothing parameter in use
      */
-    public double getSmoothing()
-    {
+    public double getSmoothing() {
         return smoothing;
     }
 
@@ -104,28 +98,25 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      *
      * @param x the new value to add to the moving statistics
      */
-    public void add(double x)
-    {
-        if (Double.isNaN(mean))//fist case
+    public void add(double x) {
+        if (Double.isNaN(mean))// fist case
         {
             mean = x;
             variance = 0;
-        }
-        else//general case
+        } else// general case
         {
-            //first update stnd deviation 
-            variance = (1-smoothing)*(variance + smoothing*Math.pow(x-mean, 2));
-            mean = (1-smoothing)*mean + smoothing*x;
+            // first update stnd deviation
+            variance = (1 - smoothing) * (variance + smoothing * Math.pow(x - mean, 2));
+            mean = (1 - smoothing) * mean + smoothing * x;
         }
-                    
+
     }
 
     /**
      * 
      * @return estimate of the moving mean
      */
-    public double getMean()
-    {
+    public double getMean() {
         return mean;
     }
 
@@ -133,8 +124,7 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      * 
      * @return the estimate of moving variance
      */
-    public double getVariance()
-    {
+    public double getVariance() {
         return variance;
     }
 
@@ -142,9 +132,8 @@ public class ExponentialMovingStatistics implements Serializable, Cloneable
      * 
      * @return the estimate of moving standard deviation
      */
-    public double getStandardDeviation()
-    {
-        return Math.sqrt(getVariance()+1e-13);
+    public double getStandardDeviation() {
+        return Math.sqrt(getVariance() + 1e-13);
     }
 
 }

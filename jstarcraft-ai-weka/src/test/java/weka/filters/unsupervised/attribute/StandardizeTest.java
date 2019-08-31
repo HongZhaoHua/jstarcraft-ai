@@ -28,47 +28,48 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Normalize. Run from the command line with:<p>
+ * Tests Normalize. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.attribute.NormalizeTest
  *
  * @author <a href="mailto:len@reeltwo.com">Eibe Frank</a>
  * @version $Revision$
  */
 public class StandardizeTest extends AbstractFilterTest {
-  
-  public StandardizeTest(String name) { super(name);  }
 
-  /** Creates an example Standardize */
-  public Filter getFilter() {
-    Standardize f = new Standardize();
-    return f;
-  }
-
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-
-    // Check conversion is OK
-    for (int j = 0; j < result.numAttributes(); j++) {
-      if (result.attribute(j).isNumeric()) {
-	double mean = result.meanOrMode(j);
-	assertTrue("Mean should be 0", Utils.eq(mean, 0));
-	double stdDev = Math.sqrt(result.variance(j));
-	assertTrue("StdDev should be 1 (or 0)", 
-		   Utils.eq(stdDev, 0) || Utils.eq(stdDev, 1));
-      }
+    public StandardizeTest(String name) {
+        super(name);
     }
-  }
 
+    /** Creates an example Standardize */
+    public Filter getFilter() {
+        Standardize f = new Standardize();
+        return f;
+    }
 
-  public static Test suite() {
-    return new TestSuite(StandardizeTest.class);
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        // Check conversion is OK
+        for (int j = 0; j < result.numAttributes(); j++) {
+            if (result.attribute(j).isNumeric()) {
+                double mean = result.meanOrMode(j);
+                assertTrue("Mean should be 0", Utils.eq(mean, 0));
+                double stdDev = Math.sqrt(result.variance(j));
+                assertTrue("StdDev should be 1 (or 0)", Utils.eq(stdDev, 0) || Utils.eq(stdDev, 1));
+            }
+        }
+    }
+
+    public static Test suite() {
+        return new TestSuite(StandardizeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

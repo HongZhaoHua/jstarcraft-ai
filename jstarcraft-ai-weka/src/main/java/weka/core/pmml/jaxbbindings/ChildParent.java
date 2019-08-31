@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for ChildParent element declaration.
+ * <p>
+ * Java class for ChildParent element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="ChildParent">
@@ -55,11 +56,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "tableLocator",
-    "inlineTable"
-})
+@XmlType(name = "", propOrder = { "extension", "tableLocator", "inlineTable" })
 @XmlRootElement(name = "ChildParent")
 public class ChildParent {
 
@@ -82,21 +79,21 @@ public class ChildParent {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -110,10 +107,8 @@ public class ChildParent {
     /**
      * Gets the value of the tableLocator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TableLocator }
-     *     
+     * @return possible object is {@link TableLocator }
+     * 
      */
     public TableLocator getTableLocator() {
         return tableLocator;
@@ -122,10 +117,8 @@ public class ChildParent {
     /**
      * Sets the value of the tableLocator property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TableLocator }
-     *     
+     * @param value allowed object is {@link TableLocator }
+     * 
      */
     public void setTableLocator(TableLocator value) {
         this.tableLocator = value;
@@ -134,10 +127,8 @@ public class ChildParent {
     /**
      * Gets the value of the inlineTable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link InlineTable }
-     *     
+     * @return possible object is {@link InlineTable }
+     * 
      */
     public InlineTable getInlineTable() {
         return inlineTable;
@@ -146,10 +137,8 @@ public class ChildParent {
     /**
      * Sets the value of the inlineTable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link InlineTable }
-     *     
+     * @param value allowed object is {@link InlineTable }
+     * 
      */
     public void setInlineTable(InlineTable value) {
         this.inlineTable = value;
@@ -158,10 +147,8 @@ public class ChildParent {
     /**
      * Gets the value of the childField property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getChildField() {
         return childField;
@@ -170,10 +157,8 @@ public class ChildParent {
     /**
      * Sets the value of the childField property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setChildField(String value) {
         this.childField = value;
@@ -182,10 +167,8 @@ public class ChildParent {
     /**
      * Gets the value of the isRecursive property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getIsRecursive() {
         if (isRecursive == null) {
@@ -198,10 +181,8 @@ public class ChildParent {
     /**
      * Sets the value of the isRecursive property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setIsRecursive(String value) {
         this.isRecursive = value;
@@ -210,10 +191,8 @@ public class ChildParent {
     /**
      * Gets the value of the parentField property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getParentField() {
         return parentField;
@@ -222,10 +201,8 @@ public class ChildParent {
     /**
      * Sets the value of the parentField property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setParentField(String value) {
         this.parentField = value;
@@ -234,10 +211,8 @@ public class ChildParent {
     /**
      * Gets the value of the parentLevelField property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getParentLevelField() {
         return parentLevelField;
@@ -246,10 +221,8 @@ public class ChildParent {
     /**
      * Sets the value of the parentLevelField property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setParentLevelField(String value) {
         this.parentLevelField = value;

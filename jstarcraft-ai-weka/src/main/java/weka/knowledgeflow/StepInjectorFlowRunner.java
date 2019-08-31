@@ -34,135 +34,123 @@ import java.util.List;
  */
 public class StepInjectorFlowRunner extends FlowRunner {
 
-  /** True if the flow has been reset */
-  protected boolean m_reset = true;
+    /** True if the flow has been reset */
+    protected boolean m_reset = true;
 
-  /** True if data is streaming */
-  protected boolean m_streaming;
+    /** True if data is streaming */
+    protected boolean m_streaming;
 
-  /**
-   * Rest the runner
-   */
-  public void reset() {
-    m_reset = true;
-    m_streaming = false;
-  }
-
-  /**
-   * Inject data into the flow
-   *
-   * @param toInject the data to inject
-   * @param callback a {@code ExecutionFinishedCallback} to notify when
-   *          execution completes
-   * @param target the target {@code Step} to inject to
-   * @throws WekaException if a problem occurs
-   */
-  public void injectWithExecutionFinishedCallback(final Data toInject,
-    ExecutionFinishedCallback callback, final Step target) throws WekaException {
-
-    if (StepManagerImpl.connectionIsIncremental(toInject)) {
-      throw new WekaException(
-        "Only batch data can be injected via this method.");
+    /**
+     * Rest the runner
+     */
+    public void reset() {
+        m_reset = true;
+        m_streaming = false;
     }
 
-    addExecutionFinishedCallback(callback);
+    /**
+     * Inject data into the flow
+     *
+     * @param toInject the data to inject
+     * @param callback a {@code ExecutionFinishedCallback} to notify when execution
+     *                 completes
+     * @param target   the target {@code Step} to inject to
+     * @throws WekaException if a problem occurs
+     */
+    public void injectWithExecutionFinishedCallback(final Data toInject, ExecutionFinishedCallback callback, final Step target) throws WekaException {
 
-    String connName = toInject.getConnectionName();
-    List<String> accceptableInputs = target.getIncomingConnectionTypes();
-    if (!accceptableInputs.contains(connName)) {
-      throw new WekaException("Step '" + target.getName() + "' can't accept a "
-        + connName + " input at present!");
+        if (StepManagerImpl.connectionIsIncremental(toInject)) {
+            throw new WekaException("Only batch data can be injected via this method.");
+        }
+
+        addExecutionFinishedCallback(callback);
+
+        String connName = toInject.getConnectionName();
+        List<String> accceptableInputs = target.getIncomingConnectionTypes();
+        if (!accceptableInputs.contains(connName)) {
+            throw new WekaException("Step '" + target.getName() + "' can't accept a " + connName + " input at present!");
+        }
+
+        initializeFlow();
+        m_execEnv.submitTask(new StepTask<Void>(null) {
+            /** For serialization */
+            private static final long serialVersionUID = 663985401825979869L;
+
+            @Override
+            public void process() throws Exception {
+                target.processIncoming(toInject);
+            }
+        });
+        m_logHandler.logDebug("StepInjectorFlowRunner: Launching shutdown monitor");
+        launchExecutorShutdownThread();
     }
 
-    initializeFlow();
-    m_execEnv.submitTask(new StepTask<Void>(null) {
-      /** For serialization */
-      private static final long serialVersionUID = 663985401825979869L;
+    /**
+     * Find a step in the flow
+     * 
+     * @param stepName  the name of the Step to find
+     * @param stepClass the class of the step to find
+     * @return the named step
+     * @throws WekaException if the named step is not in the flow or the found step
+     *                       is not of the supplied class
+     */
+    public Step findStep(String stepName, Class stepClass) throws WekaException {
+        if (m_flow == null) {
+            throw new WekaException("No flow set!");
+        }
 
-      @Override
-      public void process() throws Exception {
+        StepManagerImpl manager = m_flow.findStep(stepName);
+        if (manager == null) {
+            throw new WekaException("Step '" + stepName + "' does not seem " + "to be part of the flow!");
+        }
+
+        Step target = manager.getManagedStep();
+        if (target.getClass() != stepClass) {
+            throw new WekaException("Step '" + stepName + "' is not an instance of " + stepClass.getCanonicalName());
+        }
+
+        if (target.getIncomingConnectionTypes() == null || target.getIncomingConnectionTypes().size() == 0) {
+            throw new WekaException("Step '" + stepName + "' cannot process any incoming data!");
+        }
+
+        return target;
+    }
+
+    /**
+     * Inject streaming data into the target step in the flow
+     *
+     * @param toInject a streaming {@code Data} object to inject
+     * @param target   the target step to inject to
+     * @param lastData true if this is the last piece of data in the stream
+     * @throws WekaException if a problem occurs
+     */
+    public void injectStreaming(Data toInject, Step target, boolean lastData) throws WekaException {
+        if (m_reset) {
+            if (m_streaming) {
+                m_execEnv.stopClientExecutionService();
+            }
+
+            String connName = toInject.getConnectionName();
+            List<String> accceptableInputs = target.getIncomingConnectionTypes();
+            if (!accceptableInputs.contains(connName)) {
+                throw new WekaException("Step '" + target.getName() + "' can't accept a " + connName + " input at present!");
+            }
+
+            initializeFlow();
+            toInject.setPayloadElement(StepManager.CON_AUX_DATA_INCREMENTAL_STREAM_END, false);
+            m_streaming = true;
+            m_reset = false;
+        }
+
+        if (lastData) {
+            toInject.setPayloadElement(StepManager.CON_AUX_DATA_INCREMENTAL_STREAM_END, true);
+        }
+
         target.processIncoming(toInject);
-      }
-    });
-    m_logHandler.logDebug("StepInjectorFlowRunner: Launching shutdown monitor");
-    launchExecutorShutdownThread();
-  }
-
-  /**
-   * Find a step in the flow
-   * 
-   * @param stepName the name of the Step to find
-   * @param stepClass the class of the step to find
-   * @return the named step
-   * @throws WekaException if the named step is not in the flow or the found
-   *           step is not of the supplied class
-   */
-  public Step findStep(String stepName, Class stepClass) throws WekaException {
-    if (m_flow == null) {
-      throw new WekaException("No flow set!");
+        if (lastData) {
+            m_logHandler.logDebug("StepInjectorFlowRunner: Shutting down executor service");
+            m_execEnv.stopClientExecutionService();
+            reset();
+        }
     }
-
-    StepManagerImpl manager = m_flow.findStep(stepName);
-    if (manager == null) {
-      throw new WekaException("Step '" + stepName + "' does not seem "
-        + "to be part of the flow!");
-    }
-
-    Step target = manager.getManagedStep();
-    if (target.getClass() != stepClass) {
-      throw new WekaException("Step '" + stepName + "' is not an instance of "
-        + stepClass.getCanonicalName());
-    }
-
-    if (target.getIncomingConnectionTypes() == null
-      || target.getIncomingConnectionTypes().size() == 0) {
-      throw new WekaException("Step '" + stepName
-        + "' cannot process any incoming data!");
-    }
-
-    return target;
-  }
-
-  /**
-   * Inject streaming data into the target step in the flow
-   *
-   * @param toInject a streaming {@code Data} object to inject
-   * @param target the target step to inject to
-   * @param lastData true if this is the last piece of data in the stream
-   * @throws WekaException if a problem occurs
-   */
-  public void injectStreaming(Data toInject, Step target, boolean lastData)
-    throws WekaException {
-    if (m_reset) {
-      if (m_streaming) {
-        m_execEnv.stopClientExecutionService();
-      }
-
-      String connName = toInject.getConnectionName();
-      List<String> accceptableInputs = target.getIncomingConnectionTypes();
-      if (!accceptableInputs.contains(connName)) {
-        throw new WekaException("Step '" + target.getName()
-          + "' can't accept a " + connName + " input at present!");
-      }
-
-      initializeFlow();
-      toInject.setPayloadElement(
-        StepManager.CON_AUX_DATA_INCREMENTAL_STREAM_END, false);
-      m_streaming = true;
-      m_reset = false;
-    }
-
-    if (lastData) {
-      toInject.setPayloadElement(
-        StepManager.CON_AUX_DATA_INCREMENTAL_STREAM_END, true);
-    }
-
-    target.processIncoming(toInject);
-    if (lastData) {
-      m_logHandler
-        .logDebug("StepInjectorFlowRunner: Shutting down executor service");
-      m_execEnv.stopClientExecutionService();
-      reset();
-    }
-  }
 }

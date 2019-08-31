@@ -25,26 +25,27 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Test class for all attribute selection schemes. Run from the command line with: <p/>
+ * Test class for all attribute selection schemes. Run from the command line
+ * with:
+ * <p/>
  * java weka.attributeSelection.AllTests
  *
  * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite 	result;
-    
-    result = new TestSuite();
-    result.addTest(suite("weka.attributeSelection.ASSearch"));
-    result.addTest(suite("weka.attributeSelection.ASEvaluation"));
-    
-    return result;
-  }
+    public static Test suite() {
+        TestSuite result;
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        result = new TestSuite();
+        result.addTest(suite("weka.attributeSelection.ASSearch"));
+        result.addTest(suite("weka.attributeSelection.ASEvaluation"));
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

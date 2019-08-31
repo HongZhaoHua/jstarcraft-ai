@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests HierarchicalClusterer. Run from the command line with:<p/>
+ * Tests HierarchicalClusterer. Run from the command line with:
+ * <p/>
  * java weka.clusterers.HierarchicalClustererTest
  *
  * @author Mark Hall
  * @version $Revision$
  */
-public class HierarchicalClustererTest
-  extends AbstractClustererTest {
+public class HierarchicalClustererTest extends AbstractClustererTest {
 
-  public HierarchicalClustererTest(String name) { 
-    super(name);  
-  }
+    public HierarchicalClustererTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default HierarchicalClusterer */
-  public Clusterer getClusterer() {
-    return new HierarchicalClusterer();
-  }
+    /** Creates a default HierarchicalClusterer */
+    public Clusterer getClusterer() {
+        return new HierarchicalClusterer();
+    }
 
-  public static Test suite() {
-    return new TestSuite(HierarchicalClustererTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(HierarchicalClustererTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

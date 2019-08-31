@@ -26,11 +26,10 @@ import java.util.Vector;
 
 /**
  * Generates Javadoc comments from the TechnicalInformationHandler's data.
- * Update the BibTex references and the plaintext techincal information.
- * <br><br>
- * 
- * <!-- options-start --> Valid options are:
+ * Update the BibTex references and the plaintext techincal information. <br>
  * <br>
+ * 
+ * <!-- options-start --> Valid options are: <br>
  * 
  * <pre>
  * -W &lt;classname&gt;
@@ -68,176 +67,171 @@ import java.util.Vector;
  */
 public class TechnicalInformationHandlerJavadoc extends Javadoc {
 
-  /** the start comment tag for inserting the generated BibTex */
-  public final static String PLAINTEXT_STARTTAG = "<!-- technical-plaintext-start -->";
+    /** the start comment tag for inserting the generated BibTex */
+    public final static String PLAINTEXT_STARTTAG = "<!-- technical-plaintext-start -->";
 
-  /** the end comment tag for inserting the generated BibTex */
-  public final static String PLAINTEXT_ENDTAG = "<!-- technical-plaintext-end -->";
+    /** the end comment tag for inserting the generated BibTex */
+    public final static String PLAINTEXT_ENDTAG = "<!-- technical-plaintext-end -->";
 
-  /** the start comment tag for inserting the generated BibTex */
-  public final static String BIBTEX_STARTTAG = "<!-- technical-bibtex-start -->";
+    /** the start comment tag for inserting the generated BibTex */
+    public final static String BIBTEX_STARTTAG = "<!-- technical-bibtex-start -->";
 
-  /** the end comment tag for inserting the generated BibTex */
-  public final static String BIBTEX_ENDTAG = "<!-- technical-bibtex-end -->";
+    /** the end comment tag for inserting the generated BibTex */
+    public final static String BIBTEX_ENDTAG = "<!-- technical-bibtex-end -->";
 
-  /** whether to include the "Valid options..." prolog in the Javadoc */
-  protected boolean m_Prolog = true;
+    /** whether to include the "Valid options..." prolog in the Javadoc */
+    protected boolean m_Prolog = true;
 
-  /**
-   * default constructor
-   */
-  public TechnicalInformationHandlerJavadoc() {
-    super();
+    /**
+     * default constructor
+     */
+    public TechnicalInformationHandlerJavadoc() {
+        super();
 
-    m_StartTag = new String[2];
-    m_EndTag = new String[2];
-    m_StartTag[0] = PLAINTEXT_STARTTAG;
-    m_EndTag[0] = PLAINTEXT_ENDTAG;
-    m_StartTag[1] = BIBTEX_STARTTAG;
-    m_EndTag[1] = BIBTEX_ENDTAG;
-  }
-
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> result = new Vector<Option>();
-
-    result.addAll(Collections.list(super.listOptions()));
-
-    result.addElement(new Option(
-      "\tSuppresses the 'BibTex:' prolog in the Javadoc.", "noprolog", 0,
-      "-noprolog"));
-
-    return result.elements();
-  }
-
-  /**
-   * Parses a given list of options.
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    super.setOptions(options);
-
-    setProlog(!Utils.getFlag("noprolog", options));
-  }
-
-  /**
-   * Gets the current settings of this object.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
-    Vector<String> result;
-    String[] options;
-    int i;
-
-    result = new Vector<String>();
-
-    options = super.getOptions();
-    for (i = 0; i < options.length; i++) {
-      result.add(options[i]);
+        m_StartTag = new String[2];
+        m_EndTag = new String[2];
+        m_StartTag[0] = PLAINTEXT_STARTTAG;
+        m_EndTag[0] = PLAINTEXT_ENDTAG;
+        m_StartTag[1] = BIBTEX_STARTTAG;
+        m_EndTag[1] = BIBTEX_ENDTAG;
     }
 
-    if (!getProlog()) {
-      result.add("-noprolog");
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> result = new Vector<Option>();
+
+        result.addAll(Collections.list(super.listOptions()));
+
+        result.addElement(new Option("\tSuppresses the 'BibTex:' prolog in the Javadoc.", "noprolog", 0, "-noprolog"));
+
+        return result.elements();
     }
 
-    return result.toArray(new String[result.size()]);
-  }
+    /**
+     * Parses a given list of options.
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        super.setOptions(options);
 
-  /**
-   * sets whether to add the "Valid options are..." prolog
-   * 
-   * @param value true if the prolog is to be used
-   */
-  public void setProlog(boolean value) {
-    m_Prolog = value;
-  }
-
-  /**
-   * whether "Valid options are..." prolog is included in the Javadoc
-   * 
-   * @return whether the prolog is currently used
-   */
-  public boolean getProlog() {
-    return m_Prolog;
-  }
-
-  /**
-   * generates and returns the Javadoc for the specified start/end tag pair.
-   * 
-   * @param index the index in the start/end tag array
-   * @return the generated Javadoc
-   * @throws Exception in case the generation fails
-   */
-  @Override
-  protected String generateJavadoc(int index) throws Exception {
-    String result;
-    TechnicalInformationHandler handler;
-
-    result = "";
-
-    if (!canInstantiateClass()) {
-      return result;
+        setProlog(!Utils.getFlag("noprolog", options));
     }
 
-    if (!InheritanceUtils.hasInterface(TechnicalInformationHandler.class,
-      getInstance().getClass())) {
-      throw new Exception("Class '" + getClassname()
-        + "' is not a TechnicalInformationHandler!");
+    /**
+     * Gets the current settings of this object.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
+        Vector<String> result;
+        String[] options;
+        int i;
+
+        result = new Vector<String>();
+
+        options = super.getOptions();
+        for (i = 0; i < options.length; i++) {
+            result.add(options[i]);
+        }
+
+        if (!getProlog()) {
+            result.add("-noprolog");
+        }
+
+        return result.toArray(new String[result.size()]);
     }
 
-    handler = (TechnicalInformationHandler) getInstance();
-
-    switch (index) {
-    case 0: // plain text
-      result = toHTML(handler.getTechnicalInformation().toString()) + "\n";
-      break;
-
-    case 1: // bibtex
-      // prolog?
-      if (getProlog()) {
-        result = "BibTeX:\n";
-      }
-      result += "<pre>\n";
-      result += toHTML(handler.getTechnicalInformation().toBibTex())
-        .replaceAll("<br>", "") + "\n";
-      result += "</pre>\n<br><br>\n";
-      break;
+    /**
+     * sets whether to add the "Valid options are..." prolog
+     * 
+     * @param value true if the prolog is to be used
+     */
+    public void setProlog(boolean value) {
+        m_Prolog = value;
     }
 
-    // stars?
-    if (getUseStars()) {
-      result = indent(result, 1, "* ");
+    /**
+     * whether "Valid options are..." prolog is included in the Javadoc
+     * 
+     * @return whether the prolog is currently used
+     */
+    public boolean getProlog() {
+        return m_Prolog;
     }
 
-    return result;
-  }
+    /**
+     * generates and returns the Javadoc for the specified start/end tag pair.
+     * 
+     * @param index the index in the start/end tag array
+     * @return the generated Javadoc
+     * @throws Exception in case the generation fails
+     */
+    @Override
+    protected String generateJavadoc(int index) throws Exception {
+        String result;
+        TechnicalInformationHandler handler;
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        result = "";
 
-  /**
-   * Parses the given commandline parameters and generates the Javadoc.
-   * 
-   * @param args the commandline parameters for the object
-   */
-  public static void main(String[] args) {
-    runJavadoc(new TechnicalInformationHandlerJavadoc(), args);
-  }
+        if (!canInstantiateClass()) {
+            return result;
+        }
+
+        if (!InheritanceUtils.hasInterface(TechnicalInformationHandler.class, getInstance().getClass())) {
+            throw new Exception("Class '" + getClassname() + "' is not a TechnicalInformationHandler!");
+        }
+
+        handler = (TechnicalInformationHandler) getInstance();
+
+        switch (index) {
+        case 0: // plain text
+            result = toHTML(handler.getTechnicalInformation().toString()) + "\n";
+            break;
+
+        case 1: // bibtex
+            // prolog?
+            if (getProlog()) {
+                result = "BibTeX:\n";
+            }
+            result += "<pre>\n";
+            result += toHTML(handler.getTechnicalInformation().toBibTex()).replaceAll("<br>", "") + "\n";
+            result += "</pre>\n<br><br>\n";
+            break;
+        }
+
+        // stars?
+        if (getUseStars()) {
+            result = indent(result, 1, "* ");
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Parses the given commandline parameters and generates the Javadoc.
+     * 
+     * @param args the commandline parameters for the object
+     */
+    public static void main(String[] args) {
+        runJavadoc(new TechnicalInformationHandlerJavadoc(), args);
+    }
 }

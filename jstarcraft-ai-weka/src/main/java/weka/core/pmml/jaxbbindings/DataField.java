@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for DataField element declaration.
+ * <p>
+ * Java class for DataField element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="DataField">
@@ -57,11 +58,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "interval",
-    "value"
-})
+@XmlType(name = "", propOrder = { "extension", "interval", "value" })
 @XmlRootElement(name = "DataField")
 public class DataField {
 
@@ -84,32 +81,33 @@ public class DataField {
     @XmlAttribute
     protected String taxonomy;
 
-    public DataField() {}
-    
-    public DataField(String name, OPTYPE optype) {
-    	this.name = name;
-    	this.optype = optype;
+    public DataField() {
     }
-    
+
+    public DataField(String name, OPTYPE optype) {
+        this.name = name;
+        this.optype = optype;
+    }
+
     /**
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -124,21 +122,21 @@ public class DataField {
      * Gets the value of the interval property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the interval property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the interval property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getInterval().add(newItem);
+     * getInterval().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Interval }
+     * Objects of the following type(s) are allowed in the list {@link Interval }
      * 
      * 
      */
@@ -153,21 +151,21 @@ public class DataField {
      * Gets the value of the value property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the value property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getValue().add(newItem);
+     * getValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Value }
+     * Objects of the following type(s) are allowed in the list {@link Value }
      * 
      */
     public List<Value> getValues() {
@@ -176,21 +174,19 @@ public class DataField {
         }
         return this.value;
     }
-    
+
     public void addValue(Value v) {
-    	if (value == null) {
+        if (value == null) {
             value = new ArrayList<Value>();
         }
-    	value.add(v);
+        value.add(v);
     }
 
     /**
      * Gets the value of the dataType property.
      * 
-     * @return
-     *     possible object is
-     *     {@link DATATYPE }
-     *     
+     * @return possible object is {@link DATATYPE }
+     * 
      */
     public DATATYPE getDataType() {
         return dataType;
@@ -199,10 +195,8 @@ public class DataField {
     /**
      * Sets the value of the dataType property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DATATYPE }
-     *     
+     * @param value allowed object is {@link DATATYPE }
+     * 
      */
     public void setDataType(DATATYPE value) {
         this.dataType = value;
@@ -211,10 +205,8 @@ public class DataField {
     /**
      * Gets the value of the displayName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -223,10 +215,8 @@ public class DataField {
     /**
      * Sets the value of the displayName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDisplayName(String value) {
         this.displayName = value;
@@ -235,10 +225,8 @@ public class DataField {
     /**
      * Gets the value of the isCyclic property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getIsCyclic() {
         if (isCyclic == null) {
@@ -251,10 +239,8 @@ public class DataField {
     /**
      * Sets the value of the isCyclic property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setIsCyclic(String value) {
         this.isCyclic = value;
@@ -263,10 +249,8 @@ public class DataField {
     /**
      * Gets the value of the name property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getName() {
         return name;
@@ -275,10 +259,8 @@ public class DataField {
     /**
      * Sets the value of the name property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setName(String value) {
         this.name = value;
@@ -287,10 +269,8 @@ public class DataField {
     /**
      * Gets the value of the optype property.
      * 
-     * @return
-     *     possible object is
-     *     {@link OPTYPE }
-     *     
+     * @return possible object is {@link OPTYPE }
+     * 
      */
     public OPTYPE getOptype() {
         return optype;
@@ -299,10 +279,8 @@ public class DataField {
     /**
      * Sets the value of the optype property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link OPTYPE }
-     *     
+     * @param value allowed object is {@link OPTYPE }
+     * 
      */
     public void setOptype(OPTYPE value) {
         this.optype = value;
@@ -311,10 +289,8 @@ public class DataField {
     /**
      * Gets the value of the taxonomy property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTaxonomy() {
         return taxonomy;
@@ -323,10 +299,8 @@ public class DataField {
     /**
      * Sets the value of the taxonomy property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTaxonomy(String value) {
         this.taxonomy = value;

@@ -28,20 +28,20 @@ package weka.estimators;
  */
 public interface MultivariateEstimator {
 
-  /**
-   * Fits the value to the density estimator.
-   * 
-   * @param value the value to add
-   * @param weight the weight of the value
-   */
-  void estimate(double[][] value, double[] weight);
+    /**
+     * Fits the value to the density estimator.
+     * 
+     * @param value  the value to add
+     * @param weight the weight of the value
+     */
+    void estimate(double[][] value, double[] weight);
 
-  /**
-   * Returns the natural logarithm of the density estimate at the given point.
-   * 
-   * @param value the value at which to evaluate
-   * @return the natural logarithm of the density estimate at the given value
-   */
-  double logDensity(double[] value);
+    /**
+     * Returns the natural logarithm of the density estimate at the given point.
+     * 
+     * @param value the value at which to evaluate
+     * @return the natural logarithm of the density estimate at the given value
+     */
+    double logDensity(double[] value);
 
 }

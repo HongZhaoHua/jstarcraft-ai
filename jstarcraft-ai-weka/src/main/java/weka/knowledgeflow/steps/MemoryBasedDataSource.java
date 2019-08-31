@@ -31,92 +31,89 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Simple start step that stores a set of instances and outputs it in a
- * dataSet connection. Gets used programmatically when the setInstances()
- * method is invoked on the MainKFPerspective in order to create a new
- * Flow containing this step.
+ * Simple start step that stores a set of instances and outputs it in a dataSet
+ * connection. Gets used programmatically when the setInstances() method is
+ * invoked on the MainKFPerspective in order to create a new Flow containing
+ * this step.
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-@KFStep(name = "MemoryDataSource", category = "DataSources",
-  toolTipText = "Memory-based data", iconPath = KFGUIConsts.BASE_ICON_PATH
-    + "DefaultDataSource.gif")
+@KFStep(name = "MemoryDataSource", category = "DataSources", toolTipText = "Memory-based data", iconPath = KFGUIConsts.BASE_ICON_PATH + "DefaultDataSource.gif")
 public class MemoryBasedDataSource extends BaseStep {
-  private static final long serialVersionUID = -1901014330145130275L;
+    private static final long serialVersionUID = -1901014330145130275L;
 
-  /** The data that will be output from this step */
-  protected Instances m_instances;
+    /** The data that will be output from this step */
+    protected Instances m_instances;
 
-  /**
-   * Set the data to output from this step
-   *
-   * @param instances
-   */
-  public void setInstances(Instances instances) {
-    m_instances = instances;
-  }
-
-  /**
-   * Get the data to output from this step
-   *
-   * @return
-   */
-  public Instances getInstances() {
-    return m_instances;
-  }
-
-  /**
-   * Initialize the step
-   *
-   * @throws WekaException if the data to output has not been set yet
-   */
-  @Override
-  public void stepInit() throws WekaException {
-    if (m_instances == null) {
-      throw new WekaException(
-        "Has not been initialized with a set of instances");
+    /**
+     * Set the data to output from this step
+     *
+     * @param instances
+     */
+    public void setInstances(Instances instances) {
+        m_instances = instances;
     }
-  }
 
-  /**
-   * Get a list of incoming connection types that this step can accept. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and any existing incoming connections. E.g. a step might be able to accept
-   * one (and only one) incoming batch data connection.
-   *
-   * @return a list of incoming connections that this step can accept given its
-   *         current state
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    return null;
-  }
+    /**
+     * Get the data to output from this step
+     *
+     * @return
+     */
+    public Instances getInstances() {
+        return m_instances;
+    }
 
-  /**
-   * Get a list of outgoing connection types that this step can produce. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and the incoming connections. E.g. depending on what incoming connection is
-   * present, a step might be able to produce a trainingSet output, a testSet
-   * output or neither, but not both.
-   *
-   * @return a list of outgoing connections that this step can produce
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return Arrays.asList(StepManager.CON_DATASET);
-  }
+    /**
+     * Initialize the step
+     *
+     * @throws WekaException if the data to output has not been set yet
+     */
+    @Override
+    public void stepInit() throws WekaException {
+        if (m_instances == null) {
+            throw new WekaException("Has not been initialized with a set of instances");
+        }
+    }
 
-  /**
-   * Start processing
-   *
-   * @throws WekaException if a problem occurs
-   */
-  @Override
-  public void start() throws WekaException {
-    getStepManager().processing();
-    Data output = new Data(StepManager.CON_DATASET, m_instances);
-    getStepManager().outputData(output);
-    getStepManager().finished();
-  }
+    /**
+     * Get a list of incoming connection types that this step can accept. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * any existing incoming connections. E.g. a step might be able to accept one
+     * (and only one) incoming batch data connection.
+     *
+     * @return a list of incoming connections that this step can accept given its
+     *         current state
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        return null;
+    }
+
+    /**
+     * Get a list of outgoing connection types that this step can produce. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * the incoming connections. E.g. depending on what incoming connection is
+     * present, a step might be able to produce a trainingSet output, a testSet
+     * output or neither, but not both.
+     *
+     * @return a list of outgoing connections that this step can produce
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return Arrays.asList(StepManager.CON_DATASET);
+    }
+
+    /**
+     * Start processing
+     *
+     * @throws WekaException if a problem occurs
+     */
+    @Override
+    public void start() throws WekaException {
+        getStepManager().processing();
+        Data output = new Data(StepManager.CON_DATASET, m_instances);
+        getStepManager().outputData(output);
+        getStepManager().finished();
+    }
 }

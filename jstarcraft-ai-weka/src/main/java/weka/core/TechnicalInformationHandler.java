@@ -21,21 +21,21 @@
 package weka.core;
 
 /**
- * For classes that are based on some kind of publications. They return
- * a TechnicalInformation object filled with the data of the publication.
+ * For classes that are based on some kind of publications. They return a
+ * TechnicalInformation object filled with the data of the publication.
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  * @see TechnicalInformation
  */
 public interface TechnicalInformationHandler {
 
-  /**
-   * Returns an instance of a TechnicalInformation object, containing 
-   * detailed information about the technical background of this class,
-   * e.g., paper reference or book this class is based on.
-   * 
-   * @return the technical information about this class
-   */
-  public TechnicalInformation getTechnicalInformation();
+    /**
+     * Returns an instance of a TechnicalInformation object, containing detailed
+     * information about the technical background of this class, e.g., paper
+     * reference or book this class is based on.
+     * 
+     * @return the technical information about this class
+     */
+    public TechnicalInformation getTechnicalInformation();
 }

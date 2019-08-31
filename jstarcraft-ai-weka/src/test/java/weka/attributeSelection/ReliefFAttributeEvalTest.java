@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BestFirst. Run from the command line with:<p/>
+ * Tests BestFirst. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.ReliefFAttributeEvalTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class ReliefFAttributeEvalTest 
-  extends AbstractEvaluatorTest {
+public class ReliefFAttributeEvalTest extends AbstractEvaluatorTest {
 
-  public ReliefFAttributeEvalTest(String name) { 
-    super(name);  
-  }
+    public ReliefFAttributeEvalTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Ranker */
-  public ASSearch getSearch() {
-    return new Ranker();
-  }
+    /** Creates a default Ranker */
+    public ASSearch getSearch() {
+        return new Ranker();
+    }
 
-  /** Creates a default ReliefFAttributeEval */
-  public ASEvaluation getEvaluator() {
-    return new ReliefFAttributeEval();
-  }
+    /** Creates a default ReliefFAttributeEval */
+    public ASEvaluation getEvaluator() {
+        return new ReliefFAttributeEval();
+    }
 
-  public static Test suite() {
-    return new TestSuite(ReliefFAttributeEvalTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(ReliefFAttributeEvalTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

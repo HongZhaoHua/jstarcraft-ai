@@ -35,53 +35,53 @@ import weka.core.Instance;
  */
 public class UnivariateNumericBinarySplit extends Split implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -7392204582942741097L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -7392204582942741097L;
 
-  /** The split point */
-  protected double m_splitPoint;
+    /** The split point */
+    protected double m_splitPoint;
 
-  /**
-   * Constructor
-   * 
-   * @param attName the name of the attribute to split on
-   * @param splitPoint the split point
-   */
-  public UnivariateNumericBinarySplit(String attName, double splitPoint) {
-    m_splitAttNames.add(attName);
-    m_splitPoint = splitPoint;
-  }
-
-  @Override
-  public String branchForInstance(Instance inst) {
-
-    Attribute att = inst.dataset().attribute(m_splitAttNames.get(0));
-    if (att == null || inst.isMissing(att)) {
-      // TODO -------------
-      return null;
+    /**
+     * Constructor
+     * 
+     * @param attName    the name of the attribute to split on
+     * @param splitPoint the split point
+     */
+    public UnivariateNumericBinarySplit(String attName, double splitPoint) {
+        m_splitAttNames.add(attName);
+        m_splitPoint = splitPoint;
     }
 
-    if (inst.value(att) <= m_splitPoint) {
-      return "left";
+    @Override
+    public String branchForInstance(Instance inst) {
+
+        Attribute att = inst.dataset().attribute(m_splitAttNames.get(0));
+        if (att == null || inst.isMissing(att)) {
+            // TODO -------------
+            return null;
+        }
+
+        if (inst.value(att) <= m_splitPoint) {
+            return "left";
+        }
+
+        return "right";
     }
 
-    return "right";
-  }
+    @Override
+    public String conditionForBranch(String branch) {
+        String result = m_splitAttNames.get(0);
 
-  @Override
-  public String conditionForBranch(String branch) {
-    String result = m_splitAttNames.get(0);
+        if (branch.equalsIgnoreCase("left")) {
+            result += " <= ";
+        } else {
+            result += " > ";
+        }
 
-    if (branch.equalsIgnoreCase("left")) {
-      result += " <= ";
-    } else {
-      result += " > ";
+        result += String.format("%-9.3f", m_splitPoint);
+
+        return result;
     }
-
-    result += String.format("%-9.3f", m_splitPoint);
-
-    return result;
-  }
 }

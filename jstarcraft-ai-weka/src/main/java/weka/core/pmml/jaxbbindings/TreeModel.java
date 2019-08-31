@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigDecimal;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElementRefs;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TreeModel element declaration.
+ * <p>
+ * Java class for TreeModel element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TreeModel">
@@ -66,23 +67,11 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "content"
-})
+@XmlType(name = "", propOrder = { "content" })
 @XmlRootElement(name = "TreeModel")
 public class TreeModel {
 
-    @XmlElementRefs({
-        @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class),
-        @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class),
-        @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class),
-        @XmlElementRef(name = "Node", namespace = "http://www.dmg.org/PMML-4_1", type = Node.class),
-        @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class),
-        @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class),
-        @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class),
-        @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class),
-        @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class)
-    })
+    @XmlElementRefs({ @XmlElementRef(name = "ModelExplanation", namespace = "http://www.dmg.org/PMML-4_1", type = ModelExplanation.class), @XmlElementRef(name = "ModelStats", namespace = "http://www.dmg.org/PMML-4_1", type = ModelStats.class), @XmlElementRef(name = "Output", namespace = "http://www.dmg.org/PMML-4_1", type = Output.class), @XmlElementRef(name = "Node", namespace = "http://www.dmg.org/PMML-4_1", type = Node.class), @XmlElementRef(name = "LocalTransformations", namespace = "http://www.dmg.org/PMML-4_1", type = LocalTransformations.class), @XmlElementRef(name = "Targets", namespace = "http://www.dmg.org/PMML-4_1", type = Targets.class), @XmlElementRef(name = "MiningSchema", namespace = "http://www.dmg.org/PMML-4_1", type = MiningSchema.class), @XmlElementRef(name = "ModelVerification", namespace = "http://www.dmg.org/PMML-4_1", type = ModelVerification.class), @XmlElementRef(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", type = Extension.class) })
     protected List<Object> content;
     @XmlAttribute
     protected String algorithmName;
@@ -102,42 +91,37 @@ public class TreeModel {
     protected String splitCharacteristic;
 
     /**
-     * Gets the rest of the content model. 
+     * Gets the rest of the content model.
      * 
      * <p>
-     * You are getting this "catch-all" property because of the following reason: 
-     * The field name "Extension" is used by two different parts of a schema. See: 
-     * line 1636 of file:/home/david/workspace/weka/pmml-4-1.xsd
-     * line 1627 of file:/home/david/workspace/weka/pmml-4-1.xsd
+     * You are getting this "catch-all" property because of the following reason:
+     * The field name "Extension" is used by two different parts of a schema. See:
+     * line 1636 of file:/home/david/workspace/weka/pmml-4-1.xsd line 1627 of
+     * file:/home/david/workspace/weka/pmml-4-1.xsd
      * <p>
-     * To get rid of this property, apply a property customization to one 
-     * of both of the following declarations to change their names: 
-     * Gets the value of the content property.
+     * To get rid of this property, apply a property customization to one of both of
+     * the following declarations to change their names: Gets the value of the
+     * content property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the content property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the content property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getContent().add(newItem);
+     * getContent().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ModelExplanation }
-     * {@link ModelStats }
-     * {@link Output }
-     * {@link Node }
-     * {@link LocalTransformations }
-     * {@link Targets }
-     * {@link MiningSchema }
-     * {@link ModelVerification }
-     * {@link Extension }
+     * {@link ModelExplanation } {@link ModelStats } {@link Output } {@link Node }
+     * {@link LocalTransformations } {@link Targets } {@link MiningSchema }
+     * {@link ModelVerification } {@link Extension }
      * 
      * 
      */
@@ -151,10 +135,8 @@ public class TreeModel {
     /**
      * Gets the value of the algorithmName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlgorithmName() {
         return algorithmName;
@@ -163,10 +145,8 @@ public class TreeModel {
     /**
      * Sets the value of the algorithmName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlgorithmName(String value) {
         this.algorithmName = value;
@@ -175,10 +155,8 @@ public class TreeModel {
     /**
      * Gets the value of the functionName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @return possible object is {@link MININGFUNCTION }
+     * 
      */
     public MININGFUNCTION getFunctionName() {
         return functionName;
@@ -187,10 +165,8 @@ public class TreeModel {
     /**
      * Sets the value of the functionName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MININGFUNCTION }
-     *     
+     * @param value allowed object is {@link MININGFUNCTION }
+     * 
      */
     public void setFunctionName(MININGFUNCTION value) {
         this.functionName = value;
@@ -199,10 +175,8 @@ public class TreeModel {
     /**
      * Gets the value of the isScorable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsScorable() {
         if (isScorable == null) {
@@ -215,10 +189,8 @@ public class TreeModel {
     /**
      * Sets the value of the isScorable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsScorable(Boolean value) {
         this.isScorable = value;
@@ -227,10 +199,8 @@ public class TreeModel {
     /**
      * Gets the value of the missingValuePenalty property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getMissingValuePenalty() {
         if (missingValuePenalty == null) {
@@ -243,10 +213,8 @@ public class TreeModel {
     /**
      * Sets the value of the missingValuePenalty property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setMissingValuePenalty(BigDecimal value) {
         this.missingValuePenalty = value;
@@ -255,10 +223,8 @@ public class TreeModel {
     /**
      * Gets the value of the missingValueStrategy property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MISSINGVALUESTRATEGY }
-     *     
+     * @return possible object is {@link MISSINGVALUESTRATEGY }
+     * 
      */
     public MISSINGVALUESTRATEGY getMissingValueStrategy() {
         if (missingValueStrategy == null) {
@@ -271,10 +237,8 @@ public class TreeModel {
     /**
      * Sets the value of the missingValueStrategy property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MISSINGVALUESTRATEGY }
-     *     
+     * @param value allowed object is {@link MISSINGVALUESTRATEGY }
+     * 
      */
     public void setMissingValueStrategy(MISSINGVALUESTRATEGY value) {
         this.missingValueStrategy = value;
@@ -283,10 +247,8 @@ public class TreeModel {
     /**
      * Gets the value of the modelName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getModelName() {
         return modelName;
@@ -295,10 +257,8 @@ public class TreeModel {
     /**
      * Sets the value of the modelName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setModelName(String value) {
         this.modelName = value;
@@ -307,10 +267,8 @@ public class TreeModel {
     /**
      * Gets the value of the noTrueChildStrategy property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NOTRUECHILDSTRATEGY }
-     *     
+     * @return possible object is {@link NOTRUECHILDSTRATEGY }
+     * 
      */
     public NOTRUECHILDSTRATEGY getNoTrueChildStrategy() {
         if (noTrueChildStrategy == null) {
@@ -323,10 +281,8 @@ public class TreeModel {
     /**
      * Sets the value of the noTrueChildStrategy property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NOTRUECHILDSTRATEGY }
-     *     
+     * @param value allowed object is {@link NOTRUECHILDSTRATEGY }
+     * 
      */
     public void setNoTrueChildStrategy(NOTRUECHILDSTRATEGY value) {
         this.noTrueChildStrategy = value;
@@ -335,10 +291,8 @@ public class TreeModel {
     /**
      * Gets the value of the splitCharacteristic property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getSplitCharacteristic() {
         if (splitCharacteristic == null) {
@@ -351,10 +305,8 @@ public class TreeModel {
     /**
      * Sets the value of the splitCharacteristic property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setSplitCharacteristic(String value) {
         this.splitCharacteristic = value;

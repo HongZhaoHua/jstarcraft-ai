@@ -31,10 +31,10 @@ import java.io.Serializable;
  */
 public class WeightMass implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 6794839107050779425L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 6794839107050779425L;
 
-  public double m_weight;
+    public double m_weight;
 }

@@ -25,125 +25,124 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests C45Loader/C45Saver. Run from the command line with:<p/>
+ * Tests C45Loader/C45Saver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.C45Test
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class C45Test 
-  extends AbstractFileConverterTest {
+public class C45Test extends AbstractFileConverterTest {
 
-  /** the name of the data file */
-  protected String m_ExportFilenameData;
-  
-  /**
-   * Constructs the <code>C45Test</code>.
-   *
-   * @param name the name of the test class
-   */
-  public C45Test(String name) { 
-    super(name);  
-  }
+    /** the name of the data file */
+    protected String m_ExportFilenameData;
 
-  /**
-   * returns the loader used in the tests
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new C45Loader();
-  }
+    /**
+     * Constructs the <code>C45Test</code>.
+     *
+     * @param name the name of the test class
+     */
+    public C45Test(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the saver used in the tests
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new C45Saver();
-  }
-  
-  /**
-   * returns the filename for the data file.
-   * 
-   * @return the filename
-   */
-  protected String getExportFilenameData() {
-    return m_ExportFilename.replaceAll("\\.names", ".data");
-  }
-  
-  /**
-   * returns the command line options, either for the loader or the saver
-   * 
-   * @param loader	if true the options for the loader will be returned,
-   * 			otherwise the ones for the saver
-   * @return		the command line options
-   */
-  protected String[] getCommandlineOptions(boolean loader) {
-    if (loader)
-      return super.getCommandlineOptions(loader);
-    else
-      return new String[]{"-i", m_SourceFilename, "-o", m_ExportFilename, "-c", "last"};
-  }
-  
-  /**
-   * Called by JUnit before each test method.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    File 	file;
+    /**
+     * returns the loader used in the tests
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new C45Loader();
+    }
 
-    super.setUp();
-    
-    m_ExportFilenameData = getExportFilenameData();
+    /**
+     * returns the saver used in the tests
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new C45Saver();
+    }
 
-    // delete temp. files
-    file = new File(m_ExportFilenameData);
-    if (file.exists())
-      file.delete();
-  }
+    /**
+     * returns the filename for the data file.
+     * 
+     * @return the filename
+     */
+    protected String getExportFilenameData() {
+        return m_ExportFilename.replaceAll("\\.names", ".data");
+    }
 
-  /** 
-   * Called by JUnit after each test method
-   */
-  protected void tearDown() throws Exception {
-    File 	file;
+    /**
+     * returns the command line options, either for the loader or the saver
+     * 
+     * @param loader if true the options for the loader will be returned, otherwise
+     *               the ones for the saver
+     * @return the command line options
+     */
+    protected String[] getCommandlineOptions(boolean loader) {
+        if (loader)
+            return super.getCommandlineOptions(loader);
+        else
+            return new String[] { "-i", m_SourceFilename, "-o", m_ExportFilename, "-c", "last" };
+    }
 
-    // delete temp. files
-    file = new File(m_ExportFilenameData);
-    if (file.exists())
-      file.delete();
-    
-    m_ExportFilenameData = null;
-    
-    super.tearDown();
-  }
-  
-  /**
-   * ignored, since not supported!
-   */
-  public void testLoaderWithStream() {
-    System.out.println("testLoaderWithStream is ignored!");
-  }
+    /**
+     * Called by JUnit before each test method.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        File file;
 
-  /**
-   * returns a test suite
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(C45Test.class);
-  }
+        super.setUp();
 
-  /**
-   * for running the test from commandline
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        m_ExportFilenameData = getExportFilenameData();
+
+        // delete temp. files
+        file = new File(m_ExportFilenameData);
+        if (file.exists())
+            file.delete();
+    }
+
+    /**
+     * Called by JUnit after each test method
+     */
+    protected void tearDown() throws Exception {
+        File file;
+
+        // delete temp. files
+        file = new File(m_ExportFilenameData);
+        if (file.exists())
+            file.delete();
+
+        m_ExportFilenameData = null;
+
+        super.tearDown();
+    }
+
+    /**
+     * ignored, since not supported!
+     */
+    public void testLoaderWithStream() {
+        System.out.println("testLoaderWithStream is ignored!");
+    }
+
+    /**
+     * returns a test suite
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(C45Test.class);
+    }
+
+    /**
+     * for running the test from commandline
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

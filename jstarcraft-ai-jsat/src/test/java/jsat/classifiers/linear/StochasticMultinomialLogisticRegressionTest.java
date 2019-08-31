@@ -20,55 +20,45 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class StochasticMultinomialLogisticRegressionTest
-{
-    
-    public StochasticMultinomialLogisticRegressionTest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
+public class StochasticMultinomialLogisticRegressionTest {
+
+    public StochasticMultinomialLogisticRegressionTest() {
     }
 
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
 
     /**
      * Test of train method, of class StochasticMultinomialLogisticRegression.
      */
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        
+
         ClassificationDataSet train = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
-        
-        
-        for(StochasticMultinomialLogisticRegression.Prior prior : StochasticMultinomialLogisticRegression.Prior.values())
-        {
-        
+
+        for (StochasticMultinomialLogisticRegression.Prior prior : StochasticMultinomialLogisticRegression.Prior.values()) {
+
             StochasticMultinomialLogisticRegression smlgr = new StochasticMultinomialLogisticRegression();
             smlgr.setPrior(prior);
             smlgr.train(train);
 
             ClassificationDataSet test = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
 
-            for(DataPointPair<Integer> dpp : test.getAsDPPList())
+            for (DataPointPair<Integer> dpp : test.getAsDPPList())
                 assertEquals(dpp.getPair().longValue(), smlgr.classify(dpp.getDataPoint()).mostLikely());
         }
     }
@@ -77,31 +67,24 @@ public class StochasticMultinomialLogisticRegressionTest
      * Test of clone method, of class StochasticMultinomialLogisticRegression.
      */
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
         StochasticMultinomialLogisticRegression smlgr = new StochasticMultinomialLogisticRegression();
-        
+
         Classifier cloned = smlgr.clone();
-        
+
         ClassificationDataSet train = FixedProblems.get2ClassLinear(400, RandomUtil.getRandom());
         cloned.train(train);
-        
-        
-        
-        try
-        {
+
+        try {
             smlgr.classify(train.getDataPoint(0));
             fail("Exception should have occured");
+        } catch (UntrainedModelException ex) {
+
         }
-        catch(UntrainedModelException ex)
-        {
-            
-        }
-        
-        
+
         train.classSampleCount(train.getDataPointCategory(0));
-        
+
     }
 
 }

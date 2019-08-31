@@ -27,44 +27,36 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class BBRTest
-{
-   
-    public BBRTest()
-    {
+public class BBRTest {
+
+    public BBRTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of train method, of class BBR.
      */
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
         ClassificationDataSet train = FixedProblems.get2ClassLinear(200, RandomUtil.getRandom());
-        
-        for (BBR.Prior prior : BBR.Prior.values())
-        {
+
+        for (BBR.Prior prior : BBR.Prior.values()) {
             BBR lr = new BBR(0.01, 1000, prior);
             lr.train(train, true);
 
@@ -79,13 +71,11 @@ public class BBRTest
      * Test of train method, of class BBR.
      */
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
         ClassificationDataSet train = FixedProblems.get2ClassLinear(200, RandomUtil.getRandom());
 
-        for (BBR.Prior prior : BBR.Prior.values())
-        {
+        for (BBR.Prior prior : BBR.Prior.values()) {
             BBR lr = new BBR(0.01, 1000, prior);
             lr.train(train);
 
@@ -95,16 +85,13 @@ public class BBRTest
                 assertEquals(dpp.getPair().longValue(), lr.classify(dpp.getDataPoint()).mostLikely());
         }
     }
-    
+
     @Test
-    public void test_reported_bug_params()
-    {
+    public void test_reported_bug_params() {
         Classifier classifier = new jsat.classifiers.linear.BBR(7);
-        if (classifier instanceof Parameterized)
-        {
+        if (classifier instanceof Parameterized) {
             List<Parameter> list = ((Parameterized) classifier).getParameters();
-            for (final Parameter p : list)
-            {
+            for (final Parameter p : list) {
                 assertNotNull(p.getName());
                 assertNotNull(p.getValueString());
             }

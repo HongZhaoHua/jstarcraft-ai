@@ -31,52 +31,43 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class GapStatisticTest
-{
+public class GapStatisticTest {
     static private SimpleDataSet easyData10;
-    static private int K = 2*2;
-    
-    public GapStatisticTest()
-    {
+    static private int K = 2 * 2;
+
+    public GapStatisticTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
         GridDataGenerator gdg = new GridDataGenerator(new NormalClampedSample(0.0, 0.05), RandomUtil.getRandom(1), 2, 2);
         easyData10 = gdg.generateData(200);
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testCluster_4args_1_findK()
-    {
+    public void testCluster_4args_1_findK() {
         System.out.println("cluster findK");
         boolean good = false;
         int count = 0;
-        do
-        {
+        do {
             GridDataGenerator gdg = new GridDataGenerator(new NormalClampedSample(0.0, 0.05), RandomUtil.getRandom(), 2, 2);
             easyData10 = gdg.generateData(200);
-            
+
             good = true;
-            for(boolean parallel: new boolean[]{true, false})
-                for(boolean PCSample: new boolean[]{true, false})
-                {
+            for (boolean parallel : new boolean[] { true, false })
+                for (boolean PCSample : new boolean[] { true, false }) {
                     GapStatistic gap = new GapStatistic(new HamerlyKMeans(new EuclideanDistance(), SeedSelectionMethods.SeedSelection.FARTHEST_FIRST));
                     gap.setPCSampling(PCSample);
 
@@ -84,9 +75,8 @@ public class GapStatisticTest
                     assertEquals(K, clusters.size());
                     good = good & checkClusteringByCat(clusters);
                 }
-        }
-        while(!good && count++ < 3);
+        } while (!good && count++ < 3);
         assertTrue(good);
     }
-    
+
 }

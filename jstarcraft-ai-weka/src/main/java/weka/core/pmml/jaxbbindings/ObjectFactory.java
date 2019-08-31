@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.List;
@@ -14,19 +13,15 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
 import javax.xml.namespace.QName;
 
-
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the weka.core.pmml.jaxbbindings package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
- * provided in this class.
+ * This object contains factory methods for each Java content interface and Java
+ * element interface generated in the weka.core.pmml.jaxbbindings package.
+ * <p>
+ * An ObjectFactory allows you to programatically construct new instances of the
+ * Java representation for XML content. The Java representation of XML content
+ * can consist of schema derived interfaces and classes representing the binding
+ * of schema type definitions, element declarations and model groups. Factory
+ * methods for each of these are provided in this class.
  * 
  */
 @XmlRegistry
@@ -43,7 +38,8 @@ public class ObjectFactory {
     private final static QName _Array_QNAME = new QName("http://www.dmg.org/PMML-4_1", "Array");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: weka.core.pmml.jaxbbindings
+     * Create a new ObjectFactory that can be used to create new instances of schema
+     * derived classes for package: weka.core.pmml.jaxbbindings
      * 
      */
     public ObjectFactory() {
@@ -1843,25 +1839,28 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link List }{@code <}{@link Double }{@code >}{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link List
+     * }{@code <}{@link Double }{@code >}{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "REAL-Entries")
     public JAXBElement<List<Double>> createREALEntries(List<Double> value) {
-        return new JAXBElement<List<Double>>(_REALEntries_QNAME, ((Class) List.class), null, ((List<Double> ) value));
+        return new JAXBElement<List<Double>>(_REALEntries_QNAME, ((Class) List.class), null, ((List<Double>) value));
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link List }{@code <}{@link Integer }{@code >}{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link List
+     * }{@code <}{@link Integer }{@code >}{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "INT-Entries")
     public JAXBElement<List<Integer>> createINTEntries(List<Integer> value) {
-        return new JAXBElement<List<Integer>>(_INTEntries_QNAME, ((Class) List.class), null, ((List<Integer> ) value));
+        return new JAXBElement<List<Integer>>(_INTEntries_QNAME, ((Class) List.class), null, ((List<Integer>) value));
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link COUNTTABLETYPE }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link COUNTTABLETYPE
+     * }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "CountTable")
@@ -1879,12 +1878,13 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link List }{@code <}{@link Integer }{@code >}{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link List
+     * }{@code <}{@link Integer }{@code >}{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "Indices")
     public JAXBElement<List<Integer>> createIndices(List<Integer> value) {
-        return new JAXBElement<List<Integer>>(_Indices_QNAME, ((Class) List.class), null, ((List<Integer> ) value));
+        return new JAXBElement<List<Integer>>(_Indices_QNAME, ((Class) List.class), null, ((List<Integer>) value));
     }
 
     /**
@@ -1897,7 +1897,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link COUNTTABLETYPE }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link COUNTTABLETYPE
+     * }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "NormalizedCountTable")
@@ -1906,7 +1907,8 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayType }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link ArrayType
+     * }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.dmg.org/PMML-4_1", name = "Array")

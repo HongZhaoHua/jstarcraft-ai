@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SMO. Run from the command line with:<p>
+ * Tests SMO. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.SMOTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class SMOTest extends AbstractClassifierTest {
 
-  public SMOTest(String name) { super(name);  }
+    public SMOTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default SMO */
-  public Classifier getClassifier() {
-    return new SMO();
-  }
+    /** Creates a default SMO */
+    public Classifier getClassifier() {
+        return new SMO();
+    }
 
-  public static Test suite() {
-    return new TestSuite(SMOTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SMOTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SGDText. Run from the command line with:<p>
+ * Tests SGDText. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.SGDTextTest
  *
  * @author Mark Hall
@@ -34,21 +35,23 @@ import junit.framework.TestSuite;
  */
 public class SGDTextTest extends AbstractClassifierTest {
 
-  public SGDTextTest(String name) { super(name);  }
+    public SGDTextTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default SGDText */
-  public Classifier getClassifier() {
-    SGDText p = new SGDText();
-    p.setEpochs(1);
-    p.setLearningRate(0.001);
-    return p;
-  }
+    /** Creates a default SGDText */
+    public Classifier getClassifier() {
+        SGDText p = new SGDText();
+        p.setEpochs(1);
+        p.setLearningRate(0.001);
+        return p;
+    }
 
-  public static Test suite() {
-    return new TestSuite(SGDTextTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SGDTextTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

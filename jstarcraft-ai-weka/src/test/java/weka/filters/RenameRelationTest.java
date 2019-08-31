@@ -24,70 +24,72 @@ import junit.framework.TestSuite;
 import weka.core.Instances;
 
 /**
- * Tests RenameRelation. Run from the command line with:<p>
- * java weka.filters.RenameRelationTest</p>
+ * Tests RenameRelation. Run from the command line with:
+ * <p>
+ * java weka.filters.RenameRelationTest
+ * </p>
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
 public class RenameRelationTest extends AbstractFilterTest {
 
-  public RenameRelationTest(String name) {
-    super(name);
-  }
+    public RenameRelationTest(String name) {
+        super(name);
+    }
 
-  @Override
-  public Filter getFilter() {
-    return new RenameRelation();
-  }
+    @Override
+    public Filter getFilter() {
+        return new RenameRelation();
+    }
 
-  public void testTypical() {
-    String originalRelationName = m_Instances.relationName();
-    ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
+    public void testTypical() {
+        String originalRelationName = m_Instances.relationName();
+        ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
 
-    assertEquals(m_Instances.relationName(), originalRelationName);
-    assertEquals(result.relationName(), "GoofyGoober");
-  }
+        assertEquals(m_Instances.relationName(), originalRelationName);
+        assertEquals(result.relationName(), "GoofyGoober");
+    }
 
-  public void testPrepend() {
-    String originalRelationName = m_Instances.relationName();
-    m_Filter = getFilter();
-    ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
-    ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.PREPEND);
-    Instances result = useFilter();
+    public void testPrepend() {
+        String originalRelationName = m_Instances.relationName();
+        m_Filter = getFilter();
+        ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
+        ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.PREPEND);
+        Instances result = useFilter();
 
-    assertEquals(result.relationName(), "GoofyGoober" + originalRelationName);
-  }
+        assertEquals(result.relationName(), "GoofyGoober" + originalRelationName);
+    }
 
-  public void testAppend() {
-    String originalRelationName = m_Instances.relationName();
-    m_Filter = getFilter();
-    ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
-    ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.APPEND);
-    Instances result = useFilter();
+    public void testAppend() {
+        String originalRelationName = m_Instances.relationName();
+        m_Filter = getFilter();
+        ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
+        ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.APPEND);
+        Instances result = useFilter();
 
-    assertEquals(result.relationName(), originalRelationName + "GoofyGoober");
-  }
+        assertEquals(result.relationName(), originalRelationName + "GoofyGoober");
+    }
 
-  public void testRegex() {
-    m_Filter = getFilter();
-    ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
-    ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.REGEX);
-    ((RenameRelation) m_Filter).setRegexMatch("Test");
-    Instances result = useFilter();
+    public void testRegex() {
+        m_Filter = getFilter();
+        ((RenameRelation) m_Filter).setModificationText("GoofyGoober");
+        ((RenameRelation) m_Filter).setModType(RenameRelation.ModType.REGEX);
+        ((RenameRelation) m_Filter).setRegexMatch("Test");
+        Instances result = useFilter();
 
-    assertEquals(result.relationName(), "FilterGoofyGoober");
-  }
+        assertEquals(result.relationName(), "FilterGoofyGoober");
+    }
 
-  public static Test suite() {
-    return new TestSuite(RenameRelationTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RenameRelationTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

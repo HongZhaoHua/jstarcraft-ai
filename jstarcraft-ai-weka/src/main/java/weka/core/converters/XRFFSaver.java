@@ -74,351 +74,343 @@ import weka.core.xml.XMLInstances;
  */
 public class XRFFSaver extends AbstractFileSaver implements BatchConverter, WeightedInstancesHandler {
 
-  /** for serialization */
-  private static final long serialVersionUID = -7226404765213522043L;
+    /** for serialization */
+    private static final long serialVersionUID = -7226404765213522043L;
 
-  /** the class index */
-  protected SingleIndex m_ClassIndex = new SingleIndex();
+    /** the class index */
+    protected SingleIndex m_ClassIndex = new SingleIndex();
 
-  /** the generated XML document */
-  protected XMLInstances m_XMLInstances;
+    /** the generated XML document */
+    protected XMLInstances m_XMLInstances;
 
-  /** whether to compress the output */
-  protected boolean m_CompressOutput = false;
+    /** whether to compress the output */
+    protected boolean m_CompressOutput = false;
 
-  /**
-   * Constructor
-   */
-  public XRFFSaver() {
-    resetOptions();
-  }
-
-  /**
-   * Returns a string describing this Saver
-   * 
-   * @return a description of the Saver suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "Writes to a destination that is in the XML version of the ARFF format. "
-      + "The data can be compressed with gzip, in order to save space.";
-  }
-
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> result = new Vector<Option>();
-
-    result.addElement(new Option(
-      "\tThe class index (first and last are valid as well).\n"
-        + "\t(default: last)", "C", 1, "-C <class index>"));
-
-    result.addElement(new Option("\tCompresses the data (uses '"
-      + XRFFLoader.FILE_EXTENSION_COMPRESSED + "' as extension instead of '"
-      + XRFFLoader.FILE_EXTENSION + "')\n" + "\t(default: off)", "compress", 0,
-      "-compress"));
-
-    result.addAll(Collections.list(super.listOptions()));
-
-    return result.elements();
-  }
-
-  /**
-   * returns the options of the current setup
-   * 
-   * @return the current options
-   */
-  @Override
-  public String[] getOptions() {
-
-    Vector<String> result = new Vector<String>();
-
-    if (getClassIndex().length() != 0) {
-      result.add("-C");
-      result.add(getClassIndex());
+    /**
+     * Constructor
+     */
+    public XRFFSaver() {
+        resetOptions();
     }
 
-    if (getCompressOutput()) {
-      result.add("-compress");
+    /**
+     * Returns a string describing this Saver
+     * 
+     * @return a description of the Saver suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
+        return "Writes to a destination that is in the XML version of the ARFF format. " + "The data can be compressed with gzip, in order to save space.";
     }
 
-    Collections.addAll(result, super.getOptions());
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> result = new Vector<Option>();
 
-    return result.toArray(new String[result.size()]);
-  }
+        result.addElement(new Option("\tThe class index (first and last are valid as well).\n" + "\t(default: last)", "C", 1, "-C <class index>"));
 
-  /**
-   * Parses the options for this object.
-   * <p/>
-   * 
-   * <!-- options-start --> Valid options are:
-   * <p/>
-   * 
-   * <pre>
-   * -i &lt;the input file&gt;
-   *  The input file
-   * </pre>
-   * 
-   * <pre>
-   * -o &lt;the output file&gt;
-   *  The output file
-   * </pre>
-   * 
-   * <pre>
-   * -C &lt;class index&gt;
-   *  The class index (first and last are valid as well).
-   *  (default: last)
-   * </pre>
-   * 
-   * <pre>
-   * -compress
-   *  Compresses the data (uses '.xrff.gz' as extension instead of '.xrff')
-   *  (default: off)
-   * </pre>
-   * 
-   * <!-- options-end -->
-   * 
-   * @param options the options to use
-   * @throws Exception if setting of options fails
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    String tmpStr;
+        result.addElement(new Option("\tCompresses the data (uses '" + XRFFLoader.FILE_EXTENSION_COMPRESSED + "' as extension instead of '" + XRFFLoader.FILE_EXTENSION + "')\n" + "\t(default: off)", "compress", 0, "-compress"));
 
-    tmpStr = Utils.getOption('C', options);
-    if (tmpStr.length() != 0) {
-      setClassIndex(tmpStr);
-    } else {
-      setClassIndex("last");
+        result.addAll(Collections.list(super.listOptions()));
+
+        return result.elements();
     }
 
-    setCompressOutput(Utils.getFlag("compress", options));
+    /**
+     * returns the options of the current setup
+     * 
+     * @return the current options
+     */
+    @Override
+    public String[] getOptions() {
 
-    super.setOptions(options);
-  }
+        Vector<String> result = new Vector<String>();
 
-  /**
-   * Returns a description of the file type.
-   * 
-   * @return a short file description
-   */
-  @Override
-  public String getFileDescription() {
-    return "XRFF data files";
-  }
+        if (getClassIndex().length() != 0) {
+            result.add("-C");
+            result.add(getClassIndex());
+        }
 
-  /**
-   * Gets all the file extensions used for this type of file
-   * 
-   * @return the file extensions
-   */
-  @Override
-  public String[] getFileExtensions() {
-    return new String[] { XRFFLoader.FILE_EXTENSION,
-      XRFFLoader.FILE_EXTENSION_COMPRESSED };
-  }
+        if (getCompressOutput()) {
+            result.add("-compress");
+        }
 
-  /**
-   * Sets the destination file.
-   * 
-   * @param outputFile the destination file.
-   * @throws IOException throws an IOException if file cannot be set
-   */
-  @Override
-  public void setFile(File outputFile) throws IOException {
-    if (outputFile.getAbsolutePath().endsWith(
-      XRFFLoader.FILE_EXTENSION_COMPRESSED)) {
-      setCompressOutput(true);
+        Collections.addAll(result, super.getOptions());
+
+        return result.toArray(new String[result.size()]);
     }
 
-    super.setFile(outputFile);
-  }
+    /**
+     * Parses the options for this object.
+     * <p/>
+     * 
+     * <!-- options-start --> Valid options are:
+     * <p/>
+     * 
+     * <pre>
+     * -i &lt;the input file&gt;
+     *  The input file
+     * </pre>
+     * 
+     * <pre>
+     * -o &lt;the output file&gt;
+     *  The output file
+     * </pre>
+     * 
+     * <pre>
+     * -C &lt;class index&gt;
+     *  The class index (first and last are valid as well).
+     *  (default: last)
+     * </pre>
+     * 
+     * <pre>
+     * -compress
+     *  Compresses the data (uses '.xrff.gz' as extension instead of '.xrff')
+     *  (default: off)
+     * </pre>
+     * 
+     * <!-- options-end -->
+     * 
+     * @param options the options to use
+     * @throws Exception if setting of options fails
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        String tmpStr;
 
-  /**
-   * Resets the Saver
-   */
-  @Override
-  public void resetOptions() {
-    super.resetOptions();
+        tmpStr = Utils.getOption('C', options);
+        if (tmpStr.length() != 0) {
+            setClassIndex(tmpStr);
+        } else {
+            setClassIndex("last");
+        }
 
-    if (getCompressOutput()) {
-      setFileExtension(XRFFLoader.FILE_EXTENSION_COMPRESSED);
-    } else {
-      setFileExtension(XRFFLoader.FILE_EXTENSION);
+        setCompressOutput(Utils.getFlag("compress", options));
+
+        super.setOptions(options);
     }
 
-    try {
-      m_XMLInstances = new XMLInstances();
-    } catch (Exception e) {
-      m_XMLInstances = null;
-    }
-  }
-
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String classIndexTipText() {
-    return "Sets the class index (\"first\" and \"last\" are valid values)";
-  }
-
-  /**
-   * Get the index of the class attribute.
-   * 
-   * @return the index of the class attribute
-   */
-  public String getClassIndex() {
-    return m_ClassIndex.getSingleIndex();
-  }
-
-  /**
-   * Sets index of the class attribute.
-   * 
-   * @param value the index of the class attribute
-   */
-  public void setClassIndex(String value) {
-    m_ClassIndex.setSingleIndex(value);
-  }
-
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String compressOutputTipText() {
-    return "Optional compression of the output data";
-  }
-
-  /**
-   * Gets whether the output data is compressed.
-   * 
-   * @return true if the output data is compressed
-   */
-  public boolean getCompressOutput() {
-    return m_CompressOutput;
-  }
-
-  /**
-   * Sets whether to compress the output.
-   * 
-   * @param value if truee the output will be compressed
-   */
-  public void setCompressOutput(boolean value) {
-    m_CompressOutput = value;
-  }
-
-  /**
-   * Returns the Capabilities of this saver.
-   * 
-   * @return the capabilities of this object
-   * @see Capabilities
-   */
-  @Override
-  public Capabilities getCapabilities() {
-    Capabilities result = super.getCapabilities();
-
-    // attributes
-    result.enableAllAttributes();
-    result.enable(Capability.MISSING_VALUES);
-
-    // class
-    result.enableAllClasses();
-    result.enable(Capability.MISSING_CLASS_VALUES);
-    result.enable(Capability.NO_CLASS);
-
-    return result;
-  }
-
-  /**
-   * Sets instances that should be stored.
-   * 
-   * @param instances the instances
-   */
-  @Override
-  public void setInstances(Instances instances) {
-    if (m_ClassIndex.getSingleIndex().length() != 0) {
-      m_ClassIndex.setUpper(instances.numAttributes() - 1);
-      instances.setClassIndex(m_ClassIndex.getIndex());
+    /**
+     * Returns a description of the file type.
+     * 
+     * @return a short file description
+     */
+    @Override
+    public String getFileDescription() {
+        return "XRFF data files";
     }
 
-    super.setInstances(instances);
-  }
-
-  /**
-   * Sets the destination output stream.
-   * 
-   * @param output the output stream.
-   * @throws IOException throws an IOException if destination cannot be set
-   */
-  @Override
-  public void setDestination(OutputStream output) throws IOException {
-    if (getCompressOutput()) {
-      super.setDestination(new GZIPOutputStream(output));
-    } else {
-      super.setDestination(output);
-    }
-  }
-
-  /**
-   * Writes a Batch of instances
-   * 
-   * @throws IOException throws IOException if saving in batch mode is not
-   *           possible
-   */
-  @Override
-  public void writeBatch() throws IOException {
-    if (getInstances() == null) {
-      throw new IOException("No instances to save");
+    /**
+     * Gets all the file extensions used for this type of file
+     * 
+     * @return the file extensions
+     */
+    @Override
+    public String[] getFileExtensions() {
+        return new String[] { XRFFLoader.FILE_EXTENSION, XRFFLoader.FILE_EXTENSION_COMPRESSED };
     }
 
-    if (getRetrieval() == INCREMENTAL) {
-      throw new IOException("Batch and incremental saving cannot be mixed.");
+    /**
+     * Sets the destination file.
+     * 
+     * @param outputFile the destination file.
+     * @throws IOException throws an IOException if file cannot be set
+     */
+    @Override
+    public void setFile(File outputFile) throws IOException {
+        if (outputFile.getAbsolutePath().endsWith(XRFFLoader.FILE_EXTENSION_COMPRESSED)) {
+            setCompressOutput(true);
+        }
+
+        super.setFile(outputFile);
     }
 
-    setRetrieval(BATCH);
-    setWriteMode(WRITE);
+    /**
+     * Resets the Saver
+     */
+    @Override
+    public void resetOptions() {
+        super.resetOptions();
 
-    // generate XML
-    m_XMLInstances.setInstances(getInstances());
+        if (getCompressOutput()) {
+            setFileExtension(XRFFLoader.FILE_EXTENSION_COMPRESSED);
+        } else {
+            setFileExtension(XRFFLoader.FILE_EXTENSION);
+        }
 
-    if ((retrieveFile() == null) && (getWriter() == null)) {
-      System.out.println(m_XMLInstances.toString());
-      setWriteMode(WAIT);
-    } else {
-      PrintWriter outW = new PrintWriter(getWriter());
-      outW.println(m_XMLInstances.toString());
-      outW.flush();
-      outW.close();
-      setWriteMode(WAIT);
-      outW = null;
-      resetWriter();
-      setWriteMode(CANCEL);
+        try {
+            m_XMLInstances = new XMLInstances();
+        } catch (Exception e) {
+            m_XMLInstances = null;
+        }
     }
-  }
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String classIndexTipText() {
+        return "Sets the class index (\"first\" and \"last\" are valid values)";
+    }
 
-  /**
-   * Main method.
-   * 
-   * @param args should contain the options of a Saver.
-   */
-  public static void main(String[] args) {
-    runFileSaver(new XRFFSaver(), args);
-  }
+    /**
+     * Get the index of the class attribute.
+     * 
+     * @return the index of the class attribute
+     */
+    public String getClassIndex() {
+        return m_ClassIndex.getSingleIndex();
+    }
+
+    /**
+     * Sets index of the class attribute.
+     * 
+     * @param value the index of the class attribute
+     */
+    public void setClassIndex(String value) {
+        m_ClassIndex.setSingleIndex(value);
+    }
+
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String compressOutputTipText() {
+        return "Optional compression of the output data";
+    }
+
+    /**
+     * Gets whether the output data is compressed.
+     * 
+     * @return true if the output data is compressed
+     */
+    public boolean getCompressOutput() {
+        return m_CompressOutput;
+    }
+
+    /**
+     * Sets whether to compress the output.
+     * 
+     * @param value if truee the output will be compressed
+     */
+    public void setCompressOutput(boolean value) {
+        m_CompressOutput = value;
+    }
+
+    /**
+     * Returns the Capabilities of this saver.
+     * 
+     * @return the capabilities of this object
+     * @see Capabilities
+     */
+    @Override
+    public Capabilities getCapabilities() {
+        Capabilities result = super.getCapabilities();
+
+        // attributes
+        result.enableAllAttributes();
+        result.enable(Capability.MISSING_VALUES);
+
+        // class
+        result.enableAllClasses();
+        result.enable(Capability.MISSING_CLASS_VALUES);
+        result.enable(Capability.NO_CLASS);
+
+        return result;
+    }
+
+    /**
+     * Sets instances that should be stored.
+     * 
+     * @param instances the instances
+     */
+    @Override
+    public void setInstances(Instances instances) {
+        if (m_ClassIndex.getSingleIndex().length() != 0) {
+            m_ClassIndex.setUpper(instances.numAttributes() - 1);
+            instances.setClassIndex(m_ClassIndex.getIndex());
+        }
+
+        super.setInstances(instances);
+    }
+
+    /**
+     * Sets the destination output stream.
+     * 
+     * @param output the output stream.
+     * @throws IOException throws an IOException if destination cannot be set
+     */
+    @Override
+    public void setDestination(OutputStream output) throws IOException {
+        if (getCompressOutput()) {
+            super.setDestination(new GZIPOutputStream(output));
+        } else {
+            super.setDestination(output);
+        }
+    }
+
+    /**
+     * Writes a Batch of instances
+     * 
+     * @throws IOException throws IOException if saving in batch mode is not
+     *                     possible
+     */
+    @Override
+    public void writeBatch() throws IOException {
+        if (getInstances() == null) {
+            throw new IOException("No instances to save");
+        }
+
+        if (getRetrieval() == INCREMENTAL) {
+            throw new IOException("Batch and incremental saving cannot be mixed.");
+        }
+
+        setRetrieval(BATCH);
+        setWriteMode(WRITE);
+
+        // generate XML
+        m_XMLInstances.setInstances(getInstances());
+
+        if ((retrieveFile() == null) && (getWriter() == null)) {
+            System.out.println(m_XMLInstances.toString());
+            setWriteMode(WAIT);
+        } else {
+            PrintWriter outW = new PrintWriter(getWriter());
+            outW.println(m_XMLInstances.toString());
+            outW.flush();
+            outW.close();
+            setWriteMode(WAIT);
+            outW = null;
+            resetWriter();
+            setWriteMode(CANCEL);
+        }
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Main method.
+     * 
+     * @param args should contain the options of a Saver.
+     */
+    public static void main(String[] args) {
+        runFileSaver(new XRFFSaver(), args);
+    }
 }

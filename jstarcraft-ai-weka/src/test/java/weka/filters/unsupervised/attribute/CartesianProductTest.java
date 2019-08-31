@@ -26,54 +26,52 @@ import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
 
 /**
- * Tests CartesianProduct. Run from the command line with: <p/>
+ * Tests CartesianProduct. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.CartesianProductTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision: 8034 $
  */
-public class CartesianProductTest
-  extends AbstractFilterTest {
+public class CartesianProductTest extends AbstractFilterTest {
 
-  public CartesianProductTest(String name) {
-    super(name);  
-  }
-
-  /** Creates a default NumericCleaner */
-  public Filter getFilter() {
-    return new NumericCleaner();
-  }
-
-  /**
-   * runs a simple test
-   */
-  public void testTypical() {
-    Instances icopy = new Instances(m_Instances);
-    Instances result = null;
-    try {
-      m_Filter.setInputFormat(icopy);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
-    }
-    try {
-      result = Filter.useFilter(icopy, m_Filter);
-      assertNotNull(result);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+    public CartesianProductTest(String name) {
+        super(name);
     }
 
-    assertEquals(icopy.numInstances(), result.numInstances());
-  }
+    /** Creates a default NumericCleaner */
+    public Filter getFilter() {
+        return new NumericCleaner();
+    }
 
-  public static Test suite() {
-    return new TestSuite(CartesianProductTest.class);
-  }
+    /**
+     * runs a simple test
+     */
+    public void testTypical() {
+        Instances icopy = new Instances(m_Instances);
+        Instances result = null;
+        try {
+            m_Filter.setInputFormat(icopy);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
+        }
+        try {
+            result = Filter.useFilter(icopy, m_Filter);
+            assertNotNull(result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+        }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        assertEquals(icopy.numInstances(), result.numInstances());
+    }
+
+    public static Test suite() {
+        return new TestSuite(CartesianProductTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

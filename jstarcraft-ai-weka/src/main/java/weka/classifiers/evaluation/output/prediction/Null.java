@@ -24,107 +24,114 @@ import weka.classifiers.Classifier;
 import weka.core.Instance;
 
 /**
- <!-- globalinfo-start -->
- * Suppresses all output.
+ * <!-- globalinfo-start --> Suppresses all output.
  * <p/>
- <!-- globalinfo-end -->
+ * <!-- globalinfo-end -->
  *
- <!-- options-start -->
- * Valid options are: <p/>
+ * <!-- options-start --> Valid options are:
+ * <p/>
  * 
- * <pre> -p &lt;range&gt;
+ * <pre>
+ *  -p &lt;range&gt;
  *  The range of attributes to print in addition to the classification.
- *  (default: none)</pre>
+ *  (default: none)
+ * </pre>
  * 
- * <pre> -distribution
+ * <pre>
+ *  -distribution
  *  Whether to turn on the output of the class distribution.
  *  Only for nominal class attributes.
- *  (default: off)</pre>
+ *  (default: off)
+ * </pre>
  * 
- * <pre> -decimals &lt;num&gt;
+ * <pre>
+ *  -decimals &lt;num&gt;
  *  The number of digits after the decimal point.
- *  (default: 3)</pre>
+ *  (default: 3)
+ * </pre>
  * 
- * <pre> -file &lt;path&gt;
+ * <pre>
+ *  -file &lt;path&gt;
  *  The file to store the output in, instead of outputting it on stdout.
  *  Gets ignored if the supplied path is a directory.
- *  (default: .)</pre>
+ *  (default: .)
+ * </pre>
  * 
- * <pre> -suppress
+ * <pre>
+ *  -suppress
  *  In case the data gets stored in a file, then this flag can be used
  *  to suppress the regular output.
- *  (default: not suppressed)</pre>
+ *  (default: not suppressed)
+ * </pre>
  * 
- <!-- options-end -->
+ * <!-- options-end -->
  *
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Null
-  extends AbstractOutput {
-  
-  /** for serialization. */
-  private static final long serialVersionUID = 4988413155999044966L;
+public class Null extends AbstractOutput {
 
-  /**
-   * Returns a string describing the output generator.
-   * 
-   * @return 		a description suitable for
-   * 			displaying in the GUI
-   */
-  public String globalInfo() {
-    return "Suppresses all output.";
-  }
-  
-  /**
-   * Returns a short display text, to be used in comboboxes.
-   * 
-   * @return 		a short display text
-   */
-  public String getDisplay() {
-    return "No output";
-  }
+    /** for serialization. */
+    private static final long serialVersionUID = 4988413155999044966L;
 
-  /**
-   * Returns always false.
-   * 
-   * @return		always false
-   */
-  public boolean generatesOutput() {
-    return false;
-  }
+    /**
+     * Returns a string describing the output generator.
+     * 
+     * @return a description suitable for displaying in the GUI
+     */
+    public String globalInfo() {
+        return "Suppresses all output.";
+    }
 
-  /**
-   * Does nothing.
-   */
-  protected void doPrintHeader() {
-  }
+    /**
+     * Returns a short display text, to be used in comboboxes.
+     * 
+     * @return a short display text
+     */
+    public String getDisplay() {
+        return "No output";
+    }
 
-  /**
-   * Does nothing.
-   * 
-   * @param classifier	the classifier to use
-   * @param inst	the instance to generate text from
-   * @param index	the index in the dataset
-   * @throws Exception	if something goes wrong
-   */
-  protected void doPrintClassification(Classifier classifier, Instance inst, int index) throws Exception {
-  }
-  
-  /**
-   * Does nothing.
-   * 
-   * @param dist        the distribution to use
-   * @param inst        the instance to generate text from
-   * @param index       the index in the dataset
-   * @throws Exception  if something goes wrong
-   */
-  protected void doPrintClassification(double[] dist, Instance inst, int index) throws Exception {    
-  }
-  
-  /**
-   * Does nothing.
-   */
-  protected void doPrintFooter() {
-  }
+    /**
+     * Returns always false.
+     * 
+     * @return always false
+     */
+    public boolean generatesOutput() {
+        return false;
+    }
+
+    /**
+     * Does nothing.
+     */
+    protected void doPrintHeader() {
+    }
+
+    /**
+     * Does nothing.
+     * 
+     * @param classifier the classifier to use
+     * @param inst       the instance to generate text from
+     * @param index      the index in the dataset
+     * @throws Exception if something goes wrong
+     */
+    protected void doPrintClassification(Classifier classifier, Instance inst, int index) throws Exception {
+    }
+
+    /**
+     * Does nothing.
+     * 
+     * @param dist  the distribution to use
+     * @param inst  the instance to generate text from
+     * @param index the index in the dataset
+     * @throws Exception if something goes wrong
+     */
+    protected void doPrintClassification(double[] dist, Instance inst, int index) throws Exception {
+    }
+
+    /**
+     * Does nothing.
+     */
+    protected void doPrintFooter() {
+    }
 }

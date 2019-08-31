@@ -41,120 +41,104 @@ import jsat.utils.random.RandomUtil;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class MDA implements TreeFeatureImportanceInference
-{
-    
+public class MDA implements TreeFeatureImportanceInference {
+
     private ClassificationScore cs_base = new Accuracy();
     private RegressionScore rs_base = new MeanSquaredError();
 
     @Override
-    public <Type extends DataSet> double[] getImportanceStats(TreeLearner model, DataSet<Type> data)
-    {
+    public <Type extends DataSet> double[] getImportanceStats(TreeLearner model, DataSet<Type> data) {
         double[] features = new double[data.getNumFeatures()];
-        
+
         double baseScore;
         boolean percentIncrease;
-        
+
         Random rand = RandomUtil.getRandom();
-        if(data instanceof ClassificationDataSet)
-        {
+        if (data instanceof ClassificationDataSet) {
             ClassificationDataSet cds = (ClassificationDataSet) data;
             ClassificationScore cs = cs_base.clone();
             cs.prepare(cds.getPredicting());
-            for(int i = 0; i < cds.size(); i++)
-            {
+            for (int i = 0; i < cds.size(); i++) {
                 DataPoint dp = cds.getDataPoint(i);
-                cs.addResult(((Classifier)model).classify(dp), cds.getDataPointCategory(i), cds.getWeight(i));
+                cs.addResult(((Classifier) model).classify(dp), cds.getDataPointCategory(i), cds.getWeight(i));
             }
             baseScore = cs.getScore();
             percentIncrease = cs.lowerIsBetter();
-            
-            
-            //for every feature
-            for(int j  = 0; j < data.getNumFeatures(); j++)
-            {
+
+            // for every feature
+            for (int j = 0; j < data.getNumFeatures(); j++) {
                 cs.prepare(cds.getPredicting());
-                
-                for(int i = 0; i < cds.size(); i++)
-                {
+
+                for (int i = 0; i < cds.size(); i++) {
                     DataPoint dp = cds.getDataPoint(i);
                     int true_label = cds.getDataPointCategory(i);
                     TreeNodeVisitor curNode = walkCorruptedPath(model, dp, j, rand);
-                    
+
                     cs.addResult(curNode.localClassify(dp), true_label, cds.getWeight(i));
                 }
-                
+
                 double newScore = cs.getScore();
-                features[j] = percentIncrease ? (newScore-baseScore)/(baseScore+1e-3) : (baseScore-newScore)/(baseScore+1e-3);
+                features[j] = percentIncrease ? (newScore - baseScore) / (baseScore + 1e-3) : (baseScore - newScore) / (baseScore + 1e-3);
             }
-            
-        }
-        else if(data instanceof RegressionDataSet)
-        {
+
+        } else if (data instanceof RegressionDataSet) {
             RegressionDataSet rds = (RegressionDataSet) data;
             RegressionScore rs = rs_base.clone();
             rs.prepare();
-            for(int i = 0; i < rds.size(); i++)
-            {
+            for (int i = 0; i < rds.size(); i++) {
                 DataPoint dp = rds.getDataPoint(i);
-                rs.addResult(((Regressor)model).regress(dp), rds.getTargetValue(i), rds.getWeight(i));
+                rs.addResult(((Regressor) model).regress(dp), rds.getTargetValue(i), rds.getWeight(i));
             }
             baseScore = rs.getScore();
             percentIncrease = rs.lowerIsBetter();
-            
-            
-            //for every feature
-            for(int j  = 0; j < data.getNumFeatures(); j++)
-            {
+
+            // for every feature
+            for (int j = 0; j < data.getNumFeatures(); j++) {
                 rs.prepare();
-                
-                for(int i = 0; i < rds.size(); i++)
-                {
+
+                for (int i = 0; i < rds.size(); i++) {
                     DataPoint dp = rds.getDataPoint(i);
                     double true_label = rds.getTargetValue(i);
                     TreeNodeVisitor curNode = walkCorruptedPath(model, dp, j, rand);
-                    
+
                     rs.addResult(curNode.localRegress(dp), true_label, rds.getWeight(i));
                 }
-                
+
                 double newScore = rs.getScore();
-                features[j] = percentIncrease ? (newScore-baseScore)/(baseScore+1e-3) : (baseScore-newScore)/(baseScore+1e-3);
+                features[j] = percentIncrease ? (newScore - baseScore) / (baseScore + 1e-3) : (baseScore - newScore) / (baseScore + 1e-3);
             }
         }
-        
-        
-        
-        
+
         return features;
     }
 
     /**
      * walks the tree down to a leaf node, adding corruption for a specific feature
+     * 
      * @param model the tree model to walk
-     * @param dp the data point to push down the tree
-     * @param j the feature index to corrupt
-     * @param rand source of randomness
-     * @return the leaf node 
+     * @param dp    the data point to push down the tree
+     * @param j     the feature index to corrupt
+     * @param rand  source of randomness
+     * @return the leaf node
      */
-    private TreeNodeVisitor walkCorruptedPath(TreeLearner model, DataPoint dp, int j, Random rand)
-    {
+    private TreeNodeVisitor walkCorruptedPath(TreeLearner model, DataPoint dp, int j, Random rand) {
         TreeNodeVisitor curNode = model.getTreeNodeVisitor();
-        while(!curNode.isLeaf())
-        {
+        while (!curNode.isLeaf()) {
             int path = curNode.getPath(dp);
             int numChild = curNode.childrenCount();
-            if(curNode.featuresUsed().contains(j))//corrupt the feature!
+            if (curNode.featuresUsed().contains(j))// corrupt the feature!
             {
-                //this gets us a random OTHER path, wont be the same b/c we would need to wrap around 1 farther
+                // this gets us a random OTHER path, wont be the same b/c we would need to wrap
+                // around 1 farther
                 path = (path + rand.nextInt(numChild)) % numChild;
             }
-            
-            if(curNode.isPathDisabled(path))
+
+            if (curNode.isPathDisabled(path))
                 break;
             else
                 curNode = curNode.getChild(path);
         }
         return curNode;
     }
-    
+
 }

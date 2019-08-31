@@ -30,55 +30,49 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class HamerlyKMeansTest
-{
+public class HamerlyKMeansTest {
     static private SimpleDataSet easyData10;
     static private ExecutorService ex;
     /**
-     * Used as the starting seeds for k-means clustering to get consistent desired behavior
+     * Used as the starting seeds for k-means clustering to get consistent desired
+     * behavior
      */
     static private List<Vec> seeds;
-    
-    public HamerlyKMeansTest()
-    {
+
+    public HamerlyKMeansTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass() throws Exception
-    {
+    public static void setUpClass() throws Exception {
         GridDataGenerator gdg = new GridDataGenerator(new Uniform(-0.15, 0.15), RandomUtil.getRandom(), 2, 5);
         easyData10 = gdg.generateData(110);
         ex = Executors.newFixedThreadPool(SystemInfo.LogicalCores);
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception
-    {
+    public static void tearDownClass() throws Exception {
         ex.shutdown();
     }
-    
+
     @Before
-    public void setUp()
-    {
-        //generate seeds that should lead to exact solution 
+    public void setUp() {
+        // generate seeds that should lead to exact solution
         GridDataGenerator gdg = new GridDataGenerator(new Uniform(-1e-10, 1e-10), RandomUtil.getRandom(), 2, 5);
         SimpleDataSet seedData = gdg.generateData(1);
         seeds = seedData.getDataVectors();
-        for(Vec v : seeds)
-            v.mutableAdd(0.1);//shift off center so we aren't starting at the expected solution
+        for (Vec v : seeds)
+            v.mutableAdd(0.1);// shift off center so we aren't starting at the expected solution
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of cluster method, of class HamerlyKMeans.
      */
     @Test
-    public void testCluster_3args_1()
-    {
+    public void testCluster_3args_1() {
         System.out.println("cluster");
         HamerlyKMeans kMeans = new HamerlyKMeans(new EuclideanDistance(), SeedSelectionMethods.SeedSelection.FARTHEST_FIRST);
         int[] assignment = new int[easyData10.size()];
@@ -86,11 +80,10 @@ public class HamerlyKMeansTest
         List<List<DataPoint>> clusters = KClustererBase.createClusterListFromAssignmentArray(assignment, easyData10);
         assertEquals(10, clusters.size());
         Set<Integer> seenBefore = new IntSet();
-        for(List<DataPoint> cluster :  clusters)
-        {
+        for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
-            for(DataPoint dp : cluster)
+            for (DataPoint dp : cluster)
                 assertEquals(thisClass, dp.getCategoricalValue(0));
         }
     }
@@ -99,8 +92,7 @@ public class HamerlyKMeansTest
      * Test of cluster method, of class HamerlyKMeans.
      */
     @Test
-    public void testCluster_DataSet_intArr()
-    {
+    public void testCluster_DataSet_intArr() {
         System.out.println("cluster");
         HamerlyKMeans kMeans = new HamerlyKMeans(new EuclideanDistance(), SeedSelectionMethods.SeedSelection.FARTHEST_FIRST);
         int[] assignment = new int[easyData10.size()];
@@ -108,71 +100,66 @@ public class HamerlyKMeansTest
         List<List<DataPoint>> clusters = KClustererBase.createClusterListFromAssignmentArray(assignment, easyData10);
         assertEquals(10, clusters.size());
         Set<Integer> seenBefore = new IntSet();
-        for(List<DataPoint> cluster :  clusters)
-        {
+        for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
-            for(DataPoint dp : cluster)
+            for (DataPoint dp : cluster)
                 assertEquals(thisClass, dp.getCategoricalValue(0));
         }
     }
-    
+
     @Test
-    public void testCluster_Weighted()
-    {
+    public void testCluster_Weighted() {
         System.out.println("cluster(dataset, int, threadpool)");
         HamerlyKMeans kMeans = new HamerlyKMeans();
         kMeans.setStoreMeans(true);
         HamerlyKMeans kMeans2 = new HamerlyKMeans();
         kMeans2.setStoreMeans(true);
-        
+
         SimpleDataSet data2 = easyData10.getTwiceShallowClone();
-        for(int i = 0; i < data2.size(); i++)
+        for (int i = 0; i < data2.size(); i++)
             data2.setWeight(i, 15.0);
-        
+
         int[] assignment = new int[easyData10.size()];
         List<Vec> orig_seeds = new ArrayList<Vec>();
         List<Vec> seeds2 = new ArrayList<Vec>();
-        for(Vec v : seeds)
-        {
+        for (Vec v : seeds) {
             orig_seeds.add(v.clone());
             seeds2.add(v.clone());
         }
         kMeans.cluster(easyData10, null, 10, seeds, assignment, true, true, true, null);
         kMeans2.cluster(data2, null, 10, seeds2, assignment, true, true, true, null);
-        
-        //multiplied weights by a constant, should get same solutions
-        
-        for(int i = 0; i < 10; i++)
-        {
+
+        // multiplied weights by a constant, should get same solutions
+
+        for (int i = 0; i < 10; i++) {
             double diff = seeds.get(i).subtract(seeds2.get(i)).sum();
             assertEquals(0.0, diff, 1e-10);
         }
-        
-        
-        //restore means and try again with randomish weights, should end up with something close
-        
-        for(int i = 0; i < orig_seeds.size(); i++)
-        {
+
+        // restore means and try again with randomish weights, should end up with
+        // something close
+
+        for (int i = 0; i < orig_seeds.size(); i++) {
             orig_seeds.get(i).copyTo(seeds.get(i));
             orig_seeds.get(i).copyTo(seeds2.get(i));
         }
-        
+
         Random rand = new XORWOW(897654);
-        for(int i = 0; i < data2.size(); i++)
-            data2.setWeight(i, 0.5+5*rand.nextDouble());
+        for (int i = 0; i < data2.size(); i++)
+            data2.setWeight(i, 0.5 + 5 * rand.nextDouble());
         kMeans.cluster(easyData10, null, 10, seeds, assignment, true, true, true, null);
         kMeans2.cluster(data2, null, 10, seeds2, assignment, true, true, true, null);
-        
-        //multiplied weights by a constant, should get similar solutions, but slightly different
-        
-        for(int i = 0; i < 10; i++)
-        {
+
+        // multiplied weights by a constant, should get similar solutions, but slightly
+        // different
+
+        for (int i = 0; i < 10; i++) {
             double diff = seeds.get(i).subtract(seeds2.get(i)).sum();
             assertEquals(0.0, diff, 0.1);
-            assertTrue(Math.abs(diff) > 1e-10 );
+            assertTrue(Math.abs(diff) > 1e-10);
         }
-        
+
     }
 
 }

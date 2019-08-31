@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeAnchor element declaration.
+ * <p>
+ * Java class for TimeAnchor element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TimeAnchor">
@@ -46,10 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "timeCycle",
-    "timeException"
-})
+@XmlType(name = "", propOrder = { "timeCycle", "timeException" })
 @XmlRootElement(name = "TimeAnchor")
 public class TimeAnchor {
 
@@ -70,21 +68,21 @@ public class TimeAnchor {
      * Gets the value of the timeCycle property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the timeCycle property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the timeCycle property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getTimeCycle().add(newItem);
+     * getTimeCycle().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TimeCycle }
+     * Objects of the following type(s) are allowed in the list {@link TimeCycle }
      * 
      * 
      */
@@ -99,21 +97,22 @@ public class TimeAnchor {
      * Gets the value of the timeException property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the timeException property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the timeException property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getTimeException().add(newItem);
+     * getTimeException().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TimeException }
+     * Objects of the following type(s) are allowed in the list {@link TimeException
+     * }
      * 
      * 
      */
@@ -127,10 +126,8 @@ public class TimeAnchor {
     /**
      * Gets the value of the displayName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -139,10 +136,8 @@ public class TimeAnchor {
     /**
      * Sets the value of the displayName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDisplayName(String value) {
         this.displayName = value;
@@ -151,10 +146,8 @@ public class TimeAnchor {
     /**
      * Gets the value of the offset property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getOffset() {
         return offset;
@@ -163,10 +156,8 @@ public class TimeAnchor {
     /**
      * Sets the value of the offset property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setOffset(BigInteger value) {
         this.offset = value;
@@ -175,10 +166,8 @@ public class TimeAnchor {
     /**
      * Gets the value of the stepsize property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getStepsize() {
         return stepsize;
@@ -187,10 +176,8 @@ public class TimeAnchor {
     /**
      * Sets the value of the stepsize property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setStepsize(BigInteger value) {
         this.stepsize = value;
@@ -199,10 +186,8 @@ public class TimeAnchor {
     /**
      * Gets the value of the type property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TIMEANCHOR }
-     *     
+     * @return possible object is {@link TIMEANCHOR }
+     * 
      */
     public TIMEANCHOR2 getType() {
         return type;
@@ -211,10 +196,8 @@ public class TimeAnchor {
     /**
      * Sets the value of the type property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TIMEANCHOR }
-     *     
+     * @param value allowed object is {@link TIMEANCHOR }
+     * 
      */
     public void setType(TIMEANCHOR2 value) {
         this.type = value;

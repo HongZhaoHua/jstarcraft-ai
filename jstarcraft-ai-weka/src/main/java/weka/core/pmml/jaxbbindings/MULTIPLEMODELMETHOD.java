@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for MULTIPLE-MODEL-METHOD.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for MULTIPLE-MODEL-METHOD.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="MULTIPLE-MODEL-METHOD">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -39,24 +41,15 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum MULTIPLEMODELMETHOD {
 
     @XmlEnumValue("average")
-    AVERAGE("average"),
-    @XmlEnumValue("majorityVote")
-    MAJORITY_VOTE("majorityVote"),
-    @XmlEnumValue("max")
-    MAX("max"),
-    @XmlEnumValue("median")
-    MEDIAN("median"),
-    @XmlEnumValue("modelChain")
-    MODEL_CHAIN("modelChain"),
-    @XmlEnumValue("selectAll")
-    SELECT_ALL("selectAll"),
-    @XmlEnumValue("selectFirst")
-    SELECT_FIRST("selectFirst"),
-    @XmlEnumValue("sum")
-    SUM("sum"),
-    @XmlEnumValue("weightedAverage")
-    WEIGHTED_AVERAGE("weightedAverage"),
-    @XmlEnumValue("weightedMajorityVote")
+    AVERAGE("average"), @XmlEnumValue("majorityVote")
+    MAJORITY_VOTE("majorityVote"), @XmlEnumValue("max")
+    MAX("max"), @XmlEnumValue("median")
+    MEDIAN("median"), @XmlEnumValue("modelChain")
+    MODEL_CHAIN("modelChain"), @XmlEnumValue("selectAll")
+    SELECT_ALL("selectAll"), @XmlEnumValue("selectFirst")
+    SELECT_FIRST("selectFirst"), @XmlEnumValue("sum")
+    SUM("sum"), @XmlEnumValue("weightedAverage")
+    WEIGHTED_AVERAGE("weightedAverage"), @XmlEnumValue("weightedMajorityVote")
     WEIGHTED_MAJORITY_VOTE("weightedMajorityVote");
     private final String value;
 
@@ -69,7 +62,7 @@ public enum MULTIPLEMODELMETHOD {
     }
 
     public static MULTIPLEMODELMETHOD fromValue(String v) {
-        for (MULTIPLEMODELMETHOD c: MULTIPLEMODELMETHOD.values()) {
+        for (MULTIPLEMODELMETHOD c : MULTIPLEMODELMETHOD.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

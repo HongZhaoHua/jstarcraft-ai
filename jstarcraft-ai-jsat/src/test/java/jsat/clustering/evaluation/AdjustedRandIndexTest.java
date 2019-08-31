@@ -20,56 +20,50 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class AdjustedRandIndexTest
-{
-    
-    public AdjustedRandIndexTest()
-    {
+public class AdjustedRandIndexTest {
+
+    public AdjustedRandIndexTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of evaluate method, of class AdjustedRandIndex.
      */
     @Test
-    public void testEvaluate_intArr_DataSet()
-    {
+    public void testEvaluate_intArr_DataSet() {
         System.out.println("evaluate");
-        //using example from http://www.otlet-institute.org/wikics/Clustering_Problems.html
+        // using example from
+        // http://www.otlet-institute.org/wikics/Clustering_Problems.html
         ClassificationDataSet cds = new ClassificationDataSet(1, new CategoricalData[0], new CategoricalData(3));
-        for(int i = 0; i < 3; i++)
-            for(int j = 0; j < 3; j++)
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
                 cds.addDataPoint(Vec.random(1), new int[0], i);
         int[] d = new int[9];
         d[0] = d[1] = 0;
         d[2] = d[3] = d[4] = d[5] = 1;
         d[6] = d[7] = 2;
         d[8] = 3;
-        
+
         AdjustedRandIndex ari = new AdjustedRandIndex();
         double score = ari.evaluate(d, cds);
-        //conver tot ARI
-        score = 1.0-score;
+        // conver tot ARI
+        score = 1.0 - score;
         assertEquals(0.46, score, 0.005);
     }
-    
+
 }

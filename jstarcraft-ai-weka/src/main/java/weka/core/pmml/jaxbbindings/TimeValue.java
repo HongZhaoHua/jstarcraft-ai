@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeValue element declaration.
+ * <p>
+ * Java class for TimeValue element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TimeValue">
@@ -43,9 +44,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "timestamp"
-})
+@XmlType(name = "", propOrder = { "timestamp" })
 @XmlRootElement(name = "TimeValue")
 public class TimeValue {
 
@@ -63,10 +62,8 @@ public class TimeValue {
     /**
      * Gets the value of the timestamp property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Timestamp }
-     *     
+     * @return possible object is {@link Timestamp }
+     * 
      */
     public Timestamp getTimestamp() {
         return timestamp;
@@ -75,10 +72,8 @@ public class TimeValue {
     /**
      * Sets the value of the timestamp property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Timestamp }
-     *     
+     * @param value allowed object is {@link Timestamp }
+     * 
      */
     public void setTimestamp(Timestamp value) {
         this.timestamp = value;
@@ -87,10 +82,8 @@ public class TimeValue {
     /**
      * Gets the value of the index property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getIndex() {
         return index;
@@ -99,10 +92,8 @@ public class TimeValue {
     /**
      * Sets the value of the index property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setIndex(BigInteger value) {
         this.index = value;
@@ -111,10 +102,8 @@ public class TimeValue {
     /**
      * Gets the value of the standardError property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getStandardError() {
         return standardError;
@@ -123,10 +112,8 @@ public class TimeValue {
     /**
      * Sets the value of the standardError property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setStandardError(Double value) {
         this.standardError = value;
@@ -135,10 +122,8 @@ public class TimeValue {
     /**
      * Gets the value of the time property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getTime() {
         return time;
@@ -147,10 +132,8 @@ public class TimeValue {
     /**
      * Sets the value of the time property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setTime(Double value) {
         this.time = value;

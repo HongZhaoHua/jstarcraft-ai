@@ -21,24 +21,24 @@
 package weka.core;
 
 /**
- * Classes implementing this interface make it possible to turn off
- * capabilities checking.
+ * Classes implementing this interface make it possible to turn off capabilities
+ * checking.
  * 
- * @author  Eibe Frank
+ * @author Eibe Frank
  * @version $Revision: 11004 $
- * @see     Capabilities
+ * @see Capabilities
  */
 public interface CapabilitiesIgnorer {
-  
-  /** 
-   * Returns true if we do not actually want to check
-   * capabilities to conserver runtime.
-   */
-  public boolean getDoNotCheckCapabilities();
-  
-  /** 
-   * If argument is true, capabilities are not actually
-   * checked to improve runtime.
-   */
-  public void setDoNotCheckCapabilities(boolean flag);
+
+    /**
+     * Returns true if we do not actually want to check capabilities to conserver
+     * runtime.
+     */
+    public boolean getDoNotCheckCapabilities();
+
+    /**
+     * If argument is true, capabilities are not actually checked to improve
+     * runtime.
+     */
+    public void setDoNotCheckCapabilities(boolean flag);
 }

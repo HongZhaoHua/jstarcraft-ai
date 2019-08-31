@@ -68,166 +68,161 @@ import java.util.Vector;
  */
 public class OptionHandlerJavadoc extends Javadoc {
 
-  /** the start comment tag for inserting the generated Javadoc */
-  public final static String OPTIONS_STARTTAG = "<!-- options-start -->";
+    /** the start comment tag for inserting the generated Javadoc */
+    public final static String OPTIONS_STARTTAG = "<!-- options-start -->";
 
-  /** the end comment tag for inserting the generated Javadoc */
-  public final static String OPTIONS_ENDTAG = "<!-- options-end -->";
+    /** the end comment tag for inserting the generated Javadoc */
+    public final static String OPTIONS_ENDTAG = "<!-- options-end -->";
 
-  /** whether to include the "Valid options..." prolog in the Javadoc */
-  protected boolean m_Prolog = true;
+    /** whether to include the "Valid options..." prolog in the Javadoc */
+    protected boolean m_Prolog = true;
 
-  /**
-   * default constructor
-   */
-  public OptionHandlerJavadoc() {
-    super();
+    /**
+     * default constructor
+     */
+    public OptionHandlerJavadoc() {
+        super();
 
-    m_StartTag = new String[1];
-    m_EndTag = new String[1];
-    m_StartTag[0] = OPTIONS_STARTTAG;
-    m_EndTag[0] = OPTIONS_ENDTAG;
-  }
-
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> result = new Vector<Option>();
-
-    result.addAll(Collections.list(super.listOptions()));
-
-    result.addElement(new Option(
-      "\tSuppresses the 'Valid options are...' prolog in the Javadoc.",
-      "noprolog", 0, "-noprolog"));
-
-    return result.elements();
-  }
-
-  /**
-   * Parses a given list of options.
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    super.setOptions(options);
-
-    setProlog(!Utils.getFlag("noprolog", options));
-  }
-
-  /**
-   * Gets the current settings of this object.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
-    Vector<String> result = new Vector<String>();
-
-    Collections.addAll(result, super.getOptions());
-
-    if (!getProlog()) {
-      result.add("-noprolog");
+        m_StartTag = new String[1];
+        m_EndTag = new String[1];
+        m_StartTag[0] = OPTIONS_STARTTAG;
+        m_EndTag[0] = OPTIONS_ENDTAG;
     }
 
-    return result.toArray(new String[result.size()]);
-  }
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> result = new Vector<Option>();
 
-  /**
-   * sets whether to add the "Valid options are..." prolog
-   * 
-   * @param value true if the prolog is to be added
-   */
-  public void setProlog(boolean value) {
-    m_Prolog = value;
-  }
+        result.addAll(Collections.list(super.listOptions()));
 
-  /**
-   * whether "Valid options are..." prolog is included in the Javadoc
-   * 
-   * @return true if the prolog is printed
-   */
-  public boolean getProlog() {
-    return m_Prolog;
-  }
+        result.addElement(new Option("\tSuppresses the 'Valid options are...' prolog in the Javadoc.", "noprolog", 0, "-noprolog"));
 
-  /**
-   * generates and returns the Javadoc for the specified start/end tag pair.
-   * 
-   * @param index the index in the start/end tag array
-   * @return the generated Javadoc
-   * @throws Exception in case the generation fails
-   */
-  @Override
-  protected String generateJavadoc(int index) throws Exception {
-    String result;
-    OptionHandler handler;
-    String optionStr;
-
-    result = "";
-
-    if (index == 0) {
-      if (!canInstantiateClass()) {
-        return result;
-      }
-
-      if (!InheritanceUtils.hasInterface(OptionHandler.class, getInstance()
-        .getClass())) {
-        throw new Exception("Class '" + getClassname()
-          + "' is not an OptionHandler!");
-      }
-
-      // any options at all?
-      handler = (OptionHandler) getInstance();
-      Enumeration<Option> enm = handler.listOptions();
-      if (!enm.hasMoreElements()) {
-        return result;
-      }
-
-      // prolog?
-      if (getProlog()) {
-        result = "Valid options are: <p>\n\n";
-      }
-
-      // options
-      enm = handler.listOptions();
-      while (enm.hasMoreElements()) {
-        Option option = enm.nextElement();
-        optionStr = toHTML(option.synopsis()) + "\n"
-          + toHTML(option.description().replaceAll("\\t", " "));
-        result += "<pre> " + optionStr.replaceAll("<br>", "") + "</pre>\n\n";
-      }
-
-      // stars?
-      if (getUseStars()) {
-        result = indent(result, 1, "* ");
-      }
+        return result.elements();
     }
 
-    return result;
-  }
+    /**
+     * Parses a given list of options.
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        super.setOptions(options);
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        setProlog(!Utils.getFlag("noprolog", options));
+    }
 
-  /**
-   * Parses the given commandline parameters and generates the Javadoc.
-   * 
-   * @param args the commandline parameters for the object
-   */
-  public static void main(String[] args) {
-    runJavadoc(new OptionHandlerJavadoc(), args);
-  }
+    /**
+     * Gets the current settings of this object.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
+        Vector<String> result = new Vector<String>();
+
+        Collections.addAll(result, super.getOptions());
+
+        if (!getProlog()) {
+            result.add("-noprolog");
+        }
+
+        return result.toArray(new String[result.size()]);
+    }
+
+    /**
+     * sets whether to add the "Valid options are..." prolog
+     * 
+     * @param value true if the prolog is to be added
+     */
+    public void setProlog(boolean value) {
+        m_Prolog = value;
+    }
+
+    /**
+     * whether "Valid options are..." prolog is included in the Javadoc
+     * 
+     * @return true if the prolog is printed
+     */
+    public boolean getProlog() {
+        return m_Prolog;
+    }
+
+    /**
+     * generates and returns the Javadoc for the specified start/end tag pair.
+     * 
+     * @param index the index in the start/end tag array
+     * @return the generated Javadoc
+     * @throws Exception in case the generation fails
+     */
+    @Override
+    protected String generateJavadoc(int index) throws Exception {
+        String result;
+        OptionHandler handler;
+        String optionStr;
+
+        result = "";
+
+        if (index == 0) {
+            if (!canInstantiateClass()) {
+                return result;
+            }
+
+            if (!InheritanceUtils.hasInterface(OptionHandler.class, getInstance().getClass())) {
+                throw new Exception("Class '" + getClassname() + "' is not an OptionHandler!");
+            }
+
+            // any options at all?
+            handler = (OptionHandler) getInstance();
+            Enumeration<Option> enm = handler.listOptions();
+            if (!enm.hasMoreElements()) {
+                return result;
+            }
+
+            // prolog?
+            if (getProlog()) {
+                result = "Valid options are: <p>\n\n";
+            }
+
+            // options
+            enm = handler.listOptions();
+            while (enm.hasMoreElements()) {
+                Option option = enm.nextElement();
+                optionStr = toHTML(option.synopsis()) + "\n" + toHTML(option.description().replaceAll("\\t", " "));
+                result += "<pre> " + optionStr.replaceAll("<br>", "") + "</pre>\n\n";
+            }
+
+            // stars?
+            if (getUseStars()) {
+                result = indent(result, 1, "* ");
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Parses the given commandline parameters and generates the Javadoc.
+     * 
+     * @param args the commandline parameters for the object
+     */
+    public static void main(String[] args) {
+        runJavadoc(new OptionHandlerJavadoc(), args);
+    }
 }

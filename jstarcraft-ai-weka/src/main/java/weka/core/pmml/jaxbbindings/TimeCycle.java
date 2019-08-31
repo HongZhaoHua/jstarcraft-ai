@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeCycle element declaration.
+ * <p>
+ * Java class for TimeCycle element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TimeCycle">
@@ -42,9 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "array"
-})
+@XmlType(name = "", propOrder = { "array" })
 @XmlRootElement(name = "TimeCycle")
 public class TimeCycle {
 
@@ -60,10 +59,8 @@ public class TimeCycle {
     /**
      * Gets the value of the array property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ArrayType }
-     *     
+     * @return possible object is {@link ArrayType }
+     * 
      */
     public ArrayType getArray() {
         return array;
@@ -72,10 +69,8 @@ public class TimeCycle {
     /**
      * Sets the value of the array property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayType }
-     *     
+     * @param value allowed object is {@link ArrayType }
+     * 
      */
     public void setArray(ArrayType value) {
         this.array = value;
@@ -84,10 +79,8 @@ public class TimeCycle {
     /**
      * Gets the value of the displayName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDisplayName() {
         return displayName;
@@ -96,10 +89,8 @@ public class TimeCycle {
     /**
      * Sets the value of the displayName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDisplayName(String value) {
         this.displayName = value;
@@ -108,10 +99,8 @@ public class TimeCycle {
     /**
      * Gets the value of the length property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getLength() {
         return length;
@@ -120,10 +109,8 @@ public class TimeCycle {
     /**
      * Sets the value of the length property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setLength(BigInteger value) {
         this.length = value;
@@ -132,10 +119,8 @@ public class TimeCycle {
     /**
      * Gets the value of the type property.
      * 
-     * @return
-     *     possible object is
-     *     {@link VALIDTIMESPEC }
-     *     
+     * @return possible object is {@link VALIDTIMESPEC }
+     * 
      */
     public VALIDTIMESPEC getType() {
         return type;
@@ -144,10 +129,8 @@ public class TimeCycle {
     /**
      * Sets the value of the type property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link VALIDTIMESPEC }
-     *     
+     * @param value allowed object is {@link VALIDTIMESPEC }
+     * 
      */
     public void setType(VALIDTIMESPEC value) {
         this.type = value;

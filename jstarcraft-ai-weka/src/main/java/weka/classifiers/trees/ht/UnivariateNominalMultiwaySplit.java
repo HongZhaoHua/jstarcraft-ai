@@ -33,34 +33,33 @@ import weka.core.Instance;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class UnivariateNominalMultiwaySplit extends Split implements
-    Serializable {
+public class UnivariateNominalMultiwaySplit extends Split implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -9094590488097956665L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -9094590488097956665L;
 
-  /**
-   * Constructor
-   * 
-   * @param attName the name of the attribute to split on
-   */
-  public UnivariateNominalMultiwaySplit(String attName) {
-    m_splitAttNames.add(attName);
-  }
-
-  @Override
-  public String branchForInstance(Instance inst) {
-    Attribute att = inst.dataset().attribute(m_splitAttNames.get(0));
-    if (att == null || inst.isMissing(att)) {
-      return null;
+    /**
+     * Constructor
+     * 
+     * @param attName the name of the attribute to split on
+     */
+    public UnivariateNominalMultiwaySplit(String attName) {
+        m_splitAttNames.add(attName);
     }
-    return att.value((int) inst.value(att));
-  }
 
-  @Override
-  public String conditionForBranch(String branch) {
-    return m_splitAttNames.get(0) + " = " + branch;
-  }
+    @Override
+    public String branchForInstance(Instance inst) {
+        Attribute att = inst.dataset().attribute(m_splitAttNames.get(0));
+        if (att == null || inst.isMissing(att)) {
+            return null;
+        }
+        return att.value((int) inst.value(att));
+    }
+
+    @Override
+    public String conditionForBranch(String branch) {
+        return m_splitAttNames.get(0) + " = " + branch;
+    }
 }

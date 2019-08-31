@@ -34,45 +34,45 @@ import weka.core.Instance;
  */
 public class LeafNode extends HNode implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -3359429731894384404L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -3359429731894384404L;
 
-  /** The actual node for this leaf */
-  public HNode m_theNode;
+    /** The actual node for this leaf */
+    public HNode m_theNode;
 
-  /** Parent split node */
-  public SplitNode m_parentNode;
+    /** Parent split node */
+    public SplitNode m_parentNode;
 
-  /** Parent branch leading to this node */
-  public String m_parentBranch;
+    /** Parent branch leading to this node */
+    public String m_parentBranch;
 
-  /**
-   * Construct an empty leaf node
-   */
-  public LeafNode() {
-  }
-
-  /**
-   * Construct a leaf node with the given actual node, parent and parent branch
-   * 
-   * @param node the actual node at this leaf
-   * @param parentNode the parent split node
-   * @param parentBranch the branch leading to this node
-   */
-  public LeafNode(HNode node, SplitNode parentNode, String parentBranch) {
-    m_theNode = node;
-    m_parentNode = parentNode;
-    m_parentBranch = parentBranch;
-  }
-
-  @Override
-  public void updateNode(Instance inst) throws Exception {
-    if (m_theNode != null) {
-      m_theNode.updateDistribution(inst);
-    } else {
-      super.updateDistribution(inst);
+    /**
+     * Construct an empty leaf node
+     */
+    public LeafNode() {
     }
-  }
+
+    /**
+     * Construct a leaf node with the given actual node, parent and parent branch
+     * 
+     * @param node         the actual node at this leaf
+     * @param parentNode   the parent split node
+     * @param parentBranch the branch leading to this node
+     */
+    public LeafNode(HNode node, SplitNode parentNode, String parentBranch) {
+        m_theNode = node;
+        m_parentNode = parentNode;
+        m_parentBranch = parentBranch;
+    }
+
+    @Override
+    public void updateNode(Instance inst) throws Exception {
+        if (m_theNode != null) {
+            m_theNode.updateDistribution(inst);
+        } else {
+            super.updateDistribution(inst);
+        }
+    }
 }

@@ -33,25 +33,24 @@ import weka.core.Instance;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class InactiveHNode extends LeafNode implements LearningNode,
-    Serializable {
+public class InactiveHNode extends LeafNode implements LearningNode, Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -8747567733141700911L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -8747567733141700911L;
 
-  /**
-   * Constructor
-   * 
-   * @param classDistrib the class distribution at this node
-   */
-  public InactiveHNode(Map<String, WeightMass> classDistrib) {
-    m_classDistribution = classDistrib;
-  }
+    /**
+     * Constructor
+     * 
+     * @param classDistrib the class distribution at this node
+     */
+    public InactiveHNode(Map<String, WeightMass> classDistrib) {
+        m_classDistribution = classDistrib;
+    }
 
-  @Override
-  public void updateNode(Instance inst) {
-    super.updateDistribution(inst);
-  }
+    @Override
+    public void updateNode(Instance inst) {
+        super.updateDistribution(inst);
+    }
 }

@@ -29,30 +29,29 @@ package weka.core.pmml;
  */
 public class PMMLUtils {
 
-  /**
-   * Utility method to left or right pad strings with arbitrary characters.
-   * 
-   * @param source the source string
-   * @param padChar the character to pad with
-   * @param length the length of the resulting string
-   * @param leftPad pad to the left instead of the right
-   * @return a padded string
-   */
-  public static String pad(String source, String padChar, 
-                            int length, boolean leftPad) {
-    StringBuffer temp = new StringBuffer();
+    /**
+     * Utility method to left or right pad strings with arbitrary characters.
+     * 
+     * @param source  the source string
+     * @param padChar the character to pad with
+     * @param length  the length of the resulting string
+     * @param leftPad pad to the left instead of the right
+     * @return a padded string
+     */
+    public static String pad(String source, String padChar, int length, boolean leftPad) {
+        StringBuffer temp = new StringBuffer();
 
-    if (leftPad) {
-      for (int i = 0; i< length; i++) {
-        temp.append(padChar);
-      }
-      temp.append(source);
-    } else {
-      temp.append(source);
-      for (int i = 0; i< length; i++) {
-        temp.append(padChar);
-      }
+        if (leftPad) {
+            for (int i = 0; i < length; i++) {
+                temp.append(padChar);
+            }
+            temp.append(source);
+        } else {
+            temp.append(source);
+            for (int i = 0; i < length; i++) {
+                temp.append(padChar);
+            }
+        }
+        return temp.toString();
     }
-    return temp.toString();
-  }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TestDistributions element declaration.
+ * <p>
+ * Java class for TestDistributions element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TestDistributions">
@@ -49,11 +50,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "baseline",
-    "alternate",
-    "extension"
-})
+@XmlType(name = "", propOrder = { "baseline", "alternate", "extension" })
 @XmlRootElement(name = "TestDistributions")
 public class TestDistributions {
 
@@ -79,10 +76,8 @@ public class TestDistributions {
     /**
      * Gets the value of the baseline property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Baseline }
-     *     
+     * @return possible object is {@link Baseline }
+     * 
      */
     public Baseline getBaseline() {
         return baseline;
@@ -91,10 +86,8 @@ public class TestDistributions {
     /**
      * Sets the value of the baseline property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Baseline }
-     *     
+     * @param value allowed object is {@link Baseline }
+     * 
      */
     public void setBaseline(Baseline value) {
         this.baseline = value;
@@ -103,10 +96,8 @@ public class TestDistributions {
     /**
      * Gets the value of the alternate property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Alternate }
-     *     
+     * @return possible object is {@link Alternate }
+     * 
      */
     public Alternate getAlternate() {
         return alternate;
@@ -115,10 +106,8 @@ public class TestDistributions {
     /**
      * Sets the value of the alternate property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Alternate }
-     *     
+     * @param value allowed object is {@link Alternate }
+     * 
      */
     public void setAlternate(Alternate value) {
         this.alternate = value;
@@ -128,21 +117,21 @@ public class TestDistributions {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -156,10 +145,8 @@ public class TestDistributions {
     /**
      * Gets the value of the field property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getField() {
         return field;
@@ -168,10 +155,8 @@ public class TestDistributions {
     /**
      * Sets the value of the field property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setField(String value) {
         this.field = value;
@@ -180,10 +165,8 @@ public class TestDistributions {
     /**
      * Gets the value of the normalizationScheme property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getNormalizationScheme() {
         return normalizationScheme;
@@ -192,10 +175,8 @@ public class TestDistributions {
     /**
      * Sets the value of the normalizationScheme property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setNormalizationScheme(String value) {
         this.normalizationScheme = value;
@@ -204,14 +185,12 @@ public class TestDistributions {
     /**
      * Gets the value of the resetValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getResetValue() {
         if (resetValue == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return resetValue;
         }
@@ -220,10 +199,8 @@ public class TestDistributions {
     /**
      * Sets the value of the resetValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setResetValue(Double value) {
         this.resetValue = value;
@@ -232,10 +209,8 @@ public class TestDistributions {
     /**
      * Gets the value of the testStatistic property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BASELINETESTSTATISTIC }
-     *     
+     * @return possible object is {@link BASELINETESTSTATISTIC }
+     * 
      */
     public BASELINETESTSTATISTIC getTestStatistic() {
         return testStatistic;
@@ -244,10 +219,8 @@ public class TestDistributions {
     /**
      * Sets the value of the testStatistic property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BASELINETESTSTATISTIC }
-     *     
+     * @param value allowed object is {@link BASELINETESTSTATISTIC }
+     * 
      */
     public void setTestStatistic(BASELINETESTSTATISTIC value) {
         this.testStatistic = value;
@@ -256,10 +229,8 @@ public class TestDistributions {
     /**
      * Gets the value of the weightField property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getWeightField() {
         return weightField;
@@ -268,10 +239,8 @@ public class TestDistributions {
     /**
      * Sets the value of the weightField property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setWeightField(String value) {
         this.weightField = value;
@@ -280,10 +249,8 @@ public class TestDistributions {
     /**
      * Gets the value of the windowSize property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getWindowSize() {
         if (windowSize == null) {
@@ -296,10 +263,8 @@ public class TestDistributions {
     /**
      * Sets the value of the windowSize property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setWindowSize(BigInteger value) {
         this.windowSize = value;

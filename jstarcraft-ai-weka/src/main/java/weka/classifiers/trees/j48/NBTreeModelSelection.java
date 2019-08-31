@@ -36,173 +36,169 @@ import weka.core.Utils;
  */
 public class NBTreeModelSelection extends ModelSelection {
 
-  /** for serialization */
-  private static final long serialVersionUID = 990097748931976704L;
+    /** for serialization */
+    private static final long serialVersionUID = 990097748931976704L;
 
-  /** Minimum number of objects in interval. */
-  protected final int m_minNoObj;
+    /** Minimum number of objects in interval. */
+    protected final int m_minNoObj;
 
-  /** All the training data */
-  protected Instances m_allData; //
+    /** All the training data */
+    protected Instances m_allData; //
 
-  /**
-   * Initializes the split selection method with the given parameters.
-   * 
-   * @param minNoObj minimum number of instances that have to occur in at least
-   *          two subsets induced by split
-   * @param allData FULL training dataset (necessary for selection of split
-   *          points).
-   */
-  public NBTreeModelSelection(int minNoObj, Instances allData) {
-    m_minNoObj = minNoObj;
-    m_allData = allData;
-  }
-
-  /**
-   * Sets reference to training data to null.
-   */
-  public void cleanup() {
-
-    m_allData = null;
-  }
-
-  /**
-   * Selects NBTree-type split for the given dataset.
-   */
-  @Override
-  public final ClassifierSplitModel selectModel(Instances data) {
-
-    double globalErrors = 0;
-
-    double minResult;
-    NBTreeSplit[] currentModel;
-    NBTreeSplit bestModel = null;
-    NBTreeNoSplit noSplitModel = null;
-    int validModels = 0;
-    Distribution checkDistribution;
-    Attribute attribute;
-    double sumOfWeights;
-    int i;
-
-    try {
-      // build the global model at this node
-      noSplitModel = new NBTreeNoSplit();
-      noSplitModel.buildClassifier(data);
-      if (data.numInstances() < 5) {
-        return noSplitModel;
-      }
-
-      // evaluate it
-      globalErrors = noSplitModel.getErrors();
-      if (globalErrors == 0) {
-        return noSplitModel;
-      }
-
-      // Check if all Instances belong to one class or if not
-      // enough Instances to split.
-      checkDistribution = new Distribution(data);
-      if (Utils.sm(checkDistribution.total(), m_minNoObj)
-        || Utils.eq(checkDistribution.total(),
-          checkDistribution.perClass(checkDistribution.maxClass()))) {
-        return noSplitModel;
-      }
-
-      // Check if all attributes are nominal and have a
-      // lot of values.
-      if (m_allData != null) {
-        Enumeration<Attribute> enu = data.enumerateAttributes();
-        while (enu.hasMoreElements()) {
-          attribute = enu.nextElement();
-          if ((attribute.isNumeric())
-            || (Utils.sm(attribute.numValues(),
-              (0.3 * m_allData.numInstances())))) {
-            break;
-          }
-        }
-      }
-
-      currentModel = new NBTreeSplit[data.numAttributes()];
-      sumOfWeights = data.sumOfWeights();
-
-      // For each attribute.
-      for (i = 0; i < data.numAttributes(); i++) {
-
-        // Apart from class attribute.
-        if (i != (data).classIndex()) {
-
-          // Get models for current attribute.
-          currentModel[i] = new NBTreeSplit(i, m_minNoObj, sumOfWeights);
-          currentModel[i].setGlobalModel(noSplitModel);
-          currentModel[i].buildClassifier(data);
-
-          // Check if useful split for current attribute
-          // exists and check for enumerated attributes with
-          // a lot of values.
-          if (currentModel[i].checkModel()) {
-            validModels++;
-          }
-        } else {
-          currentModel[i] = null;
-        }
-      }
-
-      // Check if any useful split was found.
-      if (validModels == 0) {
-        return noSplitModel;
-      }
-
-      // Find "best" attribute to split on.
-      minResult = globalErrors;
-      for (i = 0; i < data.numAttributes(); i++) {
-        if ((i != (data).classIndex()) && (currentModel[i].checkModel())) {
-          /*
-           * System.err.println("Errors for "+data.attribute(i).name()+" "+
-           * currentModel[i].getErrors());
-           */
-          if (currentModel[i].getErrors() < minResult) {
-            bestModel = currentModel[i];
-            minResult = currentModel[i].getErrors();
-          }
-        }
-      }
-      // System.exit(1);
-      // Check if useful split was found.
-
-      if (((globalErrors - minResult) / globalErrors) < 0.05) {
-        return noSplitModel;
-      }
-
-      /*
-       * if (bestModel == null) {
-       * System.err.println("This shouldn't happen! glob : "+globalErrors+
-       * " minRes : "+minResult); System.exit(1); }
-       */
-      // Set the global model for the best split
-      // bestModel.setGlobalModel(noSplitModel);
-
-      return bestModel;
-    } catch (Exception e) {
-      e.printStackTrace();
+    /**
+     * Initializes the split selection method with the given parameters.
+     * 
+     * @param minNoObj minimum number of instances that have to occur in at least
+     *                 two subsets induced by split
+     * @param allData  FULL training dataset (necessary for selection of split
+     *                 points).
+     */
+    public NBTreeModelSelection(int minNoObj, Instances allData) {
+        m_minNoObj = minNoObj;
+        m_allData = allData;
     }
-    return null;
-  }
 
-  /**
-   * Selects NBTree-type split for the given dataset.
-   */
-  @Override
-  public final ClassifierSplitModel selectModel(Instances train, Instances test) {
+    /**
+     * Sets reference to training data to null.
+     */
+    public void cleanup() {
 
-    return selectModel(train);
-  }
+        m_allData = null;
+    }
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Selects NBTree-type split for the given dataset.
+     */
+    @Override
+    public final ClassifierSplitModel selectModel(Instances data) {
+
+        double globalErrors = 0;
+
+        double minResult;
+        NBTreeSplit[] currentModel;
+        NBTreeSplit bestModel = null;
+        NBTreeNoSplit noSplitModel = null;
+        int validModels = 0;
+        Distribution checkDistribution;
+        Attribute attribute;
+        double sumOfWeights;
+        int i;
+
+        try {
+            // build the global model at this node
+            noSplitModel = new NBTreeNoSplit();
+            noSplitModel.buildClassifier(data);
+            if (data.numInstances() < 5) {
+                return noSplitModel;
+            }
+
+            // evaluate it
+            globalErrors = noSplitModel.getErrors();
+            if (globalErrors == 0) {
+                return noSplitModel;
+            }
+
+            // Check if all Instances belong to one class or if not
+            // enough Instances to split.
+            checkDistribution = new Distribution(data);
+            if (Utils.sm(checkDistribution.total(), m_minNoObj) || Utils.eq(checkDistribution.total(), checkDistribution.perClass(checkDistribution.maxClass()))) {
+                return noSplitModel;
+            }
+
+            // Check if all attributes are nominal and have a
+            // lot of values.
+            if (m_allData != null) {
+                Enumeration<Attribute> enu = data.enumerateAttributes();
+                while (enu.hasMoreElements()) {
+                    attribute = enu.nextElement();
+                    if ((attribute.isNumeric()) || (Utils.sm(attribute.numValues(), (0.3 * m_allData.numInstances())))) {
+                        break;
+                    }
+                }
+            }
+
+            currentModel = new NBTreeSplit[data.numAttributes()];
+            sumOfWeights = data.sumOfWeights();
+
+            // For each attribute.
+            for (i = 0; i < data.numAttributes(); i++) {
+
+                // Apart from class attribute.
+                if (i != (data).classIndex()) {
+
+                    // Get models for current attribute.
+                    currentModel[i] = new NBTreeSplit(i, m_minNoObj, sumOfWeights);
+                    currentModel[i].setGlobalModel(noSplitModel);
+                    currentModel[i].buildClassifier(data);
+
+                    // Check if useful split for current attribute
+                    // exists and check for enumerated attributes with
+                    // a lot of values.
+                    if (currentModel[i].checkModel()) {
+                        validModels++;
+                    }
+                } else {
+                    currentModel[i] = null;
+                }
+            }
+
+            // Check if any useful split was found.
+            if (validModels == 0) {
+                return noSplitModel;
+            }
+
+            // Find "best" attribute to split on.
+            minResult = globalErrors;
+            for (i = 0; i < data.numAttributes(); i++) {
+                if ((i != (data).classIndex()) && (currentModel[i].checkModel())) {
+                    /*
+                     * System.err.println("Errors for "+data.attribute(i).name()+" "+
+                     * currentModel[i].getErrors());
+                     */
+                    if (currentModel[i].getErrors() < minResult) {
+                        bestModel = currentModel[i];
+                        minResult = currentModel[i].getErrors();
+                    }
+                }
+            }
+            // System.exit(1);
+            // Check if useful split was found.
+
+            if (((globalErrors - minResult) / globalErrors) < 0.05) {
+                return noSplitModel;
+            }
+
+            /*
+             * if (bestModel == null) {
+             * System.err.println("This shouldn't happen! glob : "+globalErrors+
+             * " minRes : "+minResult); System.exit(1); }
+             */
+            // Set the global model for the best split
+            // bestModel.setGlobalModel(noSplitModel);
+
+            return bestModel;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Selects NBTree-type split for the given dataset.
+     */
+    @Override
+    public final ClassifierSplitModel selectModel(Instances train, Instances test) {
+
+        return selectModel(train);
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

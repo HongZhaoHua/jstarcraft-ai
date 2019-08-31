@@ -34,60 +34,58 @@ import java.util.Map;
  */
 public class GiniSplitMetric extends SplitMetric implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -2037586582742660298L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -2037586582742660298L;
 
-  @Override
-  public double evaluateSplit(Map<String, WeightMass> preDist,
-      List<Map<String, WeightMass>> postDist) {
-    double totalWeight = 0.0;
-    double[] distWeights = new double[postDist.size()];
+    @Override
+    public double evaluateSplit(Map<String, WeightMass> preDist, List<Map<String, WeightMass>> postDist) {
+        double totalWeight = 0.0;
+        double[] distWeights = new double[postDist.size()];
 
-    for (int i = 0; i < postDist.size(); i++) {
-      distWeights[i] = SplitMetric.sum(postDist.get(i));
-      totalWeight += distWeights[i];
-    }
-    double gini = 0;
-    for (int i = 0; i < postDist.size(); i++) {
-      gini += (distWeights[i] / totalWeight)
-          * gini(postDist.get(i), distWeights[i]);
-    }
+        for (int i = 0; i < postDist.size(); i++) {
+            distWeights[i] = SplitMetric.sum(postDist.get(i));
+            totalWeight += distWeights[i];
+        }
+        double gini = 0;
+        for (int i = 0; i < postDist.size(); i++) {
+            gini += (distWeights[i] / totalWeight) * gini(postDist.get(i), distWeights[i]);
+        }
 
-    return 1.0 - gini;
-  }
-
-  /**
-   * Return the gini metric computed from the supplied distribution
-   * 
-   * @param dist the distribution to compute the gini metric from
-   * @param sumOfWeights the sum of the distribution weights
-   * @return the gini metric
-   */
-  protected static double gini(Map<String, WeightMass> dist, double sumOfWeights) {
-    double gini = 1.0;
-
-    for (Map.Entry<String, WeightMass> e : dist.entrySet()) {
-      double frac = e.getValue().m_weight / sumOfWeights;
-      gini -= frac * frac;
+        return 1.0 - gini;
     }
 
-    return gini;
-  }
+    /**
+     * Return the gini metric computed from the supplied distribution
+     * 
+     * @param dist         the distribution to compute the gini metric from
+     * @param sumOfWeights the sum of the distribution weights
+     * @return the gini metric
+     */
+    protected static double gini(Map<String, WeightMass> dist, double sumOfWeights) {
+        double gini = 1.0;
 
-  /**
-   * Return the gini metric computed from the supplied distribution
-   * 
-   * @param dist dist the distribution to compute the gini metric from
-   * @return
-   */
-  public static double gini(Map<String, WeightMass> dist) {
-    return gini(dist, SplitMetric.sum(dist));
-  }
+        for (Map.Entry<String, WeightMass> e : dist.entrySet()) {
+            double frac = e.getValue().m_weight / sumOfWeights;
+            gini -= frac * frac;
+        }
 
-  @Override
-  public double getMetricRange(Map<String, WeightMass> preDist) {
-    return 1.0;
-  }
+        return gini;
+    }
+
+    /**
+     * Return the gini metric computed from the supplied distribution
+     * 
+     * @param dist dist the distribution to compute the gini metric from
+     * @return
+     */
+    public static double gini(Map<String, WeightMass> dist) {
+        return gini(dist, SplitMetric.sum(dist));
+    }
+
+    @Override
+    public double getMetricRange(Map<String, WeightMass> preDist) {
+        return 1.0;
+    }
 }

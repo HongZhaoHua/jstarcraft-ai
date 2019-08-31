@@ -24,117 +24,115 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Tests SingleIndex. Run from the command line with:<p/>
+ * Tests SingleIndex. Run from the command line with:
+ * <p/>
  * java weka.core.SingleIndexTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SingleIndexTest 
-  extends TestCase {
-  
-  /**
-   * Constructs the <code>SingleIndexTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public SingleIndexTest(String name) { 
-    super(name); 
-  }
-  
-  /**
-   * Called by JUnit before each test method.
-   *
-   * @throws Exception if an error occurs
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-  }
+public class SingleIndexTest extends TestCase {
 
-  /** Called by JUnit after each test method */
-  protected void tearDown() throws Exception {
-    super.tearDown();
-  }
-
-  /**
-   * returns a configured SingleIndex
-   *
-   * @param initial     the initial string, if null the default constructor
-   *                    is used (and "1" is set - otherwise setUpper doesn't
-   *                    work!)
-   * @param upper       the upper limit
-   */
-  protected SingleIndex getIndex(String initial, int upper) {
-    SingleIndex   result; 
-
-    if (initial == null) {
-      result = new SingleIndex();
-      result.setSingleIndex("1");
-      result.setUpper(upper);
-    }
-    else {
-      result = new SingleIndex(initial);
-      result.setUpper(upper);
+    /**
+     * Constructs the <code>SingleIndexTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public SingleIndexTest(String name) {
+        super(name);
     }
 
-    return result;
-  }
+    /**
+     * Called by JUnit before each test method.
+     *
+     * @throws Exception if an error occurs
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
+    }
 
-  /**
-   * test the default constructor
-   */
-  public void testDefaultConstructor() throws Exception {
-    int upper = 10;
-    int indexInt = 0;
-    String indexStr = "" + (indexInt + 1);
-    SingleIndex index = new SingleIndex();
-    index.setSingleIndex(indexStr);
-    index.setUpper(upper);
+    /** Called by JUnit after each test method */
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
 
-    assertEquals(indexStr, index.getSingleIndex());
-    assertEquals(indexInt, index.getIndex());
-  }
+    /**
+     * returns a configured SingleIndex
+     *
+     * @param initial the initial string, if null the default constructor is used
+     *                (and "1" is set - otherwise setUpper doesn't work!)
+     * @param upper   the upper limit
+     */
+    protected SingleIndex getIndex(String initial, int upper) {
+        SingleIndex result;
 
-  /**
-   * tests the constructor with initial value
-   */
-  public void testInitialValueConstructor() throws Exception {
-    int upper = 10;
-    int indexInt = 0;
-    String indexStr = "" + (indexInt + 1);
-    SingleIndex index = getIndex("1", upper);
+        if (initial == null) {
+            result = new SingleIndex();
+            result.setSingleIndex("1");
+            result.setUpper(upper);
+        } else {
+            result = new SingleIndex(initial);
+            result.setUpper(upper);
+        }
 
-    assertEquals(indexStr, index.getSingleIndex());
-    assertEquals(indexInt, index.getIndex());
-  }
+        return result;
+    }
 
-  /**
-   * tests whether "first" is interpreted correctly
-   */
-  public void testFirst() throws Exception {
-    int upper = 10;
-    SingleIndex index = getIndex("first", upper);
+    /**
+     * test the default constructor
+     */
+    public void testDefaultConstructor() throws Exception {
+        int upper = 10;
+        int indexInt = 0;
+        String indexStr = "" + (indexInt + 1);
+        SingleIndex index = new SingleIndex();
+        index.setSingleIndex(indexStr);
+        index.setUpper(upper);
 
-    assertEquals(0, index.getIndex());
-    assertEquals("first", index.getSingleIndex());
-  }
+        assertEquals(indexStr, index.getSingleIndex());
+        assertEquals(indexInt, index.getIndex());
+    }
 
-  /**
-   * tests whether "last" is interpreted correctly
-   */
-  public void testLast() throws Exception {
-    int upper = 10;
-    SingleIndex index = getIndex("last", upper);
+    /**
+     * tests the constructor with initial value
+     */
+    public void testInitialValueConstructor() throws Exception {
+        int upper = 10;
+        int indexInt = 0;
+        String indexStr = "" + (indexInt + 1);
+        SingleIndex index = getIndex("1", upper);
 
-    assertEquals(upper, index.getIndex());
-    assertEquals("last", index.getSingleIndex());
-  }
+        assertEquals(indexStr, index.getSingleIndex());
+        assertEquals(indexInt, index.getIndex());
+    }
 
-  public static Test suite() {
-    return new TestSuite(SingleIndexTest.class);
-  }
+    /**
+     * tests whether "first" is interpreted correctly
+     */
+    public void testFirst() throws Exception {
+        int upper = 10;
+        SingleIndex index = getIndex("first", upper);
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        assertEquals(0, index.getIndex());
+        assertEquals("first", index.getSingleIndex());
+    }
+
+    /**
+     * tests whether "last" is interpreted correctly
+     */
+    public void testLast() throws Exception {
+        int upper = 10;
+        SingleIndex index = getIndex("last", upper);
+
+        assertEquals(upper, index.getIndex());
+        assertEquals("last", index.getSingleIndex());
+    }
+
+    public static Test suite() {
+        return new TestSuite(SingleIndexTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

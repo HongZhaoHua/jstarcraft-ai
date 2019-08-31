@@ -34,52 +34,49 @@ import java.util.List;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-@KFStep(name = "Dummy", category = "Misc",
-  toolTipText = "A step that is the equivalent of /dev/null",
-  iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
+@KFStep(name = "Dummy", category = "Misc", toolTipText = "A step that is the equivalent of /dev/null", iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
 public class Dummy extends BaseStep {
 
-  /** For serialization */
-  private static final long serialVersionUID = -5822675617001689385L;
+    /** For serialization */
+    private static final long serialVersionUID = -5822675617001689385L;
 
-  /**
-   * Initialize the step.
-   *
-   * @throws WekaException if a problem occurs during initialization
-   */
-  @Override
-  public void stepInit() throws WekaException {
-    // nothing to do
-  }
+    /**
+     * Initialize the step.
+     *
+     * @throws WekaException if a problem occurs during initialization
+     */
+    @Override
+    public void stepInit() throws WekaException {
+        // nothing to do
+    }
 
-  /**
-   * Get a list of incoming connection types that this step can accept. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and any existing incoming connections. E.g. a step might be able to accept
-   * one (and only one) incoming batch data connection.
-   *
-   * @return a list of incoming connections that this step can accept given its
-   *         current state
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
+    /**
+     * Get a list of incoming connection types that this step can accept. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * any existing incoming connections. E.g. a step might be able to accept one
+     * (and only one) incoming batch data connection.
+     *
+     * @return a list of incoming connections that this step can accept given its
+     *         current state
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
 
-    // TODO add all connection types here...
-    return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET,
-      StepManager.CON_TESTSET, StepManager.CON_INSTANCE);
-  }
+        // TODO add all connection types here...
+        return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET, StepManager.CON_TESTSET, StepManager.CON_INSTANCE);
+    }
 
-  /**
-   * Get a list of outgoing connection types that this step can produce. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and the incoming connections. E.g. depending on what incoming connection is
-   * present, a step might be able to produce a trainingSet output, a testSet
-   * output or neither, but not both.
-   *
-   * @return a list of outgoing connections that this step can produce
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return null;
-  }
+    /**
+     * Get a list of outgoing connection types that this step can produce. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * the incoming connections. E.g. depending on what incoming connection is
+     * present, a step might be able to produce a trainingSet output, a testSet
+     * output or neither, but not both.
+     *
+     * @return a list of outgoing connections that this step can produce
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return null;
+    }
 }

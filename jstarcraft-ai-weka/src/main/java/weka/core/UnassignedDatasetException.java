@@ -22,34 +22,33 @@
 package weka.core;
 
 /**
- * Exception that is raised when trying to use something that has no
- * reference to a dataset, when one is required.
+ * Exception that is raised when trying to use something that has no reference
+ * to a dataset, when one is required.
  *
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class UnassignedDatasetException
-  extends RuntimeException {
+public class UnassignedDatasetException extends RuntimeException {
 
-  /** for serialization */
-  private static final long serialVersionUID = -9000116786626328854L;
+    /** for serialization */
+    private static final long serialVersionUID = -9000116786626328854L;
 
-  /**
-   * Creates a new UnassignedDatasetException with no message.
-   *
-   */
-  public UnassignedDatasetException() {
+    /**
+     * Creates a new UnassignedDatasetException with no message.
+     *
+     */
+    public UnassignedDatasetException() {
 
-    super();
-  }
+        super();
+    }
 
-  /**
-   * Creates a new UnassignedDatasetException.
-   *
-   * @param message the reason for raising an exception.
-   */
-  public UnassignedDatasetException(String message) {
+    /**
+     * Creates a new UnassignedDatasetException.
+     *
+     * @param message the reason for raising an exception.
+     */
+    public UnassignedDatasetException(String message) {
 
-    super(message);
-  }
+        super(message);
+    }
 }

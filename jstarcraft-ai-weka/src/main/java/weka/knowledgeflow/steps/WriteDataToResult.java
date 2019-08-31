@@ -37,49 +37,36 @@ import java.util.List;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-@KFStep(
-  name = "WriteDataToResult",
-  category = "Flow",
-  toolTipText = "Write incoming non-incremental data to the results store in the "
-    + "job environment", iconPath = KFGUIConsts.BASE_ICON_PATH
-    + "WriteDataToResult.gif")
+@KFStep(name = "WriteDataToResult", category = "Flow", toolTipText = "Write incoming non-incremental data to the results store in the " + "job environment", iconPath = KFGUIConsts.BASE_ICON_PATH + "WriteDataToResult.gif")
 public class WriteDataToResult extends BaseStep {
-  private static final long serialVersionUID = -1932252461151862615L;
+    private static final long serialVersionUID = -1932252461151862615L;
 
-  @Override
-  public void stepInit() throws WekaException {
-    Environment env =
-      getStepManager().getExecutionEnvironment().getEnvironmentVariables();
+    @Override
+    public void stepInit() throws WekaException {
+        Environment env = getStepManager().getExecutionEnvironment().getEnvironmentVariables();
 
-    if (!(env instanceof JobEnvironment)) {
-      JobEnvironment jobEnvironment = new JobEnvironment(env);
-      getStepManager().getExecutionEnvironment().setEnvironmentVariables(
-        jobEnvironment);
+        if (!(env instanceof JobEnvironment)) {
+            JobEnvironment jobEnvironment = new JobEnvironment(env);
+            getStepManager().getExecutionEnvironment().setEnvironmentVariables(jobEnvironment);
+        }
     }
-  }
 
-  @Override
-  public void processIncoming(Data data) throws WekaException {
-    getStepManager().processing();
-    JobEnvironment jobEnvironment =
-      (JobEnvironment) getStepManager().getExecutionEnvironment()
-        .getEnvironmentVariables();
-    getStepManager().logDetailed(
-      "Storing " + data.getConnectionName() + " in " + "result");
-    jobEnvironment.addToResult(data);
-    getStepManager().finished();
-  }
+    @Override
+    public void processIncoming(Data data) throws WekaException {
+        getStepManager().processing();
+        JobEnvironment jobEnvironment = (JobEnvironment) getStepManager().getExecutionEnvironment().getEnvironmentVariables();
+        getStepManager().logDetailed("Storing " + data.getConnectionName() + " in " + "result");
+        jobEnvironment.addToResult(data);
+        getStepManager().finished();
+    }
 
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET,
-      StepManager.CON_TESTSET, StepManager.CON_BATCH_CLASSIFIER,
-      StepManager.CON_BATCH_CLUSTERER, StepManager.CON_BATCH_ASSOCIATOR,
-      StepManager.CON_TEXT, StepManager.CON_IMAGE);
-  }
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET, StepManager.CON_TESTSET, StepManager.CON_BATCH_CLASSIFIER, StepManager.CON_BATCH_CLUSTERER, StepManager.CON_BATCH_ASSOCIATOR, StepManager.CON_TEXT, StepManager.CON_IMAGE);
+    }
 
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return null;
-  }
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return null;
+    }
 }

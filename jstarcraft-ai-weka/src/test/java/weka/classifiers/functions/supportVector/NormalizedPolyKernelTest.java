@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests NormalizedPolyKernel. Run from the command line with:<p/>
+ * Tests NormalizedPolyKernel. Run from the command line with:
+ * <p/>
  * java weka.classifiers.functions.supportVector.NormalizedPolyKernelTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class NormalizedPolyKernelTest 
-  extends AbstractKernelTest {
+public class NormalizedPolyKernelTest extends AbstractKernelTest {
 
-  public NormalizedPolyKernelTest(String name) { 
-    super(name);  
-  }
+    public NormalizedPolyKernelTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default NormalizedPolyKernel */
-  public Kernel getKernel() {
-    return new NormalizedPolyKernel();
-  }
+    /** Creates a default NormalizedPolyKernel */
+    public Kernel getKernel() {
+        return new NormalizedPolyKernel();
+    }
 
-  public static Test suite() {
-    return new TestSuite(NormalizedPolyKernelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(NormalizedPolyKernelTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

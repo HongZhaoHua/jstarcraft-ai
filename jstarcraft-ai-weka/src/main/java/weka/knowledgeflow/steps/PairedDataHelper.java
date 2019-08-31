@@ -103,254 +103,240 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class PairedDataHelper<P> implements java.io.Serializable {
 
-  /** For serialization */
-  private static final long serialVersionUID = -7813465607881227514L;
+    /** For serialization */
+    private static final long serialVersionUID = -7813465607881227514L;
 
-  /**
-   * Storage of arbitrary indexed results computed during execution of
-   * PairedProcessor.processPrimary()
-   */
-  protected Map<String, Map<Integer, Object>> m_namedIndexedStore =
-    new ConcurrentHashMap<String, Map<Integer, Object>>();
+    /**
+     * Storage of arbitrary indexed results computed during execution of
+     * PairedProcessor.processPrimary()
+     */
+    protected Map<String, Map<Integer, Object>> m_namedIndexedStore = new ConcurrentHashMap<String, Map<Integer, Object>>();
 
-  /** Storage of the indexed primary result */
-  protected Map<Integer, P> m_primaryResultMap =
-    new ConcurrentHashMap<Integer, P>();
+    /** Storage of the indexed primary result */
+    protected Map<Integer, P> m_primaryResultMap = new ConcurrentHashMap<Integer, P>();
 
-  /**
-   * Holds the secondary data objects, if they arrive before the corresponding
-   * primary has been computed
-   */
-  protected Map<Integer, Data> m_secondaryDataMap =
-    new ConcurrentHashMap<Integer, Data>();
+    /**
+     * Holds the secondary data objects, if they arrive before the corresponding
+     * primary has been computed
+     */
+    protected Map<Integer, Data> m_secondaryDataMap = new ConcurrentHashMap<Integer, Data>();
 
-  /** The type of connection to route to PairedProcessor.processPrimary() */
-  protected String m_primaryConType;
+    /** The type of connection to route to PairedProcessor.processPrimary() */
+    protected String m_primaryConType;
 
-  /** The type of connection to route to PairedProcessor.processSecondary() */
-  protected String m_secondaryConType;
+    /** The type of connection to route to PairedProcessor.processSecondary() */
+    protected String m_secondaryConType;
 
-  /** The PairedProcessor implementation that will do the actual work */
-  protected transient PairedProcessor m_processor;
+    /** The PairedProcessor implementation that will do the actual work */
+    protected transient PairedProcessor m_processor;
 
-  /** The step that owns this helper */
-  protected transient Step m_ownerStep;
+    /** The step that owns this helper */
+    protected transient Step m_ownerStep;
 
-  /** Keep track of completed primary/secondary pairs */
-  protected transient AtomicInteger m_setCount;
+    /** Keep track of completed primary/secondary pairs */
+    protected transient AtomicInteger m_setCount;
 
-  /**
-   * Constructor
-   * 
-   * @param owner the owner step
-   * @param processor the PairedProcessor implementation
-   * @param primaryConType the primary connection type
-   * @param secondaryConType the secondary connection type
-   */
-  public PairedDataHelper(Step owner, PairedProcessor processor,
-    String primaryConType, String secondaryConType) {
-    m_primaryConType = primaryConType;
-    m_secondaryConType = secondaryConType;
-    m_ownerStep = owner;
-    m_processor = processor;
-  }
-
-  /**
-   * Initiate routing and processing for a particular data object
-   * 
-   * @param data the data object to process
-   * @throws WekaException if a problem occurs
-   */
-  public void process(Data data) throws WekaException {
-    if (m_ownerStep.getStepManager().isStopRequested()) {
-      m_ownerStep.getStepManager().interrupted();
-      return;
-    }
-    String connType = data.getConnectionName();
-    if (connType.equals(m_primaryConType)) {
-      processPrimary(data);
-    } else if (m_secondaryConType != null
-      && connType.equals(m_secondaryConType)) {
-      processSecondary(data);
-    } else {
-      throw new WekaException("Illegal connection/data type: " + connType);
+    /**
+     * Constructor
+     * 
+     * @param owner            the owner step
+     * @param processor        the PairedProcessor implementation
+     * @param primaryConType   the primary connection type
+     * @param secondaryConType the secondary connection type
+     */
+    public PairedDataHelper(Step owner, PairedProcessor processor, String primaryConType, String secondaryConType) {
+        m_primaryConType = primaryConType;
+        m_secondaryConType = secondaryConType;
+        m_ownerStep = owner;
+        m_processor = processor;
     }
 
-    if (!m_ownerStep.getStepManager().isStopRequested()) {
-      if (m_setCount != null && m_setCount.get() == 0) {
-        m_ownerStep.getStepManager().finished();
-        // save memory
-        m_primaryResultMap.clear();
-        m_secondaryDataMap.clear();
-        m_namedIndexedStore.clear();
-      }
-    } else {
-      m_ownerStep.getStepManager().interrupted();
-    }
-  }
+    /**
+     * Initiate routing and processing for a particular data object
+     * 
+     * @param data the data object to process
+     * @throws WekaException if a problem occurs
+     */
+    public void process(Data data) throws WekaException {
+        if (m_ownerStep.getStepManager().isStopRequested()) {
+            m_ownerStep.getStepManager().interrupted();
+            return;
+        }
+        String connType = data.getConnectionName();
+        if (connType.equals(m_primaryConType)) {
+            processPrimary(data);
+        } else if (m_secondaryConType != null && connType.equals(m_secondaryConType)) {
+            processSecondary(data);
+        } else {
+            throw new WekaException("Illegal connection/data type: " + connType);
+        }
 
-  /**
-   * Handle the processing of the primary data/connection. Performs
-   * initialization in the case of receiving the first data object in a batch.
-   * Delegates actual processing work to the PairedProcessor.
-   * 
-   * @param data the data to process
-   * @throws WekaException if a problem occurs
-   */
-  @SuppressWarnings("unchecked")
-  private void processPrimary(Data data) throws WekaException {
-    Integer setNum =
-      data.getPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
-    Integer maxSetNum =
-      data.getPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
-    if (m_setCount == null) {
-      m_setCount = new AtomicInteger(maxSetNum);
-    }
-
-    if (setNum == 1) {
-      m_ownerStep.getStepManager().processing();
-      m_ownerStep.getStepManager().statusMessage(
-        "Processing set/fold " + setNum + " out of " + maxSetNum);
+        if (!m_ownerStep.getStepManager().isStopRequested()) {
+            if (m_setCount != null && m_setCount.get() == 0) {
+                m_ownerStep.getStepManager().finished();
+                // save memory
+                m_primaryResultMap.clear();
+                m_secondaryDataMap.clear();
+                m_namedIndexedStore.clear();
+            }
+        } else {
+            m_ownerStep.getStepManager().interrupted();
+        }
     }
 
-    if (!m_ownerStep.getStepManager().isStopRequested()) {
-      P result = (P) m_processor.processPrimary(setNum, maxSetNum, data, this);
-      if (result != null) {
-        m_primaryResultMap.put(setNum, result);
-      }
-    } else {
-      m_ownerStep.getStepManager().interrupted();
-      return;
+    /**
+     * Handle the processing of the primary data/connection. Performs initialization
+     * in the case of receiving the first data object in a batch. Delegates actual
+     * processing work to the PairedProcessor.
+     * 
+     * @param data the data to process
+     * @throws WekaException if a problem occurs
+     */
+    @SuppressWarnings("unchecked")
+    private void processPrimary(Data data) throws WekaException {
+        Integer setNum = data.getPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
+        Integer maxSetNum = data.getPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
+        if (m_setCount == null) {
+            m_setCount = new AtomicInteger(maxSetNum);
+        }
+
+        if (setNum == 1) {
+            m_ownerStep.getStepManager().processing();
+            m_ownerStep.getStepManager().statusMessage("Processing set/fold " + setNum + " out of " + maxSetNum);
+        }
+
+        if (!m_ownerStep.getStepManager().isStopRequested()) {
+            P result = (P) m_processor.processPrimary(setNum, maxSetNum, data, this);
+            if (result != null) {
+                m_primaryResultMap.put(setNum, result);
+            }
+        } else {
+            m_ownerStep.getStepManager().interrupted();
+            return;
+        }
+
+        Data waitingSecondary = m_secondaryDataMap.get(setNum);
+        if (waitingSecondary != null) {
+            processSecondary(waitingSecondary);
+        } else if (m_secondaryConType == null) {
+            // no secondary connection
+            m_setCount.decrementAndGet();
+        }
     }
 
-    Data waitingSecondary = m_secondaryDataMap.get(setNum);
-    if (waitingSecondary != null) {
-      processSecondary(waitingSecondary);
-    } else if (m_secondaryConType == null) {
-      // no secondary connection
-      m_setCount.decrementAndGet();
-    }
-  }
+    /**
+     * Handle processing of the secondary data/connection. Stores the secondary if
+     * there is no corresponding primary result generated yet. Delegates actual
+     * processing work to the PairedProcessor
+     * 
+     * @param data the data to process
+     * @throws WekaException if a problem occurs
+     */
+    @SuppressWarnings("unchecked")
+    private synchronized void processSecondary(Data data) throws WekaException {
+        Integer setNum = data.getPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
+        Integer maxSetNum = data.getPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
 
-  /**
-   * Handle processing of the secondary data/connection. Stores the secondary if
-   * there is no corresponding primary result generated yet. Delegates actual
-   * processing work to the PairedProcessor
-   * 
-   * @param data the data to process
-   * @throws WekaException if a problem occurs
-   */
-  @SuppressWarnings("unchecked")
-  private synchronized void processSecondary(Data data) throws WekaException {
-    Integer setNum =
-      data.getPayloadElement(StepManager.CON_AUX_DATA_SET_NUM, 1);
-    Integer maxSetNum =
-      data.getPayloadElement(StepManager.CON_AUX_DATA_MAX_SET_NUM, 1);
+        P primaryData = m_primaryResultMap.get(setNum);
+        if (primaryData == null) {
+            // store, ready for the arrival of the matching primary data
+            m_secondaryDataMap.put(setNum, data);
+            return;
+        }
 
-    P primaryData = m_primaryResultMap.get(setNum);
-    if (primaryData == null) {
-      // store, ready for the arrival of the matching primary data
-      m_secondaryDataMap.put(setNum, data);
-      return;
-    }
+        if (!m_ownerStep.getStepManager().isStopRequested()) {
+            m_processor.processSecondary(setNum, maxSetNum, data, this);
+        } else {
+            m_ownerStep.getStepManager().interrupted();
+            return;
+        }
 
-    if (!m_ownerStep.getStepManager().isStopRequested()) {
-      m_processor.processSecondary(setNum, maxSetNum, data, this);
-    } else {
-      m_ownerStep.getStepManager().interrupted();
-      return;
+        m_setCount.decrementAndGet();
     }
 
-    m_setCount.decrementAndGet();
-  }
-
-  /**
-   * Retrieve the primary result corresponding to a given set number
-   *
-   * @param index the set number of the result to get
-   * @return the primary result
-   */
-  public P getIndexedPrimaryResult(int index) {
-    return m_primaryResultMap.get(index);
-  }
-
-  /**
-   * Reset the helper. The helper must be reset between runs if it is being
-   * re-used (as opposed to a new helper instance being created).
-   */
-  public void reset() {
-    // dont' reset if we're still processing!
-    if (m_setCount != null && m_setCount.get() > 0
-      && !m_ownerStep.getStepManager().isStopRequested()) {
-      return;
-    }
-    m_setCount = null;
-  }
-
-  /**
-   * Return true if there is no further processing to be done
-   *
-   * @return true if processing is done
-   */
-  public boolean isFinished() {
-    return m_setCount.get() == 0;
-  }
-
-  /**
-   * Create a indexed store with a given name
-   * 
-   * @param name the name of the store to create
-   */
-  public void createNamedIndexedStore(String name) {
-    m_namedIndexedStore.put(name, new ConcurrentHashMap<Integer, Object>());
-  }
-
-  /**
-   * Gets an indexed value from a named store
-   * 
-   * @param storeName the name of the store to retrieve from
-   * @param index the index of the value to get
-   * @param <T> the type of the value
-   * @return the requested value or null if either the store does not exist or
-   *         the value does not exist in the store.
-   */
-  @SuppressWarnings("unchecked")
-  public <T> T getIndexedValueFromNamedStore(String storeName, Integer index) {
-    Map<Integer, Object> store = m_namedIndexedStore.get(storeName);
-    if (store != null) {
-      return (T) store.get(index);
+    /**
+     * Retrieve the primary result corresponding to a given set number
+     *
+     * @param index the set number of the result to get
+     * @return the primary result
+     */
+    public P getIndexedPrimaryResult(int index) {
+        return m_primaryResultMap.get(index);
     }
 
-    return null;
-  }
-
-  /**
-   * Adds a value to a named store with the given index. Creates the named store
-   * if it doesn't already exist.
-   *
-   * @param storeName the name of the store to add to
-   * @param index the index to associate with the value
-   * @param value the value to store
-   */
-  public synchronized void addIndexedValueToNamedStore(String storeName,
-    Integer index, Object value) {
-    Map<Integer, Object> store = m_namedIndexedStore.get(storeName);
-    if (store == null) {
-      createNamedIndexedStore(storeName);
-      store = m_namedIndexedStore.get(storeName);
+    /**
+     * Reset the helper. The helper must be reset between runs if it is being
+     * re-used (as opposed to a new helper instance being created).
+     */
+    public void reset() {
+        // dont' reset if we're still processing!
+        if (m_setCount != null && m_setCount.get() > 0 && !m_ownerStep.getStepManager().isStopRequested()) {
+            return;
+        }
+        m_setCount = null;
     }
-    store.put(index, value);
-  }
 
-  /**
-   * Interface for processors of paired data to implement. See the description
-   * in the class documentation of PairedDataHelper.
-   */
-  public interface PairedProcessor<P> {
-    P processPrimary(Integer setNum, Integer maxSetNum, Data data,
-      PairedDataHelper<P> helper) throws WekaException;
+    /**
+     * Return true if there is no further processing to be done
+     *
+     * @return true if processing is done
+     */
+    public boolean isFinished() {
+        return m_setCount.get() == 0;
+    }
 
-    void processSecondary(Integer setNum, Integer maxSetNum, Data data,
-      PairedDataHelper<P> helper) throws WekaException;
-  }
+    /**
+     * Create a indexed store with a given name
+     * 
+     * @param name the name of the store to create
+     */
+    public void createNamedIndexedStore(String name) {
+        m_namedIndexedStore.put(name, new ConcurrentHashMap<Integer, Object>());
+    }
+
+    /**
+     * Gets an indexed value from a named store
+     * 
+     * @param storeName the name of the store to retrieve from
+     * @param index     the index of the value to get
+     * @param           <T> the type of the value
+     * @return the requested value or null if either the store does not exist or the
+     *         value does not exist in the store.
+     */
+    @SuppressWarnings("unchecked")
+    public <T> T getIndexedValueFromNamedStore(String storeName, Integer index) {
+        Map<Integer, Object> store = m_namedIndexedStore.get(storeName);
+        if (store != null) {
+            return (T) store.get(index);
+        }
+
+        return null;
+    }
+
+    /**
+     * Adds a value to a named store with the given index. Creates the named store
+     * if it doesn't already exist.
+     *
+     * @param storeName the name of the store to add to
+     * @param index     the index to associate with the value
+     * @param value     the value to store
+     */
+    public synchronized void addIndexedValueToNamedStore(String storeName, Integer index, Object value) {
+        Map<Integer, Object> store = m_namedIndexedStore.get(storeName);
+        if (store == null) {
+            createNamedIndexedStore(storeName);
+            store = m_namedIndexedStore.get(storeName);
+        }
+        store.put(index, value);
+    }
+
+    /**
+     * Interface for processors of paired data to implement. See the description in
+     * the class documentation of PairedDataHelper.
+     */
+    public interface PairedProcessor<P> {
+        P processPrimary(Integer setNum, Integer maxSetNum, Data data, PairedDataHelper<P> helper) throws WekaException;
+
+        void processSecondary(Integer setNum, Integer maxSetNum, Data data, PairedDataHelper<P> helper) throws WekaException;
+    }
 }

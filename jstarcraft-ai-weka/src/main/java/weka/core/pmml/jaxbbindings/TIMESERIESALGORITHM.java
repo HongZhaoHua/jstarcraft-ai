@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for TIMESERIES-ALGORITHM.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for TIMESERIES-ALGORITHM.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="TIMESERIES-ALGORITHM">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -32,12 +34,9 @@ import javax.xml.bind.annotation.XmlEnumValue;
 @XmlEnum
 public enum TIMESERIESALGORITHM {
 
-    ARIMA("ARIMA"),
-    @XmlEnumValue("ExponentialSmoothing")
-    EXPONENTIAL_SMOOTHING("ExponentialSmoothing"),
-    @XmlEnumValue("SeasonalTrendDecomposition")
-    SEASONAL_TREND_DECOMPOSITION("SeasonalTrendDecomposition"),
-    @XmlEnumValue("SpectralAnalysis")
+    ARIMA("ARIMA"), @XmlEnumValue("ExponentialSmoothing")
+    EXPONENTIAL_SMOOTHING("ExponentialSmoothing"), @XmlEnumValue("SeasonalTrendDecomposition")
+    SEASONAL_TREND_DECOMPOSITION("SeasonalTrendDecomposition"), @XmlEnumValue("SpectralAnalysis")
     SPECTRAL_ANALYSIS("SpectralAnalysis");
     private final String value;
 
@@ -50,7 +49,7 @@ public enum TIMESERIESALGORITHM {
     }
 
     public static TIMESERIESALGORITHM fromValue(String v) {
-        for (TIMESERIESALGORITHM c: TIMESERIESALGORITHM.values()) {
+        for (TIMESERIESALGORITHM c : TIMESERIESALGORITHM.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

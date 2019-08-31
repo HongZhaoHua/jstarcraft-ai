@@ -31,25 +31,20 @@ import jsat.linear.Vec;
  *
  * @author Edward Raff
  */
-public class NormalMR extends NormalM
-{
+public class NormalMR extends NormalM {
 
     @Override
-    public <V extends Vec> boolean setUsingData(List<V> dataSet, boolean parallel)
-    {
-        try
-        {
+    public <V extends Vec> boolean setUsingData(List<V> dataSet, boolean parallel) {
+        try {
             Vec mean = new DenseVector(dataSet.get(0).length());
             Matrix cov = new DenseMatrix(mean.length(), mean.length());
             MatrixStatistics.FastMCD(mean, cov, dataSet, parallel);
 
             setMeanCovariance(mean, cov);
             return true;
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             return false;
         }
     }
-    
+
 }

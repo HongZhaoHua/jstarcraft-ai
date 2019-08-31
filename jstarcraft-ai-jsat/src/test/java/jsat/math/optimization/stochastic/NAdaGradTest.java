@@ -46,40 +46,33 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class NAdaGradTest
-{
-    
-    public NAdaGradTest()
-    {
+public class NAdaGradTest {
+
+    public NAdaGradTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testUpdate_3args()
-    {
+    public void testUpdate_3args() {
         System.out.println("update");
         Random rand = RandomUtil.getRandom();
         Vec x0 = new DenseVector(10);
-        for(int i = 0; i < x0.length(); i++)
+        for (int i = 0; i < x0.length(); i++)
             x0.set(i, rand.nextDouble());
 
         RosenbrockFunction f = new RosenbrockFunction();
@@ -87,9 +80,8 @@ public class NAdaGradTest
         double eta = 0.01;
         NAdaGrad instance = new NAdaGrad();
         instance.setup(x0.length());
-        
-        for(int i = 0; i < 100000; i++)
-        {
+
+        for (int i = 0; i < 100000; i++) {
             instance.update(x0, fp.f(x0).normalized(), eta);
             instance = instance.clone();
         }
@@ -97,65 +89,60 @@ public class NAdaGradTest
     }
 
     @Test
-    public void testUpdate_5args()
-    {
+    public void testUpdate_5args() {
         System.out.println("update");
         Random rand = RandomUtil.getRandom();
         Vec xWithBias = new DenseVector(21);
-        for(int i = 0; i < xWithBias.length(); i++)
+        for (int i = 0; i < xWithBias.length(); i++)
             xWithBias.set(i, rand.nextDouble());
-        
+
         Vec x0 = new SubVector(0, 20, xWithBias);
 
         RosenbrockFunction f = new RosenbrockFunction();
         FunctionVec fp = f.getDerivative();
         double eta = 0.01;
-        
-        
+
         NAdaGrad instance = new NAdaGrad();
         instance.setup(x0.length());
-        
-        for(int i = 0; i < 100000; i++)
-        {
+
+        for (int i = 0; i < 100000; i++) {
             double bias = xWithBias.get(20);
             Vec gradWithBias = fp.f(xWithBias);
             gradWithBias.normalize();
             double biasGrad = gradWithBias.get(20);
             Vec grad = new SubVector(0, 20, gradWithBias);
             double biasDelta = instance.update(x0, grad, eta, bias, biasGrad);
-            xWithBias.set(20, bias-biasDelta);
-            
+            xWithBias.set(20, bias - biasDelta);
+
             instance = instance.clone();
         }
         assertEquals(0.0, f.f(xWithBias), 1e-1);
-        
+
     }
-    
+
     @Test
-    public void testUpdate_5args_scaled()
-    {
+    public void testUpdate_5args_scaled() {
         System.out.println("update");
         Random rand = RandomUtil.getRandom();
-        
-        //Test simple SGD LR on many different scalings of the data, all should work
-        for(double scale = 0.0000001; scale <= 1000050; scale *= 10)
-        {
+
+        // Test simple SGD LR on many different scalings of the data, all should work
+        for (double scale = 0.0000001; scale <= 1000050; scale *= 10) {
             ClassificationDataSet train = FixedProblems.get2ClassLinear(2000, rand);
             ClassificationDataSet test = FixedProblems.get2ClassLinear(200, rand);
-            
-            LinearTransform transform = new LinearTransform(train, -1*scale, 1*scale);
+
+            LinearTransform transform = new LinearTransform(train, -1 * scale, 1 * scale);
             train.applyTransform(transform);
             test.applyTransform(transform);
-            
+
             LinearSGD sgd = new LinearSGD(new LogisticLoss(), 0.5, new NoDecay(), 0.0, 0.0);
             sgd.setUseBias(true);
             sgd.setGradientUpdater(new NAdaGrad());
-            
+
             ClassificationModelEvaluation cme = new ClassificationModelEvaluation(sgd, train);
             cme.evaluateTestSet(test);
-            
-            assertEquals(0.0, cme.getErrorRate(), 2.0/200);//should be 0 for all, AdaGrad or SGD would not be so sucesfull
+
+            assertEquals(0.0, cme.getErrorRate(), 2.0 / 200);// should be 0 for all, AdaGrad or SGD would not be so sucesfull
         }
     }
-    
+
 }

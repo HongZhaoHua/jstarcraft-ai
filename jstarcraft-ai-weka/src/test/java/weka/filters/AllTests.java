@@ -25,26 +25,26 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Test class for all filters. Run from the command line with:<p/>
+ * Test class for all filters. Run from the command line with:
+ * <p/>
  * java weka.filters.AllTests
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite suite = (TestSuite) suite("weka.filters.Filter");
-    
-    suite.addTest(AllFilterTest.suite());
-    suite.addTest(MultiFilterTest.suite());
-    
-    return suite;
-  }
+    public static Test suite() {
+        TestSuite suite = (TestSuite) suite("weka.filters.Filter");
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        suite.addTest(AllFilterTest.suite());
+        suite.addTest(MultiFilterTest.suite());
+
+        return suite;
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

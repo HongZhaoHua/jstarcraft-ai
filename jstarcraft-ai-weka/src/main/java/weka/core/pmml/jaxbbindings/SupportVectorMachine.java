@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for SupportVectorMachine element declaration.
+ * <p>
+ * Java class for SupportVectorMachine element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="SupportVectorMachine">
@@ -45,11 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "supportVectors",
-    "coefficients"
-})
+@XmlType(name = "", propOrder = { "extension", "supportVectors", "coefficients" })
 @XmlRootElement(name = "SupportVectorMachine")
 public class SupportVectorMachine {
 
@@ -70,21 +67,21 @@ public class SupportVectorMachine {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -98,10 +95,8 @@ public class SupportVectorMachine {
     /**
      * Gets the value of the supportVectors property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SupportVectors }
-     *     
+     * @return possible object is {@link SupportVectors }
+     * 
      */
     public SupportVectors getSupportVectors() {
         return supportVectors;
@@ -110,10 +105,8 @@ public class SupportVectorMachine {
     /**
      * Sets the value of the supportVectors property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SupportVectors }
-     *     
+     * @param value allowed object is {@link SupportVectors }
+     * 
      */
     public void setSupportVectors(SupportVectors value) {
         this.supportVectors = value;
@@ -122,10 +115,8 @@ public class SupportVectorMachine {
     /**
      * Gets the value of the coefficients property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Coefficients }
-     *     
+     * @return possible object is {@link Coefficients }
+     * 
      */
     public Coefficients getCoefficients() {
         return coefficients;
@@ -134,10 +125,8 @@ public class SupportVectorMachine {
     /**
      * Sets the value of the coefficients property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Coefficients }
-     *     
+     * @param value allowed object is {@link Coefficients }
+     * 
      */
     public void setCoefficients(Coefficients value) {
         this.coefficients = value;
@@ -146,10 +135,8 @@ public class SupportVectorMachine {
     /**
      * Gets the value of the alternateTargetCategory property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getAlternateTargetCategory() {
         return alternateTargetCategory;
@@ -158,10 +145,8 @@ public class SupportVectorMachine {
     /**
      * Sets the value of the alternateTargetCategory property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setAlternateTargetCategory(String value) {
         this.alternateTargetCategory = value;
@@ -170,10 +155,8 @@ public class SupportVectorMachine {
     /**
      * Gets the value of the targetCategory property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTargetCategory() {
         return targetCategory;
@@ -182,10 +165,8 @@ public class SupportVectorMachine {
     /**
      * Sets the value of the targetCategory property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTargetCategory(String value) {
         this.targetCategory = value;
@@ -194,10 +175,8 @@ public class SupportVectorMachine {
     /**
      * Gets the value of the threshold property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getThreshold() {
         return threshold;
@@ -206,10 +185,8 @@ public class SupportVectorMachine {
     /**
      * Sets the value of the threshold property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setThreshold(Double value) {
         this.threshold = value;

@@ -27,7 +27,8 @@ import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
 
 /**
- * Tests ReplaceWithMissingValueTest. Run from the command line with:<p>
+ * Tests ReplaceWithMissingValueTest. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.attribute.ReplaceWithMissingValueTest
  *
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
@@ -35,25 +36,27 @@ import weka.filters.Filter;
  */
 public class ReplaceWithMissingValueTest extends AbstractFilterTest {
 
-  public ReplaceWithMissingValueTest(String name) { super(name);  }
+    public ReplaceWithMissingValueTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default ReplaceMissingValues */
-  public Filter getFilter() {
-    return new ReplaceWithMissingValue();
-  }
+    /** Creates a default ReplaceMissingValues */
+    public Filter getFilter() {
+        return new ReplaceWithMissingValue();
+    }
 
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  public static Test suite() {
-    return new TestSuite(ReplaceWithMissingValueTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(ReplaceWithMissingValueTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

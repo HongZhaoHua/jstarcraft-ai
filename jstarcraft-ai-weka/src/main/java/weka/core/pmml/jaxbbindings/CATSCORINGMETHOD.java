@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for CAT-SCORING-METHOD.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for CAT-SCORING-METHOD.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="CAT-SCORING-METHOD">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -31,8 +33,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum CATSCORINGMETHOD {
 
     @XmlEnumValue("majorityVote")
-    MAJORITY_VOTE("majorityVote"),
-    @XmlEnumValue("weightedMajorityVote")
+    MAJORITY_VOTE("majorityVote"), @XmlEnumValue("weightedMajorityVote")
     WEIGHTED_MAJORITY_VOTE("weightedMajorityVote");
     private final String value;
 
@@ -45,7 +46,7 @@ public enum CATSCORINGMETHOD {
     }
 
     public static CATSCORINGMETHOD fromValue(String v) {
-        for (CATSCORINGMETHOD c: CATSCORINGMETHOD.values()) {
+        for (CATSCORINGMETHOD c : CATSCORINGMETHOD.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

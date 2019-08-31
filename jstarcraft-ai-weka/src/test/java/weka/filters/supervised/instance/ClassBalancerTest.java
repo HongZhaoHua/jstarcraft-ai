@@ -26,35 +26,38 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Resample. Run from the command line with:<p>
+ * Tests Resample. Run from the command line with:
+ * <p>
  * java weka.filters.supervised.instance.ClassBalancer
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision: 8034 $
  */
 public class ClassBalancerTest extends AbstractFilterTest {
-  
-  public ClassBalancerTest(String name) { super(name);  }
-  
-  /** Creates a default StratifiedRemoveFolds */
-  public Filter getFilter() {
-    ClassBalancer f = new ClassBalancer();
-    return f;
-  }
-  
-  /** Remove string attributes from default fixture instances */
-  protected void setUp() throws Exception {
-    
-    super.setUp();
-    m_Instances.setClassIndex(1);
-  }
 
-  public static Test suite() {
-    return new TestSuite(ClassBalancerTest.class);
-  }
+    public ClassBalancerTest(String name) {
+        super(name);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /** Creates a default StratifiedRemoveFolds */
+    public Filter getFilter() {
+        ClassBalancer f = new ClassBalancer();
+        return f;
+    }
+
+    /** Remove string attributes from default fixture instances */
+    protected void setUp() throws Exception {
+
+        super.setUp();
+        m_Instances.setClassIndex(1);
+    }
+
+    public static Test suite() {
+        return new TestSuite(ClassBalancerTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

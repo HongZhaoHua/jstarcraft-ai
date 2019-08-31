@@ -27,61 +27,60 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RemoveUseless. Run from the command line with: <p/>
+ * Tests RemoveUseless. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.RemoveUselessTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RemoveUselessTest 
-  extends AbstractFilterTest {
+public class RemoveUselessTest extends AbstractFilterTest {
 
-  public RemoveUselessTest(String name) { 
-    super(name);  
-  }
+    public RemoveUselessTest(String name) {
+        super(name);
+    }
 
-  /** Need to remove non-nominal attributes, set class index */
-  protected void setUp() throws Exception {
-    super.setUp();
+    /** Need to remove non-nominal attributes, set class index */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-    // class index
-    m_Instances.setClassIndex(1);
-  }
-  
-  /** Creates a default RemoveUseless */
-  public Filter getFilter() {
-    return getFilter(new RemoveUseless().getMaximumVariancePercentageAllowed());
-  }
+        // class index
+        m_Instances.setClassIndex(1);
+    }
 
-  /**
-   * creates a RemoveUseless filter with the given percentage of allowed
-   * variance
-   */
-  protected Filter getFilter(double percentage) {
-    RemoveUseless f = new RemoveUseless();
-    f.setMaximumVariancePercentageAllowed(percentage);
-    return f;
-  }
+    /** Creates a default RemoveUseless */
+    public Filter getFilter() {
+        return getFilter(new RemoveUseless().getMaximumVariancePercentageAllowed());
+    }
 
-  public void testNoneRemoved() {
-    m_Filter = getFilter(100);
-    Instances result = useFilter();
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+    /**
+     * creates a RemoveUseless filter with the given percentage of allowed variance
+     */
+    protected Filter getFilter(double percentage) {
+        RemoveUseless f = new RemoveUseless();
+        f.setMaximumVariancePercentageAllowed(percentage);
+        return f;
+    }
 
-  public void testSomeRemoved() {
-    m_Filter = getFilter(5);
-    Instances result = useFilter();
-    assertTrue(m_Instances.numAttributes() > result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+    public void testNoneRemoved() {
+        m_Filter = getFilter(100);
+        Instances result = useFilter();
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  public static Test suite() {
-    return new TestSuite(RemoveUselessTest.class);
-  }
+    public void testSomeRemoved() {
+        m_Filter = getFilter(5);
+        Instances result = useFilter();
+        assertTrue(m_Instances.numAttributes() > result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(RemoveUselessTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

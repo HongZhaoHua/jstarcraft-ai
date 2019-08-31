@@ -32,28 +32,29 @@ import weka.core.expressionlanguage.core.MacroDeclarations;
  */
 public class NoMacros implements MacroDeclarations {
 
-  /**
-   * Whether the macro is declared. Always returns <code>false</code>
-   * 
-   * @param name name of the macro
-   * @return whether the macro is declared. Always <code>false</code>.
-   */
-  @Override
-  public boolean hasMacro(String name) {
-    return false;
-  }
+    /**
+     * Whether the macro is declared. Always returns <code>false</code>
+     * 
+     * @param name name of the macro
+     * @return whether the macro is declared. Always <code>false</code>.
+     */
+    @Override
+    public boolean hasMacro(String name) {
+        return false;
+    }
 
-  /**
-   * Tries to fetch a macro. Will always fail.</p>
-   * 
-   * The same invariant of {@link MacroDeclarations} applies here too.
-   * 
-   * @param name name of the macro
-   * @return nothing
-   */
-  @Override
-  public Macro getMacro(String name) {
-    throw new RuntimeException("Macro '" + name + "' doesn't exist!");
-  }
+    /**
+     * Tries to fetch a macro. Will always fail.
+     * </p>
+     * 
+     * The same invariant of {@link MacroDeclarations} applies here too.
+     * 
+     * @param name name of the macro
+     * @return nothing
+     */
+    @Override
+    public Macro getMacro(String name) {
+        throw new RuntimeException("Macro '" + name + "' doesn't exist!");
+    }
 
 }

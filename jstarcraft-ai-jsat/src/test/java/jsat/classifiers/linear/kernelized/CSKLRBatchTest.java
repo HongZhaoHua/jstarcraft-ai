@@ -26,39 +26,31 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class CSKLRBatchTest
-{
-    public CSKLRBatchTest()
-    {
+public class CSKLRBatchTest {
+    public CSKLRBatchTest() {
     }
 
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
 
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values())
-        {
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
             CSKLRBatch instance = new CSKLRBatch(0.5, new RBFKernel(0.5), 10, mode, SupportVectorLearner.CacheMode.NONE);
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
@@ -72,12 +64,10 @@ public class CSKLRBatchTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values())
-        {
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
             CSKLRBatch instance = new CSKLRBatch(0.5, new RBFKernel(0.5), 10, mode, SupportVectorLearner.CacheMode.NONE);
 
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
@@ -92,12 +82,10 @@ public class CSKLRBatchTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values())
-        {
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
             CSKLRBatch instance = new CSKLRBatch(0.5, new RBFKernel(0.5), 10, mode, SupportVectorLearner.CacheMode.NONE);
 
             ClassificationDataSet t1 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom());
@@ -126,7 +114,7 @@ public class CSKLRBatchTest
     public void testSerializable_WithTrainedModel() throws Exception {
         System.out.println("Serializable");
 
-        for(CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
+        for (CSKLR.UpdateMode mode : CSKLR.UpdateMode.values()) {
 
             CSKLRBatch instance = new CSKLRBatch(0.5, new RBFKernel(0.5), 10, mode, SupportVectorLearner.CacheMode.NONE);
 

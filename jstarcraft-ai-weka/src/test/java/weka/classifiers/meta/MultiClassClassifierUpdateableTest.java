@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests MultiClassClassifierUpdateable. Run from the command line with:<p>
+ * Tests MultiClassClassifierUpdateable. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.MultiClassClassifierUpdateableTest
  *
  * @author Mark Hall
@@ -34,22 +35,24 @@ import junit.framework.TestSuite;
  */
 public class MultiClassClassifierUpdateableTest extends AbstractClassifierTest {
 
-  public MultiClassClassifierUpdateableTest(String name) { super(name);  }
+    public MultiClassClassifierUpdateableTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default MultiClassClassifierUpdateable */
-  public Classifier getClassifier() {
-    MultiClassClassifierUpdateable m = new MultiClassClassifierUpdateable();
-    m.setClassifier(new weka.classifiers.functions.SGD());
+    /** Creates a default MultiClassClassifierUpdateable */
+    public Classifier getClassifier() {
+        MultiClassClassifierUpdateable m = new MultiClassClassifierUpdateable();
+        m.setClassifier(new weka.classifiers.functions.SGD());
 
-    return m;
-  }
+        return m;
+    }
 
-  public static Test suite() {
-    return new TestSuite(MultiClassClassifierUpdateableTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(MultiClassClassifierUpdateableTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

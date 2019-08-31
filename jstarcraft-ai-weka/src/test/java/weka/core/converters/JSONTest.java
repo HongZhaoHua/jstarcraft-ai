@@ -23,70 +23,69 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests JSONLoader/JSONSaver. Run from the command line with:<p/>
+ * Tests JSONLoader/JSONSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.JSONTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class JSONTest 
-  extends AbstractFileConverterTest {
+public class JSONTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>JSONTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public JSONTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>JSONTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public JSONTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests.
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new JSONLoader();
-  }
+    /**
+     * returns the loader used in the tests.
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new JSONLoader();
+    }
 
-  /**
-   * returns the saver used in the tests.
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new JSONSaver();
-  }
-  
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default loader/saver to test and generates a test set of Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_CompareValuesAsString = true;
-  }
+    /**
+     * returns the saver used in the tests.
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new JSONSaver();
+    }
 
-  /**
-   * returns a test suite.
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(JSONTest.class);
-  }
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default loader/saver to test and generates a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  /**
-   * for running the test from commandline.
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        m_CompareValuesAsString = true;
+    }
+
+    /**
+     * returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(JSONTest.class);
+    }
+
+    /**
+     * for running the test from commandline.
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

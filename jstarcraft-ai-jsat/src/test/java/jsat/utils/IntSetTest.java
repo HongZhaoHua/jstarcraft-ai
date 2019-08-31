@@ -12,39 +12,32 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class IntSetTest
-{
-    
-    public IntSetTest()
-    {
+public class IntSetTest {
+
+    public IntSetTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() throws Exception
-    {
+    public static void setUpClass() throws Exception {
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception
-    {
+    public static void tearDownClass() throws Exception {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of add method, of class IntSet.
      */
     @Test
-    public void testAdd()
-    {
+    public void testAdd() {
         System.out.println("add");
         IntSet set = new IntSet();
         assertFalse(set.add(null));
@@ -59,8 +52,7 @@ public class IntSetTest
      * Test of iterator method, of class IntSet.
      */
     @Test
-    public void testIterator()
-    {
+    public void testIterator() {
         System.out.println("iterator");
         IntSet set = new IntSet();
         set.add(5);
@@ -71,30 +63,27 @@ public class IntSetTest
         int prev = Integer.MIN_VALUE;
         Iterator<Integer> iter = set.iterator();
         int count = 0;
-        while(iter.hasNext())
-        {
+        while (iter.hasNext()) {
             int val = iter.next();
             count++;
             prev = val;
         }
         assertEquals(5, set.size());
         assertEquals(5, count);
-        
-        //Test removing some elements
+
+        // Test removing some elements
         iter = set.iterator();
-        while(iter.hasNext())
-        {
+        while (iter.hasNext()) {
             int val = iter.next();
-            if(val == 2 || val == 4)
+            if (val == 2 || val == 4)
                 iter.remove();
         }
         assertEquals(3, set.size());
-        
-        //Make sure the corect values were actually removed
+
+        // Make sure the corect values were actually removed
         iter = set.iterator();
         count = 0;
-        while(iter.hasNext())
-        {
+        while (iter.hasNext()) {
             int val = iter.next();
             assertFalse(val == 2 || val == 4);
             count++;
@@ -107,8 +96,7 @@ public class IntSetTest
      * Test of size method, of class IntSet.
      */
     @Test
-    public void testSize()
-    {
+    public void testSize() {
         System.out.println("size");
         IntSet set = new IntSet();
         assertEquals(0, set.size());

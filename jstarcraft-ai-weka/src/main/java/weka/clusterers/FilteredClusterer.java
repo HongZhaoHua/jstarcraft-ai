@@ -92,356 +92,340 @@ import weka.filters.SupervisedFilter;
  */
 public class FilteredClusterer extends SingleClustererEnhancer implements Drawable {
 
-  /** for serialization. */
-  private static final long serialVersionUID = 1420005943163412943L;
+    /** for serialization. */
+    private static final long serialVersionUID = 1420005943163412943L;
 
-  /** The filter. */
-  protected Filter m_Filter;
+    /** The filter. */
+    protected Filter m_Filter;
 
-  /** The instance structure of the filtered instances. */
-  protected Instances m_FilteredInstances;
+    /** The instance structure of the filtered instances. */
+    protected Instances m_FilteredInstances;
 
-  /**
-   * Default constructor.
-   */
-  public FilteredClusterer() {
-    m_Clusterer = new SimpleKMeans();
-    m_Filter = new weka.filters.AllFilter();
-  }
-
-  /**
-   * Returns a string describing this clusterer.
-   * 
-   * @return a description of the clusterer suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "Class for running an arbitrary clusterer on data that has been passed "
-      + "through an arbitrary filter. Like the clusterer, the structure of the filter "
-      + "is based exclusively on the training data and test instances will be processed "
-      + "by the filter without changing their structure.";
-  }
-
-  /**
-   * String describing default filter.
-   * 
-   * @return the default filter classname
-   */
-  protected String defaultFilterString() {
-    return weka.filters.AllFilter.class.getName();
-  }
-
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> result = new Vector<Option>();
-
-    result.addElement(new Option(
-      "\tFull class name of filter to use, followed\n"
-        + "\tby filter options.\n"
-        + "\teg: \"weka.filters.unsupervised.attribute.Remove -V -R 1,2\"\n"
-        + "(default: " + defaultFilterString() + ")", "F", 1,
-      "-F <filter specification>"));
-
-    result.addAll(Collections.list(super.listOptions()));
-
-    return result.elements();
-  }
-
-  /**
-   * Parses a given list of options.
-   * <p/>
-   * 
-   * <!-- options-start --> Valid options are:
-   * <p/>
-   * 
-   * <pre>
-   * -F &lt;filter specification&gt;
-   *  Full class name of filter to use, followed
-   *  by filter options.
-   *  eg: "weka.filters.unsupervised.attribute.Remove -V -R 1,2"
-   * (default: weka.filters.AllFilter)
-   * </pre>
-   * 
-   * <pre>
-   * -W
-   *  Full name of base clusterer.
-   *  (default: weka.clusterers.SimpleKMeans)
-   * </pre>
-   * 
-   * <pre>
-   * Options specific to clusterer weka.clusterers.SimpleKMeans:
-   * </pre>
-   * 
-   * <pre>
-   * -N &lt;num&gt;
-   *  number of clusters.
-   *  (default 2).
-   * </pre>
-   * 
-   * <pre>
-   * -V
-   *  Display std. deviations for centroids.
-   * </pre>
-   * 
-   * <pre>
-   * -M
-   *  Replace missing values with mean/mode.
-   * </pre>
-   * 
-   * <pre>
-   * -S &lt;num&gt;
-   *  Random number seed.
-   *  (default 10)
-   * </pre>
-   * 
-   * <!-- options-end -->
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    String tmpStr;
-    String[] tmpOptions;
-
-    tmpStr = Utils.getOption('F', options);
-    if (tmpStr.length() > 0) {
-      tmpOptions = Utils.splitOptions(tmpStr);
-      if (tmpOptions.length == 0) {
-        throw new IllegalArgumentException(
-          "Invalid filter specification string");
-      }
-      tmpStr = tmpOptions[0];
-      tmpOptions[0] = "";
-      setFilter((Filter) Utils.forName(Filter.class, tmpStr, tmpOptions));
-    } else {
-      setFilter(new weka.filters.AllFilter());
+    /**
+     * Default constructor.
+     */
+    public FilteredClusterer() {
+        m_Clusterer = new SimpleKMeans();
+        m_Filter = new weka.filters.AllFilter();
     }
 
-    super.setOptions(options);
-
-    Utils.checkForRemainingOptions(options);
-  }
-
-  /**
-   * Gets the current settings of the clusterer.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
-    Vector<String> result = new Vector<String>();
-
-    result.addElement("-F");
-    result.addElement(getFilterSpec());
-
-    Collections.addAll(result, super.getOptions());
-
-    return result.toArray(new String[result.size()]);
-  }
-
-  /**
-   * Returns the tip text for this property.
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String filterTipText() {
-    return "The filter to be used.";
-  }
-
-  /**
-   * Sets the filter.
-   * 
-   * @param filter the filter with all options set.
-   */
-  public void setFilter(Filter filter) {
-    m_Filter = filter;
-
-    if (m_Filter instanceof SupervisedFilter) {
-      System.out
-        .println("WARNING: you are using a supervised filter, which will leak "
-          + "information about the class attribute!");
-    }
-  }
-
-  /**
-   * Gets the filter used.
-   * 
-   * @return the filter
-   */
-  public Filter getFilter() {
-    return m_Filter;
-  }
-
-  /**
-   * Gets the filter specification string, which contains the class name of the
-   * filter and any options to the filter.
-   * 
-   * @return the filter string.
-   */
-  protected String getFilterSpec() {
-    String result;
-    Filter filter;
-
-    filter = getFilter();
-    result = filter.getClass().getName();
-
-    if (filter instanceof OptionHandler) {
-      result += " " + Utils.joinOptions(((OptionHandler) filter).getOptions());
+    /**
+     * Returns a string describing this clusterer.
+     * 
+     * @return a description of the clusterer suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
+        return "Class for running an arbitrary clusterer on data that has been passed " + "through an arbitrary filter. Like the clusterer, the structure of the filter " + "is based exclusively on the training data and test instances will be processed " + "by the filter without changing their structure.";
     }
 
-    return result;
-  }
-
-  /**
-   * Returns default capabilities of the clusterer.
-   * 
-   * @return the capabilities of this clusterer
-   */
-  @Override
-  public Capabilities getCapabilities() {
-    Capabilities result;
-
-    if (getFilter() == null) {
-      result = super.getCapabilities();
-      result.disableAll();
-      result.enable(Capability.NO_CLASS);
-    } else {
-      result = getFilter().getCapabilities();
+    /**
+     * String describing default filter.
+     * 
+     * @return the default filter classname
+     */
+    protected String defaultFilterString() {
+        return weka.filters.AllFilter.class.getName();
     }
 
-    // set dependencies
-    for (Capability cap : Capability.values()) {
-      result.enableDependency(cap);
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> result = new Vector<Option>();
+
+        result.addElement(new Option("\tFull class name of filter to use, followed\n" + "\tby filter options.\n" + "\teg: \"weka.filters.unsupervised.attribute.Remove -V -R 1,2\"\n" + "(default: " + defaultFilterString() + ")", "F", 1, "-F <filter specification>"));
+
+        result.addAll(Collections.list(super.listOptions()));
+
+        return result.elements();
     }
 
-    return result;
-  }
+    /**
+     * Parses a given list of options.
+     * <p/>
+     * 
+     * <!-- options-start --> Valid options are:
+     * <p/>
+     * 
+     * <pre>
+     * -F &lt;filter specification&gt;
+     *  Full class name of filter to use, followed
+     *  by filter options.
+     *  eg: "weka.filters.unsupervised.attribute.Remove -V -R 1,2"
+     * (default: weka.filters.AllFilter)
+     * </pre>
+     * 
+     * <pre>
+     * -W
+     *  Full name of base clusterer.
+     *  (default: weka.clusterers.SimpleKMeans)
+     * </pre>
+     * 
+     * <pre>
+     * Options specific to clusterer weka.clusterers.SimpleKMeans:
+     * </pre>
+     * 
+     * <pre>
+     * -N &lt;num&gt;
+     *  number of clusters.
+     *  (default 2).
+     * </pre>
+     * 
+     * <pre>
+     * -V
+     *  Display std. deviations for centroids.
+     * </pre>
+     * 
+     * <pre>
+     * -M
+     *  Replace missing values with mean/mode.
+     * </pre>
+     * 
+     * <pre>
+     * -S &lt;num&gt;
+     *  Random number seed.
+     *  (default 10)
+     * </pre>
+     * 
+     * <!-- options-end -->
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        String tmpStr;
+        String[] tmpOptions;
 
-  /**
-   * Build the clusterer on the filtered data.
-   * 
-   * @param data the training data
-   * @throws Exception if the clusterer could not be built successfully
-   */
-  @Override
-  public void buildClusterer(Instances data) throws Exception {
-    if (m_Clusterer == null) {
-      throw new Exception("No base clusterer has been set!");
+        tmpStr = Utils.getOption('F', options);
+        if (tmpStr.length() > 0) {
+            tmpOptions = Utils.splitOptions(tmpStr);
+            if (tmpOptions.length == 0) {
+                throw new IllegalArgumentException("Invalid filter specification string");
+            }
+            tmpStr = tmpOptions[0];
+            tmpOptions[0] = "";
+            setFilter((Filter) Utils.forName(Filter.class, tmpStr, tmpOptions));
+        } else {
+            setFilter(new weka.filters.AllFilter());
+        }
+
+        super.setOptions(options);
+
+        Utils.checkForRemainingOptions(options);
     }
 
-    // remove instances with missing class
-    if (data.classIndex() > -1) {
-      data = new Instances(data);
-      data.deleteWithMissingClass();
+    /**
+     * Gets the current settings of the clusterer.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
+        Vector<String> result = new Vector<String>();
+
+        result.addElement("-F");
+        result.addElement(getFilterSpec());
+
+        Collections.addAll(result, super.getOptions());
+
+        return result.toArray(new String[result.size()]);
     }
 
-    m_Filter.setInputFormat(data); // filter capabilities are checked here
-    data = Filter.useFilter(data, m_Filter);
-
-    // can clusterer handle the data?
-    getClusterer().getCapabilities().testWithFail(data);
-
-    m_FilteredInstances = data.stringFreeStructure();
-    m_Clusterer.buildClusterer(data);
-  }
-
-  /**
-   * Classifies a given instance after filtering.
-   * 
-   * @param instance the instance to be classified
-   * @return the class distribution for the given instance
-   * @throws Exception if instance could not be classified successfully
-   */
-  @Override
-  public double[] distributionForInstance(Instance instance) throws Exception {
-
-    if (m_Filter.numPendingOutput() > 0) {
-      throw new Exception("Filter output queue not empty!");
+    /**
+     * Returns the tip text for this property.
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String filterTipText() {
+        return "The filter to be used.";
     }
 
-    if (!m_Filter.input(instance)) {
-      throw new Exception(
-        "Filter didn't make the test instance immediately available!");
+    /**
+     * Sets the filter.
+     * 
+     * @param filter the filter with all options set.
+     */
+    public void setFilter(Filter filter) {
+        m_Filter = filter;
+
+        if (m_Filter instanceof SupervisedFilter) {
+            System.out.println("WARNING: you are using a supervised filter, which will leak " + "information about the class attribute!");
+        }
     }
 
-    m_Filter.batchFinished();
-    Instance newInstance = m_Filter.output();
-
-    return m_Clusterer.distributionForInstance(newInstance);
-  }
-
-  /**
-   * Output a representation of this clusterer.
-   * 
-   * @return a representation of this clusterer
-   */
-  @Override
-  public String toString() {
-    String result;
-
-    if (m_FilteredInstances == null) {
-      result = "FilteredClusterer: No model built yet.";
-    } else {
-      result = "FilteredClusterer using " + getClustererSpec()
-        + " on data filtered through " + getFilterSpec()
-        + "\n\nFiltered Header\n" + m_FilteredInstances.toString()
-        + "\n\nClusterer Model\n" + m_Clusterer.toString();
+    /**
+     * Gets the filter used.
+     * 
+     * @return the filter
+     */
+    public Filter getFilter() {
+        return m_Filter;
     }
 
-    return result;
-  }
+    /**
+     * Gets the filter specification string, which contains the class name of the
+     * filter and any options to the filter.
+     * 
+     * @return the filter string.
+     */
+    protected String getFilterSpec() {
+        String result;
+        Filter filter;
 
-  /**
-   * Returns the type of graph this clusterer represents.
-   *
-   * @return the graph type of this clusterer
-   */
-  public int graphType() {
+        filter = getFilter();
+        result = filter.getClass().getName();
 
-    if (m_Clusterer instanceof Drawable)
-      return ((Drawable) m_Clusterer).graphType();
-    else
-      return Drawable.NOT_DRAWABLE;
-  }
+        if (filter instanceof OptionHandler) {
+            result += " " + Utils.joinOptions(((OptionHandler) filter).getOptions());
+        }
 
-  /**
-   * Returns graph describing the clusterer (if possible).
-   *
-   * @return the graph of the clusterer in dotty format
-   * @throws Exception if the clusterer cannot be graphed
-   */
-  public String graph() throws Exception {
+        return result;
+    }
 
-    if (m_Clusterer instanceof Drawable)
-      return ((Drawable) m_Clusterer).graph();
-    else
-      throw new Exception(
-              "Clusterer: " + getClustererSpec() + " cannot be graphed");
-  }
+    /**
+     * Returns default capabilities of the clusterer.
+     * 
+     * @return the capabilities of this clusterer
+     */
+    @Override
+    public Capabilities getCapabilities() {
+        Capabilities result;
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        if (getFilter() == null) {
+            result = super.getCapabilities();
+            result.disableAll();
+            result.enable(Capability.NO_CLASS);
+        } else {
+            result = getFilter().getCapabilities();
+        }
 
-  /**
-   * Main method for testing this class.
-   * 
-   * @param args the commandline options, use "-h" for help
-   */
-  public static void main(String[] args) {
-    runClusterer(new FilteredClusterer(), args);
-  }
+        // set dependencies
+        for (Capability cap : Capability.values()) {
+            result.enableDependency(cap);
+        }
+
+        return result;
+    }
+
+    /**
+     * Build the clusterer on the filtered data.
+     * 
+     * @param data the training data
+     * @throws Exception if the clusterer could not be built successfully
+     */
+    @Override
+    public void buildClusterer(Instances data) throws Exception {
+        if (m_Clusterer == null) {
+            throw new Exception("No base clusterer has been set!");
+        }
+
+        // remove instances with missing class
+        if (data.classIndex() > -1) {
+            data = new Instances(data);
+            data.deleteWithMissingClass();
+        }
+
+        m_Filter.setInputFormat(data); // filter capabilities are checked here
+        data = Filter.useFilter(data, m_Filter);
+
+        // can clusterer handle the data?
+        getClusterer().getCapabilities().testWithFail(data);
+
+        m_FilteredInstances = data.stringFreeStructure();
+        m_Clusterer.buildClusterer(data);
+    }
+
+    /**
+     * Classifies a given instance after filtering.
+     * 
+     * @param instance the instance to be classified
+     * @return the class distribution for the given instance
+     * @throws Exception if instance could not be classified successfully
+     */
+    @Override
+    public double[] distributionForInstance(Instance instance) throws Exception {
+
+        if (m_Filter.numPendingOutput() > 0) {
+            throw new Exception("Filter output queue not empty!");
+        }
+
+        if (!m_Filter.input(instance)) {
+            throw new Exception("Filter didn't make the test instance immediately available!");
+        }
+
+        m_Filter.batchFinished();
+        Instance newInstance = m_Filter.output();
+
+        return m_Clusterer.distributionForInstance(newInstance);
+    }
+
+    /**
+     * Output a representation of this clusterer.
+     * 
+     * @return a representation of this clusterer
+     */
+    @Override
+    public String toString() {
+        String result;
+
+        if (m_FilteredInstances == null) {
+            result = "FilteredClusterer: No model built yet.";
+        } else {
+            result = "FilteredClusterer using " + getClustererSpec() + " on data filtered through " + getFilterSpec() + "\n\nFiltered Header\n" + m_FilteredInstances.toString() + "\n\nClusterer Model\n" + m_Clusterer.toString();
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the type of graph this clusterer represents.
+     *
+     * @return the graph type of this clusterer
+     */
+    public int graphType() {
+
+        if (m_Clusterer instanceof Drawable)
+            return ((Drawable) m_Clusterer).graphType();
+        else
+            return Drawable.NOT_DRAWABLE;
+    }
+
+    /**
+     * Returns graph describing the clusterer (if possible).
+     *
+     * @return the graph of the clusterer in dotty format
+     * @throws Exception if the clusterer cannot be graphed
+     */
+    public String graph() throws Exception {
+
+        if (m_Clusterer instanceof Drawable)
+            return ((Drawable) m_Clusterer).graph();
+        else
+            throw new Exception("Clusterer: " + getClustererSpec() + " cannot be graphed");
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Main method for testing this class.
+     * 
+     * @param args the commandline options, use "-h" for help
+     */
+    public static void main(String[] args) {
+        runClusterer(new FilteredClusterer(), args);
+    }
 }

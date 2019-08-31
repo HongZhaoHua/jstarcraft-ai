@@ -21,15 +21,14 @@
 
 package weka.attributeSelection;
 
-
-/** 
+/**
  * Interface for classes that evaluate attributes individually.
  *
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
 public interface AttributeEvaluator {
-  
+
     /**
      * evaluates an individual attribute
      *
@@ -39,7 +38,3 @@ public interface AttributeEvaluator {
      */
     public abstract double evaluateAttribute(int attribute) throws Exception;
 }
-
-
-
-

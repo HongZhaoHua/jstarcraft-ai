@@ -5,8 +5,7 @@ package jsat.text;
  *
  * @author Edward Raff
  */
-public class GreekLetters
-{
+public class GreekLetters {
     public static final String alpha = "\u03B1";
     public static final String beta = "\u03B2";
     public static final String gamma = "\u03B3";
@@ -32,15 +31,15 @@ public class GreekLetters
     public static final String chi = "\u03C7";
     public static final String psi = "\u03C8";
     public static final String omega = "\u03C9";
-    
+
     /**
      * Puts an over line on top the string s.
+     * 
      * @param s the character to put a line over
      * @return the input with a line over
      */
-    public static String bar(String s)
-    {
+    public static String bar(String s) {
         return s + "\u0305";
     }
-    
+
 }

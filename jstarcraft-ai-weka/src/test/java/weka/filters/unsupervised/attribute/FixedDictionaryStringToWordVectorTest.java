@@ -35,42 +35,38 @@ import java.io.StringReader;
  */
 public class FixedDictionaryStringToWordVectorTest extends AbstractFilterTest {
 
-  protected static final String DICTIONARY =
-    "the\nquick\nbrown\nfox\njumped\nover\n"
-      + "lazy\ndog\nhumpty\ndumpty\nsat\non\na\nwall\nhad\ngreat\nfall\nall\n"
-      + "kings\nhorses\nmen\nand\n";
+    protected static final String DICTIONARY = "the\nquick\nbrown\nfox\njumped\nover\n" + "lazy\ndog\nhumpty\ndumpty\nsat\non\na\nwall\nhad\ngreat\nfall\nall\n" + "kings\nhorses\nmen\nand\n";
 
-  /**
-   * Constructs the <code>AbstractFilterTest</code>. Called by subclasses.
-   *
-   * @param name the name of the test class
-   */
-  public FixedDictionaryStringToWordVectorTest(String name) {
-    super(name);
-  }
+    /**
+     * Constructs the <code>AbstractFilterTest</code>. Called by subclasses.
+     *
+     * @param name the name of the test class
+     */
+    public FixedDictionaryStringToWordVectorTest(String name) {
+        super(name);
+    }
 
-  @Override
-  public Filter getFilter() {
-    FixedDictionaryStringToWordVector f =
-      new FixedDictionaryStringToWordVector();
+    @Override
+    public Filter getFilter() {
+        FixedDictionaryStringToWordVector f = new FixedDictionaryStringToWordVector();
 
-    StringReader reader = new StringReader(DICTIONARY);
-    f.setDictionarySource(reader);
+        StringReader reader = new StringReader(DICTIONARY);
+        f.setDictionarySource(reader);
 
-    return f;
-  }
+        return f;
+    }
 
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  public static Test suite() {
-    return new TestSuite(FixedDictionaryStringToWordVectorTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(FixedDictionaryStringToWordVectorTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

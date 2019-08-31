@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for NN-NORMALIZATION-METHOD.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for NN-NORMALIZATION-METHOD.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="NN-NORMALIZATION-METHOD">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -32,10 +34,8 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum NNNORMALIZATIONMETHOD {
 
     @XmlEnumValue("none")
-    NONE("none"),
-    @XmlEnumValue("simplemax")
-    SIMPLEMAX("simplemax"),
-    @XmlEnumValue("softmax")
+    NONE("none"), @XmlEnumValue("simplemax")
+    SIMPLEMAX("simplemax"), @XmlEnumValue("softmax")
     SOFTMAX("softmax");
     private final String value;
 
@@ -48,7 +48,7 @@ public enum NNNORMALIZATIONMETHOD {
     }
 
     public static NNNORMALIZATIONMETHOD fromValue(String v) {
-        for (NNNORMALIZATIONMETHOD c: NNNORMALIZATIONMETHOD.values()) {
+        for (NNNORMALIZATIONMETHOD c : NNNORMALIZATIONMETHOD.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

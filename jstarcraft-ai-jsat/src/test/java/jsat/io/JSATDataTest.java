@@ -42,90 +42,75 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class JSATDataTest
-{
+public class JSATDataTest {
     static SimpleDataSet simpleData;
-    
+
     static SimpleDataSet byteIntegerData;
-    
-    public JSATDataTest()
-    {
+
+    public JSATDataTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         CategoricalData[] categories = new CategoricalData[3];
         categories[0] = new CategoricalData(2);
         categories[1] = new CategoricalData(3);
         categories[2] = new CategoricalData(5);
-        
-        categories[1].setCategoryName("I love " + GreekLetters.pi);//unicide to exercise non-ascii writer
-        
+
+        categories[1].setCategoryName("I love " + GreekLetters.pi);// unicide to exercise non-ascii writer
+
         simpleData = new SimpleDataSet(20, categories);
-        
+
         Random rand = RandomUtil.getRandom();
-        
-        for(int i = 0; i < 10; i++)
-        {
+
+        for (int i = 0; i < 10; i++) {
             int[] catVals = new int[categories.length];
-            for(int j = 0; j < categories.length; j++)
+            for (int j = 0; j < categories.length; j++)
                 catVals[j] = rand.nextInt(categories[j].getNumOfCategories());
-            
+
             double[] numeric = new double[simpleData.getNumNumericalVars()];
-            for(int j = 0; j < numeric.length/3; j++)
-            {
+            for (int j = 0; j < numeric.length / 3; j++) {
                 numeric[rand.nextInt(numeric.length)] = rand.nextDouble();
             }
-            
+
             simpleData.add(new DataPoint(new DenseVector(numeric), catVals, categories));
-	    simpleData.setWeight(simpleData.size()-1, rand.nextDouble());
+            simpleData.setWeight(simpleData.size() - 1, rand.nextDouble());
         }
-        
-        
-        
+
         byteIntegerData = new SimpleDataSet(20, categories);
-        
-        
-        for(int i = 0; i < 10; i++)
-        {
+
+        for (int i = 0; i < 10; i++) {
             int[] catVals = new int[categories.length];
-            for(int j = 0; j < categories.length; j++)
+            for (int j = 0; j < categories.length; j++)
                 catVals[j] = rand.nextInt(categories[j].getNumOfCategories());
-            
+
             double[] numeric = new double[simpleData.getNumNumericalVars()];
-            for(int j = 0; j < numeric.length/3; j++)
-            {
+            for (int j = 0; j < numeric.length / 3; j++) {
                 numeric[rand.nextInt(numeric.length)] = rand.nextInt(Byte.MAX_VALUE);
             }
-            
+
             byteIntegerData.add(new DataPoint(new DenseVector(numeric), catVals, categories));
-	    byteIntegerData.setWeight(byteIntegerData.size()-1, rand.nextInt(Byte.MAX_VALUE-1)+1);
+            byteIntegerData.setWeight(byteIntegerData.size() - 1, rand.nextInt(Byte.MAX_VALUE - 1) + 1);
         }
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
-    
+
     @Test
-    public void testReadWriteSimpleFPTypes() throws Exception
-    {
+    public void testReadWriteSimpleFPTypes() throws Exception {
         System.out.println("ReadWriteSimple");
-        
-        for(JSATData.FloatStorageMethod fpStoreMethod : JSATData.FloatStorageMethod.values())
-        {
+
+        for (JSATData.FloatStorageMethod fpStoreMethod : JSATData.FloatStorageMethod.values()) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JSATData.writeData(byteIntegerData, baos, fpStoreMethod);
 
@@ -135,7 +120,7 @@ public class JSATDataTest
 
             checkDataSet(byteIntegerData, readBack);
 
-            byteIntegerData.applyTransform(new DenseSparceTransform(0.5));//sparcify our numeric values and try again
+            byteIntegerData.applyTransform(new DenseSparceTransform(0.5));// sparcify our numeric values and try again
 
             baos = new ByteArrayOutputStream();
             JSATData.writeData(byteIntegerData, baos, fpStoreMethod);
@@ -146,8 +131,9 @@ public class JSATDataTest
             readBack = JSATData.load(bin);
 
             checkDataSet(byteIntegerData, readBack);
-            
-            //what if we muck the number of data points to be a negative value? indicates streaming write scenario
+
+            // what if we muck the number of data points to be a negative value? indicates
+            // streaming write scenario
             raw_read_back[17] = -1;
             raw_read_back[18] = -1;
             raw_read_back[19] = -1;
@@ -164,23 +150,21 @@ public class JSATDataTest
      * Test of writeData method, of class JSATData.
      */
     @Test
-    public void testReadWriteSimple() throws Exception
-    {
+    public void testReadWriteSimple() throws Exception {
         System.out.println("ReadWriteSimple");
-        
-        for(DataStore store : new DataStore[]{new RowMajorStore(), new ColumnMajorStore()})
-        {
-            //Prime by writting out the data
+
+        for (DataStore store : new DataStore[] { new RowMajorStore(), new ColumnMajorStore() }) {
+            // Prime by writting out the data
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JSATData.writeData(simpleData, baos);
-            
+
             ByteArrayInputStream bin = new ByteArrayInputStream(baos.toByteArray());
-            
+
             DataSet readBack = JSATData.load(bin, store.clone());
 
             checkDataSet(simpleData, readBack);
 
-            simpleData.applyTransform(new DenseSparceTransform(0.5));//sparcify our numeric values and try again
+            simpleData.applyTransform(new DenseSparceTransform(0.5));// sparcify our numeric values and try again
 
             baos = new ByteArrayOutputStream();
             JSATData.writeData(simpleData, baos);
@@ -192,7 +176,8 @@ public class JSATDataTest
 
             checkDataSet(simpleData, readBack);
 
-            //what if we muck the number of data points to be a negative value? indicates streaming write scenario
+            // what if we muck the number of data points to be a negative value? indicates
+            // streaming write scenario
             raw_read_back[17] = -1;
             raw_read_back[18] = -1;
             raw_read_back[19] = -1;
@@ -204,37 +189,35 @@ public class JSATDataTest
             checkDataSet(simpleData, readBack);
         }
     }
-    
+
     @Test
-    public void testReadWriteClassification() throws Exception
-    {
+    public void testReadWriteClassification() throws Exception {
         System.out.println("ReadWriteClassification");
-        
-        
-        //use the last categorical feature as the read target so that forcing as a standard dataset produces the same expected result as the original simple dataset
-        ClassificationDataSet cds = simpleData.asClassificationDataSet(simpleData.getNumCategoricalVars()-1);
-        
-        
-        for(DataStore store : new DataStore[]{new RowMajorStore(), new ColumnMajorStore()})
-        {
-            //Prime by writting out the data
+
+        // use the last categorical feature as the read target so that forcing as a
+        // standard dataset produces the same expected result as the original simple
+        // dataset
+        ClassificationDataSet cds = simpleData.asClassificationDataSet(simpleData.getNumCategoricalVars() - 1);
+
+        for (DataStore store : new DataStore[] { new RowMajorStore(), new ColumnMajorStore() }) {
+            // Prime by writting out the data
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JSATData.writeData(cds, baos);
-        
+
             ByteArrayInputStream bin = new ByteArrayInputStream(baos.toByteArray());
-            
-            //check classificaiton is right
+
+            // check classificaiton is right
             DataSet readBack = JSATData.load(bin, store.clone());
             checkDataSet(cds, readBack);
             bin.reset();
             readBack = JSATData.loadClassification(bin, store.clone());
             checkDataSet(cds, readBack);
-            //check forcing as simple
+            // check forcing as simple
             bin = new ByteArrayInputStream(baos.toByteArray());
             readBack = JSATData.load(bin, true, store.clone());
             checkDataSet(simpleData, readBack);
 
-            cds.applyTransform(new DenseSparceTransform(0.5));//sparcify our numeric values and try again
+            cds.applyTransform(new DenseSparceTransform(0.5));// sparcify our numeric values and try again
             simpleData.applyTransform(new DenseSparceTransform(0.5));
 
             baos = new ByteArrayOutputStream();
@@ -242,19 +225,20 @@ public class JSATDataTest
 
             bin = new ByteArrayInputStream(baos.toByteArray());
 
-            //check classificaiton is right
+            // check classificaiton is right
             readBack = JSATData.load(bin, store.clone());
             checkDataSet(cds, readBack);
             bin.reset();
             readBack = JSATData.loadClassification(bin, store.clone());
             checkDataSet(cds, readBack);
-            //check forcing as simple
+            // check forcing as simple
             byte[] raw_read_back = baos.toByteArray();
             bin = new ByteArrayInputStream(raw_read_back);
             readBack = JSATData.load(bin, true, store.clone());
             checkDataSet(simpleData, readBack);
 
-            //what if we muck the number of data points to be a negative value? indicates streaming write scenario
+            // what if we muck the number of data points to be a negative value? indicates
+            // streaming write scenario
             raw_read_back[17] = -1;
             raw_read_back[18] = -1;
             raw_read_back[19] = -1;
@@ -266,35 +250,34 @@ public class JSATDataTest
             checkDataSet(simpleData, readBack);
         }
     }
-    
+
     @Test
-    public void testReadWriteRegression() throws Exception
-    {
+    public void testReadWriteRegression() throws Exception {
         System.out.println("ReadWriteRegression");
-        
-        
-        for(DataStore store : new DataStore[]{new RowMajorStore(), new ColumnMajorStore()})
-        {
-            //use the last categorical feature as the read target so that forcing as a standard dataset produces the same expected result as the original simple dataset
-            RegressionDataSet rds = simpleData.asRegressionDataSet(simpleData.getNumNumericalVars()-1);
+
+        for (DataStore store : new DataStore[] { new RowMajorStore(), new ColumnMajorStore() }) {
+            // use the last categorical feature as the read target so that forcing as a
+            // standard dataset produces the same expected result as the original simple
+            // dataset
+            RegressionDataSet rds = simpleData.asRegressionDataSet(simpleData.getNumNumericalVars() - 1);
 
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             JSATData.writeData(rds, baos);
 
             ByteArrayInputStream bin = new ByteArrayInputStream(baos.toByteArray());
 
-            //check classificaiton is right
+            // check classificaiton is right
             DataSet readBack = JSATData.load(bin, store.clone());
             checkDataSet(rds, readBack);
             bin.reset();
             readBack = JSATData.loadRegression(bin, store.clone());
             checkDataSet(rds, readBack);
-            //check forcing as simple
+            // check forcing as simple
             bin = new ByteArrayInputStream(baos.toByteArray());
             readBack = JSATData.load(bin, true, store.clone());
             checkDataSet(simpleData, readBack);
 
-            rds.applyTransform(new DenseSparceTransform(0.5));//sparcify our numeric values and try again
+            rds.applyTransform(new DenseSparceTransform(0.5));// sparcify our numeric values and try again
             simpleData.applyTransform(new DenseSparceTransform(0.5));
 
             baos = new ByteArrayOutputStream();
@@ -302,19 +285,20 @@ public class JSATDataTest
 
             bin = new ByteArrayInputStream(baos.toByteArray());
 
-            //check classificaiton is right
+            // check classificaiton is right
             readBack = JSATData.load(bin, store.clone());
             checkDataSet(rds, readBack);
             bin.reset();
             readBack = JSATData.loadRegression(bin, store.clone());
             checkDataSet(rds, readBack);
-            //check forcing as simple
+            // check forcing as simple
             byte[] raw_read_back = baos.toByteArray();
             bin = new ByteArrayInputStream(raw_read_back);
             readBack = JSATData.load(bin, true, store.clone());
             checkDataSet(simpleData, readBack);
 
-            //what if we muck the number of data points to be a negative value? indicates streaming write scenario
+            // what if we muck the number of data points to be a negative value? indicates
+            // streaming write scenario
             raw_read_back[17] = -1;
             raw_read_back[18] = -1;
             raw_read_back[19] = -1;
@@ -325,65 +309,59 @@ public class JSATDataTest
 
             checkDataSet(simpleData, readBack);
 
-            //Check data-writer appraoch looks like mucked version of binary
+            // Check data-writer appraoch looks like mucked version of binary
         }
-        
+
     }
 
-    private void checkDataSet(DataSet ogData, DataSet cpData)
-    {
+    private void checkDataSet(DataSet ogData, DataSet cpData) {
         assertEquals(ogData.getClass().getCanonicalName(), cpData.getClass().getCanonicalName());
-        
+
         assertEquals(ogData.getNumNumericalVars(), cpData.getNumNumericalVars());
         assertEquals(ogData.getNumCategoricalVars(), cpData.getNumCategoricalVars());
         assertEquals(ogData.size(), cpData.size());
-        
+
         CategoricalData[] og_cats = ogData.getCategories();
         CategoricalData[] cp_cats = ogData.getCategories();
-        
-        for(int i = 0; i < og_cats.length; i++)
-        {
+
+        for (int i = 0; i < og_cats.length; i++) {
             assertEquals(og_cats[i].getCategoryName(), cp_cats[i].getCategoryName());
             assertEquals(og_cats[i].getNumOfCategories(), cp_cats[i].getNumOfCategories());
-            for(int j = 0; j < og_cats[i].getNumOfCategories(); j++)
+            for (int j = 0; j < og_cats[i].getNumOfCategories(); j++)
                 assertEquals(og_cats[i].getOptionName(j), cp_cats[i].getOptionName(j));
         }
-        
-        //compare datapoint values
-        for(int i = 0; i < ogData.size(); i++)
-        {
+
+        // compare datapoint values
+        for (int i = 0; i < ogData.size(); i++) {
             DataPoint og = ogData.getDataPoint(i);
             DataPoint cp = cpData.getDataPoint(i);
-            
+
             assertArrayEquals(og.getCategoricalValues(), cp.getCategoricalValues());
             Vec og_vec = og.getNumericalValues();
             Vec cp_vec = cp.getNumericalValues();
 //            assertTrue(og_vec.isSparse() == cp_vec.isSparse());
             assertTrue(og_vec.equals(cp_vec));
-            
+
             assertEquals(ogData.getWeight(i), cpData.getWeight(i), 0.0);
-            
+
         }
-        
-        if(ogData instanceof ClassificationDataSet)
-        {
+
+        if (ogData instanceof ClassificationDataSet) {
             ClassificationDataSet ogC = (ClassificationDataSet) ogData;
             ClassificationDataSet cpC = (ClassificationDataSet) cpData;
-            
-            for(int i = 0; i < ogData.size(); i++)
+
+            for (int i = 0; i < ogData.size(); i++)
                 assertEquals(ogC.getDataPointCategory(i), cpC.getDataPointCategory(i));
         }
-        
-        if(ogData instanceof RegressionDataSet)
-        {
+
+        if (ogData instanceof RegressionDataSet) {
             RegressionDataSet ogR = (RegressionDataSet) ogData;
             RegressionDataSet cpR = (RegressionDataSet) cpData;
-            
-            for(int i = 0; i < ogData.size(); i++)
+
+            for (int i = 0; i < ogData.size(); i++)
                 assertEquals(ogR.getTargetValue(i), cpR.getTargetValue(i), 0.0);
         }
-        
+
     }
 
-    
 }

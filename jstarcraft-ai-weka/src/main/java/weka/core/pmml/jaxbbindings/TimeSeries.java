@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeSeries element declaration.
+ * <p>
+ * Java class for TimeSeries element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TimeSeries">
@@ -45,10 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "timeAnchor",
-    "timeValue"
-})
+@XmlType(name = "", propOrder = { "timeAnchor", "timeValue" })
 @XmlRootElement(name = "TimeSeries")
 public class TimeSeries {
 
@@ -68,10 +66,8 @@ public class TimeSeries {
     /**
      * Gets the value of the timeAnchor property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TimeAnchor }
-     *     
+     * @return possible object is {@link TimeAnchor }
+     * 
      */
     public TimeAnchor getTimeAnchor() {
         return timeAnchor;
@@ -80,10 +76,8 @@ public class TimeSeries {
     /**
      * Sets the value of the timeAnchor property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TimeAnchor }
-     *     
+     * @param value allowed object is {@link TimeAnchor }
+     * 
      */
     public void setTimeAnchor(TimeAnchor value) {
         this.timeAnchor = value;
@@ -93,21 +87,21 @@ public class TimeSeries {
      * Gets the value of the timeValue property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the timeValue property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the timeValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getTimeValue().add(newItem);
+     * getTimeValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TimeValue }
+     * Objects of the following type(s) are allowed in the list {@link TimeValue }
      * 
      * 
      */
@@ -121,10 +115,8 @@ public class TimeSeries {
     /**
      * Gets the value of the endTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getEndTime() {
         return endTime;
@@ -133,10 +125,8 @@ public class TimeSeries {
     /**
      * Sets the value of the endTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setEndTime(Double value) {
         this.endTime = value;
@@ -145,10 +135,8 @@ public class TimeSeries {
     /**
      * Gets the value of the interpolationMethod property.
      * 
-     * @return
-     *     possible object is
-     *     {@link INTERPOLATIONMETHOD }
-     *     
+     * @return possible object is {@link INTERPOLATIONMETHOD }
+     * 
      */
     public INTERPOLATIONMETHOD getInterpolationMethod() {
         if (interpolationMethod == null) {
@@ -161,10 +149,8 @@ public class TimeSeries {
     /**
      * Sets the value of the interpolationMethod property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link INTERPOLATIONMETHOD }
-     *     
+     * @param value allowed object is {@link INTERPOLATIONMETHOD }
+     * 
      */
     public void setInterpolationMethod(INTERPOLATIONMETHOD value) {
         this.interpolationMethod = value;
@@ -173,10 +159,8 @@ public class TimeSeries {
     /**
      * Gets the value of the startTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getStartTime() {
         return startTime;
@@ -185,10 +169,8 @@ public class TimeSeries {
     /**
      * Sets the value of the startTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setStartTime(Double value) {
         this.startTime = value;
@@ -197,10 +179,8 @@ public class TimeSeries {
     /**
      * Gets the value of the usage property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TIMESERIESUSAGE }
-     *     
+     * @return possible object is {@link TIMESERIESUSAGE }
+     * 
      */
     public TIMESERIESUSAGE getUsage() {
         if (usage == null) {
@@ -213,10 +193,8 @@ public class TimeSeries {
     /**
      * Sets the value of the usage property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TIMESERIESUSAGE }
-     *     
+     * @param value allowed object is {@link TIMESERIESUSAGE }
+     * 
      */
     public void setUsage(TIMESERIESUSAGE value) {
         this.usage = value;

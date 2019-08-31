@@ -31,11 +31,11 @@ import jsat.linear.Vec;
  * @author Edward Raff
  * @param <V> The type of vectors stored in this collection
  */
-public interface IncrementalCollection<V extends Vec> extends VectorCollection<V>
-{
+public interface IncrementalCollection<V extends Vec> extends VectorCollection<V> {
     /**
-     * Incrementally adds the given datapoint into the collection 
-     * @param x the vector to add to the collection 
+     * Incrementally adds the given datapoint into the collection
+     * 
+     * @param x the vector to add to the collection
      */
     public void insert(V x);
 

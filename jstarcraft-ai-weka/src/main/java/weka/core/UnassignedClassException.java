@@ -22,34 +22,33 @@
 package weka.core;
 
 /**
- * Exception that is raised when trying to use some data that has no
- * class assigned to it, but a class is needed to perform the operation.
+ * Exception that is raised when trying to use some data that has no class
+ * assigned to it, but a class is needed to perform the operation.
  *
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class UnassignedClassException
-  extends RuntimeException {
+public class UnassignedClassException extends RuntimeException {
 
-  /** for serialization */
-  private static final long serialVersionUID = 6268278694768818235L;
+    /** for serialization */
+    private static final long serialVersionUID = 6268278694768818235L;
 
-  /**
-   * Creates a new UnassignedClassException with no message.
-   *
-   */
-  public UnassignedClassException() {
+    /**
+     * Creates a new UnassignedClassException with no message.
+     *
+     */
+    public UnassignedClassException() {
 
-    super();
-  }
+        super();
+    }
 
-  /**
-   * Creates a new UnassignedClassException.
-   *
-   * @param message the reason for raising an exception.
-   */
-  public UnassignedClassException(String message) {
+    /**
+     * Creates a new UnassignedClassException.
+     *
+     * @param message the reason for raising an exception.
+     */
+    public UnassignedClassException(String message) {
 
-    super(message);
-  }
+        super(message);
+    }
 }

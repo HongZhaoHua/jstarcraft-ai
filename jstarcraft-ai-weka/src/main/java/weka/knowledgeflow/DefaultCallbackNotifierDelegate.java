@@ -22,32 +22,30 @@
 package weka.knowledgeflow;
 
 /**
- * Default implementation of a CallbackNotifierDelegate. Notifies the
- * callback immediately.
+ * Default implementation of a CallbackNotifierDelegate. Notifies the callback
+ * immediately.
  *
  * @author Mark hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-public class DefaultCallbackNotifierDelegate
-  implements CallbackNotifierDelegate {
+public class DefaultCallbackNotifierDelegate implements CallbackNotifierDelegate {
 
-  /**
-   * Notifies the callback immediately
-   *
-   * @param callback     the callback to notify
-   * @param taskExecuted the StepTask that was executed
-   * @param result       the ExecutionResult that was produced
-   * @throws Exception if a problem occurs
-   */
-  @SuppressWarnings("unchecked")
-  @Override
-  public void notifyCallback(StepTaskCallback callback, StepTask taskExecuted,
-    ExecutionResult result) throws Exception {
+    /**
+     * Notifies the callback immediately
+     *
+     * @param callback     the callback to notify
+     * @param taskExecuted the StepTask that was executed
+     * @param result       the ExecutionResult that was produced
+     * @throws Exception if a problem occurs
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void notifyCallback(StepTaskCallback callback, StepTask taskExecuted, ExecutionResult result) throws Exception {
 
-    if (result.getError() == null) {
-      callback.taskFinished(result);
-    } else {
-      callback.taskFailed(taskExecuted, result);
+        if (result.getError() == null) {
+            callback.taskFinished(result);
+        } else {
+            callback.taskFailed(taskExecuted, result);
+        }
     }
-  }
 }

@@ -34,145 +34,142 @@ import weka.core.Utils;
  */
 public class NumericItem extends Item implements Serializable {
 
-  /** For serialization */
-  private static final long serialVersionUID = -7869433770765864800L;
+    /** For serialization */
+    private static final long serialVersionUID = -7869433770765864800L;
 
-  public static enum Comparison {
-    NONE, EQUAL, LESS_THAN_OR_EQUAL_TO, GREATER_THAN;
-  }
-
-  /** The numeric test */
-  protected double m_splitPoint;
-
-  /** The comparison operator */
-  protected Comparison m_comparison;
-
-  /**
-   * Constructs a new <code>NumericItem</code>
-   * 
-   * @param att the attribute that backs the item.
-   * @param splitPoint the numeric test value.
-   * @param comp the comparison operator.
-   * @throws Exception if the NumericItem can't be constructed.
-   */
-  public NumericItem(Attribute att, double splitPoint, Comparison comp) throws Exception {
-    super(att);
-
-    if (!att.isNumeric()) {
-      throw new Exception(
-        "NumericItem must be constructed using a numeric attribute");
+    public static enum Comparison {
+        NONE, EQUAL, LESS_THAN_OR_EQUAL_TO, GREATER_THAN;
     }
 
-    m_comparison = comp;
-    m_splitPoint = splitPoint;
-  }
+    /** The numeric test */
+    protected double m_splitPoint;
 
-  /**
-   * Gets the numeric test.
-   * 
-   * @return the numeric test value for this item.
-   */
-  public double getSplitPoint() {
-    return m_splitPoint;
-  }
+    /** The comparison operator */
+    protected Comparison m_comparison;
 
-  /**
-   * Gets the comparison operator for this item.
-   * 
-   * @return the comparison operator for this item.
-   */
-  public Comparison getComparison() {
-    return m_comparison;
-  }
+    /**
+     * Constructs a new <code>NumericItem</code>
+     * 
+     * @param att        the attribute that backs the item.
+     * @param splitPoint the numeric test value.
+     * @param comp       the comparison operator.
+     * @throws Exception if the NumericItem can't be constructed.
+     */
+    public NumericItem(Attribute att, double splitPoint, Comparison comp) throws Exception {
+        super(att);
 
-  /**
-   * Get this item's value as a String.
-   * 
-   * @return this item's value as a String.
-   */
-  @Override
-  public String getItemValueAsString() {
-    return Utils.doubleToString(m_splitPoint, 3);
-  }
+        if (!att.isNumeric()) {
+            throw new Exception("NumericItem must be constructed using a numeric attribute");
+        }
 
-  /**
-   * Get this item's comparison operator as a String.
-   * 
-   * @return this item's comparison operator as a String.
-   */
-  @Override
-  public String getComparisonAsString() {
-    String result = null;
-
-    switch (m_comparison) {
-    case EQUAL:
-      result = "=";
-      break;
-    case LESS_THAN_OR_EQUAL_TO:
-      result = "<=";
-      break;
-    case GREATER_THAN:
-      result = ">";
-      break;
-    default:
-      break;
+        m_comparison = comp;
+        m_splitPoint = splitPoint;
     }
 
-    return result;
-  }
-
-  /**
-   * A string representation of this item, (i.e. <attribute name> <comparison
-   * operator> <item value>). This default implementation just prints the
-   * attribute name and (optionally) frequency information.
-   * 
-   * @param freq true if the frequency should be included.
-   * @return a string representation of this item.
-   */
-  @Override
-  public String toString(boolean freq) {
-    StringBuffer result = new StringBuffer();
-    result.append(m_attribute.name() + " ");
-    switch (m_comparison) {
-    case EQUAL:
-      result.append("=");
-      break;
-    case LESS_THAN_OR_EQUAL_TO:
-      result.append("<=");
-      break;
-    case GREATER_THAN:
-      result.append(">");
-      break;
-    default:
-      break;
+    /**
+     * Gets the numeric test.
+     * 
+     * @return the numeric test value for this item.
+     */
+    public double getSplitPoint() {
+        return m_splitPoint;
     }
 
-    result.append(" " + Utils.doubleToString(m_splitPoint, 4));
-    if (freq) {
-      result.append(":" + m_frequency);
+    /**
+     * Gets the comparison operator for this item.
+     * 
+     * @return the comparison operator for this item.
+     */
+    public Comparison getComparison() {
+        return m_comparison;
     }
 
-    return result.toString();
-  }
-
-  /**
-   * Equals. Compares the attribute, numeric test and comparison operator
-   * 
-   * @return true if this NumericItem is equal to the argument.
-   */
-  @Override
-  public boolean equals(Object compareTo) {
-    if (!(compareTo instanceof NumericItem)) {
-      return false;
+    /**
+     * Get this item's value as a String.
+     * 
+     * @return this item's value as a String.
+     */
+    @Override
+    public String getItemValueAsString() {
+        return Utils.doubleToString(m_splitPoint, 3);
     }
 
-    NumericItem b = (NumericItem) compareTo;
-    if (m_attribute.equals(b.getAttribute())
-      && m_comparison == b.getComparison()
-      && (new Double(m_splitPoint).equals(new Double(b.getSplitPoint())))) {
-      return true;
+    /**
+     * Get this item's comparison operator as a String.
+     * 
+     * @return this item's comparison operator as a String.
+     */
+    @Override
+    public String getComparisonAsString() {
+        String result = null;
+
+        switch (m_comparison) {
+        case EQUAL:
+            result = "=";
+            break;
+        case LESS_THAN_OR_EQUAL_TO:
+            result = "<=";
+            break;
+        case GREATER_THAN:
+            result = ">";
+            break;
+        default:
+            break;
+        }
+
+        return result;
     }
 
-    return false;
-  }
+    /**
+     * A string representation of this item, (i.e. <attribute name> <comparison
+     * operator> <item value>). This default implementation just prints the
+     * attribute name and (optionally) frequency information.
+     * 
+     * @param freq true if the frequency should be included.
+     * @return a string representation of this item.
+     */
+    @Override
+    public String toString(boolean freq) {
+        StringBuffer result = new StringBuffer();
+        result.append(m_attribute.name() + " ");
+        switch (m_comparison) {
+        case EQUAL:
+            result.append("=");
+            break;
+        case LESS_THAN_OR_EQUAL_TO:
+            result.append("<=");
+            break;
+        case GREATER_THAN:
+            result.append(">");
+            break;
+        default:
+            break;
+        }
+
+        result.append(" " + Utils.doubleToString(m_splitPoint, 4));
+        if (freq) {
+            result.append(":" + m_frequency);
+        }
+
+        return result.toString();
+    }
+
+    /**
+     * Equals. Compares the attribute, numeric test and comparison operator
+     * 
+     * @return true if this NumericItem is equal to the argument.
+     */
+    @Override
+    public boolean equals(Object compareTo) {
+        if (!(compareTo instanceof NumericItem)) {
+            return false;
+        }
+
+        NumericItem b = (NumericItem) compareTo;
+        if (m_attribute.equals(b.getAttribute()) && m_comparison == b.getComparison() && (new Double(m_splitPoint).equals(new Double(b.getSplitPoint())))) {
+            return true;
+        }
+
+        return false;
+    }
 }

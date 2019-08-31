@@ -25,38 +25,37 @@ import junit.textui.TestRunner;
 
 /**
  * Tests the Rainbow stopwords algorithm. Run from commandline as follows:<br/>
- *   java weka.core.stopwords.RainbowTest
+ * java weka.core.stopwords.RainbowTest
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RainbowTest
-  extends AbstractStopwordsTest {
+public class RainbowTest extends AbstractStopwordsTest {
 
-  /**
-   * Constructs the test.
-   * 
-   * @param name the name of the test
-   */
-  public RainbowTest(String name) {
-    super(name);
-  }
+    /**
+     * Constructs the test.
+     * 
+     * @param name the name of the test
+     */
+    public RainbowTest(String name) {
+        super(name);
+    }
 
-  /**
-   * Used to create an instance of a specific stopwords scheme.
-   * 
-   * @return a suitably configured <code>StopwordsHandler</code> value
-   */
-  @Override
-  public StopwordsHandler getStopwords() {
-    return new Rainbow();
-  }
+    /**
+     * Used to create an instance of a specific stopwords scheme.
+     * 
+     * @return a suitably configured <code>StopwordsHandler</code> value
+     */
+    @Override
+    public StopwordsHandler getStopwords() {
+        return new Rainbow();
+    }
 
-  public static Test suite() {
-    return new TestSuite(RainbowTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RainbowTest.class);
+    }
 
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        TestRunner.run(suite());
+    }
 }

@@ -19,7 +19,6 @@
  *
  */
 
-
 package weka.experiment;
 
 /**
@@ -31,10 +30,11 @@ package weka.experiment;
  */
 public interface RemoteExperimentListener {
 
-  /**
-   * Called when progress has been made in a remote experiment
-   * @param e the event encapsulating what happened
-   */
-  void remoteExperimentStatus(RemoteExperimentEvent e);
+    /**
+     * Called when progress has been made in a remote experiment
+     * 
+     * @param e the event encapsulating what happened
+     */
+    void remoteExperimentStatus(RemoteExperimentEvent e);
 
 }

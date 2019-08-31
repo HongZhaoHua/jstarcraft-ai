@@ -23,58 +23,57 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests XRFFLoader/XRFFSaver. Run from the command line with:<p/>
+ * Tests XRFFLoader/XRFFSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.XRFFTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class XRFFTest 
-  extends AbstractFileConverterTest {
+public class XRFFTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>XRFFTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public XRFFTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>XRFFTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public XRFFTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new XRFFLoader();
-  }
+    /**
+     * returns the loader used in the tests
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new XRFFLoader();
+    }
 
-  /**
-   * returns the saver used in the tests
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new XRFFSaver();
-  }
+    /**
+     * returns the saver used in the tests
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new XRFFSaver();
+    }
 
-  /**
-   * returns a test suite
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(XRFFTest.class);
-  }
+    /**
+     * returns a test suite
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(XRFFTest.class);
+    }
 
-  /**
-   * for running the test from commandline
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * for running the test from commandline
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

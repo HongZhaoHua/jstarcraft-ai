@@ -34,103 +34,106 @@ import weka.filters.Filter;
  *
  */
 public class FilteredAssociationRules extends AssociationRules {
-  
-  /** For serialization */
-  private static final long serialVersionUID = -4223408305476916955L;
 
-  protected Filter m_filter;
-  
-  protected AssociationRules m_wrappedRules;
-  
-  /**
-   * Constructs a new FilteredAssociationRules.
-   * 
-   * @param producer a string describing the scheme that produced these rules.
-   * @param filter the filter applied to preprocess the data used to learn the rules. 
-   * @param rules the wrapped AssociationRules object.
-   */
-  public FilteredAssociationRules(String producer, Filter filter, AssociationRules rules) {
-    super(null, producer);
-    
-    m_filter = filter;
-    m_wrappedRules = rules;
-  }
-  
-  /**
-   * Constructs a new FilteredAssociationRules.
-   * 
-   * @param producer the scheme that produced the rules
-   * @param filter the filter applied to preprocess the data used to learn the rules. 
-   * @param rules the wrapped AssociationRules object.
-   */
-  public FilteredAssociationRules(Object producer, Filter filter, AssociationRules rules) {
-    super(null, producer);
-    
-    m_filter = filter;
-    m_wrappedRules = rules;
-  }
-  
-  /**
-   * Constructs a new FilteredAssociationRules.
-   * 
-   * @param filter the filter applied to preprocess the data used to learn the rules. 
-   * @param rules the wrapped AssociationRules object.
-   */
-  public FilteredAssociationRules(Filter filter, AssociationRules rules) {
-    super(null);
-    
-    m_filter = filter;
-    m_wrappedRules = rules;
-  }
-  
-  /**
-   * Set the rules to use. Passes them to the wrapped AssociationRules object.
-   * 
-   * @param rules the rules to use.
-   */
-  public void setRules(List<AssociationRule> rules) {
-    
-    // delegate to our wrapped association rules
-    m_wrappedRules.setRules(rules);
-  }
-  
-  /**
-   * Get the rules.
-   * 
-   * @return the rules.
-   */
-  public List<AssociationRule> getRules() {
-    
-    // delegate to our wrapped association rules
-    return m_wrappedRules.getRules();
-  }
-  
-  /**
-   * Get the number of rules.
-   * 
-   * @return the number of rules.
-   */
-  public int getNumRules() {
-    
-    // delegate to our wrapped association rules
-    return m_wrappedRules.getNumRules();
-  }
-  
-  /**
-   * Set the wrapped <code>AssociationRules</code> object to use.
-   * 
-   * @param rules the <code>AssociationRules</code> object to wrap.
-   */
-  public void setWrappedRules(AssociationRules rules) {
-    m_wrappedRules = rules;
-  }
-  
-  /**
-   * Get the wrapped <code>AssociationRules</code> object.
-   * 
-   * @return the wrapped <code>AssociationRules</code> object.
-   */
-  public AssociationRules getWrappedRules() {
-    return m_wrappedRules;
-  }
+    /** For serialization */
+    private static final long serialVersionUID = -4223408305476916955L;
+
+    protected Filter m_filter;
+
+    protected AssociationRules m_wrappedRules;
+
+    /**
+     * Constructs a new FilteredAssociationRules.
+     * 
+     * @param producer a string describing the scheme that produced these rules.
+     * @param filter   the filter applied to preprocess the data used to learn the
+     *                 rules.
+     * @param rules    the wrapped AssociationRules object.
+     */
+    public FilteredAssociationRules(String producer, Filter filter, AssociationRules rules) {
+        super(null, producer);
+
+        m_filter = filter;
+        m_wrappedRules = rules;
+    }
+
+    /**
+     * Constructs a new FilteredAssociationRules.
+     * 
+     * @param producer the scheme that produced the rules
+     * @param filter   the filter applied to preprocess the data used to learn the
+     *                 rules.
+     * @param rules    the wrapped AssociationRules object.
+     */
+    public FilteredAssociationRules(Object producer, Filter filter, AssociationRules rules) {
+        super(null, producer);
+
+        m_filter = filter;
+        m_wrappedRules = rules;
+    }
+
+    /**
+     * Constructs a new FilteredAssociationRules.
+     * 
+     * @param filter the filter applied to preprocess the data used to learn the
+     *               rules.
+     * @param rules  the wrapped AssociationRules object.
+     */
+    public FilteredAssociationRules(Filter filter, AssociationRules rules) {
+        super(null);
+
+        m_filter = filter;
+        m_wrappedRules = rules;
+    }
+
+    /**
+     * Set the rules to use. Passes them to the wrapped AssociationRules object.
+     * 
+     * @param rules the rules to use.
+     */
+    public void setRules(List<AssociationRule> rules) {
+
+        // delegate to our wrapped association rules
+        m_wrappedRules.setRules(rules);
+    }
+
+    /**
+     * Get the rules.
+     * 
+     * @return the rules.
+     */
+    public List<AssociationRule> getRules() {
+
+        // delegate to our wrapped association rules
+        return m_wrappedRules.getRules();
+    }
+
+    /**
+     * Get the number of rules.
+     * 
+     * @return the number of rules.
+     */
+    public int getNumRules() {
+
+        // delegate to our wrapped association rules
+        return m_wrappedRules.getNumRules();
+    }
+
+    /**
+     * Set the wrapped <code>AssociationRules</code> object to use.
+     * 
+     * @param rules the <code>AssociationRules</code> object to wrap.
+     */
+    public void setWrappedRules(AssociationRules rules) {
+        m_wrappedRules = rules;
+    }
+
+    /**
+     * Get the wrapped <code>AssociationRules</code> object.
+     * 
+     * @return the wrapped <code>AssociationRules</code> object.
+     */
+    public AssociationRules getWrappedRules() {
+        return m_wrappedRules;
+    }
 }

@@ -27,35 +27,36 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Center. Run from the command line with:<p>
+ * Tests Center. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.attribute.CenterTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
 public class CenterTest extends AbstractFilterTest {
-  
-  public CenterTest(String name) { 
-    super(name);
-  }
 
-  /** Creates a default Center */
-  public Filter getFilter() {
-    return new Center();
-  }
+    public CenterTest(String name) {
+        super(name);
+    }
 
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+    /** Creates a default Center */
+    public Filter getFilter() {
+        return new Center();
+    }
 
-  public static Test suite() {
-    return new TestSuite(CenterTest.class);
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(CenterTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

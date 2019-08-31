@@ -37,217 +37,214 @@ import weka.core.Utils;
  * @revision $Revision$
  */
 public abstract class HNode implements Serializable {
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 197233928177240264L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 197233928177240264L;
 
-  /** Class distribution at this node */
-  public Map<String, WeightMass> m_classDistribution = new LinkedHashMap<String, WeightMass>();
+    /** Class distribution at this node */
+    public Map<String, WeightMass> m_classDistribution = new LinkedHashMap<String, WeightMass>();
 
-  /** Holds the leaf number (if this is a leaf) */
-  protected int m_leafNum;
+    /** Holds the leaf number (if this is a leaf) */
+    protected int m_leafNum;
 
-  /** Holds the node number (for graphing purposes) */
-  protected int m_nodeNum;
+    /** Holds the node number (for graphing purposes) */
+    protected int m_nodeNum;
 
-  /**
-   * Construct a new HNode
-   */
-  public HNode() {
-  }
+    /**
+     * Construct a new HNode
+     */
+    public HNode() {
+    }
 
-  /**
-   * Construct a new HNode with the supplied class distribution
-   * 
-   * @param classDistrib
-   */
-  public HNode(Map<String, WeightMass> classDistrib) {
-    m_classDistribution = classDistrib;
-  }
+    /**
+     * Construct a new HNode with the supplied class distribution
+     * 
+     * @param classDistrib
+     */
+    public HNode(Map<String, WeightMass> classDistrib) {
+        m_classDistribution = classDistrib;
+    }
 
-  /**
-   * Returns true if this is a leaf
-   * 
-   * @return
-   */
-  public boolean isLeaf() {
-    return true;
-  }
+    /**
+     * Returns true if this is a leaf
+     * 
+     * @return
+     */
+    public boolean isLeaf() {
+        return true;
+    }
 
-  /**
-   * The size of the class distribution
-   * 
-   * @return the number of entries in the class distribution
-   */
-  public int numEntriesInClassDistribution() {
-    return m_classDistribution.size();
-  }
+    /**
+     * The size of the class distribution
+     * 
+     * @return the number of entries in the class distribution
+     */
+    public int numEntriesInClassDistribution() {
+        return m_classDistribution.size();
+    }
 
-  /**
-   * Returns true if the class distribution is pure
-   * 
-   * @return true if the class distribution is pure
-   */
-  public boolean classDistributionIsPure() {
-    int count = 0;
-    for (Map.Entry<String, WeightMass> el : m_classDistribution.entrySet()) {
-      if (el.getValue().m_weight > 0) {
-        count++;
+    /**
+     * Returns true if the class distribution is pure
+     * 
+     * @return true if the class distribution is pure
+     */
+    public boolean classDistributionIsPure() {
+        int count = 0;
+        for (Map.Entry<String, WeightMass> el : m_classDistribution.entrySet()) {
+            if (el.getValue().m_weight > 0) {
+                count++;
 
-        if (count > 1) {
-          break;
+                if (count > 1) {
+                    break;
+                }
+            }
         }
-      }
+
+        return (count < 2);
     }
 
-    return (count < 2);
-  }
+    /**
+     * Update the class frequency distribution with the supplied instance
+     * 
+     * @param inst the instance to update with
+     */
+    public void updateDistribution(Instance inst) {
+        if (inst.classIsMissing()) {
+            return;
+        }
+        String classVal = inst.stringValue(inst.classAttribute());
 
-  /**
-   * Update the class frequency distribution with the supplied instance
-   * 
-   * @param inst the instance to update with
-   */
-  public void updateDistribution(Instance inst) {
-    if (inst.classIsMissing()) {
-      return;
-    }
-    String classVal = inst.stringValue(inst.classAttribute());
+        WeightMass m = m_classDistribution.get(classVal);
+        if (m == null) {
+            m = new WeightMass();
+            m.m_weight = 1.0;
 
-    WeightMass m = m_classDistribution.get(classVal);
-    if (m == null) {
-      m = new WeightMass();
-      m.m_weight = 1.0;
-
-      m_classDistribution.put(classVal, m);
-    }
-    m.m_weight += inst.weight();
-  }
-
-  /**
-   * Return a class probability distribution computed from the frequency counts
-   * at this node
-   * 
-   * @param inst the instance to get a prediction for
-   * @param classAtt the class attribute
-   * @return a class probability distribution
-   * @throws Exception if a problem occurs
-   */
-  public double[] getDistribution(Instance inst, Attribute classAtt)
-      throws Exception {
-    double[] dist = new double[classAtt.numValues()];
-
-    for (int i = 0; i < classAtt.numValues(); i++) {
-      WeightMass w = m_classDistribution.get(classAtt.value(i));
-      if (w != null) {
-        dist[i] = w.m_weight;
-      } else {
-        dist[i] = 1.0;
-      }
+            m_classDistribution.put(classVal, m);
+        }
+        m.m_weight += inst.weight();
     }
 
-    Utils.normalize(dist);
-    return dist;
-  }
+    /**
+     * Return a class probability distribution computed from the frequency counts at
+     * this node
+     * 
+     * @param inst     the instance to get a prediction for
+     * @param classAtt the class attribute
+     * @return a class probability distribution
+     * @throws Exception if a problem occurs
+     */
+    public double[] getDistribution(Instance inst, Attribute classAtt) throws Exception {
+        double[] dist = new double[classAtt.numValues()];
 
-  public int installNodeNums(int nodeNum) {
-    nodeNum++;
-    m_nodeNum = nodeNum;
+        for (int i = 0; i < classAtt.numValues(); i++) {
+            WeightMass w = m_classDistribution.get(classAtt.value(i));
+            if (w != null) {
+                dist[i] = w.m_weight;
+            } else {
+                dist[i] = 1.0;
+            }
+        }
 
-    return nodeNum;
-  }
-
-  protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
-
-    double max = -1;
-    String classVal = "";
-    for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
-      if (e.getValue().m_weight > max) {
-        max = e.getValue().m_weight;
-        classVal = e.getKey();
-      }
-    }
-    buff.append(classVal + " (" + String.format("%-9.3f", max).trim() + ")");
-    leafCount++;
-    m_leafNum = leafCount;
-
-    return leafCount;
-  }
-
-  protected void printLeafModels(StringBuffer buff) {
-  }
-
-  public void graphTree(StringBuffer text) {
-
-    double max = -1;
-    String classVal = "";
-    for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
-      if (e.getValue().m_weight > max) {
-        max = e.getValue().m_weight;
-        classVal = e.getKey();
-      }
+        Utils.normalize(dist);
+        return dist;
     }
 
-    text.append("N" + m_nodeNum + " [label=\"" + classVal + " ("
-        + String.format("%-9.3f", max).trim() + ")\" shape=box style=filled]\n");
-  }
+    public int installNodeNums(int nodeNum) {
+        nodeNum++;
+        m_nodeNum = nodeNum;
 
-  /**
-   * Print a textual description of the tree
-   * 
-   * @param printLeaf true if leaf models (NB, NB adaptive) should be output
-   * @return a textual description of the tree
-   */
-  public String toString(boolean printLeaf) {
-
-    installNodeNums(0);
-
-    StringBuffer buff = new StringBuffer();
-
-    dumpTree(0, 0, buff);
-
-    if (printLeaf) {
-      buff.append("\n\n");
-      printLeafModels(buff);
+        return nodeNum;
     }
 
-    return buff.toString();
-  }
+    protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
 
-  /**
-   * Return the total weight of instances seen at this node
-   * 
-   * @return the total weight of instances seen at this node
-   */
-  public double totalWeight() {
-    double tw = 0;
+        double max = -1;
+        String classVal = "";
+        for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
+            if (e.getValue().m_weight > max) {
+                max = e.getValue().m_weight;
+                classVal = e.getKey();
+            }
+        }
+        buff.append(classVal + " (" + String.format("%-9.3f", max).trim() + ")");
+        leafCount++;
+        m_leafNum = leafCount;
 
-    for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
-      tw += e.getValue().m_weight;
+        return leafCount;
     }
 
-    return tw;
-  }
+    protected void printLeafModels(StringBuffer buff) {
+    }
 
-  /**
-   * Return the leaf that the supplied instance ends up at
-   * 
-   * @param inst the instance to find the leaf for
-   * @param parent the parent node
-   * @param parentBranch the parent branch
-   * @return the leaf that the supplied instance ends up at
-   */
-  public LeafNode leafForInstance(Instance inst, SplitNode parent,
-      String parentBranch) {
-    return new LeafNode(this, parent, parentBranch);
-  }
+    public void graphTree(StringBuffer text) {
 
-  /**
-   * Update the node with the supplied instance
-   * 
-   * @param inst the instance to update with
-   * @throws Exception if a problem occurs
-   */
-  public abstract void updateNode(Instance inst) throws Exception;
+        double max = -1;
+        String classVal = "";
+        for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
+            if (e.getValue().m_weight > max) {
+                max = e.getValue().m_weight;
+                classVal = e.getKey();
+            }
+        }
+
+        text.append("N" + m_nodeNum + " [label=\"" + classVal + " (" + String.format("%-9.3f", max).trim() + ")\" shape=box style=filled]\n");
+    }
+
+    /**
+     * Print a textual description of the tree
+     * 
+     * @param printLeaf true if leaf models (NB, NB adaptive) should be output
+     * @return a textual description of the tree
+     */
+    public String toString(boolean printLeaf) {
+
+        installNodeNums(0);
+
+        StringBuffer buff = new StringBuffer();
+
+        dumpTree(0, 0, buff);
+
+        if (printLeaf) {
+            buff.append("\n\n");
+            printLeafModels(buff);
+        }
+
+        return buff.toString();
+    }
+
+    /**
+     * Return the total weight of instances seen at this node
+     * 
+     * @return the total weight of instances seen at this node
+     */
+    public double totalWeight() {
+        double tw = 0;
+
+        for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
+            tw += e.getValue().m_weight;
+        }
+
+        return tw;
+    }
+
+    /**
+     * Return the leaf that the supplied instance ends up at
+     * 
+     * @param inst         the instance to find the leaf for
+     * @param parent       the parent node
+     * @param parentBranch the parent branch
+     * @return the leaf that the supplied instance ends up at
+     */
+    public LeafNode leafForInstance(Instance inst, SplitNode parent, String parentBranch) {
+        return new LeafNode(this, parent, parentBranch);
+    }
+
+    /**
+     * Update the node with the supplied instance
+     * 
+     * @param inst the instance to update with
+     * @throws Exception if a problem occurs
+     */
+    public abstract void updateNode(Instance inst) throws Exception;
 }

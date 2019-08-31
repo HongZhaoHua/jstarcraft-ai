@@ -27,51 +27,51 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests PKIDiscretize. Run from the command line with: <p/>
+ * Tests PKIDiscretize. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.PKIDiscretizeTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PKIDiscretizeTest 
-  extends AbstractFilterTest {
+public class PKIDiscretizeTest extends AbstractFilterTest {
 
-  /** the attribute to discretize */
-  protected int m_AttIndex;
-  
-  public PKIDiscretizeTest(String name) { 
-    super(name);  
-  }
+    /** the attribute to discretize */
+    protected int m_AttIndex;
 
-  /** Need to remove non-nominal attributes, set class index */
-  protected void setUp() throws Exception {
-    super.setUp();
+    public PKIDiscretizeTest(String name) {
+        super(name);
+    }
 
-    m_Instances.setClassIndex(1);
-    m_AttIndex = 2;
-  }
-  
-  /** Creates a default PKIDiscretize */
-  public Filter getFilter() {
-    PKIDiscretize f = new PKIDiscretize();
-    f.setAttributeIndicesArray(new int[]{m_AttIndex});
-    return f;
-  }
+    /** Need to remove non-nominal attributes, set class index */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  public void testTypical() {
-    m_Filter = getFilter();
-    Instances result = useFilter();
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-    // the discretized attribute must be nominal
-    assertTrue(result.attribute(m_AttIndex).isNominal());
-  }
+        m_Instances.setClassIndex(1);
+        m_AttIndex = 2;
+    }
 
-  public static Test suite() {
-    return new TestSuite(PKIDiscretizeTest.class);
-  }
+    /** Creates a default PKIDiscretize */
+    public Filter getFilter() {
+        PKIDiscretize f = new PKIDiscretize();
+        f.setAttributeIndicesArray(new int[] { m_AttIndex });
+        return f;
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public void testTypical() {
+        m_Filter = getFilter();
+        Instances result = useFilter();
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        // the discretized attribute must be nominal
+        assertTrue(result.attribute(m_AttIndex).isNominal());
+    }
+
+    public static Test suite() {
+        return new TestSuite(PKIDiscretizeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

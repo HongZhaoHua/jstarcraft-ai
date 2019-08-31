@@ -35,28 +35,28 @@ import weka.test.WekaTestSuite;
  */
 public class AllTests extends WekaTestSuite {
 
-  /**
-   * generates all the tests
-   * 
-   * @return all the tests
-   */
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
+    /**
+     * generates all the tests
+     * 
+     * @return all the tests
+     */
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
-    // all tests in converter package
-    Vector<String> packages = new Vector<String>();
-    packages.add("weka.core.converters");
-    suite.addTest(suite(AbstractConverterTest.class.getName(), packages));
+        // all tests in converter package
+        Vector<String> packages = new Vector<String>();
+        packages.add("weka.core.converters");
+        suite.addTest(suite(AbstractConverterTest.class.getName(), packages));
 
-    return suite;
-  }
+        return suite;
+    }
 
-  /**
-   * for running the tests from commandline
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * for running the tests from commandline
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

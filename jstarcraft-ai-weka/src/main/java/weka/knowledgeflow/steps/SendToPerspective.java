@@ -33,84 +33,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Step that can send incoming instances to a perspective. Only operates
- * in a graphical (i.e. non-headless) environment.
+ * Step that can send incoming instances to a perspective. Only operates in a
+ * graphical (i.e. non-headless) environment.
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-@KFStep(name = "SendToPerspective", category = "Flow",
-  toolTipText = "Send instances to a perspective (graphical environment only)",
-  iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
+@KFStep(name = "SendToPerspective", category = "Flow", toolTipText = "Send instances to a perspective (graphical environment only)", iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
 public class SendToPerspective extends BaseStep {
 
-  private static final long serialVersionUID = 7322550048407408819L;
+    private static final long serialVersionUID = 7322550048407408819L;
 
-  protected String m_perspectiveName = "";
+    protected String m_perspectiveName = "";
 
-  public void setPerspectiveName(String name) {
-    m_perspectiveName = name;
-  }
-
-  public String getPerspectiveName() {
-    return m_perspectiveName;
-  }
-
-  @Override
-  public void stepInit() throws WekaException {
-  }
-
-  @Override
-  public void processIncoming(Data data) throws WekaException {
-    getStepManager().processing();
-    if (getStepManager().getExecutionEnvironment().isHeadless()) {
-      getStepManager().logWarning(
-        "Unable to send data to perspective due to "
-          + "execution in a headless environment.");
-    } else {
-      if (m_perspectiveName == null || m_perspectiveName.length() == 0) {
-        getStepManager().logWarning("No perspective specified");
-      } else {
-        List<String> visiblePerspectives =
-          getStepManager()
-            .getExecutionEnvironment()
-            .getGraphicalEnvironmentCommandHandler()
-            .performCommand(
-              GetPerspectiveNamesGraphicalCommand.GET_PERSPECTIVE_NAMES_KEY);
-        if (!visiblePerspectives.contains(m_perspectiveName)) {
-          throw new WekaException("The perspective to send to '"
-            + m_perspectiveName + "' does not seem to be available");
-        }
-
-        Instances toSend = data.getPrimaryPayload();
-        if (toSend != null) {
-          getStepManager()
-            .getExecutionEnvironment()
-            .getGraphicalEnvironmentCommandHandler()
-            .performCommand(
-              SendToPerspectiveGraphicalCommand.SEND_TO_PERSPECTIVE_COMMAND_KEY,
-              m_perspectiveName, toSend);
-        }
-      }
+    public void setPerspectiveName(String name) {
+        m_perspectiveName = name;
     }
 
-    getStepManager().finished();
-  }
-
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    List<String> result = new ArrayList<>();
-    if (getStepManager().numIncomingConnections() == 0) {
-      result.add(StepManager.CON_DATASET);
-      result.add(StepManager.CON_TRAININGSET);
-      result.add(StepManager.CON_TESTSET);
+    public String getPerspectiveName() {
+        return m_perspectiveName;
     }
 
-    return result;
-  }
+    @Override
+    public void stepInit() throws WekaException {
+    }
 
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    return null;
-  }
+    @Override
+    public void processIncoming(Data data) throws WekaException {
+        getStepManager().processing();
+        if (getStepManager().getExecutionEnvironment().isHeadless()) {
+            getStepManager().logWarning("Unable to send data to perspective due to " + "execution in a headless environment.");
+        } else {
+            if (m_perspectiveName == null || m_perspectiveName.length() == 0) {
+                getStepManager().logWarning("No perspective specified");
+            } else {
+                List<String> visiblePerspectives = getStepManager().getExecutionEnvironment().getGraphicalEnvironmentCommandHandler().performCommand(GetPerspectiveNamesGraphicalCommand.GET_PERSPECTIVE_NAMES_KEY);
+                if (!visiblePerspectives.contains(m_perspectiveName)) {
+                    throw new WekaException("The perspective to send to '" + m_perspectiveName + "' does not seem to be available");
+                }
+
+                Instances toSend = data.getPrimaryPayload();
+                if (toSend != null) {
+                    getStepManager().getExecutionEnvironment().getGraphicalEnvironmentCommandHandler().performCommand(SendToPerspectiveGraphicalCommand.SEND_TO_PERSPECTIVE_COMMAND_KEY, m_perspectiveName, toSend);
+                }
+            }
+        }
+
+        getStepManager().finished();
+    }
+
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        List<String> result = new ArrayList<>();
+        if (getStepManager().numIncomingConnections() == 0) {
+            result.add(StepManager.CON_DATASET);
+            result.add(StepManager.CON_TRAININGSET);
+            result.add(StepManager.CON_TESTSET);
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        return null;
+    }
 }

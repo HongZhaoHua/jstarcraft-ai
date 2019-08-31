@@ -36,113 +36,106 @@ import weka.core.RevisionUtils;
  */
 public class AlphabeticTokenizer extends Tokenizer {
 
-  /** for serialization */
-  private static final long serialVersionUID = 6705199562609861697L;
+    /** for serialization */
+    private static final long serialVersionUID = 6705199562609861697L;
 
-  /** the characters of the string */
-  protected char[] m_Str;
+    /** the characters of the string */
+    protected char[] m_Str;
 
-  /** the current position */
-  protected int m_CurrentPos;
+    /** the current position */
+    protected int m_CurrentPos;
 
-  /**
-   * Returns a string describing the stemmer
-   * 
-   * @return a description suitable for displaying in the explorer/experimenter
-   *         gui
-   */
-  @Override
-  public String globalInfo() {
-    return "Alphabetic string tokenizer, tokens are to be formed only from "
-      + "contiguous alphabetic sequences.";
-  }
-
-  /**
-   * returns whether there are more elements still
-   * 
-   * @return true if there are still more elements
-   */
-  @Override
-  public boolean hasMoreElements() {
-    int beginpos = m_CurrentPos;
-
-    while ((beginpos < m_Str.length)
-      && ((m_Str[beginpos] < 'a') || (m_Str[beginpos] > 'z'))
-      && ((m_Str[beginpos] < 'A') || (m_Str[beginpos] > 'Z'))) {
-      beginpos++;
-    }
-    m_CurrentPos = beginpos;
-
-    if ((beginpos < m_Str.length)
-      && (((m_Str[beginpos] >= 'a') && (m_Str[beginpos] <= 'z')) || ((m_Str[beginpos] >= 'A') && (m_Str[beginpos] <= 'Z')))) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  /**
-   * returns the next element
-   * 
-   * @return the next element
-   */
-  @Override
-  public String nextElement() {
-    int beginpos, endpos;
-
-    beginpos = m_CurrentPos;
-
-    while ((beginpos < m_Str.length)
-      && ((m_Str[beginpos] < 'a') && (m_Str[beginpos] > 'z'))
-      && ((m_Str[beginpos] < 'A') && (m_Str[beginpos] > 'Z'))) {
-      beginpos++;
-    }
-    m_CurrentPos = endpos = beginpos;
-
-    if (beginpos >= m_Str.length) {
-      throw new NoSuchElementException("No more tokens present");
+    /**
+     * Returns a string describing the stemmer
+     * 
+     * @return a description suitable for displaying in the explorer/experimenter
+     *         gui
+     */
+    @Override
+    public String globalInfo() {
+        return "Alphabetic string tokenizer, tokens are to be formed only from " + "contiguous alphabetic sequences.";
     }
 
-    while ((endpos < m_Str.length)
-      && (((m_Str[endpos] >= 'a') && (m_Str[endpos] <= 'z')) || ((m_Str[endpos] >= 'A') && (m_Str[endpos] <= 'Z')))) {
-      endpos++;
+    /**
+     * returns whether there are more elements still
+     * 
+     * @return true if there are still more elements
+     */
+    @Override
+    public boolean hasMoreElements() {
+        int beginpos = m_CurrentPos;
+
+        while ((beginpos < m_Str.length) && ((m_Str[beginpos] < 'a') || (m_Str[beginpos] > 'z')) && ((m_Str[beginpos] < 'A') || (m_Str[beginpos] > 'Z'))) {
+            beginpos++;
+        }
+        m_CurrentPos = beginpos;
+
+        if ((beginpos < m_Str.length) && (((m_Str[beginpos] >= 'a') && (m_Str[beginpos] <= 'z')) || ((m_Str[beginpos] >= 'A') && (m_Str[beginpos] <= 'Z')))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    String s = new String(m_Str, beginpos, endpos - m_CurrentPos);
-    m_CurrentPos = endpos;
+    /**
+     * returns the next element
+     * 
+     * @return the next element
+     */
+    @Override
+    public String nextElement() {
+        int beginpos, endpos;
 
-    return s;
-  }
+        beginpos = m_CurrentPos;
 
-  /**
-   * Sets the string to tokenize. Tokenization happens immediately.
-   * 
-   * @param s the string to tokenize
-   */
-  @Override
-  public void tokenize(String s) {
-    m_CurrentPos = 0;
-    m_Str = new char[s.length()];
-    s.getChars(0, s.length(), m_Str, 0);
-  }
+        while ((beginpos < m_Str.length) && ((m_Str[beginpos] < 'a') && (m_Str[beginpos] > 'z')) && ((m_Str[beginpos] < 'A') && (m_Str[beginpos] > 'Z'))) {
+            beginpos++;
+        }
+        m_CurrentPos = endpos = beginpos;
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        if (beginpos >= m_Str.length) {
+            throw new NoSuchElementException("No more tokens present");
+        }
 
-  /**
-   * Runs the tokenizer with the given options and strings to tokenize. The
-   * tokens are printed to stdout.
-   * 
-   * @param args the commandline options and strings to tokenize
-   */
-  public static void main(String[] args) {
-    runTokenizer(new AlphabeticTokenizer(), args);
-  }
+        while ((endpos < m_Str.length) && (((m_Str[endpos] >= 'a') && (m_Str[endpos] <= 'z')) || ((m_Str[endpos] >= 'A') && (m_Str[endpos] <= 'Z')))) {
+            endpos++;
+        }
+
+        String s = new String(m_Str, beginpos, endpos - m_CurrentPos);
+        m_CurrentPos = endpos;
+
+        return s;
+    }
+
+    /**
+     * Sets the string to tokenize. Tokenization happens immediately.
+     * 
+     * @param s the string to tokenize
+     */
+    @Override
+    public void tokenize(String s) {
+        m_CurrentPos = 0;
+        m_Str = new char[s.length()];
+        s.getChars(0, s.length(), m_Str, 0);
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Runs the tokenizer with the given options and strings to tokenize. The tokens
+     * are printed to stdout.
+     * 
+     * @param args the commandline options and strings to tokenize
+     */
+    public static void main(String[] args) {
+        runTokenizer(new AlphabeticTokenizer(), args);
+    }
 }

@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests ClassificationViaRegression. Run from the command line with:<p>
+ * Tests ClassificationViaRegression. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.ClassificationViaRegressionTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class ClassificationViaRegressionTest extends AbstractClassifierTest {
 
-  public ClassificationViaRegressionTest(String name) { super(name);  }
+    public ClassificationViaRegressionTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default ClassificationViaRegression */
-  public Classifier getClassifier() {
-    return new ClassificationViaRegression();
-  }
+    /** Creates a default ClassificationViaRegression */
+    public Classifier getClassifier() {
+        return new ClassificationViaRegression();
+    }
 
-  public static Test suite() {
-    return new TestSuite(ClassificationViaRegressionTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(ClassificationViaRegressionTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

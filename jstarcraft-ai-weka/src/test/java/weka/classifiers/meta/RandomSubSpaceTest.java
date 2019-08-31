@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RandomSubSpace. Run from the command line with:<p/>
+ * Tests RandomSubSpace. Run from the command line with:
+ * <p/>
  * java weka.classifiers.meta.RandomSubSpaceTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RandomSubSpaceTest 
-  extends AbstractClassifierTest {
+public class RandomSubSpaceTest extends AbstractClassifierTest {
 
-  public RandomSubSpaceTest(String name) { 
-    super(name);  
-  }
+    public RandomSubSpaceTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default RandomSubSpace */
-  public Classifier getClassifier() {
-    return new RandomSubSpace();
-  }
+    /** Creates a default RandomSubSpace */
+    public Classifier getClassifier() {
+        return new RandomSubSpace();
+    }
 
-  public static Test suite() {
-    return new TestSuite(RandomSubSpaceTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RandomSubSpaceTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

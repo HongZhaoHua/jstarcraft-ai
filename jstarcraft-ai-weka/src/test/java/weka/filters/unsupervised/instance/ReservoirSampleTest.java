@@ -28,92 +28,90 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests ReservoirSample. Run from the command line with: <p/>
+ * Tests ReservoirSample. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.instance.ReservoirSampleTest
  *
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}org)
  * @version $Revision$
  */
-public class ReservoirSampleTest
-  extends AbstractFilterTest {
+public class ReservoirSampleTest extends AbstractFilterTest {
 
-  /** for comparing the instances */
-  protected InstanceComparator m_Comparator;
-  
-  public ReservoirSampleTest(String name) { 
-    super(name);  
-  }
+    /** for comparing the instances */
+    protected InstanceComparator m_Comparator;
 
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_Comparator = new InstanceComparator(true);
-  }
-
-  /** Creates a default ReservoirSample */
-  public Filter getFilter() {
-    ReservoirSample r = new ReservoirSample();
-    return r;
-  }
-
-  public void testTypical() {
-    m_Filter = getFilter();
-    Instances result = useFilter();
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-    
-    // instances should be indentical as default settings ask for
-    // a larger sample than there is number of instances in the test
-    // dataset
-    boolean equal = true;
-    for (int i = 0; i < m_Instances.numInstances(); i++) {
-      if (m_Comparator.compare(
-            m_Instances.instance(i), result.instance(i)) != 0) {
-        equal = false;
-        break;
-      }
-    }
-    if (!equal) {
-      fail("Result should be equal");
-    }
-  }
-
-  public void testSubSample() {
-    m_Filter = getFilter();
-    ((ReservoirSample)m_Filter).setSampleSize(10);
-    
-    Instances result = useFilter();
-    assertEquals(result.numInstances(), 10);
-
-    // instances should be different from the first 10 instances in
-    // the original data
-
-    boolean equal = true;
-    for (int i = 0; i < result.numInstances(); i++) {
-      if (m_Comparator.compare(
-            m_Instances.instance(i), result.instance(i)) != 0) {
-        equal = false;
-        break;
-      }
+    public ReservoirSampleTest(String name) {
+        super(name);
     }
 
-    if (equal) {
-      fail("Result should be different than the first 10 instances");
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        m_Comparator = new InstanceComparator(true);
     }
-  }
 
-  public void testHeaderOnlyInput() {
-    m_Filter = getFilter();
-    m_Instances = new Instances(m_Instances, 0);
-    Instances result = useFilter();
-    assertEquals(result.numInstances(), m_Instances.numInstances());
-  }
+    /** Creates a default ReservoirSample */
+    public Filter getFilter() {
+        ReservoirSample r = new ReservoirSample();
+        return r;
+    }
 
-  public static Test suite() {
-    return new TestSuite(ReservoirSampleTest.class);
-  }
-  
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public void testTypical() {
+        m_Filter = getFilter();
+        Instances result = useFilter();
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+
+        // instances should be indentical as default settings ask for
+        // a larger sample than there is number of instances in the test
+        // dataset
+        boolean equal = true;
+        for (int i = 0; i < m_Instances.numInstances(); i++) {
+            if (m_Comparator.compare(m_Instances.instance(i), result.instance(i)) != 0) {
+                equal = false;
+                break;
+            }
+        }
+        if (!equal) {
+            fail("Result should be equal");
+        }
+    }
+
+    public void testSubSample() {
+        m_Filter = getFilter();
+        ((ReservoirSample) m_Filter).setSampleSize(10);
+
+        Instances result = useFilter();
+        assertEquals(result.numInstances(), 10);
+
+        // instances should be different from the first 10 instances in
+        // the original data
+
+        boolean equal = true;
+        for (int i = 0; i < result.numInstances(); i++) {
+            if (m_Comparator.compare(m_Instances.instance(i), result.instance(i)) != 0) {
+                equal = false;
+                break;
+            }
+        }
+
+        if (equal) {
+            fail("Result should be different than the first 10 instances");
+        }
+    }
+
+    public void testHeaderOnlyInput() {
+        m_Filter = getFilter();
+        m_Instances = new Instances(m_Instances, 0);
+        Instances result = useFilter();
+        assertEquals(result.numInstances(), m_Instances.numInstances());
+    }
+
+    public static Test suite() {
+        return new TestSuite(ReservoirSampleTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

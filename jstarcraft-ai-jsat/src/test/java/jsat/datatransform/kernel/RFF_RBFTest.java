@@ -36,38 +36,31 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class RFF_RBFTest
-{
-    
-    public RFF_RBFTest()
-    {
+public class RFF_RBFTest {
+
+    public RFF_RBFTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
-        
+
         DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new RFF_RBF(0.5, 100, true));
 
         ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
@@ -81,8 +74,7 @@ public class RFF_RBFTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
         DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new RFF_RBF(0.5, 100, true));
@@ -98,12 +90,11 @@ public class RFF_RBFTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new RFF_RBF(0.5, 100, false));
-        
+
         ClassificationDataSet t1 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom());
         ClassificationDataSet t2 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom(), 2.0, 10.0);
 
@@ -111,9 +102,8 @@ public class RFF_RBFTest
 
         instance.train(t1);
 
-        
         DataModelPipeline result = instance.clone();
-        
+
         for (int i = 0; i < t1.size(); i++)
             assertEquals(t1.getDataPointCategory(i), result.classify(t1.getDataPoint(i)).mostLikely());
         result.train(t2);
@@ -125,5 +115,5 @@ public class RFF_RBFTest
             assertEquals(t2.getDataPointCategory(i), result.classify(t2.getDataPoint(i)).mostLikely());
 
     }
-    
+
 }

@@ -8,66 +8,53 @@ import java.util.Collections;
  *
  * @author Edward Raff
  */
-public class BoundedSortedList<E extends Comparable<E>> extends ArrayList<E> implements Serializable
-{
+public class BoundedSortedList<E extends Comparable<E>> extends ArrayList<E> implements Serializable {
 
-	private static final long serialVersionUID = 5503813399376102571L;
-	private final int maxSize;
+    private static final long serialVersionUID = 5503813399376102571L;
+    private final int maxSize;
 
-    public BoundedSortedList(int maxSize, int initialCapacity)
-    {
+    public BoundedSortedList(int maxSize, int initialCapacity) {
         super(initialCapacity);
-        if(maxSize < 1)
+        if (maxSize < 1)
             throw new RuntimeException("Invalid max size");
         this.maxSize = maxSize;
     }
 
-    public BoundedSortedList(int maxSize)
-    {
-        if(maxSize < 1)
+    public BoundedSortedList(int maxSize) {
+        if (maxSize < 1)
             throw new RuntimeException("Invalid max size");
         this.maxSize = maxSize;
     }
-        
 
     @Override
-    public boolean add(E e)
-    {
-        if(isEmpty())
-        {
+    public boolean add(E e) {
+        if (isEmpty()) {
             super.add(e);
             return true;
-        }
-        else
-        {
+        } else {
             int ind = Collections.binarySearch(this, e);
-            if (ind >= 0)//it is already in the list, 
+            if (ind >= 0)// it is already in the list,
             {
-                if (size() == maxSize)//pop the last, put this 
+                if (size() == maxSize)// pop the last, put this
                 {
                     this.remove(maxSize - 1);
                     super.add(ind, e);
-                }
-                else//not full yet, can jsut add
+                } else// not full yet, can jsut add
                 {
-                    if(ind > size())
+                    if (ind > size())
                         super.add(e);
                     else
                         super.add(ind, e);
                 }
                 return true;
-            }
-            else
-            {
-                ind = -(ind + 1);//Now it is the point where it should be inserted
+            } else {
+                ind = -(ind + 1);// Now it is the point where it should be inserted
                 if (size() < maxSize)
                     super.add(ind, e);
-                else if (ind < maxSize)
-                {
+                else if (ind < maxSize) {
                     this.remove(maxSize - 1);
                     super.add(ind, e);
-                }
-                else
+                } else
                     return false;
 
                 return true;
@@ -75,33 +62,29 @@ public class BoundedSortedList<E extends Comparable<E>> extends ArrayList<E> imp
         }
     }
 
-
-    public E first()
-    {
-        if(isEmpty())
+    public E first() {
+        if (isEmpty())
             return null;
         return get(0);
     }
-    
-    public E last()
-    {
-        if(isEmpty())
+
+    public E last() {
+        if (isEmpty())
             return null;
-        return get(size()-1);
+        return get(size() - 1);
     }
 
     @Override
-    public void add(int index, E element)
-    {
+    public void add(int index, E element) {
         add(element);
     }
-    
+
     /**
      * Returns the maximum size allowed for the bounded list
+     * 
      * @return the maximum size allowed for the bounded list
      */
-    public int maxSize()
-    {
+    public int maxSize() {
         return maxSize;
     }
 }

@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests FilteredClassifier. Run from the command line with:<p>
+ * Tests FilteredClassifier. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.FilteredClassifierTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class FilteredClassifierTest extends AbstractClassifierTest {
 
-  public FilteredClassifierTest(String name) { super(name);  }
+    public FilteredClassifierTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default FilteredClassifier */
-  public Classifier getClassifier() {
-    return new FilteredClassifier();
-  }
+    /** Creates a default FilteredClassifier */
+    public Classifier getClassifier() {
+        return new FilteredClassifier();
+    }
 
-  public static Test suite() {
-    return new TestSuite(FilteredClassifierTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(FilteredClassifierTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

@@ -33,70 +33,69 @@ import java.util.Map;
  */
 public class Defaults implements Serializable {
 
-  /** For serialization */
-  private static final long serialVersionUID = 1061521489520308096L;
+    /** For serialization */
+    private static final long serialVersionUID = 1061521489520308096L;
 
-  /** Identifier for this set of defaults */
-  protected String m_defaultsID = "";
+    /** Identifier for this set of defaults */
+    protected String m_defaultsID = "";
 
-  /** Maintains the list of default settings */
-  protected Map<Settings.SettingKey, Object> m_defaults =
-    new LinkedHashMap<Settings.SettingKey, Object>();
+    /** Maintains the list of default settings */
+    protected Map<Settings.SettingKey, Object> m_defaults = new LinkedHashMap<Settings.SettingKey, Object>();
 
-  /**
-   * Construct a new empty Defaults
-   *
-   * @param ID the ID for this set of defaults
-   */
-  public Defaults(String ID) {
-    setID(ID);
-  }
+    /**
+     * Construct a new empty Defaults
+     *
+     * @param ID the ID for this set of defaults
+     */
+    public Defaults(String ID) {
+        setID(ID);
+    }
 
-  /**
-   * Construct a new Defaults
-   *
-   * @param ID the ID for this set of defaults
-   * @param defaults the default settings to use
-   */
-  public Defaults(String ID, Map<Settings.SettingKey, Object> defaults) {
-    this(ID);
-    m_defaults = defaults;
-  }
+    /**
+     * Construct a new Defaults
+     *
+     * @param ID       the ID for this set of defaults
+     * @param defaults the default settings to use
+     */
+    public Defaults(String ID, Map<Settings.SettingKey, Object> defaults) {
+        this(ID);
+        m_defaults = defaults;
+    }
 
-  /**
-   * Get the ID of this set of defaults
-   *
-   * @return the ID of this set of defaults
-   */
-  public String getID() {
-    return m_defaultsID;
-  }
+    /**
+     * Get the ID of this set of defaults
+     *
+     * @return the ID of this set of defaults
+     */
+    public String getID() {
+        return m_defaultsID;
+    }
 
-  /**
-   * Set the ID for this set of defaults
-   *
-   * @param ID the ID to use
-   */
-  public void setID(String ID) {
-    m_defaultsID = ID;
-  }
+    /**
+     * Set the ID for this set of defaults
+     *
+     * @param ID the ID to use
+     */
+    public void setID(String ID) {
+        m_defaultsID = ID;
+    }
 
-  /**
-   * Get the map of default settings
-   *
-   * @return the map of default settings
-   */
-  public Map<Settings.SettingKey, Object> getDefaults() {
-    return m_defaults;
-  }
+    /**
+     * Get the map of default settings
+     *
+     * @return the map of default settings
+     */
+    public Map<Settings.SettingKey, Object> getDefaults() {
+        return m_defaults;
+    }
 
-  /**
-   * Add the supplied defaults to this one. Note that the added defaults now
-   * come under the ID of this set of defaults.
-   *
-   * @param toAdd the defaults to add
-   */
-  public void add(Defaults toAdd) {
-    m_defaults.putAll(toAdd.getDefaults());
-  }
+    /**
+     * Add the supplied defaults to this one. Note that the added defaults now come
+     * under the ID of this set of defaults.
+     *
+     * @param toAdd the defaults to add
+     */
+    public void add(Defaults toAdd) {
+        m_defaults.putAll(toAdd.getDefaults());
+    }
 }

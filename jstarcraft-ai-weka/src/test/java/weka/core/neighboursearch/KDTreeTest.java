@@ -23,29 +23,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests KDTree. Run from the command line with: <p/>
+ * Tests KDTree. Run from the command line with:
+ * <p/>
  * java weka.core.neighboursearch.KDTreeTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class KDTreeTest
-  extends AbstractNearestNeighbourSearchTest {
+public class KDTreeTest extends AbstractNearestNeighbourSearchTest {
 
-  public KDTreeTest(String name) {
-    super(name);
-  }
+    public KDTreeTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default KDTree */
-  public NearestNeighbourSearch getNearestNeighbourSearch() {
-    return new KDTree();
-  }
-  
-  public static Test suite() {
-    return new TestSuite(KDTreeTest.class);
-  }
+    /** Creates a default KDTree */
+    public NearestNeighbourSearch getNearestNeighbourSearch() {
+        return new KDTree();
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(KDTreeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

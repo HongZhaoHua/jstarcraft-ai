@@ -26,25 +26,25 @@ import junit.framework.TestSuite;
 
 /**
  * Test class for all datagenerators and cluster definitions. Run from the
- * command line with:<p/>
+ * command line with:
+ * <p/>
  * java weka.datagenerators.AllTests
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
-    suite.addTest(suite("weka.datagenerators.DataGenerator"));
-    suite.addTest(suite("weka.datagenerators.ClusterDefinition"));
+        suite.addTest(suite("weka.datagenerators.DataGenerator"));
+        suite.addTest(suite("weka.datagenerators.ClusterDefinition"));
 
-    return suite;
-  }
+        return suite;
+    }
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

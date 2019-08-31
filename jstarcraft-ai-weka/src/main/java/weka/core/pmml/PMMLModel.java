@@ -32,55 +32,54 @@ import weka.gui.Logger;
  * @version $Revision$
  */
 public interface PMMLModel {
-  
-  /**
-   * Set the version of the PMML.
-   *
-   * @param doc the Document encapsulating the pmml
-   */
-  void setPMMLVersion(Document doc);
-  
-  /**
-   * Get the version of PMML used to encode this model.
-   *
-   * @return the version as a String
-   */
-  String getPMMLVersion();
-  
-  /**
-   * Set the name of the application (if specified) that created this.
-   * model
-   * 
-   * @param doc the Document encapsulating the pmml
-   */
-  void setCreatorApplication(Document doc);
-  
-  /**
-   * Get the name of the application that created this model.
-   * 
-   * @return the name of the creating application or null
-   * if not specified in the pmml.
-   */
-  String getCreatorApplication();
 
-  /**
-   * Get the mining schema.
-   *
-   * @return the mining schema
-   */
-  MiningSchema getMiningSchema();
-  
-  /**
-   * Set a logger to use.
-   * 
-   * @param log the logger to use
-   */
-  void setLog(Logger log);
-  
-  /**
-   * Get the logger.
-   * 
-   * @return the logger (or null if none is being used)
-   */
-  Logger getLog();
+    /**
+     * Set the version of the PMML.
+     *
+     * @param doc the Document encapsulating the pmml
+     */
+    void setPMMLVersion(Document doc);
+
+    /**
+     * Get the version of PMML used to encode this model.
+     *
+     * @return the version as a String
+     */
+    String getPMMLVersion();
+
+    /**
+     * Set the name of the application (if specified) that created this. model
+     * 
+     * @param doc the Document encapsulating the pmml
+     */
+    void setCreatorApplication(Document doc);
+
+    /**
+     * Get the name of the application that created this model.
+     * 
+     * @return the name of the creating application or null if not specified in the
+     *         pmml.
+     */
+    String getCreatorApplication();
+
+    /**
+     * Get the mining schema.
+     *
+     * @return the mining schema
+     */
+    MiningSchema getMiningSchema();
+
+    /**
+     * Set a logger to use.
+     * 
+     * @param log the logger to use
+     */
+    void setLog(Logger log);
+
+    /**
+     * Get the logger.
+     * 
+     * @return the logger (or null if none is being used)
+     */
+    Logger getLog();
 }

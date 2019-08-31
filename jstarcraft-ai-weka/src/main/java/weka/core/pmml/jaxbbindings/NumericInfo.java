@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for NumericInfo element declaration.
+ * <p>
+ * Java class for NumericInfo element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="NumericInfo">
@@ -47,10 +48,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "quantile"
-})
+@XmlType(name = "", propOrder = { "extension", "quantile" })
 @XmlRootElement(name = "NumericInfo")
 public class NumericInfo {
 
@@ -75,21 +73,21 @@ public class NumericInfo {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -104,21 +102,21 @@ public class NumericInfo {
      * Gets the value of the quantile property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the quantile property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the quantile property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getQuantile().add(newItem);
+     * getQuantile().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Quantile }
+     * Objects of the following type(s) are allowed in the list {@link Quantile }
      * 
      * 
      */
@@ -132,10 +130,8 @@ public class NumericInfo {
     /**
      * Gets the value of the interQuartileRange property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getInterQuartileRange() {
         return interQuartileRange;
@@ -144,10 +140,8 @@ public class NumericInfo {
     /**
      * Sets the value of the interQuartileRange property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setInterQuartileRange(Double value) {
         this.interQuartileRange = value;
@@ -156,10 +150,8 @@ public class NumericInfo {
     /**
      * Gets the value of the maximum property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMaximum() {
         return maximum;
@@ -168,10 +160,8 @@ public class NumericInfo {
     /**
      * Sets the value of the maximum property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMaximum(Double value) {
         this.maximum = value;
@@ -180,10 +170,8 @@ public class NumericInfo {
     /**
      * Gets the value of the mean property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMean() {
         return mean;
@@ -192,10 +180,8 @@ public class NumericInfo {
     /**
      * Sets the value of the mean property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMean(Double value) {
         this.mean = value;
@@ -204,10 +190,8 @@ public class NumericInfo {
     /**
      * Gets the value of the median property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMedian() {
         return median;
@@ -216,10 +200,8 @@ public class NumericInfo {
     /**
      * Sets the value of the median property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMedian(Double value) {
         this.median = value;
@@ -228,10 +210,8 @@ public class NumericInfo {
     /**
      * Gets the value of the minimum property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMinimum() {
         return minimum;
@@ -240,10 +220,8 @@ public class NumericInfo {
     /**
      * Sets the value of the minimum property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimum(Double value) {
         this.minimum = value;
@@ -252,10 +230,8 @@ public class NumericInfo {
     /**
      * Gets the value of the standardDeviation property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getStandardDeviation() {
         return standardDeviation;
@@ -264,10 +240,8 @@ public class NumericInfo {
     /**
      * Sets the value of the standardDeviation property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setStandardDeviation(Double value) {
         this.standardDeviation = value;

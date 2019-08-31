@@ -31,10 +31,10 @@ package weka.classifiers;
  */
 public interface UpdateableBatchProcessor {
 
-  /**
-   * Signal that the training data is finished (for now).
-   * 
-   * @throws Exception if a problem occurs
-   */
-  public void batchFinished() throws Exception;
+    /**
+     * Signal that the training data is finished (for now).
+     * 
+     * @throws Exception if a problem occurs
+     */
+    public void batchFinished() throws Exception;
 }

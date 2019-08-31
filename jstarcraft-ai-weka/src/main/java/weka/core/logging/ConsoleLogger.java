@@ -27,33 +27,30 @@ import weka.core.RevisionUtils;
 /**
  * A simple logger that outputs the logging information in the console.
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class ConsoleLogger
-  extends Logger {
+public class ConsoleLogger extends Logger {
 
-  /**
-   * Performs the actual logging. 
-   * 
-   * @param level	the level of the message
-   * @param msg		the message to log
-   * @param cls		the classname originating the log event
-   * @param method	the method originating the log event
-   * @param lineno	the line number originating the log event
-   */
-  protected void doLog(Level level, String msg, String cls, String method, int lineno) {
-    System.err.println(
-	m_DateFormat.format(new Date()) + " " + cls + " " + method + "\n" 
-	+ level + ": " + msg);
-  }
-  
-  /**
-   * Returns the revision string.
-   * 
-   * @return		the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Performs the actual logging.
+     * 
+     * @param level  the level of the message
+     * @param msg    the message to log
+     * @param cls    the classname originating the log event
+     * @param method the method originating the log event
+     * @param lineno the line number originating the log event
+     */
+    protected void doLog(Level level, String msg, String cls, String method, int lineno) {
+        System.err.println(m_DateFormat.format(new Date()) + " " + cls + " " + method + "\n" + level + ": " + msg);
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

@@ -30,48 +30,50 @@ import weka.core.Instances;
  * @version $Revision$
  */
 public interface SplitEvaluate {
-  
-  /**
-   * makes a copy of the SplitEvaluate object
-   * @return a copy of the object
-   */
-  SplitEvaluate copy () throws Exception;
 
-  /** 
-   * Finds the best splitting point for an attribute in the instances
-   * @param attr the splitting attribute
-   * @param inst the instances
-   * @exception Exception if something goes wrong
-   */
-   void attrSplit (int attr, Instances inst) throws Exception;
+    /**
+     * makes a copy of the SplitEvaluate object
+     * 
+     * @return a copy of the object
+     */
+    SplitEvaluate copy() throws Exception;
 
-  /**
-   * Returns the impurity of this split
-   *
-   * @return the impurity of this split
-   */
-   double maxImpurity();
+    /**
+     * Finds the best splitting point for an attribute in the instances
+     * 
+     * @param attr the splitting attribute
+     * @param inst the instances
+     * @exception Exception if something goes wrong
+     */
+    void attrSplit(int attr, Instances inst) throws Exception;
 
-  /**
-   * Returns the position of the split in the sorted values. -1 indicates that
-   * a split could not be found.
-   *
-   * @return an <code>int</code> value
-   */
-   int position();
-  
-  /**
-   * Returns the attribute used in this split
-   *
-   * @return the attribute used in this split
-   */
-   int splitAttr();
+    /**
+     * Returns the impurity of this split
+     *
+     * @return the impurity of this split
+     */
+    double maxImpurity();
 
-  /**
-   * Returns the split value
-   *
-   * @return the split value
-   */
-   double splitValue();
+    /**
+     * Returns the position of the split in the sorted values. -1 indicates that a
+     * split could not be found.
+     *
+     * @return an <code>int</code> value
+     */
+    int position();
+
+    /**
+     * Returns the attribute used in this split
+     *
+     * @return the attribute used in this split
+     */
+    int splitAttr();
+
+    /**
+     * Returns the split value
+     *
+     * @return the split value
+     */
+    double splitValue();
 
 }

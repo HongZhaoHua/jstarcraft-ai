@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for OPTYPE.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for OPTYPE.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="OPTYPE">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -32,10 +34,8 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum OPTYPE {
 
     @XmlEnumValue("categorical")
-    CATEGORICAL("categorical"),
-    @XmlEnumValue("continuous")
-    CONTINUOUS("continuous"),
-    @XmlEnumValue("ordinal")
+    CATEGORICAL("categorical"), @XmlEnumValue("continuous")
+    CONTINUOUS("continuous"), @XmlEnumValue("ordinal")
     ORDINAL("ordinal");
     private final String value;
 
@@ -48,7 +48,7 @@ public enum OPTYPE {
     }
 
     public static OPTYPE fromValue(String v) {
-        for (OPTYPE c: OPTYPE.values()) {
+        for (OPTYPE c : OPTYPE.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

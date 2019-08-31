@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests LWL. Run from the command line with:<p>
+ * Tests LWL. Run from the command line with:
+ * <p>
  * java weka.classifiers.lazy.LWLTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class LWLTest extends AbstractClassifierTest {
 
-  public LWLTest(String name) { super(name);  }
+    public LWLTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default LWL */
-  public Classifier getClassifier() {
-    return new LWL();
-  }
+    /** Creates a default LWL */
+    public Classifier getClassifier() {
+        return new LWL();
+    }
 
-  public static Test suite() {
-    return new TestSuite(LWLTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(LWLTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

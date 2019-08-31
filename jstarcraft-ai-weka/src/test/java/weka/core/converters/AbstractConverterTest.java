@@ -33,301 +33,295 @@ import junit.framework.TestCase;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class AbstractConverterTest 
-  extends TestCase {
+public abstract class AbstractConverterTest extends TestCase {
 
-  /** whether the option handling is fully enabled */
-  public final static boolean TEST_OPTION_HANDLING = false;
+    /** whether the option handling is fully enabled */
+    public final static boolean TEST_OPTION_HANDLING = false;
 
-  /** for generating test data */
-  protected TestInstances m_TestInstances;
-  
-  /** the loader */
-  protected AbstractLoader m_Loader;
-  
-  /** the saver */
-  protected AbstractSaver m_Saver;
-  
-  /** the OptionHandler tester for the loader */
-  protected CheckOptionHandler m_OptionTesterLoader;
-  
-  /** the OptionHandler tester for the saver */
-  protected CheckOptionHandler m_OptionTesterSaver;
-  
-  /** for testing GOE stuff for the loader */
-  protected CheckGOE m_GOETesterLoader;
-  
-  /** for testing GOE stuff for the saver */
-  protected CheckGOE m_GOETesterSaver;
-  
-  /** the reference dataset */
-  protected Instances m_Instances;
-  
-  /**
-   * Constructs the <code>AbstractConverterTest</code>. Called by subclasses.
-   *
-   * @param name the name of the test class
-   */
-  public AbstractConverterTest(String name) { 
-    super(name); 
-  }
+    /** for generating test data */
+    protected TestInstances m_TestInstances;
 
-  /**
-   * returns the loader used in the tests
-   * 
-   * @return the configured loader
-   */
-  public abstract AbstractLoader getLoader();
+    /** the loader */
+    protected AbstractLoader m_Loader;
 
-  /**
-   * returns the saver used in the tests
-   * 
-   * @return the configured saver
-   */
-  public abstract AbstractSaver getSaver();
-  
-  /**
-   * Configures the CheckOptionHandler uses for testing the optionhandling.
-   * Sets the scheme to test.
-   * 
-   * @param o	the object to test
-   * @return	the fully configured CheckOptionHandler
-   */
-  protected CheckOptionHandler getOptionTester(Object o) {
-    CheckOptionHandler		result;
-    
-    result = new CheckOptionHandler();
-    if (o instanceof OptionHandler)
-      result.setOptionHandler((OptionHandler) o);
-    else
-      result.setOptionHandler(null);
-    result.setUserOptions(new String[0]);
-    result.setSilent(true);
-    
-    return result;
-  }
-  
-  /**
-   * Configures the CheckGOE used for testing GOE stuff.
-   * 
-   * @param o	the object to test
-   * @return	the fully configured CheckGOE
-   */
-  protected CheckGOE getGOETester(Object o) {
-    CheckGOE		result;
-    
-    result = new CheckGOE();
-    result.setObject(o);
-    result.setIgnoredProperties(result.getIgnoredProperties() + ",instances");
-    result.setSilent(true);
-    
-    return result;
-  }
-  
-  /**
-   * Configures the CheckOptionHandler used for testing the option handling
-   * of the loader.
-   * Sets the scheme to test.
-   * 
-   * @return	the fully configured CheckOptionHandler
-   */
-  protected CheckOptionHandler getOptionTesterLoader() {
-    return getOptionTester(getLoader());
-  }
-  
-  /**
-   * Configures the CheckOptionHandler used for testing the option handling
-   * of the saver.
-   * Sets the scheme to test.
-   * 
-   * @return	the fully configured CheckOptionHandler
-   */
-  protected CheckOptionHandler getOptionTesterSaver() {
-    return getOptionTester(getSaver());
-  }
-  
-  /**
-   * Configures the CheckGOE used for testing the option handling
-   * of the loader.
-   * Sets the scheme to test.
-   * 
-   * @return	the fully configured CheckGOE
-   */
-  protected CheckGOE getGOETesterLoader() {
-    return getGOETester(getLoader());
-  }
-  
-  /**
-   * Configures the CheckGOE used for testing the option handling
-   * of the saver.
-   * Sets the scheme to test.
-   * 
-   * @return	the fully configured CheckGOE
-   */
-  protected CheckGOE getGOETesterSaver() {
-    return getGOETester(getSaver());
-  }
+    /** the saver */
+    protected AbstractSaver m_Saver;
 
-  /**
-   * returns the test data generator
-   * 
-   * @return 	the configured test data generator
-   */
-  protected TestInstances getTestInstances() {
-    return new TestInstances();
-  }
-  
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default converters (loader/saver) to test and loads a test set of 
-   * Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_Loader             = getLoader();
-    m_Saver              = getSaver();
-    
-    m_OptionTesterLoader = getOptionTesterLoader();
-    m_OptionTesterSaver  = getOptionTesterSaver();
-    m_GOETesterLoader    = getGOETesterLoader();
-    m_GOETesterSaver     = getGOETesterSaver();
-    
-    m_TestInstances      = getTestInstances();
-    m_Instances          = m_TestInstances.generate();
-  }
-  
-  /** 
-   * Called by JUnit after each test method
-   */
-  protected void tearDown() throws Exception {
-    m_Loader             = null;
-    m_Saver              = null;
+    /** the OptionHandler tester for the loader */
+    protected CheckOptionHandler m_OptionTesterLoader;
 
-    m_OptionTesterLoader = null;
-    m_OptionTesterSaver  = null;
-    m_GOETesterLoader    = null;
-    m_GOETesterSaver     = null;
-    
-    m_TestInstances      = null;
-    m_Instances          = null;
-    
-    super.tearDown();
-  }
-  
-  /**
-   * tests the listing of the options
-   */
-  public void testListOptions() {
-    if (m_OptionTesterLoader.getOptionHandler() != null) {
-      if (!m_OptionTesterLoader.checkListOptions())
-	fail("Loader: Options cannot be listed via listOptions.");
+    /** the OptionHandler tester for the saver */
+    protected CheckOptionHandler m_OptionTesterSaver;
+
+    /** for testing GOE stuff for the loader */
+    protected CheckGOE m_GOETesterLoader;
+
+    /** for testing GOE stuff for the saver */
+    protected CheckGOE m_GOETesterSaver;
+
+    /** the reference dataset */
+    protected Instances m_Instances;
+
+    /**
+     * Constructs the <code>AbstractConverterTest</code>. Called by subclasses.
+     *
+     * @param name the name of the test class
+     */
+    public AbstractConverterTest(String name) {
+        super(name);
     }
 
-    if (m_OptionTesterSaver.getOptionHandler() != null) {
-      if (!m_OptionTesterSaver.checkListOptions())
-	fail("Saver: Options cannot be listed via listOptions.");
-    }
-  }
-  
-  /**
-   * tests the setting of the options
-   */
-  public void testSetOptions() {
-    // TODO: currently disabled
-    if (!TEST_OPTION_HANDLING)
-      return;
-    
-    if (m_OptionTesterLoader.getOptionHandler() != null) {
-      if (!m_OptionTesterLoader.checkSetOptions())
-	fail("Loader: setOptions method failed.");
+    /**
+     * returns the loader used in the tests
+     * 
+     * @return the configured loader
+     */
+    public abstract AbstractLoader getLoader();
+
+    /**
+     * returns the saver used in the tests
+     * 
+     * @return the configured saver
+     */
+    public abstract AbstractSaver getSaver();
+
+    /**
+     * Configures the CheckOptionHandler uses for testing the optionhandling. Sets
+     * the scheme to test.
+     * 
+     * @param o the object to test
+     * @return the fully configured CheckOptionHandler
+     */
+    protected CheckOptionHandler getOptionTester(Object o) {
+        CheckOptionHandler result;
+
+        result = new CheckOptionHandler();
+        if (o instanceof OptionHandler)
+            result.setOptionHandler((OptionHandler) o);
+        else
+            result.setOptionHandler(null);
+        result.setUserOptions(new String[0]);
+        result.setSilent(true);
+
+        return result;
     }
 
-    if (m_OptionTesterSaver.getOptionHandler() != null) {
-      if (!m_OptionTesterSaver.checkSetOptions())
-	fail("Saver: setOptions method failed.");
-    }
-  }
-  
-  /**
-   * tests whether there are any remaining options
-   */
-  public void testRemainingOptions() {
-    // TODO: currently disabled
-    if (!TEST_OPTION_HANDLING)
-      return;
-    
-    if (m_OptionTesterLoader.getOptionHandler() != null) {
-      if (!m_OptionTesterLoader.checkRemainingOptions())
-	fail("Loader: There were 'left-over' options.");
+    /**
+     * Configures the CheckGOE used for testing GOE stuff.
+     * 
+     * @param o the object to test
+     * @return the fully configured CheckGOE
+     */
+    protected CheckGOE getGOETester(Object o) {
+        CheckGOE result;
+
+        result = new CheckGOE();
+        result.setObject(o);
+        result.setIgnoredProperties(result.getIgnoredProperties() + ",instances");
+        result.setSilent(true);
+
+        return result;
     }
 
-    if (m_OptionTesterSaver.getOptionHandler() != null) {
-      if (!m_OptionTesterSaver.checkRemainingOptions())
-	fail("Saver: There were 'left-over' options.");
-    }
-  }
-  
-  /**
-   * tests the whether the user-supplied options stay the same after setting.
-   * getting, and re-setting again.
-   */
-  public void testCanonicalUserOptions() {
-    // TODO: currently disabled
-    if (!TEST_OPTION_HANDLING)
-      return;
-    
-    if (m_OptionTesterLoader.getOptionHandler() != null) {
-      if (!m_OptionTesterLoader.checkCanonicalUserOptions())
-	fail("Loader: setOptions method failed");
+    /**
+     * Configures the CheckOptionHandler used for testing the option handling of the
+     * loader. Sets the scheme to test.
+     * 
+     * @return the fully configured CheckOptionHandler
+     */
+    protected CheckOptionHandler getOptionTesterLoader() {
+        return getOptionTester(getLoader());
     }
 
-    if (m_OptionTesterSaver.getOptionHandler() != null) {
-      if (!m_OptionTesterSaver.checkCanonicalUserOptions())
-	fail("Saver: setOptions method failed");
-    }
-  }
-  
-  /**
-   * tests the resetting of the options to the default ones
-   */
-  public void testResettingOptions() {
-    // TODO: currently disabled
-    if (!TEST_OPTION_HANDLING)
-      return;
-    
-    if (m_OptionTesterLoader.getOptionHandler() != null) {
-      if (!m_OptionTesterLoader.checkSetOptions())
-	fail("Loader: Resetting of options failed");
+    /**
+     * Configures the CheckOptionHandler used for testing the option handling of the
+     * saver. Sets the scheme to test.
+     * 
+     * @return the fully configured CheckOptionHandler
+     */
+    protected CheckOptionHandler getOptionTesterSaver() {
+        return getOptionTester(getSaver());
     }
 
-    if (m_OptionTesterSaver.getOptionHandler() != null) {
-      if (!m_OptionTesterSaver.checkSetOptions())
-	fail("Saver: Resetting of options failed");
+    /**
+     * Configures the CheckGOE used for testing the option handling of the loader.
+     * Sets the scheme to test.
+     * 
+     * @return the fully configured CheckGOE
+     */
+    protected CheckGOE getGOETesterLoader() {
+        return getGOETester(getLoader());
     }
-  }
-  
-  /**
-   * tests for a globalInfo method
-   */
-  public void testGlobalInfo() {
-    if (!m_GOETesterLoader.checkGlobalInfo())
-      fail("Loader: No globalInfo method");
 
-    if (!m_GOETesterSaver.checkGlobalInfo())
-      fail("Saver: No globalInfo method");
-  }
-  
-  /**
-   * tests the tool tips
-   */
-  public void testToolTips() {
-    if (!m_GOETesterLoader.checkToolTips())
-      fail("Loader: Tool tips inconsistent");
+    /**
+     * Configures the CheckGOE used for testing the option handling of the saver.
+     * Sets the scheme to test.
+     * 
+     * @return the fully configured CheckGOE
+     */
+    protected CheckGOE getGOETesterSaver() {
+        return getGOETester(getSaver());
+    }
 
-    if (!m_GOETesterSaver.checkToolTips())
-      fail("Saver: Tool tips inconsistent");
-  }
+    /**
+     * returns the test data generator
+     * 
+     * @return the configured test data generator
+     */
+    protected TestInstances getTestInstances() {
+        return new TestInstances();
+    }
+
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default converters (loader/saver) to test and loads a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        m_Loader = getLoader();
+        m_Saver = getSaver();
+
+        m_OptionTesterLoader = getOptionTesterLoader();
+        m_OptionTesterSaver = getOptionTesterSaver();
+        m_GOETesterLoader = getGOETesterLoader();
+        m_GOETesterSaver = getGOETesterSaver();
+
+        m_TestInstances = getTestInstances();
+        m_Instances = m_TestInstances.generate();
+    }
+
+    /**
+     * Called by JUnit after each test method
+     */
+    protected void tearDown() throws Exception {
+        m_Loader = null;
+        m_Saver = null;
+
+        m_OptionTesterLoader = null;
+        m_OptionTesterSaver = null;
+        m_GOETesterLoader = null;
+        m_GOETesterSaver = null;
+
+        m_TestInstances = null;
+        m_Instances = null;
+
+        super.tearDown();
+    }
+
+    /**
+     * tests the listing of the options
+     */
+    public void testListOptions() {
+        if (m_OptionTesterLoader.getOptionHandler() != null) {
+            if (!m_OptionTesterLoader.checkListOptions())
+                fail("Loader: Options cannot be listed via listOptions.");
+        }
+
+        if (m_OptionTesterSaver.getOptionHandler() != null) {
+            if (!m_OptionTesterSaver.checkListOptions())
+                fail("Saver: Options cannot be listed via listOptions.");
+        }
+    }
+
+    /**
+     * tests the setting of the options
+     */
+    public void testSetOptions() {
+        // TODO: currently disabled
+        if (!TEST_OPTION_HANDLING)
+            return;
+
+        if (m_OptionTesterLoader.getOptionHandler() != null) {
+            if (!m_OptionTesterLoader.checkSetOptions())
+                fail("Loader: setOptions method failed.");
+        }
+
+        if (m_OptionTesterSaver.getOptionHandler() != null) {
+            if (!m_OptionTesterSaver.checkSetOptions())
+                fail("Saver: setOptions method failed.");
+        }
+    }
+
+    /**
+     * tests whether there are any remaining options
+     */
+    public void testRemainingOptions() {
+        // TODO: currently disabled
+        if (!TEST_OPTION_HANDLING)
+            return;
+
+        if (m_OptionTesterLoader.getOptionHandler() != null) {
+            if (!m_OptionTesterLoader.checkRemainingOptions())
+                fail("Loader: There were 'left-over' options.");
+        }
+
+        if (m_OptionTesterSaver.getOptionHandler() != null) {
+            if (!m_OptionTesterSaver.checkRemainingOptions())
+                fail("Saver: There were 'left-over' options.");
+        }
+    }
+
+    /**
+     * tests the whether the user-supplied options stay the same after setting.
+     * getting, and re-setting again.
+     */
+    public void testCanonicalUserOptions() {
+        // TODO: currently disabled
+        if (!TEST_OPTION_HANDLING)
+            return;
+
+        if (m_OptionTesterLoader.getOptionHandler() != null) {
+            if (!m_OptionTesterLoader.checkCanonicalUserOptions())
+                fail("Loader: setOptions method failed");
+        }
+
+        if (m_OptionTesterSaver.getOptionHandler() != null) {
+            if (!m_OptionTesterSaver.checkCanonicalUserOptions())
+                fail("Saver: setOptions method failed");
+        }
+    }
+
+    /**
+     * tests the resetting of the options to the default ones
+     */
+    public void testResettingOptions() {
+        // TODO: currently disabled
+        if (!TEST_OPTION_HANDLING)
+            return;
+
+        if (m_OptionTesterLoader.getOptionHandler() != null) {
+            if (!m_OptionTesterLoader.checkSetOptions())
+                fail("Loader: Resetting of options failed");
+        }
+
+        if (m_OptionTesterSaver.getOptionHandler() != null) {
+            if (!m_OptionTesterSaver.checkSetOptions())
+                fail("Saver: Resetting of options failed");
+        }
+    }
+
+    /**
+     * tests for a globalInfo method
+     */
+    public void testGlobalInfo() {
+        if (!m_GOETesterLoader.checkGlobalInfo())
+            fail("Loader: No globalInfo method");
+
+        if (!m_GOETesterSaver.checkGlobalInfo())
+            fail("Saver: No globalInfo method");
+    }
+
+    /**
+     * tests the tool tips
+     */
+    public void testToolTips() {
+        if (!m_GOETesterLoader.checkToolTips())
+            fail("Loader: Tool tips inconsistent");
+
+        if (!m_GOETesterSaver.checkToolTips())
+            fail("Saver: Tool tips inconsistent");
+    }
 }

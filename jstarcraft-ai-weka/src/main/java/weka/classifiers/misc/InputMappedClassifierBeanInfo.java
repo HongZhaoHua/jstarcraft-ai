@@ -25,43 +25,43 @@ import java.beans.SimpleBeanInfo;
 import java.util.ArrayList;
 
 /**
- * Bean info class for the InputMappedClassifier. Ensures that the 
- * FileEnvironmentField class is used as the custom property editor
- * in the GOE for the modelPath property.
+ * Bean info class for the InputMappedClassifier. Ensures that the
+ * FileEnvironmentField class is used as the custom property editor in the GOE
+ * for the modelPath property.
  * 
  * @author Mar Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  *
  */
 public class InputMappedClassifierBeanInfo extends SimpleBeanInfo {
-  
-  /**
-   * Get an array of PropertyDescriptors for the InputMappedClassifier's
-   * public properties.
-   * 
-   * @return an array of PropertyDescriptors
-   */
-  public PropertyDescriptor[] getPropertyDescriptors() {
-    try {
-      PropertyDescriptor p1;
-      ArrayList<PropertyDescriptor> pds = new ArrayList<PropertyDescriptor>();
-      
-      p1 = new PropertyDescriptor("modelPath", InputMappedClassifier.class);
-      p1.setPropertyEditorClass(weka.gui.beans.FileEnvironmentField.class);
-      pds.add(p1);
-      
-      pds.add(new PropertyDescriptor("ignoreCaseForNames", InputMappedClassifier.class));
-      pds.add(new PropertyDescriptor("suppressMappingReport", InputMappedClassifier.class));
-      pds.add(new PropertyDescriptor("trim", InputMappedClassifier.class));
-      pds.add(new PropertyDescriptor("classifier", InputMappedClassifier.class));
-      
-      // this one is only really needed for XMLSerialization
-      pds.add(new PropertyDescriptor("options", InputMappedClassifier.class));
-      
-      return pds.toArray(new PropertyDescriptor[1]);
-    } catch (Exception ex) {
-      ex.printStackTrace();
+
+    /**
+     * Get an array of PropertyDescriptors for the InputMappedClassifier's public
+     * properties.
+     * 
+     * @return an array of PropertyDescriptors
+     */
+    public PropertyDescriptor[] getPropertyDescriptors() {
+        try {
+            PropertyDescriptor p1;
+            ArrayList<PropertyDescriptor> pds = new ArrayList<PropertyDescriptor>();
+
+            p1 = new PropertyDescriptor("modelPath", InputMappedClassifier.class);
+            p1.setPropertyEditorClass(weka.gui.beans.FileEnvironmentField.class);
+            pds.add(p1);
+
+            pds.add(new PropertyDescriptor("ignoreCaseForNames", InputMappedClassifier.class));
+            pds.add(new PropertyDescriptor("suppressMappingReport", InputMappedClassifier.class));
+            pds.add(new PropertyDescriptor("trim", InputMappedClassifier.class));
+            pds.add(new PropertyDescriptor("classifier", InputMappedClassifier.class));
+
+            // this one is only really needed for XMLSerialization
+            pds.add(new PropertyDescriptor("options", InputMappedClassifier.class));
+
+            return pds.toArray(new PropertyDescriptor[1]);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-    return null;
-  }
 }

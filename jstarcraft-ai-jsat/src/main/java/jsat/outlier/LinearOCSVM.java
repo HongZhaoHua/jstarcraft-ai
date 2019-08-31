@@ -36,7 +36,7 @@ import jsat.utils.random.RandomUtil;
  * non-linear transformation to the data.
  *
  * 
- * See: 
+ * See:
  * <ul>
  * <li>Schölkopf, B., Williamson, R., Smola, A., Shawe-Taylor, J., & Platt, J.
  * (1999). <i>Support Vector Method for Novelty Detection</i>. In Advances in
@@ -48,82 +48,72 @@ import jsat.utils.random.RandomUtil;
  * 
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class LinearOCSVM implements Outlier
-{
-    
+public class LinearOCSVM implements Outlier {
+
     private Vec w;
     private double p;
     private int max_epochs = 100;
     private double learningRate = 0.01;
     private double v = 0.05;
 
-    public void setV(double v)
-    {
+    public void setV(double v) {
         this.v = v;
     }
 
-    public double getV()
-    {
+    public double getV() {
         return v;
     }
-    
-    
+
     @Override
-    public void fit(DataSet d, boolean parallel)
-    {
-        
+    public void fit(DataSet d, boolean parallel) {
+
         Random rand = RandomUtil.getRandom();
         List<Vec> X = d.getDataVectors();
-        
+
         int N = X.size();
         w = new ScaledVector(new DenseVector(X.get(0).length()));
         p = 0;
-        
-        
+
         GradientUpdater gu = new AdaGrad();
         gu.setup(w.length());
-        double cnt = 1/(v);
-        
+        double cnt = 1 / (v);
+
         double prevLoss = Double.POSITIVE_INFINITY;
         double curLoss = Double.POSITIVE_INFINITY;
-        for(int epoch = 0; epoch < max_epochs; epoch++)
-        {
+        for (int epoch = 0; epoch < max_epochs; epoch++) {
             Collections.shuffle(X, rand);
-            
+
             prevLoss = curLoss;
             curLoss = 0;
-            
-            for(int i = 0; i < X.size(); i++)
-            {
+
+            for (int i = 0; i < X.size(); i++) {
                 Vec x = X.get(i);
                 double loss = p - w.dot(x);
-                
+
                 double p_delta = -1;
                 double x_mul = 0;
-                
-                if(loss > 0)
-                {
-                    p_delta += 1*cnt;
-                    x_mul = -1*cnt;
+
+                if (loss > 0) {
+                    p_delta += 1 * cnt;
+                    x_mul = -1 * cnt;
                 }
-                
+
                 curLoss += Math.max(0, loss);
-                
+
                 p -= gu.update(w, new ScaledVector(x_mul, x), learningRate, p, p_delta);
-                w.mutableMultiply(1-learningRate);
+                w.mutableMultiply(1 - learningRate);
             }
-            
+
 //            System.out.println("Epoch " + epoch + " " + curLoss + " " + (curLoss-prevLoss)/N);
-            if(Math.abs((curLoss-prevLoss)/N) < 1e-6*v)
-                break;//Convergence check
-            
+            if (Math.abs((curLoss - prevLoss) / N) < 1e-6 * v)
+                break;// Convergence check
+
         }
     }
 
     @Override
-    public double score(DataPoint x)
-    {
-        return w.dot(x.getNumericalValues())-p;
+    public double score(DataPoint x) {
+        return w.dot(x.getNumericalValues()) - p;
     }
-    
+
 }

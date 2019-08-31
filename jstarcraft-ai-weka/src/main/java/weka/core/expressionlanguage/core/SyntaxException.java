@@ -29,16 +29,15 @@ package weka.core.expressionlanguage.core;
  */
 public class SyntaxException extends Exception {
 
-  /** for serialization */
-  private static final long serialVersionUID = 390076835893846782L;
+    /** for serialization */
+    private static final long serialVersionUID = 390076835893846782L;
 
-
-  /**
-   * Constructs a {@link SyntaxException} with a message
-   * 
-   * @param msg the message of the exception
-   */
-  public SyntaxException(String msg) {
-    super(msg);
-  }
+    /**
+     * Constructs a {@link SyntaxException} with a message
+     * 
+     * @param msg the message of the exception
+     */
+    public SyntaxException(String msg) {
+        super(msg);
+    }
 }

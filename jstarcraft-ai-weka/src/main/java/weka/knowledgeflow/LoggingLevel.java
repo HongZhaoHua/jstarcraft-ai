@@ -28,45 +28,44 @@ package weka.knowledgeflow;
  * @version $Revision: $
  */
 public enum LoggingLevel {
-  NONE("None"), LOW("Low"), BASIC("Basic"), DETAILED("Detailed"), DEBUGGING(
-    "Debugging"), WARNING("WARNING"), ERROR("ERROR");
+    NONE("None"), LOW("Low"), BASIC("Basic"), DETAILED("Detailed"), DEBUGGING("Debugging"), WARNING("WARNING"), ERROR("ERROR");
 
-  /** The name of this logging level */
-  private final String m_name;
+    /** The name of this logging level */
+    private final String m_name;
 
-  /**
-   * Constructor
-   *
-   * @param name the name of this logging level
-   */
-  LoggingLevel(String name) {
-    m_name = name;
-  }
-
-  /**
-   * Return LoggingLevel given its name as a string
-   *
-   * @param s the string containing the name of the logging level
-   * @return the LoggingLevel (or LoggingLevel.BASIC if the string could
-   * not be matched)
-   */
-  public static LoggingLevel stringToLevel(String s) {
-    LoggingLevel ret = LoggingLevel.BASIC;
-    for (LoggingLevel l : LoggingLevel.values()) {
-      if (l.toString().equals(s)) {
-        ret = l;
-      }
+    /**
+     * Constructor
+     *
+     * @param name the name of this logging level
+     */
+    LoggingLevel(String name) {
+        m_name = name;
     }
-    return ret;
-  }
 
-  /**
-   * String representation
-   *
-   * @return the string representation of this logging level
-   */
-  @Override
-  public String toString() {
-    return m_name;
-  }
+    /**
+     * Return LoggingLevel given its name as a string
+     *
+     * @param s the string containing the name of the logging level
+     * @return the LoggingLevel (or LoggingLevel.BASIC if the string could not be
+     *         matched)
+     */
+    public static LoggingLevel stringToLevel(String s) {
+        LoggingLevel ret = LoggingLevel.BASIC;
+        for (LoggingLevel l : LoggingLevel.values()) {
+            if (l.toString().equals(s)) {
+                ret = l;
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * String representation
+     *
+     * @return the string representation of this logging level
+     */
+    @Override
+    public String toString() {
+        return m_name;
+    }
 }

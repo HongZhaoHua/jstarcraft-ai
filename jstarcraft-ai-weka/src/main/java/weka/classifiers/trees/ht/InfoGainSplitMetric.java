@@ -37,74 +37,73 @@ import weka.core.Utils;
  */
 public class InfoGainSplitMetric extends SplitMetric implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 2173840581308675428L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 2173840581308675428L;
 
-  protected double m_minFracWeightForTwoBranches;
+    protected double m_minFracWeightForTwoBranches;
 
-  public InfoGainSplitMetric(double minFracWeightForTwoBranches) {
-    m_minFracWeightForTwoBranches = minFracWeightForTwoBranches;
-  }
-
-  @Override
-  public double evaluateSplit(Map<String, WeightMass> preDist,
-      List<Map<String, WeightMass>> postDist) {
-
-    double[] pre = new double[preDist.size()];
-    int count = 0;
-    for (Map.Entry<String, WeightMass> e : preDist.entrySet()) {
-      pre[count++] = e.getValue().m_weight;
+    public InfoGainSplitMetric(double minFracWeightForTwoBranches) {
+        m_minFracWeightForTwoBranches = minFracWeightForTwoBranches;
     }
 
-    double preEntropy = ContingencyTables.entropy(pre);
+    @Override
+    public double evaluateSplit(Map<String, WeightMass> preDist, List<Map<String, WeightMass>> postDist) {
 
-    double[] distWeights = new double[postDist.size()];
-    double totalWeight = 0.0;
-    for (int i = 0; i < postDist.size(); i++) {
-      distWeights[i] = SplitMetric.sum(postDist.get(i));
-      totalWeight += distWeights[i];
+        double[] pre = new double[preDist.size()];
+        int count = 0;
+        for (Map.Entry<String, WeightMass> e : preDist.entrySet()) {
+            pre[count++] = e.getValue().m_weight;
+        }
+
+        double preEntropy = ContingencyTables.entropy(pre);
+
+        double[] distWeights = new double[postDist.size()];
+        double totalWeight = 0.0;
+        for (int i = 0; i < postDist.size(); i++) {
+            distWeights[i] = SplitMetric.sum(postDist.get(i));
+            totalWeight += distWeights[i];
+        }
+
+        int fracCount = 0;
+        for (double d : distWeights) {
+            if (d / totalWeight > m_minFracWeightForTwoBranches) {
+                fracCount++;
+            }
+        }
+
+        if (fracCount < 2) {
+            return Double.NEGATIVE_INFINITY;
+        }
+
+        double postEntropy = 0;
+        for (int i = 0; i < postDist.size(); i++) {
+            Map<String, WeightMass> d = postDist.get(i);
+            double[] post = new double[d.size()];
+            count = 0;
+            for (Map.Entry<String, WeightMass> e : d.entrySet()) {
+                post[count++] = e.getValue().m_weight;
+            }
+            postEntropy += distWeights[i] * ContingencyTables.entropy(post);
+        }
+
+        if (totalWeight > 0) {
+            postEntropy /= totalWeight;
+        }
+
+        return preEntropy - postEntropy;
     }
 
-    int fracCount = 0;
-    for (double d : distWeights) {
-      if (d / totalWeight > m_minFracWeightForTwoBranches) {
-        fracCount++;
-      }
+    @Override
+    public double getMetricRange(Map<String, WeightMass> preDist) {
+
+        int numClasses = preDist.size();
+        if (numClasses < 2) {
+            numClasses = 2;
+        }
+
+        return Utils.log2(numClasses);
     }
-
-    if (fracCount < 2) {
-      return Double.NEGATIVE_INFINITY;
-    }
-
-    double postEntropy = 0;
-    for (int i = 0; i < postDist.size(); i++) {
-      Map<String, WeightMass> d = postDist.get(i);
-      double[] post = new double[d.size()];
-      count = 0;
-      for (Map.Entry<String, WeightMass> e : d.entrySet()) {
-        post[count++] = e.getValue().m_weight;
-      }
-      postEntropy += distWeights[i] * ContingencyTables.entropy(post);
-    }
-
-    if (totalWeight > 0) {
-      postEntropy /= totalWeight;
-    }
-
-    return preEntropy - postEntropy;
-  }
-
-  @Override
-  public double getMetricRange(Map<String, WeightMass> preDist) {
-
-    int numClasses = preDist.size();
-    if (numClasses < 2) {
-      numClasses = 2;
-    }
-
-    return Utils.log2(numClasses);
-  }
 
 }

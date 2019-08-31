@@ -34,42 +34,41 @@ import java.util.Map;
  */
 public abstract class SplitMetric implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 2891555018707080818L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 2891555018707080818L;
 
-  /**
-   * Utility method to return the sum of instance weight in a distribution
-   * 
-   * @param dist the distribution
-   * @return the sum of the weights contained in a distribution
-   */
-  public static double sum(Map<String, WeightMass> dist) {
-    double sum = 0;
+    /**
+     * Utility method to return the sum of instance weight in a distribution
+     * 
+     * @param dist the distribution
+     * @return the sum of the weights contained in a distribution
+     */
+    public static double sum(Map<String, WeightMass> dist) {
+        double sum = 0;
 
-    for (Map.Entry<String, WeightMass> e : dist.entrySet()) {
-      sum += e.getValue().m_weight;
+        for (Map.Entry<String, WeightMass> e : dist.entrySet()) {
+            sum += e.getValue().m_weight;
+        }
+
+        return sum;
     }
 
-    return sum;
-  }
+    /**
+     * Evaluate the merit of a split
+     * 
+     * @param preDist  the class distribution before the split
+     * @param postDist the class distributions after the split
+     * @return the merit of the split
+     */
+    public abstract double evaluateSplit(Map<String, WeightMass> preDist, List<Map<String, WeightMass>> postDist);
 
-  /**
-   * Evaluate the merit of a split
-   * 
-   * @param preDist the class distribution before the split
-   * @param postDist the class distributions after the split
-   * @return the merit of the split
-   */
-  public abstract double evaluateSplit(Map<String, WeightMass> preDist,
-      List<Map<String, WeightMass>> postDist);
-
-  /**
-   * Get the range of the splitting metric
-   * 
-   * @param preDist the pre-split class distribution
-   * @return the range of the splitting metric
-   */
-  public abstract double getMetricRange(Map<String, WeightMass> preDist);
+    /**
+     * Get the range of the splitting metric
+     * 
+     * @param preDist the pre-split class distribution
+     * @return the range of the splitting metric
+     */
+    public abstract double getMetricRange(Map<String, WeightMass> preDist);
 }

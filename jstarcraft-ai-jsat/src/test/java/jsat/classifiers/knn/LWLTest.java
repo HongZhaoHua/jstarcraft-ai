@@ -36,39 +36,32 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class LWLTest
-{
+public class LWLTest {
 
-    public LWLTest()
-    {
+    public LWLTest() {
     }
 
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
 
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
 
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_RegressionDataSet()
-    {
+    public void testTrainC_RegressionDataSet() {
         System.out.println("train");
 
-        LWL instance = new LWL((Regressor)new DCDs(), 30, new EuclideanDistance());
+        LWL instance = new LWL((Regressor) new DCDs(), 30, new EuclideanDistance());
 
         RegressionDataSet train = FixedProblems.getLinearRegression(5000, RandomUtil.getRandom());
         RegressionDataSet test = FixedProblems.getLinearRegression(200, RandomUtil.getRandom());
@@ -81,11 +74,10 @@ public class LWLTest
     }
 
     @Test
-    public void testTrainC_RegressionDataSet_ExecutorService()
-    {
+    public void testTrainC_RegressionDataSet_ExecutorService() {
         System.out.println("train");
 
-        LWL instance = new LWL((Regressor)new DCDs(), 15, new EuclideanDistance());
+        LWL instance = new LWL((Regressor) new DCDs(), 15, new EuclideanDistance());
 
         RegressionDataSet train = FixedProblems.getLinearRegression(5000, RandomUtil.getRandom());
         RegressionDataSet test = FixedProblems.getLinearRegression(200, RandomUtil.getRandom());
@@ -98,8 +90,7 @@ public class LWLTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
         LWL instance = new LWL(new NaiveBayesUpdateable(), 15, new EuclideanDistance());
@@ -114,8 +105,7 @@ public class LWLTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
         LWL instance = new LWL(new NaiveBayesUpdateable(), 15, new EuclideanDistance());
@@ -131,8 +121,7 @@ public class LWLTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         LWL instance = new LWL(new NaiveBayesUpdateable(), 15, new EuclideanDistance());

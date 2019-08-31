@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BestFirst. Run from the command line with:<p/>
+ * Tests BestFirst. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.CfsSubsetEvalTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class CfsSubsetEvalTest 
-  extends AbstractEvaluatorTest {
+public class CfsSubsetEvalTest extends AbstractEvaluatorTest {
 
-  public CfsSubsetEvalTest(String name) { 
-    super(name);  
-  }
+    public CfsSubsetEvalTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default BestFirst */
-  public ASSearch getSearch() {
-    return new BestFirst();
-  }
+    /** Creates a default BestFirst */
+    public ASSearch getSearch() {
+        return new BestFirst();
+    }
 
-  /** Creates a default CfsSubsetEval */
-  public ASEvaluation getEvaluator() {
-    return new CfsSubsetEval();
-  }
+    /** Creates a default CfsSubsetEval */
+    public ASEvaluation getEvaluator() {
+        return new CfsSubsetEval();
+    }
 
-  public static Test suite() {
-    return new TestSuite(CfsSubsetEvalTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(CfsSubsetEvalTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

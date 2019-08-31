@@ -21,20 +21,20 @@
 package weka.core;
 
 /**
- * Classes implementing this interface return their capabilities in regards
- * to datasets.
+ * Classes implementing this interface return their capabilities in regards to
+ * datasets.
  * 
- * @author  FracPete (fracpete at waikato dot ac dot nz)
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
- * @see     Capabilities
+ * @see Capabilities
  */
 public interface CapabilitiesHandler {
 
-  /**
-   * Returns the capabilities of this object.
-   *
-   * @return            the capabilities of this object
-   * @see               Capabilities
-   */
-  public Capabilities getCapabilities();
+    /**
+     * Returns the capabilities of this object.
+     *
+     * @return the capabilities of this object
+     * @see Capabilities
+     */
+    public Capabilities getCapabilities();
 }

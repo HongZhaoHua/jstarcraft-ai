@@ -34,27 +34,23 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class ExponentialMovingStatisticsTest
-{
+public class ExponentialMovingStatisticsTest {
     private List<ContinuousDistribution> distributions;
-    public ExponentialMovingStatisticsTest()
-    {
+
+    public ExponentialMovingStatisticsTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
-        //EMA has difficulty with values centered about 0 and symetric distributoins
+    public void setUp() {
+        // EMA has difficulty with values centered about 0 and symetric distributoins
         distributions = new ArrayList<ContinuousDistribution>();
         distributions.add(new Normal(5, 1));
         distributions.add(new Normal(3, 7));
@@ -63,30 +59,27 @@ public class ExponentialMovingStatisticsTest
         distributions.add(new LogUniform(1, 100));
         distributions.add(new Uniform(-10, 10));
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of setSmoothing method, of class ExponentialMovingStatistics.
      */
     @Test
-    public void testSetSmoothing()
-    {
+    public void testSetSmoothing() {
         System.out.println("setSmoothing");
         Random rand = RandomUtil.getRandom();
 
-        for (ContinuousDistribution dist : distributions)
-        {
+        for (ContinuousDistribution dist : distributions) {
             double smoothing = 0.01;
             ExponentialMovingStatistics instance = new ExponentialMovingStatistics(smoothing);
             Vec values = dist.sampleVec(100000, rand);
 
             for (double x : values.arrayCopy())
                 instance.add(x);
-            
+
 //            System.out.println(dist.toString());
 //            System.out.println(dist.mean() + " " + instance.getMean() + "   " + smoothing);
 //            System.out.println(dist.standardDeviation() + " " + instance.getStandardDeviation() + "   " + smoothing);
@@ -95,36 +88,33 @@ public class ExponentialMovingStatisticsTest
             assertEquals(dist.standardDeviation(), instance.getStandardDeviation(), Math.max(dist.mean() * 0.75, 1.5));
         }
     }
-    
+
     @Test
-    public void testSetSmoothingDrifted()
-    {
+    public void testSetSmoothingDrifted() {
         System.out.println("setSmoothing Drift");
         Random rand = RandomUtil.getRandom();
 
         for (ContinuousDistribution other_dist : distributions)
-            for (ContinuousDistribution dist : distributions)
-            {
-                if(other_dist == dist)
+            for (ContinuousDistribution dist : distributions) {
+                if (other_dist == dist)
                     continue;
                 double smoothing = 0.01;
                 ExponentialMovingStatistics instance = new ExponentialMovingStatistics(smoothing);
-                
 
-                //these first onces should eventually be forgoten
+                // these first onces should eventually be forgoten
                 for (double x : other_dist.sample(100000, rand))
                     instance.add(x);
                 for (double x : dist.sample(100000, rand))
                     instance.add(x);
 
-    //            System.out.println(dist.toString());
-    //            System.out.println(dist.mean() + " " + instance.getMean() + "   " + smoothing);
-    //            System.out.println(dist.standardDeviation() + " " + instance.getStandardDeviation() + "   " + smoothing);
+                // System.out.println(dist.toString());
+                // System.out.println(dist.mean() + " " + instance.getMean() + " " + smoothing);
+                // System.out.println(dist.standardDeviation() + " " +
+                // instance.getStandardDeviation() + " " + smoothing);
 
                 assertEquals(dist.mean(), instance.getMean(), Math.max(dist.mean() * 0.75, 3.5));
                 assertEquals(dist.standardDeviation(), instance.getStandardDeviation(), Math.max(dist.mean() * 0.75, 1.5));
             }
     }
-
 
 }

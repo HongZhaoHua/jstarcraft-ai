@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BestFirst. Run from the command line with:<p/>
+ * Tests BestFirst. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.OneRAttributeEvalTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class OneRAttributeEvalTest 
-  extends AbstractEvaluatorTest {
+public class OneRAttributeEvalTest extends AbstractEvaluatorTest {
 
-  public OneRAttributeEvalTest(String name) { 
-    super(name);  
-  }
+    public OneRAttributeEvalTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Ranker */
-  public ASSearch getSearch() {
-    return new Ranker();
-  }
+    /** Creates a default Ranker */
+    public ASSearch getSearch() {
+        return new Ranker();
+    }
 
-  /** Creates a default OneRAttributeEval */
-  public ASEvaluation getEvaluator() {
-    return new OneRAttributeEval();
-  }
+    /** Creates a default OneRAttributeEval */
+    public ASEvaluation getEvaluator() {
+        return new OneRAttributeEval();
+    }
 
-  public static Test suite() {
-    return new TestSuite(OneRAttributeEvalTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(OneRAttributeEvalTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

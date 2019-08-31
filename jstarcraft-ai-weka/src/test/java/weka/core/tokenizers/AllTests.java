@@ -25,24 +25,24 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Test class for all tokenizers. Run from the command line with: <p/>
+ * Test class for all tokenizers. Run from the command line with:
+ * <p/>
  * java weka.core.tokenizers.AllTests
  *
  * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
-    suite.addTest(suite("weka.core.tokenizers.Tokenizer"));
+        suite.addTest(suite("weka.core.tokenizers.Tokenizer"));
 
-    return suite;
-  }
+        return suite;
+    }
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

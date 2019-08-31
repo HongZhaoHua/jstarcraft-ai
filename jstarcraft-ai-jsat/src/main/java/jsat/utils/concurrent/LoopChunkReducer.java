@@ -29,13 +29,14 @@ import java.util.function.BinaryOperator;
  * @author Edward Raff
  * @param <T> The object type that the Loop Chunk Reducer will return
  */
-public interface LoopChunkReducer<T>
-{
+public interface LoopChunkReducer<T> {
     /**
-     * Runs a process over the given loop portion, returning a single object of type {@link T}. 
-     * @param start the starting index to process 
-     * @param end the ending index to process
-     * @return the object to return 
+     * Runs a process over the given loop portion, returning a single object of type
+     * {@link T}.
+     * 
+     * @param start the starting index to process
+     * @param end   the ending index to process
+     * @return the object to return
      */
     public T run(int start, int end);
 }

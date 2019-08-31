@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SimpleLinearRegression. Run from the command line with:<p/>
+ * Tests SimpleLinearRegression. Run from the command line with:
+ * <p/>
  * java weka.classifiers.functions.SimpleLinearRegressionTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SimpleLinearRegressionTest 
-  extends AbstractClassifierTest {
+public class SimpleLinearRegressionTest extends AbstractClassifierTest {
 
-  public SimpleLinearRegressionTest(String name) { 
-    super(name);  
-  }
+    public SimpleLinearRegressionTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default SimpleLinearRegression */
-  public Classifier getClassifier() {
-    return new SimpleLinearRegression();
-  }
+    /** Creates a default SimpleLinearRegression */
+    public Classifier getClassifier() {
+        return new SimpleLinearRegression();
+    }
 
-  public static Test suite() {
-    return new TestSuite(SimpleLinearRegressionTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(SimpleLinearRegressionTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

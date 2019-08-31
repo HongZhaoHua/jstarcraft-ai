@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Stacking. Run from the command line with:<p>
+ * Tests Stacking. Run from the command line with:
+ * <p>
  * java weka.classifiers.meta.StackingTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class StackingTest extends AbstractClassifierTest {
 
-  public StackingTest(String name) { super(name);  }
+    public StackingTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Stacking */
-  public Classifier getClassifier() {
-    return new Stacking();
-  }
+    /** Creates a default Stacking */
+    public Classifier getClassifier() {
+        return new Stacking();
+    }
 
-  public static Test suite() {
-    return new TestSuite(StackingTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(StackingTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

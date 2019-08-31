@@ -35,71 +35,63 @@ import weka.filters.Filter;
  */
 public class ReorderTest extends AbstractFilterTest {
 
-  public ReorderTest(String name) {
-    super(name);
-  }
-
-  /** Creates a default Reorder */
-  @Override
-  public Filter getFilter() {
-    return getFilter("first-last");
-  }
-
-  /** Creates a specialized Reorder */
-  public Filter getFilter(String rangelist) {
-
-    try {
-      Reorder af = new Reorder();
-      af.setAttributeIndices(rangelist);
-      return af;
-    } catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception setting attribute range: " + rangelist + "\n"
-        + ex.getMessage());
+    public ReorderTest(String name) {
+        super(name);
     }
-    return null;
-  }
 
-  public void testTypical() {
-    m_Filter = getFilter("2,1");
-    Instances result = useFilter();
-    m_Instances.numAttributes();
-    assertEquals(2, result.numAttributes());
-    assertTrue(result.attribute(1).name()
-      .endsWith(m_Instances.attribute(0).name()));
-    assertTrue(result.attribute(0).name()
-      .endsWith(m_Instances.attribute(1).name()));
-  }
+    /** Creates a default Reorder */
+    @Override
+    public Filter getFilter() {
+        return getFilter("first-last");
+    }
 
-  public void testTypical2() {
-    m_Filter = getFilter("3-4");
-    Instances result = useFilter();
-    m_Instances.numAttributes();
-    assertEquals(2, result.numAttributes());
-    assertTrue(result.attribute(0).name()
-      .endsWith(m_Instances.attribute(2).name()));
-    assertTrue(result.attribute(1).name()
-      .endsWith(m_Instances.attribute(3).name()));
-  }
+    /** Creates a specialized Reorder */
+    public Filter getFilter(String rangelist) {
 
-  public void testTypical3() {
-    m_Filter = getFilter("2-last,1");
-    Instances result = useFilter();
-    int origNum = m_Instances.numAttributes();
-    assertEquals(origNum, result.numAttributes());
-    assertTrue(result.attribute(0).name()
-      .endsWith(m_Instances.attribute(1).name()));
-    assertTrue(result.attribute(1).name()
-      .endsWith(m_Instances.attribute(2).name()));
-    assertTrue(result.attribute(origNum - 1).name()
-      .endsWith(m_Instances.attribute(0).name()));
-  }
+        try {
+            Reorder af = new Reorder();
+            af.setAttributeIndices(rangelist);
+            return af;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception setting attribute range: " + rangelist + "\n" + ex.getMessage());
+        }
+        return null;
+    }
 
-  public static Test suite() {
-    return new TestSuite(ReorderTest.class);
-  }
+    public void testTypical() {
+        m_Filter = getFilter("2,1");
+        Instances result = useFilter();
+        m_Instances.numAttributes();
+        assertEquals(2, result.numAttributes());
+        assertTrue(result.attribute(1).name().endsWith(m_Instances.attribute(0).name()));
+        assertTrue(result.attribute(0).name().endsWith(m_Instances.attribute(1).name()));
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public void testTypical2() {
+        m_Filter = getFilter("3-4");
+        Instances result = useFilter();
+        m_Instances.numAttributes();
+        assertEquals(2, result.numAttributes());
+        assertTrue(result.attribute(0).name().endsWith(m_Instances.attribute(2).name()));
+        assertTrue(result.attribute(1).name().endsWith(m_Instances.attribute(3).name()));
+    }
+
+    public void testTypical3() {
+        m_Filter = getFilter("2-last,1");
+        Instances result = useFilter();
+        int origNum = m_Instances.numAttributes();
+        assertEquals(origNum, result.numAttributes());
+        assertTrue(result.attribute(0).name().endsWith(m_Instances.attribute(1).name()));
+        assertTrue(result.attribute(1).name().endsWith(m_Instances.attribute(2).name()));
+        assertTrue(result.attribute(origNum - 1).name().endsWith(m_Instances.attribute(0).name()));
+    }
+
+    public static Test suite() {
+        return new TestSuite(ReorderTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

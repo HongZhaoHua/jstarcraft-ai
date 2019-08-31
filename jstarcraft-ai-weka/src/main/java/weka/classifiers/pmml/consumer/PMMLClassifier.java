@@ -41,194 +41,191 @@ import weka.gui.Logger;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public abstract class PMMLClassifier extends AbstractClassifier
-  implements Serializable, PMMLModel {
-  
-  /** For serialization */
-  private static final long serialVersionUID = -5371600590320702971L;
+public abstract class PMMLClassifier extends AbstractClassifier implements Serializable, PMMLModel {
 
-  /** PMML version */
-  protected String m_pmmlVersion = "?";
-  
-  /** Creator application */
-  protected String m_creatorApplication = "?";
-  
-  /** Logger */
-  protected Logger m_log = null;
+    /** For serialization */
+    private static final long serialVersionUID = -5371600590320702971L;
 
-  /** The data dictionary */
-  protected Instances m_dataDictionary;
+    /** PMML version */
+    protected String m_pmmlVersion = "?";
 
-  /** The fields and meta data used by the model */
-  protected MiningSchema m_miningSchema;
+    /** Creator application */
+    protected String m_creatorApplication = "?";
 
-  /** The mapping between mining schema fields and incoming instance
-      attributes */
-  protected transient MappingInfo m_fieldsMap;
+    /** Logger */
+    protected Logger m_log = null;
 
-  /** Has the classifier been initialized (i.e. have we established
-      a mapping between the mining schema and the incoming instances)? */
-  protected transient boolean m_initialized = false;
+    /** The data dictionary */
+    protected Instances m_dataDictionary;
 
-  /**
-   * Constructor.
-   *
-   * @param dataDictionary the data dictionary
-   * @param miningSchema the mining schema
-   */
-   PMMLClassifier(Instances dataDictionary,
-                        MiningSchema miningSchema) {
-    m_dataDictionary = dataDictionary;
-    m_miningSchema = miningSchema;
-  }
+    /** The fields and meta data used by the model */
+    protected MiningSchema m_miningSchema;
 
-  /**
-   * Set the version of PMML used for this model.
-   *
-   * @param doc the Document encapsulating the pmml
-   */
-  public void setPMMLVersion(Document doc) {
-    NodeList tempL = doc.getElementsByTagName("PMML");
-    Node pmml = tempL.item(0);
-    if (pmml.getNodeType() == Node.ELEMENT_NODE) {
-      String version = ((Element)pmml).getAttribute("version");
-      if (version.length() > 0) {
-        m_pmmlVersion = version;
-      }
+    /**
+     * The mapping between mining schema fields and incoming instance attributes
+     */
+    protected transient MappingInfo m_fieldsMap;
+
+    /**
+     * Has the classifier been initialized (i.e. have we established a mapping
+     * between the mining schema and the incoming instances)?
+     */
+    protected transient boolean m_initialized = false;
+
+    /**
+     * Constructor.
+     *
+     * @param dataDictionary the data dictionary
+     * @param miningSchema   the mining schema
+     */
+    PMMLClassifier(Instances dataDictionary, MiningSchema miningSchema) {
+        m_dataDictionary = dataDictionary;
+        m_miningSchema = miningSchema;
     }
-  }
-  
-  /**
-   * Set the name of the application (if specified) that created this
-   * model
-   * 
-   * @param doc the Document encapsulating the pmml
-   */
-  public void setCreatorApplication(Document doc) {
-    NodeList tempL = doc.getElementsByTagName("Header");
-    Node header = tempL.item(0);
-    if (header.getNodeType() == Node.ELEMENT_NODE) {
-      NodeList appL = ((Element)header).getElementsByTagName("Application");
-      if (appL.getLength() > 0) {
-        Node app = appL.item(0);
-        if (app.getNodeType() == Node.ELEMENT_NODE) {
-          String appName = ((Element)app).getAttribute("name");
-          if (appName != null && appName.length() > 0) {
-            String version = ((Element)app).getAttribute("version");
-            if (version != null && version.length() > 0) {
-              appName += " v. " + version;
+
+    /**
+     * Set the version of PMML used for this model.
+     *
+     * @param doc the Document encapsulating the pmml
+     */
+    public void setPMMLVersion(Document doc) {
+        NodeList tempL = doc.getElementsByTagName("PMML");
+        Node pmml = tempL.item(0);
+        if (pmml.getNodeType() == Node.ELEMENT_NODE) {
+            String version = ((Element) pmml).getAttribute("version");
+            if (version.length() > 0) {
+                m_pmmlVersion = version;
             }
-            m_creatorApplication = appName;
-          }
         }
-      }
     }
-  }
 
-  /**
-   * Get the data dictionary.
-   *
-   * @return the data dictionary
-   */
-  public Instances getDataDictionary() {
-    return m_dataDictionary;
-  }
-
-  /**
-   * Get the mining schema for this model.
-   *
-   * @return the mining schema
-   */
-  public MiningSchema getMiningSchema() {
-    return m_miningSchema;
-  }
-
-  /**
-   * Get the PMML version used for this model.
-   *
-   * @return the PMML version
-   */
-  public String getPMMLVersion() {
-    return m_pmmlVersion;
-  }
-  
-  /**
-   * Get the name of the application that created this model
-   * 
-   * @return the name of the creating application or null
-   * if not specified in the pmml.
-   */
-  public String getCreatorApplication() {
-    return m_creatorApplication;
-  }
-  
-  /**
-   * Set a logger to use.
-   * 
-   * @param log the logger to use
-   */
-  public void setLog(Logger log) {
-    m_log = log;
-  }
-  
-  /**
-   * Get the logger.
-   * 
-   * @return the logger (or null if none is being used)
-   */
-  public Logger getLog() {
-    return m_log;
-  }
-
-  /**
-   * Throw an exception - PMML models are pre-built.
-   *
-   * @param data the Instances to learn from
-   * @throws Exception if something goes wrong
-   */
-  public void buildClassifier(Instances data) throws Exception {
-    throw new Exception("[PMMLClassifier] PMML models are pre-built "
-                        + "and static!");
-  }
-  
-  /**
-   * Signal that a scoring run has been completed. Resets
-   * the initialized state to false so that a subsequent
-   * scoring run will trigger the mapping of the mining
-   * schema to incoming instances. If not called after a
-   * scoring run, then the classifier will assume that
-   * the current mapping is still valid.
-   */
-  public void done() {
-    m_initialized = false;
-    m_fieldsMap = null;
-  }
-
-  /**
-   * Map mining schema to incoming instances.
-   *
-   * @param dataSet the structure of the incoming Instances
-   * @throws Exception if something goes wrong
-   */
-  public void mapToMiningSchema(Instances dataSet) throws Exception {
-    if (m_fieldsMap == null) {
-      // PMMLUtils.mapToMiningSchema(dataSet, m_miningSchema);
-      m_fieldsMap = new MappingInfo(dataSet, m_miningSchema, m_log);
-      m_initialized = true;
+    /**
+     * Set the name of the application (if specified) that created this model
+     * 
+     * @param doc the Document encapsulating the pmml
+     */
+    public void setCreatorApplication(Document doc) {
+        NodeList tempL = doc.getElementsByTagName("Header");
+        Node header = tempL.item(0);
+        if (header.getNodeType() == Node.ELEMENT_NODE) {
+            NodeList appL = ((Element) header).getElementsByTagName("Application");
+            if (appL.getLength() > 0) {
+                Node app = appL.item(0);
+                if (app.getNodeType() == Node.ELEMENT_NODE) {
+                    String appName = ((Element) app).getAttribute("name");
+                    if (appName != null && appName.length() > 0) {
+                        String version = ((Element) app).getAttribute("version");
+                        if (version != null && version.length() > 0) {
+                            appName += " v. " + version;
+                        }
+                        m_creatorApplication = appName;
+                    }
+                }
+            }
+        }
     }
-  }
-  
-  /**
-   * Get a textual description of the mapping between mining schema
-   * fields and incoming data fields.
-   * 
-   * @return a description of the fields mapping as a String or null if
-   * no mapping has been constructed yet.
-   */
-  public String getFieldsMappingString() {
-    if (!m_initialized) {
-      return null;
+
+    /**
+     * Get the data dictionary.
+     *
+     * @return the data dictionary
+     */
+    public Instances getDataDictionary() {
+        return m_dataDictionary;
     }
-    return m_fieldsMap.getFieldsMappingString();
-  }
+
+    /**
+     * Get the mining schema for this model.
+     *
+     * @return the mining schema
+     */
+    public MiningSchema getMiningSchema() {
+        return m_miningSchema;
+    }
+
+    /**
+     * Get the PMML version used for this model.
+     *
+     * @return the PMML version
+     */
+    public String getPMMLVersion() {
+        return m_pmmlVersion;
+    }
+
+    /**
+     * Get the name of the application that created this model
+     * 
+     * @return the name of the creating application or null if not specified in the
+     *         pmml.
+     */
+    public String getCreatorApplication() {
+        return m_creatorApplication;
+    }
+
+    /**
+     * Set a logger to use.
+     * 
+     * @param log the logger to use
+     */
+    public void setLog(Logger log) {
+        m_log = log;
+    }
+
+    /**
+     * Get the logger.
+     * 
+     * @return the logger (or null if none is being used)
+     */
+    public Logger getLog() {
+        return m_log;
+    }
+
+    /**
+     * Throw an exception - PMML models are pre-built.
+     *
+     * @param data the Instances to learn from
+     * @throws Exception if something goes wrong
+     */
+    public void buildClassifier(Instances data) throws Exception {
+        throw new Exception("[PMMLClassifier] PMML models are pre-built " + "and static!");
+    }
+
+    /**
+     * Signal that a scoring run has been completed. Resets the initialized state to
+     * false so that a subsequent scoring run will trigger the mapping of the mining
+     * schema to incoming instances. If not called after a scoring run, then the
+     * classifier will assume that the current mapping is still valid.
+     */
+    public void done() {
+        m_initialized = false;
+        m_fieldsMap = null;
+    }
+
+    /**
+     * Map mining schema to incoming instances.
+     *
+     * @param dataSet the structure of the incoming Instances
+     * @throws Exception if something goes wrong
+     */
+    public void mapToMiningSchema(Instances dataSet) throws Exception {
+        if (m_fieldsMap == null) {
+            // PMMLUtils.mapToMiningSchema(dataSet, m_miningSchema);
+            m_fieldsMap = new MappingInfo(dataSet, m_miningSchema, m_log);
+            m_initialized = true;
+        }
+    }
+
+    /**
+     * Get a textual description of the mapping between mining schema fields and
+     * incoming data fields.
+     * 
+     * @return a description of the fields mapping as a String or null if no mapping
+     *         has been constructed yet.
+     */
+    public String getFieldsMappingString() {
+        if (!m_initialized) {
+            return null;
+        }
+        return m_fieldsMap.getFieldsMappingString();
+    }
 }

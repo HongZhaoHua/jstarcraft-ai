@@ -21,43 +21,35 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class BOGDTest
-{
-    
-    public BOGDTest()
-    {
+public class BOGDTest {
+
+    public BOGDTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
-    
+
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
-       
-        for(boolean sampling : new boolean[]{true, false})
-        {
+
+        for (boolean sampling : new boolean[] { true, false }) {
             BOGD instance = new BOGD(new RBFKernel(0.5), 50, 0.5, 1e-3, 10, new HingeLoss());
             instance.setUniformSampling(sampling);
-       
+
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom(), 1, 4);
             ClassificationDataSet test = FixedProblems.getCircles(100, 0.0, RandomUtil.getRandom(), 1, 4);
 
@@ -69,15 +61,13 @@ public class BOGDTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        
-        for(boolean sampling : new boolean[]{true, false})
-        {
+
+        for (boolean sampling : new boolean[] { true, false }) {
             BOGD instance = new BOGD(new RBFKernel(0.5), 50, 0.5, 1e-3, 10, new HingeLoss());
             instance.setUniformSampling(sampling);
-        
+
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom(), 1, 4);
             ClassificationDataSet test = FixedProblems.getCircles(100, 0.0, RandomUtil.getRandom(), 1, 4);
 
@@ -89,12 +79,11 @@ public class BOGDTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         BOGD instance = new BOGD(new RBFKernel(0.5), 50, 0.5, 1e-3, 10, new HingeLoss());
-        
+
         ClassificationDataSet t1 = FixedProblems.getCircles(500, 0.0, RandomUtil.getRandom(), 1, 4);
         ClassificationDataSet t2 = FixedProblems.getCircles(500, 0.0, RandomUtil.getRandom(), 0.5, 3.0);
 
@@ -106,7 +95,7 @@ public class BOGDTest
         instance.setUniformSampling(false);
         BOGD result = instance.clone();
         assertFalse(result.isUniformSampling());
-        
+
         for (int i = 0; i < t1.size(); i++)
             assertEquals(t1.getDataPointCategory(i), result.classify(t1.getDataPoint(i)).mostLikely());
         result.train(t2);

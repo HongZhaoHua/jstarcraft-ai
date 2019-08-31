@@ -28,5 +28,5 @@ package weka.core;
  * @version $Revision$
  */
 public interface ThreadSafe {
-  // marker interface only
+    // marker interface only
 }

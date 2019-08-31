@@ -34,25 +34,24 @@ import weka.core.Instance;
  */
 public interface IntervalBasedEvaluationMetric {
 
-  /**
-   * Updates stats for interval estimator based on current test instance.
-   * Implementers need only implement this method if it is not possible to
-   * compute their statistics from what is stored in the base Evaluation object.
-   * 
-   * @param classifier the interval estimator
-   * @param classMissing the instance for which the intervals are computed,
-   *          without a class value
-   * @param classValue the class value of this instance
-   * @throws Exception if intervals could not be computed successfully
-   */
-  void updateStatsForIntervalEstimator(IntervalEstimator classifier,
-      Instance classMissing, double classValue) throws Exception;
+    /**
+     * Updates stats for interval estimator based on current test instance.
+     * Implementers need only implement this method if it is not possible to compute
+     * their statistics from what is stored in the base Evaluation object.
+     * 
+     * @param classifier   the interval estimator
+     * @param classMissing the instance for which the intervals are computed,
+     *                     without a class value
+     * @param classValue   the class value of this instance
+     * @throws Exception if intervals could not be computed successfully
+     */
+    void updateStatsForIntervalEstimator(IntervalEstimator classifier, Instance classMissing, double classValue) throws Exception;
 
-  /**
-   * Return a formatted string (suitable for displaying in console or GUI
-   * output) containing all the statistics that this metric computes.
-   * 
-   * @return a formatted string containing all the computed statistics
-   */
-  String toSummaryString();
+    /**
+     * Return a formatted string (suitable for displaying in console or GUI output)
+     * containing all the statistics that this metric computes.
+     * 
+     * @return a formatted string containing all the computed statistics
+     */
+    String toSummaryString();
 }

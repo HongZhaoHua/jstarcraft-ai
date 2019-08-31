@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for BayesOutput element declaration.
+ * <p>
+ * Java class for BayesOutput element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="BayesOutput">
@@ -42,10 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "targetValueCounts"
-})
+@XmlType(name = "", propOrder = { "extension", "targetValueCounts" })
 @XmlRootElement(name = "BayesOutput")
 public class BayesOutput {
 
@@ -60,21 +58,21 @@ public class BayesOutput {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -88,10 +86,8 @@ public class BayesOutput {
     /**
      * Gets the value of the targetValueCounts property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TargetValueCounts }
-     *     
+     * @return possible object is {@link TargetValueCounts }
+     * 
      */
     public TargetValueCounts getTargetValueCounts() {
         return targetValueCounts;
@@ -100,10 +96,8 @@ public class BayesOutput {
     /**
      * Sets the value of the targetValueCounts property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TargetValueCounts }
-     *     
+     * @param value allowed object is {@link TargetValueCounts }
+     * 
      */
     public void setTargetValueCounts(TargetValueCounts value) {
         this.targetValueCounts = value;
@@ -112,10 +106,8 @@ public class BayesOutput {
     /**
      * Gets the value of the fieldName property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getFieldName() {
         return fieldName;
@@ -124,10 +116,8 @@ public class BayesOutput {
     /**
      * Sets the value of the fieldName property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setFieldName(String value) {
         this.fieldName = value;

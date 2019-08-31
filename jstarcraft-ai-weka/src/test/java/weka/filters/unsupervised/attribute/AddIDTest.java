@@ -27,74 +27,72 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests AddID. Run from the command line with: <p/>
+ * Tests AddID. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.AddIDTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AddIDTest 
-  extends AbstractFilterTest {
-  
-  public AddIDTest(String name) { 
-    super(name);  
-  }
+public class AddIDTest extends AbstractFilterTest {
 
-  /** Creates a default AddID */
-  public Filter getFilter() {
-    return new AddID();
-  }
-
-  /** Creates a specialized AddID */
-  public Filter getFilter(int pos) {
-    AddID af = new AddID();
-    af.setIDIndex("" + (pos + 1));
-    return af;
-  }
-
-  /**
-   * performs the actual test
-   */
-  protected void performTest() {
-    Instances icopy = new Instances(m_Instances);
-    Instances result = null;
-    try {
-      m_Filter.setInputFormat(icopy);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
-    }
-    try {
-      result = Filter.useFilter(icopy, m_Filter);
-      assertNotNull(result);
-    } 
-    catch (Exception ex) {
-      ex.printStackTrace();
-      fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+    public AddIDTest(String name) {
+        super(name);
     }
 
-    assertEquals((icopy.numAttributes() + 1), result.numAttributes());
-    assertEquals(icopy.numInstances(), m_Instances.numInstances());
-  }
+    /** Creates a default AddID */
+    public Filter getFilter() {
+        return new AddID();
+    }
 
-  public void testAddFirst() {
-    m_Filter = getFilter(0);
-    testBuffered();
-    performTest();
-  }
+    /** Creates a specialized AddID */
+    public Filter getFilter(int pos) {
+        AddID af = new AddID();
+        af.setIDIndex("" + (pos + 1));
+        return af;
+    }
 
-  public void testAddLast() {
-    m_Filter = getFilter(m_Instances.numAttributes() - 1);
-    testBuffered();
-    performTest();
-  }
+    /**
+     * performs the actual test
+     */
+    protected void performTest() {
+        Instances icopy = new Instances(m_Instances);
+        Instances result = null;
+        try {
+            m_Filter.setInputFormat(icopy);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on setInputFormat(): \n" + ex.getMessage());
+        }
+        try {
+            result = Filter.useFilter(icopy, m_Filter);
+            assertNotNull(result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            fail("Exception thrown on useFilter(): \n" + ex.getMessage());
+        }
 
-  public static Test suite() {
-    return new TestSuite(AddIDTest.class);
-  }
+        assertEquals((icopy.numAttributes() + 1), result.numAttributes());
+        assertEquals(icopy.numInstances(), m_Instances.numInstances());
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public void testAddFirst() {
+        m_Filter = getFilter(0);
+        testBuffered();
+        performTest();
+    }
+
+    public void testAddLast() {
+        m_Filter = getFilter(m_Instances.numAttributes() - 1);
+        testBuffered();
+        performTest();
+    }
+
+    public static Test suite() {
+        return new TestSuite(AddIDTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

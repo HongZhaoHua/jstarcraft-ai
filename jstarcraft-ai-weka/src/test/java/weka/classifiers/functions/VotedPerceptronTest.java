@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests VotedPerceptron. Run from the command line with:<p>
+ * Tests VotedPerceptron. Run from the command line with:
+ * <p>
  * java weka.classifiers.functions.VotedPerceptronTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class VotedPerceptronTest extends AbstractClassifierTest {
 
-  public VotedPerceptronTest(String name) { super(name);  }
+    public VotedPerceptronTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default VotedPerceptron */
-  public Classifier getClassifier() {
-    return new VotedPerceptron();
-  }
+    /** Creates a default VotedPerceptron */
+    public Classifier getClassifier() {
+        return new VotedPerceptron();
+    }
 
-  public static Test suite() {
-    return new TestSuite(VotedPerceptronTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(VotedPerceptronTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

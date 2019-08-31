@@ -22,31 +22,27 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class NaiveBayesTest
-{
+public class NaiveBayesTest {
     static private ClassificationDataSet easyTrain;
     static private ClassificationDataSet easyTest;
     static private NaiveBayes nb;
-    public NaiveBayesTest()
-    {
+
+    public NaiveBayesTest() {
         GridDataGenerator gdg = new GridDataGenerator(new Normal(0, 0.05), new Random(12), 2);
         easyTrain = new ClassificationDataSet(gdg.generateData(40).getList(), 0);
         easyTest = new ClassificationDataSet(gdg.generateData(40).getList(), 0);
     }
 
     @BeforeClass
-    public static void setUpClass() throws Exception
-    {
+    public static void setUpClass() throws Exception {
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception
-    {
+    public static void tearDownClass() throws Exception {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         nb = new NaiveBayes();
     }
 
@@ -54,11 +50,10 @@ public class NaiveBayesTest
      * Test of train method, of class NaiveBayes.
      */
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
         nb.train(easyTrain);
-        for(int i = 0; i < easyTest.size(); i++)
+        for (int i = 0; i < easyTest.size(); i++)
             assertEquals(easyTest.getDataPointCategory(i), nb.classify(easyTest.getDataPoint(i)).mostLikely());
     }
 
@@ -66,12 +61,11 @@ public class NaiveBayesTest
      * Test of clone method, of class NaiveBayes.
      */
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
         nb.train(easyTrain);
         Classifier clone = nb.clone();
-        for(int i = 0; i < easyTest.size(); i++)
+        for (int i = 0; i < easyTest.size(); i++)
             assertEquals(easyTest.getDataPointCategory(i), clone.classify(easyTest.getDataPoint(i)).mostLikely());
     }
 
@@ -79,11 +73,10 @@ public class NaiveBayesTest
      * Test of train method, of class NaiveBayes.
      */
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
         nb.train(easyTrain, true);
-        for(int i = 0; i < easyTest.size(); i++)
+        for (int i = 0; i < easyTest.size(); i++)
             assertEquals(easyTest.getDataPointCategory(i), nb.classify(easyTest.getDataPoint(i)).mostLikely());
     }
 }

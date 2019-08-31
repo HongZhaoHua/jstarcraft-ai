@@ -37,149 +37,148 @@ import weka.filters.Filter;
  */
 public class RenameNominalValuesTest extends AbstractFilterTest {
 
-  public RenameNominalValuesTest(String name) {
-    super(name);
-  }
-
-  /** Creates a default RenameNominalValues */
-  @Override
-  public Filter getFilter() {
-    return getFilter("2,5", "b:bob");
-  }
-
-  /** Creates a specialized Remove */
-  public Filter getFilter(String rangelist, String renameSpec) {
-
-    RenameNominalValues af = new RenameNominalValues();
-
-    if (rangelist.length() > 0) {
-      af.setSelectedAttributes(rangelist);
+    public RenameNominalValuesTest(String name) {
+        super(name);
     }
 
-    if (renameSpec.length() > 0) {
-      af.setValueReplacements(renameSpec);
+    /** Creates a default RenameNominalValues */
+    @Override
+    public Filter getFilter() {
+        return getFilter("2,5", "b:bob");
     }
 
-    return af;
-  }
+    /** Creates a specialized Remove */
+    public Filter getFilter(String rangelist, String renameSpec) {
 
-  public void testNoSelectedAttsNoReplaceSpec() {
-    m_Filter = getFilter();
-    ((RenameNominalValues) m_Filter).setSelectedAttributes("");
-    ((RenameNominalValues) m_Filter).setValueReplacements("");
+        RenameNominalValues af = new RenameNominalValues();
 
-    Instances result = useFilter();
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-
-    // all instances should be unchanged
-    for (int i = 0; i < result.numInstances(); i++) {
-      Instance orig = m_Instances.instance(i);
-      Instance filtered = result.instance(i);
-
-      for (int j = 0; j < orig.numAttributes(); j++) {
-        assertEquals(orig.value(j), filtered.value(j));
-      }
-    }
-  }
-
-  public void testTypical() {
-    m_Filter = getFilter();
-    Instances result = useFilter();
-
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-
-    // shouldn't be any 'b' values in the header - they should now
-    // be 'bob'
-    Attribute first = result.attribute(1);
-    Attribute second = result.attribute(4);
-
-    assertEquals(first.value(2), "bob");
-    assertEquals(second.value(1), "bob");
-
-    // check an instance
-    Instance inst = result.instance(1);
-    assertEquals(inst.stringValue(1), "bob");
-    assertEquals(inst.stringValue(4), "bob");
-  }
-
-  public void testTypical2() {
-    m_Filter = getFilter("2", "b:bob");
-    Instances result = useFilter();
-
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-
-    // shouldn't be any 'b' values in the header for attribute 2
-    // - they should now be 'bob'
-    Attribute first = result.attribute(1);
-    Attribute second = result.attribute(4);
-
-    assertEquals(first.value(2), "bob");
-
-    // check that the other nominal attribute is unchanged
-    assertEquals(second.value(1), "b");
-
-    // check an instance
-    Instance inst = result.instance(1);
-    assertEquals(inst.stringValue(1), "bob");
-    assertEquals(inst.stringValue(4), "b");
-  }
-
-  public void testInverted1() {
-    m_Filter = getFilter("", "b:bob");
-    ((RenameNominalValues) m_Filter).setInvertSelection(true);
-
-    Instances result = useFilter();
-
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-
-    // shouldn't be any 'b' values in the header - they should now
-    // be 'bob'
-    Attribute first = result.attribute(1);
-    Attribute second = result.attribute(4);
-
-    assertEquals(first.value(2), "bob");
-    assertEquals(second.value(1), "bob");
-
-    // check an instance
-    Instance inst = result.instance(1);
-    assertEquals(inst.stringValue(1), "bob");
-    assertEquals(inst.stringValue(4), "bob");
-  }
-
-  /**
-   * tests the filter in conjunction with the FilteredClassifier
-   */
-  @Override
-  public void testFilteredClassifier() {
-    try {
-      Instances data = getFilteredClassifierData();
-
-      for (int i = 0; i < data.numAttributes(); i++) {
-        if (data.classIndex() == i)
-          continue;
-        if (data.attribute(i).isNominal()) {
-          ((RenameNominalValues) m_FilteredClassifier.getFilter())
-              .setSelectedAttributes("" + (i + 1));
-          break;
+        if (rangelist.length() > 0) {
+            af.setSelectedAttributes(rangelist);
         }
-      }
-    } catch (Exception e) {
-      fail("Problem setting up test for FilteredClassifier: " + e.toString());
+
+        if (renameSpec.length() > 0) {
+            af.setValueReplacements(renameSpec);
+        }
+
+        return af;
     }
 
-    super.testFilteredClassifier();
-  }
+    public void testNoSelectedAttsNoReplaceSpec() {
+        m_Filter = getFilter();
+        ((RenameNominalValues) m_Filter).setSelectedAttributes("");
+        ((RenameNominalValues) m_Filter).setValueReplacements("");
 
-  public static Test suite() {
-    return new TestSuite(RenameNominalValuesTest.class);
-  }
+        Instances result = useFilter();
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        // all instances should be unchanged
+        for (int i = 0; i < result.numInstances(); i++) {
+            Instance orig = m_Instances.instance(i);
+            Instance filtered = result.instance(i);
+
+            for (int j = 0; j < orig.numAttributes(); j++) {
+                assertEquals(orig.value(j), filtered.value(j));
+            }
+        }
+    }
+
+    public void testTypical() {
+        m_Filter = getFilter();
+        Instances result = useFilter();
+
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+
+        // shouldn't be any 'b' values in the header - they should now
+        // be 'bob'
+        Attribute first = result.attribute(1);
+        Attribute second = result.attribute(4);
+
+        assertEquals(first.value(2), "bob");
+        assertEquals(second.value(1), "bob");
+
+        // check an instance
+        Instance inst = result.instance(1);
+        assertEquals(inst.stringValue(1), "bob");
+        assertEquals(inst.stringValue(4), "bob");
+    }
+
+    public void testTypical2() {
+        m_Filter = getFilter("2", "b:bob");
+        Instances result = useFilter();
+
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+
+        // shouldn't be any 'b' values in the header for attribute 2
+        // - they should now be 'bob'
+        Attribute first = result.attribute(1);
+        Attribute second = result.attribute(4);
+
+        assertEquals(first.value(2), "bob");
+
+        // check that the other nominal attribute is unchanged
+        assertEquals(second.value(1), "b");
+
+        // check an instance
+        Instance inst = result.instance(1);
+        assertEquals(inst.stringValue(1), "bob");
+        assertEquals(inst.stringValue(4), "b");
+    }
+
+    public void testInverted1() {
+        m_Filter = getFilter("", "b:bob");
+        ((RenameNominalValues) m_Filter).setInvertSelection(true);
+
+        Instances result = useFilter();
+
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+
+        // shouldn't be any 'b' values in the header - they should now
+        // be 'bob'
+        Attribute first = result.attribute(1);
+        Attribute second = result.attribute(4);
+
+        assertEquals(first.value(2), "bob");
+        assertEquals(second.value(1), "bob");
+
+        // check an instance
+        Instance inst = result.instance(1);
+        assertEquals(inst.stringValue(1), "bob");
+        assertEquals(inst.stringValue(4), "bob");
+    }
+
+    /**
+     * tests the filter in conjunction with the FilteredClassifier
+     */
+    @Override
+    public void testFilteredClassifier() {
+        try {
+            Instances data = getFilteredClassifierData();
+
+            for (int i = 0; i < data.numAttributes(); i++) {
+                if (data.classIndex() == i)
+                    continue;
+                if (data.attribute(i).isNominal()) {
+                    ((RenameNominalValues) m_FilteredClassifier.getFilter()).setSelectedAttributes("" + (i + 1));
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            fail("Problem setting up test for FilteredClassifier: " + e.toString());
+        }
+
+        super.testFilteredClassifier();
+    }
+
+    public static Test suite() {
+        return new TestSuite(RenameNominalValuesTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

@@ -31,118 +31,112 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests NominalToString. Run from the command line with: <p/>
+ * Tests NominalToString. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.NominalToStringTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class NominalToStringTest
-  extends AbstractFilterTest {
-  
-  public NominalToStringTest(String name) {
-    super(name);
-  }
+public class NominalToStringTest extends AbstractFilterTest {
 
-  /** Creates an example NominalToString */
-  public Filter getFilter() {
-    NominalToString f = new NominalToString();
-    f.setAttributeIndexes("2");
-    return f;
-  }
-
-  /**
-   * returns the configured FilteredClassifier. Since the base classifier is
-   * determined heuristically, derived tests might need to adjust it.
-   * 
-   * @return the configured FilteredClassifier
-   */
-  protected FilteredClassifier getFilteredClassifier() {
-    FilteredClassifier 	result;
-    
-    result = super.getFilteredClassifier();
-    ((NominalToString) result.getFilter()).setAttributeIndexes("1");
-    result.setClassifier(new ZeroR());
-    
-    return result;
-  }
-  
-  /**
-   * returns data generated for the FilteredClassifier test
-   * 
-   * @return		the dataset for the FilteredClassifier
-   * @throws Exception	if generation of data fails
-   */
-  protected Instances getFilteredClassifierData() throws Exception{
-    TestInstances	test;
-    Instances		result;
-
-    test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
-    test.setNumRelational(0);
-    test.setClassIndex(TestInstances.CLASS_IS_LAST);
-
-    result = test.generate();
-    
-    return result;
-  }
-
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-    assertEquals("Attribute type should now be STRING",
-                 Attribute.STRING, result.attribute(1).type());
-
-    assertEquals(3, result.attribute(1).numValues());
-  }
-
-  public void testMissing() {
-    ((NominalToString)m_Filter).setAttributeIndexes("5");
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-    assertEquals("Attribute type should now be STRING",
-                 Attribute.STRING, result.attribute(4).type());
-    assertEquals(4, result.attribute(4).numValues());
-    for (int i = 0; i < result.numInstances(); i++) {
-      assertTrue("Missing values should be preserved",
-             m_Instances.instance(i).isMissing(4) ==
-             result.instance(i).isMissing(4));
+    public NominalToStringTest(String name) {
+        super(name);
     }
-  }
-  
-  /**
-   * tests the filter in conjunction with the FilteredClassifier
-   */
-  public void testFilteredClassifier() {
-    try {
-      Instances data = getFilteredClassifierData();
 
-      for (int i = 0; i < data.numAttributes(); i++) {
-	if (data.classIndex() == i)
-	  continue;
-	if (data.attribute(i).isNominal()) {
-	  ((NominalToString) m_FilteredClassifier.getFilter()).setAttributeIndexes(
-	      "" + (i + 1));
-	  break;
-	}
-      }
+    /** Creates an example NominalToString */
+    public Filter getFilter() {
+        NominalToString f = new NominalToString();
+        f.setAttributeIndexes("2");
+        return f;
     }
-    catch (Exception e) {
-      fail("Problem setting up test for FilteredClassifier: " + e.toString());
+
+    /**
+     * returns the configured FilteredClassifier. Since the base classifier is
+     * determined heuristically, derived tests might need to adjust it.
+     * 
+     * @return the configured FilteredClassifier
+     */
+    protected FilteredClassifier getFilteredClassifier() {
+        FilteredClassifier result;
+
+        result = super.getFilteredClassifier();
+        ((NominalToString) result.getFilter()).setAttributeIndexes("1");
+        result.setClassifier(new ZeroR());
+
+        return result;
     }
-    
-    super.testFilteredClassifier();
-  }
 
-  public static Test suite() {
-    return new TestSuite(NominalToStringTest.class);
-  }
+    /**
+     * returns data generated for the FilteredClassifier test
+     * 
+     * @return the dataset for the FilteredClassifier
+     * @throws Exception if generation of data fails
+     */
+    protected Instances getFilteredClassifierData() throws Exception {
+        TestInstances test;
+        Instances result;
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        test = TestInstances.forCapabilities(m_FilteredClassifier.getCapabilities());
+        test.setNumRelational(0);
+        test.setClassIndex(TestInstances.CLASS_IS_LAST);
+
+        result = test.generate();
+
+        return result;
+    }
+
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        assertEquals("Attribute type should now be STRING", Attribute.STRING, result.attribute(1).type());
+
+        assertEquals(3, result.attribute(1).numValues());
+    }
+
+    public void testMissing() {
+        ((NominalToString) m_Filter).setAttributeIndexes("5");
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        assertEquals("Attribute type should now be STRING", Attribute.STRING, result.attribute(4).type());
+        assertEquals(4, result.attribute(4).numValues());
+        for (int i = 0; i < result.numInstances(); i++) {
+            assertTrue("Missing values should be preserved", m_Instances.instance(i).isMissing(4) == result.instance(i).isMissing(4));
+        }
+    }
+
+    /**
+     * tests the filter in conjunction with the FilteredClassifier
+     */
+    public void testFilteredClassifier() {
+        try {
+            Instances data = getFilteredClassifierData();
+
+            for (int i = 0; i < data.numAttributes(); i++) {
+                if (data.classIndex() == i)
+                    continue;
+                if (data.attribute(i).isNominal()) {
+                    ((NominalToString) m_FilteredClassifier.getFilter()).setAttributeIndexes("" + (i + 1));
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            fail("Problem setting up test for FilteredClassifier: " + e.toString());
+        }
+
+        super.testFilteredClassifier();
+    }
+
+    public static Test suite() {
+        return new TestSuite(NominalToStringTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

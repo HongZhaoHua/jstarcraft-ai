@@ -28,21 +28,27 @@ import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 
 /**
- <!-- globalinfo-start -->
- * Generates a decision list for regression problems using separate-and-conquer. In each iteration it builds a model tree using M5 and makes the "best" leaf into a rule.<br/>
+ * <!-- globalinfo-start --> Generates a decision list for regression problems
+ * using separate-and-conquer. In each iteration it builds a model tree using M5
+ * and makes the "best" leaf into a rule.<br/>
  * <br/>
  * For more information see:<br/>
  * <br/>
- * Geoffrey Holmes, Mark Hall, Eibe Frank: Generating Rule Sets from Model Trees. In: Twelfth Australian Joint Conference on Artificial Intelligence, 1-12, 1999.<br/>
+ * Geoffrey Holmes, Mark Hall, Eibe Frank: Generating Rule Sets from Model
+ * Trees. In: Twelfth Australian Joint Conference on Artificial Intelligence,
+ * 1-12, 1999.<br/>
  * <br/>
- * Ross J. Quinlan: Learning with Continuous Classes. In: 5th Australian Joint Conference on Artificial Intelligence, Singapore, 343-348, 1992.<br/>
+ * Ross J. Quinlan: Learning with Continuous Classes. In: 5th Australian Joint
+ * Conference on Artificial Intelligence, Singapore, 343-348, 1992.<br/>
  * <br/>
- * Y. Wang, I. H. Witten: Induction of model trees for predicting continuous classes. In: Poster papers of the 9th European Conference on Machine Learning, 1997.
+ * Y. Wang, I. H. Witten: Induction of model trees for predicting continuous
+ * classes. In: Poster papers of the 9th European Conference on Machine
+ * Learning, 1997.
  * <p/>
- <!-- globalinfo-end -->
+ * <!-- globalinfo-end -->
  *
- <!-- technical-bibtex-start -->
- * BibTeX:
+ * <!-- technical-bibtex-start --> BibTeX:
+ * 
  * <pre>
  * &#64;inproceedings{Holmes1999,
  *    author = {Geoffrey Holmes and Mark Hall and Eibe Frank},
@@ -72,97 +78,99 @@ import weka.core.TechnicalInformationHandler;
  * }
  * </pre>
  * <p/>
- <!-- technical-bibtex-end -->
+ * <!-- technical-bibtex-end -->
  *
- <!-- options-start -->
- * Valid options are: <p/>
+ * <!-- options-start --> Valid options are:
+ * <p/>
  * 
- * <pre> -N
- *  Use unpruned tree/rules</pre>
+ * <pre>
+ *  -N
+ *  Use unpruned tree/rules
+ * </pre>
  * 
- * <pre> -U
- *  Use unsmoothed predictions</pre>
+ * <pre>
+ *  -U
+ *  Use unsmoothed predictions
+ * </pre>
  * 
- * <pre> -R
- *  Build regression tree/rule rather than a model tree/rule</pre>
+ * <pre>
+ *  -R
+ *  Build regression tree/rule rather than a model tree/rule
+ * </pre>
  * 
- * <pre> -M &lt;minimum number of instances&gt;
+ * <pre>
+ *  -M &lt;minimum number of instances&gt;
  *  Set minimum number of instances per leaf
- *  (default 4)</pre>
+ *  (default 4)
+ * </pre>
  * 
- <!-- options-end -->
+ * <!-- options-end -->
  *
  * @author <a href="mailto:mhall@cs.waikato.ac.nz">Mark Hall</a>
  * @version $Revision$
  */
-public class M5Rules 
-  extends M5Base
-  implements TechnicalInformationHandler {
-    
-  /** for serialization */
-  static final long serialVersionUID = -1746114858746563180L;
-  
-  /**
-   * Returns a string describing classifier
-   * @return a description suitable for
-   * displaying in the explorer/experimenter gui
-   */
-  public String globalInfo() {
+public class M5Rules extends M5Base implements TechnicalInformationHandler {
 
-    return "Generates a decision list for regression problems using " 
-      + "separate-and-conquer. In each iteration it builds a "
-      + "model tree using M5 and makes the \"best\" "
-      + "leaf into a rule.\n\n"
-      + "For more information see:\n\n"
-      + getTechnicalInformation().toString();
-  }
+    /** for serialization */
+    static final long serialVersionUID = -1746114858746563180L;
 
-  /**
-   * Constructor
-   */
-  public M5Rules() {
-    super();
-    setGenerateRules(true);
-  }
+    /**
+     * Returns a string describing classifier
+     * 
+     * @return a description suitable for displaying in the explorer/experimenter
+     *         gui
+     */
+    public String globalInfo() {
 
-  /**
-   * Returns an instance of a TechnicalInformation object, containing 
-   * detailed information about the technical background of this class,
-   * e.g., paper reference or book this class is based on.
-   * 
-   * @return the technical information about this class
-   */
-  public TechnicalInformation getTechnicalInformation() {
-    TechnicalInformation 	result;
-    
-    result = new TechnicalInformation(Type.INPROCEEDINGS);
-    result.setValue(Field.AUTHOR, "Geoffrey Holmes and Mark Hall and Eibe Frank");
-    result.setValue(Field.TITLE, "Generating Rule Sets from Model Trees");
-    result.setValue(Field.BOOKTITLE, "Twelfth Australian Joint Conference on Artificial Intelligence");
-    result.setValue(Field.YEAR, "1999");
-    result.setValue(Field.PAGES, "1-12");
-    result.setValue(Field.PUBLISHER, "Springer");
-    
-    result.add(super.getTechnicalInformation());
-    
-    return result;
-  }
-  
-  /**
-   * Returns the revision string.
-   * 
-   * @return		the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+        return "Generates a decision list for regression problems using " + "separate-and-conquer. In each iteration it builds a " + "model tree using M5 and makes the \"best\" " + "leaf into a rule.\n\n" + "For more information see:\n\n" + getTechnicalInformation().toString();
+    }
 
-  /**
-   * Main method by which this class can be tested
-   * 
-   * @param args an array of options
-   */
-  public static void main(String[] args) {
-    runClassifier(new M5Rules(), args);
-  } 
+    /**
+     * Constructor
+     */
+    public M5Rules() {
+        super();
+        setGenerateRules(true);
+    }
+
+    /**
+     * Returns an instance of a TechnicalInformation object, containing detailed
+     * information about the technical background of this class, e.g., paper
+     * reference or book this class is based on.
+     * 
+     * @return the technical information about this class
+     */
+    public TechnicalInformation getTechnicalInformation() {
+        TechnicalInformation result;
+
+        result = new TechnicalInformation(Type.INPROCEEDINGS);
+        result.setValue(Field.AUTHOR, "Geoffrey Holmes and Mark Hall and Eibe Frank");
+        result.setValue(Field.TITLE, "Generating Rule Sets from Model Trees");
+        result.setValue(Field.BOOKTITLE, "Twelfth Australian Joint Conference on Artificial Intelligence");
+        result.setValue(Field.YEAR, "1999");
+        result.setValue(Field.PAGES, "1-12");
+        result.setValue(Field.PUBLISHER, "Springer");
+
+        result.add(super.getTechnicalInformation());
+
+        return result;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Main method by which this class can be tested
+     * 
+     * @param args an array of options
+     */
+    public static void main(String[] args) {
+        runClassifier(new M5Rules(), args);
+    }
 }

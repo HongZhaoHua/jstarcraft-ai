@@ -36,365 +36,355 @@ import weka.core.RevisionUtils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class DatabaseResultListener extends DatabaseUtils implements
-  ResultListener {
+public class DatabaseResultListener extends DatabaseUtils implements ResultListener {
 
-  /** for serialization */
-  static final long serialVersionUID = 7388014746954652818L;
+    /** for serialization */
+    static final long serialVersionUID = 7388014746954652818L;
 
-  /** The ResultProducer to listen to */
-  protected ResultProducer m_ResultProducer;
+    /** The ResultProducer to listen to */
+    protected ResultProducer m_ResultProducer;
 
-  /** The name of the current results table */
-  protected String m_ResultsTableName;
+    /** The name of the current results table */
+    protected String m_ResultsTableName;
 
-  /** Holds the name of the key field to cache upon, or null if no caching */
-  protected String m_CacheKeyName = "";
+    /** Holds the name of the key field to cache upon, or null if no caching */
+    protected String m_CacheKeyName = "";
 
-  /** Stores the index of the key column holding the cache key data */
-  protected int m_CacheKeyIndex;
+    /** Stores the index of the key column holding the cache key data */
+    protected int m_CacheKeyIndex;
 
-  /** Stores the key for which the cache is valid */
-  protected Object[] m_CacheKey;
+    /** Stores the key for which the cache is valid */
+    protected Object[] m_CacheKey;
 
-  /** Stores the cached values */
-  protected ArrayList<String> m_Cache = new ArrayList<String>();
+    /** Stores the cached values */
+    protected ArrayList<String> m_Cache = new ArrayList<String>();
 
-  /**
-   * Returns a string describing this result listener
-   * 
-   * @return a description of the result listener suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "Takes results from a result producer and sends them to a "
-      + "database.";
-  }
-
-  /**
-   * Sets up the database drivers
-   * 
-   * @throws Exception if an error occurs
-   */
-  public DatabaseResultListener() throws Exception {
-
-    super();
-  }
-
-  /**
-   * Prepare for the results to be received.
-   * 
-   * @param rp the ResultProducer that will generate the results
-   * @throws Exception if an error occurs during preprocessing.
-   */
-  @Override
-  public void preProcess(ResultProducer rp) throws Exception {
-
-    m_ResultProducer = rp;
-    // Connect to the database and find out what table corresponds to this
-    // ResultProducer
-    updateResultsTableName(m_ResultProducer);
-  }
-
-  /**
-   * Perform any postprocessing. When this method is called, it indicates that
-   * no more results will be sent that need to be grouped together in any way.
-   * 
-   * @param rp the ResultProducer that generated the results
-   * @throws Exception if an error occurs
-   */
-  @Override
-  public void postProcess(ResultProducer rp) throws Exception {
-
-    if (m_ResultProducer != rp) {
-      throw new Error("Unrecognized ResultProducer calling postProcess!!");
-    }
-    disconnectFromDatabase();
-  }
-
-  /**
-   * Determines if there are any constraints (imposed by the destination) on any
-   * additional measures produced by resultProducers. Null should be returned if
-   * there are NO constraints, otherwise a list of column names should be
-   * returned as an array of Strings. In the case of DatabaseResultListener, the
-   * structure of an existing database will impose constraints.
-   * 
-   * @param rp the ResultProducer to which the constraints will apply
-   * @return an array of column names to which resutltProducer's results will be
-   *         restricted.
-   * @throws Exception if an error occurs.
-   */
-  @Override
-  public String[] determineColumnConstraints(ResultProducer rp)
-    throws Exception {
-    ArrayList<String> cNames = new ArrayList<String>();
-    updateResultsTableName(rp);
-    DatabaseMetaData dbmd = m_Connection.getMetaData();
-    ResultSet rs;
-    // gets a result set where each row is info on a column
-    if (m_checkForUpperCaseNames) {
-      rs = dbmd.getColumns(null, null, m_ResultsTableName.toUpperCase(), null);
-    } else {
-      rs = dbmd.getColumns(null, null, m_ResultsTableName, null);
-    }
-    boolean tableExists = false;
-    int numColumns = 0;
-
-    while (rs.next()) {
-      tableExists = true;
-      // column four contains the column name
-      String name = rs.getString(4);
-      if (name.toLowerCase().startsWith("measure")) {
-        numColumns++;
-        cNames.add(name);
-      }
+    /**
+     * Returns a string describing this result listener
+     * 
+     * @return a description of the result listener suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
+        return "Takes results from a result producer and sends them to a " + "database.";
     }
 
-    // no constraints on any additional measures if the table does not exist
-    if (!tableExists) {
-      return null;
+    /**
+     * Sets up the database drivers
+     * 
+     * @throws Exception if an error occurs
+     */
+    public DatabaseResultListener() throws Exception {
+
+        super();
     }
 
-    // a zero element array indicates maximum constraint
-    String[] columnNames = new String[numColumns];
-    for (int i = 0; i < numColumns; i++) {
-      columnNames[i] = (cNames.get(i));
+    /**
+     * Prepare for the results to be received.
+     * 
+     * @param rp the ResultProducer that will generate the results
+     * @throws Exception if an error occurs during preprocessing.
+     */
+    @Override
+    public void preProcess(ResultProducer rp) throws Exception {
+
+        m_ResultProducer = rp;
+        // Connect to the database and find out what table corresponds to this
+        // ResultProducer
+        updateResultsTableName(m_ResultProducer);
     }
 
-    return columnNames;
-  }
+    /**
+     * Perform any postprocessing. When this method is called, it indicates that no
+     * more results will be sent that need to be grouped together in any way.
+     * 
+     * @param rp the ResultProducer that generated the results
+     * @throws Exception if an error occurs
+     */
+    @Override
+    public void postProcess(ResultProducer rp) throws Exception {
 
-  /**
-   * Submit the result to the appropriate table of the database
-   * 
-   * @param rp the ResultProducer that generated the result
-   * @param key The key for the results.
-   * @param result The actual results.
-   * @throws Exception if the result couldn't be sent to the database
-   */
-  @Override
-  public void acceptResult(ResultProducer rp, Object[] key, Object[] result)
-    throws Exception {
-
-    if (m_ResultProducer != rp) {
-      throw new Error("Unrecognized ResultProducer calling acceptResult!!");
+        if (m_ResultProducer != rp) {
+            throw new Error("Unrecognized ResultProducer calling postProcess!!");
+        }
+        disconnectFromDatabase();
     }
 
-    // null result could occur from a chain of doRunKeys calls
-    if (result != null) {
-      putResultInTable(m_ResultsTableName, rp, key, result);
-    }
-  }
+    /**
+     * Determines if there are any constraints (imposed by the destination) on any
+     * additional measures produced by resultProducers. Null should be returned if
+     * there are NO constraints, otherwise a list of column names should be returned
+     * as an array of Strings. In the case of DatabaseResultListener, the structure
+     * of an existing database will impose constraints.
+     * 
+     * @param rp the ResultProducer to which the constraints will apply
+     * @return an array of column names to which resutltProducer's results will be
+     *         restricted.
+     * @throws Exception if an error occurs.
+     */
+    @Override
+    public String[] determineColumnConstraints(ResultProducer rp) throws Exception {
+        ArrayList<String> cNames = new ArrayList<String>();
+        updateResultsTableName(rp);
+        DatabaseMetaData dbmd = m_Connection.getMetaData();
+        ResultSet rs;
+        // gets a result set where each row is info on a column
+        if (m_checkForUpperCaseNames) {
+            rs = dbmd.getColumns(null, null, m_ResultsTableName.toUpperCase(), null);
+        } else {
+            rs = dbmd.getColumns(null, null, m_ResultsTableName, null);
+        }
+        boolean tableExists = false;
+        int numColumns = 0;
 
-  /**
-   * Always says a result is required. If this is the first call, prints out the
-   * header for the Database output.
-   * 
-   * @param rp the ResultProducer wanting to generate the result
-   * @param key The key for which a result may be needed.
-   * @return true if the result should be calculated.
-   * @throws Exception if the database couldn't be queried
-   */
-  @Override
-  public boolean isResultRequired(ResultProducer rp, Object[] key)
-    throws Exception {
+        while (rs.next()) {
+            tableExists = true;
+            // column four contains the column name
+            String name = rs.getString(4);
+            if (name.toLowerCase().startsWith("measure")) {
+                numColumns++;
+                cNames.add(name);
+            }
+        }
 
-    if (m_ResultProducer != rp) {
-      throw new Error("Unrecognized ResultProducer calling isResultRequired!");
-    }
-    if (m_Debug) {
-      System.err.print("Is result required...");
-      for (Object element : key) {
-        System.err.print(" " + element);
-      }
-      System.err.flush();
-    }
-    boolean retval = false;
+        // no constraints on any additional measures if the table does not exist
+        if (!tableExists) {
+            return null;
+        }
 
-    // Check the key cache first
-    if (!m_CacheKeyName.equals("")) {
-      if (!isCacheValid(key)) {
-        loadCache(rp, key);
-      }
-      retval = !isKeyInCache(rp, key);
-    } else {
-      // Ask whether the results are needed
-      retval = !isKeyInTable(m_ResultsTableName, rp, key);
-    }
+        // a zero element array indicates maximum constraint
+        String[] columnNames = new String[numColumns];
+        for (int i = 0; i < numColumns; i++) {
+            columnNames[i] = (cNames.get(i));
+        }
 
-    if (m_Debug) {
-      System.err.println(" ..." + (retval ? "required" : "not required")
-        + (m_CacheKeyName.equals("") ? "" : " (cache)"));
-      System.err.flush();
-    }
-    return retval;
-  }
-
-  /**
-   * Determines the table name that results will be inserted into. If required:
-   * a connection will be opened, an experiment index table created, and the
-   * results table created.
-   * 
-   * @param rp the ResultProducer
-   * @throws Exception if an error occurs
-   */
-  protected void updateResultsTableName(ResultProducer rp) throws Exception {
-
-    if (!isConnected()) {
-      connectToDatabase();
-    }
-    if (!experimentIndexExists()) {
-      createExperimentIndex();
+        return columnNames;
     }
 
-    String tableName = getResultsTableName(rp);
-    if (tableName == null) {
-      tableName = createExperimentIndexEntry(rp);
+    /**
+     * Submit the result to the appropriate table of the database
+     * 
+     * @param rp     the ResultProducer that generated the result
+     * @param key    The key for the results.
+     * @param result The actual results.
+     * @throws Exception if the result couldn't be sent to the database
+     */
+    @Override
+    public void acceptResult(ResultProducer rp, Object[] key, Object[] result) throws Exception {
+
+        if (m_ResultProducer != rp) {
+            throw new Error("Unrecognized ResultProducer calling acceptResult!!");
+        }
+
+        // null result could occur from a chain of doRunKeys calls
+        if (result != null) {
+            putResultInTable(m_ResultsTableName, rp, key, result);
+        }
     }
-    if (!tableExists(tableName)) {
-      createResultsTable(rp, tableName);
+
+    /**
+     * Always says a result is required. If this is the first call, prints out the
+     * header for the Database output.
+     * 
+     * @param rp  the ResultProducer wanting to generate the result
+     * @param key The key for which a result may be needed.
+     * @return true if the result should be calculated.
+     * @throws Exception if the database couldn't be queried
+     */
+    @Override
+    public boolean isResultRequired(ResultProducer rp, Object[] key) throws Exception {
+
+        if (m_ResultProducer != rp) {
+            throw new Error("Unrecognized ResultProducer calling isResultRequired!");
+        }
+        if (m_Debug) {
+            System.err.print("Is result required...");
+            for (Object element : key) {
+                System.err.print(" " + element);
+            }
+            System.err.flush();
+        }
+        boolean retval = false;
+
+        // Check the key cache first
+        if (!m_CacheKeyName.equals("")) {
+            if (!isCacheValid(key)) {
+                loadCache(rp, key);
+            }
+            retval = !isKeyInCache(rp, key);
+        } else {
+            // Ask whether the results are needed
+            retval = !isKeyInTable(m_ResultsTableName, rp, key);
+        }
+
+        if (m_Debug) {
+            System.err.println(" ..." + (retval ? "required" : "not required") + (m_CacheKeyName.equals("") ? "" : " (cache)"));
+            System.err.flush();
+        }
+        return retval;
     }
-    m_ResultsTableName = tableName;
-  }
 
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String cacheKeyNameTipText() {
-    return "Set the name of the key field by which to cache.";
-  }
+    /**
+     * Determines the table name that results will be inserted into. If required: a
+     * connection will be opened, an experiment index table created, and the results
+     * table created.
+     * 
+     * @param rp the ResultProducer
+     * @throws Exception if an error occurs
+     */
+    protected void updateResultsTableName(ResultProducer rp) throws Exception {
 
-  /**
-   * Get the value of CacheKeyName.
-   * 
-   * @return Value of CacheKeyName.
-   */
-  public String getCacheKeyName() {
+        if (!isConnected()) {
+            connectToDatabase();
+        }
+        if (!experimentIndexExists()) {
+            createExperimentIndex();
+        }
 
-    return m_CacheKeyName;
-  }
-
-  /**
-   * Set the value of CacheKeyName.
-   * 
-   * @param newCacheKeyName Value to assign to CacheKeyName.
-   */
-  public void setCacheKeyName(String newCacheKeyName) {
-
-    m_CacheKeyName = newCacheKeyName;
-  }
-
-  /**
-   * Checks whether the current cache contents are valid for the supplied key.
-   * 
-   * @param key the results key
-   * @return true if the cache contents are valid for the key given
-   */
-  protected boolean isCacheValid(Object[] key) {
-
-    if (m_CacheKey == null) {
-      return false;
+        String tableName = getResultsTableName(rp);
+        if (tableName == null) {
+            tableName = createExperimentIndexEntry(rp);
+        }
+        if (!tableExists(tableName)) {
+            createResultsTable(rp, tableName);
+        }
+        m_ResultsTableName = tableName;
     }
-    if (m_CacheKey.length != key.length) {
-      return false;
-    }
-    for (int i = 0; i < key.length; i++) {
-      if ((i != m_CacheKeyIndex) && (!m_CacheKey[i].equals(key[i]))) {
-        return false;
-      }
-    }
-    return true;
-  }
 
-  /**
-   * Returns true if the supplied key is in the key cache (and thus we do not
-   * need to execute a database query).
-   * 
-   * @param rp the ResultProducer the key belongs to.
-   * @param key the result key
-   * @return true if the key is in the key cache
-   * @throws Exception if an error occurs
-   */
-  protected boolean isKeyInCache(ResultProducer rp, Object[] key)
-    throws Exception {
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String cacheKeyNameTipText() {
+        return "Set the name of the key field by which to cache.";
+    }
 
-    for (int i = 0; i < m_Cache.size(); i++) {
-      if (m_Cache.get(i).equals(key[m_CacheKeyIndex])) {
+    /**
+     * Get the value of CacheKeyName.
+     * 
+     * @return Value of CacheKeyName.
+     */
+    public String getCacheKeyName() {
+
+        return m_CacheKeyName;
+    }
+
+    /**
+     * Set the value of CacheKeyName.
+     * 
+     * @param newCacheKeyName Value to assign to CacheKeyName.
+     */
+    public void setCacheKeyName(String newCacheKeyName) {
+
+        m_CacheKeyName = newCacheKeyName;
+    }
+
+    /**
+     * Checks whether the current cache contents are valid for the supplied key.
+     * 
+     * @param key the results key
+     * @return true if the cache contents are valid for the key given
+     */
+    protected boolean isCacheValid(Object[] key) {
+
+        if (m_CacheKey == null) {
+            return false;
+        }
+        if (m_CacheKey.length != key.length) {
+            return false;
+        }
+        for (int i = 0; i < key.length; i++) {
+            if ((i != m_CacheKeyIndex) && (!m_CacheKey[i].equals(key[i]))) {
+                return false;
+            }
+        }
         return true;
-      }
     }
-    return false;
-  }
 
-  /**
-   * Executes a database query to fill the key cache
-   * 
-   * @param rp the ResultProducer the key belongs to
-   * @param key the key
-   * @throws Exception if an error occurs
-   */
-  protected void loadCache(ResultProducer rp, Object[] key) throws Exception {
+    /**
+     * Returns true if the supplied key is in the key cache (and thus we do not need
+     * to execute a database query).
+     * 
+     * @param rp  the ResultProducer the key belongs to.
+     * @param key the result key
+     * @return true if the key is in the key cache
+     * @throws Exception if an error occurs
+     */
+    protected boolean isKeyInCache(ResultProducer rp, Object[] key) throws Exception {
 
-    System.err.print(" (updating cache)");
-    System.err.flush();
-    m_Cache.clear();
-    m_CacheKey = null;
-    String query = "SELECT Key_" + m_CacheKeyName + " FROM "
-      + m_ResultsTableName;
-    String[] keyNames = rp.getKeyNames();
-    if (keyNames.length != key.length) {
-      throw new Exception("Key names and key values of different lengths");
-    }
-    m_CacheKeyIndex = -1;
-    for (int i = 0; i < keyNames.length; i++) {
-      if (keyNames[i].equalsIgnoreCase(m_CacheKeyName)) {
-        m_CacheKeyIndex = i;
-        break;
-      }
-    }
-    if (m_CacheKeyIndex == -1) {
-      throw new Exception("No key field named " + m_CacheKeyName
-        + " (as specified for caching)");
-    }
-    boolean first = true;
-    for (int i = 0; i < key.length; i++) {
-      if ((key[i] != null) && (i != m_CacheKeyIndex)) {
-        if (first) {
-          query += " WHERE ";
-          first = false;
-        } else {
-          query += " AND ";
+        for (int i = 0; i < m_Cache.size(); i++) {
+            if (m_Cache.get(i).equals(key[m_CacheKeyIndex])) {
+                return true;
+            }
         }
-        query += "Key_" + keyNames[i] + '=';
-        if (key[i] instanceof String) {
-          query += "'" + DatabaseUtils.processKeyString(key[i].toString())
-            + "'";
-        } else {
-          query += key[i].toString();
-        }
-      }
+        return false;
     }
-    ResultSet rs = select(query);
-    while (rs.next()) {
-      String keyVal = rs.getString(1);
-      if (!rs.wasNull()) {
-        m_Cache.add(keyVal);
-      }
-    }
-    close(rs);
-    m_CacheKey = key.clone();
-  }
 
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Executes a database query to fill the key cache
+     * 
+     * @param rp  the ResultProducer the key belongs to
+     * @param key the key
+     * @throws Exception if an error occurs
+     */
+    protected void loadCache(ResultProducer rp, Object[] key) throws Exception {
+
+        System.err.print(" (updating cache)");
+        System.err.flush();
+        m_Cache.clear();
+        m_CacheKey = null;
+        String query = "SELECT Key_" + m_CacheKeyName + " FROM " + m_ResultsTableName;
+        String[] keyNames = rp.getKeyNames();
+        if (keyNames.length != key.length) {
+            throw new Exception("Key names and key values of different lengths");
+        }
+        m_CacheKeyIndex = -1;
+        for (int i = 0; i < keyNames.length; i++) {
+            if (keyNames[i].equalsIgnoreCase(m_CacheKeyName)) {
+                m_CacheKeyIndex = i;
+                break;
+            }
+        }
+        if (m_CacheKeyIndex == -1) {
+            throw new Exception("No key field named " + m_CacheKeyName + " (as specified for caching)");
+        }
+        boolean first = true;
+        for (int i = 0; i < key.length; i++) {
+            if ((key[i] != null) && (i != m_CacheKeyIndex)) {
+                if (first) {
+                    query += " WHERE ";
+                    first = false;
+                } else {
+                    query += " AND ";
+                }
+                query += "Key_" + keyNames[i] + '=';
+                if (key[i] instanceof String) {
+                    query += "'" + DatabaseUtils.processKeyString(key[i].toString()) + "'";
+                } else {
+                    query += key[i].toString();
+                }
+            }
+        }
+        ResultSet rs = select(query);
+        while (rs.next()) {
+            String keyVal = rs.getString(1);
+            if (!rs.wasNull()) {
+                m_Cache.add(keyVal);
+            }
+        }
+        close(rs);
+        m_CacheKey = key.clone();
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

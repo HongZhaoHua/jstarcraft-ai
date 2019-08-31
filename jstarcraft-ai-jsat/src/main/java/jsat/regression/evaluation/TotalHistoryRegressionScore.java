@@ -3,16 +3,15 @@ package jsat.regression.evaluation;
 import jsat.utils.DoubleList;
 
 /**
- * This abstract class provides the work for maintaining the history of 
- * predictions and their true values. 
+ * This abstract class provides the work for maintaining the history of
+ * predictions and their true values.
  * 
  * @author Edward Raff
  */
-public abstract class TotalHistoryRegressionScore implements RegressionScore
-{
+public abstract class TotalHistoryRegressionScore implements RegressionScore {
 
-	private static final long serialVersionUID = -5262934560490160236L;
-	/**
+    private static final long serialVersionUID = -5262934560490160236L;
+    /**
      * List of the true target values
      */
     protected DoubleList truths;
@@ -25,43 +24,38 @@ public abstract class TotalHistoryRegressionScore implements RegressionScore
      */
     protected DoubleList weights;
 
-    public TotalHistoryRegressionScore()
-    {
+    public TotalHistoryRegressionScore() {
     }
 
     /**
      * Copy constructor
+     * 
      * @param toCopy the object to copy
      */
-    public TotalHistoryRegressionScore(TotalHistoryRegressionScore toCopy)
-    {
-        if(toCopy.truths != null)
-        {
+    public TotalHistoryRegressionScore(TotalHistoryRegressionScore toCopy) {
+        if (toCopy.truths != null) {
             this.truths = new DoubleList(toCopy.truths);
             this.predictions = new DoubleList(toCopy.predictions);
             this.weights = new DoubleList(toCopy.weights);
         }
     }
-    
+
     @Override
-    public void prepare()
-    {
+    public void prepare() {
         truths = new DoubleList();
         predictions = new DoubleList();
         weights = new DoubleList();
     }
 
     @Override
-    public void addResult(double prediction, double trueValue, double weight)
-    {
+    public void addResult(double prediction, double trueValue, double weight) {
         truths.add(trueValue);
         predictions.add(prediction);
         weights.add(weight);
     }
 
     @Override
-    public void addResults(RegressionScore other)
-    {
+    public void addResults(RegressionScore other) {
         TotalHistoryRegressionScore otherObj = (TotalHistoryRegressionScore) other;
         this.truths.addAll(otherObj.truths);
         this.predictions.addAll(otherObj.predictions);
@@ -70,5 +64,5 @@ public abstract class TotalHistoryRegressionScore implements RegressionScore
 
     @Override
     public abstract TotalHistoryRegressionScore clone();
-    
+
 }

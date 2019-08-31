@@ -30,141 +30,122 @@ import jsat.utils.IntList;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**
- * This class implements the Local Outlier Factor (LOF) algorithm for outlier detection. 
+ * This class implements the Local Outlier Factor (LOF) algorithm for outlier
+ * detection.
+ * 
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class LOF implements Outlier
-{
+public class LOF implements Outlier {
     int minPnts;
     private DistanceMetric distanceMetric;
     VectorCollection<Vec> vc = new DefaultVectorCollection<>();
-    
-    
+
     /**
      * the points in this collection
      */
     private List<Vec> X;
     /**
-     * Stores the distance of an index in X to it's k'th (minPnts) nearest neighbor. 
+     * Stores the distance of an index in X to it's k'th (minPnts) nearest neighbor.
      */
     private double[] k_distance;
     private double[] lrd_internal;
 
-    public LOF()
-    {
+    public LOF() {
         this(15);
     }
-    
-    public LOF(int minPnts)
-    {
+
+    public LOF(int minPnts) {
         this(minPnts, new EuclideanDistance());
     }
-    
-    public LOF(int minPnts, DistanceMetric dm)
-    {
+
+    public LOF(int minPnts, DistanceMetric dm) {
         setMinPnts(minPnts);
         setDistanceMetric(dm);
     }
 
-    public void setMinPnts(int minPnts)
-    {
+    public void setMinPnts(int minPnts) {
         this.minPnts = minPnts;
     }
 
-    public int getMinPnts()
-    {
+    public int getMinPnts() {
         return minPnts;
     }
 
-    public void setDistanceMetric(DistanceMetric distanceMetric)
-    {
+    public void setDistanceMetric(DistanceMetric distanceMetric) {
         this.distanceMetric = distanceMetric;
     }
 
-    public DistanceMetric getDistanceMetric()
-    {
+    public DistanceMetric getDistanceMetric() {
         return distanceMetric;
     }
-    
-    
-    
 
     @Override
-    public void fit(DataSet d, boolean parallel)
-    {
+    public void fit(DataSet d, boolean parallel) {
         X = d.getDataVectors();
         vc.build(parallel, X, distanceMetric);
-        
+
         int N = X.size();
         k_distance = new double[N];
         List<List<Integer>> all_knn = new ArrayList<>();
         List<List<Double>> all_knn_dists = new ArrayList<>();
-        
-        vc.search(X, minPnts+1, all_knn, all_knn_dists, parallel);//+1 to avoid self distance
-        
-        ParallelUtils.run(parallel, N, (start, end)->
-        {
-            for(int i = start; i < end; i++)
+
+        vc.search(X, minPnts + 1, all_knn, all_knn_dists, parallel);// +1 to avoid self distance
+
+        ParallelUtils.run(parallel, N, (start, end) -> {
+            for (int i = start; i < end; i++)
                 k_distance[i] = all_knn_dists.get(i).get(minPnts);
         });
-        
+
         lrd_internal = new double[N];
-        ParallelUtils.run(parallel, N, (start, end)->
-        {
-            for(int i = start; i < end; i++)
-            {
+        ParallelUtils.run(parallel, N, (start, end) -> {
+            for (int i = start; i < end; i++) {
                 double reachSum = 0;
 
-                for(int j_indx = 1; j_indx < minPnts+1; j_indx++)
-                {
+                for (int j_indx = 1; j_indx < minPnts + 1; j_indx++) {
                     int neighbor = all_knn.get(i).get(j_indx);
                     double dist = all_knn_dists.get(i).get(j_indx);
                     reachSum += Math.max(k_distance[neighbor], dist);
                 }
-                
-                //lrd_internal[i] = 1.0/(reachSum/minPnts);
-                lrd_internal[i] = minPnts/reachSum;
+
+                // lrd_internal[i] = 1.0/(reachSum/minPnts);
+                lrd_internal[i] = minPnts / reachSum;
             }
         });
-        
-        
+
     }
-    
-    double lrd(Vec a, List<Double> qi)
-    {
+
+    double lrd(Vec a, List<Double> qi) {
         return 0;
     }
 
     @Override
-    public double score(DataPoint x)
-    {
+    public double score(DataPoint x) {
         IntList knn = new IntList(minPnts);
         DoubleList dists = new DoubleList(minPnts);
-        
+
         vc.search(x.getNumericalValues(), minPnts, knn, dists);
-        
+
         double lof = 0;
         double lrd_x = 0;
-        for(int i_indx = 0; i_indx < minPnts; i_indx++)
-        {
+        for (int i_indx = 0; i_indx < minPnts; i_indx++) {
             int neighbor = knn.get(i_indx);
             double dist = dists.get(i_indx);
             double reach_dist = Math.max(k_distance[neighbor], dist);
-            
+
             lof += lrd_internal[neighbor];
-            
+
             lrd_x += reach_dist;
         }
-        
-        //lrd_x now has the local reachability distance of the query x
-        lrd_x = minPnts/lrd_x;
-        //now compuate final LOF score
+
+        // lrd_x now has the local reachability distance of the query x
+        lrd_x = minPnts / lrd_x;
+        // now compuate final LOF score
         lof /= minPnts * lrd_x;
-        
-        //lof, > 1 indicates outlier, <= 1 indicates inlier. 
-        //to map to interface (negative = outlier), -1*(lof-1)
-        //use -1.25 b/c the boarder around 1 is kinda noisy
-        return -(lof-1.25);
+
+        // lof, > 1 indicates outlier, <= 1 indicates inlier.
+        // to map to interface (negative = outlier), -1*(lof-1)
+        // use -1.25 b/c the boarder around 1 is kinda noisy
+        return -(lof - 1.25);
     }
-    
+
 }

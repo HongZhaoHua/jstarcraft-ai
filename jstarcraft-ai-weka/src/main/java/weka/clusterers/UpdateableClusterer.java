@@ -23,24 +23,24 @@ package weka.clusterers;
 import weka.core.Instance;
 
 /**
- * Interface to incremental cluster models that can learn using one instance 
- * at a time.
+ * Interface to incremental cluster models that can learn using one instance at
+ * a time.
  * 
- * @author  FracPete (fracpete at waikato dot ac dot nz)
+ * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
 public interface UpdateableClusterer {
 
-  /**
-   * Adds an instance to the clusterer.
-   *
-   * @param newInstance the instance to be added
-   * @throws Exception 	if something goes wrong
-   */
-  public void updateClusterer(Instance newInstance) throws Exception;
+    /**
+     * Adds an instance to the clusterer.
+     *
+     * @param newInstance the instance to be added
+     * @throws Exception if something goes wrong
+     */
+    public void updateClusterer(Instance newInstance) throws Exception;
 
-  /**
-   * Signals the end of the updating.
-   */
-  public void updateFinished();
+    /**
+     * Signals the end of the updating.
+     */
+    public void updateFinished();
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for MapValues element declaration.
+ * <p>
+ * Java class for MapValues element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="MapValues">
@@ -49,12 +50,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "fieldColumnPair",
-    "tableLocator",
-    "inlineTable"
-})
+@XmlType(name = "", propOrder = { "extension", "fieldColumnPair", "tableLocator", "inlineTable" })
 @XmlRootElement(name = "MapValues")
 public class MapValues {
 
@@ -79,21 +75,21 @@ public class MapValues {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -108,15 +104,16 @@ public class MapValues {
      * Gets the value of the fieldColumnPair property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fieldColumnPair property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the fieldColumnPair property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getFieldColumnPair().add(newItem);
+     * getFieldColumnPair().add(newItem);
      * </pre>
      * 
      * 
@@ -136,10 +133,8 @@ public class MapValues {
     /**
      * Gets the value of the tableLocator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TableLocator }
-     *     
+     * @return possible object is {@link TableLocator }
+     * 
      */
     public TableLocator getTableLocator() {
         return tableLocator;
@@ -148,10 +143,8 @@ public class MapValues {
     /**
      * Sets the value of the tableLocator property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TableLocator }
-     *     
+     * @param value allowed object is {@link TableLocator }
+     * 
      */
     public void setTableLocator(TableLocator value) {
         this.tableLocator = value;
@@ -160,10 +153,8 @@ public class MapValues {
     /**
      * Gets the value of the inlineTable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link InlineTable }
-     *     
+     * @return possible object is {@link InlineTable }
+     * 
      */
     public InlineTable getInlineTable() {
         return inlineTable;
@@ -172,10 +163,8 @@ public class MapValues {
     /**
      * Sets the value of the inlineTable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link InlineTable }
-     *     
+     * @param value allowed object is {@link InlineTable }
+     * 
      */
     public void setInlineTable(InlineTable value) {
         this.inlineTable = value;
@@ -184,10 +173,8 @@ public class MapValues {
     /**
      * Gets the value of the dataType property.
      * 
-     * @return
-     *     possible object is
-     *     {@link DATATYPE }
-     *     
+     * @return possible object is {@link DATATYPE }
+     * 
      */
     public DATATYPE getDataType() {
         return dataType;
@@ -196,10 +183,8 @@ public class MapValues {
     /**
      * Sets the value of the dataType property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DATATYPE }
-     *     
+     * @param value allowed object is {@link DATATYPE }
+     * 
      */
     public void setDataType(DATATYPE value) {
         this.dataType = value;
@@ -208,10 +193,8 @@ public class MapValues {
     /**
      * Gets the value of the defaultValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getDefaultValue() {
         return defaultValue;
@@ -220,10 +203,8 @@ public class MapValues {
     /**
      * Sets the value of the defaultValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setDefaultValue(String value) {
         this.defaultValue = value;
@@ -232,10 +213,8 @@ public class MapValues {
     /**
      * Gets the value of the mapMissingTo property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getMapMissingTo() {
         return mapMissingTo;
@@ -244,10 +223,8 @@ public class MapValues {
     /**
      * Sets the value of the mapMissingTo property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setMapMissingTo(String value) {
         this.mapMissingTo = value;
@@ -256,10 +233,8 @@ public class MapValues {
     /**
      * Gets the value of the outputColumn property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getOutputColumn() {
         return outputColumn;
@@ -268,10 +243,8 @@ public class MapValues {
     /**
      * Sets the value of the outputColumn property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setOutputColumn(String value) {
         this.outputColumn = value;

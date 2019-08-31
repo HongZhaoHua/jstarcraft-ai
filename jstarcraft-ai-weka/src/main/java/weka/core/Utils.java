@@ -53,2612 +53,2545 @@ import java.util.Vector;
  */
 public final class Utils implements RevisionHandler {
 
-  /**
-   * The natural logarithm of 2.
-   */
-  public static double log2 = Math.log(2);
+    /**
+     * The natural logarithm of 2.
+     */
+    public static double log2 = Math.log(2);
 
-  /**
-   * The small deviation allowed in double comparisons.
-   */
-  public static double SMALL = 1e-6;
+    /**
+     * The small deviation allowed in double comparisons.
+     */
+    public static double SMALL = 1e-6;
 
-  /** Decimal format */
-  private static final ThreadLocal<DecimalFormat> DF =
-    new ThreadLocal<DecimalFormat>() {
+    /** Decimal format */
+    private static final ThreadLocal<DecimalFormat> DF = new ThreadLocal<DecimalFormat>() {
 
-      @Override
-      protected DecimalFormat initialValue() {
+        @Override
+        protected DecimalFormat initialValue() {
 
-        DecimalFormat df = new DecimalFormat();
-        DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
-        dfs.setDecimalSeparator('.');
-        dfs.setNaN("NaN");
-        dfs.setInfinity("Infinity");
-        df.setGroupingUsed(false);
-        df.setRoundingMode(RoundingMode.HALF_UP);
-        df.setDecimalFormatSymbols(dfs);
-        return df;
-      }
+            DecimalFormat df = new DecimalFormat();
+            DecimalFormatSymbols dfs = df.getDecimalFormatSymbols();
+            dfs.setDecimalSeparator('.');
+            dfs.setNaN("NaN");
+            dfs.setInfinity("Infinity");
+            df.setGroupingUsed(false);
+            df.setRoundingMode(RoundingMode.HALF_UP);
+            df.setDecimalFormatSymbols(dfs);
+            return df;
+        }
     };
 
-  /**
-   * Turns a given date string into Java's internal representation (milliseconds
-   * from 1 January 1970).
-   *
-   * @param dateString the string representing the date
-   * @param dateFormat the date format as a string
-   *
-   * @return milliseconds since 1 January 1970 (as a double converted from long)
-   */
-  public static double dateToMillis(String dateString, String dateFormat)
-    throws ParseException {
-    return new java.text.SimpleDateFormat(dateFormat).parse(dateString)
-      .getTime();
-  }
-
-  /**
-   * Tests if the given value codes "missing".
-   * 
-   * @param val the value to be tested
-   * @return true if val codes "missing"
-   */
-  public static boolean isMissingValue(double val) {
-
-    return Double.isNaN(val);
-  }
-
-  /**
-   * Returns the value used to code a missing value. Note that equality tests on
-   * this value will always return false, so use isMissingValue(double val) for
-   * testing..
-   * 
-   * @return the value used as missing value.
-   */
-  public static double missingValue() {
-
-    return Double.NaN;
-  }
-
-  /**
-   * Casting an object without "unchecked" compile-time warnings. Use only when
-   * absolutely necessary (e.g. when using clone()).
-   */
-  @SuppressWarnings("unchecked")
-  public static <T> T cast(Object x) {
-    return (T) x;
-  }
-
-  /**
-   * Reads properties that inherit from three locations. Properties are first
-   * defined in the system resource location (i.e. in the CLASSPATH). These
-   * default properties must exist. Properties optionally defined in the user
-   * properties location (WekaPackageManager.PROPERTIES_DIR) override default
-   * settings. Properties defined in the current directory (optional) override
-   * all these settings.
-   *
-   * @param resourceName the location of the resource that should be loaded.
-   *          e.g.: "weka/core/Utils.props". (The use of hardcoded forward
-   *          slashes here is OK - see jdk1.1/docs/guide/misc/resources.html)
-   *          This routine will also look for the file (in this case)
-   *          "Utils.props" in the users home directory and the current
-   *          directory.
-   * @return the Properties
-   * @exception Exception if no default properties are defined, or if an error
-   *              occurs reading the properties files.
-   */
-  public static Properties readProperties(String resourceName) throws Exception {
-    return ResourceUtils.readProperties(resourceName);
-  }
-
-  /**
-   * Reads properties that inherit from three locations. Properties are first
-   * defined in the system resource location (i.e. in the CLASSPATH). These
-   * default properties must exist. Properties optionally defined in the user
-   * properties location (WekaPackageManager.PROPERTIES_DIR) override default
-   * settings. Properties defined in the current directory (optional) override
-   * all these settings.
-   * 
-   * @param resourceName the location of the resource that should be loaded.
-   *          e.g.: "weka/core/Utils.props". (The use of hardcoded forward
-   *          slashes here is OK - see jdk1.1/docs/guide/misc/resources.html)
-   *          This routine will also look for the file (in this case)
-   *          "Utils.props" in the users home directory and the current
-   *          directory.
-   * @param loader the class loader to use when loading properties
-   * @return the Properties
-   * @exception Exception if no default properties are defined, or if an error
-   *              occurs reading the properties files.
-   */
-  public static Properties readProperties(String resourceName,
-    ClassLoader loader) throws Exception {
-
-    return ResourceUtils.readProperties(resourceName, loader);
-  }
-
-  /**
-   * Returns the correlation coefficient of two double vectors.
-   * 
-   * @param y1 double vector 1
-   * @param y2 double vector 2
-   * @param n the length of two double vectors
-   * @return the correlation coefficient
-   */
-  public static final double correlation(double y1[], double y2[], int n) {
-
-    int i;
-    double av1 = 0.0, av2 = 0.0, y11 = 0.0, y22 = 0.0, y12 = 0.0, c;
-
-    if (n <= 1) {
-      return 1.0;
-    }
-    for (i = 0; i < n; i++) {
-      av1 += y1[i];
-      av2 += y2[i];
-    }
-    av1 /= n;
-    av2 /= n;
-    for (i = 0; i < n; i++) {
-      y11 += (y1[i] - av1) * (y1[i] - av1);
-      y22 += (y2[i] - av2) * (y2[i] - av2);
-      y12 += (y1[i] - av1) * (y2[i] - av2);
-    }
-    if (y11 * y22 == 0.0) {
-      c = 1.0;
-    } else {
-      c = y12 / Math.sqrt(Math.abs(y11 * y22));
+    /**
+     * Turns a given date string into Java's internal representation (milliseconds
+     * from 1 January 1970).
+     *
+     * @param dateString the string representing the date
+     * @param dateFormat the date format as a string
+     *
+     * @return milliseconds since 1 January 1970 (as a double converted from long)
+     */
+    public static double dateToMillis(String dateString, String dateFormat) throws ParseException {
+        return new java.text.SimpleDateFormat(dateFormat).parse(dateString).getTime();
     }
 
-    return c;
-  }
+    /**
+     * Tests if the given value codes "missing".
+     * 
+     * @param val the value to be tested
+     * @return true if val codes "missing"
+     */
+    public static boolean isMissingValue(double val) {
 
-  /**
-   * Removes all occurrences of a string from another string.
-   * 
-   * @param inString the string to remove substrings from.
-   * @param substring the substring to remove.
-   * @return the input string with occurrences of substring removed.
-   */
-  public static String removeSubstring(String inString, String substring) {
-
-    StringBuffer result = new StringBuffer();
-    int oldLoc = 0, loc = 0;
-    while ((loc = inString.indexOf(substring, oldLoc)) != -1) {
-      result.append(inString.substring(oldLoc, loc));
-      oldLoc = loc + substring.length();
-    }
-    result.append(inString.substring(oldLoc));
-    return result.toString();
-  }
-
-  /**
-   * Replaces with a new string, all occurrences of a string from another
-   * string.
-   * 
-   * @param inString the string to replace substrings in.
-   * @param subString the substring to replace.
-   * @param replaceString the replacement substring
-   * @return the input string with occurrences of substring replaced.
-   */
-  public static String replaceSubstring(String inString, String subString,
-    String replaceString) {
-
-    StringBuffer result = new StringBuffer();
-    int oldLoc = 0, loc = 0;
-    while ((loc = inString.indexOf(subString, oldLoc)) != -1) {
-      result.append(inString.substring(oldLoc, loc));
-      result.append(replaceString);
-      oldLoc = loc + subString.length();
-    }
-    result.append(inString.substring(oldLoc));
-    return result.toString();
-  }
-
-  /**
-   * Pads a string to a specified length, inserting spaces on the left as
-   * required. If the string is too long, it is simply returned unchanged.
-   * 
-   * @param inString the input string
-   * @param length the desired length of the output string
-   * @return the output string
-   */
-  public static String padLeftAndAllowOverflow(String inString, int length) {
-
-    return String.format("%1$" + length + "s", inString);
-  }
-
-  /**
-   * Pads a string to a specified length, inserting spaces on the right as
-   * required. If the string is too long, it is simply returned unchanged.
-   * 
-   * @param inString the input string
-   * @param length the desired length of the output string
-   * @return the output string
-   */
-  public static String padRightAndAllowOverflow(String inString, int length) {
-
-    return String.format("%1$-" + length + "s", inString);
-  }
-
-  /**
-   * Pads a string to a specified length, inserting spaces on the left as
-   * required. If the string is too long, characters are removed (from the
-   * right).
-   * 
-   * @param inString the input string
-   * @param length the desired length of the output string
-   * @return the output string
-   */
-  public static String padLeft(String inString, int length) {
-
-    return String.format("%1$" + length + "." + length + "s", inString);
-  }
-
-  /**
-   * Pads a string to a specified length, inserting spaces on the right as
-   * required. If the string is too long, characters are removed (from the
-   * right).
-   * 
-   * @param inString the input string
-   * @param length the desired length of the output string
-   * @return the output string
-   */
-  public static String padRight(String inString, int length) {
-
-    return String.format("%1$-" + length + "." + length + "s", inString);
-  }
-
-  /**
-   * Rounds a double and converts it into String.
-   * 
-   * @param value the double value
-   * @param afterDecimalPoint the (maximum) number of digits permitted after the
-   *          decimal point
-   * @return the double as a formatted string
-   */
-  public static/* @pure@ */String doubleToString(double value,
-    int afterDecimalPoint) {
-
-    DF.get().setMaximumFractionDigits(afterDecimalPoint);
-    return DF.get().format(value);
-  }
-
-  /**
-   * Rounds a double and converts it into a formatted decimal-justified String.
-   * Trailing 0's are replaced with spaces.
-   * 
-   * @param value the double value
-   * @param width the width of the string
-   * @param afterDecimalPoint the number of digits after the decimal point
-   * @return the double as a formatted string
-   */
-  public static/* @pure@ */String doubleToString(double value, int width,
-    int afterDecimalPoint) {
-
-    String tempString = doubleToString(value, afterDecimalPoint);
-    char[] result;
-    int dotPosition;
-
-    if (afterDecimalPoint >= width) {
-      return tempString;
+        return Double.isNaN(val);
     }
 
-    // Initialize result
-    result = new char[width];
-    for (int i = 0; i < result.length; i++) {
-      result[i] = ' ';
+    /**
+     * Returns the value used to code a missing value. Note that equality tests on
+     * this value will always return false, so use isMissingValue(double val) for
+     * testing..
+     * 
+     * @return the value used as missing value.
+     */
+    public static double missingValue() {
+
+        return Double.NaN;
     }
 
-    if (afterDecimalPoint > 0) {
-      // Get position of decimal point and insert decimal point
-      dotPosition = tempString.indexOf('.');
-      if (dotPosition == -1) {
-        dotPosition = tempString.length();
-      } else {
-        result[width - afterDecimalPoint - 1] = '.';
-      }
-    } else {
-      dotPosition = tempString.length();
+    /**
+     * Casting an object without "unchecked" compile-time warnings. Use only when
+     * absolutely necessary (e.g. when using clone()).
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T cast(Object x) {
+        return (T) x;
     }
 
-    int offset = width - afterDecimalPoint - dotPosition;
-    if (afterDecimalPoint > 0) {
-      offset--;
+    /**
+     * Reads properties that inherit from three locations. Properties are first
+     * defined in the system resource location (i.e. in the CLASSPATH). These
+     * default properties must exist. Properties optionally defined in the user
+     * properties location (WekaPackageManager.PROPERTIES_DIR) override default
+     * settings. Properties defined in the current directory (optional) override all
+     * these settings.
+     *
+     * @param resourceName the location of the resource that should be loaded. e.g.:
+     *                     "weka/core/Utils.props". (The use of hardcoded forward
+     *                     slashes here is OK - see
+     *                     jdk1.1/docs/guide/misc/resources.html) This routine will
+     *                     also look for the file (in this case) "Utils.props" in
+     *                     the users home directory and the current directory.
+     * @return the Properties
+     * @exception Exception if no default properties are defined, or if an error
+     *                      occurs reading the properties files.
+     */
+    public static Properties readProperties(String resourceName) throws Exception {
+        return ResourceUtils.readProperties(resourceName);
     }
 
-    // Not enough room to decimal align within the supplied width
-    if (offset < 0) {
-      return tempString;
+    /**
+     * Reads properties that inherit from three locations. Properties are first
+     * defined in the system resource location (i.e. in the CLASSPATH). These
+     * default properties must exist. Properties optionally defined in the user
+     * properties location (WekaPackageManager.PROPERTIES_DIR) override default
+     * settings. Properties defined in the current directory (optional) override all
+     * these settings.
+     * 
+     * @param resourceName the location of the resource that should be loaded. e.g.:
+     *                     "weka/core/Utils.props". (The use of hardcoded forward
+     *                     slashes here is OK - see
+     *                     jdk1.1/docs/guide/misc/resources.html) This routine will
+     *                     also look for the file (in this case) "Utils.props" in
+     *                     the users home directory and the current directory.
+     * @param loader       the class loader to use when loading properties
+     * @return the Properties
+     * @exception Exception if no default properties are defined, or if an error
+     *                      occurs reading the properties files.
+     */
+    public static Properties readProperties(String resourceName, ClassLoader loader) throws Exception {
+
+        return ResourceUtils.readProperties(resourceName, loader);
     }
 
-    // Copy characters before decimal point
-    for (int i = 0; i < dotPosition; i++) {
-      result[offset + i] = tempString.charAt(i);
-    }
+    /**
+     * Returns the correlation coefficient of two double vectors.
+     * 
+     * @param y1 double vector 1
+     * @param y2 double vector 2
+     * @param n  the length of two double vectors
+     * @return the correlation coefficient
+     */
+    public static final double correlation(double y1[], double y2[], int n) {
 
-    // Copy characters after decimal point
-    for (int i = dotPosition + 1; i < tempString.length(); i++) {
-      result[offset + i] = tempString.charAt(i);
-    }
+        int i;
+        double av1 = 0.0, av2 = 0.0, y11 = 0.0, y22 = 0.0, y12 = 0.0, c;
 
-    return new String(result);
-  }
-
-  /**
-   * Returns the basic class of an array class (handles multi-dimensional
-   * arrays).
-   * 
-   * @param c the array to inspect
-   * @return the class of the innermost elements
-   */
-  public static Class<?> getArrayClass(Class<?> c) {
-    if (c.getComponentType().isArray()) {
-      return getArrayClass(c.getComponentType());
-    } else {
-      return c.getComponentType();
-    }
-  }
-
-  /**
-   * Returns the dimensions of the given array. Even though the parameter is of
-   * type "Object" one can hand over primitve arrays, e.g. int[3] or
-   * double[2][4].
-   * 
-   * @param array the array to determine the dimensions for
-   * @return the dimensions of the array
-   */
-  public static int getArrayDimensions(Class<?> array) {
-    if (array.getComponentType().isArray()) {
-      return 1 + getArrayDimensions(array.getComponentType());
-    } else {
-      return 1;
-    }
-  }
-
-  /**
-   * Returns the dimensions of the given array. Even though the parameter is of
-   * type "Object" one can hand over primitve arrays, e.g. int[3] or
-   * double[2][4].
-   * 
-   * @param array the array to determine the dimensions for
-   * @return the dimensions of the array
-   */
-  public static int getArrayDimensions(Object array) {
-    return getArrayDimensions(array.getClass());
-  }
-
-  /**
-   * Returns the given Array in a string representation. Even though the
-   * parameter is of type "Object" one can hand over primitve arrays, e.g.
-   * int[3] or double[2][4].
-   * 
-   * @param array the array to return in a string representation
-   * @return the array as string
-   */
-  public static String arrayToString(Object array) {
-    String result;
-    int dimensions;
-    int i;
-
-    result = "";
-    dimensions = getArrayDimensions(array);
-
-    if (dimensions == 0) {
-      result = "null";
-    } else if (dimensions == 1) {
-      for (i = 0; i < Array.getLength(array); i++) {
-        if (i > 0) {
-          result += ",";
+        if (n <= 1) {
+            return 1.0;
         }
-        if (Array.get(array, i) == null) {
-          result += "null";
+        for (i = 0; i < n; i++) {
+            av1 += y1[i];
+            av2 += y2[i];
+        }
+        av1 /= n;
+        av2 /= n;
+        for (i = 0; i < n; i++) {
+            y11 += (y1[i] - av1) * (y1[i] - av1);
+            y22 += (y2[i] - av2) * (y2[i] - av2);
+            y12 += (y1[i] - av1) * (y2[i] - av2);
+        }
+        if (y11 * y22 == 0.0) {
+            c = 1.0;
         } else {
-          result += Array.get(array, i).toString();
+            c = y12 / Math.sqrt(Math.abs(y11 * y22));
         }
-      }
-    } else {
-      for (i = 0; i < Array.getLength(array); i++) {
-        if (i > 0) {
-          result += ",";
+
+        return c;
+    }
+
+    /**
+     * Removes all occurrences of a string from another string.
+     * 
+     * @param inString  the string to remove substrings from.
+     * @param substring the substring to remove.
+     * @return the input string with occurrences of substring removed.
+     */
+    public static String removeSubstring(String inString, String substring) {
+
+        StringBuffer result = new StringBuffer();
+        int oldLoc = 0, loc = 0;
+        while ((loc = inString.indexOf(substring, oldLoc)) != -1) {
+            result.append(inString.substring(oldLoc, loc));
+            oldLoc = loc + substring.length();
         }
-        result += "[" + arrayToString(Array.get(array, i)) + "]";
-      }
+        result.append(inString.substring(oldLoc));
+        return result.toString();
     }
 
-    return result;
-  }
+    /**
+     * Replaces with a new string, all occurrences of a string from another string.
+     * 
+     * @param inString      the string to replace substrings in.
+     * @param subString     the substring to replace.
+     * @param replaceString the replacement substring
+     * @return the input string with occurrences of substring replaced.
+     */
+    public static String replaceSubstring(String inString, String subString, String replaceString) {
 
-  /**
-   * Tests if a is equal to b.
-   * 
-   * @param a a double
-   * @param b a double
-   */
-  public static/* @pure@ */boolean eq(double a, double b) {
-
-    return (a == b) || ((a - b < SMALL) && (b - a < SMALL));
-  }
-
-  /**
-   * Checks if the given array contains any non-empty options.
-   * 
-   * @param options an array of strings
-   * @exception Exception if there are any non-empty options
-   */
-  public static void checkForRemainingOptions(String[] options)
-    throws Exception {
-
-    int illegalOptionsFound = 0;
-    StringBuffer text = new StringBuffer();
-
-    if (options == null) {
-      return;
-    }
-    for (String option : options) {
-      if (option.length() > 0) {
-        illegalOptionsFound++;
-        text.append(option + ' ');
-      }
-    }
-    if (illegalOptionsFound > 0) {
-      throw new Exception("Illegal options: " + text);
-    }
-  }
-
-  /**
-   * Checks if the given array contains the flag "-Char". Stops searching at the
-   * first marker "--". If the flag is found, it is replaced with the empty
-   * string.
-   * 
-   * @param flag the character indicating the flag.
-   * @param options the array of strings containing all the options.
-   * @return true if the flag was found
-   * @exception Exception if an illegal option was found
-   */
-  public static boolean getFlag(char flag, String[] options) throws Exception {
-
-    return getFlag("" + flag, options);
-  }
-
-  /**
-   * Checks if the given array contains the flag "-String". Stops searching at
-   * the first marker "--". If the flag is found, it is replaced with the empty
-   * string.
-   * 
-   * @param flag the String indicating the flag.
-   * @param options the array of strings containing all the options.
-   * @return true if the flag was found
-   * @exception Exception if an illegal option was found
-   */
-  public static boolean getFlag(String flag, String[] options) throws Exception {
-
-    int pos = getOptionPos(flag, options);
-
-    if (pos > -1) {
-      options[pos] = "";
-    }
-
-    return (pos > -1);
-  }
-
-  /**
-   * Gets an option indicated by a flag "-Char" from the given array of strings.
-   * Stops searching at the first marker "--". Replaces flag and option with
-   * empty strings.
-   * 
-   * @param flag the character indicating the option.
-   * @param options the array of strings containing all the options.
-   * @return the indicated option or an empty string
-   * @exception Exception if the option indicated by the flag can't be found
-   */
-  public static/* @non_null@ */String getOption(char flag, String[] options)
-    throws Exception {
-
-    return getOption("" + flag, options);
-  }
-
-  /**
-   * Gets an option indicated by a flag "-String" from the given array of
-   * strings. Stops searching at the first marker "--". Replaces flag and option
-   * with empty strings.
-   * 
-   * @param flag the String indicating the option.
-   * @param options the array of strings containing all the options.
-   * @return the indicated option or an empty string
-   * @exception Exception if the option indicated by the flag can't be found
-   */
-  public static/* @non_null@ */String getOption(String flag, String[] options)
-    throws Exception {
-
-    String newString;
-    int i = getOptionPos(flag, options);
-
-    if (i > -1) {
-      if (options[i].equals("-" + flag)) {
-        if (i + 1 == options.length) {
-          throw new Exception("No value given for -" + flag + " option.");
+        StringBuffer result = new StringBuffer();
+        int oldLoc = 0, loc = 0;
+        while ((loc = inString.indexOf(subString, oldLoc)) != -1) {
+            result.append(inString.substring(oldLoc, loc));
+            result.append(replaceString);
+            oldLoc = loc + subString.length();
         }
-        options[i] = "";
-        newString = new String(options[i + 1]);
-        options[i + 1] = "";
-        return newString;
-      }
-      if (options[i].charAt(1) == '-') {
+        result.append(inString.substring(oldLoc));
+        return result.toString();
+    }
+
+    /**
+     * Pads a string to a specified length, inserting spaces on the left as
+     * required. If the string is too long, it is simply returned unchanged.
+     * 
+     * @param inString the input string
+     * @param length   the desired length of the output string
+     * @return the output string
+     */
+    public static String padLeftAndAllowOverflow(String inString, int length) {
+
+        return String.format("%1$" + length + "s", inString);
+    }
+
+    /**
+     * Pads a string to a specified length, inserting spaces on the right as
+     * required. If the string is too long, it is simply returned unchanged.
+     * 
+     * @param inString the input string
+     * @param length   the desired length of the output string
+     * @return the output string
+     */
+    public static String padRightAndAllowOverflow(String inString, int length) {
+
+        return String.format("%1$-" + length + "s", inString);
+    }
+
+    /**
+     * Pads a string to a specified length, inserting spaces on the left as
+     * required. If the string is too long, characters are removed (from the right).
+     * 
+     * @param inString the input string
+     * @param length   the desired length of the output string
+     * @return the output string
+     */
+    public static String padLeft(String inString, int length) {
+
+        return String.format("%1$" + length + "." + length + "s", inString);
+    }
+
+    /**
+     * Pads a string to a specified length, inserting spaces on the right as
+     * required. If the string is too long, characters are removed (from the right).
+     * 
+     * @param inString the input string
+     * @param length   the desired length of the output string
+     * @return the output string
+     */
+    public static String padRight(String inString, int length) {
+
+        return String.format("%1$-" + length + "." + length + "s", inString);
+    }
+
+    /**
+     * Rounds a double and converts it into String.
+     * 
+     * @param value             the double value
+     * @param afterDecimalPoint the (maximum) number of digits permitted after the
+     *                          decimal point
+     * @return the double as a formatted string
+     */
+    public static/* @pure@ */String doubleToString(double value, int afterDecimalPoint) {
+
+        DF.get().setMaximumFractionDigits(afterDecimalPoint);
+        return DF.get().format(value);
+    }
+
+    /**
+     * Rounds a double and converts it into a formatted decimal-justified String.
+     * Trailing 0's are replaced with spaces.
+     * 
+     * @param value             the double value
+     * @param width             the width of the string
+     * @param afterDecimalPoint the number of digits after the decimal point
+     * @return the double as a formatted string
+     */
+    public static/* @pure@ */String doubleToString(double value, int width, int afterDecimalPoint) {
+
+        String tempString = doubleToString(value, afterDecimalPoint);
+        char[] result;
+        int dotPosition;
+
+        if (afterDecimalPoint >= width) {
+            return tempString;
+        }
+
+        // Initialize result
+        result = new char[width];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = ' ';
+        }
+
+        if (afterDecimalPoint > 0) {
+            // Get position of decimal point and insert decimal point
+            dotPosition = tempString.indexOf('.');
+            if (dotPosition == -1) {
+                dotPosition = tempString.length();
+            } else {
+                result[width - afterDecimalPoint - 1] = '.';
+            }
+        } else {
+            dotPosition = tempString.length();
+        }
+
+        int offset = width - afterDecimalPoint - dotPosition;
+        if (afterDecimalPoint > 0) {
+            offset--;
+        }
+
+        // Not enough room to decimal align within the supplied width
+        if (offset < 0) {
+            return tempString;
+        }
+
+        // Copy characters before decimal point
+        for (int i = 0; i < dotPosition; i++) {
+            result[offset + i] = tempString.charAt(i);
+        }
+
+        // Copy characters after decimal point
+        for (int i = dotPosition + 1; i < tempString.length(); i++) {
+            result[offset + i] = tempString.charAt(i);
+        }
+
+        return new String(result);
+    }
+
+    /**
+     * Returns the basic class of an array class (handles multi-dimensional arrays).
+     * 
+     * @param c the array to inspect
+     * @return the class of the innermost elements
+     */
+    public static Class<?> getArrayClass(Class<?> c) {
+        if (c.getComponentType().isArray()) {
+            return getArrayClass(c.getComponentType());
+        } else {
+            return c.getComponentType();
+        }
+    }
+
+    /**
+     * Returns the dimensions of the given array. Even though the parameter is of
+     * type "Object" one can hand over primitve arrays, e.g. int[3] or double[2][4].
+     * 
+     * @param array the array to determine the dimensions for
+     * @return the dimensions of the array
+     */
+    public static int getArrayDimensions(Class<?> array) {
+        if (array.getComponentType().isArray()) {
+            return 1 + getArrayDimensions(array.getComponentType());
+        } else {
+            return 1;
+        }
+    }
+
+    /**
+     * Returns the dimensions of the given array. Even though the parameter is of
+     * type "Object" one can hand over primitve arrays, e.g. int[3] or double[2][4].
+     * 
+     * @param array the array to determine the dimensions for
+     * @return the dimensions of the array
+     */
+    public static int getArrayDimensions(Object array) {
+        return getArrayDimensions(array.getClass());
+    }
+
+    /**
+     * Returns the given Array in a string representation. Even though the parameter
+     * is of type "Object" one can hand over primitve arrays, e.g. int[3] or
+     * double[2][4].
+     * 
+     * @param array the array to return in a string representation
+     * @return the array as string
+     */
+    public static String arrayToString(Object array) {
+        String result;
+        int dimensions;
+        int i;
+
+        result = "";
+        dimensions = getArrayDimensions(array);
+
+        if (dimensions == 0) {
+            result = "null";
+        } else if (dimensions == 1) {
+            for (i = 0; i < Array.getLength(array); i++) {
+                if (i > 0) {
+                    result += ",";
+                }
+                if (Array.get(array, i) == null) {
+                    result += "null";
+                } else {
+                    result += Array.get(array, i).toString();
+                }
+            }
+        } else {
+            for (i = 0; i < Array.getLength(array); i++) {
+                if (i > 0) {
+                    result += ",";
+                }
+                result += "[" + arrayToString(Array.get(array, i)) + "]";
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Tests if a is equal to b.
+     * 
+     * @param a a double
+     * @param b a double
+     */
+    public static/* @pure@ */boolean eq(double a, double b) {
+
+        return (a == b) || ((a - b < SMALL) && (b - a < SMALL));
+    }
+
+    /**
+     * Checks if the given array contains any non-empty options.
+     * 
+     * @param options an array of strings
+     * @exception Exception if there are any non-empty options
+     */
+    public static void checkForRemainingOptions(String[] options) throws Exception {
+
+        int illegalOptionsFound = 0;
+        StringBuffer text = new StringBuffer();
+
+        if (options == null) {
+            return;
+        }
+        for (String option : options) {
+            if (option.length() > 0) {
+                illegalOptionsFound++;
+                text.append(option + ' ');
+            }
+        }
+        if (illegalOptionsFound > 0) {
+            throw new Exception("Illegal options: " + text);
+        }
+    }
+
+    /**
+     * Checks if the given array contains the flag "-Char". Stops searching at the
+     * first marker "--". If the flag is found, it is replaced with the empty
+     * string.
+     * 
+     * @param flag    the character indicating the flag.
+     * @param options the array of strings containing all the options.
+     * @return true if the flag was found
+     * @exception Exception if an illegal option was found
+     */
+    public static boolean getFlag(char flag, String[] options) throws Exception {
+
+        return getFlag("" + flag, options);
+    }
+
+    /**
+     * Checks if the given array contains the flag "-String". Stops searching at the
+     * first marker "--". If the flag is found, it is replaced with the empty
+     * string.
+     * 
+     * @param flag    the String indicating the flag.
+     * @param options the array of strings containing all the options.
+     * @return true if the flag was found
+     * @exception Exception if an illegal option was found
+     */
+    public static boolean getFlag(String flag, String[] options) throws Exception {
+
+        int pos = getOptionPos(flag, options);
+
+        if (pos > -1) {
+            options[pos] = "";
+        }
+
+        return (pos > -1);
+    }
+
+    /**
+     * Gets an option indicated by a flag "-Char" from the given array of strings.
+     * Stops searching at the first marker "--". Replaces flag and option with empty
+     * strings.
+     * 
+     * @param flag    the character indicating the option.
+     * @param options the array of strings containing all the options.
+     * @return the indicated option or an empty string
+     * @exception Exception if the option indicated by the flag can't be found
+     */
+    public static/* @non_null@ */String getOption(char flag, String[] options) throws Exception {
+
+        return getOption("" + flag, options);
+    }
+
+    /**
+     * Gets an option indicated by a flag "-String" from the given array of strings.
+     * Stops searching at the first marker "--". Replaces flag and option with empty
+     * strings.
+     * 
+     * @param flag    the String indicating the option.
+     * @param options the array of strings containing all the options.
+     * @return the indicated option or an empty string
+     * @exception Exception if the option indicated by the flag can't be found
+     */
+    public static/* @non_null@ */String getOption(String flag, String[] options) throws Exception {
+
+        String newString;
+        int i = getOptionPos(flag, options);
+
+        if (i > -1) {
+            if (options[i].equals("-" + flag)) {
+                if (i + 1 == options.length) {
+                    throw new Exception("No value given for -" + flag + " option.");
+                }
+                options[i] = "";
+                newString = new String(options[i + 1]);
+                options[i + 1] = "";
+                return newString;
+            }
+            if (options[i].charAt(1) == '-') {
+                return "";
+            }
+        }
+
         return "";
-      }
     }
 
-    return "";
-  }
-
-  /**
-   * Gets the index of an option or flag indicated by a flag "-Char" from the
-   * given array of strings. Stops searching at the first marker "--".
-   * 
-   * @param flag the character indicating the option.
-   * @param options the array of strings containing all the options.
-   * @return the position if found, or -1 otherwise
-   */
-  public static int getOptionPos(char flag, String[] options) {
-    return getOptionPos("" + flag, options);
-  }
-
-  /**
-   * Gets the index of an option or flag indicated by a flag "-String" from the
-   * given array of strings. Stops searching at the first marker "--".
-   * 
-   * @param flag the String indicating the option.
-   * @param options the array of strings containing all the options.
-   * @return the position if found, or -1 otherwise
-   */
-  public static int getOptionPos(String flag, String[] options) {
-    if (options == null) {
-      return -1;
+    /**
+     * Gets the index of an option or flag indicated by a flag "-Char" from the
+     * given array of strings. Stops searching at the first marker "--".
+     * 
+     * @param flag    the character indicating the option.
+     * @param options the array of strings containing all the options.
+     * @return the position if found, or -1 otherwise
+     */
+    public static int getOptionPos(char flag, String[] options) {
+        return getOptionPos("" + flag, options);
     }
 
-    for (int i = 0; i < options.length; i++) {
-      if ((options[i].length() > 0) && (options[i].charAt(0) == '-')) {
-        // Check if it is a negative number
-        try {
-          Double.valueOf(options[i]);
-        } catch (NumberFormatException e) {
-          // found?
-          if (options[i].equals("-" + flag)) {
-            return i;
-          }
-          // did we reach "--"?
-          if (options[i].charAt(1) == '-') {
+    /**
+     * Gets the index of an option or flag indicated by a flag "-String" from the
+     * given array of strings. Stops searching at the first marker "--".
+     * 
+     * @param flag    the String indicating the option.
+     * @param options the array of strings containing all the options.
+     * @return the position if found, or -1 otherwise
+     */
+    public static int getOptionPos(String flag, String[] options) {
+        if (options == null) {
             return -1;
-          }
         }
-      }
+
+        for (int i = 0; i < options.length; i++) {
+            if ((options[i].length() > 0) && (options[i].charAt(0) == '-')) {
+                // Check if it is a negative number
+                try {
+                    Double.valueOf(options[i]);
+                } catch (NumberFormatException e) {
+                    // found?
+                    if (options[i].equals("-" + flag)) {
+                        return i;
+                    }
+                    // did we reach "--"?
+                    if (options[i].charAt(1) == '-') {
+                        return -1;
+                    }
+                }
+            }
+        }
+
+        return -1;
     }
 
-    return -1;
-  }
+    /**
+     * Quotes a string if it contains special characters.
+     * 
+     * The following rules are applied:
+     * 
+     * A character is backquoted version of it is one of <tt>" ' % \ \n \r \t</tt> .
+     * 
+     * A string is enclosed within single quotes if a character has been backquoted
+     * using the previous rule above or contains <tt>{ }</tt> or is exactly equal to
+     * the strings <tt>, ? space or ""</tt> (empty string).
+     * 
+     * A quoted question mark distinguishes it from the missing value which is
+     * represented as an unquoted question mark in arff files.
+     * 
+     * @param string the string to be quoted
+     * @return the string (possibly quoted)
+     * @see #unquote(String)
+     */
+    public static/* @pure@ */String quote(String string) {
+        boolean quote = false;
 
-  /**
-   * Quotes a string if it contains special characters.
-   * 
-   * The following rules are applied:
-   * 
-   * A character is backquoted version of it is one of <tt>" ' % \ \n \r \t</tt>
-   * .
-   * 
-   * A string is enclosed within single quotes if a character has been
-   * backquoted using the previous rule above or contains <tt>{ }</tt> or is
-   * exactly equal to the strings <tt>, ? space or ""</tt> (empty string).
-   * 
-   * A quoted question mark distinguishes it from the missing value which is
-   * represented as an unquoted question mark in arff files.
-   * 
-   * @param string the string to be quoted
-   * @return the string (possibly quoted)
-   * @see #unquote(String)
-   */
-  public static/* @pure@ */String quote(String string) {
-    boolean quote = false;
+        // backquote the following characters
+        if ((string.indexOf('\n') != -1) || (string.indexOf('\r') != -1) || (string.indexOf('\'') != -1) || (string.indexOf('"') != -1) || (string.indexOf('\\') != -1) || (string.indexOf('\t') != -1) || (string.indexOf('%') != -1) || (string.indexOf('\u001E') != -1)) {
+            string = backQuoteChars(string);
+            quote = true;
+        }
 
-    // backquote the following characters
-    if ((string.indexOf('\n') != -1) || (string.indexOf('\r') != -1)
-      || (string.indexOf('\'') != -1) || (string.indexOf('"') != -1)
-      || (string.indexOf('\\') != -1) || (string.indexOf('\t') != -1)
-      || (string.indexOf('%') != -1) || (string.indexOf('\u001E') != -1)) {
-      string = backQuoteChars(string);
-      quote = true;
+        // Enclose the string in 's if the string contains a recently added
+        // backquote or contains one of the following characters.
+        if ((quote == true) || (string.indexOf('{') != -1) || (string.indexOf('}') != -1) || (string.indexOf(',') != -1) || (string.equals("?")) || (string.indexOf(' ') != -1) || (string.equals(""))) {
+            string = ("'".concat(string)).concat("'");
+        }
+
+        return string;
     }
 
-    // Enclose the string in 's if the string contains a recently added
-    // backquote or contains one of the following characters.
-    if ((quote == true) || (string.indexOf('{') != -1)
-      || (string.indexOf('}') != -1) || (string.indexOf(',') != -1)
-      || (string.equals("?")) || (string.indexOf(' ') != -1)
-      || (string.equals(""))) {
-      string = ("'".concat(string)).concat("'");
+    /**
+     * unquotes are previously quoted string (but only if necessary), i.e., it
+     * removes the single quotes around it. Inverse to quote(String).
+     * 
+     * @param string the string to process
+     * @return the unquoted string
+     * @see #quote(String)
+     */
+    public static String unquote(String string) {
+        if (string.startsWith("'") && string.endsWith("'")) {
+            string = string.substring(1, string.length() - 1);
+
+            if ((string.indexOf("\\n") != -1) || (string.indexOf("\\r") != -1) || (string.indexOf("\\'") != -1) || (string.indexOf("\\\"") != -1) || (string.indexOf("\\\\") != -1) || (string.indexOf("\\t") != -1) || (string.indexOf("\\%") != -1) || (string.indexOf("\\u001E") != -1)) {
+                string = unbackQuoteChars(string);
+            }
+        }
+
+        return string;
     }
 
-    return string;
-  }
+    /**
+     * Converts carriage returns and new lines in a string into \r and \n.
+     * Backquotes the following characters: ` " \ \t and %
+     * 
+     * @param string the string
+     * @return the converted string
+     * @see #unbackQuoteChars(String)
+     */
+    public static/* @pure@ */String backQuoteChars(String string) {
 
-  /**
-   * unquotes are previously quoted string (but only if necessary), i.e., it
-   * removes the single quotes around it. Inverse to quote(String).
-   * 
-   * @param string the string to process
-   * @return the unquoted string
-   * @see #quote(String)
-   */
-  public static String unquote(String string) {
-    if (string.startsWith("'") && string.endsWith("'")) {
-      string = string.substring(1, string.length() - 1);
+        int index;
+        StringBuffer newStringBuffer;
 
-      if ((string.indexOf("\\n") != -1) || (string.indexOf("\\r") != -1)
-        || (string.indexOf("\\'") != -1) || (string.indexOf("\\\"") != -1)
-        || (string.indexOf("\\\\") != -1) || (string.indexOf("\\t") != -1)
-        || (string.indexOf("\\%") != -1) || (string.indexOf("\\u001E") != -1)) {
-        string = unbackQuoteChars(string);
-      }
+        // replace each of the following characters with the backquoted version
+        char charsFind[] = { '\\', '\'', '\t', '\n', '\r', '"', '%', '\u001E' };
+        String charsReplace[] = { "\\\\", "\\'", "\\t", "\\n", "\\r", "\\\"", "\\%", "\\u001E" };
+        for (int i = 0; i < charsFind.length; i++) {
+            if (string.indexOf(charsFind[i]) != -1) {
+                newStringBuffer = new StringBuffer();
+                while ((index = string.indexOf(charsFind[i])) != -1) {
+                    if (index > 0) {
+                        newStringBuffer.append(string.substring(0, index));
+                    }
+                    newStringBuffer.append(charsReplace[i]);
+                    if ((index + 1) < string.length()) {
+                        string = string.substring(index + 1);
+                    } else {
+                        string = "";
+                    }
+                }
+                newStringBuffer.append(string);
+                string = newStringBuffer.toString();
+            }
+        }
+
+        return string;
     }
 
-    return string;
-  }
+    /**
+     * Converts carriage returns and new lines in a string into \r and \n.
+     * 
+     * @param string the string
+     * @return the converted string
+     */
+    public static String convertNewLines(String string) {
+        int index;
 
-  /**
-   * Converts carriage returns and new lines in a string into \r and \n.
-   * Backquotes the following characters: ` " \ \t and %
-   * 
-   * @param string the string
-   * @return the converted string
-   * @see #unbackQuoteChars(String)
-   */
-  public static/* @pure@ */String backQuoteChars(String string) {
-
-    int index;
-    StringBuffer newStringBuffer;
-
-    // replace each of the following characters with the backquoted version
-    char charsFind[] = { '\\', '\'', '\t', '\n', '\r', '"', '%', '\u001E' };
-    String charsReplace[] =
-      { "\\\\", "\\'", "\\t", "\\n", "\\r", "\\\"", "\\%", "\\u001E" };
-    for (int i = 0; i < charsFind.length; i++) {
-      if (string.indexOf(charsFind[i]) != -1) {
-        newStringBuffer = new StringBuffer();
-        while ((index = string.indexOf(charsFind[i])) != -1) {
-          if (index > 0) {
-            newStringBuffer.append(string.substring(0, index));
-          }
-          newStringBuffer.append(charsReplace[i]);
-          if ((index + 1) < string.length()) {
-            string = string.substring(index + 1);
-          } else {
-            string = "";
-          }
+        // Replace with \n
+        StringBuffer newStringBuffer = new StringBuffer();
+        while ((index = string.indexOf('\n')) != -1) {
+            if (index > 0) {
+                newStringBuffer.append(string.substring(0, index));
+            }
+            newStringBuffer.append('\\');
+            newStringBuffer.append('n');
+            if ((index + 1) < string.length()) {
+                string = string.substring(index + 1);
+            } else {
+                string = "";
+            }
         }
         newStringBuffer.append(string);
         string = newStringBuffer.toString();
-      }
-    }
 
-    return string;
-  }
-
-  /**
-   * Converts carriage returns and new lines in a string into \r and \n.
-   * 
-   * @param string the string
-   * @return the converted string
-   */
-  public static String convertNewLines(String string) {
-    int index;
-
-    // Replace with \n
-    StringBuffer newStringBuffer = new StringBuffer();
-    while ((index = string.indexOf('\n')) != -1) {
-      if (index > 0) {
-        newStringBuffer.append(string.substring(0, index));
-      }
-      newStringBuffer.append('\\');
-      newStringBuffer.append('n');
-      if ((index + 1) < string.length()) {
-        string = string.substring(index + 1);
-      } else {
-        string = "";
-      }
-    }
-    newStringBuffer.append(string);
-    string = newStringBuffer.toString();
-
-    // Replace with \r
-    newStringBuffer = new StringBuffer();
-    while ((index = string.indexOf('\r')) != -1) {
-      if (index > 0) {
-        newStringBuffer.append(string.substring(0, index));
-      }
-      newStringBuffer.append('\\');
-      newStringBuffer.append('r');
-      if ((index + 1) < string.length()) {
-        string = string.substring(index + 1);
-      } else {
-        string = "";
-      }
-    }
-    newStringBuffer.append(string);
-    return newStringBuffer.toString();
-  }
-
-  /**
-   * Reverts \r and \n in a string into carriage returns and new lines.
-   * 
-   * @param string the string
-   * @return the converted string
-   */
-  public static String revertNewLines(String string) {
-    int index;
-
-    // Replace with \n
-    StringBuffer newStringBuffer = new StringBuffer();
-    while ((index = string.indexOf("\\n")) != -1) {
-      if (index > 0) {
-        newStringBuffer.append(string.substring(0, index));
-      }
-      newStringBuffer.append('\n');
-      if ((index + 2) < string.length()) {
-        string = string.substring(index + 2);
-      } else {
-        string = "";
-      }
-    }
-    newStringBuffer.append(string);
-    string = newStringBuffer.toString();
-
-    // Replace with \r
-    newStringBuffer = new StringBuffer();
-    while ((index = string.indexOf("\\r")) != -1) {
-      if (index > 0) {
-        newStringBuffer.append(string.substring(0, index));
-      }
-      newStringBuffer.append('\r');
-      if ((index + 2) < string.length()) {
-        string = string.substring(index + 2);
-      } else {
-        string = "";
-      }
-    }
-    newStringBuffer.append(string);
-
-    return newStringBuffer.toString();
-  }
-
-  /**
-   * Returns the secondary set of options (if any) contained in the supplied
-   * options array. The secondary set is defined to be any options after the
-   * first "--". These options are removed from the original options array.
-   * 
-   * @param options the input array of options
-   * @return the array of secondary options
-   */
-  public static String[] partitionOptions(String[] options) {
-
-    for (int i = 0; i < options.length; i++) {
-      if (options[i].equals("--")) {
-        options[i++] = "";
-        String[] result = new String[options.length - i];
-        for (int j = i; j < options.length; j++) {
-          result[j - i] = options[j];
-          options[j] = "";
-        }
-        return result;
-      }
-    }
-    return new String[0];
-  }
-
-  /**
-   * The inverse operation of backQuoteChars(). Converts back-quoted carriage
-   * returns and new lines in a string to the corresponding character ('\r' and
-   * '\n'). Also "un"-back-quotes the following characters: ` " \ \t and %
-   *
-   * @param string the string
-   * @return the converted string
-   * @see #backQuoteChars(String)
-   */
-  public static String unbackQuoteChars(String string) {
-
-    String charsFind[] = { "\\\\", "\\'", "\\t", "\\n", "\\r", "\\\"", "\\%", "\\u001E" };
-    char charsReplace[] = { '\\', '\'', '\t', '\n', '\r', '"', '%', '\u001E' };
-    return replaceStrings(string, charsFind, charsReplace);
-  }
-
-  /**
-   * Converts the specified strings in the given string to the specified characters.
-   * 
-   * @param string the string to operate on
-   * @param charsFind the strings to replace
-   * @param charsReplace the characters to replace these with
-   * @return the converted string
-   */
-  public static String replaceStrings(String string, String[] charsFind, char[] charsReplace) {
-
-    int index;
-    StringBuffer newStringBuffer;
-
-    int pos[] = new int[charsFind.length];
-    int curPos;
-
-    String str = new String(string);
-    newStringBuffer = new StringBuffer();
-    while (str.length() > 0) {
-      // get positions and closest character to replace
-      curPos = str.length();
-      index = -1;
-      for (int i = 0; i < pos.length; i++) {
-        pos[i] = str.indexOf(charsFind[i]);
-        if ((pos[i] > -1) && (pos[i] < curPos)) {
-          index = i;
-          curPos = pos[i];
-        }
-      }
-
-      // replace character if found, otherwise finished
-      if (index == -1) {
-        newStringBuffer.append(str);
-        str = "";
-      } else {
-        newStringBuffer.append(str.substring(0, pos[index]));
-        newStringBuffer.append(charsReplace[index]);
-        str = str.substring(pos[index] + charsFind[index].length());
-      }
-    }
-
-    return newStringBuffer.toString();
-  }
-
-
-  /**
-   * Split up a string containing options into an array of strings, one for each
-   * option.
-   *
-   * @param quotedOptionString the string containing the options
-   * @return the array of options
-   * @throws Exception in case of an unterminated string, unknown character or a
-   *           parse error
-   */
-  public static String[] splitOptions(String quotedOptionString)
-          throws Exception {
-
-    return splitOptions(quotedOptionString, null, null);
-  }
-
-  /**
-   * Split up a string containing options into an array of strings, one for each option. If either the second
-   * or the third argument are null, the method unbackQuoteChars() is applied to each individual option string.
-   * Otherwise, the method replaceStrings() is applied to each individual option string, using the second and
-   * third argument of this method as parameters.
-   *
-   * @param quotedOptionString the string containing the options
-   * @param toReplace strings to replace in each option (e.g., backquoted characters)
-   * @param replacements the characters to replace the strings with
-   * @return the array of options
-   * @throws Exception in case of an unterminated string, unknown character or a
-   *           parse error
-   */
-  public static String[] splitOptions(String quotedOptionString, String[] toReplace, char[] replacements)
-          throws Exception {
-
-    Vector<String> optionsVec = new Vector<String>();
-    String str = new String(quotedOptionString);
-    int i;
-
-    while (true) {
-
-      // trimLeft
-      i = 0;
-      while ((i < str.length()) && (Character.isWhitespace(str.charAt(i)))) {
-        i++;
-      }
-      str = str.substring(i);
-
-      // stop when str is empty
-      if (str.length() == 0) {
-        break;
-      }
-
-      // if str start with a double quote
-      if (str.charAt(0) == '"') {
-
-        // find the first not anti-slached double quote
-        i = 1;
-        while (i < str.length()) {
-          if (str.charAt(i) == str.charAt(0)) {
-            break;
-          }
-          if (str.charAt(i) == '\\') {
-            i += 1;
-            if (i >= str.length()) {
-              throw new Exception("String should not finish with \\");
+        // Replace with \r
+        newStringBuffer = new StringBuffer();
+        while ((index = string.indexOf('\r')) != -1) {
+            if (index > 0) {
+                newStringBuffer.append(string.substring(0, index));
             }
-          }
-          i += 1;
+            newStringBuffer.append('\\');
+            newStringBuffer.append('r');
+            if ((index + 1) < string.length()) {
+                string = string.substring(index + 1);
+            } else {
+                string = "";
+            }
         }
-        if (i >= str.length()) {
-          throw new Exception("Quote parse error.");
+        newStringBuffer.append(string);
+        return newStringBuffer.toString();
+    }
+
+    /**
+     * Reverts \r and \n in a string into carriage returns and new lines.
+     * 
+     * @param string the string
+     * @return the converted string
+     */
+    public static String revertNewLines(String string) {
+        int index;
+
+        // Replace with \n
+        StringBuffer newStringBuffer = new StringBuffer();
+        while ((index = string.indexOf("\\n")) != -1) {
+            if (index > 0) {
+                newStringBuffer.append(string.substring(0, index));
+            }
+            newStringBuffer.append('\n');
+            if ((index + 2) < string.length()) {
+                string = string.substring(index + 2);
+            } else {
+                string = "";
+            }
+        }
+        newStringBuffer.append(string);
+        string = newStringBuffer.toString();
+
+        // Replace with \r
+        newStringBuffer = new StringBuffer();
+        while ((index = string.indexOf("\\r")) != -1) {
+            if (index > 0) {
+                newStringBuffer.append(string.substring(0, index));
+            }
+            newStringBuffer.append('\r');
+            if ((index + 2) < string.length()) {
+                string = string.substring(index + 2);
+            } else {
+                string = "";
+            }
+        }
+        newStringBuffer.append(string);
+
+        return newStringBuffer.toString();
+    }
+
+    /**
+     * Returns the secondary set of options (if any) contained in the supplied
+     * options array. The secondary set is defined to be any options after the first
+     * "--". These options are removed from the original options array.
+     * 
+     * @param options the input array of options
+     * @return the array of secondary options
+     */
+    public static String[] partitionOptions(String[] options) {
+
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equals("--")) {
+                options[i++] = "";
+                String[] result = new String[options.length - i];
+                for (int j = i; j < options.length; j++) {
+                    result[j - i] = options[j];
+                    options[j] = "";
+                }
+                return result;
+            }
+        }
+        return new String[0];
+    }
+
+    /**
+     * The inverse operation of backQuoteChars(). Converts back-quoted carriage
+     * returns and new lines in a string to the corresponding character ('\r' and
+     * '\n'). Also "un"-back-quotes the following characters: ` " \ \t and %
+     *
+     * @param string the string
+     * @return the converted string
+     * @see #backQuoteChars(String)
+     */
+    public static String unbackQuoteChars(String string) {
+
+        String charsFind[] = { "\\\\", "\\'", "\\t", "\\n", "\\r", "\\\"", "\\%", "\\u001E" };
+        char charsReplace[] = { '\\', '\'', '\t', '\n', '\r', '"', '%', '\u001E' };
+        return replaceStrings(string, charsFind, charsReplace);
+    }
+
+    /**
+     * Converts the specified strings in the given string to the specified
+     * characters.
+     * 
+     * @param string       the string to operate on
+     * @param charsFind    the strings to replace
+     * @param charsReplace the characters to replace these with
+     * @return the converted string
+     */
+    public static String replaceStrings(String string, String[] charsFind, char[] charsReplace) {
+
+        int index;
+        StringBuffer newStringBuffer;
+
+        int pos[] = new int[charsFind.length];
+        int curPos;
+
+        String str = new String(string);
+        newStringBuffer = new StringBuffer();
+        while (str.length() > 0) {
+            // get positions and closest character to replace
+            curPos = str.length();
+            index = -1;
+            for (int i = 0; i < pos.length; i++) {
+                pos[i] = str.indexOf(charsFind[i]);
+                if ((pos[i] > -1) && (pos[i] < curPos)) {
+                    index = i;
+                    curPos = pos[i];
+                }
+            }
+
+            // replace character if found, otherwise finished
+            if (index == -1) {
+                newStringBuffer.append(str);
+                str = "";
+            } else {
+                newStringBuffer.append(str.substring(0, pos[index]));
+                newStringBuffer.append(charsReplace[index]);
+                str = str.substring(pos[index] + charsFind[index].length());
+            }
         }
 
-        // add the founded string to the option vector (without quotes)
-        String optStr = str.substring(1, i);
-        if ((toReplace != null) && (replacements != null)) {
-          optStr = replaceStrings(optStr, toReplace, replacements);
+        return newStringBuffer.toString();
+    }
+
+    /**
+     * Split up a string containing options into an array of strings, one for each
+     * option.
+     *
+     * @param quotedOptionString the string containing the options
+     * @return the array of options
+     * @throws Exception in case of an unterminated string, unknown character or a
+     *                   parse error
+     */
+    public static String[] splitOptions(String quotedOptionString) throws Exception {
+
+        return splitOptions(quotedOptionString, null, null);
+    }
+
+    /**
+     * Split up a string containing options into an array of strings, one for each
+     * option. If either the second or the third argument are null, the method
+     * unbackQuoteChars() is applied to each individual option string. Otherwise,
+     * the method replaceStrings() is applied to each individual option string,
+     * using the second and third argument of this method as parameters.
+     *
+     * @param quotedOptionString the string containing the options
+     * @param toReplace          strings to replace in each option (e.g., backquoted
+     *                           characters)
+     * @param replacements       the characters to replace the strings with
+     * @return the array of options
+     * @throws Exception in case of an unterminated string, unknown character or a
+     *                   parse error
+     */
+    public static String[] splitOptions(String quotedOptionString, String[] toReplace, char[] replacements) throws Exception {
+
+        Vector<String> optionsVec = new Vector<String>();
+        String str = new String(quotedOptionString);
+        int i;
+
+        while (true) {
+
+            // trimLeft
+            i = 0;
+            while ((i < str.length()) && (Character.isWhitespace(str.charAt(i)))) {
+                i++;
+            }
+            str = str.substring(i);
+
+            // stop when str is empty
+            if (str.length() == 0) {
+                break;
+            }
+
+            // if str start with a double quote
+            if (str.charAt(0) == '"') {
+
+                // find the first not anti-slached double quote
+                i = 1;
+                while (i < str.length()) {
+                    if (str.charAt(i) == str.charAt(0)) {
+                        break;
+                    }
+                    if (str.charAt(i) == '\\') {
+                        i += 1;
+                        if (i >= str.length()) {
+                            throw new Exception("String should not finish with \\");
+                        }
+                    }
+                    i += 1;
+                }
+                if (i >= str.length()) {
+                    throw new Exception("Quote parse error.");
+                }
+
+                // add the founded string to the option vector (without quotes)
+                String optStr = str.substring(1, i);
+                if ((toReplace != null) && (replacements != null)) {
+                    optStr = replaceStrings(optStr, toReplace, replacements);
+                } else {
+                    optStr = unbackQuoteChars(optStr);
+                }
+                optionsVec.addElement(optStr);
+                str = str.substring(i + 1);
+            } else {
+                // find first whiteSpace
+                i = 0;
+                while ((i < str.length()) && (!Character.isWhitespace(str.charAt(i)))) {
+                    i++;
+                }
+
+                // add the founded string to the option vector
+                String optStr = str.substring(0, i);
+                optionsVec.addElement(optStr);
+                str = str.substring(i);
+            }
+        }
+
+        // convert optionsVec to an array of String
+        String[] options = new String[optionsVec.size()];
+        for (i = 0; i < optionsVec.size(); i++) {
+            options[i] = optionsVec.elementAt(i);
+        }
+        return options;
+    }
+
+    /**
+     * Joins all the options in an option array into a single string, as might be
+     * used on the command line.
+     * 
+     * @param optionArray the array of options
+     * @return the string containing all options.
+     */
+    public static String joinOptions(String[] optionArray) {
+
+        String optionString = "";
+        for (String element : optionArray) {
+            if (element.equals("")) {
+                continue;
+            }
+            boolean escape = false;
+            for (int n = 0; n < element.length(); n++) {
+                if (Character.isWhitespace(element.charAt(n)) || element.charAt(n) == '"' || element.charAt(n) == '\'') {
+                    escape = true;
+                    break;
+                }
+            }
+            if (escape) {
+                optionString += '"' + backQuoteChars(element) + '"';
+            } else {
+                optionString += element;
+            }
+            optionString += " ";
+        }
+        return optionString.trim();
+    }
+
+    /**
+     * Creates a new instance of an object given it's class name and (optional)
+     * arguments to pass to it's setOptions method. If the object implements
+     * OptionHandler and the options parameter is non-null, the object will have
+     * it's options set. Example use:
+     * <p>
+     * 
+     * <code> <pre>
+     * String classifierName = Utils.getOption('W', options);
+     * Classifier c = (Classifier)Utils.forName(Classifier.class,
+     *                                          classifierName,
+     *                                          options);
+     * setClassifier(c);
+     * </pre></code>
+     * 
+     * @param classType the class that the instantiated object should be assignable
+     *                  to -- an exception is thrown if this is not the case
+     * @param className the fully qualified class name of the object
+     * @param options   an array of options suitable for passing to setOptions. May
+     *                  be null. Any options accepted by the object will be removed
+     *                  from the array.
+     * @return the newly created object, ready for use (if it is an array, it will
+     *         have size zero).
+     * @exception Exception if the class name is invalid, or if the class is not
+     *                      assignable to the desired class type, or the options
+     *                      supplied are not acceptable to the object
+     */
+    public static Object forName(Class<?> classType, String className, String[] options) throws Exception {
+
+        return ResourceUtils.forName(classType, className, options);
+    }
+
+    /**
+     * Returns a JFrame with the given title. The JFrame will be placed relative to
+     * the ancestor window of the given component (or relative to the given
+     * component itself, if it is a window), and will receive the icon image from
+     * that window if the window is a frame.
+     *
+     * The default close operation of the JFrame is set to DO_NOTHING_ON_CLOSE so
+     * code using the JFrame will need to make sure that it is disposed of properly.
+     *
+     * @param title     the title of the window
+     * @param component the component for which the ancestor window is found
+     * @return the JFrame
+     */
+    public static JFrame getWekaJFrame(String title, Component component) {
+        JFrame jf = new JFrame(title);
+        jf.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        Window windowAncestor = null;
+        if (component != null) {
+            if (component instanceof Window) {
+                windowAncestor = (Window) component;
+            } else {
+                windowAncestor = SwingUtilities.getWindowAncestor(component);
+            }
+            if (windowAncestor instanceof Frame) {
+                jf.setIconImage(((Frame) windowAncestor).getIconImage());
+            }
+        }
+        return jf;
+    }
+
+    /**
+     * Generates a commandline of the given object. If the object is not
+     * implementing OptionHandler, then it will only return the classname, otherwise
+     * also the options.
+     * 
+     * @param obj the object to turn into a commandline
+     * @return the commandline
+     */
+    public static String toCommandLine(Object obj) {
+        StringBuffer result;
+
+        result = new StringBuffer();
+
+        if (obj != null) {
+            result.append(obj.getClass().getName());
+            if (obj instanceof OptionHandler) {
+                result.append(" " + joinOptions(((OptionHandler) obj).getOptions()));
+            }
+        }
+
+        return result.toString().trim();
+    }
+
+    /**
+     * Computes entropy for an array of integers.
+     * 
+     * @param counts array of counts
+     * @return - a log2 a - b log2 b - c log2 c + (a+b+c) log2 (a+b+c) when given
+     *         array [a b c]
+     */
+    public static/* @pure@ */double info(int counts[]) {
+
+        int total = 0;
+        double x = 0;
+        for (int count : counts) {
+            x -= xlogx(count);
+            total += count;
+        }
+        return x + xlogx(total);
+    }
+
+    /**
+     * Tests if a is smaller or equal to b.
+     * 
+     * @param a a double
+     * @param b a double
+     */
+    public static/* @pure@ */boolean smOrEq(double a, double b) {
+
+        return (a - b < SMALL) || (a <= b);
+    }
+
+    /**
+     * Tests if a is greater or equal to b.
+     * 
+     * @param a a double
+     * @param b a double
+     */
+    public static/* @pure@ */boolean grOrEq(double a, double b) {
+
+        return (b - a < SMALL) || (a >= b);
+    }
+
+    /**
+     * Tests if a is smaller than b.
+     * 
+     * @param a a double
+     * @param b a double
+     */
+    public static/* @pure@ */boolean sm(double a, double b) {
+
+        return (b - a > SMALL);
+    }
+
+    /**
+     * Tests if a is greater than b.
+     * 
+     * @param a a double
+     * @param b a double
+     */
+    public static/* @pure@ */boolean gr(double a, double b) {
+
+        return (a - b > SMALL);
+    }
+
+    /**
+     * Returns the kth-smallest value in the array.
+     * 
+     * @param array the array of integers
+     * @param k     the value of k
+     * @return the kth-smallest value
+     */
+    public static int kthSmallestValue(int[] array, int k) {
+
+        int[] index = initialIndex(array.length);
+        return array[index[select(array, index, 0, array.length - 1, k)]];
+    }
+
+    /**
+     * Returns the kth-smallest value in the array
+     * 
+     * @param array the array of double
+     * @param k     the value of k
+     * @return the kth-smallest value
+     */
+    public static double kthSmallestValue(double[] array, int k) {
+
+        int[] index = initialIndex(array.length);
+        return array[index[select(array, index, 0, array.length - 1, k)]];
+    }
+
+    /**
+     * Returns the logarithm of a for base 2.
+     * 
+     * @param a a double
+     * @return the logarithm for base 2
+     */
+    public static/* @pure@ */double log2(double a) {
+
+        return Math.log(a) / log2;
+    }
+
+    /**
+     * Returns index of maximum element in a given array of doubles. First maximum
+     * is returned.
+     * 
+     * @param doubles the array of doubles
+     * @return the index of the maximum element
+     */
+    public static/* @pure@ */int maxIndex(double[] doubles) {
+
+        double maximum = 0;
+        int maxIndex = 0;
+
+        for (int i = 0; i < doubles.length; i++) {
+            if ((i == 0) || (doubles[i] > maximum)) {
+                maxIndex = i;
+                maximum = doubles[i];
+            }
+        }
+
+        return maxIndex;
+    }
+
+    /**
+     * Returns index of maximum element in a given array of integers. First maximum
+     * is returned.
+     * 
+     * @param ints the array of integers
+     * @return the index of the maximum element
+     */
+    public static/* @pure@ */int maxIndex(int[] ints) {
+
+        int maximum = 0;
+        int maxIndex = 0;
+
+        for (int i = 0; i < ints.length; i++) {
+            if ((i == 0) || (ints[i] > maximum)) {
+                maxIndex = i;
+                maximum = ints[i];
+            }
+        }
+
+        return maxIndex;
+    }
+
+    /**
+     * Computes the mean for an array of doubles.
+     * 
+     * @param vector the array
+     * @return the mean
+     */
+    public static/* @pure@ */double mean(double[] vector) {
+
+        double sum = 0;
+
+        if (vector.length == 0) {
+            return 0;
+        }
+        for (double element : vector) {
+            sum += element;
+        }
+        return sum / vector.length;
+    }
+
+    /**
+     * Returns index of minimum element in a given array of integers. First minimum
+     * is returned.
+     * 
+     * @param ints the array of integers
+     * @return the index of the minimum element
+     */
+    public static/* @pure@ */int minIndex(int[] ints) {
+
+        int minimum = 0;
+        int minIndex = 0;
+
+        for (int i = 0; i < ints.length; i++) {
+            if ((i == 0) || (ints[i] < minimum)) {
+                minIndex = i;
+                minimum = ints[i];
+            }
+        }
+
+        return minIndex;
+    }
+
+    /**
+     * Returns index of minimum element in a given array of doubles. First minimum
+     * is returned.
+     * 
+     * @param doubles the array of doubles
+     * @return the index of the minimum element
+     */
+    public static/* @pure@ */int minIndex(double[] doubles) {
+
+        double minimum = 0;
+        int minIndex = 0;
+
+        for (int i = 0; i < doubles.length; i++) {
+            if ((i == 0) || (doubles[i] < minimum)) {
+                minIndex = i;
+                minimum = doubles[i];
+            }
+        }
+
+        return minIndex;
+    }
+
+    /**
+     * Normalizes the doubles in the array by their sum.
+     * 
+     * @param doubles the array of double
+     * @exception IllegalArgumentException if sum is Zero or NaN
+     */
+    public static void normalize(double[] doubles) {
+
+        double sum = 0;
+        for (double d : doubles) {
+            sum += d;
+        }
+        normalize(doubles, sum);
+    }
+
+    /**
+     * Normalizes the doubles in the array using the given value.
+     * 
+     * @param doubles the array of double
+     * @param sum     the value by which the doubles are to be normalized
+     * @exception IllegalArgumentException if sum is zero or NaN
+     */
+    public static void normalize(double[] doubles, double sum) {
+
+        if (Double.isNaN(sum)) {
+            throw new IllegalArgumentException("Can't normalize array. Sum is NaN.");
+        }
+        if (sum == 0) {
+            // Maybe this should just be a return.
+            throw new IllegalArgumentException("Can't normalize array. Sum is zero.");
+        }
+        for (int i = 0; i < doubles.length; i++) {
+            doubles[i] /= sum;
+        }
+    }
+
+    /**
+     * Converts an array containing the natural logarithms of probabilities stored
+     * in a vector back into probabilities. The probabilities are assumed to sum to
+     * one.
+     * 
+     * @param a an array holding the natural logarithms of the probabilities
+     * @return the converted array
+     */
+    public static double[] logs2probs(double[] a) {
+
+        double max = a[maxIndex(a)];
+        double sum = 0.0;
+
+        double[] result = new double[a.length];
+        for (int i = 0; i < a.length; i++) {
+            result[i] = Math.exp(a[i] - max);
+            sum += result[i];
+        }
+
+        normalize(result, sum);
+
+        return result;
+    }
+
+    /**
+     * Returns the log-odds for a given probabilitiy.
+     * 
+     * @param prob the probabilitiy
+     * 
+     * @return the log-odds after the probability has been mapped to [Utils.SMALL,
+     *         1-Utils.SMALL]
+     */
+    public static/* @pure@ */double probToLogOdds(double prob) {
+
+        if (gr(prob, 1) || (sm(prob, 0))) {
+            throw new IllegalArgumentException("probToLogOdds: probability must " + "be in [0,1] " + prob);
+        }
+        double p = SMALL + (1.0 - 2 * SMALL) * prob;
+        return Math.log(p / (1 - p));
+    }
+
+    /**
+     * Rounds a double to the next nearest integer value. The JDK version of it
+     * doesn't work properly.
+     * 
+     * @param value the double value
+     * @return the resulting integer value
+     */
+    public static/* @pure@ */int round(double value) {
+
+        int roundedValue = value > 0 ? (int) (value + 0.5) : -(int) (Math.abs(value) + 0.5);
+
+        return roundedValue;
+    }
+
+    /**
+     * Rounds a double to the next nearest integer value in a probabilistic fashion
+     * (e.g. 0.8 has a 20% chance of being rounded down to 0 and a 80% chance of
+     * being rounded up to 1). In the limit, the average of the rounded numbers
+     * generated by this procedure should converge to the original double.
+     * 
+     * @param value the double value
+     * @param rand  the random number generator
+     * @return the resulting integer value
+     */
+    public static int probRound(double value, Random rand) {
+
+        if (value >= 0) {
+            double lower = Math.floor(value);
+            double prob = value - lower;
+            if (rand.nextDouble() < prob) {
+                return (int) lower + 1;
+            } else {
+                return (int) lower;
+            }
         } else {
-          optStr = unbackQuoteChars(optStr);
+            double lower = Math.floor(Math.abs(value));
+            double prob = Math.abs(value) - lower;
+            if (rand.nextDouble() < prob) {
+                return -((int) lower + 1);
+            } else {
+                return -(int) lower;
+            }
         }
-        optionsVec.addElement(optStr);
-        str = str.substring(i + 1);
-      } else {
-        // find first whiteSpace
-        i = 0;
-        while ((i < str.length()) && (!Character.isWhitespace(str.charAt(i)))) {
-          i++;
+    }
+
+    /**
+     * Replaces all "missing values" in the given array of double values with
+     * MAX_VALUE.
+     * 
+     * @param array the array to be modified.
+     */
+    public static void replaceMissingWithMAX_VALUE(double[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            if (isMissingValue(array[i])) {
+                array[i] = Double.MAX_VALUE;
+            }
         }
-
-        // add the founded string to the option vector
-        String optStr = str.substring(0, i);
-        optionsVec.addElement(optStr);
-        str = str.substring(i);
-      }
     }
 
-    // convert optionsVec to an array of String
-    String[] options = new String[optionsVec.size()];
-    for (i = 0; i < optionsVec.size(); i++) {
-      options[i] = optionsVec.elementAt(i);
+    /**
+     * Rounds a double to the given number of decimal places.
+     * 
+     * @param value             the double value
+     * @param afterDecimalPoint the number of digits after the decimal point
+     * @return the double rounded to the given precision
+     */
+    public static/* @pure@ */double roundDouble(double value, int afterDecimalPoint) {
+
+        double mask = Math.pow(10.0, afterDecimalPoint);
+
+        return (Math.round(value * mask)) / mask;
     }
-    return options;
-  }
 
-  /**
-   * Joins all the options in an option array into a single string, as might be
-   * used on the command line.
-   * 
-   * @param optionArray the array of options
-   * @return the string containing all options.
-   */
-  public static String joinOptions(String[] optionArray) {
+    /**
+     * Sorts a given array of integers in ascending order and returns an array of
+     * integers with the positions of the elements of the original array in the
+     * sorted array. The sort is stable. (Equal elements remain in their original
+     * order.)
+     * 
+     * @param array this array is not changed by the method!
+     * @return an array of integers with the positions in the sorted array.
+     */
+    public static/* @pure@ */int[] sort(int[] array) {
 
-    String optionString = "";
-    for (String element : optionArray) {
-      if (element.equals("")) {
-        continue;
-      }
-      boolean escape = false;
-      for (int n = 0; n < element.length(); n++) {
-        if (Character.isWhitespace(element.charAt(n))
-          || element.charAt(n) == '"' || element.charAt(n) == '\'') {
-          escape = true;
-          break;
+        int[] index = initialIndex(array.length);
+        int[] newIndex = new int[array.length];
+        int[] helpIndex;
+        int numEqual;
+
+        quickSort(array, index, 0, array.length - 1);
+
+        // Make sort stable
+        int i = 0;
+        while (i < index.length) {
+            numEqual = 1;
+            for (int j = i + 1; ((j < index.length) && (array[index[i]] == array[index[j]])); j++) {
+                numEqual++;
+            }
+            if (numEqual > 1) {
+                helpIndex = new int[numEqual];
+                for (int j = 0; j < numEqual; j++) {
+                    helpIndex[j] = i + j;
+                }
+                quickSort(index, helpIndex, 0, numEqual - 1);
+                for (int j = 0; j < numEqual; j++) {
+                    newIndex[i + j] = index[helpIndex[j]];
+                }
+                i += numEqual;
+            } else {
+                newIndex[i] = index[i];
+                i++;
+            }
         }
-      }
-      if (escape) {
-        optionString += '"' + backQuoteChars(element) + '"';
-      } else {
-        optionString += element;
-      }
-      optionString += " ";
-    }
-    return optionString.trim();
-  }
-
-  /**
-   * Creates a new instance of an object given it's class name and (optional)
-   * arguments to pass to it's setOptions method. If the object implements
-   * OptionHandler and the options parameter is non-null, the object will have
-   * it's options set. Example use:
-   * <p>
-   * 
-   * <code> <pre>
-   * String classifierName = Utils.getOption('W', options);
-   * Classifier c = (Classifier)Utils.forName(Classifier.class,
-   *                                          classifierName,
-   *                                          options);
-   * setClassifier(c);
-   * </pre></code>
-   * 
-   * @param classType the class that the instantiated object should be
-   *          assignable to -- an exception is thrown if this is not the case
-   * @param className the fully qualified class name of the object
-   * @param options an array of options suitable for passing to setOptions. May
-   *          be null. Any options accepted by the object will be removed from
-   *          the array.
-   * @return the newly created object, ready for use (if it is an array, it will
-   *         have size zero).
-   * @exception Exception if the class name is invalid, or if the class is not
-   *              assignable to the desired class type, or the options supplied
-   *              are not acceptable to the object
-   */
-  public static Object forName(Class<?> classType, String className,
-    String[] options) throws Exception {
-
-    return ResourceUtils.forName(classType, className, options);
-  }
-
-  /**
-   * Returns a JFrame with the given title. The JFrame will be placed relative
-   * to the ancestor window of the given component (or relative to the given component itself,
-   * if it is a window), and will receive the icon image from that window if the window is a frame.
-   *
-   * The default close operation of the JFrame is set to DO_NOTHING_ON_CLOSE so code using
-   * the JFrame will need to make sure that it is disposed of properly.
-   *
-   * @param title the title of the window
-   * @param component the component for which the ancestor window is found
-   * @return the JFrame
-   */
-  public static JFrame getWekaJFrame(String title, Component component) {
-    JFrame jf = new JFrame(title);
-    jf.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-    Window windowAncestor = null;
-    if (component != null) {
-      if (component instanceof Window) {
-        windowAncestor = (Window)component;
-      } else {
-        windowAncestor = SwingUtilities.getWindowAncestor(component);
-      }
-      if (windowAncestor instanceof Frame) {
-        jf.setIconImage(((Frame) windowAncestor).getIconImage());
-      }
-    }
-    return jf;
-  }
-
-  /**
-   * Generates a commandline of the given object. If the object is not
-   * implementing OptionHandler, then it will only return the classname,
-   * otherwise also the options.
-   * 
-   * @param obj the object to turn into a commandline
-   * @return the commandline
-   */
-  public static String toCommandLine(Object obj) {
-    StringBuffer result;
-
-    result = new StringBuffer();
-
-    if (obj != null) {
-      result.append(obj.getClass().getName());
-      if (obj instanceof OptionHandler) {
-        result.append(" " + joinOptions(((OptionHandler) obj).getOptions()));
-      }
+        return newIndex;
     }
 
-    return result.toString().trim();
-  }
+    /**
+     * Sorts a given array of doubles in ascending order and returns an array of
+     * integers with the positions of the elements of the original array in the
+     * sorted array. NOTE THESE CHANGES: the sort is no longer stable and it doesn't
+     * use safe floating-point comparisons anymore. Occurrences of Double.NaN are
+     * treated as Double.MAX_VALUE.
+     * 
+     * @param array this array is not changed by the method!
+     * @return an array of integers with the positions in the sorted array.
+     */
+    public static/* @pure@ */int[] sort(/* @non_null@ */double[] array) {
 
-  /**
-   * Computes entropy for an array of integers.
-   * 
-   * @param counts array of counts
-   * @return - a log2 a - b log2 b - c log2 c + (a+b+c) log2 (a+b+c) when given
-   *         array [a b c]
-   */
-  public static/* @pure@ */double info(int counts[]) {
-
-    int total = 0;
-    double x = 0;
-    for (int count : counts) {
-      x -= xlogx(count);
-      total += count;
-    }
-    return x + xlogx(total);
-  }
-
-  /**
-   * Tests if a is smaller or equal to b.
-   * 
-   * @param a a double
-   * @param b a double
-   */
-  public static/* @pure@ */boolean smOrEq(double a, double b) {
-
-    return (a - b < SMALL) || (a <= b);
-  }
-
-  /**
-   * Tests if a is greater or equal to b.
-   * 
-   * @param a a double
-   * @param b a double
-   */
-  public static/* @pure@ */boolean grOrEq(double a, double b) {
-
-    return (b - a < SMALL) || (a >= b);
-  }
-
-  /**
-   * Tests if a is smaller than b.
-   * 
-   * @param a a double
-   * @param b a double
-   */
-  public static/* @pure@ */boolean sm(double a, double b) {
-
-    return (b - a > SMALL);
-  }
-
-  /**
-   * Tests if a is greater than b.
-   * 
-   * @param a a double
-   * @param b a double
-   */
-  public static/* @pure@ */boolean gr(double a, double b) {
-
-    return (a - b > SMALL);
-  }
-
-  /**
-   * Returns the kth-smallest value in the array.
-   * 
-   * @param array the array of integers
-   * @param k the value of k
-   * @return the kth-smallest value
-   */
-  public static int kthSmallestValue(int[] array, int k) {
-
-    int[] index = initialIndex(array.length);
-    return array[index[select(array, index, 0, array.length - 1, k)]];
-  }
-
-  /**
-   * Returns the kth-smallest value in the array
-   * 
-   * @param array the array of double
-   * @param k the value of k
-   * @return the kth-smallest value
-   */
-  public static double kthSmallestValue(double[] array, int k) {
-
-    int[] index = initialIndex(array.length);
-    return array[index[select(array, index, 0, array.length - 1, k)]];
-  }
-
-  /**
-   * Returns the logarithm of a for base 2.
-   * 
-   * @param a a double
-   * @return the logarithm for base 2
-   */
-  public static/* @pure@ */double log2(double a) {
-
-    return Math.log(a) / log2;
-  }
-
-  /**
-   * Returns index of maximum element in a given array of doubles. First maximum
-   * is returned.
-   * 
-   * @param doubles the array of doubles
-   * @return the index of the maximum element
-   */
-  public static/* @pure@ */int maxIndex(double[] doubles) {
-
-    double maximum = 0;
-    int maxIndex = 0;
-
-    for (int i = 0; i < doubles.length; i++) {
-      if ((i == 0) || (doubles[i] > maximum)) {
-        maxIndex = i;
-        maximum = doubles[i];
-      }
-    }
-
-    return maxIndex;
-  }
-
-  /**
-   * Returns index of maximum element in a given array of integers. First
-   * maximum is returned.
-   * 
-   * @param ints the array of integers
-   * @return the index of the maximum element
-   */
-  public static/* @pure@ */int maxIndex(int[] ints) {
-
-    int maximum = 0;
-    int maxIndex = 0;
-
-    for (int i = 0; i < ints.length; i++) {
-      if ((i == 0) || (ints[i] > maximum)) {
-        maxIndex = i;
-        maximum = ints[i];
-      }
-    }
-
-    return maxIndex;
-  }
-
-  /**
-   * Computes the mean for an array of doubles.
-   * 
-   * @param vector the array
-   * @return the mean
-   */
-  public static/* @pure@ */double mean(double[] vector) {
-
-    double sum = 0;
-
-    if (vector.length == 0) {
-      return 0;
-    }
-    for (double element : vector) {
-      sum += element;
-    }
-    return sum / vector.length;
-  }
-
-  /**
-   * Returns index of minimum element in a given array of integers. First
-   * minimum is returned.
-   * 
-   * @param ints the array of integers
-   * @return the index of the minimum element
-   */
-  public static/* @pure@ */int minIndex(int[] ints) {
-
-    int minimum = 0;
-    int minIndex = 0;
-
-    for (int i = 0; i < ints.length; i++) {
-      if ((i == 0) || (ints[i] < minimum)) {
-        minIndex = i;
-        minimum = ints[i];
-      }
-    }
-
-    return minIndex;
-  }
-
-  /**
-   * Returns index of minimum element in a given array of doubles. First minimum
-   * is returned.
-   * 
-   * @param doubles the array of doubles
-   * @return the index of the minimum element
-   */
-  public static/* @pure@ */int minIndex(double[] doubles) {
-
-    double minimum = 0;
-    int minIndex = 0;
-
-    for (int i = 0; i < doubles.length; i++) {
-      if ((i == 0) || (doubles[i] < minimum)) {
-        minIndex = i;
-        minimum = doubles[i];
-      }
-    }
-
-    return minIndex;
-  }
-
-  /**
-   * Normalizes the doubles in the array by their sum.
-   * 
-   * @param doubles the array of double
-   * @exception IllegalArgumentException if sum is Zero or NaN
-   */
-  public static void normalize(double[] doubles) {
-
-    double sum = 0;
-    for (double d : doubles) {
-      sum += d;
-    }
-    normalize(doubles, sum);
-  }
-
-  /**
-   * Normalizes the doubles in the array using the given value.
-   * 
-   * @param doubles the array of double
-   * @param sum the value by which the doubles are to be normalized
-   * @exception IllegalArgumentException if sum is zero or NaN
-   */
-  public static void normalize(double[] doubles, double sum) {
-
-    if (Double.isNaN(sum)) {
-      throw new IllegalArgumentException("Can't normalize array. Sum is NaN.");
-    }
-    if (sum == 0) {
-      // Maybe this should just be a return.
-      throw new IllegalArgumentException("Can't normalize array. Sum is zero.");
-    }
-    for (int i = 0; i < doubles.length; i++) {
-      doubles[i] /= sum;
-    }
-  }
-
-  /**
-   * Converts an array containing the natural logarithms of probabilities stored
-   * in a vector back into probabilities. The probabilities are assumed to sum
-   * to one.
-   * 
-   * @param a an array holding the natural logarithms of the probabilities
-   * @return the converted array
-   */
-  public static double[] logs2probs(double[] a) {
-
-    double max = a[maxIndex(a)];
-    double sum = 0.0;
-
-    double[] result = new double[a.length];
-    for (int i = 0; i < a.length; i++) {
-      result[i] = Math.exp(a[i] - max);
-      sum += result[i];
-    }
-
-    normalize(result, sum);
-
-    return result;
-  }
-
-  /**
-   * Returns the log-odds for a given probabilitiy.
-   * 
-   * @param prob the probabilitiy
-   * 
-   * @return the log-odds after the probability has been mapped to [Utils.SMALL,
-   *         1-Utils.SMALL]
-   */
-  public static/* @pure@ */double probToLogOdds(double prob) {
-
-    if (gr(prob, 1) || (sm(prob, 0))) {
-      throw new IllegalArgumentException("probToLogOdds: probability must "
-        + "be in [0,1] " + prob);
-    }
-    double p = SMALL + (1.0 - 2 * SMALL) * prob;
-    return Math.log(p / (1 - p));
-  }
-
-  /**
-   * Rounds a double to the next nearest integer value. The JDK version of it
-   * doesn't work properly.
-   * 
-   * @param value the double value
-   * @return the resulting integer value
-   */
-  public static/* @pure@ */int round(double value) {
-
-    int roundedValue =
-      value > 0 ? (int) (value + 0.5) : -(int) (Math.abs(value) + 0.5);
-
-    return roundedValue;
-  }
-
-  /**
-   * Rounds a double to the next nearest integer value in a probabilistic
-   * fashion (e.g. 0.8 has a 20% chance of being rounded down to 0 and a 80%
-   * chance of being rounded up to 1). In the limit, the average of the rounded
-   * numbers generated by this procedure should converge to the original double.
-   * 
-   * @param value the double value
-   * @param rand the random number generator
-   * @return the resulting integer value
-   */
-  public static int probRound(double value, Random rand) {
-
-    if (value >= 0) {
-      double lower = Math.floor(value);
-      double prob = value - lower;
-      if (rand.nextDouble() < prob) {
-        return (int) lower + 1;
-      } else {
-        return (int) lower;
-      }
-    } else {
-      double lower = Math.floor(Math.abs(value));
-      double prob = Math.abs(value) - lower;
-      if (rand.nextDouble() < prob) {
-        return -((int) lower + 1);
-      } else {
-        return -(int) lower;
-      }
-    }
-  }
-
-  /**
-   * Replaces all "missing values" in the given array of double values with
-   * MAX_VALUE.
-   * 
-   * @param array the array to be modified.
-   */
-  public static void replaceMissingWithMAX_VALUE(double[] array) {
-
-    for (int i = 0; i < array.length; i++) {
-      if (isMissingValue(array[i])) {
-        array[i] = Double.MAX_VALUE;
-      }
-    }
-  }
-
-  /**
-   * Rounds a double to the given number of decimal places.
-   * 
-   * @param value the double value
-   * @param afterDecimalPoint the number of digits after the decimal point
-   * @return the double rounded to the given precision
-   */
-  public static/* @pure@ */double roundDouble(double value,
-    int afterDecimalPoint) {
-
-    double mask = Math.pow(10.0, afterDecimalPoint);
-
-    return (Math.round(value * mask)) / mask;
-  }
-
-  /**
-   * Sorts a given array of integers in ascending order and returns an array of
-   * integers with the positions of the elements of the original array in the
-   * sorted array. The sort is stable. (Equal elements remain in their original
-   * order.)
-   * 
-   * @param array this array is not changed by the method!
-   * @return an array of integers with the positions in the sorted array.
-   */
-  public static/* @pure@ */int[] sort(int[] array) {
-
-    int[] index = initialIndex(array.length);
-    int[] newIndex = new int[array.length];
-    int[] helpIndex;
-    int numEqual;
-
-    quickSort(array, index, 0, array.length - 1);
-
-    // Make sort stable
-    int i = 0;
-    while (i < index.length) {
-      numEqual = 1;
-      for (int j = i + 1; ((j < index.length) && (array[index[i]] == array[index[j]])); j++) {
-        numEqual++;
-      }
-      if (numEqual > 1) {
-        helpIndex = new int[numEqual];
-        for (int j = 0; j < numEqual; j++) {
-          helpIndex[j] = i + j;
+        int[] index = initialIndex(array.length);
+        if (array.length > 1) {
+            array = array.clone();
+            replaceMissingWithMAX_VALUE(array);
+            quickSort(array, index, 0, array.length - 1);
         }
-        quickSort(index, helpIndex, 0, numEqual - 1);
-        for (int j = 0; j < numEqual; j++) {
-          newIndex[i + j] = index[helpIndex[j]];
+        return index;
+    }
+
+    /**
+     * Sorts a given array of doubles in ascending order and returns an array of
+     * integers with the positions of the elements of the original array in the
+     * sorted array. Missing values in the given array are replaced by
+     * Double.MAX_VALUE, so the array is modified in that case!
+     * 
+     * @param array the array to be sorted, which is modified if it has missing
+     *              values
+     * @return an array of integers with the positions in the sorted array.
+     */
+    public static/* @pure@ */int[] sortWithNoMissingValues(/* @non_null@ */double[] array) {
+
+        int[] index = initialIndex(array.length);
+        if (array.length > 1) {
+            quickSort(array, index, 0, array.length - 1);
         }
-        i += numEqual;
-      } else {
-        newIndex[i] = index[i];
-        i++;
-      }
+        return index;
     }
-    return newIndex;
-  }
 
-  /**
-   * Sorts a given array of doubles in ascending order and returns an array of
-   * integers with the positions of the elements of the original array in the
-   * sorted array. NOTE THESE CHANGES: the sort is no longer stable and it
-   * doesn't use safe floating-point comparisons anymore. Occurrences of
-   * Double.NaN are treated as Double.MAX_VALUE.
-   * 
-   * @param array this array is not changed by the method!
-   * @return an array of integers with the positions in the sorted array.
-   */
-  public static/* @pure@ */int[] sort(/* @non_null@ */double[] array) {
+    /**
+     * Sorts a given array of doubles in ascending order and returns an array of
+     * integers with the positions of the elements of the original array in the
+     * sorted array. The sort is stable (Equal elements remain in their original
+     * order.) Occurrences of Double.NaN are treated as Double.MAX_VALUE
+     * 
+     * @param array this array is not changed by the method!
+     * @return an array of integers with the positions in the sorted array.
+     */
+    public static/* @pure@ */int[] stableSort(double[] array) {
 
-    int[] index = initialIndex(array.length);
-    if (array.length > 1) {
-      array = array.clone();
-      replaceMissingWithMAX_VALUE(array);
-      quickSort(array, index, 0, array.length - 1);
-    }
-    return index;
-  }
+        int[] index = initialIndex(array.length);
 
-  /**
-   * Sorts a given array of doubles in ascending order and returns an array of
-   * integers with the positions of the elements of the original array in the
-   * sorted array. Missing values in the given array are replaced by
-   * Double.MAX_VALUE, so the array is modified in that case!
-   * 
-   * @param array the array to be sorted, which is modified if it has missing
-   *          values
-   * @return an array of integers with the positions in the sorted array.
-   */
-  public static/* @pure@ */int[] sortWithNoMissingValues(
-  /* @non_null@ */double[] array) {
+        if (array.length > 1) {
 
-    int[] index = initialIndex(array.length);
-    if (array.length > 1) {
-      quickSort(array, index, 0, array.length - 1);
-    }
-    return index;
-  }
+            int[] newIndex = new int[array.length];
+            int[] helpIndex;
+            int numEqual;
 
-  /**
-   * Sorts a given array of doubles in ascending order and returns an array of
-   * integers with the positions of the elements of the original array in the
-   * sorted array. The sort is stable (Equal elements remain in their original
-   * order.) Occurrences of Double.NaN are treated as Double.MAX_VALUE
-   * 
-   * @param array this array is not changed by the method!
-   * @return an array of integers with the positions in the sorted array.
-   */
-  public static/* @pure@ */int[] stableSort(double[] array) {
+            array = array.clone();
+            replaceMissingWithMAX_VALUE(array);
+            quickSort(array, index, 0, array.length - 1);
 
-    int[] index = initialIndex(array.length);
+            // Make sort stable
 
-    if (array.length > 1) {
-
-      int[] newIndex = new int[array.length];
-      int[] helpIndex;
-      int numEqual;
-
-      array = array.clone();
-      replaceMissingWithMAX_VALUE(array);
-      quickSort(array, index, 0, array.length - 1);
-
-      // Make sort stable
-
-      int i = 0;
-      while (i < index.length) {
-        numEqual = 1;
-        for (int j = i + 1; ((j < index.length) && (array[index[i]] == array[index[j]])); j++) {
-          numEqual++;
-        }
-        if (numEqual > 1) {
-          helpIndex = new int[numEqual];
-          for (int j = 0; j < numEqual; j++) {
-            helpIndex[j] = i + j;
-          }
-          quickSort(index, helpIndex, 0, numEqual - 1);
-          for (int j = 0; j < numEqual; j++) {
-            newIndex[i + j] = index[helpIndex[j]];
-          }
-          i += numEqual;
+            int i = 0;
+            while (i < index.length) {
+                numEqual = 1;
+                for (int j = i + 1; ((j < index.length) && (array[index[i]] == array[index[j]])); j++) {
+                    numEqual++;
+                }
+                if (numEqual > 1) {
+                    helpIndex = new int[numEqual];
+                    for (int j = 0; j < numEqual; j++) {
+                        helpIndex[j] = i + j;
+                    }
+                    quickSort(index, helpIndex, 0, numEqual - 1);
+                    for (int j = 0; j < numEqual; j++) {
+                        newIndex[i + j] = index[helpIndex[j]];
+                    }
+                    i += numEqual;
+                } else {
+                    newIndex[i] = index[i];
+                    i++;
+                }
+            }
+            return newIndex;
         } else {
-          newIndex[i] = index[i];
-          i++;
+            return index;
         }
-      }
-      return newIndex;
-    } else {
-      return index;
-    }
-  }
-
-  /**
-   * Computes the variance for an array of doubles.
-   * 
-   * @param vector the array
-   * @return the variance
-   */
-  public static/* @pure@ */double variance(double[] vector) {
-
-    if (vector.length <= 1)
-      return Double.NaN;
-
-    double mean = 0;
-    double var = 0;
-
-    for (int i = 0; i < vector.length; i++) {
-      double delta = vector[i] - mean;
-      mean += delta / (i + 1);
-      var += (vector[i] - mean) * delta;
     }
 
-    var /= vector.length - 1;
+    /**
+     * Computes the variance for an array of doubles.
+     * 
+     * @param vector the array
+     * @return the variance
+     */
+    public static/* @pure@ */double variance(double[] vector) {
 
-    // We don't like negative variance
-    if (var < 0) {
-      return 0;
-    } else {
-      return var;
+        if (vector.length <= 1)
+            return Double.NaN;
+
+        double mean = 0;
+        double var = 0;
+
+        for (int i = 0; i < vector.length; i++) {
+            double delta = vector[i] - mean;
+            mean += delta / (i + 1);
+            var += (vector[i] - mean) * delta;
+        }
+
+        var /= vector.length - 1;
+
+        // We don't like negative variance
+        if (var < 0) {
+            return 0;
+        } else {
+            return var;
+        }
     }
-  }
 
-  /**
-   * Computes the sum of the elements of an array of doubles.
-   * 
-   * @param doubles the array of double
-   * @return the sum of the elements
-   */
-  public static/* @pure@ */double sum(double[] doubles) {
+    /**
+     * Computes the sum of the elements of an array of doubles.
+     * 
+     * @param doubles the array of double
+     * @return the sum of the elements
+     */
+    public static/* @pure@ */double sum(double[] doubles) {
 
-    double sum = 0;
+        double sum = 0;
 
-    for (double d : doubles) {
-      sum += d;
+        for (double d : doubles) {
+            sum += d;
+        }
+        return sum;
     }
-    return sum;
-  }
 
-  /**
-   * Computes the sum of the elements of an array of integers.
-   * 
-   * @param ints the array of integers
-   * @return the sum of the elements
-   */
-  public static/* @pure@ */int sum(int[] ints) {
+    /**
+     * Computes the sum of the elements of an array of integers.
+     * 
+     * @param ints the array of integers
+     * @return the sum of the elements
+     */
+    public static/* @pure@ */int sum(int[] ints) {
 
-    int sum = 0;
+        int sum = 0;
 
-    for (int j : ints) {
-      sum += j;
+        for (int j : ints) {
+            sum += j;
+        }
+        return sum;
     }
-    return sum;
-  }
 
-  /**
-   * Returns c*log2(c) for a given integer value c.
-   * 
-   * @param c an integer value
-   * @return c*log2(c) (but is careful to return 0 if c is 0)
-   */
-  public static/* @pure@ */double xlogx(int c) {
+    /**
+     * Returns c*log2(c) for a given integer value c.
+     * 
+     * @param c an integer value
+     * @return c*log2(c) (but is careful to return 0 if c is 0)
+     */
+    public static/* @pure@ */double xlogx(int c) {
 
-    if (c == 0) {
-      return 0.0;
+        if (c == 0) {
+            return 0.0;
+        }
+        return c * Utils.log2(c);
     }
-    return c * Utils.log2(c);
-  }
 
-  /**
-   * Initial index, filled with values from 0 to size - 1.
-   */
-  private static int[] initialIndex(int size) {
+    /**
+     * Initial index, filled with values from 0 to size - 1.
+     */
+    private static int[] initialIndex(int size) {
 
-    int[] index = new int[size];
-    for (int i = 0; i < size; i++) {
-      index[i] = i;
+        int[] index = new int[size];
+        for (int i = 0; i < size; i++) {
+            index[i] = i;
+        }
+        return index;
     }
-    return index;
-  }
 
-  /**
-   * Sorts left, right, and center elements only, returns resulting center as
-   * pivot.
-   */
-  private static int sortLeftRightAndCenter(double[] array, int[] index, int l,
-    int r) {
+    /**
+     * Sorts left, right, and center elements only, returns resulting center as
+     * pivot.
+     */
+    private static int sortLeftRightAndCenter(double[] array, int[] index, int l, int r) {
 
-    int c = (l + r) / 2;
-    conditionalSwap(array, index, l, c);
-    conditionalSwap(array, index, l, r);
-    conditionalSwap(array, index, c, r);
-    return c;
-  }
-
-  /**
-   * Swaps two elements in the given integer array.
-   */
-  private static void swap(int[] index, int l, int r) {
-
-    int help = index[l];
-    index[l] = index[r];
-    index[r] = help;
-  }
-
-  /**
-   * Conditional swap for quick sort.
-   */
-  private static void conditionalSwap(double[] array, int[] index, int left,
-    int right) {
-
-    if (array[index[left]] > array[index[right]]) {
-      int help = index[left];
-      index[left] = index[right];
-      index[right] = help;
+        int c = (l + r) / 2;
+        conditionalSwap(array, index, l, c);
+        conditionalSwap(array, index, l, r);
+        conditionalSwap(array, index, c, r);
+        return c;
     }
-  }
 
-  /**
-   * Partitions the instances around a pivot. Used by quicksort and
-   * kthSmallestValue.
-   * 
-   * @param array the array of doubles to be sorted
-   * @param index the index into the array of doubles
-   * @param l the first index of the subset
-   * @param r the last index of the subset
-   * 
-   * @return the index of the middle element
-   */
-  private static int partition(double[] array, int[] index, int l, int r,
-    double pivot) {
+    /**
+     * Swaps two elements in the given integer array.
+     */
+    private static void swap(int[] index, int l, int r) {
 
-    r--;
-    while (true) {
-      while ((array[index[++l]] < pivot)) {
-        ;
-      }
-      while ((array[index[--r]] > pivot)) {
-        ;
-      }
-      if (l >= r) {
-        return l;
-      }
-      swap(index, l, r);
-    }
-  }
-
-  /**
-   * Partitions the instances around a pivot. Used by quicksort and
-   * kthSmallestValue.
-   * 
-   * @param array the array of integers to be sorted
-   * @param index the index into the array of integers
-   * @param l the first index of the subset
-   * @param r the last index of the subset
-   * 
-   * @return the index of the middle element
-   */
-  private static int partition(int[] array, int[] index, int l, int r) {
-
-    double pivot = array[index[(l + r) / 2]];
-    int help;
-
-    while (l < r) {
-      while ((array[index[l]] < pivot) && (l < r)) {
-        l++;
-      }
-      while ((array[index[r]] > pivot) && (l < r)) {
-        r--;
-      }
-      if (l < r) {
-        help = index[l];
+        int help = index[l];
         index[l] = index[r];
         index[r] = help;
-        l++;
+    }
+
+    /**
+     * Conditional swap for quick sort.
+     */
+    private static void conditionalSwap(double[] array, int[] index, int left, int right) {
+
+        if (array[index[left]] > array[index[right]]) {
+            int help = index[left];
+            index[left] = index[right];
+            index[right] = help;
+        }
+    }
+
+    /**
+     * Partitions the instances around a pivot. Used by quicksort and
+     * kthSmallestValue.
+     * 
+     * @param array the array of doubles to be sorted
+     * @param index the index into the array of doubles
+     * @param l     the first index of the subset
+     * @param r     the last index of the subset
+     * 
+     * @return the index of the middle element
+     */
+    private static int partition(double[] array, int[] index, int l, int r, double pivot) {
+
         r--;
-      }
-    }
-    if ((l == r) && (array[index[r]] > pivot)) {
-      r--;
-    }
-
-    return r;
-  }
-
-  /**
-   * Implements quicksort with median-of-three method and explicit sort for
-   * problems of size three or less.
-   * 
-   * @param array the array of doubles to be sorted
-   * @param index the index into the array of doubles
-   * @param left the first index of the subset to be sorted
-   * @param right the last index of the subset to be sorted
-   */
-  // @ requires 0 <= first && first <= right && right < array.length;
-  // @ requires (\forall int i; 0 <= i && i < index.length; 0 <= index[i] &&
-  // index[i] < array.length);
-  // @ requires array != index;
-  // assignable index;
-  private static void quickSort(/* @non_null@ */double[] array, /* @non_null@ */
-    int[] index, int left, int right) {
-
-    int diff = right - left;
-
-    switch (diff) {
-    case 0:
-
-      // No need to do anything
-      return;
-    case 1:
-
-      // Swap two elements if necessary
-      conditionalSwap(array, index, left, right);
-      return;
-    case 2:
-
-      // Just need to sort three elements
-      conditionalSwap(array, index, left, left + 1);
-      conditionalSwap(array, index, left, right);
-      conditionalSwap(array, index, left + 1, right);
-      return;
-    default:
-
-      // Establish pivot
-      int pivotLocation = sortLeftRightAndCenter(array, index, left, right);
-
-      // Move pivot to the right, partition, and restore pivot
-      swap(index, pivotLocation, right - 1);
-      int center =
-        partition(array, index, left, right, array[index[right - 1]]);
-      swap(index, center, right - 1);
-
-      // Sort recursively
-      quickSort(array, index, left, center - 1);
-      quickSort(array, index, center + 1, right);
-    }
-  }
-
-  /**
-   * Implements quicksort according to Manber's "Introduction to Algorithms".
-   * 
-   * @param array the array of integers to be sorted
-   * @param index the index into the array of integers
-   * @param left the first index of the subset to be sorted
-   * @param right the last index of the subset to be sorted
-   */
-  // @ requires 0 <= first && first <= right && right < array.length;
-  // @ requires (\forall int i; 0 <= i && i < index.length; 0 <= index[i] &&
-  // index[i] < array.length);
-  // @ requires array != index;
-  // assignable index;
-  private static void quickSort(/* @non_null@ */int[] array, /* @non_null@ */
-    int[] index, int left, int right) {
-
-    if (left < right) {
-      int middle = partition(array, index, left, right);
-      quickSort(array, index, left, middle);
-      quickSort(array, index, middle + 1, right);
-    }
-  }
-
-  /**
-   * Implements computation of the kth-smallest element according to Manber's
-   * "Introduction to Algorithms".
-   * 
-   * @param array the array of double
-   * @param index the index into the array of doubles
-   * @param left the first index of the subset
-   * @param right the last index of the subset
-   * @param k the value of k
-   * 
-   * @return the index of the kth-smallest element
-   */
-  // @ requires 0 <= first && first <= right && right < array.length;
-  private static int select(/* @non_null@ */double[] array, /* @non_null@ */
-    int[] index, int left, int right, int k) {
-
-    int diff = right - left;
-    switch (diff) {
-    case 0:
-
-      // Nothing to be done
-      return left;
-    case 1:
-
-      // Swap two elements if necessary
-      conditionalSwap(array, index, left, right);
-      return left + k - 1;
-    case 2:
-
-      // Just need to sort three elements
-      conditionalSwap(array, index, left, left + 1);
-      conditionalSwap(array, index, left, right);
-      conditionalSwap(array, index, left + 1, right);
-      return left + k - 1;
-    default:
-
-      // Establish pivot
-      int pivotLocation = sortLeftRightAndCenter(array, index, left, right);
-
-      // Move pivot to the right, partition, and restore pivot
-      swap(index, pivotLocation, right - 1);
-      int center =
-        partition(array, index, left, right, array[index[right - 1]]);
-      swap(index, center, right - 1);
-
-      // Proceed recursively
-      if ((center - left + 1) >= k) {
-        return select(array, index, left, center, k);
-      } else {
-        return select(array, index, center + 1, right, k - (center - left + 1));
-      }
-    }
-  }
-
-  /**
-   * Converts a File's absolute path to a path relative to the user (ie start)
-   * directory. Includes an additional workaround for Cygwin, which doesn't like
-   * upper case drive letters.
-   * 
-   * @param absolute the File to convert to relative path
-   * @return a File with a path that is relative to the user's directory
-   * @exception Exception if the path cannot be constructed
-   */
-  public static File convertToRelativePath(File absolute) throws Exception {
-    File result;
-    String fileStr;
-
-    result = null;
-
-    // if we're running windows, it could be Cygwin
-    if (File.separator.equals("\\")) {
-      // Cygwin doesn't like upper case drives -> try lower case drive
-      try {
-        fileStr = absolute.getPath();
-        fileStr = fileStr.substring(0, 1).toLowerCase() + fileStr.substring(1);
-        result = createRelativePath(new File(fileStr));
-      } catch (Exception e) {
-        // no luck with Cygwin workaround, convert it like it is
-        result = createRelativePath(absolute);
-      }
-    } else {
-      result = createRelativePath(absolute);
-    }
-
-    return result;
-  }
-
-  /**
-   * Converts a File's absolute path to a path relative to the user (ie start)
-   * directory.
-   * 
-   * @param absolute the File to convert to relative path
-   * @return a File with a path that is relative to the user's directory
-   * @exception Exception if the path cannot be constructed
-   */
-  protected static File createRelativePath(File absolute) throws Exception {
-    File userDir = new File(System.getProperty("user.dir"));
-    String userPath = userDir.getAbsolutePath() + File.separator;
-    String targetPath =
-      (new File(absolute.getParent())).getPath() + File.separator;
-    String fileName = absolute.getName();
-    StringBuffer relativePath = new StringBuffer();
-    // relativePath.append("."+File.separator);
-    // System.err.println("User dir "+userPath);
-    // System.err.println("Target path "+targetPath);
-
-    // file is in user dir (or subdir)
-    int subdir = targetPath.indexOf(userPath);
-    if (subdir == 0) {
-      if (userPath.length() == targetPath.length()) {
-        relativePath.append(fileName);
-      } else {
-        int ll = userPath.length();
-        relativePath.append(targetPath.substring(ll));
-        relativePath.append(fileName);
-      }
-    } else {
-      int sepCount = 0;
-      String temp = new String(userPath);
-      while (temp.indexOf(File.separator) != -1) {
-        int ind = temp.indexOf(File.separator);
-        sepCount++;
-        temp = temp.substring(ind + 1, temp.length());
-      }
-
-      String targetTemp = new String(targetPath);
-      String userTemp = new String(userPath);
-      int tcount = 0;
-      while (targetTemp.indexOf(File.separator) != -1) {
-        int ind = targetTemp.indexOf(File.separator);
-        int ind2 = userTemp.indexOf(File.separator);
-        String tpart = targetTemp.substring(0, ind + 1);
-        String upart = userTemp.substring(0, ind2 + 1);
-        if (tpart.compareTo(upart) != 0) {
-          if (tcount == 0) {
-            tcount = -1;
-          }
-          break;
-        }
-        tcount++;
-        targetTemp = targetTemp.substring(ind + 1, targetTemp.length());
-        userTemp = userTemp.substring(ind2 + 1, userTemp.length());
-      }
-      if (tcount == -1) {
-        // then target file is probably on another drive (under windows)
-        throw new Exception("Can't construct a path to file relative to user "
-          + "dir.");
-      }
-      if (targetTemp.indexOf(File.separator) == -1) {
-        targetTemp = "";
-      }
-      for (int i = 0; i < sepCount - tcount; i++) {
-        relativePath.append(".." + File.separator);
-      }
-      relativePath.append(targetTemp + fileName);
-    }
-    // System.err.println("new path : "+relativePath.toString());
-    return new File(relativePath.toString());
-  }
-
-  /**
-   * Implements computation of the kth-smallest element according to Manber's
-   * "Introduction to Algorithms".
-   * 
-   * @param array the array of integers
-   * @param index the index into the array of integers
-   * @param left the first index of the subset
-   * @param right the last index of the subset
-   * @param k the value of k
-   * 
-   * @return the index of the kth-smallest element
-   */
-  // @ requires 0 <= first && first <= right && right < array.length;
-  private static int select(/* @non_null@ */int[] array, /* @non_null@ */
-    int[] index, int left, int right, int k) {
-
-    if (left == right) {
-      return left;
-    } else {
-      int middle = partition(array, index, left, right);
-      if ((middle - left + 1) >= k) {
-        return select(array, index, left, middle, k);
-      } else {
-        return select(array, index, middle + 1, right, k - (middle - left + 1));
-      }
-    }
-  }
-
-  /**
-   * For a named dialog, returns true if the user has opted not to view it again
-   * in the future.
-   * 
-   * @param dialogName the name of the dialog to check (e.g.
-   *          weka.gui.GUICHooser.HowToFindPackageManager).
-   * @return true if the user has opted not to view the named dialog in the
-   *         future.
-   */
-  public static boolean getDontShowDialog(String dialogName) {
-    File wekaHome = ResourceUtils.getWekaHome();
-
-    if (!wekaHome.exists()) {
-      return false;
-    }
-
-    File dialogSubDir =
-      new File(wekaHome.toString() + File.separator + "systemDialogs");
-    if (!dialogSubDir.exists()) {
-      return false;
-    }
-
-    File dialogFile =
-      new File(dialogSubDir.toString() + File.separator + dialogName);
-
-    return dialogFile.exists();
-  }
-
-  /**
-   * Specify that the named dialog is not to be displayed in the future.
-   * 
-   * @param dialogName the name of the dialog not to show again (e.g.
-   *          weka.gui.GUIChooser.HowToFindPackageManager).
-   * @throws Exception if the marker file that is used to indicate that a named
-   *           dialog is not to be shown can't be created. This file lives in
-   *           $WEKA_HOME/systemDialogs
-   */
-  public static void setDontShowDialog(String dialogName) throws Exception {
-    File wekaHome = ResourceUtils.getWekaHome();
-
-    if (!wekaHome.exists()) {
-      return;
-    }
-
-    File dialogSubDir =
-      new File(wekaHome.toString() + File.separator + "systemDialogs");
-    if (!dialogSubDir.exists()) {
-      if (!dialogSubDir.mkdir()) {
-        return;
-      }
-    }
-
-    File dialogFile =
-      new File(dialogSubDir.toString() + File.separator + dialogName);
-    dialogFile.createNewFile();
-  }
-
-  /**
-   * For a named dialog, if the user has opted not to view it again, returns the
-   * answer the answer the user supplied when they closed the dialog. Returns
-   * null if the user did opt to view the dialog again.
-   * 
-   * @param dialogName the name of the dialog to check (e.g.
-   *          weka.gui.GUICHooser.HowToFindPackageManager).
-   * @return the answer the user supplied the last time they viewed the named
-   *         dialog (if they opted not to view it again in the future) or null
-   *         if the user opted to view the dialog again in the future.
-   */
-  public static String getDontShowDialogResponse(String dialogName)
-    throws Exception {
-    if (!getDontShowDialog(dialogName)) {
-      return null; // This must be the first time - no file recorded yet.
-    }
-
-    File wekaHome = ResourceUtils.getWekaHome();
-    File dialogSubDir =
-      new File(wekaHome.toString() + File.separator + "systemDialogs"
-        + File.separator + dialogName);
-
-    BufferedReader br = new BufferedReader(new FileReader(dialogSubDir));
-    String response = br.readLine();
-
-    br.close();
-    return response;
-  }
-
-  /**
-   * Specify that the named dialog is not to be shown again in the future. Also
-   * records the answer that the user chose when closing the dialog.
-   * 
-   * @param dialogName the name of the dialog to no longer display
-   * @param response the user selected response when they closed the dialog
-   * @throws Exception if there is a problem saving the information
-   */
-  public static void setDontShowDialogResponse(String dialogName,
-    String response) throws Exception {
-
-    File wekaHome = ResourceUtils.getWekaHome();
-
-    if (!wekaHome.exists()) {
-      return;
-    }
-
-    File dialogSubDir =
-      new File(wekaHome.toString() + File.separator + "systemDialogs");
-    if (!dialogSubDir.exists()) {
-      if (!dialogSubDir.mkdir()) {
-        return;
-      }
-    }
-
-    File dialogFile =
-      new File(dialogSubDir.toString() + File.separator + dialogName);
-    BufferedWriter br = new BufferedWriter(new FileWriter(dialogFile));
-    br.write(response + "\n");
-    br.flush();
-    br.close();
-  }
-
-  /**
-   * Breaks up the string, if wider than "columns" characters.
-   * 
-   * @param s the string to process
-   * @param columns the width in columns
-   * @return the processed string
-   */
-  public static String[] breakUp(String s, int columns) {
-    Vector<String> result;
-    String line;
-    BreakIterator boundary;
-    int boundaryStart;
-    int boundaryEnd;
-    String word;
-    String punctuation;
-    int i;
-    String[] lines;
-
-    result = new Vector<String>();
-    punctuation = " .,;:!?'\"";
-    lines = s.split("\n");
-
-    for (i = 0; i < lines.length; i++) {
-      boundary = BreakIterator.getWordInstance();
-      boundary.setText(lines[i]);
-      boundaryStart = boundary.first();
-      boundaryEnd = boundary.next();
-      line = "";
-
-      while (boundaryEnd != BreakIterator.DONE) {
-        word = lines[i].substring(boundaryStart, boundaryEnd);
-        if (line.length() >= columns) {
-          if (word.length() == 1) {
-            if (punctuation.indexOf(word.charAt(0)) > -1) {
-              line += word;
-              word = "";
+        while (true) {
+            while ((array[index[++l]] < pivot)) {
+                ;
             }
-          }
-          result.add(line);
-          line = "";
+            while ((array[index[--r]] > pivot)) {
+                ;
+            }
+            if (l >= r) {
+                return l;
+            }
+            swap(index, l, r);
         }
-        line += word;
-        boundaryStart = boundaryEnd;
-        boundaryEnd = boundary.next();
-      }
-      if (line.length() > 0) {
-        result.add(line);
-      }
     }
 
-    return result.toArray(new String[result.size()]);
-  }
+    /**
+     * Partitions the instances around a pivot. Used by quicksort and
+     * kthSmallestValue.
+     * 
+     * @param array the array of integers to be sorted
+     * @param index the index into the array of integers
+     * @param l     the first index of the subset
+     * @param r     the last index of the subset
+     * 
+     * @return the index of the middle element
+     */
+    private static int partition(int[] array, int[] index, int l, int r) {
 
-  /**
-   * Utility method for grabbing the global info help (if it exists) from an
-   * arbitrary object. Can also append capabilities information if the object is
-   * a CapabilitiesHandler.
-   * 
-   * @param object the object to grab global info from
-   * @param addCapabilities true if capabilities information is to be added to
-   *          the result
-   * @return the global help info or null if global info does not exist
-   */
-  public static String getGlobalInfo(Object object, boolean addCapabilities) {
-    // set tool tip text from global info if supplied
-    String gi = null;
-    StringBuilder result = new StringBuilder();
-    try {
-      BeanInfo bi = Introspector.getBeanInfo(object.getClass());
-      MethodDescriptor[] methods = bi.getMethodDescriptors();
-      for (MethodDescriptor method : methods) {
-        String name = method.getDisplayName();
-        Method meth = method.getMethod();
-        if (name.equals("globalInfo")) {
-          if (meth.getReturnType().equals(String.class)) {
-            Object args[] = {};
-            String globalInfo = (String) (meth.invoke(object, args));
-            gi = globalInfo;
-            break;
-          }
+        double pivot = array[index[(l + r) / 2]];
+        int help;
+
+        while (l < r) {
+            while ((array[index[l]] < pivot) && (l < r)) {
+                l++;
+            }
+            while ((array[index[r]] > pivot) && (l < r)) {
+                r--;
+            }
+            if (l < r) {
+                help = index[l];
+                index[l] = index[r];
+                index[r] = help;
+                l++;
+                r--;
+            }
         }
-      }
-    } catch (Exception ex) {
-
-    }
-
-    // Max. number of characters per line (may overflow)
-    int lineWidth = 180;
-
-    result.append("<html>");
-
-    if (gi != null && gi.length() > 0) {
-
-      StringBuilder firstLine = new StringBuilder();
-      firstLine.append("<font color=blue>");
-      boolean addFirstBreaks = true;
-      int indexOfDot = gi.indexOf(".");
-      if (indexOfDot > 0) {
-        firstLine.append(gi.substring(0, gi.indexOf(".")));
-        if (gi.length() - indexOfDot < 3) {
-          addFirstBreaks = false;
+        if ((l == r) && (array[index[r]] > pivot)) {
+            r--;
         }
-        gi = gi.substring(indexOfDot + 1, gi.length());
-      } else {
-        firstLine.append(gi);
-        gi = "";
-      }
-      firstLine.append("</font>");
-      if ((addFirstBreaks) && !(gi.startsWith("\n\n"))) {
-        if (!gi.startsWith("\n")) {
-          firstLine.append("<br>");
+
+        return r;
+    }
+
+    /**
+     * Implements quicksort with median-of-three method and explicit sort for
+     * problems of size three or less.
+     * 
+     * @param array the array of doubles to be sorted
+     * @param index the index into the array of doubles
+     * @param left  the first index of the subset to be sorted
+     * @param right the last index of the subset to be sorted
+     */
+    // @ requires 0 <= first && first <= right && right < array.length;
+    // @ requires (\forall int i; 0 <= i && i < index.length; 0 <= index[i] &&
+    // index[i] < array.length);
+    // @ requires array != index;
+    // assignable index;
+    private static void quickSort(/* @non_null@ */double[] array, /* @non_null@ */
+            int[] index, int left, int right) {
+
+        int diff = right - left;
+
+        switch (diff) {
+        case 0:
+
+            // No need to do anything
+            return;
+        case 1:
+
+            // Swap two elements if necessary
+            conditionalSwap(array, index, left, right);
+            return;
+        case 2:
+
+            // Just need to sort three elements
+            conditionalSwap(array, index, left, left + 1);
+            conditionalSwap(array, index, left, right);
+            conditionalSwap(array, index, left + 1, right);
+            return;
+        default:
+
+            // Establish pivot
+            int pivotLocation = sortLeftRightAndCenter(array, index, left, right);
+
+            // Move pivot to the right, partition, and restore pivot
+            swap(index, pivotLocation, right - 1);
+            int center = partition(array, index, left, right, array[index[right - 1]]);
+            swap(index, center, right - 1);
+
+            // Sort recursively
+            quickSort(array, index, left, center - 1);
+            quickSort(array, index, center + 1, right);
         }
-        firstLine.append("<br>");
-      }
-      result.append(Utils.lineWrap(firstLine.toString(), lineWidth));
-
-      result.append(Utils.lineWrap(gi, lineWidth).replace("\n", "<br>"));
-      result.append("<br>");
     }
 
-    if (addCapabilities) {
-      if (object instanceof CapabilitiesHandler) {
-        if (!result.toString().endsWith("<br><br>")) {
-          result.append("<br>");
+    /**
+     * Implements quicksort according to Manber's "Introduction to Algorithms".
+     * 
+     * @param array the array of integers to be sorted
+     * @param index the index into the array of integers
+     * @param left  the first index of the subset to be sorted
+     * @param right the last index of the subset to be sorted
+     */
+    // @ requires 0 <= first && first <= right && right < array.length;
+    // @ requires (\forall int i; 0 <= i && i < index.length; 0 <= index[i] &&
+    // index[i] < array.length);
+    // @ requires array != index;
+    // assignable index;
+    private static void quickSort(/* @non_null@ */int[] array, /* @non_null@ */
+            int[] index, int left, int right) {
+
+        if (left < right) {
+            int middle = partition(array, index, left, right);
+            quickSort(array, index, left, middle);
+            quickSort(array, index, middle + 1, right);
         }
-        String caps =
-          CapabilitiesUtils.addCapabilities(
-            "<font color=red>CAPABILITIES</font>",
-            ((CapabilitiesHandler) object).getCapabilities());
-        caps = Utils.lineWrap(caps, lineWidth).replace("\n", "<br>");
-        result.append(caps);
-      }
-
-      if (object instanceof MultiInstanceCapabilitiesHandler) {
-        result.append("<br>");
-        String caps =
-          CapabilitiesUtils.addCapabilities(
-            "<font color=red>MI CAPABILITIES</font>",
-            ((MultiInstanceCapabilitiesHandler) object)
-              .getMultiInstanceCapabilities());
-        caps = Utils.lineWrap(caps, lineWidth).replace("\n", "<br>");
-        result.append(caps);
-      }
     }
 
-    result.append("</html>");
+    /**
+     * Implements computation of the kth-smallest element according to Manber's
+     * "Introduction to Algorithms".
+     * 
+     * @param array the array of double
+     * @param index the index into the array of doubles
+     * @param left  the first index of the subset
+     * @param right the last index of the subset
+     * @param k     the value of k
+     * 
+     * @return the index of the kth-smallest element
+     */
+    // @ requires 0 <= first && first <= right && right < array.length;
+    private static int select(/* @non_null@ */double[] array, /* @non_null@ */
+            int[] index, int left, int right, int k) {
 
-    if (result.toString().equals("<html></html>")) {
-      return null;
-    }
-    return result.toString();
-  }
+        int diff = right - left;
+        switch (diff) {
+        case 0:
 
-  /**
-   * Implements simple line breaking. Reformats the given string by introducing
-   * line breaks so that, ideally, no line exceeds the given number of
-   * characters. Line breaks are assumed to be indicated by newline characters.
-   * Existing line breaks are left in the input text.
-   * 
-   * @param input the string to line wrap
-   * @param maxLineWidth the maximum permitted number of characters in a line
-   * @return the processed string
-   */
-  public static String lineWrap(String input, int maxLineWidth) {
+            // Nothing to be done
+            return left;
+        case 1:
 
-    StringBuffer sb = new StringBuffer();
-    BreakIterator biterator = BreakIterator.getLineInstance();
-    biterator.setText(input);
-    int linestart = 0;
-    int previous = 0;
-    while (true) {
-      int next = biterator.next();
-      String toAdd = input.substring(linestart, previous);
-      if (next == BreakIterator.DONE) {
-        sb.append(toAdd);
-        break;
-      }
-      if (next - linestart > maxLineWidth) {
-        sb.append(toAdd + '\n');
-        linestart = previous;
-      } else {
-        int newLineIndex = toAdd.lastIndexOf('\n');
-        if (newLineIndex != -1) {
-          sb.append(toAdd.substring(0, newLineIndex + 1));
-          linestart += newLineIndex + 1;
+            // Swap two elements if necessary
+            conditionalSwap(array, index, left, right);
+            return left + k - 1;
+        case 2:
+
+            // Just need to sort three elements
+            conditionalSwap(array, index, left, left + 1);
+            conditionalSwap(array, index, left, right);
+            conditionalSwap(array, index, left + 1, right);
+            return left + k - 1;
+        default:
+
+            // Establish pivot
+            int pivotLocation = sortLeftRightAndCenter(array, index, left, right);
+
+            // Move pivot to the right, partition, and restore pivot
+            swap(index, pivotLocation, right - 1);
+            int center = partition(array, index, left, right, array[index[right - 1]]);
+            swap(index, center, right - 1);
+
+            // Proceed recursively
+            if ((center - left + 1) >= k) {
+                return select(array, index, left, center, k);
+            } else {
+                return select(array, index, center + 1, right, k - (center - left + 1));
+            }
         }
-      }
-      previous = next;
     }
-    return sb.toString();
-  }
 
-  /**
-   * Returns a configured Range object given a 1-based range index string (such
-   * as 1-20,35,last) or a comma-separated list of attribute names.
-   * 
-   * @param instanceInfo the header of the instances to configure the range for
-   * @param rangeString a string containing a range of attribute indexes, or a
-   *          comma-separated list of attribute names
-   * @return a Range object configured to cover the supplied rangeString
-   * @throws Exception if a problem occured
-   */
-  public static Range configureRangeFromRangeStringOrAttributeNameList(
-    Instances instanceInfo, String rangeString) throws Exception {
-    Range result = new Range(rangeString);
+    /**
+     * Converts a File's absolute path to a path relative to the user (ie start)
+     * directory. Includes an additional workaround for Cygwin, which doesn't like
+     * upper case drive letters.
+     * 
+     * @param absolute the File to convert to relative path
+     * @return a File with a path that is relative to the user's directory
+     * @exception Exception if the path cannot be constructed
+     */
+    public static File convertToRelativePath(File absolute) throws Exception {
+        File result;
+        String fileStr;
 
-    try {
-      result.setUpper(instanceInfo.numAttributes() - 1);
-    } catch (IllegalArgumentException e) {
-      // now try as a list of named attributes
-      String[] parts = rangeString.split(",");
-      if (parts.length == 0) {
-        throw new Exception(
-          "Must specify a list of attributes to configure the range object "
-            + "with!");
-      }
+        result = null;
 
-      StringBuilder indexList = new StringBuilder();
-      for (String att : parts) {
-        att = att.trim();
-        Attribute a = instanceInfo.attribute(att);
-        if (a == null) {
-          throw new Exception("I can't find the requested attribute '" + att
-            + "' in the supplied instances information.");
+        // if we're running windows, it could be Cygwin
+        if (File.separator.equals("\\")) {
+            // Cygwin doesn't like upper case drives -> try lower case drive
+            try {
+                fileStr = absolute.getPath();
+                fileStr = fileStr.substring(0, 1).toLowerCase() + fileStr.substring(1);
+                result = createRelativePath(new File(fileStr));
+            } catch (Exception e) {
+                // no luck with Cygwin workaround, convert it like it is
+                result = createRelativePath(absolute);
+            }
+        } else {
+            result = createRelativePath(absolute);
         }
-        indexList.append(a.index() + 1).append(",");
-      }
-      if (indexList.length() > 0) {
-        indexList.setLength(indexList.length() - 1);
-      }
-      result = new Range(indexList.toString());
-      result.setUpper(instanceInfo.numAttributes() - 1);
+
+        return result;
     }
 
-    return result;
-  }
+    /**
+     * Converts a File's absolute path to a path relative to the user (ie start)
+     * directory.
+     * 
+     * @param absolute the File to convert to relative path
+     * @return a File with a path that is relative to the user's directory
+     * @exception Exception if the path cannot be constructed
+     */
+    protected static File createRelativePath(File absolute) throws Exception {
+        File userDir = new File(System.getProperty("user.dir"));
+        String userPath = userDir.getAbsolutePath() + File.separator;
+        String targetPath = (new File(absolute.getParent())).getPath() + File.separator;
+        String fileName = absolute.getName();
+        StringBuffer relativePath = new StringBuffer();
+        // relativePath.append("."+File.separator);
+        // System.err.println("User dir "+userPath);
+        // System.err.println("Target path "+targetPath);
 
-  /**
-   * Takes a sample based on the given array of weights based on Walker's method.
-   * Returns an array of the same size that gives the frequency of each item in the sample.
-   * For Walker's method, see pp. 232 of "Stochastic Simulation" by B.D. Ripley (1987).
-   *
-   * @param weights the (positive) weights to be used to determine sample probabilities by normalization
-   * @param random the random number generator to be used
-   *
-   * @return the histogram of items in the sample
-   */
-  public static int[] takeSample(double[] weights, Random random) {
+        // file is in user dir (or subdir)
+        int subdir = targetPath.indexOf(userPath);
+        if (subdir == 0) {
+            if (userPath.length() == targetPath.length()) {
+                relativePath.append(fileName);
+            } else {
+                int ll = userPath.length();
+                relativePath.append(targetPath.substring(ll));
+                relativePath.append(fileName);
+            }
+        } else {
+            int sepCount = 0;
+            String temp = new String(userPath);
+            while (temp.indexOf(File.separator) != -1) {
+                int ind = temp.indexOf(File.separator);
+                sepCount++;
+                temp = temp.substring(ind + 1, temp.length());
+            }
 
-    // Walker's method, see pp. 232 of "Stochastic Simulation" by B.D. Ripley
-    double[] P = new double[weights.length];
-    System.arraycopy(weights, 0, P, 0, weights.length);
-    Utils.normalize(P);
-    double[] Q = new double[weights.length];
-    int[] A = new int[weights.length];
-    int[] W = new int[weights.length];
-    int M = weights.length;
-    int NN = -1;
-    int NP = M;
-    for (int I = 0; I < M; I++) {
-      if (P[I] < 0) {
-        throw new IllegalArgumentException("Weights have to be positive.");
-      }
-      Q[I] = M * P[I];
-      if (Q[I] < 1.0) {
-        W[++NN] = I;
-      } else {
-        W[--NP] = I;
-      }
-    }
-    if (NN > -1 && NP < M) {
-      for (int S = 0; S < M - 1; S++) {
-        int I = W[S];
-        int J = W[NP];
-        A[I] = J;
-        Q[J] += Q[I] - 1.0;
-        if (Q[J] < 1.0) {
-          NP++;
+            String targetTemp = new String(targetPath);
+            String userTemp = new String(userPath);
+            int tcount = 0;
+            while (targetTemp.indexOf(File.separator) != -1) {
+                int ind = targetTemp.indexOf(File.separator);
+                int ind2 = userTemp.indexOf(File.separator);
+                String tpart = targetTemp.substring(0, ind + 1);
+                String upart = userTemp.substring(0, ind2 + 1);
+                if (tpart.compareTo(upart) != 0) {
+                    if (tcount == 0) {
+                        tcount = -1;
+                    }
+                    break;
+                }
+                tcount++;
+                targetTemp = targetTemp.substring(ind + 1, targetTemp.length());
+                userTemp = userTemp.substring(ind2 + 1, userTemp.length());
+            }
+            if (tcount == -1) {
+                // then target file is probably on another drive (under windows)
+                throw new Exception("Can't construct a path to file relative to user " + "dir.");
+            }
+            if (targetTemp.indexOf(File.separator) == -1) {
+                targetTemp = "";
+            }
+            for (int i = 0; i < sepCount - tcount; i++) {
+                relativePath.append(".." + File.separator);
+            }
+            relativePath.append(targetTemp + fileName);
         }
-        if (NP >= M) {
-          break;
+        // System.err.println("new path : "+relativePath.toString());
+        return new File(relativePath.toString());
+    }
+
+    /**
+     * Implements computation of the kth-smallest element according to Manber's
+     * "Introduction to Algorithms".
+     * 
+     * @param array the array of integers
+     * @param index the index into the array of integers
+     * @param left  the first index of the subset
+     * @param right the last index of the subset
+     * @param k     the value of k
+     * 
+     * @return the index of the kth-smallest element
+     */
+    // @ requires 0 <= first && first <= right && right < array.length;
+    private static int select(/* @non_null@ */int[] array, /* @non_null@ */
+            int[] index, int left, int right, int k) {
+
+        if (left == right) {
+            return left;
+        } else {
+            int middle = partition(array, index, left, right);
+            if ((middle - left + 1) >= k) {
+                return select(array, index, left, middle, k);
+            } else {
+                return select(array, index, middle + 1, right, k - (middle - left + 1));
+            }
         }
-      }
-      // A[W[M]] = W[M];
     }
 
-    for (int I = 0; I < M; I++) {
-      Q[I] += I;
-    }
+    /**
+     * For a named dialog, returns true if the user has opted not to view it again
+     * in the future.
+     * 
+     * @param dialogName the name of the dialog to check (e.g.
+     *                   weka.gui.GUICHooser.HowToFindPackageManager).
+     * @return true if the user has opted not to view the named dialog in the
+     *         future.
+     */
+    public static boolean getDontShowDialog(String dialogName) {
+        File wekaHome = ResourceUtils.getWekaHome();
 
-    int[] result = new int[weights.length];
-
-    for (int i = 0; i < weights.length; i++) {
-      int ALRV;
-      double U = M * random.nextDouble();
-      int I = (int) U;
-      if (U < Q[I]) {
-        ALRV = I;
-      } else {
-        ALRV = A[I];
-      }
-      result[ALRV]++;
-    }
-
-    return result;
-  }
-
-  /**
-   * Returns the revision string.
-   * 
-   * @return the revision
-   */
-  @Override
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
-
-  /**
-   * Main method for testing this class.
-   * 
-   * @param ops some dummy options
-   */
-  public static void main(String[] ops) {
-
-    double[] doublesWithNaN = { 4.5, 6.7, Double.NaN, 3.4, 4.8, 1.2, 3.4 };
-    double[] doubles = { 4.5, 6.7, 6.7, 3.4, 4.8, 1.2, 3.4, 6.7, 6.7, 3.4 };
-    int[] ints = { 12, 6, 2, 18, 16, 6, 7, 5, 18, 18, 17 };
-
-    try {
-
-      // Option handling
-      System.out.println("First option split up:");
-      if (ops.length > 0) {
-        String[] firstOptionSplitUp = Utils.splitOptions(ops[0]);
-        for (String element : firstOptionSplitUp) {
-          System.out.println(element);
+        if (!wekaHome.exists()) {
+            return false;
         }
-      }
-      System.out.println("Partitioned options: ");
-      String[] partitionedOptions = Utils.partitionOptions(ops);
-      for (String partitionedOption : partitionedOptions) {
-        System.out.println(partitionedOption);
-      }
-      System.out.println("Get position of flag -f: "
-        + Utils.getOptionPos('f', ops));
-      System.out.println("Get flag -f: " + Utils.getFlag('f', ops));
-      System.out.println("Get position of option -o: "
-        + Utils.getOptionPos('o', ops));
-      System.out.println("Get option -o: " + Utils.getOption('o', ops));
-      System.out.println("Checking for remaining options... ");
-      Utils.checkForRemainingOptions(ops);
 
-      // Statistics
-      System.out.println("Original array with NaN (doubles): ");
-      for (double element : doublesWithNaN) {
-        System.out.print(element + " ");
-      }
-      System.out.println();
-      System.out.println("Original array (doubles): ");
-      for (double d : doubles) {
-        System.out.print(d + " ");
-      }
-      System.out.println();
-      System.out.println("Original array (ints): ");
-      for (int j : ints) {
-        System.out.print(j + " ");
-      }
-      System.out.println();
-      System.out.println("Correlation: "
-        + Utils.correlation(doubles, doubles, doubles.length));
-      System.out.println("Mean: " + Utils.mean(doubles));
-      System.out.println("Variance: " + Utils.variance(doubles));
-      System.out.println("Sum (doubles): " + Utils.sum(doubles));
-      System.out.println("Sum (ints): " + Utils.sum(ints));
-      System.out.println("Max index (doubles): " + Utils.maxIndex(doubles));
-      System.out.println("Max index (ints): " + Utils.maxIndex(ints));
-      System.out.println("Min index (doubles): " + Utils.minIndex(doubles));
-      System.out.println("Min index (ints): " + Utils.minIndex(ints));
-      System.out.println("Median (doubles): "
-        + Utils.kthSmallestValue(doubles, doubles.length / 2));
-      System.out.println("Median (ints): "
-        + Utils.kthSmallestValue(ints, ints.length / 2));
+        File dialogSubDir = new File(wekaHome.toString() + File.separator + "systemDialogs");
+        if (!dialogSubDir.exists()) {
+            return false;
+        }
 
-      // Sorting and normalizing
-      System.out.println("Sorted array with NaN (doubles): ");
-      int[] sorted = Utils.sort(doublesWithNaN);
-      for (int i = 0; i < doublesWithNaN.length; i++) {
-        System.out.print(doublesWithNaN[sorted[i]] + " ");
-      }
-      System.out.println();
-      System.out.println("Sorted array (doubles): ");
-      sorted = Utils.sort(doubles);
-      for (int i = 0; i < doubles.length; i++) {
-        System.out.print(doubles[sorted[i]] + " ");
-      }
-      System.out.println();
-      System.out.println("Sorted array (ints): ");
-      sorted = Utils.sort(ints);
-      for (int i = 0; i < ints.length; i++) {
-        System.out.print(ints[sorted[i]] + " ");
-      }
-      System.out.println();
-      System.out.println("Indices from stable sort (doubles): ");
-      sorted = Utils.stableSort(doubles);
-      for (int i = 0; i < doubles.length; i++) {
-        System.out.print(sorted[i] + " ");
-      }
-      System.out.println();
-      System.out.println("Indices from sort (ints): ");
-      sorted = Utils.sort(ints);
-      for (int i = 0; i < ints.length; i++) {
-        System.out.print(sorted[i] + " ");
-      }
-      System.out.println();
-      System.out.println("Normalized array (doubles): ");
-      Utils.normalize(doubles);
-      for (double d : doubles) {
-        System.out.print(d + " ");
-      }
-      System.out.println();
-      System.out.println("Normalized again (doubles): ");
-      Utils.normalize(doubles, Utils.sum(doubles));
-      for (double d : doubles) {
-        System.out.print(d + " ");
-      }
-      System.out.println();
+        File dialogFile = new File(dialogSubDir.toString() + File.separator + dialogName);
 
-      // Pretty-printing
-      System.out.println("-4.58: " + Utils.doubleToString(-4.57826535, 2));
-      System.out.println("-6.78: " + Utils.doubleToString(-6.78214234, 6, 2));
-
-      // Comparisons
-      System.out.println("5.70001 == 5.7 ? " + Utils.eq(5.70001, 5.7));
-      System.out.println("5.70001 > 5.7 ? " + Utils.gr(5.70001, 5.7));
-      System.out.println("5.70001 >= 5.7 ? " + Utils.grOrEq(5.70001, 5.7));
-      System.out.println("5.7 < 5.70001 ? " + Utils.sm(5.7, 5.70001));
-      System.out.println("5.7 <= 5.70001 ? " + Utils.smOrEq(5.7, 5.70001));
-
-      // Math
-      System.out.println("Info (ints): " + Utils.info(ints));
-      System.out.println("log2(4.6): " + Utils.log2(4.6));
-      System.out.println("5 * log(5): " + Utils.xlogx(5));
-      System.out.println("5.5 rounded: " + Utils.round(5.5));
-      System.out.println("5.55555 rounded to 2 decimal places: "
-        + Utils.roundDouble(5.55555, 2));
-
-      // Arrays
-      System.out.println("Array-Dimensions of 'new int[][]': "
-        + Utils.getArrayDimensions(new int[][] {}));
-      System.out.println("Array-Dimensions of 'new int[][]{{1,2,3},{4,5,6}}': "
-        + Utils.getArrayDimensions(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }));
-      String[][][] s = new String[3][4][];
-      System.out.println("Array-Dimensions of 'new String[3][4][]': "
-        + Utils.getArrayDimensions(s));
-    } catch (Exception e) {
-      e.printStackTrace();
+        return dialogFile.exists();
     }
-  }
+
+    /**
+     * Specify that the named dialog is not to be displayed in the future.
+     * 
+     * @param dialogName the name of the dialog not to show again (e.g.
+     *                   weka.gui.GUIChooser.HowToFindPackageManager).
+     * @throws Exception if the marker file that is used to indicate that a named
+     *                   dialog is not to be shown can't be created. This file lives
+     *                   in $WEKA_HOME/systemDialogs
+     */
+    public static void setDontShowDialog(String dialogName) throws Exception {
+        File wekaHome = ResourceUtils.getWekaHome();
+
+        if (!wekaHome.exists()) {
+            return;
+        }
+
+        File dialogSubDir = new File(wekaHome.toString() + File.separator + "systemDialogs");
+        if (!dialogSubDir.exists()) {
+            if (!dialogSubDir.mkdir()) {
+                return;
+            }
+        }
+
+        File dialogFile = new File(dialogSubDir.toString() + File.separator + dialogName);
+        dialogFile.createNewFile();
+    }
+
+    /**
+     * For a named dialog, if the user has opted not to view it again, returns the
+     * answer the answer the user supplied when they closed the dialog. Returns null
+     * if the user did opt to view the dialog again.
+     * 
+     * @param dialogName the name of the dialog to check (e.g.
+     *                   weka.gui.GUICHooser.HowToFindPackageManager).
+     * @return the answer the user supplied the last time they viewed the named
+     *         dialog (if they opted not to view it again in the future) or null if
+     *         the user opted to view the dialog again in the future.
+     */
+    public static String getDontShowDialogResponse(String dialogName) throws Exception {
+        if (!getDontShowDialog(dialogName)) {
+            return null; // This must be the first time - no file recorded yet.
+        }
+
+        File wekaHome = ResourceUtils.getWekaHome();
+        File dialogSubDir = new File(wekaHome.toString() + File.separator + "systemDialogs" + File.separator + dialogName);
+
+        BufferedReader br = new BufferedReader(new FileReader(dialogSubDir));
+        String response = br.readLine();
+
+        br.close();
+        return response;
+    }
+
+    /**
+     * Specify that the named dialog is not to be shown again in the future. Also
+     * records the answer that the user chose when closing the dialog.
+     * 
+     * @param dialogName the name of the dialog to no longer display
+     * @param response   the user selected response when they closed the dialog
+     * @throws Exception if there is a problem saving the information
+     */
+    public static void setDontShowDialogResponse(String dialogName, String response) throws Exception {
+
+        File wekaHome = ResourceUtils.getWekaHome();
+
+        if (!wekaHome.exists()) {
+            return;
+        }
+
+        File dialogSubDir = new File(wekaHome.toString() + File.separator + "systemDialogs");
+        if (!dialogSubDir.exists()) {
+            if (!dialogSubDir.mkdir()) {
+                return;
+            }
+        }
+
+        File dialogFile = new File(dialogSubDir.toString() + File.separator + dialogName);
+        BufferedWriter br = new BufferedWriter(new FileWriter(dialogFile));
+        br.write(response + "\n");
+        br.flush();
+        br.close();
+    }
+
+    /**
+     * Breaks up the string, if wider than "columns" characters.
+     * 
+     * @param s       the string to process
+     * @param columns the width in columns
+     * @return the processed string
+     */
+    public static String[] breakUp(String s, int columns) {
+        Vector<String> result;
+        String line;
+        BreakIterator boundary;
+        int boundaryStart;
+        int boundaryEnd;
+        String word;
+        String punctuation;
+        int i;
+        String[] lines;
+
+        result = new Vector<String>();
+        punctuation = " .,;:!?'\"";
+        lines = s.split("\n");
+
+        for (i = 0; i < lines.length; i++) {
+            boundary = BreakIterator.getWordInstance();
+            boundary.setText(lines[i]);
+            boundaryStart = boundary.first();
+            boundaryEnd = boundary.next();
+            line = "";
+
+            while (boundaryEnd != BreakIterator.DONE) {
+                word = lines[i].substring(boundaryStart, boundaryEnd);
+                if (line.length() >= columns) {
+                    if (word.length() == 1) {
+                        if (punctuation.indexOf(word.charAt(0)) > -1) {
+                            line += word;
+                            word = "";
+                        }
+                    }
+                    result.add(line);
+                    line = "";
+                }
+                line += word;
+                boundaryStart = boundaryEnd;
+                boundaryEnd = boundary.next();
+            }
+            if (line.length() > 0) {
+                result.add(line);
+            }
+        }
+
+        return result.toArray(new String[result.size()]);
+    }
+
+    /**
+     * Utility method for grabbing the global info help (if it exists) from an
+     * arbitrary object. Can also append capabilities information if the object is a
+     * CapabilitiesHandler.
+     * 
+     * @param object          the object to grab global info from
+     * @param addCapabilities true if capabilities information is to be added to the
+     *                        result
+     * @return the global help info or null if global info does not exist
+     */
+    public static String getGlobalInfo(Object object, boolean addCapabilities) {
+        // set tool tip text from global info if supplied
+        String gi = null;
+        StringBuilder result = new StringBuilder();
+        try {
+            BeanInfo bi = Introspector.getBeanInfo(object.getClass());
+            MethodDescriptor[] methods = bi.getMethodDescriptors();
+            for (MethodDescriptor method : methods) {
+                String name = method.getDisplayName();
+                Method meth = method.getMethod();
+                if (name.equals("globalInfo")) {
+                    if (meth.getReturnType().equals(String.class)) {
+                        Object args[] = {};
+                        String globalInfo = (String) (meth.invoke(object, args));
+                        gi = globalInfo;
+                        break;
+                    }
+                }
+            }
+        } catch (Exception ex) {
+
+        }
+
+        // Max. number of characters per line (may overflow)
+        int lineWidth = 180;
+
+        result.append("<html>");
+
+        if (gi != null && gi.length() > 0) {
+
+            StringBuilder firstLine = new StringBuilder();
+            firstLine.append("<font color=blue>");
+            boolean addFirstBreaks = true;
+            int indexOfDot = gi.indexOf(".");
+            if (indexOfDot > 0) {
+                firstLine.append(gi.substring(0, gi.indexOf(".")));
+                if (gi.length() - indexOfDot < 3) {
+                    addFirstBreaks = false;
+                }
+                gi = gi.substring(indexOfDot + 1, gi.length());
+            } else {
+                firstLine.append(gi);
+                gi = "";
+            }
+            firstLine.append("</font>");
+            if ((addFirstBreaks) && !(gi.startsWith("\n\n"))) {
+                if (!gi.startsWith("\n")) {
+                    firstLine.append("<br>");
+                }
+                firstLine.append("<br>");
+            }
+            result.append(Utils.lineWrap(firstLine.toString(), lineWidth));
+
+            result.append(Utils.lineWrap(gi, lineWidth).replace("\n", "<br>"));
+            result.append("<br>");
+        }
+
+        if (addCapabilities) {
+            if (object instanceof CapabilitiesHandler) {
+                if (!result.toString().endsWith("<br><br>")) {
+                    result.append("<br>");
+                }
+                String caps = CapabilitiesUtils.addCapabilities("<font color=red>CAPABILITIES</font>", ((CapabilitiesHandler) object).getCapabilities());
+                caps = Utils.lineWrap(caps, lineWidth).replace("\n", "<br>");
+                result.append(caps);
+            }
+
+            if (object instanceof MultiInstanceCapabilitiesHandler) {
+                result.append("<br>");
+                String caps = CapabilitiesUtils.addCapabilities("<font color=red>MI CAPABILITIES</font>", ((MultiInstanceCapabilitiesHandler) object).getMultiInstanceCapabilities());
+                caps = Utils.lineWrap(caps, lineWidth).replace("\n", "<br>");
+                result.append(caps);
+            }
+        }
+
+        result.append("</html>");
+
+        if (result.toString().equals("<html></html>")) {
+            return null;
+        }
+        return result.toString();
+    }
+
+    /**
+     * Implements simple line breaking. Reformats the given string by introducing
+     * line breaks so that, ideally, no line exceeds the given number of characters.
+     * Line breaks are assumed to be indicated by newline characters. Existing line
+     * breaks are left in the input text.
+     * 
+     * @param input        the string to line wrap
+     * @param maxLineWidth the maximum permitted number of characters in a line
+     * @return the processed string
+     */
+    public static String lineWrap(String input, int maxLineWidth) {
+
+        StringBuffer sb = new StringBuffer();
+        BreakIterator biterator = BreakIterator.getLineInstance();
+        biterator.setText(input);
+        int linestart = 0;
+        int previous = 0;
+        while (true) {
+            int next = biterator.next();
+            String toAdd = input.substring(linestart, previous);
+            if (next == BreakIterator.DONE) {
+                sb.append(toAdd);
+                break;
+            }
+            if (next - linestart > maxLineWidth) {
+                sb.append(toAdd + '\n');
+                linestart = previous;
+            } else {
+                int newLineIndex = toAdd.lastIndexOf('\n');
+                if (newLineIndex != -1) {
+                    sb.append(toAdd.substring(0, newLineIndex + 1));
+                    linestart += newLineIndex + 1;
+                }
+            }
+            previous = next;
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns a configured Range object given a 1-based range index string (such as
+     * 1-20,35,last) or a comma-separated list of attribute names.
+     * 
+     * @param instanceInfo the header of the instances to configure the range for
+     * @param rangeString  a string containing a range of attribute indexes, or a
+     *                     comma-separated list of attribute names
+     * @return a Range object configured to cover the supplied rangeString
+     * @throws Exception if a problem occured
+     */
+    public static Range configureRangeFromRangeStringOrAttributeNameList(Instances instanceInfo, String rangeString) throws Exception {
+        Range result = new Range(rangeString);
+
+        try {
+            result.setUpper(instanceInfo.numAttributes() - 1);
+        } catch (IllegalArgumentException e) {
+            // now try as a list of named attributes
+            String[] parts = rangeString.split(",");
+            if (parts.length == 0) {
+                throw new Exception("Must specify a list of attributes to configure the range object " + "with!");
+            }
+
+            StringBuilder indexList = new StringBuilder();
+            for (String att : parts) {
+                att = att.trim();
+                Attribute a = instanceInfo.attribute(att);
+                if (a == null) {
+                    throw new Exception("I can't find the requested attribute '" + att + "' in the supplied instances information.");
+                }
+                indexList.append(a.index() + 1).append(",");
+            }
+            if (indexList.length() > 0) {
+                indexList.setLength(indexList.length() - 1);
+            }
+            result = new Range(indexList.toString());
+            result.setUpper(instanceInfo.numAttributes() - 1);
+        }
+
+        return result;
+    }
+
+    /**
+     * Takes a sample based on the given array of weights based on Walker's method.
+     * Returns an array of the same size that gives the frequency of each item in
+     * the sample. For Walker's method, see pp. 232 of "Stochastic Simulation" by
+     * B.D. Ripley (1987).
+     *
+     * @param weights the (positive) weights to be used to determine sample
+     *                probabilities by normalization
+     * @param random  the random number generator to be used
+     *
+     * @return the histogram of items in the sample
+     */
+    public static int[] takeSample(double[] weights, Random random) {
+
+        // Walker's method, see pp. 232 of "Stochastic Simulation" by B.D. Ripley
+        double[] P = new double[weights.length];
+        System.arraycopy(weights, 0, P, 0, weights.length);
+        Utils.normalize(P);
+        double[] Q = new double[weights.length];
+        int[] A = new int[weights.length];
+        int[] W = new int[weights.length];
+        int M = weights.length;
+        int NN = -1;
+        int NP = M;
+        for (int I = 0; I < M; I++) {
+            if (P[I] < 0) {
+                throw new IllegalArgumentException("Weights have to be positive.");
+            }
+            Q[I] = M * P[I];
+            if (Q[I] < 1.0) {
+                W[++NN] = I;
+            } else {
+                W[--NP] = I;
+            }
+        }
+        if (NN > -1 && NP < M) {
+            for (int S = 0; S < M - 1; S++) {
+                int I = W[S];
+                int J = W[NP];
+                A[I] = J;
+                Q[J] += Q[I] - 1.0;
+                if (Q[J] < 1.0) {
+                    NP++;
+                }
+                if (NP >= M) {
+                    break;
+                }
+            }
+            // A[W[M]] = W[M];
+        }
+
+        for (int I = 0; I < M; I++) {
+            Q[I] += I;
+        }
+
+        int[] result = new int[weights.length];
+
+        for (int i = 0; i < weights.length; i++) {
+            int ALRV;
+            double U = M * random.nextDouble();
+            int I = (int) U;
+            if (U < Q[I]) {
+                ALRV = I;
+            } else {
+                ALRV = A[I];
+            }
+            result[ALRV]++;
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    @Override
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
+
+    /**
+     * Main method for testing this class.
+     * 
+     * @param ops some dummy options
+     */
+    public static void main(String[] ops) {
+
+        double[] doublesWithNaN = { 4.5, 6.7, Double.NaN, 3.4, 4.8, 1.2, 3.4 };
+        double[] doubles = { 4.5, 6.7, 6.7, 3.4, 4.8, 1.2, 3.4, 6.7, 6.7, 3.4 };
+        int[] ints = { 12, 6, 2, 18, 16, 6, 7, 5, 18, 18, 17 };
+
+        try {
+
+            // Option handling
+            System.out.println("First option split up:");
+            if (ops.length > 0) {
+                String[] firstOptionSplitUp = Utils.splitOptions(ops[0]);
+                for (String element : firstOptionSplitUp) {
+                    System.out.println(element);
+                }
+            }
+            System.out.println("Partitioned options: ");
+            String[] partitionedOptions = Utils.partitionOptions(ops);
+            for (String partitionedOption : partitionedOptions) {
+                System.out.println(partitionedOption);
+            }
+            System.out.println("Get position of flag -f: " + Utils.getOptionPos('f', ops));
+            System.out.println("Get flag -f: " + Utils.getFlag('f', ops));
+            System.out.println("Get position of option -o: " + Utils.getOptionPos('o', ops));
+            System.out.println("Get option -o: " + Utils.getOption('o', ops));
+            System.out.println("Checking for remaining options... ");
+            Utils.checkForRemainingOptions(ops);
+
+            // Statistics
+            System.out.println("Original array with NaN (doubles): ");
+            for (double element : doublesWithNaN) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
+            System.out.println("Original array (doubles): ");
+            for (double d : doubles) {
+                System.out.print(d + " ");
+            }
+            System.out.println();
+            System.out.println("Original array (ints): ");
+            for (int j : ints) {
+                System.out.print(j + " ");
+            }
+            System.out.println();
+            System.out.println("Correlation: " + Utils.correlation(doubles, doubles, doubles.length));
+            System.out.println("Mean: " + Utils.mean(doubles));
+            System.out.println("Variance: " + Utils.variance(doubles));
+            System.out.println("Sum (doubles): " + Utils.sum(doubles));
+            System.out.println("Sum (ints): " + Utils.sum(ints));
+            System.out.println("Max index (doubles): " + Utils.maxIndex(doubles));
+            System.out.println("Max index (ints): " + Utils.maxIndex(ints));
+            System.out.println("Min index (doubles): " + Utils.minIndex(doubles));
+            System.out.println("Min index (ints): " + Utils.minIndex(ints));
+            System.out.println("Median (doubles): " + Utils.kthSmallestValue(doubles, doubles.length / 2));
+            System.out.println("Median (ints): " + Utils.kthSmallestValue(ints, ints.length / 2));
+
+            // Sorting and normalizing
+            System.out.println("Sorted array with NaN (doubles): ");
+            int[] sorted = Utils.sort(doublesWithNaN);
+            for (int i = 0; i < doublesWithNaN.length; i++) {
+                System.out.print(doublesWithNaN[sorted[i]] + " ");
+            }
+            System.out.println();
+            System.out.println("Sorted array (doubles): ");
+            sorted = Utils.sort(doubles);
+            for (int i = 0; i < doubles.length; i++) {
+                System.out.print(doubles[sorted[i]] + " ");
+            }
+            System.out.println();
+            System.out.println("Sorted array (ints): ");
+            sorted = Utils.sort(ints);
+            for (int i = 0; i < ints.length; i++) {
+                System.out.print(ints[sorted[i]] + " ");
+            }
+            System.out.println();
+            System.out.println("Indices from stable sort (doubles): ");
+            sorted = Utils.stableSort(doubles);
+            for (int i = 0; i < doubles.length; i++) {
+                System.out.print(sorted[i] + " ");
+            }
+            System.out.println();
+            System.out.println("Indices from sort (ints): ");
+            sorted = Utils.sort(ints);
+            for (int i = 0; i < ints.length; i++) {
+                System.out.print(sorted[i] + " ");
+            }
+            System.out.println();
+            System.out.println("Normalized array (doubles): ");
+            Utils.normalize(doubles);
+            for (double d : doubles) {
+                System.out.print(d + " ");
+            }
+            System.out.println();
+            System.out.println("Normalized again (doubles): ");
+            Utils.normalize(doubles, Utils.sum(doubles));
+            for (double d : doubles) {
+                System.out.print(d + " ");
+            }
+            System.out.println();
+
+            // Pretty-printing
+            System.out.println("-4.58: " + Utils.doubleToString(-4.57826535, 2));
+            System.out.println("-6.78: " + Utils.doubleToString(-6.78214234, 6, 2));
+
+            // Comparisons
+            System.out.println("5.70001 == 5.7 ? " + Utils.eq(5.70001, 5.7));
+            System.out.println("5.70001 > 5.7 ? " + Utils.gr(5.70001, 5.7));
+            System.out.println("5.70001 >= 5.7 ? " + Utils.grOrEq(5.70001, 5.7));
+            System.out.println("5.7 < 5.70001 ? " + Utils.sm(5.7, 5.70001));
+            System.out.println("5.7 <= 5.70001 ? " + Utils.smOrEq(5.7, 5.70001));
+
+            // Math
+            System.out.println("Info (ints): " + Utils.info(ints));
+            System.out.println("log2(4.6): " + Utils.log2(4.6));
+            System.out.println("5 * log(5): " + Utils.xlogx(5));
+            System.out.println("5.5 rounded: " + Utils.round(5.5));
+            System.out.println("5.55555 rounded to 2 decimal places: " + Utils.roundDouble(5.55555, 2));
+
+            // Arrays
+            System.out.println("Array-Dimensions of 'new int[][]': " + Utils.getArrayDimensions(new int[][] {}));
+            System.out.println("Array-Dimensions of 'new int[][]{{1,2,3},{4,5,6}}': " + Utils.getArrayDimensions(new int[][] { { 1, 2, 3 }, { 4, 5, 6 } }));
+            String[][][] s = new String[3][4][];
+            System.out.println("Array-Dimensions of 'new String[3][4][]': " + Utils.getArrayDimensions(s));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Predictor element declaration.
+ * <p>
+ * Java class for Predictor element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Predictor">
@@ -44,11 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "categories",
-    "matrix"
-})
+@XmlType(name = "", propOrder = { "extension", "categories", "matrix" })
 @XmlRootElement(name = "Predictor")
 public class Predictor {
 
@@ -67,21 +64,21 @@ public class Predictor {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -95,10 +92,8 @@ public class Predictor {
     /**
      * Gets the value of the categories property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Categories }
-     *     
+     * @return possible object is {@link Categories }
+     * 
      */
     public Categories getCategories() {
         return categories;
@@ -107,10 +102,8 @@ public class Predictor {
     /**
      * Sets the value of the categories property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Categories }
-     *     
+     * @param value allowed object is {@link Categories }
+     * 
      */
     public void setCategories(Categories value) {
         this.categories = value;
@@ -119,10 +112,8 @@ public class Predictor {
     /**
      * Gets the value of the matrix property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Matrix }
-     *     
+     * @return possible object is {@link Matrix }
+     * 
      */
     public Matrix getMatrix() {
         return matrix;
@@ -131,10 +122,8 @@ public class Predictor {
     /**
      * Sets the value of the matrix property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Matrix }
-     *     
+     * @param value allowed object is {@link Matrix }
+     * 
      */
     public void setMatrix(Matrix value) {
         this.matrix = value;
@@ -143,10 +132,8 @@ public class Predictor {
     /**
      * Gets the value of the contrastMatrixType property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getContrastMatrixType() {
         return contrastMatrixType;
@@ -155,10 +142,8 @@ public class Predictor {
     /**
      * Sets the value of the contrastMatrixType property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setContrastMatrixType(String value) {
         this.contrastMatrixType = value;
@@ -167,10 +152,8 @@ public class Predictor {
     /**
      * Gets the value of the name property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getName() {
         return name;
@@ -179,10 +162,8 @@ public class Predictor {
     /**
      * Sets the value of the name property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setName(String value) {
         this.name = value;

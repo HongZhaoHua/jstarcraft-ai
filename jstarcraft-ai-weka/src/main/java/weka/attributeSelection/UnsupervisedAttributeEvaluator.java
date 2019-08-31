@@ -21,18 +21,15 @@
 
 package weka.attributeSelection;
 
-/** 
+/**
  * Abstract unsupervised attribute evaluator.
  *
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class UnsupervisedAttributeEvaluator
-  extends ASEvaluation
-          implements AttributeEvaluator {
+public abstract class UnsupervisedAttributeEvaluator extends ASEvaluation implements AttributeEvaluator {
 
-  /** for serialization */
-  private static final long serialVersionUID = -4100897318675336178L;
-  
+    /** for serialization */
+    private static final long serialVersionUID = -4100897318675336178L;
+
 }
-

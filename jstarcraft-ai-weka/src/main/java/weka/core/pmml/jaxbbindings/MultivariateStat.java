@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigDecimal;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for MultivariateStat element declaration.
+ * <p>
+ * Java class for MultivariateStat element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="MultivariateStat">
@@ -58,9 +59,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "MultivariateStat")
 public class MultivariateStat {
 
@@ -103,21 +102,21 @@ public class MultivariateStat {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -131,10 +130,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the category property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getCategory() {
         return category;
@@ -143,10 +140,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the category property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setCategory(String value) {
         this.category = value;
@@ -155,10 +150,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the chiSquareValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getChiSquareValue() {
         return chiSquareValue;
@@ -167,10 +160,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the chiSquareValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setChiSquareValue(Double value) {
         this.chiSquareValue = value;
@@ -179,10 +170,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the confidenceLevel property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getConfidenceLevel() {
         if (confidenceLevel == null) {
@@ -195,10 +184,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the confidenceLevel property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setConfidenceLevel(BigDecimal value) {
         this.confidenceLevel = value;
@@ -207,10 +194,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the confidenceLowerBound property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getConfidenceLowerBound() {
         return confidenceLowerBound;
@@ -219,10 +204,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the confidenceLowerBound property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setConfidenceLowerBound(Double value) {
         this.confidenceLowerBound = value;
@@ -231,10 +214,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the confidenceUpperBound property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getConfidenceUpperBound() {
         return confidenceUpperBound;
@@ -243,10 +224,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the confidenceUpperBound property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setConfidenceUpperBound(Double value) {
         this.confidenceUpperBound = value;
@@ -255,10 +234,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the df property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getDF() {
         return df;
@@ -267,10 +244,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the df property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setDF(Double value) {
         this.df = value;
@@ -279,10 +254,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the exponent property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getExponent() {
         if (exponent == null) {
@@ -295,10 +268,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the exponent property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setExponent(BigInteger value) {
         this.exponent = value;
@@ -307,10 +278,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the fStatistic property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getFStatistic() {
         return fStatistic;
@@ -319,10 +288,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the fStatistic property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setFStatistic(Double value) {
         this.fStatistic = value;
@@ -331,10 +298,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the importance property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getImportance() {
         return importance;
@@ -343,10 +308,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the importance property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setImportance(BigDecimal value) {
         this.importance = value;
@@ -355,10 +318,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the isIntercept property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsIntercept() {
         if (isIntercept == null) {
@@ -371,10 +332,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the isIntercept property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsIntercept(Boolean value) {
         this.isIntercept = value;
@@ -383,10 +342,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the name property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getName() {
         return name;
@@ -395,10 +352,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the name property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setName(String value) {
         this.name = value;
@@ -407,10 +362,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the pValueAlpha property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getPValueAlpha() {
         return pValueAlpha;
@@ -419,10 +372,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the pValueAlpha property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setPValueAlpha(BigDecimal value) {
         this.pValueAlpha = value;
@@ -431,10 +382,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the pValueFinal property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getPValueFinal() {
         return pValueFinal;
@@ -443,10 +392,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the pValueFinal property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setPValueFinal(BigDecimal value) {
         this.pValueFinal = value;
@@ -455,10 +402,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the pValueInitial property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getPValueInitial() {
         return pValueInitial;
@@ -467,10 +412,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the pValueInitial property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setPValueInitial(BigDecimal value) {
         this.pValueInitial = value;
@@ -479,10 +422,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the stdError property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getStdError() {
         return stdError;
@@ -491,10 +432,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the stdError property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setStdError(Double value) {
         this.stdError = value;
@@ -503,10 +442,8 @@ public class MultivariateStat {
     /**
      * Gets the value of the tValue property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getTValue() {
         return tValue;
@@ -515,10 +452,8 @@ public class MultivariateStat {
     /**
      * Sets the value of the tValue property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setTValue(Double value) {
         this.tValue = value;

@@ -29,20 +29,19 @@ import junit.framework.TestSuite;
  * @version $Revision 1.0 $
  */
 public class AllTests extends TestSuite {
- 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
 
-    suite.addTest(RegressionTest.suite());
-    suite.addTest(GeneralRegressionTest.suite());
-    suite.addTest(NeuralNetworkTest.suite());
-    suite.addTest(TreeModelTest.suite());
-    
-    return suite;
-  }
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
+        suite.addTest(RegressionTest.suite());
+        suite.addTest(GeneralRegressionTest.suite());
+        suite.addTest(NeuralNetworkTest.suite());
+        suite.addTest(TreeModelTest.suite());
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+        return suite;
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

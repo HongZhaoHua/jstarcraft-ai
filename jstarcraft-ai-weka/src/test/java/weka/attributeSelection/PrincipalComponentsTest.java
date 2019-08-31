@@ -23,34 +23,34 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests BestFirst. Run from the command line with:<p/>
+ * Tests BestFirst. Run from the command line with:
+ * <p/>
  * java weka.attributeSelection.PrincipalComponentsTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PrincipalComponentsTest 
-  extends AbstractEvaluatorTest {
+public class PrincipalComponentsTest extends AbstractEvaluatorTest {
 
-  public PrincipalComponentsTest(String name) { 
-    super(name);  
-  }
+    public PrincipalComponentsTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Ranker */
-  public ASSearch getSearch() {
-    return new Ranker();
-  }
+    /** Creates a default Ranker */
+    public ASSearch getSearch() {
+        return new Ranker();
+    }
 
-  /** Creates a default PrincipalComponents */
-  public ASEvaluation getEvaluator() {
-    return new PrincipalComponents();
-  }
+    /** Creates a default PrincipalComponents */
+    public ASEvaluation getEvaluator() {
+        return new PrincipalComponents();
+    }
 
-  public static Test suite() {
-    return new TestSuite(PrincipalComponentsTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(PrincipalComponentsTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

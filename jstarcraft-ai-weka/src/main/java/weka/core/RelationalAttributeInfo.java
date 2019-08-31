@@ -25,15 +25,15 @@ package weka.core;
  */
 public class RelationalAttributeInfo extends NominalAttributeInfo {
 
-  /** The header information for a relation-valued attribute. */
-  protected Instances m_Header;
+    /** The header information for a relation-valued attribute. */
+    protected Instances m_Header;
 
-  /**
-   * Constructs the information object based on the given parameter.
-   */
-  public RelationalAttributeInfo(Instances header) {
+    /**
+     * Constructs the information object based on the given parameter.
+     */
+    public RelationalAttributeInfo(Instances header) {
 
-    super(null, null);
-    m_Header = header;
-  }
+        super(null, null);
+        m_Header = header;
+    }
 }

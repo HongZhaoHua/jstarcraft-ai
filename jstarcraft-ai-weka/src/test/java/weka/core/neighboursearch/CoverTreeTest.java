@@ -23,29 +23,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests CoverTree. Run from the command line with: <p/>
+ * Tests CoverTree. Run from the command line with:
+ * <p/>
  * java weka.core.neighboursearch.CoverTreeTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class CoverTreeTest
-  extends AbstractNearestNeighbourSearchTest {
+public class CoverTreeTest extends AbstractNearestNeighbourSearchTest {
 
-  public CoverTreeTest(String name) {
-    super(name);
-  }
+    public CoverTreeTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default CoverTree */
-  public NearestNeighbourSearch getNearestNeighbourSearch() {
-    return new CoverTree();
-  }
-  
-  public static Test suite() {
-    return new TestSuite(CoverTreeTest.class);
-  }
+    /** Creates a default CoverTree */
+    public NearestNeighbourSearch getNearestNeighbourSearch() {
+        return new CoverTree();
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(CoverTreeTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

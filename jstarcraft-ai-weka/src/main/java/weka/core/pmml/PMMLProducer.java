@@ -32,14 +32,14 @@ import weka.core.Instances;
  */
 public interface PMMLProducer {
 
-  /**
-   * Produce a PMML representation
-   * 
-   * @param train the training data that might have been used by the
-   *          implementer. If it is not needed by the implementer then clients
-   *          can safely pass in null
-   * 
-   * @return a string containing the PMML representation
-   */
-  String toPMML(Instances train);
+    /**
+     * Produce a PMML representation
+     * 
+     * @param train the training data that might have been used by the implementer.
+     *              If it is not needed by the implementer then clients can safely
+     *              pass in null
+     * 
+     * @return a string containing the PMML representation
+     */
+    String toPMML(Instances train);
 }

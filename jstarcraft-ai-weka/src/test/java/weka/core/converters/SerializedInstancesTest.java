@@ -23,58 +23,58 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests SerializedInstancesLoader/SerializedInstancesSaver. Run from the command line with:<p/>
+ * Tests SerializedInstancesLoader/SerializedInstancesSaver. Run from the
+ * command line with:
+ * <p/>
  * java weka.core.converters.SerializedInstancesTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SerializedInstancesTest 
-  extends AbstractFileConverterTest {
+public class SerializedInstancesTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>SerializedInstancesTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public SerializedInstancesTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>SerializedInstancesTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public SerializedInstancesTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new SerializedInstancesLoader();
-  }
+    /**
+     * returns the loader used in the tests
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new SerializedInstancesLoader();
+    }
 
-  /**
-   * returns the saver used in the tests
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new SerializedInstancesSaver();
-  }
+    /**
+     * returns the saver used in the tests
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new SerializedInstancesSaver();
+    }
 
-  /**
-   * returns a test suite
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(SerializedInstancesTest.class);
-  }
+    /**
+     * returns a test suite
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(SerializedInstancesTest.class);
+    }
 
-  /**
-   * for running the test from commandline
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * for running the test from commandline
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

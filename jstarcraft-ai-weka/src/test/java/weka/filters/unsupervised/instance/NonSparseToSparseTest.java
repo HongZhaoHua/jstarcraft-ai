@@ -28,41 +28,42 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests NonSparseToSparse. Run from the command line with:<p>
+ * Tests NonSparseToSparse. Run from the command line with:
+ * <p>
  * java weka.filters.unsupervised.instance.NonSparseToSparseTest
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
 public class NonSparseToSparseTest extends AbstractFilterTest {
-  
-  public NonSparseToSparseTest(String name) { super(name);  }
 
-  /** Creates an example NonSparseToSparse */
-  public Filter getFilter() {
-    NonSparseToSparse f = new NonSparseToSparse();
-    return f;
-  }
-
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes and instances shouldn't change
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-    // Check conversion is OK
-    for (int i = 0; i < result.numInstances(); i++) {
-      assertTrue("Instance should be an instanceof SparseInstance",
-             result.instance(i) instanceof SparseInstance);
+    public NonSparseToSparseTest(String name) {
+        super(name);
     }
-  }
 
+    /** Creates an example NonSparseToSparse */
+    public Filter getFilter() {
+        NonSparseToSparse f = new NonSparseToSparse();
+        return f;
+    }
 
-  public static Test suite() {
-    return new TestSuite(NonSparseToSparseTest.class);
-  }
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes and instances shouldn't change
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        // Check conversion is OK
+        for (int i = 0; i < result.numInstances(); i++) {
+            assertTrue("Instance should be an instanceof SparseInstance", result.instance(i) instanceof SparseInstance);
+        }
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static Test suite() {
+        return new TestSuite(NonSparseToSparseTest.class);
+    }
+
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

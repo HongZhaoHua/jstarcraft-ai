@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests LMT. Run from the command line with:<p/>
+ * Tests LMT. Run from the command line with:
+ * <p/>
  * java weka.classifiers.trees.LMTTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class LMTTest 
-  extends AbstractClassifierTest {
+public class LMTTest extends AbstractClassifierTest {
 
-  public LMTTest(String name) { 
-    super(name);  
-  }
+    public LMTTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default LMT */
-  public Classifier getClassifier() {
-    return new LMT();
-  }
+    /** Creates a default LMT */
+    public Classifier getClassifier() {
+        return new LMT();
+    }
 
-  public static Test suite() {
-    return new TestSuite(LMTTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(LMTTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

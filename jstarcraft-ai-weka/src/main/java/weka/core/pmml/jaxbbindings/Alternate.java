@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Alternate element declaration.
+ * <p>
+ * Java class for Alternate element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Alternate">
@@ -39,13 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "anyDistribution",
-    "gaussianDistribution",
-    "poissonDistribution",
-    "uniformDistribution",
-    "extension"
-})
+@XmlType(name = "", propOrder = { "anyDistribution", "gaussianDistribution", "poissonDistribution", "uniformDistribution", "extension" })
 @XmlRootElement(name = "Alternate")
 public class Alternate {
 
@@ -63,10 +58,8 @@ public class Alternate {
     /**
      * Gets the value of the anyDistribution property.
      * 
-     * @return
-     *     possible object is
-     *     {@link AnyDistribution }
-     *     
+     * @return possible object is {@link AnyDistribution }
+     * 
      */
     public AnyDistribution getAnyDistribution() {
         return anyDistribution;
@@ -75,10 +68,8 @@ public class Alternate {
     /**
      * Sets the value of the anyDistribution property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link AnyDistribution }
-     *     
+     * @param value allowed object is {@link AnyDistribution }
+     * 
      */
     public void setAnyDistribution(AnyDistribution value) {
         this.anyDistribution = value;
@@ -87,10 +78,8 @@ public class Alternate {
     /**
      * Gets the value of the gaussianDistribution property.
      * 
-     * @return
-     *     possible object is
-     *     {@link GaussianDistribution }
-     *     
+     * @return possible object is {@link GaussianDistribution }
+     * 
      */
     public GaussianDistribution getGaussianDistribution() {
         return gaussianDistribution;
@@ -99,10 +88,8 @@ public class Alternate {
     /**
      * Sets the value of the gaussianDistribution property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link GaussianDistribution }
-     *     
+     * @param value allowed object is {@link GaussianDistribution }
+     * 
      */
     public void setGaussianDistribution(GaussianDistribution value) {
         this.gaussianDistribution = value;
@@ -111,10 +98,8 @@ public class Alternate {
     /**
      * Gets the value of the poissonDistribution property.
      * 
-     * @return
-     *     possible object is
-     *     {@link PoissonDistribution }
-     *     
+     * @return possible object is {@link PoissonDistribution }
+     * 
      */
     public PoissonDistribution getPoissonDistribution() {
         return poissonDistribution;
@@ -123,10 +108,8 @@ public class Alternate {
     /**
      * Sets the value of the poissonDistribution property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link PoissonDistribution }
-     *     
+     * @param value allowed object is {@link PoissonDistribution }
+     * 
      */
     public void setPoissonDistribution(PoissonDistribution value) {
         this.poissonDistribution = value;
@@ -135,10 +118,8 @@ public class Alternate {
     /**
      * Gets the value of the uniformDistribution property.
      * 
-     * @return
-     *     possible object is
-     *     {@link UniformDistribution }
-     *     
+     * @return possible object is {@link UniformDistribution }
+     * 
      */
     public UniformDistribution getUniformDistribution() {
         return uniformDistribution;
@@ -147,10 +128,8 @@ public class Alternate {
     /**
      * Sets the value of the uniformDistribution property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link UniformDistribution }
-     *     
+     * @param value allowed object is {@link UniformDistribution }
+     * 
      */
     public void setUniformDistribution(UniformDistribution value) {
         this.uniformDistribution = value;
@@ -160,21 +139,21 @@ public class Alternate {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */

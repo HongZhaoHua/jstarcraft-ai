@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for SimpleSetPredicate element declaration.
+ * <p>
+ * Java class for SimpleSetPredicate element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="SimpleSetPredicate">
@@ -50,10 +51,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "array"
-})
+@XmlType(name = "", propOrder = { "extension", "array" })
 @XmlRootElement(name = "SimpleSetPredicate")
 public class SimpleSetPredicate {
 
@@ -70,21 +68,21 @@ public class SimpleSetPredicate {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -98,10 +96,8 @@ public class SimpleSetPredicate {
     /**
      * Gets the value of the array property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ArrayType }
-     *     
+     * @return possible object is {@link ArrayType }
+     * 
      */
     public ArrayType getArray() {
         return array;
@@ -110,10 +106,8 @@ public class SimpleSetPredicate {
     /**
      * Sets the value of the array property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayType }
-     *     
+     * @param value allowed object is {@link ArrayType }
+     * 
      */
     public void setArray(ArrayType value) {
         this.array = value;
@@ -122,10 +116,8 @@ public class SimpleSetPredicate {
     /**
      * Gets the value of the booleanOperator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getBooleanOperator() {
         return booleanOperator;
@@ -134,10 +126,8 @@ public class SimpleSetPredicate {
     /**
      * Sets the value of the booleanOperator property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setBooleanOperator(String value) {
         this.booleanOperator = value;
@@ -146,10 +136,8 @@ public class SimpleSetPredicate {
     /**
      * Gets the value of the field property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getField() {
         return field;
@@ -158,10 +146,8 @@ public class SimpleSetPredicate {
     /**
      * Sets the value of the field property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setField(String value) {
         this.field = value;

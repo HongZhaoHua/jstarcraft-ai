@@ -34,40 +34,35 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Edward Raff
  */
-public class TestTools
-{
-    public static void assertEqualsRelDiff(double expected, double actual, double delta)
-    {
+public class TestTools {
+    public static void assertEqualsRelDiff(double expected, double actual, double delta) {
         double denom = expected;
-        if(expected == 0)
+        if (expected == 0)
             denom = 1e-6;
 
-        double relError = Math.abs(expected-actual)/denom;
+        double relError = Math.abs(expected - actual) / denom;
         assertEquals(0.0, relError, delta);
     }
-    
+
     /**
-     * Creates a deep copy of the given object via serialization. 
-     * @param <O> The class of the object
+     * Creates a deep copy of the given object via serialization.
+     * 
+     * @param      <O> The class of the object
      * @param orig the object to make a copy of
      * @return a copy of the object via serialization
      */
-    public static <O extends Object> O deepCopy(O orig)
-    {
+    public static <O extends Object> O deepCopy(O orig) {
         Object obj = null;
-        try
-        {
+        try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream out = new ObjectOutputStream(bos);
             out.writeObject(orig);
             out.flush();
             out.close();
-            
+
             ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
             obj = in.readObject();
-        }
-        catch (IOException | ClassNotFoundException e)
-        {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException("Object couldn't be copied", e);
         }
@@ -75,20 +70,21 @@ public class TestTools
     }
 
     /**
-     * Evaluates a given clustering by assuming that the true cluster label is in the first categorical feature. Checks to make sure that each cluster is pure in the label
+     * Evaluates a given clustering by assuming that the true cluster label is in
+     * the first categorical feature. Checks to make sure that each cluster is pure
+     * in the label
+     * 
      * @param clusters the clustering to evaluate
      * @return true if the clustering is good, false otherwise
      */
-    public static boolean checkClusteringByCat(List<List<DataPoint>> clusters)
-    {
+    public static boolean checkClusteringByCat(List<List<DataPoint>> clusters) {
         Set<Integer> seenBefore = new IntSet();
-        for (List<DataPoint> cluster : clusters)
-        {
+        for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
-            if(seenBefore.contains(thisClass) != false)
+            if (seenBefore.contains(thisClass) != false)
                 return false;
             for (DataPoint dp : cluster)
-                if(thisClass != dp.getCategoricalValue(0))
+                if (thisClass != dp.getCategoricalValue(0))
                     return false;
         }
         return true;
@@ -96,23 +92,25 @@ public class TestTools
 
     /**
      * Evaluate regressor on linear problem
+     * 
      * @param instance regressor to use
-     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it failed
+     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it
+     *         failed
      */
-    public static boolean regressEvalLinear(Regressor instance)
-    {
+    public static boolean regressEvalLinear(Regressor instance) {
         return regressEvalLinear(instance, 500, 100);
     }
-    
+
     /**
      * Evaluate regressor on linear problem
+     * 
      * @param instance regressor to use
-     * @param N_train size of the training set to use
-     * @param N_test size of the testing set
-     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it failed
+     * @param N_train  size of the training set to use
+     * @param N_test   size of the testing set
+     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it
+     *         failed
      */
-    public static boolean regressEvalLinear(Regressor instance, int N_train, int N_test)
-    {
+    public static boolean regressEvalLinear(Regressor instance, int N_train, int N_test) {
         RegressionDataSet train = FixedProblems.getLinearRegression(N_train, RandomUtil.getRandom());
         RegressionDataSet test = FixedProblems.getLinearRegression(N_test, RandomUtil.getRandom());
         RegressionModelEvaluation rme = new RegressionModelEvaluation(instance, train);
@@ -122,25 +120,27 @@ public class TestTools
 
     /**
      * Evaluate regressor on linear problem
+     * 
      * @param instance regressor to use
-     * @param ex source of threads to use
-     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it failed
+     * @param ex       source of threads to use
+     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it
+     *         failed
      */
-    public static boolean regressEvalLinear(Regressor instance, ExecutorService ex)
-    {
+    public static boolean regressEvalLinear(Regressor instance, ExecutorService ex) {
         return regressEvalLinear(instance, false, 500, 100);
     }
-    
+
     /**
      * Evaluate regressor on linear problem
+     * 
      * @param instance regressor to use
-     * @param ex source of threads to use
-     * @param N_train size of the training set to use
-     * @param N_test size of the testing set
-     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it failed
+     * @param ex       source of threads to use
+     * @param N_train  size of the training set to use
+     * @param N_test   size of the testing set
+     * @return <tt>true</tt> if the model passed the test, <tt>false</tt> if it
+     *         failed
      */
-    public static boolean regressEvalLinear(Regressor instance, boolean parallel, int N_train, int N_test)
-    {
+    public static boolean regressEvalLinear(Regressor instance, boolean parallel, int N_train, int N_test) {
         RegressionDataSet train = FixedProblems.getLinearRegression(N_train, RandomUtil.getRandom());
         RegressionDataSet test = FixedProblems.getLinearRegression(N_test, RandomUtil.getRandom());
         RegressionModelEvaluation rme = new RegressionModelEvaluation(instance, train, parallel);

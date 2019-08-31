@@ -24,47 +24,40 @@ package jsat.linear.vectorcollection;
  *
  * @author Edward Raff
  */
-public class IndexDistPair implements Comparable<IndexDistPair>
-{
+public class IndexDistPair implements Comparable<IndexDistPair> {
     /**
      * the index of a vector
      */
     protected int indx;
-    
+
     /**
      * the distance of this index to a query vector
      */
     protected double dist;
 
-    public IndexDistPair(int indx, double dist)
-    {
+    public IndexDistPair(int indx, double dist) {
         this.indx = indx;
         this.dist = dist;
     }
-    
-    public int getIndex()
-    {
+
+    public int getIndex() {
         return indx;
     }
-    
-    public void setIndex(int indx)
-    {
+
+    public void setIndex(int indx) {
         this.indx = indx;
     }
-    
-    public double getDist()
-    {
+
+    public double getDist() {
         return dist;
     }
-    
-    public void setDist(double dist)
-    {
+
+    public void setDist(double dist) {
         this.dist = dist;
     }
 
     @Override
-    public int compareTo(IndexDistPair o)
-    {
+    public int compareTo(IndexDistPair o) {
         return Double.compare(this.dist, o.dist);
     }
 }

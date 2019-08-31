@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests Apriori. Run from the command line with:<p/>
+ * Tests Apriori. Run from the command line with:
+ * <p/>
  * java weka.associations.AprioriTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AprioriTest 
-  extends AbstractAssociatorTest {
+public class AprioriTest extends AbstractAssociatorTest {
 
-  public AprioriTest(String name) { 
-    super(name);  
-  }
+    public AprioriTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Apriori */
-  public Associator getAssociator() {
-    return new Apriori();
-  }
+    /** Creates a default Apriori */
+    public Associator getAssociator() {
+        return new Apriori();
+    }
 
-  public static Test suite() {
-    return new TestSuite(AprioriTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(AprioriTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

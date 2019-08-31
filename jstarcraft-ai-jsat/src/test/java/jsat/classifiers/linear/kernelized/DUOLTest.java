@@ -22,36 +22,29 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class DUOLTest
-{
-    
-    public DUOLTest()
-    {
+public class DUOLTest {
+
+    public DUOLTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
-    
+
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
         DUOL instance = new DUOL(new RBFKernel(0.5));
@@ -67,12 +60,11 @@ public class DUOLTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
         DUOL instance = new DUOL(new RBFKernel(0.5));
-        
+
         ClassificationDataSet train = FixedProblems.getInnerOuterCircle(200, RandomUtil.getRandom());
         ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
 
@@ -84,12 +76,11 @@ public class DUOLTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         DUOL instance = new DUOL(new RBFKernel(0.5));
-        
+
         ClassificationDataSet t1 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom());
         ClassificationDataSet t2 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom(), 2.0, 10.0);
 

@@ -28,28 +28,27 @@ package weka.core;
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class UnsupportedAttributeTypeException
-  extends WekaException {
+public class UnsupportedAttributeTypeException extends WekaException {
 
-  /** for serialization */
-  private static final long serialVersionUID = 2658987325328414838L;
+    /** for serialization */
+    private static final long serialVersionUID = 2658987325328414838L;
 
-  /**
-   * Creates a new UnsupportedAttributeTypeException with no message.
-   *
-   */
-  public UnsupportedAttributeTypeException() {
+    /**
+     * Creates a new UnsupportedAttributeTypeException with no message.
+     *
+     */
+    public UnsupportedAttributeTypeException() {
 
-    super();
-  }
+        super();
+    }
 
-  /**
-   * Creates a new UnsupportedAttributeTypeException.
-   *
-   * @param message the reason for raising an exception.
-   */
-  public UnsupportedAttributeTypeException(String message) {
+    /**
+     * Creates a new UnsupportedAttributeTypeException.
+     *
+     * @param message the reason for raising an exception.
+     */
+    public UnsupportedAttributeTypeException(String message) {
 
-    super(message);
-  }
+        super(message);
+    }
 }

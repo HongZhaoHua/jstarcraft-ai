@@ -28,25 +28,25 @@ package weka.core;
  */
 public class CapabilitiesUtils {
 
-  /**
-   * returns a comma-separated list of all the capabilities, excluding interface-based ones.
-   *
-   * @param c the capabilities to get a string representation from
-   * @return the string describing the capabilities
-   */
-  public static String listCapabilities(Capabilities c) {
-    return c.listCapabilities();
-  }
+    /**
+     * returns a comma-separated list of all the capabilities, excluding
+     * interface-based ones.
+     *
+     * @param c the capabilities to get a string representation from
+     * @return the string describing the capabilities
+     */
+    public static String listCapabilities(Capabilities c) {
+        return c.listCapabilities();
+    }
 
-  /**
-   * generates a string from the capabilities, suitable to add to the help
-   * text.
-   *
-   * @param title the title for the capabilities
-   * @param c the capabilities
-   * @return a string describing the capabilities
-   */
-  public static String addCapabilities(String title, Capabilities c) {
-   return c.addCapabilities(title);
-  }
+    /**
+     * generates a string from the capabilities, suitable to add to the help text.
+     *
+     * @param title the title for the capabilities
+     * @param c     the capabilities
+     * @return a string describing the capabilities
+     */
+    public static String addCapabilities(String title, Capabilities c) {
+        return c.addCapabilities(title);
+    }
 }

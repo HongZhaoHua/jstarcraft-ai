@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests JRip. Run from the command line with:<p>
+ * Tests JRip. Run from the command line with:
+ * <p>
  * java weka.classifiers.rules.JRipTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class JRipTest extends AbstractClassifierTest {
 
-  public JRipTest(String name) { super(name);  }
+    public JRipTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default JRip */
-  public Classifier getClassifier() {
-    return new JRip();
-  }
+    /** Creates a default JRip */
+    public Classifier getClassifier() {
+        return new JRip();
+    }
 
-  public static Test suite() {
-    return new TestSuite(JRipTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(JRipTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

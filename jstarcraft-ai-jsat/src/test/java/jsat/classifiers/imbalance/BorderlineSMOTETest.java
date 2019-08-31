@@ -39,94 +39,85 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class BorderlineSMOTETest
-{
+public class BorderlineSMOTETest {
     static boolean parallelTrain = true;
-    public BorderlineSMOTETest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
+
+    public BorderlineSMOTETest() {
     }
 
-    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
         ClassificationDataSet train = FixedProblems.get2ClassLinear2D(200, 20, 0.5, RandomUtil.getRandom());
-        
+
         BorderlineSMOTE smote = new BorderlineSMOTE(new LogisticRegressionDCD(), false);
         smote.train(train, parallelTrain);
-        
-        
+
         ClassificationDataSet test = FixedProblems.get2ClassLinear2D(200, 200, 4.0, RandomUtil.getRandom());
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = smote.clone();
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = new BorderlineSMOTE(new LogisticRegressionDCD(), true);
         smote.train(train, parallelTrain);
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = smote.clone();
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
     }
-    
+
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
         ClassificationDataSet train = FixedProblems.get2ClassLinear2D(200, 20, 0.5, RandomUtil.getRandom());
-        
+
         BorderlineSMOTE smote = new BorderlineSMOTE(new LogisticRegressionDCD(), true);
         smote.train(train);
-        
+
         ClassificationDataSet test = FixedProblems.get2ClassLinear2D(200, 200, 4.0, RandomUtil.getRandom());
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = smote.clone();
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = new BorderlineSMOTE(new LogisticRegressionDCD(), false);
         smote.train(train);
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
-        
+
         smote = smote.clone();
-        
-        for(DataPointPair<Integer> dpp : test.getAsDPPList())
+
+        for (DataPointPair<Integer> dpp : test.getAsDPPList())
             assertEquals(dpp.getPair().longValue(), smote.classify(dpp.getDataPoint()).mostLikely());
     }
 }

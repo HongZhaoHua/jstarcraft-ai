@@ -38,118 +38,117 @@ import weka.core.Utils;
  * @version $Revision$
  */
 
-public abstract class ClusterDefinition implements Serializable, OptionHandler,
-  RevisionHandler {
+public abstract class ClusterDefinition implements Serializable, OptionHandler, RevisionHandler {
 
-  /** for serialization */
-  private static final long serialVersionUID = -5950001207047429961L;
+    /** for serialization */
+    private static final long serialVersionUID = -5950001207047429961L;
 
-  /** the parent of the cluster */
-  protected ClusterGenerator m_Parent;
+    /** the parent of the cluster */
+    protected ClusterGenerator m_Parent;
 
-  /**
-   * initializes the cluster, without a parent cluster (necessary for GOE)
-   */
-  public ClusterDefinition() {
-    this(null);
-  }
-
-  /**
-   * initializes the cluster
-   * 
-   * @param parent the datagenerator this cluster belongs to
-   */
-  public ClusterDefinition(ClusterGenerator parent) {
-    m_Parent = parent;
-
-    try {
-      setDefaults();
-    } catch (Exception e) {
-      e.printStackTrace();
+    /**
+     * initializes the cluster, without a parent cluster (necessary for GOE)
+     */
+    public ClusterDefinition() {
+        this(null);
     }
-  }
 
-  /**
-   * sets the default values
-   * 
-   * @throws Exception if setting of defaults fails
-   */
-  protected abstract void setDefaults() throws Exception;
+    /**
+     * initializes the cluster
+     * 
+     * @param parent the datagenerator this cluster belongs to
+     */
+    public ClusterDefinition(ClusterGenerator parent) {
+        m_Parent = parent;
 
-  /**
-   * Returns a string describing this data generator.
-   * 
-   * @return a description of the data generator suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String globalInfo() {
-    return "Contains informations about a certain cluster of a cluster generator.";
-  }
+        try {
+            setDefaults();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options
-   */
-  @Override
-  public abstract Enumeration<Option> listOptions();
+    /**
+     * sets the default values
+     * 
+     * @throws Exception if setting of defaults fails
+     */
+    protected abstract void setDefaults() throws Exception;
 
-  /**
-   * Parses a list of options for this object.
-   * <p/>
-   * 
-   * For list of valid options see class description.
-   * <p/>
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public abstract void setOptions(String[] options) throws Exception;
+    /**
+     * Returns a string describing this data generator.
+     * 
+     * @return a description of the data generator suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String globalInfo() {
+        return "Contains informations about a certain cluster of a cluster generator.";
+    }
 
-  /**
-   * Gets the current settings of the datagenerator BIRCHCluster.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public abstract String[] getOptions();
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options
+     */
+    @Override
+    public abstract Enumeration<Option> listOptions();
 
-  /**
-   * returns the parent datagenerator this cluster belongs to
-   * 
-   * @return the parent this cluster belongs to
-   */
-  public ClusterGenerator getParent() {
-    return m_Parent;
-  }
+    /**
+     * Parses a list of options for this object.
+     * <p/>
+     * 
+     * For list of valid options see class description.
+     * <p/>
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public abstract void setOptions(String[] options) throws Exception;
 
-  /**
-   * sets the parent datagenerator this cluster belongs to
-   * 
-   * @param parent the parent datagenerator
-   */
-  public void setParent(ClusterGenerator parent) {
-    m_Parent = parent;
-  }
+    /**
+     * Gets the current settings of the datagenerator BIRCHCluster.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public abstract String[] getOptions();
 
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String parentTipText() {
-    return "The cluster generator this object belongs to.";
-  }
+    /**
+     * returns the parent datagenerator this cluster belongs to
+     * 
+     * @return the parent this cluster belongs to
+     */
+    public ClusterGenerator getParent() {
+        return m_Parent;
+    }
 
-  /**
-   * returns a string representation of the cluster
-   * 
-   * @return the cluster definition as string
-   */
-  @Override
-  public String toString() {
-    return this.getClass().getName() + ": " + Utils.joinOptions(getOptions());
-  }
+    /**
+     * sets the parent datagenerator this cluster belongs to
+     * 
+     * @param parent the parent datagenerator
+     */
+    public void setParent(ClusterGenerator parent) {
+        m_Parent = parent;
+    }
+
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String parentTipText() {
+        return "The cluster generator this object belongs to.";
+    }
+
+    /**
+     * returns a string representation of the cluster
+     * 
+     * @return the cluster definition as string
+     */
+    @Override
+    public String toString() {
+        return this.getClass().getName() + ": " + Utils.joinOptions(getOptions());
+    }
 }

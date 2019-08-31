@@ -29,102 +29,102 @@ import weka.core.Instances;
 import weka.core.RevisionUtils;
 
 /**
- * Helper class for logistic model trees (weka.classifiers.trees.lmt.LMT) to implement the 
- * splitting criterion based on residuals.
+ * Helper class for logistic model trees (weka.classifiers.trees.lmt.LMT) to
+ * implement the splitting criterion based on residuals.
  * 
  * @author Niels Landwehr
  * @version $Revision$
  */
-public class ResidualModelSelection
-  extends ModelSelection {
+public class ResidualModelSelection extends ModelSelection {
 
-  /** for serialization */
-  private static final long serialVersionUID = -293098783159385148L;
+    /** for serialization */
+    private static final long serialVersionUID = -293098783159385148L;
 
-  /** Minimum number of instances for leaves*/
-  protected int m_minNumInstances;
+    /** Minimum number of instances for leaves */
+    protected int m_minNumInstances;
 
-  /** Minimum information gain for split*/
-  protected double m_minInfoGain;    
+    /** Minimum information gain for split */
+    protected double m_minInfoGain;
 
-  /**
-   * Constructor to create ResidualModelSelection object. 
-   * @param minNumInstances minimum number of instances for leaves
-   */
-  public ResidualModelSelection(int minNumInstances) {
-    m_minNumInstances = minNumInstances;
-    m_minInfoGain = 1.0E-4;
-  }
-
-  /**Method not in use*/
-  public void cleanup() {
-    //method not in use
-  }
-
-  /**
-   * Selects split based on residuals for the given dataset.
-   */
-  public final ClassifierSplitModel selectModel(Instances data, 
-      double[][] dataZs, double[][] dataWs) throws Exception{
-
-    int numAttributes = data.numAttributes();
-
-    if (numAttributes < 2) throw new Exception("Can't select Model without non-class attribute");
-    if (data.numInstances() < m_minNumInstances) return new NoSplit(new Distribution(data));
-
-
-    double bestGain = -Double.MAX_VALUE;
-    int bestAttribute = -1;
-
-    //try split on every attribute
-    for (int i = 0; i < numAttributes; i++) {
-      if (i != data.classIndex()) {
-
-	//build split
-	ResidualSplit split = new ResidualSplit(i);	    
-	split.buildClassifier(data, dataZs, dataWs);
-
-	if (split.checkModel(m_minNumInstances)){
-
-	  //evaluate split 
-	  double gain = split.entropyGain();	
-	  if (gain > bestGain) {
-	    bestGain = gain;
-	    bestAttribute = i;
-	  }
-	}
-      }    	    
-    }     
-
-    if (bestGain >= m_minInfoGain){
-      //return best split
-      ResidualSplit split = new ResidualSplit(bestAttribute);
-      split.buildClassifier(data, dataZs, dataWs);	
-      return split;	    
-    } else {	    
-      //could not find any split with enough information gain
-      return new NoSplit(new Distribution(data));	    
+    /**
+     * Constructor to create ResidualModelSelection object.
+     * 
+     * @param minNumInstances minimum number of instances for leaves
+     */
+    public ResidualModelSelection(int minNumInstances) {
+        m_minNumInstances = minNumInstances;
+        m_minInfoGain = 1.0E-4;
     }
-  }
 
-  /**Method not in use*/
-  public final ClassifierSplitModel selectModel(Instances train) {
-    //method not in use
-    return null;
-  }
+    /** Method not in use */
+    public void cleanup() {
+        // method not in use
+    }
 
-  /**Method not in use*/
-  public final ClassifierSplitModel selectModel(Instances train, Instances test) {
-    //method not in use
-    return null;
-  }
-  
-  /**
-   * Returns the revision string.
-   * 
-   * @return		the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Selects split based on residuals for the given dataset.
+     */
+    public final ClassifierSplitModel selectModel(Instances data, double[][] dataZs, double[][] dataWs) throws Exception {
+
+        int numAttributes = data.numAttributes();
+
+        if (numAttributes < 2)
+            throw new Exception("Can't select Model without non-class attribute");
+        if (data.numInstances() < m_minNumInstances)
+            return new NoSplit(new Distribution(data));
+
+        double bestGain = -Double.MAX_VALUE;
+        int bestAttribute = -1;
+
+        // try split on every attribute
+        for (int i = 0; i < numAttributes; i++) {
+            if (i != data.classIndex()) {
+
+                // build split
+                ResidualSplit split = new ResidualSplit(i);
+                split.buildClassifier(data, dataZs, dataWs);
+
+                if (split.checkModel(m_minNumInstances)) {
+
+                    // evaluate split
+                    double gain = split.entropyGain();
+                    if (gain > bestGain) {
+                        bestGain = gain;
+                        bestAttribute = i;
+                    }
+                }
+            }
+        }
+
+        if (bestGain >= m_minInfoGain) {
+            // return best split
+            ResidualSplit split = new ResidualSplit(bestAttribute);
+            split.buildClassifier(data, dataZs, dataWs);
+            return split;
+        } else {
+            // could not find any split with enough information gain
+            return new NoSplit(new Distribution(data));
+        }
+    }
+
+    /** Method not in use */
+    public final ClassifierSplitModel selectModel(Instances train) {
+        // method not in use
+        return null;
+    }
+
+    /** Method not in use */
+    public final ClassifierSplitModel selectModel(Instances train, Instances test) {
+        // method not in use
+        return null;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

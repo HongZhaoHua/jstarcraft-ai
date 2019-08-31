@@ -27,112 +27,112 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RemoveByName. Run from the command line with: <p/>
+ * Tests RemoveByName. Run from the command line with:
+ * <p/>
  * java weka.filters.unsupervised.attribute.RemoveByNameTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RemoveByNameTest
-  extends AbstractFilterTest {
-  
-  /**
-   * Initializes the test.
-   * 
-   * @param name	the name of the test
-   */
-  public RemoveByNameTest(String name) { 
-    super(name);
-  }
+public class RemoveByNameTest extends AbstractFilterTest {
 
-  /**
-   * Creates a default RemoveByName.
-   * 
-   * @return		the filter
-   */
-  public Filter getFilter() {
-    return getFilter(RemoveByName.DEFAULT_EXPRESSION, false);
-  }
-  
-  /**
-   * returns a custom filter.
-   * 
-   * @param expression	the expression to use
-   * @param invert	whether to invert the matching sense
-   * @return		the configured filter
-   */
-  protected Filter getFilter(String expression, boolean invert) {
-    RemoveByName	filter;
-    
-    filter = new RemoveByName();
-    filter.setExpression(expression);
-    filter.setInvertSelection(invert);
-    
-    return filter;
-  }
+    /**
+     * Initializes the test.
+     * 
+     * @param name the name of the test
+     */
+    public RemoveByNameTest(String name) {
+        super(name);
+    }
 
-  /**
-   * Tests removing all attributes starting with "String".
-   */
-  public void testTypical() {
-    Instances 	result;
+    /**
+     * Creates a default RemoveByName.
+     * 
+     * @return the filter
+     */
+    public Filter getFilter() {
+        return getFilter(RemoveByName.DEFAULT_EXPRESSION, false);
+    }
 
-    m_Filter = getFilter("^String.*", false);
+    /**
+     * returns a custom filter.
+     * 
+     * @param expression the expression to use
+     * @param invert     whether to invert the matching sense
+     * @return the configured filter
+     */
+    protected Filter getFilter(String expression, boolean invert) {
+        RemoveByName filter;
 
-    // 1. with class attribute
-    result = useFilter();
-    // Number of attributes will be two less, number of instances won't change
-    assertEquals(m_Instances.numAttributes() - 2, result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+        filter = new RemoveByName();
+        filter.setExpression(expression);
+        filter.setInvertSelection(invert);
 
-  /**
-   * Tests removing all attributes starting with "Nominal", one of them being
-   * the class attribute.
-   */
-  public void testTypicalWithClass() {
-    Instances 	result;
+        return filter;
+    }
 
-    m_Instances.setClassIndex(1);  // "NominalAtt1"
-    m_Filter = getFilter("^Nominal.*", false);
+    /**
+     * Tests removing all attributes starting with "String".
+     */
+    public void testTypical() {
+        Instances result;
 
-    // 1. with class attribute
-    result = useFilter();
-    // Number of attributes will be two less, number of instances won't change
-    assertEquals(m_Instances.numAttributes() - 1, result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+        m_Filter = getFilter("^String.*", false);
 
-  /**
-   * Tests removing all attributes but attributes ending with "Att2".
-   */
-  public void testTypicalInverted() {
-    Instances 	result;
+        // 1. with class attribute
+        result = useFilter();
+        // Number of attributes will be two less, number of instances won't change
+        assertEquals(m_Instances.numAttributes() - 2, result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-    m_Filter = getFilter(".*Att2$", true);
+    /**
+     * Tests removing all attributes starting with "Nominal", one of them being the
+     * class attribute.
+     */
+    public void testTypicalWithClass() {
+        Instances result;
 
-    // 1. with class attribute
-    result = useFilter();
-    // Number of attributes will be two less, number of instances won't change
-    assertEquals(3, result.numAttributes());
-    assertEquals(m_Instances.numInstances(), result.numInstances());
-  }
+        m_Instances.setClassIndex(1); // "NominalAtt1"
+        m_Filter = getFilter("^Nominal.*", false);
 
-  /**
-   * Returns a test suite.
-   * 
-   * @return		the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(RemoveByNameTest.class);
-  }
+        // 1. with class attribute
+        result = useFilter();
+        // Number of attributes will be two less, number of instances won't change
+        assertEquals(m_Instances.numAttributes() - 1, result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
 
-  /**
-   * Runs the test from commandline.
-   * 
-   * @param args	ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * Tests removing all attributes but attributes ending with "Att2".
+     */
+    public void testTypicalInverted() {
+        Instances result;
+
+        m_Filter = getFilter(".*Att2$", true);
+
+        // 1. with class attribute
+        result = useFilter();
+        // Number of attributes will be two less, number of instances won't change
+        assertEquals(3, result.numAttributes());
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+    }
+
+    /**
+     * Returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(RemoveByNameTest.class);
+    }
+
+    /**
+     * Runs the test from commandline.
+     * 
+     * @param args ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

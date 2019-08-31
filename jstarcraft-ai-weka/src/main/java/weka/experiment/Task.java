@@ -19,7 +19,6 @@
  *
  */
 
-
 package weka.experiment;
 
 import java.io.Serializable;
@@ -31,18 +30,18 @@ import java.io.Serializable;
  * @version $Revision$
  */
 public interface Task extends Serializable {
-  
-  /**
-   * Execute this task.
-   */
-  void execute();
 
-  /**
-   * Clients should be able to call this method at any time to obtain
-   * information on a current task.
-   *
-   * @return a TaskStatusInfo object holding info and result (if available) for
-   * this task
-   */
-  TaskStatusInfo getTaskStatus();
+    /**
+     * Execute this task.
+     */
+    void execute();
+
+    /**
+     * Clients should be able to call this method at any time to obtain information
+     * on a current task.
+     *
+     * @return a TaskStatusInfo object holding info and result (if available) for
+     *         this task
+     */
+    TaskStatusInfo getTaskStatus();
 }

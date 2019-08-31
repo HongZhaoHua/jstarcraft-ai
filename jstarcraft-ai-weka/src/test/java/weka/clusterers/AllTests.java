@@ -24,20 +24,20 @@ import weka.test.WekaTestSuite;
 import junit.framework.Test;
 
 /**
- * Test class for all clusterers. Run from the command line with: <p/>
+ * Test class for all clusterers. Run from the command line with:
+ * <p/>
  * java weka.clusterers.AllTests
  *
  * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests 
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    return suite("weka.clusterers.Clusterer");
-  }
+    public static Test suite() {
+        return suite("weka.clusterers.Clusterer");
+    }
 
-  public static void main(String []args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

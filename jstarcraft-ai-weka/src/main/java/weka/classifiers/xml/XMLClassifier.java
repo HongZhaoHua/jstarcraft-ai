@@ -24,42 +24,41 @@ import weka.core.RevisionUtils;
 import weka.core.xml.XMLBasicSerialization;
 
 /**
- * This class serializes and deserializes a Classifier instance to and
- * fro XML.<br>
+ * This class serializes and deserializes a Classifier instance to and fro
+ * XML.<br>
  * 
  * @author FracPete (fracpete at waikato dot ac dot nz)
- * @version $Revision$ 
+ * @version $Revision$
  */
-public class XMLClassifier
-   extends XMLBasicSerialization {
+public class XMLClassifier extends XMLBasicSerialization {
 
-   /**
-    * initializes the serialization
-    * 
-    * @throws Exception if initialization fails
-    */
-   public XMLClassifier() throws Exception {
-      super();
-   }
+    /**
+     * initializes the serialization
+     * 
+     * @throws Exception if initialization fails
+     */
+    public XMLClassifier() throws Exception {
+        super();
+    }
 
-   /**
-    * generates internally a new XML document and clears also the IgnoreList and
-    * the mappings for the Read/Write-Methods
-    */
-   public void clear() throws Exception {
-      super.clear();
+    /**
+     * generates internally a new XML document and clears also the IgnoreList and
+     * the mappings for the Read/Write-Methods
+     */
+    public void clear() throws Exception {
+        super.clear();
 
-      // allow
-      m_Properties.addAllowed(weka.classifiers.Classifier.class, "debug");
-      m_Properties.addAllowed(weka.classifiers.Classifier.class, "options");
-   }
-   
-   /**
-    * Returns the revision string.
-    * 
-    * @return		the revision
-    */
-   public String getRevision() {
-     return RevisionUtils.extract("$Revision$");
-   }
+        // allow
+        m_Properties.addAllowed(weka.classifiers.Classifier.class, "debug");
+        m_Properties.addAllowed(weka.classifiers.Classifier.class, "options");
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

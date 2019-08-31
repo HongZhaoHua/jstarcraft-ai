@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TimeException element declaration.
+ * <p>
+ * Java class for TimeException element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TimeException">
@@ -41,9 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "array"
-})
+@XmlType(name = "", propOrder = { "array" })
 @XmlRootElement(name = "TimeException")
 public class TimeException {
 
@@ -57,10 +56,8 @@ public class TimeException {
     /**
      * Gets the value of the array property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ArrayType }
-     *     
+     * @return possible object is {@link ArrayType }
+     * 
      */
     public ArrayType getArray() {
         return array;
@@ -69,10 +66,8 @@ public class TimeException {
     /**
      * Sets the value of the array property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ArrayType }
-     *     
+     * @param value allowed object is {@link ArrayType }
+     * 
      */
     public void setArray(ArrayType value) {
         this.array = value;
@@ -81,10 +76,8 @@ public class TimeException {
     /**
      * Gets the value of the count property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getCount() {
         return count;
@@ -93,10 +86,8 @@ public class TimeException {
     /**
      * Sets the value of the count property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setCount(BigInteger value) {
         this.count = value;
@@ -105,10 +96,8 @@ public class TimeException {
     /**
      * Gets the value of the type property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TIMEEXCEPTIONTYPE }
-     *     
+     * @return possible object is {@link TIMEEXCEPTIONTYPE }
+     * 
      */
     public TIMEEXCEPTIONTYPE getType() {
         return type;
@@ -117,10 +106,8 @@ public class TimeException {
     /**
      * Sets the value of the type property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TIMEEXCEPTIONTYPE }
-     *     
+     * @param value allowed object is {@link TIMEEXCEPTIONTYPE }
+     * 
      */
     public void setType(TIMEEXCEPTIONTYPE value) {
         this.type = value;

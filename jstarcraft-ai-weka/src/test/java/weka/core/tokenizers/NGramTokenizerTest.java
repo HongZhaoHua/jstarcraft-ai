@@ -30,75 +30,66 @@ import junit.framework.TestSuite;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class NGramTokenizerTest
-  extends AbstractTokenizerTest {
+public class NGramTokenizerTest extends AbstractTokenizerTest {
 
-  public NGramTokenizerTest(String name) {
-    super(name);
-  }
-
-  /** Creates a default NGramTokenizer */
-  @Override
-  public Tokenizer getTokenizer() {
-    return new NGramTokenizer();
-  }
-
-  /**
-   * tests the number of generated tokens
-   */
-  public void testNumberOfGeneratedTokens() {
-    String s;
-    String[] result;
-
-    s = "HOWEVER, the egg only got larger and larger, and more and more human";
-
-    // only 1-grams
-    try {
-      result =
-        Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max",
-          "1", s });
-      assertEquals("number of tokens differ (1)", 13, result.length);
-    } catch (Exception e) {
-      fail("Error tokenizing string '" + s + "'!");
+    public NGramTokenizerTest(String name) {
+        super(name);
     }
 
-    // only 2-grams
-    try {
-      result =
-        Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "2", "-max",
-          "2", s });
-      assertEquals("number of tokens differ (2)", 12, result.length);
-    } catch (Exception e) {
-      fail("Error tokenizing string '" + s + "'!");
+    /** Creates a default NGramTokenizer */
+    @Override
+    public Tokenizer getTokenizer() {
+        return new NGramTokenizer();
     }
 
-    // 1 to 3-grams
-    try {
-      result =
-        Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max",
-          "3", s });
-      assertEquals("number of tokens differ (3)", 36, result.length);
-    } catch (Exception e) {
-      fail("Error tokenizing string '" + s + "'!");
+    /**
+     * tests the number of generated tokens
+     */
+    public void testNumberOfGeneratedTokens() {
+        String s;
+        String[] result;
+
+        s = "HOWEVER, the egg only got larger and larger, and more and more human";
+
+        // only 1-grams
+        try {
+            result = Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max", "1", s });
+            assertEquals("number of tokens differ (1)", 13, result.length);
+        } catch (Exception e) {
+            fail("Error tokenizing string '" + s + "'!");
+        }
+
+        // only 2-grams
+        try {
+            result = Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "2", "-max", "2", s });
+            assertEquals("number of tokens differ (2)", 12, result.length);
+        } catch (Exception e) {
+            fail("Error tokenizing string '" + s + "'!");
+        }
+
+        // 1 to 3-grams
+        try {
+            result = Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max", "3", s });
+            assertEquals("number of tokens differ (3)", 36, result.length);
+        } catch (Exception e) {
+            fail("Error tokenizing string '" + s + "'!");
+        }
+
+        // 1 to 3-grams, but sentence only has 2 grams
+        try {
+            s = "cannot split";
+            result = Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max", "3", s });
+            assertEquals("number of tokens differ (4)", 3, result.length);
+        } catch (Exception e) {
+            fail("Error tokenizing string '" + s + "'!");
+        }
     }
 
-    // 1 to 3-grams, but sentence only has 2 grams
-    try {
-      s = "cannot split";
-      result =
-        Tokenizer.tokenize(m_Tokenizer, new String[] { "-min", "1", "-max",
-          "3", s });
-      assertEquals("number of tokens differ (4)", 3, result.length);
-    } catch (Exception e) {
-      fail("Error tokenizing string '" + s + "'!");
+    public static Test suite() {
+        return new TestSuite(NGramTokenizerTest.class);
     }
-  }
 
-  public static Test suite() {
-    return new TestSuite(NGramTokenizerTest.class);
-  }
-
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

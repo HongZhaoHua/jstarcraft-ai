@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Matrix element declaration.
+ * <p>
+ * Java class for Matrix element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Matrix">
@@ -55,10 +56,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "numarray",
-    "matCell"
-})
+@XmlType(name = "", propOrder = { "numarray", "matCell" })
 @XmlRootElement(name = "Matrix")
 public class Matrix {
 
@@ -81,21 +79,21 @@ public class Matrix {
      * Gets the value of the numarray property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numarray property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the numarray property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getNUMARRAY().add(newItem);
+     * getNUMARRAY().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ArrayType }
+     * Objects of the following type(s) are allowed in the list {@link ArrayType }
      * 
      * 
      */
@@ -110,21 +108,21 @@ public class Matrix {
      * Gets the value of the matCell property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the matCell property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the matCell property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getMatCell().add(newItem);
+     * getMatCell().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MatCell }
+     * Objects of the following type(s) are allowed in the list {@link MatCell }
      * 
      * 
      */
@@ -138,10 +136,8 @@ public class Matrix {
     /**
      * Gets the value of the diagDefault property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getDiagDefault() {
         return diagDefault;
@@ -150,10 +146,8 @@ public class Matrix {
     /**
      * Sets the value of the diagDefault property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setDiagDefault(Double value) {
         this.diagDefault = value;
@@ -162,10 +156,8 @@ public class Matrix {
     /**
      * Gets the value of the kind property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getKind() {
         if (kind == null) {
@@ -178,10 +170,8 @@ public class Matrix {
     /**
      * Sets the value of the kind property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setKind(String value) {
         this.kind = value;
@@ -190,10 +180,8 @@ public class Matrix {
     /**
      * Gets the value of the nbCols property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNbCols() {
         return nbCols;
@@ -202,10 +190,8 @@ public class Matrix {
     /**
      * Sets the value of the nbCols property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNbCols(BigInteger value) {
         this.nbCols = value;
@@ -214,10 +200,8 @@ public class Matrix {
     /**
      * Gets the value of the nbRows property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNbRows() {
         return nbRows;
@@ -226,10 +210,8 @@ public class Matrix {
     /**
      * Sets the value of the nbRows property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNbRows(BigInteger value) {
         this.nbRows = value;
@@ -238,10 +220,8 @@ public class Matrix {
     /**
      * Gets the value of the offDiagDefault property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getOffDiagDefault() {
         return offDiagDefault;
@@ -250,10 +230,8 @@ public class Matrix {
     /**
      * Sets the value of the offDiagDefault property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setOffDiagDefault(Double value) {
         this.offDiagDefault = value;

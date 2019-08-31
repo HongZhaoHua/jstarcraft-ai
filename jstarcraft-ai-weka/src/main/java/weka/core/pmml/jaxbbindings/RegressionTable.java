@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for RegressionTable element declaration.
+ * <p>
+ * Java class for RegressionTable element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="RegressionTable">
@@ -45,12 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "numericPredictor",
-    "categoricalPredictor",
-    "predictorTerm"
-})
+@XmlType(name = "", propOrder = { "extension", "numericPredictor", "categoricalPredictor", "predictorTerm" })
 @XmlRootElement(name = "RegressionTable")
 public class RegressionTable {
 
@@ -66,32 +62,33 @@ public class RegressionTable {
     protected double intercept;
     @XmlAttribute
     protected String targetCategory;
-    
-    public RegressionTable() {}
-    
+
+    public RegressionTable() {
+    }
+
     public RegressionTable(String targetCategory) {
-      this.targetCategory = targetCategory;
+        this.targetCategory = targetCategory;
     }
 
     /**
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -106,15 +103,16 @@ public class RegressionTable {
      * Gets the value of the numericPredictor property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numericPredictor property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the numericPredictor property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getNumericPredictor().add(newItem);
+     * getNumericPredictor().add(newItem);
      * </pre>
      * 
      * 
@@ -130,7 +128,7 @@ public class RegressionTable {
         }
         return this.numericPredictor;
     }
-    
+
     public void addNumericPredictor(NumericPredictor predictor) {
         if (numericPredictor == null) {
             numericPredictor = new ArrayList<NumericPredictor>();
@@ -142,15 +140,16 @@ public class RegressionTable {
      * Gets the value of the categoricalPredictor property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the categoricalPredictor property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the categoricalPredictor property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getCategoricalPredictor().add(newItem);
+     * getCategoricalPredictor().add(newItem);
      * </pre>
      * 
      * 
@@ -171,21 +170,22 @@ public class RegressionTable {
      * Gets the value of the predictorTerm property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the predictorTerm property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the predictorTerm property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getPredictorTerm().add(newItem);
+     * getPredictorTerm().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PredictorTerm }
+     * Objects of the following type(s) are allowed in the list {@link PredictorTerm
+     * }
      * 
      * 
      */
@@ -215,10 +215,8 @@ public class RegressionTable {
     /**
      * Gets the value of the targetCategory property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getTargetCategory() {
         return targetCategory;
@@ -227,10 +225,8 @@ public class RegressionTable {
     /**
      * Sets the value of the targetCategory property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setTargetCategory(String value) {
         this.targetCategory = value;

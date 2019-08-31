@@ -25,38 +25,37 @@ import junit.textui.TestRunner;
 
 /**
  * Tests the Null stopwords algorithm. Run from commandline as follows:<br/>
- *   java weka.core.stopwords.NullTest
+ * java weka.core.stopwords.NullTest
  * 
- * @author  fracpete (fracpete at waikato dot ac dot nz)
+ * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class NullTest
-  extends AbstractStopwordsTest {
+public class NullTest extends AbstractStopwordsTest {
 
-  /**
-   * Constructs the test.
-   * 
-   * @param name the name of the test
-   */
-  public NullTest(String name) {
-    super(name);
-  }
+    /**
+     * Constructs the test.
+     * 
+     * @param name the name of the test
+     */
+    public NullTest(String name) {
+        super(name);
+    }
 
-  /**
-   * Used to create an instance of a specific stopwords scheme.
-   * 
-   * @return a suitably configured <code>StopwordsHandler</code> value
-   */
-  @Override
-  public StopwordsHandler getStopwords() {
-    return new Null();
-  }
+    /**
+     * Used to create an instance of a specific stopwords scheme.
+     * 
+     * @return a suitably configured <code>StopwordsHandler</code> value
+     */
+    @Override
+    public StopwordsHandler getStopwords() {
+        return new Null();
+    }
 
-  public static Test suite() {
-    return new TestSuite(NullTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(NullTest.class);
+    }
 
-  public static void main(String[] args) {
-    TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        TestRunner.run(suite());
+    }
 }

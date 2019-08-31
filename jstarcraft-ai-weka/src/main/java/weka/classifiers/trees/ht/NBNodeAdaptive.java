@@ -36,88 +36,84 @@ import weka.core.Instances;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class NBNodeAdaptive extends NBNode implements LearningNode,
-    Serializable {
+public class NBNodeAdaptive extends NBNode implements LearningNode, Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = -4509802312019989686L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = -4509802312019989686L;
 
-  /** The number of correct predictions made by the majority class */
-  protected double m_majClassCorrectWeight = 0;
+    /** The number of correct predictions made by the majority class */
+    protected double m_majClassCorrectWeight = 0;
 
-  /** The number of correct predictions made by naive Bayes */
-  protected double m_nbCorrectWeight = 0;
+    /** The number of correct predictions made by naive Bayes */
+    protected double m_nbCorrectWeight = 0;
 
-  /**
-   * Constructor
-   * 
-   * @param header the structure of the instances we're training from
-   * @param nbWeightThreshold the weight mass to see before allowing naive Bayes
-   *          to predict
-   * @throws Exception if a problem occurs
-   */
-  public NBNodeAdaptive(Instances header, double nbWeightThreshold)
-      throws Exception {
-    super(header, nbWeightThreshold);
-  }
-
-  protected String majorityClass() {
-    String mc = "";
-    double max = -1;
-
-    for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
-      if (e.getValue().m_weight > max) {
-        max = e.getValue().m_weight;
-        mc = e.getKey();
-      }
+    /**
+     * Constructor
+     * 
+     * @param header            the structure of the instances we're training from
+     * @param nbWeightThreshold the weight mass to see before allowing naive Bayes
+     *                          to predict
+     * @throws Exception if a problem occurs
+     */
+    public NBNodeAdaptive(Instances header, double nbWeightThreshold) throws Exception {
+        super(header, nbWeightThreshold);
     }
 
-    return mc;
-  }
+    protected String majorityClass() {
+        String mc = "";
+        double max = -1;
 
-  @Override
-  public void updateNode(Instance inst) throws Exception {
+        for (Map.Entry<String, WeightMass> e : m_classDistribution.entrySet()) {
+            if (e.getValue().m_weight > max) {
+                max = e.getValue().m_weight;
+                mc = e.getKey();
+            }
+        }
 
-    String trueClass = inst.classAttribute().value((int) inst.classValue());
-    int trueClassIndex = (int) inst.classValue();
-
-    if (majorityClass().equals(trueClass)) {
-      m_majClassCorrectWeight += inst.weight();
+        return mc;
     }
 
-    if (m_bayes.classifyInstance(inst) == trueClassIndex) {
-      m_nbCorrectWeight += inst.weight();
+    @Override
+    public void updateNode(Instance inst) throws Exception {
+
+        String trueClass = inst.classAttribute().value((int) inst.classValue());
+        int trueClassIndex = (int) inst.classValue();
+
+        if (majorityClass().equals(trueClass)) {
+            m_majClassCorrectWeight += inst.weight();
+        }
+
+        if (m_bayes.classifyInstance(inst) == trueClassIndex) {
+            m_nbCorrectWeight += inst.weight();
+        }
+
+        super.updateNode(inst);
     }
 
-    super.updateNode(inst);
-  }
+    @Override
+    public double[] getDistribution(Instance inst, Attribute classAtt) throws Exception {
 
-  @Override
-  public double[] getDistribution(Instance inst, Attribute classAtt)
-      throws Exception {
+        if (m_majClassCorrectWeight > m_nbCorrectWeight) {
+            return super.bypassNB(inst, classAtt);
+        }
 
-    if (m_majClassCorrectWeight > m_nbCorrectWeight) {
-      return super.bypassNB(inst, classAtt);
+        return super.getDistribution(inst, classAtt);
     }
 
-    return super.getDistribution(inst, classAtt);
-  }
+    @Override
+    protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
+        leafCount = super.dumpTree(depth, leafCount, buff);
 
-  @Override
-  protected int dumpTree(int depth, int leafCount, StringBuffer buff) {
-    leafCount = super.dumpTree(depth, leafCount, buff);
+        buff.append(" NB adaptive" + m_leafNum);
 
-    buff.append(" NB adaptive" + m_leafNum);
+        return leafCount;
+    }
 
-    return leafCount;
-  }
-
-  @Override
-  protected void printLeafModels(StringBuffer buff) {
-    buff.append("NB adaptive" + m_leafNum).append("\n")
-        .append(m_bayes.toString());
-  }
+    @Override
+    protected void printLeafModels(StringBuffer buff) {
+        buff.append("NB adaptive" + m_leafNum).append("\n").append(m_bayes.toString());
+    }
 
 }

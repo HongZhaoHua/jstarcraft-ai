@@ -36,36 +36,29 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class AveragedRegressorTest
-{
-    
-    public AveragedRegressorTest()
-    {
+public class AveragedRegressorTest {
+
+    public AveragedRegressorTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_RegressionDataSet()
-    {
+    public void testTrainC_RegressionDataSet() {
         System.out.println("train");
 
         AveragedRegressor instance = new AveragedRegressor(new KernelRLS(new LinearKernel(1), 1e-1), new KernelRLS(new LinearKernel(1), 1e-2), new KernelRLS(new LinearKernel(1), 1e-4));
@@ -81,8 +74,7 @@ public class AveragedRegressorTest
     }
 
     @Test
-    public void testTrainC_RegressionDataSet_ExecutorService()
-    {
+    public void testTrainC_RegressionDataSet_ExecutorService() {
         System.out.println("train");
 
         AveragedRegressor instance = new AveragedRegressor(new KernelRLS(new LinearKernel(1), 1e-1), new KernelRLS(new LinearKernel(1), 1e-2), new KernelRLS(new LinearKernel(1), 1e-4));
@@ -95,10 +87,9 @@ public class AveragedRegressorTest
 
         assertTrue(rme.getMeanError() <= test.getTargetValues().mean() * 0.25);
     }
-    
+
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
         AveragedRegressor instance = new AveragedRegressor(new KernelRLS(new LinearKernel(1), 1e-1), new KernelRLS(new LinearKernel(1), 1e-2), new KernelRLS(new LinearKernel(1), 1e-4));
@@ -113,15 +104,15 @@ public class AveragedRegressorTest
 
         AveragedRegressor result = instance.clone();
         for (int i = 0; i < t1.size(); i++)
-            assertEquals(t1.getTargetValue(i), result.regress(t1.getDataPoint(i)), t1.getTargetValues().mean()*0.5);
+            assertEquals(t1.getTargetValue(i), result.regress(t1.getDataPoint(i)), t1.getTargetValues().mean() * 0.5);
         result.train(t2);
 
         for (int i = 0; i < t1.size(); i++)
-            assertEquals(t1.getTargetValue(i), instance.regress(t1.getDataPoint(i)), t1.getTargetValues().mean()*0.5);
+            assertEquals(t1.getTargetValue(i), instance.regress(t1.getDataPoint(i)), t1.getTargetValues().mean() * 0.5);
 
         for (int i = 0; i < t2.size(); i++)
-            assertEquals(t2.getTargetValue(i), result.regress(t2.getDataPoint(i)), t2.getTargetValues().mean()*0.5);
+            assertEquals(t2.getTargetValue(i), result.regress(t2.getDataPoint(i)), t2.getTargetValues().mean() * 0.5);
 
     }
-    
+
 }

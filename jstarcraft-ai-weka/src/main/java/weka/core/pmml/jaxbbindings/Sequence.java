@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Sequence element declaration.
+ * <p>
+ * Java class for Sequence element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Sequence">
@@ -51,12 +52,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "setReference",
-    "extensionAndDelimiterAndTime",
-    "time"
-})
+@XmlType(name = "", propOrder = { "extension", "setReference", "extensionAndDelimiterAndTime", "time" })
 @XmlRootElement(name = "Sequence")
 public class Sequence {
 
@@ -64,12 +60,7 @@ public class Sequence {
     protected List<Extension> extension;
     @XmlElement(name = "SetReference", namespace = "http://www.dmg.org/PMML-4_1", required = true)
     protected SetReference setReference;
-    @XmlElements({
-        @XmlElement(name = "SetReference", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SetReference.class),
-        @XmlElement(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Extension.class),
-        @XmlElement(name = "Delimiter", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Delimiter.class),
-        @XmlElement(name = "Time", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Time.class)
-    })
+    @XmlElements({ @XmlElement(name = "SetReference", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SetReference.class), @XmlElement(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Extension.class), @XmlElement(name = "Delimiter", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Delimiter.class), @XmlElement(name = "Time", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Time.class) })
     protected List<Object> extensionAndDelimiterAndTime;
     @XmlElement(name = "Time", namespace = "http://www.dmg.org/PMML-4_1")
     protected Time time;
@@ -86,21 +77,21 @@ public class Sequence {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -114,10 +105,8 @@ public class Sequence {
     /**
      * Gets the value of the setReference property.
      * 
-     * @return
-     *     possible object is
-     *     {@link SetReference }
-     *     
+     * @return possible object is {@link SetReference }
+     * 
      */
     public SetReference getSetReference() {
         return setReference;
@@ -126,10 +115,8 @@ public class Sequence {
     /**
      * Sets the value of the setReference property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link SetReference }
-     *     
+     * @param value allowed object is {@link SetReference }
+     * 
      */
     public void setSetReference(SetReference value) {
         this.setReference = value;
@@ -139,24 +126,22 @@ public class Sequence {
      * Gets the value of the extensionAndDelimiterAndTime property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extensionAndDelimiterAndTime property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extensionAndDelimiterAndTime property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtensionAndDelimiterAndTime().add(newItem);
+     * getExtensionAndDelimiterAndTime().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SetReference }
-     * {@link Extension }
-     * {@link Delimiter }
-     * {@link Time }
+     * Objects of the following type(s) are allowed in the list {@link SetReference
+     * } {@link Extension } {@link Delimiter } {@link Time }
      * 
      * 
      */
@@ -170,10 +155,8 @@ public class Sequence {
     /**
      * Gets the value of the time property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Time }
-     *     
+     * @return possible object is {@link Time }
+     * 
      */
     public Time getTime() {
         return time;
@@ -182,10 +165,8 @@ public class Sequence {
     /**
      * Sets the value of the time property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Time }
-     *     
+     * @param value allowed object is {@link Time }
+     * 
      */
     public void setTime(Time value) {
         this.time = value;
@@ -194,10 +175,8 @@ public class Sequence {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -206,10 +185,8 @@ public class Sequence {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -218,10 +195,8 @@ public class Sequence {
     /**
      * Gets the value of the numberOfSets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfSets() {
         return numberOfSets;
@@ -230,10 +205,8 @@ public class Sequence {
     /**
      * Sets the value of the numberOfSets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfSets(BigInteger value) {
         this.numberOfSets = value;
@@ -242,10 +215,8 @@ public class Sequence {
     /**
      * Gets the value of the occurrence property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getOccurrence() {
         return occurrence;
@@ -254,10 +225,8 @@ public class Sequence {
     /**
      * Sets the value of the occurrence property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setOccurrence(BigInteger value) {
         this.occurrence = value;
@@ -266,10 +235,8 @@ public class Sequence {
     /**
      * Gets the value of the support property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getSupport() {
         return support;
@@ -278,10 +245,8 @@ public class Sequence {
     /**
      * Sets the value of the support property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setSupport(Double value) {
         this.support = value;

@@ -20,7 +20,6 @@
  *
  */
 
-
 package weka.classifiers.lazy.kstar;
 
 /**
@@ -30,33 +29,33 @@ package weka.classifiers.lazy.kstar;
  */
 public interface KStarConstants {
 
-  /** Some usefull constants */
-  int    ON            = 1;
-  int    OFF           = 0;
-  int    NUM_RAND_COLS = 5;
-  double FLOOR         = 0.0;
-  double FLOOR1        = 0.1;
-  double INITIAL_STEP  = 0.05;
-  double LOG2          = 0.693147181;
-  double EPSILON       = 1.0e-5;
+    /** Some usefull constants */
+    int ON = 1;
+    int OFF = 0;
+    int NUM_RAND_COLS = 5;
+    double FLOOR = 0.0;
+    double FLOOR1 = 0.1;
+    double INITIAL_STEP = 0.05;
+    double LOG2 = 0.693147181;
+    double EPSILON = 1.0e-5;
 
-  /** How close the root finder for numeric and nominal have to get */
-  int    ROOT_FINDER_MAX_ITER = 40;
-  double ROOT_FINDER_ACCURACY = 0.01;
+    /** How close the root finder for numeric and nominal have to get */
+    int ROOT_FINDER_MAX_ITER = 40;
+    double ROOT_FINDER_ACCURACY = 0.01;
 
-  /** Blend setting modes */
-  int B_SPHERE  = 1; /* Use sphere of influence */
-  int B_ENTROPY = 2; /* Use entropic blend setting */
+    /** Blend setting modes */
+    int B_SPHERE = 1; /* Use sphere of influence */
+    int B_ENTROPY = 2; /* Use entropic blend setting */
 
-  /** Missing value handling mode */
+    /** Missing value handling mode */
 
-  /* Ignore the instance with the missing value */
-  int M_DELETE  = 1; 
-  /* Treat missing values as maximally different */
-  int M_MAXDIFF = 2; 
-  /* Normilize over the attributes */
-  int M_NORMAL  = 3; 
-  /* Average column entropy curves */
-  int M_AVERAGE = 4; 
-  
+    /* Ignore the instance with the missing value */
+    int M_DELETE = 1;
+    /* Treat missing values as maximally different */
+    int M_MAXDIFF = 2;
+    /* Normilize over the attributes */
+    int M_NORMAL = 3;
+    /* Average column entropy curves */
+    int M_AVERAGE = 4;
+
 }

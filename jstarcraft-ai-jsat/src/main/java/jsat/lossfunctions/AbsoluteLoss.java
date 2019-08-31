@@ -1,14 +1,12 @@
 package jsat.lossfunctions;
 
 /**
- * The AbsoluteLoss loss function for regression <i>L(x, y) = |x-y|</i>. 
- * <br>
+ * The AbsoluteLoss loss function for regression <i>L(x, y) = |x-y|</i>. <br>
  * This function is only one differentiable.
  *
  * @author Edward Raff
  */
-public class AbsoluteLoss implements LossR
-{
+public class AbsoluteLoss implements LossR {
 
     private static final long serialVersionUID = -3398199227407867808L;
 
@@ -16,11 +14,10 @@ public class AbsoluteLoss implements LossR
      * Computes the absolute loss
      *
      * @param pred the predicted value
-     * @param y the target value
+     * @param y    the target value
      * @return the loss for the functions
      */
-    public static double loss(double pred, double y)
-    {
+    public static double loss(double pred, double y) {
         return Math.abs(y - pred);
     }
 
@@ -28,66 +25,57 @@ public class AbsoluteLoss implements LossR
      * Returns the derivative of the absolute loss
      *
      * @param pred the predicted value
-     * @param y the target value
+     * @param y    the target value
      * @return the derivative of the loss function
      */
-    public static double deriv(double pred, double y)
-    {
+    public static double deriv(double pred, double y) {
         return Math.signum(pred - y);
     }
-    
-    public static double regress(double score)
-    {
+
+    public static double regress(double score) {
         return score;
     }
 
     @Override
-    public double getLoss(double pred, double y)
-    {
+    public double getLoss(double pred, double y) {
         return loss(pred, y);
     }
 
     @Override
-    public double getDeriv(double pred, double y)
-    {
+    public double getDeriv(double pred, double y) {
         return deriv(pred, y);
     }
 
     @Override
-    public double getDeriv2(double pred, double y)
-    {
+    public double getDeriv2(double pred, double y) {
         return 0;
     }
 
     @Override
-    public double getConjugate(double b, double pred, double y)
-    {
-        return b*y;
+    public double getConjugate(double b, double pred, double y) {
+        return b * y;
     }
 
     @Override
-    public double getDeriv2Max()
-    {
+    public double getDeriv2Max() {
         return 0;
     }
 
     @Override
-    public AbsoluteLoss clone()
-    {
+    public AbsoluteLoss clone() {
         return this;
     }
 
     @Override
-    public double getRegression(double score)
-    {
+    public double getRegression(double score) {
         return score;
     }
 
     @Override
-    public double lipschitz()
-    {
-        //see Stochastic Dual Coordinate Ascent Methods for Regularized Loss Minimization
-        //"absolute deviation loss are 1-Lipschitz."
+    public double lipschitz() {
+        // see Stochastic Dual Coordinate Ascent Methods for Regularized Loss
+        // Minimization
+        // "absolute deviation loss are 1-Lipschitz."
         return 1.0;
     }
 }

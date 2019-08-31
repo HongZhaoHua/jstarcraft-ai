@@ -32,41 +32,41 @@ import weka.filters.Filter;
  */
 public class OrdinalToNumericTest extends AbstractFilterTest {
 
-  @Override
-  public Filter getFilter() {
-    return new OrdinalToNumeric();
-  }
+    @Override
+    public Filter getFilter() {
+        return new OrdinalToNumeric();
+    }
 
-  public OrdinalToNumericTest(String name) {
-    super(name);
-  }
+    public OrdinalToNumericTest(String name) {
+        super(name);
+    }
 
-  public void testTypical() {
-    m_Filter = getFilter();
+    public void testTypical() {
+        m_Filter = getFilter();
 
-    Instances result = useFilter();
+        Instances result = useFilter();
 
-    assertEquals(m_Instances.numAttributes(), result.numAttributes());
+        assertEquals(m_Instances.numAttributes(), result.numAttributes());
 
-    // check that the two nominal attributes are now numeric
-    assertTrue(result.attribute(1).isNumeric());
-    assertTrue(result.attribute(4).isNumeric());
-  }
+        // check that the two nominal attributes are now numeric
+        assertTrue(result.attribute(1).isNumeric());
+        assertTrue(result.attribute(4).isNumeric());
+    }
 
-  public void testNoNominalsInRange() {
-    m_Filter = getFilter();
-    ((OrdinalToNumeric) m_Filter).setAttributesToOperateOn("1,3-4,6,last");
-    Instances result = useFilter();
+    public void testNoNominalsInRange() {
+        m_Filter = getFilter();
+        ((OrdinalToNumeric) m_Filter).setAttributesToOperateOn("1,3-4,6,last");
+        Instances result = useFilter();
 
-    assertTrue(result.attribute(1).isNominal());
-    assertTrue(result.attribute(4).isNominal());
-  }
+        assertTrue(result.attribute(1).isNominal());
+        assertTrue(result.attribute(4).isNominal());
+    }
 
-  public static Test suite() {
-    return new TestSuite(OrdinalToNumericTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(OrdinalToNumericTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

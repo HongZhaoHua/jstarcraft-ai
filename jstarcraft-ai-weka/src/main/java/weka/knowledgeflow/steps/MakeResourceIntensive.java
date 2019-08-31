@@ -53,109 +53,88 @@ import java.util.Set;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision: $
  */
-@KFStep(
-  name = "MakeResourceIntensive",
-  category = "Flow",
-  toolTipText = "Makes downstream connected steps resource intensive (or not)."
-    + " This shifts "
-    + "processing of such steps between the main step executor<br>"
-    + "service and the high resource executor service or vice versa.",
-  iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
+@KFStep(name = "MakeResourceIntensive", category = "Flow", toolTipText = "Makes downstream connected steps resource intensive (or not)." + " This shifts " + "processing of such steps between the main step executor<br>" + "service and the high resource executor service or vice versa.", iconPath = KFGUIConsts.BASE_ICON_PATH + "DiamondPlain.gif")
 public class MakeResourceIntensive extends BaseStep {
 
-  private static final long serialVersionUID = -5670771681991035130L;
+    private static final long serialVersionUID = -5670771681991035130L;
 
-  /** True if downstream steps are to be made resource intensive */
-  protected boolean m_setAsResourceIntensive = true;
+    /** True if downstream steps are to be made resource intensive */
+    protected boolean m_setAsResourceIntensive = true;
 
-  /**
-   * Set whether downstream steps are to be made resource intensive or not
-   * 
-   * @param resourceIntensive true if the downstream connected steps are to be
-   *          made resource intensive
-   */
-  @OptionMetadata(
-    displayName = "Make downstream step(s) high resource",
-    description = "<html>Makes downstream connected "
-      + "steps resource intensive (or not)<br>This shifts processing of such steps "
-      + "between the main step executor service and the high resource executor "
-      + "service or vice versa.</html>")
-  public
-    void setMakeResourceIntensive(boolean resourceIntensive) {
-    m_setAsResourceIntensive = resourceIntensive;
-  }
-
-  /**
-   * Get whether downstream steps are to be made resource intensive
-   * 
-   * @return true if downstream connected steps are to be made resource
-   *         intensive
-   */
-  public boolean getMakeResourceIntensive() {
-    return m_setAsResourceIntensive;
-  }
-
-  /**
-   * Initialize the step
-   *
-   * @throws WekaException if a problem occurs
-   */
-  @Override
-  public void stepInit() throws WekaException {
-
-  }
-
-  /**
-   * Get a list of incoming connection types that this step can accept. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and any existing incoming connections. E.g. a step might be able to accept
-   * one (and only one) incoming batch data connection.
-   *
-   * @return a list of incoming connections that this step can accept given its
-   *         current state
-   */
-  @Override
-  public List<String> getIncomingConnectionTypes() {
-    return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET,
-      StepManager.CON_TESTSET, StepManager.CON_BATCH_CLASSIFIER,
-      StepManager.CON_BATCH_CLUSTERER, StepManager.CON_BATCH_ASSOCIATOR);
-  }
-
-  /**
-   * Get a list of outgoing connection types that this step can produce. Ideally
-   * (and if appropriate), this should take into account the state of the step
-   * and the incoming connections. E.g. depending on what incoming connection is
-   * present, a step might be able to produce a trainingSet output, a testSet
-   * output or neither, but not both.
-   *
-   * @return a list of outgoing connections that this step can produce
-   */
-  @Override
-  public List<String> getOutgoingConnectionTypes() {
-    Set<String> inConnTypes =
-      getStepManager().getIncomingConnections().keySet();
-    return new ArrayList<String>(inConnTypes);
-  }
-
-  /**
-   * Process incoming data
-   *
-   * @param data the data to process
-   * @throws WekaException
-   */
-  @Override
-  public void processIncoming(Data data) throws WekaException {
-    String connType = data.getConnectionName();
-    List<StepManager> connected =
-      getStepManager().getOutgoingConnectedStepsOfConnectionType(connType);
-
-    for (StepManager m : connected) {
-      getStepManager().logDetailed(
-        "Setting " + m.getName() + " as resource intensive: "
-          + m_setAsResourceIntensive);
-      ((StepManagerImpl) m)
-        .setStepIsResourceIntensive(m_setAsResourceIntensive);
+    /**
+     * Set whether downstream steps are to be made resource intensive or not
+     * 
+     * @param resourceIntensive true if the downstream connected steps are to be
+     *                          made resource intensive
+     */
+    @OptionMetadata(displayName = "Make downstream step(s) high resource", description = "<html>Makes downstream connected " + "steps resource intensive (or not)<br>This shifts processing of such steps " + "between the main step executor service and the high resource executor " + "service or vice versa.</html>")
+    public void setMakeResourceIntensive(boolean resourceIntensive) {
+        m_setAsResourceIntensive = resourceIntensive;
     }
-    getStepManager().outputData(data);
-  }
+
+    /**
+     * Get whether downstream steps are to be made resource intensive
+     * 
+     * @return true if downstream connected steps are to be made resource intensive
+     */
+    public boolean getMakeResourceIntensive() {
+        return m_setAsResourceIntensive;
+    }
+
+    /**
+     * Initialize the step
+     *
+     * @throws WekaException if a problem occurs
+     */
+    @Override
+    public void stepInit() throws WekaException {
+
+    }
+
+    /**
+     * Get a list of incoming connection types that this step can accept. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * any existing incoming connections. E.g. a step might be able to accept one
+     * (and only one) incoming batch data connection.
+     *
+     * @return a list of incoming connections that this step can accept given its
+     *         current state
+     */
+    @Override
+    public List<String> getIncomingConnectionTypes() {
+        return Arrays.asList(StepManager.CON_DATASET, StepManager.CON_TRAININGSET, StepManager.CON_TESTSET, StepManager.CON_BATCH_CLASSIFIER, StepManager.CON_BATCH_CLUSTERER, StepManager.CON_BATCH_ASSOCIATOR);
+    }
+
+    /**
+     * Get a list of outgoing connection types that this step can produce. Ideally
+     * (and if appropriate), this should take into account the state of the step and
+     * the incoming connections. E.g. depending on what incoming connection is
+     * present, a step might be able to produce a trainingSet output, a testSet
+     * output or neither, but not both.
+     *
+     * @return a list of outgoing connections that this step can produce
+     */
+    @Override
+    public List<String> getOutgoingConnectionTypes() {
+        Set<String> inConnTypes = getStepManager().getIncomingConnections().keySet();
+        return new ArrayList<String>(inConnTypes);
+    }
+
+    /**
+     * Process incoming data
+     *
+     * @param data the data to process
+     * @throws WekaException
+     */
+    @Override
+    public void processIncoming(Data data) throws WekaException {
+        String connType = data.getConnectionName();
+        List<StepManager> connected = getStepManager().getOutgoingConnectedStepsOfConnectionType(connType);
+
+        for (StepManager m : connected) {
+            getStepManager().logDetailed("Setting " + m.getName() + " as resource intensive: " + m_setAsResourceIntensive);
+            ((StepManagerImpl) m).setStepIsResourceIntensive(m_setAsResourceIntensive);
+        }
+        getStepManager().outputData(data);
+    }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -16,11 +15,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for COUNT-TABLE-TYPE complex type.
+ * <p>
+ * Java class for COUNT-TABLE-TYPE complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;complexType name="COUNT-TABLE-TYPE">
@@ -42,11 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "COUNT-TABLE-TYPE", propOrder = {
-    "extension",
-    "fieldValue",
-    "fieldValueCount"
-})
+@XmlType(name = "COUNT-TABLE-TYPE", propOrder = { "extension", "fieldValue", "fieldValueCount" })
 public class COUNTTABLETYPE {
 
     @XmlElement(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", required = true)
@@ -62,21 +59,21 @@ public class COUNTTABLETYPE {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -91,21 +88,21 @@ public class COUNTTABLETYPE {
      * Gets the value of the fieldValue property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fieldValue property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the fieldValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getFieldValue().add(newItem);
+     * getFieldValue().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link FieldValue }
+     * Objects of the following type(s) are allowed in the list {@link FieldValue }
      * 
      * 
      */
@@ -120,15 +117,16 @@ public class COUNTTABLETYPE {
      * Gets the value of the fieldValueCount property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fieldValueCount property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the fieldValueCount property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getFieldValueCount().add(newItem);
+     * getFieldValueCount().add(newItem);
      * </pre>
      * 
      * 
@@ -148,10 +146,8 @@ public class COUNTTABLETYPE {
     /**
      * Gets the value of the sample property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getSample() {
         return sample;
@@ -160,10 +156,8 @@ public class COUNTTABLETYPE {
     /**
      * Sets the value of the sample property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setSample(Double value) {
         this.sample = value;

@@ -36,48 +36,39 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class MultinomialNaiveBayesTest
-{
-    
-    public MultinomialNaiveBayesTest()
-    {
-    }
-    
-    @BeforeClass
-    public static void setUpClass()
-    {
-    }
-    
-    @AfterClass
-    public static void tearDownClass()
-    {
-    }
-    
-    @Before
-    public void setUp()
-    {
-    }
-    
-    @After
-    public void tearDown()
-    {
+public class MultinomialNaiveBayesTest {
+
+    public MultinomialNaiveBayesTest() {
     }
 
-    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+
+    @AfterClass
+    public static void tearDownClass() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @After
+    public void tearDown() {
+    }
+
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
 
-        for(boolean useCatFeatures : new boolean[]{true, false})
-        {
+        for (boolean useCatFeatures : new boolean[] { true, false }) {
             MultinomialNaiveBayes instance = new MultinomialNaiveBayes();
 
-            ClassificationDataSet train =  FixedProblems.getSimpleKClassLinear(10000, 3, RandomUtil.getRandom());
+            ClassificationDataSet train = FixedProblems.getSimpleKClassLinear(10000, 3, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getSimpleKClassLinear(1000, 3, RandomUtil.getRandom());
 
             ClassificationModelEvaluation cme = new ClassificationModelEvaluation(instance, train, true);
-            if(useCatFeatures)
+            if (useCatFeatures)
                 cme.setDataTransformProcess(new DataTransformProcess(new NumericalToHistogram()));
             cme.evaluateTestSet(test);
 
@@ -87,19 +78,16 @@ public class MultinomialNaiveBayesTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
-        for(boolean useCatFeatures : new boolean[]{true, false})
-        {
+        for (boolean useCatFeatures : new boolean[] { true, false }) {
             MultinomialNaiveBayes instance = new MultinomialNaiveBayes();
-            
 
-            ClassificationDataSet train =  FixedProblems.getSimpleKClassLinear(10000, 3, RandomUtil.getRandom());
+            ClassificationDataSet train = FixedProblems.getSimpleKClassLinear(10000, 3, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getSimpleKClassLinear(1000, 3, RandomUtil.getRandom());
 
             ClassificationModelEvaluation cme = new ClassificationModelEvaluation(instance, train);
-            if(useCatFeatures)
+            if (useCatFeatures)
                 cme.setDataTransformProcess(new DataTransformProcess(new NumericalToHistogram()));
             cme.evaluateTestSet(test);
 
@@ -107,19 +95,15 @@ public class MultinomialNaiveBayesTest
         }
     }
 
-    
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
-        for(boolean useCatFeatures : new boolean[]{true, false})
-        {
+        for (boolean useCatFeatures : new boolean[] { true, false }) {
             MultinomialNaiveBayes instance = new MultinomialNaiveBayes();
-            
+
             ClassificationDataSet t1 = FixedProblems.getSimpleKClassLinear(1000, 3, RandomUtil.getRandom());
             ClassificationDataSet t2 = FixedProblems.getSimpleKClassLinear(1000, 6, RandomUtil.getRandom());
-            if(useCatFeatures)
-            {
+            if (useCatFeatures) {
                 t1.applyTransform(new NumericalToHistogram(t1));
                 t2.applyTransform(new NumericalToHistogram(t2));
             }
@@ -129,16 +113,16 @@ public class MultinomialNaiveBayesTest
             instance.train(t1);
 
             MultinomialNaiveBayes result = instance.clone();
-            for(int i = 0; i < t1.size(); i++)
+            for (int i = 0; i < t1.size(); i++)
                 assertEquals(t1.getDataPointCategory(i), result.classify(t1.getDataPoint(i)).mostLikely());
             result.train(t2);
 
-            for(int i = 0; i < t1.size(); i++)
+            for (int i = 0; i < t1.size(); i++)
                 assertEquals(t1.getDataPointCategory(i), instance.classify(t1.getDataPoint(i)).mostLikely());
 
-            for(int i = 0; i < t2.size(); i++)
+            for (int i = 0; i < t2.size(); i++)
                 assertEquals(t2.getDataPointCategory(i), result.classify(t2.getDataPoint(i)).mostLikely());
         }
     }
-    
+
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for PMML element declaration.
+ * <p>
+ * Java class for PMML element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="PMML">
@@ -49,14 +50,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "header",
-    "miningBuildTask",
-    "dataDictionary",
-    "transformationDictionary",
-    "associationModelOrBaselineModelOrClusteringModel",
-    "extension"
-})
+@XmlType(name = "", propOrder = { "header", "miningBuildTask", "dataDictionary", "transformationDictionary", "associationModelOrBaselineModelOrClusteringModel", "extension" })
 @XmlRootElement(name = "PMML")
 public class PMML {
 
@@ -68,24 +62,9 @@ public class PMML {
     protected DataDictionary dataDictionary;
     @XmlElement(name = "TransformationDictionary", namespace = "http://www.dmg.org/PMML-4_1")
     protected TransformationDictionary transformationDictionary;
-    @XmlElements({
-        @XmlElement(name = "TreeModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TreeModel.class),
-        @XmlElement(name = "AssociationModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = AssociationModel.class),
-        @XmlElement(name = "SupportVectorMachineModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SupportVectorMachineModel.class),
-        @XmlElement(name = "TimeSeriesModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TimeSeriesModel.class),
-        @XmlElement(name = "ClusteringModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = ClusteringModel.class),
-        @XmlElement(name = "TextModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TextModel.class),
-        @XmlElement(name = "NeuralNetwork", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NeuralNetwork.class),
-        @XmlElement(name = "BaselineModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = BaselineModel.class),
-        @XmlElement(name = "GeneralRegressionModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = GeneralRegressionModel.class),
-        @XmlElement(name = "NearestNeighborModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NearestNeighborModel.class),
-        @XmlElement(name = "NaiveBayesModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NaiveBayesModel.class),
-        @XmlElement(name = "MiningModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = MiningModel.class),
-        @XmlElement(name = "SequenceModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SequenceModel.class),
-        @XmlElement(name = "Scorecard", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Scorecard.class),
-        @XmlElement(name = "RuleSetModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = RuleSetModel.class),
-        @XmlElement(name = "RegressionModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = RegressionModel.class)
-    })
+    @XmlElements({ @XmlElement(name = "TreeModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TreeModel.class), @XmlElement(name = "AssociationModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = AssociationModel.class), @XmlElement(name = "SupportVectorMachineModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SupportVectorMachineModel.class), @XmlElement(name = "TimeSeriesModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TimeSeriesModel.class), @XmlElement(name = "ClusteringModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = ClusteringModel.class), @XmlElement(name = "TextModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = TextModel.class), @XmlElement(name = "NeuralNetwork", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NeuralNetwork.class),
+            @XmlElement(name = "BaselineModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = BaselineModel.class), @XmlElement(name = "GeneralRegressionModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = GeneralRegressionModel.class), @XmlElement(name = "NearestNeighborModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NearestNeighborModel.class), @XmlElement(name = "NaiveBayesModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = NaiveBayesModel.class), @XmlElement(name = "MiningModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = MiningModel.class), @XmlElement(name = "SequenceModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = SequenceModel.class), @XmlElement(name = "Scorecard", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = Scorecard.class),
+            @XmlElement(name = "RuleSetModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = RuleSetModel.class), @XmlElement(name = "RegressionModel", namespace = "http://www.dmg.org/PMML-4_1", required = true, type = RegressionModel.class) })
     protected List<Object> associationModelOrBaselineModelOrClusteringModel;
     @XmlElement(name = "Extension", namespace = "http://www.dmg.org/PMML-4_1", required = true)
     protected List<Extension> extension;
@@ -95,10 +74,8 @@ public class PMML {
     /**
      * Gets the value of the header property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Header }
-     *     
+     * @return possible object is {@link Header }
+     * 
      */
     public Header getHeader() {
         return header;
@@ -107,10 +84,8 @@ public class PMML {
     /**
      * Sets the value of the header property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Header }
-     *     
+     * @param value allowed object is {@link Header }
+     * 
      */
     public void setHeader(Header value) {
         this.header = value;
@@ -119,10 +94,8 @@ public class PMML {
     /**
      * Gets the value of the miningBuildTask property.
      * 
-     * @return
-     *     possible object is
-     *     {@link MiningBuildTask }
-     *     
+     * @return possible object is {@link MiningBuildTask }
+     * 
      */
     public MiningBuildTask getMiningBuildTask() {
         return miningBuildTask;
@@ -131,10 +104,8 @@ public class PMML {
     /**
      * Sets the value of the miningBuildTask property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link MiningBuildTask }
-     *     
+     * @param value allowed object is {@link MiningBuildTask }
+     * 
      */
     public void setMiningBuildTask(MiningBuildTask value) {
         this.miningBuildTask = value;
@@ -143,10 +114,8 @@ public class PMML {
     /**
      * Gets the value of the dataDictionary property.
      * 
-     * @return
-     *     possible object is
-     *     {@link DataDictionary }
-     *     
+     * @return possible object is {@link DataDictionary }
+     * 
      */
     public DataDictionary getDataDictionary() {
         return dataDictionary;
@@ -155,10 +124,8 @@ public class PMML {
     /**
      * Sets the value of the dataDictionary property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DataDictionary }
-     *     
+     * @param value allowed object is {@link DataDictionary }
+     * 
      */
     public void setDataDictionary(DataDictionary value) {
         this.dataDictionary = value;
@@ -167,10 +134,8 @@ public class PMML {
     /**
      * Gets the value of the transformationDictionary property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TransformationDictionary }
-     *     
+     * @return possible object is {@link TransformationDictionary }
+     * 
      */
     public TransformationDictionary getTransformationDictionary() {
         return transformationDictionary;
@@ -179,48 +144,38 @@ public class PMML {
     /**
      * Sets the value of the transformationDictionary property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TransformationDictionary }
-     *     
+     * @param value allowed object is {@link TransformationDictionary }
+     * 
      */
     public void setTransformationDictionary(TransformationDictionary value) {
         this.transformationDictionary = value;
     }
 
     /**
-     * Gets the value of the associationModelOrBaselineModelOrClusteringModel property.
+     * Gets the value of the associationModelOrBaselineModelOrClusteringModel
+     * property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the associationModelOrBaselineModelOrClusteringModel property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the associationModelOrBaselineModelOrClusteringModel property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getAssociationModelOrBaselineModelOrClusteringModel().add(newItem);
+     * getAssociationModelOrBaselineModelOrClusteringModel().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TreeModel }
-     * {@link AssociationModel }
-     * {@link SupportVectorMachineModel }
-     * {@link TimeSeriesModel }
-     * {@link ClusteringModel }
-     * {@link TextModel }
-     * {@link NeuralNetwork }
-     * {@link BaselineModel }
-     * {@link GeneralRegressionModel }
-     * {@link NearestNeighborModel }
-     * {@link NaiveBayesModel }
-     * {@link MiningModel }
-     * {@link SequenceModel }
-     * {@link Scorecard }
-     * {@link RuleSetModel }
+     * Objects of the following type(s) are allowed in the list {@link TreeModel }
+     * {@link AssociationModel } {@link SupportVectorMachineModel }
+     * {@link TimeSeriesModel } {@link ClusteringModel } {@link TextModel }
+     * {@link NeuralNetwork } {@link BaselineModel } {@link GeneralRegressionModel }
+     * {@link NearestNeighborModel } {@link NaiveBayesModel } {@link MiningModel }
+     * {@link SequenceModel } {@link Scorecard } {@link RuleSetModel }
      * {@link RegressionModel }
      * 
      * 
@@ -231,7 +186,7 @@ public class PMML {
         }
         return this.associationModelOrBaselineModelOrClusteringModel;
     }
-    
+
     public void addAssociationModelOrBaselineModelOrClusteringModes(Object object) {
         if (associationModelOrBaselineModelOrClusteringModel == null) {
             associationModelOrBaselineModelOrClusteringModel = new ArrayList<Object>();
@@ -243,21 +198,21 @@ public class PMML {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -271,10 +226,8 @@ public class PMML {
     /**
      * Gets the value of the version property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getVersion() {
         return version;
@@ -283,10 +236,8 @@ public class PMML {
     /**
      * Sets the value of the version property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setVersion(String value) {
         this.version = value;

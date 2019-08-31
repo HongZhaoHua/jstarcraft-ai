@@ -37,87 +37,73 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class DualTreeTest
-{
-    
-    public DualTreeTest()
-    {
+public class DualTreeTest {
+
+    public DualTreeTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of search method, of class DualTree.
      */
     @Test
-    public void testSearch_Radius_DT()
-    {
+    public void testSearch_Radius_DT() {
         System.out.println("search_radius_dt");
-        
+
         Random rand = RandomUtil.getRandom();
-        
-        
+
         VectorArray<Vec> A = new VectorArray<>(new EuclideanDistance());
         VectorArray<Vec> B = new VectorArray<>(new EuclideanDistance());
-        for(int i = 0; i < 2500; i++)
-        {
+        for (int i = 0; i < 2500; i++) {
             A.add(DenseVector.random(3, rand));
             B.add(DenseVector.random(3, rand));
         }
 
-        
         List<List<Integer>> nn_true = new ArrayList<>();
         List<List<Double>> dists_true = new ArrayList<>();
-        
+
         double min_radius = 0.1;
         double max_radius = 0.2;
-        
-        for(int i = 0; i < B.size(); i++)
-        {
+
+        for (int i = 0; i < B.size(); i++) {
             List<Integer> nn = new IntList();
             List<Double> dd = new DoubleList();
-            
+
             A.search(B.get(i), max_radius, nn, dd);
-            
-            //remove everyone that was too close
-            while(!dd.isEmpty() && dd.get(0) < min_radius)
-            {
+
+            // remove everyone that was too close
+            while (!dd.isEmpty() && dd.get(0) < min_radius) {
                 nn.remove(0);
-                dd.remove(0);           
+                dd.remove(0);
             }
-            
+
             nn_true.add(nn);
             dists_true.add(dd);
         }
-        
-        
+
 //        VPTree<Vec> A_dt = new VPTree<>();
 //        VPTree<Vec> B_dt = new VPTree<>();
 
 //        for(DualTree<Vec> base : Arrays.asList(new SVPTree<>()))
 //        for(DualTree<Vec> base : Arrays.asList(new VPTree<>()))
-        for(boolean parallel : new boolean[]{false,true})
-            for(DualTree<Vec> base : Arrays.asList(new BallTree<>(), new VPTree<>()))
-            {
-    //            System.out.println(base.getClass().getCanonicalName());
+        for (boolean parallel : new boolean[] { false, true })
+            for (DualTree<Vec> base : Arrays.asList(new BallTree<>(), new VPTree<>())) {
+                // System.out.println(base.getClass().getCanonicalName());
                 DualTree<Vec> A_dt = base.clone();
                 DualTree<Vec> B_dt = base.clone();
                 A_dt.build(A);
@@ -129,20 +115,17 @@ public class DualTreeTest
 
                 A_dt.search(B_dt, min_radius, max_radius, nn_found, dists_found, parallel);
 
-                for(int i = 0; i < B.size(); i++)
-                {
+                for (int i = 0; i < B.size(); i++) {
                     List<Integer> nn_t = nn_true.get(i);
                     List<Integer> nn_f = nn_found.get(i);
 
                     List<Double> dd_t = dists_true.get(i);
                     List<Double> dd_f = dists_found.get(i);
 
-
                     assertEquals(nn_t.size(), nn_f.size());
                     assertEquals(dd_t.size(), dd_f.size());
 
-                    for(int j = 0; j < nn_t.size(); j++)
-                    {
+                    for (int j = 0; j < nn_t.size(); j++) {
                         assertEquals(nn_t.get(j), nn_f.get(j));
                         assertEquals(dd_t.get(j), dd_f.get(j), 1e-10);
                     }
@@ -150,47 +133,39 @@ public class DualTreeTest
             }
     }
 
-    
     @Test
-    public void testSearch_knn_DT()
-    {
+    public void testSearch_knn_DT() {
         System.out.println("search_knn_dt");
-        
+
         Random rand = RandomUtil.getRandom();
-        
-        
+
         VectorArray<Vec> A = new VectorArray<>(new EuclideanDistance());
         VectorArray<Vec> B = new VectorArray<>(new EuclideanDistance());
-        for(int i = 0; i < 2500; i++)
-        {
+        for (int i = 0; i < 2500; i++) {
             A.add(DenseVector.random(3, rand));
             B.add(DenseVector.random(3, rand));
         }
 
-        
         List<List<Integer>> nn_true = new ArrayList<>();
         List<List<Double>> dists_true = new ArrayList<>();
-        
+
         int K = 9;
-        
-        for(int i = 0; i < B.size(); i++)
-        {
+
+        for (int i = 0; i < B.size(); i++) {
             List<Integer> nn = new IntList();
             List<Double> dd = new DoubleList();
-            
+
             A.search(B.get(i), K, nn, dd);
-            
+
             nn_true.add(nn);
             dists_true.add(dd);
         }
-        
-        
+
 //        for(DualTree<Vec> base : Arrays.asList(new VPTree<>()))
 //        for(DualTree<Vec> base : Arrays.asList(new SVPTree<>()))
-        for(boolean parallel : new boolean[]{false, true})
-            for(DualTree<Vec> base : Arrays.asList(new BallTree<>(), new VPTreeMV<>()))
-            {
-    //            System.out.println(base.getClass().getCanonicalName());
+        for (boolean parallel : new boolean[] { false, true })
+            for (DualTree<Vec> base : Arrays.asList(new BallTree<>(), new VPTreeMV<>())) {
+                // System.out.println(base.getClass().getCanonicalName());
                 DualTree<Vec> A_dt = base.clone();
                 DualTree<Vec> B_dt = base.clone();
                 A_dt.build(A);
@@ -201,8 +176,7 @@ public class DualTreeTest
 
                 A_dt.search(B_dt, K, nn_found, dists_found, parallel);
 
-                for(int i = 0; i < B.size(); i++)
-                {
+                for (int i = 0; i < B.size(); i++) {
                     List<Integer> nn_t = nn_true.get(i);
                     List<Integer> nn_f = nn_found.get(i);
 
@@ -212,14 +186,13 @@ public class DualTreeTest
                     assertEquals(nn_t.size(), nn_f.size());
                     assertEquals(dd_t.size(), dd_f.size());
 
-                    for(int j = 0; j < nn_t.size(); j++)
-                    {
+                    for (int j = 0; j < nn_t.size(); j++) {
                         assertEquals(nn_t.get(j), nn_f.get(j));
                         assertEquals(dd_t.get(j), dd_f.get(j), 1e-10);
                     }
                 }
             }
-        
+
     }
-    
+
 }

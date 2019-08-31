@@ -37,101 +37,99 @@ import weka.core.Utils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class RandomizableClusterer extends AbstractClusterer implements
-  OptionHandler, Randomizable {
+public abstract class RandomizableClusterer extends AbstractClusterer implements OptionHandler, Randomizable {
 
-  /** for serialization */
-  private static final long serialVersionUID = -4819590778152242745L;
+    /** for serialization */
+    private static final long serialVersionUID = -4819590778152242745L;
 
-  /** the default seed value */
-  protected int m_SeedDefault = 1;
+    /** the default seed value */
+    protected int m_SeedDefault = 1;
 
-  /** The random number seed. */
-  protected int m_Seed = m_SeedDefault;
+    /** The random number seed. */
+    protected int m_Seed = m_SeedDefault;
 
-  /**
-   * Returns an enumeration describing the available options.
-   * 
-   * @return an enumeration of all the available options.
-   */
-  @Override
-  public Enumeration<Option> listOptions() {
-    Vector<Option> result = new Vector<Option>();
+    /**
+     * Returns an enumeration describing the available options.
+     * 
+     * @return an enumeration of all the available options.
+     */
+    @Override
+    public Enumeration<Option> listOptions() {
+        Vector<Option> result = new Vector<Option>();
 
-    result.addElement(new Option("\tRandom number seed.\n" + "\t(default "
-      + m_SeedDefault + ")", "S", 1, "-S <num>"));
+        result.addElement(new Option("\tRandom number seed.\n" + "\t(default " + m_SeedDefault + ")", "S", 1, "-S <num>"));
 
-    result.addAll(Collections.list(super.listOptions()));
+        result.addAll(Collections.list(super.listOptions()));
 
-    return result.elements();
-  }
-
-  /**
-   * Parses a given list of options. Valid options are:
-   * <p>
-   * 
-   * @param options the list of options as an array of strings
-   * @throws Exception if an option is not supported
-   */
-  @Override
-  public void setOptions(String[] options) throws Exception {
-    String tmpStr;
-
-    tmpStr = Utils.getOption('S', options);
-    if (tmpStr.length() != 0) {
-      setSeed(Integer.parseInt(tmpStr));
-    } else {
-      setSeed(m_SeedDefault);
+        return result.elements();
     }
 
-    super.setOptions(options);
-  }
+    /**
+     * Parses a given list of options. Valid options are:
+     * <p>
+     * 
+     * @param options the list of options as an array of strings
+     * @throws Exception if an option is not supported
+     */
+    @Override
+    public void setOptions(String[] options) throws Exception {
+        String tmpStr;
 
-  /**
-   * Gets the current settings of the classifier.
-   * 
-   * @return an array of strings suitable for passing to setOptions
-   */
-  @Override
-  public String[] getOptions() {
+        tmpStr = Utils.getOption('S', options);
+        if (tmpStr.length() != 0) {
+            setSeed(Integer.parseInt(tmpStr));
+        } else {
+            setSeed(m_SeedDefault);
+        }
 
-    Vector<String> result = new Vector<String>();
+        super.setOptions(options);
+    }
 
-    result.add("-S");
-    result.add("" + getSeed());
+    /**
+     * Gets the current settings of the classifier.
+     * 
+     * @return an array of strings suitable for passing to setOptions
+     */
+    @Override
+    public String[] getOptions() {
 
-    Collections.addAll(result, super.getOptions());
+        Vector<String> result = new Vector<String>();
 
-    return result.toArray(new String[result.size()]);
-  }
+        result.add("-S");
+        result.add("" + getSeed());
 
-  /**
-   * Returns the tip text for this property
-   * 
-   * @return tip text for this property suitable for displaying in the
-   *         explorer/experimenter gui
-   */
-  public String seedTipText() {
-    return "The random number seed to be used.";
-  }
+        Collections.addAll(result, super.getOptions());
 
-  /**
-   * Set the seed for random number generation.
-   * 
-   * @param value the seed to use
-   */
-  @Override
-  public void setSeed(int value) {
-    m_Seed = value;
-  }
+        return result.toArray(new String[result.size()]);
+    }
 
-  /**
-   * Gets the seed for the random number generations
-   * 
-   * @return the seed for the random number generation
-   */
-  @Override
-  public int getSeed() {
-    return m_Seed;
-  }
+    /**
+     * Returns the tip text for this property
+     * 
+     * @return tip text for this property suitable for displaying in the
+     *         explorer/experimenter gui
+     */
+    public String seedTipText() {
+        return "The random number seed to be used.";
+    }
+
+    /**
+     * Set the seed for random number generation.
+     * 
+     * @param value the seed to use
+     */
+    @Override
+    public void setSeed(int value) {
+        m_Seed = value;
+    }
+
+    /**
+     * Gets the seed for the random number generations
+     * 
+     * @return the seed for the random number generation
+     */
+    @Override
+    public int getSeed() {
+        return m_Seed;
+    }
 }

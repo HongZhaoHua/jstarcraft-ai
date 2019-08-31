@@ -36,59 +36,49 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff <Raff.Edward@gmail.com>
  */
-public class MDITest
-{
-    
-    public MDITest()
-    {
+public class MDITest {
+
+    public MDITest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     /**
      * Test of getImportanceStats method, of class ImportanceByUses.
      */
     @Test
-    public void testGetImportanceStats()
-    {
+    public void testGetImportanceStats() {
         System.out.println("getImportanceStats");
-        
-        for(ImpurityScore.ImpurityMeasure im : ImpurityScore.ImpurityMeasure.values())
-        {
+
+        for (ImpurityScore.ImpurityMeasure im : ImpurityScore.ImpurityMeasure.values()) {
             MDI instance = new MDI(im);
 
             int randomFeatures = 30;
 
-            //make the circles close to force tree to do lots of splits / make it harder
+            // make the circles close to force tree to do lots of splits / make it harder
             ClassificationDataSet train = FixedProblems.getCircles(10000, RandomUtil.getRandom(), 1.0, 1.35);
             int good_featres = train.getNumNumericalVars();
-            ClassificationDataSet train_noise = new ClassificationDataSet(train.getNumNumericalVars()+randomFeatures, train.getCategories(), train.getPredicting());
+            ClassificationDataSet train_noise = new ClassificationDataSet(train.getNumNumericalVars() + randomFeatures, train.getCategories(), train.getPredicting());
 
-            for(int i = 0; i < train.size(); i++)
-            {
+            for (int i = 0; i < train.size(); i++) {
                 DataPoint dp = train.getDataPoint(i);
                 Vec n = dp.getNumericalValues();
                 train_noise.addDataPoint(new ConcatenatedVec(n, DenseVector.random(randomFeatures)), train.getDataPointCategory(i));
             }
-
 
             DecisionTree tree = new DecisionTree();
             tree.setPruningMethod(TreePruner.PruningMethod.NONE);
@@ -96,21 +86,19 @@ public class MDITest
 
             double[] importances = instance.getImportanceStats(tree, train_noise);
 
-            //make sure the first 2 features were infered as more important than the others!
-            for(int i = good_featres; i < importances.length; i++)
-            {
-                for(int j = 0; j < good_featres; j++)
+            // make sure the first 2 features were infered as more important than the
+            // others!
+            for (int i = good_featres; i < importances.length; i++) {
+                for (int j = 0; j < good_featres; j++)
                     assertTrue(importances[j] > importances[i]);
             }
 
-
-            //categorical features, make space wider b/c we lose resolution 
+            // categorical features, make space wider b/c we lose resolution
             train = FixedProblems.getCircles(10000, RandomUtil.getRandom(), 1.0, 1.5);
             good_featres = train.getNumNumericalVars();
-            train_noise = new ClassificationDataSet(train.getNumNumericalVars()+randomFeatures, train.getCategories(), train.getPredicting());
+            train_noise = new ClassificationDataSet(train.getNumNumericalVars() + randomFeatures, train.getCategories(), train.getPredicting());
 
-            for(int i = 0; i < train.size(); i++)
-            {
+            for (int i = 0; i < train.size(); i++) {
                 DataPoint dp = train.getDataPoint(i);
                 Vec n = dp.getNumericalValues().add(DenseVector.random(good_featres).multiply(0.3));
                 train_noise.addDataPoint(new ConcatenatedVec(n, DenseVector.random(randomFeatures)), train.getDataPointCategory(i));
@@ -123,13 +111,13 @@ public class MDITest
 
             importances = instance.getImportanceStats(tree, train_noise);
 
-            //make sure the first 2 features were infered as more important than the others!
-            for(int i = good_featres; i < importances.length; i++)
-            {
-                for(int j = 0; j < good_featres; j++)
+            // make sure the first 2 features were infered as more important than the
+            // others!
+            for (int i = good_featres; i < importances.length; i++) {
+                for (int j = 0; j < good_featres; j++)
                     assertTrue(importances[j] >= importances[i]);
             }
         }
     }
-    
+
 }

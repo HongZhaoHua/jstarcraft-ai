@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for UnivariateStats element declaration.
+ * <p>
+ * Java class for UnivariateStats element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="UnivariateStats">
@@ -54,14 +55,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "counts",
-    "numericInfo",
-    "discrStats",
-    "contStats",
-    "anova"
-})
+@XmlType(name = "", propOrder = { "extension", "counts", "numericInfo", "discrStats", "contStats", "anova" })
 @XmlRootElement(name = "UnivariateStats")
 public class UnivariateStats {
 
@@ -86,21 +80,21 @@ public class UnivariateStats {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -114,10 +108,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the counts property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Counts }
-     *     
+     * @return possible object is {@link Counts }
+     * 
      */
     public Counts getCounts() {
         return counts;
@@ -126,10 +118,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the counts property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Counts }
-     *     
+     * @param value allowed object is {@link Counts }
+     * 
      */
     public void setCounts(Counts value) {
         this.counts = value;
@@ -138,10 +128,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the numericInfo property.
      * 
-     * @return
-     *     possible object is
-     *     {@link NumericInfo }
-     *     
+     * @return possible object is {@link NumericInfo }
+     * 
      */
     public NumericInfo getNumericInfo() {
         return numericInfo;
@@ -150,10 +138,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the numericInfo property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link NumericInfo }
-     *     
+     * @param value allowed object is {@link NumericInfo }
+     * 
      */
     public void setNumericInfo(NumericInfo value) {
         this.numericInfo = value;
@@ -162,10 +148,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the discrStats property.
      * 
-     * @return
-     *     possible object is
-     *     {@link DiscrStats }
-     *     
+     * @return possible object is {@link DiscrStats }
+     * 
      */
     public DiscrStats getDiscrStats() {
         return discrStats;
@@ -174,10 +158,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the discrStats property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link DiscrStats }
-     *     
+     * @param value allowed object is {@link DiscrStats }
+     * 
      */
     public void setDiscrStats(DiscrStats value) {
         this.discrStats = value;
@@ -186,10 +168,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the contStats property.
      * 
-     * @return
-     *     possible object is
-     *     {@link ContStats }
-     *     
+     * @return possible object is {@link ContStats }
+     * 
      */
     public ContStats getContStats() {
         return contStats;
@@ -198,10 +178,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the contStats property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link ContStats }
-     *     
+     * @param value allowed object is {@link ContStats }
+     * 
      */
     public void setContStats(ContStats value) {
         this.contStats = value;
@@ -210,10 +188,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the anova property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Anova }
-     *     
+     * @return possible object is {@link Anova }
+     * 
      */
     public Anova getAnova() {
         return anova;
@@ -222,10 +198,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the anova property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Anova }
-     *     
+     * @param value allowed object is {@link Anova }
+     * 
      */
     public void setAnova(Anova value) {
         this.anova = value;
@@ -234,10 +208,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the field property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getField() {
         return field;
@@ -246,10 +218,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the field property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setField(String value) {
         this.field = value;
@@ -258,10 +228,8 @@ public class UnivariateStats {
     /**
      * Gets the value of the weighted property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getWeighted() {
         if (weighted == null) {
@@ -274,10 +242,8 @@ public class UnivariateStats {
     /**
      * Sets the value of the weighted property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setWeighted(String value) {
         this.weighted = value;

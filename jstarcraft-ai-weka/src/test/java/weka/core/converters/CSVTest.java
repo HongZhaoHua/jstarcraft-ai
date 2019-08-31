@@ -23,71 +23,70 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests CSVLoader/CSVSaver. Run from the command line with:<p/>
+ * Tests CSVLoader/CSVSaver. Run from the command line with:
+ * <p/>
  * java weka.core.converters.CSVTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class CSVTest 
-  extends AbstractFileConverterTest {
+public class CSVTest extends AbstractFileConverterTest {
 
-  /**
-   * Constructs the <code>CSVTest</code>.
-   *
-   * @param name the name of the test class
-   */
-  public CSVTest(String name) { 
-    super(name);  
-  }
+    /**
+     * Constructs the <code>CSVTest</code>.
+     *
+     * @param name the name of the test class
+     */
+    public CSVTest(String name) {
+        super(name);
+    }
 
-  /**
-   * returns the loader used in the tests.
-   * 
-   * @return the configured loader
-   */
-  public AbstractLoader getLoader() {
-    return new CSVLoader();
-  }
+    /**
+     * returns the loader used in the tests.
+     * 
+     * @return the configured loader
+     */
+    public AbstractLoader getLoader() {
+        return new CSVLoader();
+    }
 
-  /**
-   * returns the saver used in the tests.
-   * 
-   * @return the configured saver
-   */
-  public AbstractSaver getSaver() {
-    return new CSVSaver();
-  }
-  
-  /**
-   * Called by JUnit before each test method. This implementation creates
-   * the default loader/saver to test and generates a test set of Instances.
-   *
-   * @throws Exception if an error occurs reading the example instances.
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-    
-    m_CheckHeader           = false;
-    m_CompareValuesAsString = true;
-  }
+    /**
+     * returns the saver used in the tests.
+     * 
+     * @return the configured saver
+     */
+    public AbstractSaver getSaver() {
+        return new CSVSaver();
+    }
 
-  /**
-   * returns a test suite.
-   * 
-   * @return the test suite
-   */
-  public static Test suite() {
-    return new TestSuite(CSVTest.class);
-  }
+    /**
+     * Called by JUnit before each test method. This implementation creates the
+     * default loader/saver to test and generates a test set of Instances.
+     *
+     * @throws Exception if an error occurs reading the example instances.
+     */
+    protected void setUp() throws Exception {
+        super.setUp();
 
-  /**
-   * for running the test from commandline.
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+        m_CheckHeader = false;
+        m_CompareValuesAsString = true;
+    }
+
+    /**
+     * returns a test suite.
+     * 
+     * @return the test suite
+     */
+    public static Test suite() {
+        return new TestSuite(CSVTest.class);
+    }
+
+    /**
+     * for running the test from commandline.
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }
-

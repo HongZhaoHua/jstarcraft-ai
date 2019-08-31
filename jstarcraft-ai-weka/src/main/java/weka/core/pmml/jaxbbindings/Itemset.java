@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigDecimal;
@@ -19,11 +18,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Itemset element declaration.
+ * <p>
+ * Java class for Itemset element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Itemset">
@@ -46,10 +47,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "itemRef"
-})
+@XmlType(name = "", propOrder = { "extension", "itemRef" })
 @XmlRootElement(name = "Itemset")
 public class Itemset {
 
@@ -68,21 +66,21 @@ public class Itemset {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -97,21 +95,21 @@ public class Itemset {
      * Gets the value of the itemRef property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the itemRef property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the itemRef property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getItemRef().add(newItem);
+     * getItemRef().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ItemRef }
+     * Objects of the following type(s) are allowed in the list {@link ItemRef }
      * 
      * 
      */
@@ -125,10 +123,8 @@ public class Itemset {
     /**
      * Gets the value of the id property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getId() {
         return id;
@@ -137,10 +133,8 @@ public class Itemset {
     /**
      * Sets the value of the id property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setId(String value) {
         this.id = value;
@@ -149,10 +143,8 @@ public class Itemset {
     /**
      * Gets the value of the numberOfItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getNumberOfItems() {
         return numberOfItems;
@@ -161,10 +153,8 @@ public class Itemset {
     /**
      * Sets the value of the numberOfItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setNumberOfItems(BigInteger value) {
         this.numberOfItems = value;
@@ -173,10 +163,8 @@ public class Itemset {
     /**
      * Gets the value of the support property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     * @return possible object is {@link BigDecimal }
+     * 
      */
     public BigDecimal getSupport() {
         return support;
@@ -185,10 +173,8 @@ public class Itemset {
     /**
      * Sets the value of the support property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     * @param value allowed object is {@link BigDecimal }
+     * 
      */
     public void setSupport(BigDecimal value) {
         this.support = value;

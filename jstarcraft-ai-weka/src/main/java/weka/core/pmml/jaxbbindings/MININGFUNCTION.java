@@ -5,18 +5,20 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
-
 /**
- * <p>Java class for MINING-FUNCTION.
- * 
- * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
+ * Java class for MINING-FUNCTION.
+ * 
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
+ * <p>
+ * 
  * <pre>
  * &lt;simpleType name="MINING-FUNCTION">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
@@ -36,18 +38,12 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum MININGFUNCTION {
 
     @XmlEnumValue("associationRules")
-    ASSOCIATION_RULES("associationRules"),
-    @XmlEnumValue("classification")
-    CLASSIFICATION("classification"),
-    @XmlEnumValue("clustering")
-    CLUSTERING("clustering"),
-    @XmlEnumValue("mixed")
-    MIXED("mixed"),
-    @XmlEnumValue("regression")
-    REGRESSION("regression"),
-    @XmlEnumValue("sequences")
-    SEQUENCES("sequences"),
-    @XmlEnumValue("timeSeries")
+    ASSOCIATION_RULES("associationRules"), @XmlEnumValue("classification")
+    CLASSIFICATION("classification"), @XmlEnumValue("clustering")
+    CLUSTERING("clustering"), @XmlEnumValue("mixed")
+    MIXED("mixed"), @XmlEnumValue("regression")
+    REGRESSION("regression"), @XmlEnumValue("sequences")
+    SEQUENCES("sequences"), @XmlEnumValue("timeSeries")
     TIME_SERIES("timeSeries");
     private final String value;
 
@@ -60,7 +56,7 @@ public enum MININGFUNCTION {
     }
 
     public static MININGFUNCTION fromValue(String v) {
-        for (MININGFUNCTION c: MININGFUNCTION.values()) {
+        for (MININGFUNCTION c : MININGFUNCTION.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

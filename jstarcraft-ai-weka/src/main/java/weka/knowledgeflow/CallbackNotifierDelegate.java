@@ -34,14 +34,13 @@ package weka.knowledgeflow;
  */
 public interface CallbackNotifierDelegate {
 
-  /**
-   * Notify the supplied callback
-   *
-   * @param callback the callback to notify
-   * @param taskExecuted the StepTask that was executed
-   * @param result the ExecutionResult that was produced
-   * @throws Exception if a problem occurs
-   */
-    void notifyCallback(StepTaskCallback callback, StepTask taskExecuted,
-      ExecutionResult result) throws Exception;
+    /**
+     * Notify the supplied callback
+     *
+     * @param callback     the callback to notify
+     * @param taskExecuted the StepTask that was executed
+     * @param result       the ExecutionResult that was produced
+     * @throws Exception if a problem occurs
+     */
+    void notifyCallback(StepTaskCallback callback, StepTask taskExecuted, ExecutionResult result) throws Exception;
 }

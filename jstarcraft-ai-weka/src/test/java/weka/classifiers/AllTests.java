@@ -32,21 +32,20 @@ import weka.test.WekaTestSuite;
  * @author FracPete (frapcete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class AllTests
-  extends WekaTestSuite {
+public class AllTests extends WekaTestSuite {
 
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
-    suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
-    suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
-    suite.addTest(suite("weka.classifiers.Classifier"));
-    suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
+        suite.addTest(new TestSuite(weka.classifiers.CostMatrixTest.class));
+        suite.addTest(weka.classifiers.pmml.consumer.AllTests.suite());
+        suite.addTest(suite("weka.classifiers.Classifier"));
+        suite.addTest(suite("weka.classifiers.functions.supportVector.Kernel"));
 
-    return suite;
-  }
+        return suite;
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -32,18 +32,18 @@ import weka.core.WekaException;
  */
 public interface DataCollector {
 
-  /**
-   * Get the data that this collector has collected
-   *
-   * @return the data collected by this collector
-   */
-  public Object retrieveData();
+    /**
+     * Get the data that this collector has collected
+     *
+     * @return the data collected by this collector
+     */
+    public Object retrieveData();
 
-  /**
-   * Set the data for this collector
-   *
-   * @param data the data to set
-   * @throws WekaException if there is a problem restoring data
-   */
-  public void restoreData(Object data) throws WekaException;
+    /**
+     * Set the data for this collector
+     *
+     * @param data the data to set
+     * @throws WekaException if there is a problem restoring data
+     */
+    public void restoreData(Object data) throws WekaException;
 }

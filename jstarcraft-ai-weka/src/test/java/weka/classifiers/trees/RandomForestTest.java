@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests RandomForest. Run from the command line with:<p/>
+ * Tests RandomForest. Run from the command line with:
+ * <p/>
  * java weka.classifiers.trees.RandomForestTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class RandomForestTest 
-  extends AbstractClassifierTest {
+public class RandomForestTest extends AbstractClassifierTest {
 
-  public RandomForestTest(String name) { 
-    super(name);  
-  }
+    public RandomForestTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default RandomForest */
-  public Classifier getClassifier() {
-    return new RandomForest();
-  }
+    /** Creates a default RandomForest */
+    public Classifier getClassifier() {
+        return new RandomForest();
+    }
 
-  public static Test suite() {
-    return new TestSuite(RandomForestTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RandomForestTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

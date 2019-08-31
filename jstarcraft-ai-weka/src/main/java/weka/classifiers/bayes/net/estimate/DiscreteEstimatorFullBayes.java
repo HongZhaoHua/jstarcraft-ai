@@ -25,94 +25,84 @@ import weka.estimators.DiscreteEstimator;
 
 /**
  * Symbolic probability estimator based on symbol counts and a prior.
- *  
+ * 
  * @author Remco Bouckaert (rrb@xm.co.nz)
  * @version $Revision$
  */
-public class DiscreteEstimatorFullBayes 
-  extends DiscreteEstimatorBayes {
+public class DiscreteEstimatorFullBayes extends DiscreteEstimatorBayes {
 
-  /** for serialization */
-  static final long serialVersionUID = 6774941981423312133L;
-  
-  /**
-   * Constructor
-   * 
-   * @param nSymbols the number of possible symbols (remember to include 0)
-   * @param w1
-   * @param w2
-   * @param EmptyDist
-   * @param ClassDist
-   * @param fPrior
-   */
-  public DiscreteEstimatorFullBayes(int nSymbols, 
-    double w1, double w2,
-    DiscreteEstimatorBayes EmptyDist,
-    DiscreteEstimatorBayes ClassDist,
-    double fPrior) {
-    
-    super(nSymbols, fPrior);
+    /** for serialization */
+    static final long serialVersionUID = 6774941981423312133L;
 
-    m_SumOfCounts = 0.0;
-    for (int iSymbol = 0; iSymbol < m_nSymbols; iSymbol++) {
-      double p1 = EmptyDist.getProbability(iSymbol);
-      double p2 = ClassDist.getProbability(iSymbol);
-      m_Counts[iSymbol] = w1 * p1 + w2 * p2;
-      m_SumOfCounts += m_Counts[iSymbol];
-    } 
-  } // DiscreteEstimatorFullBayes
-  
-  /**
-   * Returns the revision string.
-   * 
-   * @return		the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Constructor
+     * 
+     * @param nSymbols  the number of possible symbols (remember to include 0)
+     * @param w1
+     * @param w2
+     * @param EmptyDist
+     * @param ClassDist
+     * @param fPrior
+     */
+    public DiscreteEstimatorFullBayes(int nSymbols, double w1, double w2, DiscreteEstimatorBayes EmptyDist, DiscreteEstimatorBayes ClassDist, double fPrior) {
 
-  /**
-   * Main method for testing this class.
-   * 
-   * @param argv should contain a sequence of integers which
-   * will be treated as symbolic.
-   */
-  public static void main(String[] argv) {
-    try {
-      if (argv.length == 0) {
-	System.out.println("Please specify a set of instances.");
+        super(nSymbols, fPrior);
 
-	return;
-      } 
+        m_SumOfCounts = 0.0;
+        for (int iSymbol = 0; iSymbol < m_nSymbols; iSymbol++) {
+            double p1 = EmptyDist.getProbability(iSymbol);
+            double p2 = ClassDist.getProbability(iSymbol);
+            m_Counts[iSymbol] = w1 * p1 + w2 * p2;
+            m_SumOfCounts += m_Counts[iSymbol];
+        }
+    } // DiscreteEstimatorFullBayes
 
-      int current = Integer.parseInt(argv[0]);
-      int max = current;
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 
-      for (int i = 1; i < argv.length; i++) {
-	current = Integer.parseInt(argv[i]);
+    /**
+     * Main method for testing this class.
+     * 
+     * @param argv should contain a sequence of integers which will be treated as
+     *             symbolic.
+     */
+    public static void main(String[] argv) {
+        try {
+            if (argv.length == 0) {
+                System.out.println("Please specify a set of instances.");
 
-	if (current > max) {
-	  max = current;
-	} 
-      } 
+                return;
+            }
 
-      DiscreteEstimator newEst = new DiscreteEstimator(max + 1, true);
+            int current = Integer.parseInt(argv[0]);
+            int max = current;
 
-      for (int i = 0; i < argv.length; i++) {
-	current = Integer.parseInt(argv[i]);
+            for (int i = 1; i < argv.length; i++) {
+                current = Integer.parseInt(argv[i]);
 
-	System.out.println(newEst);
-	System.out.println("Prediction for " + current + " = " 
-			   + newEst.getProbability(current));
-	newEst.addValue(current, 1);
-      } 
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    } 
-  }    // main
- 
-}  // class DiscreteEstimatorFullBayes
+                if (current > max) {
+                    max = current;
+                }
+            }
 
+            DiscreteEstimator newEst = new DiscreteEstimator(max + 1, true);
 
+            for (int i = 0; i < argv.length; i++) {
+                current = Integer.parseInt(argv[i]);
 
+                System.out.println(newEst);
+                System.out.println("Prediction for " + current + " = " + newEst.getProbability(current));
+                newEst.addValue(current, 1);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    } // main
 
+} // class DiscreteEstimatorFullBayes

@@ -36,46 +36,45 @@ import weka.test.WekaTestSuite;
  */
 public class AllTests extends WekaTestSuite {
 
-  /**
-   * generates all the tests
-   * 
-   * @return all the tests
-   */
-  public static Test suite() {
-    TestSuite suite = new TestSuite();
+    /**
+     * generates all the tests
+     * 
+     * @return all the tests
+     */
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
 
-    // all test in core package
-    Vector<String> packages = new Vector<String>();
-    packages.add("weka.core");
-    suite.addTest(suite(TestCase.class.getName(), packages));
+        // all test in core package
+        Vector<String> packages = new Vector<String>();
+        packages.add("weka.core");
+        suite.addTest(suite(TestCase.class.getName(), packages));
 
-    // all OptionHandler's
-    // TODO: fix all errors
-    // suite.addTest(OptionHandlersTest.suite());
+        // all OptionHandler's
+        // TODO: fix all errors
+        // suite.addTest(OptionHandlersTest.suite());
 
-    // converters
-    suite.addTest(weka.core.converters.AllTests.suite());
+        // converters
+        suite.addTest(weka.core.converters.AllTests.suite());
 
-    // neighboursearch
-    suite.addTest(weka.core.neighboursearch.AllTests.suite());
+        // neighboursearch
+        suite.addTest(weka.core.neighboursearch.AllTests.suite());
 
-    // tokenizers
-    suite.addTest(weka.core.tokenizers.AllTests.suite());
+        // tokenizers
+        suite.addTest(weka.core.tokenizers.AllTests.suite());
 
-    suite
-      .addTestSuite(weka.core.expressionlanguage.ExpressionLanguageTest.class);
+        suite.addTestSuite(weka.core.expressionlanguage.ExpressionLanguageTest.class);
 
-    suite.addTestSuite(weka.core.DictionaryBuilderTest.class);
+        suite.addTestSuite(weka.core.DictionaryBuilderTest.class);
 
-    return suite;
-  }
+        return suite;
+    }
 
-  /**
-   * for running the tests from commandline
-   * 
-   * @param args the commandline arguments - ignored
-   */
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    /**
+     * for running the tests from commandline
+     * 
+     * @param args the commandline arguments - ignored
+     */
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

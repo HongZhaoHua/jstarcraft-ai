@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests FarthestFirst. Run from the command line with:<p/>
+ * Tests FarthestFirst. Run from the command line with:
+ * <p/>
  * java weka.clusterers.FarthestFirstTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class FarthestFirstTest 
-  extends AbstractClustererTest {
+public class FarthestFirstTest extends AbstractClustererTest {
 
-  public FarthestFirstTest(String name) { 
-    super(name);  
-  }
+    public FarthestFirstTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default FarthestFirst */
-  public Clusterer getClusterer() {
-    return new FarthestFirst();
-  }
+    /** Creates a default FarthestFirst */
+    public Clusterer getClusterer() {
+        return new FarthestFirst();
+    }
 
-  public static Test suite() {
-    return new TestSuite(FarthestFirstTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(FarthestFirstTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

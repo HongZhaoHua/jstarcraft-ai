@@ -32,25 +32,25 @@ import junit.framework.TestSuite;
  */
 public class TreeModelTest extends AbstractPMMLClassifierTest {
 
-  public TreeModelTest(String name) {
-    super(name);
-  }
+    public TreeModelTest(String name) {
+        super(name);
+    }
 
-  @Override
-  protected void setUp() throws Exception {
-    m_modelNames = new ArrayList<String>();
-    m_dataSetNames = new ArrayList<String>();
-    m_modelNames.add("IRIS_TREE.xml");
-    m_modelNames.add("HEART_TREE.xml");
-    m_dataSetNames.add("iris.arff");
-    m_dataSetNames.add("heart-c2.arff");
-  }
+    @Override
+    protected void setUp() throws Exception {
+        m_modelNames = new ArrayList<String>();
+        m_dataSetNames = new ArrayList<String>();
+        m_modelNames.add("IRIS_TREE.xml");
+        m_modelNames.add("HEART_TREE.xml");
+        m_dataSetNames.add("iris.arff");
+        m_dataSetNames.add("heart-c2.arff");
+    }
 
-  public static Test suite() {
-    return new TestSuite(weka.classifiers.pmml.consumer.TreeModelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(weka.classifiers.pmml.consumer.TreeModelTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for Constraints element declaration.
+ * <p>
+ * Java class for Constraints element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="Constraints">
@@ -56,9 +57,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension"
-})
+@XmlType(name = "", propOrder = { "extension" })
 @XmlRootElement(name = "Constraints")
 public class Constraints {
 
@@ -99,21 +98,21 @@ public class Constraints {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -127,10 +126,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumAntConsSeparationTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMaximumAntConsSeparationTime() {
         return maximumAntConsSeparationTime;
@@ -139,10 +136,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumAntConsSeparationTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMaximumAntConsSeparationTime(Double value) {
         this.maximumAntConsSeparationTime = value;
@@ -151,10 +146,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumItemsetSeparationTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMaximumItemsetSeparationTime() {
         return maximumItemsetSeparationTime;
@@ -163,10 +156,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumItemsetSeparationTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMaximumItemsetSeparationTime(Double value) {
         this.maximumItemsetSeparationTime = value;
@@ -175,10 +166,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumNumberOfAntecedentItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMaximumNumberOfAntecedentItems() {
         return maximumNumberOfAntecedentItems;
@@ -187,10 +176,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumNumberOfAntecedentItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMaximumNumberOfAntecedentItems(BigInteger value) {
         this.maximumNumberOfAntecedentItems = value;
@@ -199,10 +186,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumNumberOfConsequentItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMaximumNumberOfConsequentItems() {
         return maximumNumberOfConsequentItems;
@@ -211,10 +196,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumNumberOfConsequentItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMaximumNumberOfConsequentItems(BigInteger value) {
         this.maximumNumberOfConsequentItems = value;
@@ -223,10 +206,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumNumberOfItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMaximumNumberOfItems() {
         return maximumNumberOfItems;
@@ -235,10 +216,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumNumberOfItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMaximumNumberOfItems(BigInteger value) {
         this.maximumNumberOfItems = value;
@@ -247,10 +226,8 @@ public class Constraints {
     /**
      * Gets the value of the maximumTotalSequenceTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMaximumTotalSequenceTime() {
         return maximumTotalSequenceTime;
@@ -259,10 +236,8 @@ public class Constraints {
     /**
      * Sets the value of the maximumTotalSequenceTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMaximumTotalSequenceTime(Double value) {
         this.maximumTotalSequenceTime = value;
@@ -271,14 +246,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumAntConsSeparationTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumAntConsSeparationTime() {
         if (minimumAntConsSeparationTime == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumAntConsSeparationTime;
         }
@@ -287,10 +260,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumAntConsSeparationTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumAntConsSeparationTime(Double value) {
         this.minimumAntConsSeparationTime = value;
@@ -299,14 +270,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumConfidence property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumConfidence() {
         if (minimumConfidence == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumConfidence;
         }
@@ -315,10 +284,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumConfidence property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumConfidence(Double value) {
         this.minimumConfidence = value;
@@ -327,14 +294,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumItemsetSeparationTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumItemsetSeparationTime() {
         if (minimumItemsetSeparationTime == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumItemsetSeparationTime;
         }
@@ -343,10 +308,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumItemsetSeparationTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumItemsetSeparationTime(Double value) {
         this.minimumItemsetSeparationTime = value;
@@ -355,14 +318,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumLift property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumLift() {
         if (minimumLift == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumLift;
         }
@@ -371,10 +332,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumLift property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumLift(Double value) {
         this.minimumLift = value;
@@ -383,10 +342,8 @@ public class Constraints {
     /**
      * Gets the value of the minimumNumberOfAntecedentItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMinimumNumberOfAntecedentItems() {
         if (minimumNumberOfAntecedentItems == null) {
@@ -399,10 +356,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumNumberOfAntecedentItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMinimumNumberOfAntecedentItems(BigInteger value) {
         this.minimumNumberOfAntecedentItems = value;
@@ -411,10 +366,8 @@ public class Constraints {
     /**
      * Gets the value of the minimumNumberOfConsequentItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMinimumNumberOfConsequentItems() {
         if (minimumNumberOfConsequentItems == null) {
@@ -427,10 +380,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumNumberOfConsequentItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMinimumNumberOfConsequentItems(BigInteger value) {
         this.minimumNumberOfConsequentItems = value;
@@ -439,10 +390,8 @@ public class Constraints {
     /**
      * Gets the value of the minimumNumberOfItems property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getMinimumNumberOfItems() {
         if (minimumNumberOfItems == null) {
@@ -455,10 +404,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumNumberOfItems property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setMinimumNumberOfItems(BigInteger value) {
         this.minimumNumberOfItems = value;
@@ -467,14 +414,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumSupport property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumSupport() {
         if (minimumSupport == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumSupport;
         }
@@ -483,10 +428,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumSupport property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumSupport(Double value) {
         this.minimumSupport = value;
@@ -495,14 +438,12 @@ public class Constraints {
     /**
      * Gets the value of the minimumTotalSequenceTime property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public double getMinimumTotalSequenceTime() {
         if (minimumTotalSequenceTime == null) {
-            return  0.0D;
+            return 0.0D;
         } else {
             return minimumTotalSequenceTime;
         }
@@ -511,10 +452,8 @@ public class Constraints {
     /**
      * Sets the value of the minimumTotalSequenceTime property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMinimumTotalSequenceTime(Double value) {
         this.minimumTotalSequenceTime = value;

@@ -32,131 +32,130 @@ import weka.core.RevisionUtils;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class SMOset
-  implements Serializable, RevisionHandler {
+public class SMOset implements Serializable, RevisionHandler {
 
-  /** for serialization */
-  private static final long serialVersionUID = -8364829283188675777L;
-  
-  /** The current number of elements in the set */
-  private int m_number;
+    /** for serialization */
+    private static final long serialVersionUID = -8364829283188675777L;
 
-  /** The first element in the set */
-  private int m_first;
+    /** The current number of elements in the set */
+    private int m_number;
 
-  /** Indicators */
-  private boolean[] m_indicators;
+    /** The first element in the set */
+    private int m_first;
 
-  /** The next element for each element */
-  private int[] m_next;
+    /** Indicators */
+    private boolean[] m_indicators;
 
-  /** The previous element for each element */
-  private int[] m_previous;
+    /** The next element for each element */
+    private int[] m_next;
 
-  /**
-   * Creates a new set of the given size.
-   */
-  public SMOset(int size) {
-      
-    m_indicators = new boolean[size];
-    m_next = new int[size];
-    m_previous = new int[size];
-    m_number = 0;
-    m_first = -1;
-  }
- 
-  /**
-   * Checks whether an element is in the set.
-   */
-  public boolean contains(int index) {
+    /** The previous element for each element */
+    private int[] m_previous;
 
-    return m_indicators[index];
-  }
+    /**
+     * Creates a new set of the given size.
+     */
+    public SMOset(int size) {
 
-  /**
-   * Deletes an element from the set.
-   */
-  public void delete(int index) {
-
-    if (m_indicators[index]) {
-      if (m_first == index) {
-	m_first = m_next[index];
-      } else {
-	m_next[m_previous[index]] = m_next[index];
-      }
-      if (m_next[index] != -1) {
-	m_previous[m_next[index]] = m_previous[index];
-      }
-      m_indicators[index] = false;
-      m_number--;
+        m_indicators = new boolean[size];
+        m_next = new int[size];
+        m_previous = new int[size];
+        m_number = 0;
+        m_first = -1;
     }
-  }
 
-  /**
-   * Inserts an element into the set.
-   */
-  public void insert(int index) {
+    /**
+     * Checks whether an element is in the set.
+     */
+    public boolean contains(int index) {
 
-    if (!m_indicators[index]) {
-      if (m_number == 0) {
-	m_first = index;
-	m_next[index] = -1;
-	m_previous[index] = -1;
-      } else {
-	m_previous[m_first] = index;
-	m_next[index] = m_first;
-	m_previous[index] = -1;
-	m_first = index;
-      }
-      m_indicators[index] = true;
-      m_number++;
+        return m_indicators[index];
     }
-  }
 
-  /** 
-   * Gets the next element in the set. -1 gets the first one.
-   */
-  public int getNext(int index) {
+    /**
+     * Deletes an element from the set.
+     */
+    public void delete(int index) {
 
-    if (index == -1) {
-      return m_first;
-    } else {
-      return m_next[index];
+        if (m_indicators[index]) {
+            if (m_first == index) {
+                m_first = m_next[index];
+            } else {
+                m_next[m_previous[index]] = m_next[index];
+            }
+            if (m_next[index] != -1) {
+                m_previous[m_next[index]] = m_previous[index];
+            }
+            m_indicators[index] = false;
+            m_number--;
+        }
     }
-  }
 
-  /**
-   * Prints all the current elements in the set.
-   */
-  public void printElements() {
+    /**
+     * Inserts an element into the set.
+     */
+    public void insert(int index) {
 
-    for (int i = getNext(-1); i != -1; i = getNext(i)) {
-      System.err.print(i + " ");
+        if (!m_indicators[index]) {
+            if (m_number == 0) {
+                m_first = index;
+                m_next[index] = -1;
+                m_previous[index] = -1;
+            } else {
+                m_previous[m_first] = index;
+                m_next[index] = m_first;
+                m_previous[index] = -1;
+                m_first = index;
+            }
+            m_indicators[index] = true;
+            m_number++;
+        }
     }
-    System.err.println();
-    for (int i = 0; i < m_indicators.length; i++) {
-      if (m_indicators[i]) {
-	System.err.print(i + " ");
-      }
-    }
-    System.err.println();
-    System.err.println(m_number);
-  }
 
-  /** 
-   * Returns the number of elements in the set.
-   */
-  public int numElements() {
-      
-    return m_number;
-  }
-  
-  /**
-   * Returns the revision string.
-   * 
-   * @return		the revision
-   */
-  public String getRevision() {
-    return RevisionUtils.extract("$Revision$");
-  }
+    /**
+     * Gets the next element in the set. -1 gets the first one.
+     */
+    public int getNext(int index) {
+
+        if (index == -1) {
+            return m_first;
+        } else {
+            return m_next[index];
+        }
+    }
+
+    /**
+     * Prints all the current elements in the set.
+     */
+    public void printElements() {
+
+        for (int i = getNext(-1); i != -1; i = getNext(i)) {
+            System.err.print(i + " ");
+        }
+        System.err.println();
+        for (int i = 0; i < m_indicators.length; i++) {
+            if (m_indicators[i]) {
+                System.err.print(i + " ");
+            }
+        }
+        System.err.println();
+        System.err.println(m_number);
+    }
+
+    /**
+     * Returns the number of elements in the set.
+     */
+    public int numElements() {
+
+        return m_number;
+    }
+
+    /**
+     * Returns the revision string.
+     * 
+     * @return the revision
+     */
+    public String getRevision() {
+        return RevisionUtils.extract("$Revision$");
+    }
 }

@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.math.BigInteger;
@@ -18,11 +17,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for TrainingInstances element declaration.
+ * <p>
+ * Java class for TrainingInstances element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="TrainingInstances">
@@ -49,12 +50,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "instanceFields",
-    "tableLocator",
-    "inlineTable"
-})
+@XmlType(name = "", propOrder = { "extension", "instanceFields", "tableLocator", "inlineTable" })
 @XmlRootElement(name = "TrainingInstances")
 public class TrainingInstances {
 
@@ -77,21 +73,21 @@ public class TrainingInstances {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -105,10 +101,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the instanceFields property.
      * 
-     * @return
-     *     possible object is
-     *     {@link InstanceFields }
-     *     
+     * @return possible object is {@link InstanceFields }
+     * 
      */
     public InstanceFields getInstanceFields() {
         return instanceFields;
@@ -117,10 +111,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the instanceFields property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link InstanceFields }
-     *     
+     * @param value allowed object is {@link InstanceFields }
+     * 
      */
     public void setInstanceFields(InstanceFields value) {
         this.instanceFields = value;
@@ -129,10 +121,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the tableLocator property.
      * 
-     * @return
-     *     possible object is
-     *     {@link TableLocator }
-     *     
+     * @return possible object is {@link TableLocator }
+     * 
      */
     public TableLocator getTableLocator() {
         return tableLocator;
@@ -141,10 +131,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the tableLocator property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link TableLocator }
-     *     
+     * @param value allowed object is {@link TableLocator }
+     * 
      */
     public void setTableLocator(TableLocator value) {
         this.tableLocator = value;
@@ -153,10 +141,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the inlineTable property.
      * 
-     * @return
-     *     possible object is
-     *     {@link InlineTable }
-     *     
+     * @return possible object is {@link InlineTable }
+     * 
      */
     public InlineTable getInlineTable() {
         return inlineTable;
@@ -165,10 +151,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the inlineTable property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link InlineTable }
-     *     
+     * @param value allowed object is {@link InlineTable }
+     * 
      */
     public void setInlineTable(InlineTable value) {
         this.inlineTable = value;
@@ -177,10 +161,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the fieldCount property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getFieldCount() {
         return fieldCount;
@@ -189,10 +171,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the fieldCount property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setFieldCount(BigInteger value) {
         this.fieldCount = value;
@@ -201,10 +181,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the isTransformed property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Boolean }
-     *     
+     * @return possible object is {@link Boolean }
+     * 
      */
     public boolean isIsTransformed() {
         if (isTransformed == null) {
@@ -217,10 +195,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the isTransformed property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Boolean }
-     *     
+     * @param value allowed object is {@link Boolean }
+     * 
      */
     public void setIsTransformed(Boolean value) {
         this.isTransformed = value;
@@ -229,10 +205,8 @@ public class TrainingInstances {
     /**
      * Gets the value of the recordCount property.
      * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     * @return possible object is {@link BigInteger }
+     * 
      */
     public BigInteger getRecordCount() {
         return recordCount;
@@ -241,10 +215,8 @@ public class TrainingInstances {
     /**
      * Sets the value of the recordCount property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     * @param value allowed object is {@link BigInteger }
+     * 
      */
     public void setRecordCount(BigInteger value) {
         this.recordCount = value;

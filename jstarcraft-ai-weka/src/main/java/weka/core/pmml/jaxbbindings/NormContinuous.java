@@ -5,7 +5,6 @@
 // Generated on: 2013.12.20 at 12:48:21 PM GMT 
 //
 
-
 package weka.core.pmml.jaxbbindings;
 
 import java.util.ArrayList;
@@ -17,11 +16,13 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-
 /**
- * <p>Java class for NormContinuous element declaration.
+ * <p>
+ * Java class for NormContinuous element declaration.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>
+ * The following schema fragment specifies the expected content contained within
+ * this class.
  * 
  * <pre>
  * &lt;element name="NormContinuous">
@@ -44,10 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "extension",
-    "linearNorm"
-})
+@XmlType(name = "", propOrder = { "extension", "linearNorm" })
 @XmlRootElement(name = "NormContinuous")
 public class NormContinuous {
 
@@ -66,21 +64,21 @@ public class NormContinuous {
      * Gets the value of the extension property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extension property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the extension property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getExtension().add(newItem);
+     * getExtension().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Extension }
+     * Objects of the following type(s) are allowed in the list {@link Extension }
      * 
      * 
      */
@@ -95,21 +93,21 @@ public class NormContinuous {
      * Gets the value of the linearNorm property.
      * 
      * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the linearNorm property.
+     * This accessor method returns a reference to the live list, not a snapshot.
+     * Therefore any modification you make to the returned list will be present
+     * inside the JAXB object. This is why there is not a <CODE>set</CODE> method
+     * for the linearNorm property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getLinearNorm().add(newItem);
+     * getLinearNorm().add(newItem);
      * </pre>
      * 
      * 
      * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link LinearNorm }
+     * Objects of the following type(s) are allowed in the list {@link LinearNorm }
      * 
      * 
      */
@@ -123,10 +121,8 @@ public class NormContinuous {
     /**
      * Gets the value of the field property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     * @return possible object is {@link String }
+     * 
      */
     public String getField() {
         return field;
@@ -135,10 +131,8 @@ public class NormContinuous {
     /**
      * Sets the value of the field property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     * @param value allowed object is {@link String }
+     * 
      */
     public void setField(String value) {
         this.field = value;
@@ -147,10 +141,8 @@ public class NormContinuous {
     /**
      * Gets the value of the mapMissingTo property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
+     * @return possible object is {@link Double }
+     * 
      */
     public Double getMapMissingTo() {
         return mapMissingTo;
@@ -159,10 +151,8 @@ public class NormContinuous {
     /**
      * Sets the value of the mapMissingTo property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * @param value allowed object is {@link Double }
+     * 
      */
     public void setMapMissingTo(Double value) {
         this.mapMissingTo = value;
@@ -171,10 +161,8 @@ public class NormContinuous {
     /**
      * Gets the value of the outliers property.
      * 
-     * @return
-     *     possible object is
-     *     {@link OUTLIERTREATMENTMETHOD }
-     *     
+     * @return possible object is {@link OUTLIERTREATMENTMETHOD }
+     * 
      */
     public OUTLIERTREATMENTMETHOD getOutliers() {
         if (outliers == null) {
@@ -187,10 +175,8 @@ public class NormContinuous {
     /**
      * Sets the value of the outliers property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link OUTLIERTREATMENTMETHOD }
-     *     
+     * @param value allowed object is {@link OUTLIERTREATMENTMETHOD }
+     * 
      */
     public void setOutliers(OUTLIERTREATMENTMETHOD value) {
         this.outliers = value;

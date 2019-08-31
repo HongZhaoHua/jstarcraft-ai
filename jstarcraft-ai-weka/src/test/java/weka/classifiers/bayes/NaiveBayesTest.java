@@ -26,7 +26,8 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests NaiveBayes. Run from the command line with:<p>
+ * Tests NaiveBayes. Run from the command line with:
+ * <p>
  * java weka.classifiers.bayes.NaiveBayesTest
  *
  * @author <a href="mailto:eibe@cs.waikato.ac.nz">Eibe Frank</a>
@@ -34,19 +35,21 @@ import junit.framework.TestSuite;
  */
 public class NaiveBayesTest extends AbstractClassifierTest {
 
-  public NaiveBayesTest(String name) { super(name);  }
+    public NaiveBayesTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default NaiveBayes */
-  public Classifier getClassifier() {
-    return new NaiveBayes();
-  }
+    /** Creates a default NaiveBayes */
+    public Classifier getClassifier() {
+        return new NaiveBayes();
+    }
 
-  public static Test suite() {
-    return new TestSuite(NaiveBayesTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(NaiveBayesTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

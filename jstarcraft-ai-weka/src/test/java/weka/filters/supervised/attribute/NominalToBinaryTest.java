@@ -27,46 +27,48 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests NominalToBinary. Run from the command line with:<p>
+ * Tests NominalToBinary. Run from the command line with:
+ * <p>
  * java weka.filters.supervised.attribute.NominalToBinaryTest
  *
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
 public class NominalToBinaryTest extends AbstractFilterTest {
-  
-  public NominalToBinaryTest(String name) { super(name);  }
 
-  /** Creates an example NominalToBinary */
-  public Filter getFilter() {
-    NominalToBinary f = new NominalToBinary();
-    return f;
-  }
+    public NominalToBinaryTest(String name) {
+        super(name);
+    }
 
-  /** Remove string attributes from default fixture instances */
-  protected void setUp() throws Exception {
+    /** Creates an example NominalToBinary */
+    public Filter getFilter() {
+        NominalToBinary f = new NominalToBinary();
+        return f;
+    }
 
-    super.setUp();
-    // NominalToBinary requires a class attribute be set
-    m_Instances.setClassIndex(m_Instances.numAttributes() - 1);
-  }
+    /** Remove string attributes from default fixture instances */
+    protected void setUp() throws Exception {
 
-  public void testTypical() {
-    Instances result = useFilter();
-    // Number of attributes changes
-    assertEquals(m_Instances.numAttributes() + 3, result.numAttributes());
-    // Number of instances shouldn't change
-    assertEquals(m_Instances.numInstances(),  result.numInstances());
-    // Eibe can enhance this to check the binarizing is correct.
-  }
+        super.setUp();
+        // NominalToBinary requires a class attribute be set
+        m_Instances.setClassIndex(m_Instances.numAttributes() - 1);
+    }
 
+    public void testTypical() {
+        Instances result = useFilter();
+        // Number of attributes changes
+        assertEquals(m_Instances.numAttributes() + 3, result.numAttributes());
+        // Number of instances shouldn't change
+        assertEquals(m_Instances.numInstances(), result.numInstances());
+        // Eibe can enhance this to check the binarizing is correct.
+    }
 
-  public static Test suite() {
-    return new TestSuite(NominalToBinaryTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(NominalToBinaryTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

@@ -16,96 +16,86 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Edward Raff
  */
-public class SecantTest
-{
+public class SecantTest {
     /**
      * Root at 0
      */
     Function1D sinF = (double x) -> sin(x);
-    
+
     /**
      * Root at approx -4.87906
      */
-    Function1D polyF = (double x) -> pow(x, 3)+5*pow(x,2)+x+2;
-    
-    public SecantTest()
-    {
+    Function1D polyF = (double x) -> pow(x, 3) + 5 * pow(x, 2) + x + 2;
+
+    public SecantTest() {
     }
 
     @BeforeClass
-    public static void setUpClass() throws Exception
-    {
+    public static void setUpClass() throws Exception {
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception
-    {
+    public static void tearDownClass() throws Exception {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
 
     /**
      * Test of root method, of class Bisection.
      */
     @Test
-    public void testRoot_4args()
-    {
+    public void testRoot_4args() {
         System.out.println("root");
         double eps = 1e-15;
-        double result = Secant.root(-PI/2, PI/2, sinF);
+        double result = Secant.root(-PI / 2, PI / 2, sinF);
         assertEquals(0, result, eps);
-        
+
         result = Secant.root(-6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
-        
+
         result = Secant.root(-6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
-        
-        
-        result = Secant.root(-PI / 2, PI / 2, (x)->sin(x+1));
-        assertEquals(0, sin(result+1), eps);
+
+        result = Secant.root(-PI / 2, PI / 2, (x) -> sin(x + 1));
+        assertEquals(0, sin(result + 1), eps);
     }
 
     /**
      * Test of root method, of class Bisection.
      */
     @Test
-    public void testRoot_5args()
-    {
+    public void testRoot_5args() {
         System.out.println("root");
         double eps = 1e-15;
-        double result = Secant.root(eps, -PI/2, PI/2, sinF);
+        double result = Secant.root(eps, -PI / 2, PI / 2, sinF);
         assertEquals(0, result, eps);
-        
+
         result = Secant.root(eps, -6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
-        
-        result = Secant.root(eps, -6, 6,polyF);
+
+        result = Secant.root(eps, -6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
-        
-        
-        result = Secant.root(eps, -PI / 2, PI / 2, (x)->sin(x+1));
-        assertEquals(0, sin(result+1), eps);
-        
+
+        result = Secant.root(eps, -PI / 2, PI / 2, (x) -> sin(x + 1));
+        assertEquals(0, sin(result + 1), eps);
+
     }
-    
+
     @Test
-    public void testRoot_6args()
-    {
+    public void testRoot_6args() {
         System.out.println("root");
         double eps = 1e-15;
-        double result = Secant.root(eps, -PI/2, PI/2, sinF);
+        double result = Secant.root(eps, -PI / 2, PI / 2, sinF);
         assertEquals(0, result, eps);
-        
-        result = Secant.root(eps, -PI/2, PI/2, (x)->sin(x+1));
-        assertEquals(0, sin(result+1), eps);
-        
-        result = Secant.root(eps, -PI/2, PI/2, (x)->sin(x+3));
-        assertEquals(PI-3.0, result, eps);
-        
+
+        result = Secant.root(eps, -PI / 2, PI / 2, (x) -> sin(x + 1));
+        assertEquals(0, sin(result + 1), eps);
+
+        result = Secant.root(eps, -PI / 2, PI / 2, (x) -> sin(x + 3));
+        assertEquals(PI - 3.0, result, eps);
+
         result = Secant.root(eps, -6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
     }
@@ -114,20 +104,19 @@ public class SecantTest
      * Test of root method, of class Bisection.
      */
     @Test
-    public void testRoot_7args()
-    {
+    public void testRoot_7args() {
         System.out.println("root");
         double eps = 1e-13;
         int maxIterations = 1000;
-        double result = Secant.root(eps, maxIterations, -PI/2, PI/2, sinF);
+        double result = Secant.root(eps, maxIterations, -PI / 2, PI / 2, sinF);
         assertEquals(0, result, eps);
-        
-        result = Secant.root(eps, maxIterations, -PI/2, PI/2, (x)->sin(x+1));
-        assertEquals(0, sin(result+1), eps);
-        
-        result = Secant.root(eps, maxIterations, -PI/2, PI/2, (x)->sin(x+3));
-        assertEquals(PI-3.0, result, eps);
-        
+
+        result = Secant.root(eps, maxIterations, -PI / 2, PI / 2, (x) -> sin(x + 1));
+        assertEquals(0, sin(result + 1), eps);
+
+        result = Secant.root(eps, maxIterations, -PI / 2, PI / 2, (x) -> sin(x + 3));
+        assertEquals(PI - 3.0, result, eps);
+
         result = Secant.root(eps, maxIterations, -6, 6, polyF);
         assertEquals(-4.8790576334840479813, result, eps);
     }

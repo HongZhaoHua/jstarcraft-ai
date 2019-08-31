@@ -34,42 +34,40 @@ import java.util.Map;
  */
 public abstract class ConditionalSufficientStats implements Serializable {
 
-  /**
-   * For serialization
-   */
-  private static final long serialVersionUID = 8724787722646808376L;
+    /**
+     * For serialization
+     */
+    private static final long serialVersionUID = 8724787722646808376L;
 
-  /** Lookup by class value */
-  protected Map<String, Object> m_classLookup = new HashMap<String, Object>();
+    /** Lookup by class value */
+    protected Map<String, Object> m_classLookup = new HashMap<String, Object>();
 
-  /**
-   * Update this stat with the supplied attribute value and class value
-   * 
-   * @param attVal the value of the attribute
-   * @param classVal the class value
-   * @param weight the weight of this observation
-   */
-  public abstract void update(double attVal, String classVal, double weight);
+    /**
+     * Update this stat with the supplied attribute value and class value
+     * 
+     * @param attVal   the value of the attribute
+     * @param classVal the class value
+     * @param weight   the weight of this observation
+     */
+    public abstract void update(double attVal, String classVal, double weight);
 
-  /**
-   * Return the probability of an attribute value conditioned on a class value
-   * 
-   * @param attVal the attribute value to compute the conditional probability
-   *          for
-   * @param classVal the class value
-   * @return the probability
-   */
-  public abstract double probabilityOfAttValConditionedOnClass(double attVal,
-      String classVal);
+    /**
+     * Return the probability of an attribute value conditioned on a class value
+     * 
+     * @param attVal   the attribute value to compute the conditional probability
+     *                 for
+     * @param classVal the class value
+     * @return the probability
+     */
+    public abstract double probabilityOfAttValConditionedOnClass(double attVal, String classVal);
 
-  /**
-   * Return the best split
-   * 
-   * @param splitMetric the split metric to use
-   * @param preSplitDist the distribution of class values prior to splitting
-   * @param attName the name of the attribute being considered for splitting
-   * @return the best split for the attribute
-   */
-  public abstract SplitCandidate bestSplit(SplitMetric splitMetric,
-      Map<String, WeightMass> preSplitDist, String attName);
+    /**
+     * Return the best split
+     * 
+     * @param splitMetric  the split metric to use
+     * @param preSplitDist the distribution of class values prior to splitting
+     * @param attName      the name of the attribute being considered for splitting
+     * @return the best split for the attribute
+     */
+    public abstract SplitCandidate bestSplit(SplitMetric splitMetric, Map<String, WeightMass> preSplitDist, String attName);
 }

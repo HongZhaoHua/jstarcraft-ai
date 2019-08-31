@@ -26,29 +26,29 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 /**
- * Tests PolyKernel. Run from the command line with:<p/>
+ * Tests PolyKernel. Run from the command line with:
+ * <p/>
  * java weka.classifiers.functions.supportVector.PolyKernelTest
  *
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PolyKernelTest 
-  extends AbstractKernelTest {
+public class PolyKernelTest extends AbstractKernelTest {
 
-  public PolyKernelTest(String name) { 
-    super(name);  
-  }
+    public PolyKernelTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default PolyKernel */
-  public Kernel getKernel() {
-    return new PolyKernel();
-  }
+    /** Creates a default PolyKernel */
+    public Kernel getKernel() {
+        return new PolyKernel();
+    }
 
-  public static Test suite() {
-    return new TestSuite(PolyKernelTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(PolyKernelTest.class);
+    }
 
-  public static void main(String[] args){
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 }

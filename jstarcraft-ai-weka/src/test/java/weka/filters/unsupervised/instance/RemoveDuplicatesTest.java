@@ -34,23 +34,23 @@ import weka.filters.Filter;
  */
 public class RemoveDuplicatesTest extends AbstractFilterTest {
 
-  public RemoveDuplicatesTest(String name) {
-    super(name);
-  }
+    public RemoveDuplicatesTest(String name) {
+        super(name);
+    }
 
-  /** Creates a default Resample */
-  @Override
-  public Filter getFilter() {
-    RemoveDuplicates f = new RemoveDuplicates();
-    return f;
-  }
+    /** Creates a default Resample */
+    @Override
+    public Filter getFilter() {
+        RemoveDuplicates f = new RemoveDuplicates();
+        return f;
+    }
 
-  public static Test suite() {
-    return new TestSuite(RemoveDuplicatesTest.class);
-  }
+    public static Test suite() {
+        return new TestSuite(RemoveDuplicatesTest.class);
+    }
 
-  public static void main(String[] args) {
-    junit.textui.TestRunner.run(suite());
-  }
+    public static void main(String[] args) {
+        junit.textui.TestRunner.run(suite());
+    }
 
 }

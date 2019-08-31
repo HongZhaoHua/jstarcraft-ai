@@ -22,34 +22,33 @@
 package weka.core;
 
 /**
- * Exception that is raised by an object that is unable to process the
- * class type of the data it has been passed.
+ * Exception that is raised by an object that is unable to process the class
+ * type of the data it has been passed.
  *
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class UnsupportedClassTypeException
-  extends WekaException {
+public class UnsupportedClassTypeException extends WekaException {
 
-  /** for serialization */
-  private static final long serialVersionUID = 5175741076972192151L;
+    /** for serialization */
+    private static final long serialVersionUID = 5175741076972192151L;
 
-  /**
-   * Creates a new UnsupportedClassTypeException with no message.
-   *
-   */
-  public UnsupportedClassTypeException() {
+    /**
+     * Creates a new UnsupportedClassTypeException with no message.
+     *
+     */
+    public UnsupportedClassTypeException() {
 
-    super();
-  }
+        super();
+    }
 
-  /**
-   * Creates a new UnsupportedClassTypeException.
-   *
-   * @param message the reason for raising an exception.
-   */
-  public UnsupportedClassTypeException(String message) {
+    /**
+     * Creates a new UnsupportedClassTypeException.
+     *
+     * @param message the reason for raising an exception.
+     */
+    public UnsupportedClassTypeException(String message) {
 
-    super(message);
-  }
+        super(message);
+    }
 }

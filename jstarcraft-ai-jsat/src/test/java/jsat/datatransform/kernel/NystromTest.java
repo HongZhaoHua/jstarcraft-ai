@@ -37,41 +37,33 @@ import static org.junit.Assert.*;
  *
  * @author Edward Raff
  */
-public class NystromTest
-{
-    
-    public NystromTest()
-    {
+public class NystromTest {
+
+    public NystromTest() {
     }
-    
+
     @BeforeClass
-    public static void setUpClass()
-    {
+    public static void setUpClass() {
     }
-    
+
     @AfterClass
-    public static void tearDownClass()
-    {
+    public static void tearDownClass() {
     }
-    
+
     @Before
-    public void setUp()
-    {
+    public void setUp() {
     }
-    
+
     @After
-    public void tearDown()
-    {
+    public void tearDown() {
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet_ExecutorService()
-    {
+    public void testTrainC_ClassificationDataSet_ExecutorService() {
         System.out.println("trainC");
-        
-        for(Nystrom.SamplingMethod sampMethod : Nystrom.SamplingMethod.values())
-        {
-            DataModelPipeline instance = new DataModelPipeline((Classifier)new DCDs(), new Nystrom(new RBFKernel(0.5), 250, sampMethod, 1e-5, false)); 
+
+        for (Nystrom.SamplingMethod sampMethod : Nystrom.SamplingMethod.values()) {
+            DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new Nystrom(new RBFKernel(0.5), 250, sampMethod, 1e-5, false));
 
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(400, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
@@ -85,14 +77,12 @@ public class NystromTest
     }
 
     @Test
-    public void testTrainC_ClassificationDataSet()
-    {
+    public void testTrainC_ClassificationDataSet() {
         System.out.println("trainC");
 
-        for(Nystrom.SamplingMethod sampMethod : Nystrom.SamplingMethod.values())
-        {
-            DataModelPipeline instance = new DataModelPipeline((Classifier)new DCDs(), new Nystrom(new RBFKernel(0.5), 250, sampMethod, 1e-5, false)); 
-        
+        for (Nystrom.SamplingMethod sampMethod : Nystrom.SamplingMethod.values()) {
+            DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new Nystrom(new RBFKernel(0.5), 250, sampMethod, 1e-5, false));
+
             ClassificationDataSet train = FixedProblems.getInnerOuterCircle(400, RandomUtil.getRandom());
             ClassificationDataSet test = FixedProblems.getInnerOuterCircle(100, RandomUtil.getRandom());
 
@@ -105,12 +95,11 @@ public class NystromTest
     }
 
     @Test
-    public void testClone()
-    {
+    public void testClone() {
         System.out.println("clone");
 
-        DataModelPipeline instance = new DataModelPipeline((Classifier)new DCDs(), new Nystrom(new RBFKernel(0.5), 250, Nystrom.SamplingMethod.NORM, 1e-5, true)); 
-        
+        DataModelPipeline instance = new DataModelPipeline((Classifier) new DCDs(), new Nystrom(new RBFKernel(0.5), 250, Nystrom.SamplingMethod.NORM, 1e-5, true));
+
         ClassificationDataSet t1 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom());
         ClassificationDataSet t2 = FixedProblems.getInnerOuterCircle(500, RandomUtil.getRandom(), 2.0, 10.0);
 
@@ -118,9 +107,8 @@ public class NystromTest
 
         instance.train(t1);
 
-        
         DataModelPipeline result = instance.clone();
-        
+
         for (int i = 0; i < t1.size(); i++)
             assertEquals(t1.getDataPointCategory(i), result.classify(t1.getDataPoint(i)).mostLikely());
         result.train(t2);
@@ -132,5 +120,5 @@ public class NystromTest
             assertEquals(t2.getDataPointCategory(i), result.classify(t2.getDataPoint(i)).mostLikely());
 
     }
-    
+
 }
