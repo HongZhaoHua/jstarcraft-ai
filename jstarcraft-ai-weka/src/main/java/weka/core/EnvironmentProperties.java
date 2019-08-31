@@ -21,7 +21,6 @@
 package weka.core;
 
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * Extends Properties to allow the value of a system property (if set) to

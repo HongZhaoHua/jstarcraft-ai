@@ -21,6 +21,13 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.UpdateableBatchProcessor;
 import weka.classifiers.UpdateableClassifier;
@@ -42,14 +49,6 @@ import weka.knowledgeflow.Data;
 import weka.knowledgeflow.LoggingLevel;
 import weka.knowledgeflow.SingleThreadedExecution;
 import weka.knowledgeflow.StepManager;
-
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Step that wraps a Weka classifier. Handles instance, trainingSet and testSet

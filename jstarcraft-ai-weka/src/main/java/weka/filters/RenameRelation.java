@@ -21,9 +21,15 @@
 
 package weka.filters;
 
-import weka.core.*;
-
 import java.util.regex.Pattern;
+
+import weka.core.Capabilities;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.RevisionUtils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 
 /**
  * A simple filter that allows the relation name of a set of instances to be

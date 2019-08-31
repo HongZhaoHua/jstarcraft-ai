@@ -21,6 +21,11 @@
 
 package weka.core.expressionlanguage;
 
+import junit.framework.AssertionFailedError;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 import weka.core.expressionlanguage.common.IfElseMacro;
 import weka.core.expressionlanguage.common.JavaMacro;
 import weka.core.expressionlanguage.common.MacroDeclarationsCompositor;
@@ -31,11 +36,6 @@ import weka.core.expressionlanguage.common.Primitives.StringExpression;
 import weka.core.expressionlanguage.common.SimpleVariableDeclarations;
 import weka.core.expressionlanguage.core.Node;
 import weka.core.expressionlanguage.parser.Parser;
-import junit.framework.AssertionFailedError;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import junit.textui.TestRunner;
 
 /**
  * Tests the weka.core.expressionlanguage package.

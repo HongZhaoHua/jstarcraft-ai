@@ -21,8 +21,12 @@
 
 package weka.classifiers.functions.supportVector;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> The RBF kernel : K(x, y) = exp(-gamma*(x-y)^2) <br>

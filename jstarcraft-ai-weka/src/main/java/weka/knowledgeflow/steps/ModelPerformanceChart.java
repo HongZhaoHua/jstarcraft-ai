@@ -21,26 +21,26 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.Attribute;
-import weka.core.DenseInstance;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.OptionMetadata;
-import weka.core.WekaException;
-import weka.gui.ProgrammaticProperty;
-import weka.gui.beans.OffscreenChartRenderer;
-import weka.core.PluginManager;
-import weka.gui.beans.WekaOffscreenChartRenderer;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.gui.visualize.PlotData2D;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.PluginManager;
+import weka.core.WekaException;
+import weka.gui.ProgrammaticProperty;
+import weka.gui.beans.OffscreenChartRenderer;
+import weka.gui.beans.WekaOffscreenChartRenderer;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.gui.visualize.PlotData2D;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * A Step that collects and displays either classifier error plots or threshold

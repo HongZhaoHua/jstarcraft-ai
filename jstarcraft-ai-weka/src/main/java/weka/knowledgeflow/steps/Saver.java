@@ -21,6 +21,11 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.EnvironmentHandler;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -34,11 +39,6 @@ import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that wraps weka.core.converters.Saver classes

@@ -20,9 +20,9 @@
 
 package weka.classifiers.functions.neural;
 
-import weka.core.RevisionUtils;
-
 import java.util.Random;
+
+import weka.core.RevisionUtils;
 
 /**
  * This class is used to represent a node in the neuralnet.

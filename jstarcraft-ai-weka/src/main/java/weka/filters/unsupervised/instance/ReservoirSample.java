@@ -21,18 +21,26 @@
 
 package weka.filters.unsupervised.instance;
 
-import weka.core.*;
-import weka.core.Capabilities.Capability;
-import weka.filters.Filter;
-import weka.filters.StreamableFilter;
-import weka.filters.UnsupervisedFilter;
-import weka.gui.ProgrammaticProperty;
-
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.Vector;
+
+import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Randomizable;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.filters.Filter;
+import weka.filters.StreamableFilter;
+import weka.filters.UnsupervisedFilter;
+import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Produces a random subsample of a dataset using the

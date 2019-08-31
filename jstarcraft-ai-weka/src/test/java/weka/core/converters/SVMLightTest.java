@@ -19,11 +19,10 @@
 
 package weka.core.converters;
 
-import weka.core.Instance;
-import weka.core.Instances;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.core.Instance;
+import weka.core.Instances;
 
 /**
  * Tests SVMLightLoader/SVMLightSaver. Run from the command line with:

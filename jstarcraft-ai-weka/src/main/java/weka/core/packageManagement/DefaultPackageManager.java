@@ -20,10 +20,6 @@
  */
 package weka.core.packageManagement;
 
-import weka.core.Defaults;
-import weka.core.Environment;
-import weka.core.Settings;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -51,6 +47,10 @@ import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
+
+import weka.core.Defaults;
+import weka.core.Environment;
+import weka.core.Settings;
 
 /**
  * A concrete implementation of PackageManager that uses Java properties

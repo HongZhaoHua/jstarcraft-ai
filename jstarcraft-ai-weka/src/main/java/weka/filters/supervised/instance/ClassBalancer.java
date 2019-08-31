@@ -21,13 +21,15 @@
 
 package weka.filters.supervised.instance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Vector;
-
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 import weka.filters.Filter;
 import weka.filters.SimpleBatchFilter;
 import weka.filters.SupervisedFilter;

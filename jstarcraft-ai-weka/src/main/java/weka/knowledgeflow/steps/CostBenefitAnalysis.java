@@ -21,15 +21,15 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.gui.visualize.PlotData2D;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.gui.visualize.PlotData2D;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * Step for storing and viewing threshold data in a cost-benefit visualization

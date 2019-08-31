@@ -21,8 +21,6 @@
 
 package weka.core;
 
-import weka.gui.ProgrammaticProperty;
-
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -30,6 +28,8 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Vector;
+
+import weka.gui.ProgrammaticProperty;
 
 /**
  * Simple command line checking of classes that are editable in the GOE.

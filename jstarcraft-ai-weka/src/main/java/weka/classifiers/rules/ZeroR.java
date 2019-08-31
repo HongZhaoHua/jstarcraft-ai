@@ -21,8 +21,6 @@
 
 package weka.classifiers.rules;
 
-import java.util.Enumeration;
-
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Sourcable;
 import weka.core.Attribute;

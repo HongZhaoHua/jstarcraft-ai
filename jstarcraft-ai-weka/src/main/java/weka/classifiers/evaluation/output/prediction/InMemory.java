@@ -20,18 +20,18 @@
 
 package weka.classifiers.evaluation.output.prediction;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import weka.classifiers.Classifier;
 import weka.classifiers.evaluation.NominalPrediction;
 import weka.classifiers.evaluation.NumericPrediction;
 import weka.classifiers.evaluation.Prediction;
 import weka.core.Attribute;
 import weka.core.Instance;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <!-- globalinfo-start --> * Stores the predictions in memory for programmatic

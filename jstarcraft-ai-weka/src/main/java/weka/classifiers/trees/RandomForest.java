@@ -21,6 +21,11 @@
 
 package weka.classifiers.trees;
 
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Vector;
+
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.Bagging;
@@ -34,11 +39,6 @@ import weka.core.TechnicalInformation.Type;
 import weka.core.Utils;
 import weka.core.WekaException;
 import weka.gui.ProgrammaticProperty;
-
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
 
 /**
  * <!-- globalinfo-start --> Class for constructing a forest of random

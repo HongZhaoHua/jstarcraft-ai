@@ -20,16 +20,16 @@
 
 package weka.core.converters;
 
-import weka.core.InheritanceUtils;
-import weka.core.PluginManager;
-import weka.core.WekaPackageClassLoaderManager;
-import weka.gui.GenericPropertiesCreator;
-
 import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Properties;
 import java.util.Vector;
+
+import weka.core.InheritanceUtils;
+import weka.core.PluginManager;
+import weka.core.WekaPackageClassLoaderManager;
+import weka.gui.GenericPropertiesCreator;
 
 /**
  * Helper class for dealing with Converter resources.

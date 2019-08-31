@@ -32,7 +32,6 @@ import weka.classifiers.RandomizableParallelIteratedSingleClassifierEnhancer;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.Randomizable;
 import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;

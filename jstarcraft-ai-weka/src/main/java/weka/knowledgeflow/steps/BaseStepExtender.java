@@ -21,10 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.List;
+
 import weka.core.WekaException;
 import weka.knowledgeflow.Data;
-
-import java.util.List;
 
 /**
  * A minimal set of methods, duplicated from the Step interface, that a simple

@@ -30,8 +30,19 @@ import weka.attributeSelection.ASEvaluation;
 import weka.attributeSelection.ASSearch;
 import weka.attributeSelection.AttributeSelection;
 import weka.classifiers.SingleClassifierEnhancer;
-import weka.core.*;
+import weka.core.AdditionalMeasureProducer;
+import weka.core.BatchPredictor;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Drawable;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedInstancesHandler;
+import weka.core.WekaException;
 
 /**
  * <!-- globalinfo-start --> Dimensionality of training and test data is reduced

@@ -19,15 +19,13 @@
 
 package weka.filters.supervised.attribute;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.core.Instances;
 import weka.core.TestInstances;
 import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
-import weka.filters.supervised.attribute.PartitionMembership;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests PartitionMembership. Run from the command line with:

@@ -27,7 +27,16 @@ import java.util.List;
 import java.util.Map;
 
 import weka.classifiers.bayes.NaiveBayes;
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.Capabilities;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 import weka.estimators.Estimator;
 import weka.filters.Filter;
 import weka.filters.SimpleBatchFilter;

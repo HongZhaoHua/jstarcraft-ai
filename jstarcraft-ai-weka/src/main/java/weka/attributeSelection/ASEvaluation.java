@@ -21,6 +21,8 @@
 
 package weka.attributeSelection;
 
+import java.io.Serializable;
+
 import weka.core.Capabilities;
 import weka.core.CapabilitiesHandler;
 import weka.core.CapabilitiesIgnorer;
@@ -30,8 +32,6 @@ import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
-
-import java.io.Serializable;
 
 /**
  * Abstract attribute selection evaluation class

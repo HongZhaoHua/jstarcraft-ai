@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import weka.core.CommandlineRunnable;
 import weka.core.Instance;
 import weka.core.Instances;
 

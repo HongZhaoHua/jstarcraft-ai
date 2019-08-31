@@ -39,6 +39,7 @@ import weka.classifiers.IterativeClassifier;
 import weka.classifiers.RandomizableClassifier;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.evaluation.EvaluationMetricHelper;
+import weka.core.AdditionalMeasureProducer;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
@@ -49,7 +50,6 @@ import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
-import weka.core.AdditionalMeasureProducer;
 
 /**
  * Chooses the best number of iterations for an IterativeClassifier such as

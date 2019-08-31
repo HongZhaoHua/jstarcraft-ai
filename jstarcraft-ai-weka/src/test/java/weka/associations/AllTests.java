@@ -19,9 +19,8 @@
 
 package weka.associations;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all associators. Run from the command line with:

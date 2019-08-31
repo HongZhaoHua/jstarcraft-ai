@@ -21,14 +21,14 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.Instances;
 import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Simple start step that stores a set of instances and outputs it in a dataSet

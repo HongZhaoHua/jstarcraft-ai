@@ -22,8 +22,7 @@
 
 package weka.core.expressionlanguage.parser;
 
-import java_cup.runtime.*;
-
+import java_cup.runtime.Symbol;
 import weka.core.expressionlanguage.core.SyntaxException;
 
 /**

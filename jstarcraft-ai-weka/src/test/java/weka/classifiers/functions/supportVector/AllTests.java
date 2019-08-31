@@ -19,10 +19,9 @@
 
 package weka.classifiers.functions.supportVector;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all supportVector classes. Run from the command line with:

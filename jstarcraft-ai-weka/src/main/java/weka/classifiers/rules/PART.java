@@ -32,6 +32,7 @@ import weka.classifiers.trees.j48.C45ModelSelection;
 import weka.classifiers.trees.j48.ModelSelection;
 import weka.core.AdditionalMeasureProducer;
 import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
@@ -44,8 +45,6 @@ import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.core.Capabilities;
-import weka.core.Capabilities.Capability;
 
 /**
  * <!-- globalinfo-start --> Class for generating a PART decision list. Uses

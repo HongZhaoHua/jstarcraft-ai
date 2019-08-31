@@ -20,9 +20,6 @@
  */
 package weka.core.packageManagement;
 
-import weka.core.Defaults;
-import weka.core.Settings;
-
 import java.awt.GraphicsEnvironment;
 import java.beans.Beans;
 import java.io.File;
@@ -38,6 +35,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import weka.core.Defaults;
+import weka.core.Settings;
 
 /**
  * Abstract base class for package managers. Contains methods to manage the

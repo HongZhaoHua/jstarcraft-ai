@@ -21,6 +21,14 @@
 
 package weka.knowledgeflow;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.TreeMap;
+
 import weka.core.CommandlineRunnable;
 import weka.core.Environment;
 import weka.core.PluginManager;
@@ -31,14 +39,6 @@ import weka.core.WekaPackageManager;
 import weka.gui.Logger;
 import weka.gui.knowledgeflow.KnowledgeFlowApp;
 import weka.knowledgeflow.steps.Note;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeMap;
 
 /**
  * A FlowExecutor that can launch start points in a flow in parallel or

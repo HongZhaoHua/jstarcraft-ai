@@ -21,14 +21,26 @@
 
 package weka.filters.unsupervised.attribute;
 
-import weka.core.*;
-import weka.filters.StreamableFilter;
-import weka.filters.UnsupervisedFilter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import weka.core.Attribute;
+import weka.core.Capabilities;
+import weka.core.Environment;
+import weka.core.EnvironmentHandler;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionMetadata;
+import weka.core.Range;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
+import weka.filters.StreamableFilter;
+import weka.filters.UnsupervisedFilter;
 
 /**
  * <!-- globalinfo-start --> An attribute filter that converts ordinal nominal

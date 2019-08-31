@@ -26,11 +26,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import weka.core.expressionlanguage.core.Node;
-import weka.core.expressionlanguage.core.VariableDeclarations;
 import weka.core.expressionlanguage.common.Primitives.BooleanVariable;
 import weka.core.expressionlanguage.common.Primitives.DoubleVariable;
 import weka.core.expressionlanguage.common.Primitives.StringVariable;
+import weka.core.expressionlanguage.core.Node;
+import weka.core.expressionlanguage.core.VariableDeclarations;
 
 /**
  * A set of customizable variable declarations for primitive types.

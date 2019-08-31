@@ -20,12 +20,12 @@
 
 package weka.core.logging;
 
-import weka.core.RevisionUtils;
-import weka.core.Tee;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
+
+import weka.core.RevisionUtils;
+import weka.core.Tee;
 
 /**
  * A logger that logs all output on stdout and stderr to a file.

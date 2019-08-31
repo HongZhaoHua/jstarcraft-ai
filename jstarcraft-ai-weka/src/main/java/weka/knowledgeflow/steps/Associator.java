@@ -21,6 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import weka.associations.AssociationRules;
 import weka.associations.AssociationRulesProducer;
 import weka.core.Attribute;
@@ -31,10 +35,6 @@ import weka.gui.ProgrammaticProperty;
 import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that wraps a Weka associator. Handles dataSet, trainingSet and testSet

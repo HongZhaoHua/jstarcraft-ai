@@ -21,11 +21,12 @@
 
 package weka.knowledgeflow;
 
-import weka.core.Defaults;
-import weka.core.Settings;
+import java.awt.Color;
 
 import javax.swing.JPanel;
-import java.awt.Color;
+
+import weka.core.Defaults;
+import weka.core.Settings;
 
 /**
  * Default settings for the Knowledge Flow

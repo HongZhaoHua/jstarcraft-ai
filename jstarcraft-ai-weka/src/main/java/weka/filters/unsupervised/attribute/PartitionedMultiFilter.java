@@ -21,15 +21,26 @@
 
 package weka.filters.unsupervised.attribute;
 
-import weka.core.*;
-import weka.filters.AllFilter;
-import weka.filters.Filter;
-import weka.filters.SimpleBatchFilter;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
+
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Range;
+import weka.core.RevisionUtils;
+import weka.core.SparseInstance;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
+import weka.filters.AllFilter;
+import weka.filters.Filter;
+import weka.filters.SimpleBatchFilter;
 
 /**
  * <!-- globalinfo-start --> A filter that applies filters on subsets of

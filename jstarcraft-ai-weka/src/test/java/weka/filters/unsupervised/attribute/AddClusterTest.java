@@ -19,6 +19,8 @@
 
 package weka.filters.unsupervised.attribute;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.clusterers.Clusterer;
 import weka.clusterers.EM;
@@ -27,9 +29,6 @@ import weka.core.Instances;
 import weka.core.TestInstances;
 import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests AddCluster. Run from the command line with:

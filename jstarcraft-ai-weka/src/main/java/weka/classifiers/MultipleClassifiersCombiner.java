@@ -25,8 +25,12 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.CommandlineRunnable;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Utils;
 
 /**
  * Abstract utility class for handling settings common to meta classifiers that

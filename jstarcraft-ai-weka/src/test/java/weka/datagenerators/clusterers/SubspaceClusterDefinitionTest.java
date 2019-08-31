@@ -19,11 +19,10 @@
 
 package weka.datagenerators.clusterers;
 
-import weka.datagenerators.AbstractClusterDefinitionTest;
-import weka.datagenerators.ClusterDefinition;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.datagenerators.AbstractClusterDefinitionTest;
+import weka.datagenerators.ClusterDefinition;
 
 /**
  * Tests SubspaceClusterDefinition. Run from the command line with:

@@ -21,16 +21,16 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that converts an incoming instance stream to a batch dataset

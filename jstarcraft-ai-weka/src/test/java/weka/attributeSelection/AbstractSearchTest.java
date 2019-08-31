@@ -21,8 +21,8 @@ package weka.attributeSelection;
 
 import weka.core.CheckGOE;
 import weka.core.CheckOptionHandler;
-import weka.core.OptionHandler;
 import weka.core.CheckScheme.PostProcessor;
+import weka.core.OptionHandler;
 
 /**
  * Abstract Test class for search schemes. Internally it uses the class

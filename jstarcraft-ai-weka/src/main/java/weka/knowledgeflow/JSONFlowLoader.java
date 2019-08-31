@@ -21,12 +21,12 @@
 
 package weka.knowledgeflow;
 
-import weka.core.WekaException;
-import weka.gui.Logger;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
+
+import weka.core.WekaException;
+import weka.gui.Logger;
 
 /**
  * Flow loader that wraps the routines in JSONFlowUtils

@@ -21,6 +21,13 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import weka.core.Attribute;
 import weka.core.Environment;
 import weka.core.Instance;
@@ -31,13 +38,6 @@ import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.JobEnvironment;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Step that can be used to set the values of environment variables for the flow

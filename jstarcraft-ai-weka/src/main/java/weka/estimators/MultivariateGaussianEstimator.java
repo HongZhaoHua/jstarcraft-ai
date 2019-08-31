@@ -20,11 +20,16 @@
 
 package weka.estimators;
 
-import no.uib.cipr.matrix.*;
-import no.uib.cipr.matrix.Matrix;
-import weka.core.Utils;
-
 import java.io.Serializable;
+
+import no.uib.cipr.matrix.DenseCholesky;
+import no.uib.cipr.matrix.DenseMatrix;
+import no.uib.cipr.matrix.DenseVector;
+import no.uib.cipr.matrix.Matrices;
+import no.uib.cipr.matrix.Matrix;
+import no.uib.cipr.matrix.UpperSPDDenseMatrix;
+import no.uib.cipr.matrix.Vector;
+import weka.core.Utils;
 
 /**
  * Implementation of maximum likelihood Multivariate Distribution Estimation

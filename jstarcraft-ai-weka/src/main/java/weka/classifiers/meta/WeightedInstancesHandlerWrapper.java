@@ -20,6 +20,13 @@
 
 package weka.classifiers.meta;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
+
 import weka.classifiers.RandomizableSingleClassifierEnhancer;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -28,13 +35,6 @@ import weka.core.ResampleUtils;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
 
 /**
  * <!-- globalinfo-start --> Generic wrapper around any classifier to enable

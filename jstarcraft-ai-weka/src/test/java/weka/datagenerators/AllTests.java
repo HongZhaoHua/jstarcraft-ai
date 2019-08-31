@@ -19,10 +19,9 @@
 
 package weka.datagenerators;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all datagenerators and cluster definitions. Run from the

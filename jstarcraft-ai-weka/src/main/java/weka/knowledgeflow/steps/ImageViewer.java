@@ -21,12 +21,6 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.WekaException;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -38,6 +32,13 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+
+import weka.core.WekaException;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * A step for collecting and viewing image data

@@ -19,13 +19,12 @@
 
 package weka.filters.unsupervised.attribute;
 
-import weka.core.Instances;
-import weka.filters.AbstractFilterTest;
-import weka.filters.Filter;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+import weka.core.Instances;
+import weka.filters.AbstractFilterTest;
+import weka.filters.Filter;
 
 /**
  * Tests RenameAttribute. Run from the command line with:

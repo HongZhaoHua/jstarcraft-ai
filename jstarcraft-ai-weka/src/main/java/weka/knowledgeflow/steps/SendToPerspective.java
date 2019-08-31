@@ -21,6 +21,9 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.core.Instances;
 import weka.core.WekaException;
 import weka.gui.knowledgeflow.GetPerspectiveNamesGraphicalCommand;
@@ -28,9 +31,6 @@ import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.gui.knowledgeflow.SendToPerspectiveGraphicalCommand;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Step that can send incoming instances to a perspective. Only operates in a

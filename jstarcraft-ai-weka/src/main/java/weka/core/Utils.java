@@ -21,8 +21,9 @@
 
 package weka.core;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Frame;
+import java.awt.Window;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.MethodDescriptor;
@@ -41,6 +42,10 @@ import java.text.ParseException;
 import java.util.Properties;
 import java.util.Random;
 import java.util.Vector;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  * Class implementing some simple utility methods.

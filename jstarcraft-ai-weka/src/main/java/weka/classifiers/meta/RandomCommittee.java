@@ -21,18 +21,18 @@
 
 package weka.classifiers.meta;
 
-import java.util.Random;
 import java.util.ArrayList;
+import java.util.Random;
 
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.RandomizableParallelIteratedSingleClassifierEnhancer;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.core.PartitionGenerator;
 
 /**
  * <!-- globalinfo-start --> Class for building an ensemble of randomizable base

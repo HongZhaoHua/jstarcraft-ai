@@ -21,6 +21,33 @@
 
 package weka.classifiers.evaluation;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.MethodDescriptor;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Serializable;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Stream;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.ConditionalDensityEstimator;
@@ -35,7 +62,19 @@ import weka.classifiers.evaluation.output.prediction.PlainText;
 import weka.classifiers.misc.InputMappedClassifier;
 import weka.classifiers.pmml.consumer.PMMLClassifier;
 import weka.classifiers.xml.XMLClassifier;
-import weka.core.*;
+import weka.core.BatchPredictor;
+import weka.core.Drawable;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionHandler;
+import weka.core.RevisionUtils;
+import weka.core.SerializationHelper;
+import weka.core.Summarizable;
+import weka.core.Utils;
+import weka.core.Version;
+import weka.core.WekaException;
 import weka.core.converters.ConverterUtils.DataSink;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.core.pmml.PMMLFactory;
@@ -44,21 +83,6 @@ import weka.core.xml.KOML;
 import weka.core.xml.XMLOptions;
 import weka.core.xml.XMLSerialization;
 import weka.estimators.UnivariateKernelEstimator;
-
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.MethodDescriptor;
-import java.io.*;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Stream;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * Class for evaluating machine learning models.

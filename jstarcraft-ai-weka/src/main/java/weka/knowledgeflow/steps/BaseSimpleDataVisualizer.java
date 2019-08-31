@@ -21,16 +21,16 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.Instances;
-import weka.core.WekaException;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import weka.core.Instances;
+import weka.core.WekaException;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * Abstract base class for simple data visualization steps that just collect

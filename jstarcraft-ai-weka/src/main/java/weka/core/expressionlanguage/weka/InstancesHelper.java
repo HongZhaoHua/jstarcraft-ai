@@ -23,17 +23,17 @@ package weka.core.expressionlanguage.weka;
 
 import java.util.regex.Pattern;
 
-import weka.core.Utils;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Utils;
+import weka.core.expressionlanguage.common.Primitives.BooleanExpression;
+import weka.core.expressionlanguage.common.Primitives.DoubleExpression;
+import weka.core.expressionlanguage.common.Primitives.StringExpression;
 import weka.core.expressionlanguage.core.Macro;
 import weka.core.expressionlanguage.core.MacroDeclarations;
 import weka.core.expressionlanguage.core.Node;
 import weka.core.expressionlanguage.core.SemanticException;
 import weka.core.expressionlanguage.core.VariableDeclarations;
-import weka.core.expressionlanguage.common.Primitives.BooleanExpression;
-import weka.core.expressionlanguage.common.Primitives.DoubleExpression;
-import weka.core.expressionlanguage.common.Primitives.StringExpression;
 
 /**
  * A helper class to expose instance values and macros for instance values to a

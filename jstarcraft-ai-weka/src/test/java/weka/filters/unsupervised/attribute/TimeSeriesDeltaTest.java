@@ -19,13 +19,12 @@
 
 package weka.filters.unsupervised.attribute;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.filters.AbstractTimeSeriesFilterTest;
 import weka.filters.Filter;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests TimeSeriesDelta. Run from the command line with:

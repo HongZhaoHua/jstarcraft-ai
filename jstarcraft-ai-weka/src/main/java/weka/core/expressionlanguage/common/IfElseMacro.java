@@ -21,13 +21,13 @@
 
 package weka.core.expressionlanguage.common;
 
-import weka.core.expressionlanguage.core.Node;
-import weka.core.expressionlanguage.core.Macro;
-import weka.core.expressionlanguage.core.MacroDeclarations;
-import weka.core.expressionlanguage.core.SemanticException;
 import weka.core.expressionlanguage.common.Primitives.BooleanExpression;
 import weka.core.expressionlanguage.common.Primitives.DoubleExpression;
 import weka.core.expressionlanguage.common.Primitives.StringExpression;
+import weka.core.expressionlanguage.core.Macro;
+import weka.core.expressionlanguage.core.MacroDeclarations;
+import weka.core.expressionlanguage.core.Node;
+import weka.core.expressionlanguage.core.SemanticException;
 
 /**
  * A macro declaration exposing the <code>ifelse</code> function.

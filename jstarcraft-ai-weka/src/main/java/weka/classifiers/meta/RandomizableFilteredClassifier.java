@@ -21,7 +21,9 @@
 
 package weka.classifiers.meta;
 
-import weka.core.*;
+import weka.core.Instances;
+import weka.core.Randomizable;
+import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> Class for running an arbitrary classifier on data

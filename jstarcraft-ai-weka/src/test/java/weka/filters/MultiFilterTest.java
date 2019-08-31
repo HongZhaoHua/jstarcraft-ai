@@ -19,14 +19,13 @@
 
 package weka.filters;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.core.Instances;
 import weka.filters.unsupervised.attribute.Add;
 import weka.filters.unsupervised.attribute.AddExpression;
 import weka.filters.unsupervised.attribute.Center;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests MultiFilter. Run from the command line with:

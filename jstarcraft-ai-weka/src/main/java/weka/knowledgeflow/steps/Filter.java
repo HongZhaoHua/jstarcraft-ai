@@ -21,6 +21,12 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import weka.core.EnvironmentHandler;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -30,12 +36,6 @@ import weka.gui.ProgrammaticProperty;
 import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Step that wraps a Weka filter. Handles dataSet, trainingSet, testSet and

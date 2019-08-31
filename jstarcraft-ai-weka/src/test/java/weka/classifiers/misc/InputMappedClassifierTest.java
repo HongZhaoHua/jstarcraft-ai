@@ -19,18 +19,16 @@
 
 package weka.classifiers.misc;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.classifiers.AbstractClassifierTest;
 import weka.classifiers.Classifier;
-import weka.classifiers.misc.InputMappedClassifier;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.TestInstances;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Reorder;
 import weka.filters.unsupervised.attribute.SwapValues;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests InputMappedClassifier. Run from the command line with:

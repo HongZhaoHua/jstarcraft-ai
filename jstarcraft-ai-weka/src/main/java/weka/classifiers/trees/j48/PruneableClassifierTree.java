@@ -23,8 +23,6 @@ package weka.classifiers.trees.j48;
 
 import java.util.Random;
 
-import weka.core.Capabilities;
-import weka.core.Capabilities.Capability;
 import weka.core.Instances;
 import weka.core.RevisionUtils;
 import weka.core.Utils;

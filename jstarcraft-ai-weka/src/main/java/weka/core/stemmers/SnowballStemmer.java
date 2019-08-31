@@ -21,6 +21,11 @@
 
 package weka.core.stemmers;
 
+import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Vector;
+
 import weka.core.ClassDiscovery;
 import weka.core.Option;
 import weka.core.OptionHandler;
@@ -28,11 +33,6 @@ import weka.core.PluginManager;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WekaPackageClassLoaderManager;
-
-import java.lang.reflect.Method;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
 
 /**
  * <!-- globalinfo-start --> A wrapper class for the Snowball stemmers. Only

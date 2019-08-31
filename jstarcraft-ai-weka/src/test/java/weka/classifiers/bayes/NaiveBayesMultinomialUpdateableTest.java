@@ -19,12 +19,11 @@
 
 package weka.classifiers.bayes;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.classifiers.AbstractClassifierTest;
 import weka.classifiers.Classifier;
 import weka.core.CheckScheme.PostProcessor;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests NaiveBayesMultinomialUpdateable. Run from the command line with:

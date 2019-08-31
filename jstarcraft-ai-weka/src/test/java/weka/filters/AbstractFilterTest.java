@@ -19,6 +19,10 @@
 
 package weka.filters;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.StringWriter;
+
 import junit.framework.TestCase;
 import weka.classifiers.Classifier;
 import weka.classifiers.meta.FilteredClassifier;
@@ -32,10 +36,6 @@ import weka.core.OptionHandler;
 import weka.core.SerializationHelper;
 import weka.core.TestInstances;
 import weka.test.Regression;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 
 /**
  * Abstract Test class for Filters.

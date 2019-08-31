@@ -14,10 +14,10 @@
 
 package weka.core.matrix;
 
+import java.io.Serializable;
+
 import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
-
-import java.io.Serializable;
 
 /**
  * Eigenvalues and eigenvectors of a real matrix.

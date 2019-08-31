@@ -21,6 +21,10 @@
 
 package weka.clusterers;
 
+import java.io.Serializable;
+import java.util.Enumeration;
+import java.util.Vector;
+
 import weka.core.Capabilities;
 import weka.core.CapabilitiesHandler;
 import weka.core.CapabilitiesIgnorer;
@@ -33,10 +37,6 @@ import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
-
-import java.io.Serializable;
-import java.util.Enumeration;
-import java.util.Vector;
 
 /**
  * Abstract clusterer.

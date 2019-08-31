@@ -21,19 +21,24 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import weka.classifiers.UpdateableClassifier;
 import weka.classifiers.misc.InputMappedClassifier;
 import weka.clusterers.DensityBasedClusterer;
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.OptionMetadata;
+import weka.core.WekaException;
 import weka.filters.unsupervised.attribute.Add;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that can produce data with predictions appended from batch or

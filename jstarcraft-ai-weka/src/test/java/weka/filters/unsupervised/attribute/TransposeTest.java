@@ -19,16 +19,14 @@
 
 package weka.filters.unsupervised.attribute;
 
-import weka.core.Instances;
-import weka.filters.AbstractFilterTest;
-import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.Remove;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import weka.core.Instances;
+import weka.filters.AbstractFilterTest;
+import weka.filters.Filter;
 
 /**
  * Tests Transpose. Run from the command line with:

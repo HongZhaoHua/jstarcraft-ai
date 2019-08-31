@@ -29,9 +29,9 @@ import java.util.Vector;
 
 import weka.classifiers.RandomizableClassifier;
 import weka.classifiers.UpdateableClassifier;
+import weka.core.Aggregateable;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.Aggregateable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;

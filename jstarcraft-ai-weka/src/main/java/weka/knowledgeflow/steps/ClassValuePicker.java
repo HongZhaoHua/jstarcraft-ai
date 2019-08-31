@@ -21,6 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
@@ -30,10 +34,6 @@ import weka.filters.unsupervised.attribute.SwapValues;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that allows the selection of the class label that is to be considered as

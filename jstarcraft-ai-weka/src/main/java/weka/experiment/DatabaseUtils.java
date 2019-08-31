@@ -21,13 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-import weka.core.Utils;
-import weka.core.WekaException;
-import weka.core.WekaPackageClassLoaderManager;
-import weka.core.logging.Logger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.Serializable;
@@ -42,11 +35,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
+
+import weka.core.RevisionHandler;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WekaException;
+import weka.core.WekaPackageClassLoaderManager;
+import weka.core.logging.Logger;
 
 /**
  * DatabaseUtils provides utility functions for accessing the experiment

@@ -34,8 +34,19 @@ import java.util.Vector;
 import weka.classifiers.Classifier;
 import weka.classifiers.CostMatrix;
 import weka.classifiers.RandomizableSingleClassifierEnhancer;
-import weka.core.*;
+import weka.core.BatchPredictor;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Drawable;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionUtils;
+import weka.core.SelectedTag;
+import weka.core.Tag;
+import weka.core.Utils;
+import weka.core.WeightedInstancesHandler;
 
 /**
  * <!-- globalinfo-start --> A metaclassifier that makes its base classifier

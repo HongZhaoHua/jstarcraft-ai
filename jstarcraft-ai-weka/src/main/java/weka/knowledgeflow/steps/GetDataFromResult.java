@@ -21,17 +21,17 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.WekaException;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.JobEnvironment;
-import weka.knowledgeflow.StepManager;
-
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import weka.core.WekaException;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.JobEnvironment;
+import weka.knowledgeflow.StepManager;
 
 /**
  * Step that outputs data stored in the job environment

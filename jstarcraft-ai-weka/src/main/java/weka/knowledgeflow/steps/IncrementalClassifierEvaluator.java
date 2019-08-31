@@ -21,6 +21,11 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 import weka.classifiers.evaluation.Evaluation;
 import weka.core.Instance;
 import weka.core.Utils;
@@ -28,11 +33,6 @@ import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Step that evaluates incremental classifiers and produces strip chart data

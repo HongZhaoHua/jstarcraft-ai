@@ -21,15 +21,12 @@
 
 package weka.classifiers.bayes.net.estimate;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
 
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.search.local.K2;
-import weka.core.Attribute;
-import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;

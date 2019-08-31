@@ -35,6 +35,7 @@ import weka.classifiers.trees.j48.ModelSelection;
 import weka.classifiers.trees.j48.PruneableClassifierTree;
 import weka.core.AdditionalMeasureProducer;
 import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
 import weka.core.Drawable;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -50,8 +51,6 @@ import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.core.Capabilities;
-import weka.core.Capabilities.Capability;
 
 /**
  * <!-- globalinfo-start --> Class for generating a pruned or unpruned C4.5

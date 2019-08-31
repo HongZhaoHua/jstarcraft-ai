@@ -21,6 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.core.Environment;
 import weka.core.EnvironmentHandler;
 import weka.core.Instance;
@@ -34,10 +38,6 @@ import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Knowledge Flow step that wraps {@code weka.core.converters.Loader}s.

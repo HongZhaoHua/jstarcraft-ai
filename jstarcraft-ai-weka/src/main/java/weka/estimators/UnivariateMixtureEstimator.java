@@ -22,10 +22,10 @@
 package weka.estimators;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Random;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import weka.core.ContingencyTables;

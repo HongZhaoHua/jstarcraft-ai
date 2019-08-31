@@ -38,6 +38,14 @@
 
 package weka.classifiers;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.Reader;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Random;
+import java.util.Vector;
+
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -46,18 +54,10 @@ import weka.core.OptionHandler;
 import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
-import weka.core.TechnicalInformationHandler;
-import weka.core.Utils;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.Reader;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.Random;
-import java.util.Vector;
+import weka.core.TechnicalInformationHandler;
+import weka.core.Utils;
 
 /**
  * <!-- globalinfo-start --> This class performs Bias-Variance decomposion on

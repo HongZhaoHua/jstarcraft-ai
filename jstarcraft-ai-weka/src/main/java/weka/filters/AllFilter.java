@@ -21,8 +21,13 @@
 
 package weka.filters;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.RevisionUtils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 
 /**
  * A simple instance filter that passes all instances directly through.

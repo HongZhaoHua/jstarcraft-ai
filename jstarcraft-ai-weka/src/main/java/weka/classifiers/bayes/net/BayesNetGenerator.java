@@ -29,7 +29,6 @@ import java.util.Vector;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
-import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;

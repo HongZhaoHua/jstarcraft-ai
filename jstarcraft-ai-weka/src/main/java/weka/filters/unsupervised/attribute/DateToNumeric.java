@@ -20,10 +20,22 @@
 
 package weka.filters.unsupervised.attribute;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.Range;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 import weka.filters.SimpleBatchFilter;
 
 /**

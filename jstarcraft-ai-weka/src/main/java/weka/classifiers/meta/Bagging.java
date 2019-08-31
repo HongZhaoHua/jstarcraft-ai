@@ -21,13 +21,13 @@
 
 package weka.classifiers.meta;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
-import java.util.ArrayList;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.RandomizableParallelIteratedSingleClassifierEnhancer;
@@ -37,6 +37,7 @@ import weka.core.Aggregateable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
+import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
 import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
@@ -45,7 +46,6 @@ import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.core.PartitionGenerator;
 
 /**
  * <!-- globalinfo-start --> Class for bagging a classifier to reduce variance.

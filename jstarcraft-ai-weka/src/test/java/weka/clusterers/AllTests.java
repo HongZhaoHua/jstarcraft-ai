@@ -19,9 +19,8 @@
 
 package weka.clusterers;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all clusterers. Run from the command line with:

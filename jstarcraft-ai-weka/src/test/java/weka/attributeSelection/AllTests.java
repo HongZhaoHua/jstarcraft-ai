@@ -19,10 +19,9 @@
 
 package weka.attributeSelection;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all attribute selection schemes. Run from the command line

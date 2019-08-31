@@ -19,12 +19,11 @@
 
 package weka.classifiers.meta;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.classifiers.AbstractClassifierTest;
 import weka.classifiers.Classifier;
 import weka.core.CheckOptionHandler;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests AttributeSelectedClassifier. Run from the command line with:

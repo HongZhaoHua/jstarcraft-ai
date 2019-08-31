@@ -30,8 +30,14 @@ import java.util.Enumeration;
 import java.util.Vector;
 import java.util.zip.GZIPOutputStream;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.RevisionUtils;
+import weka.core.SingleIndex;
+import weka.core.Utils;
+import weka.core.WeightedInstancesHandler;
 import weka.core.xml.XMLInstances;
 
 /**

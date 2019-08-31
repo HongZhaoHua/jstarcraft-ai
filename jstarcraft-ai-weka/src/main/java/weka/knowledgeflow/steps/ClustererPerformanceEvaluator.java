@@ -21,6 +21,9 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.clusterers.ClusterEvaluation;
 import weka.core.Instances;
 import weka.core.OptionHandler;
@@ -29,9 +32,6 @@ import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A step that evaluates the performance of batch trained clusterers

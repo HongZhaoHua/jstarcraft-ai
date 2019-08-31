@@ -20,6 +20,15 @@
 
 package weka.classifiers.functions;
 
+import java.util.Collections;
+import java.util.Enumeration;
+
+import no.uib.cipr.matrix.DenseCholesky;
+import no.uib.cipr.matrix.DenseVector;
+import no.uib.cipr.matrix.Matrices;
+import no.uib.cipr.matrix.Matrix;
+import no.uib.cipr.matrix.UpperSPDDenseMatrix;
+import no.uib.cipr.matrix.Vector;
 import weka.classifiers.ConditionalDensityEstimator;
 import weka.classifiers.IntervalEstimator;
 import weka.classifiers.RandomizableClassifier;
@@ -46,12 +55,6 @@ import weka.filters.unsupervised.attribute.NominalToBinary;
 import weka.filters.unsupervised.attribute.Normalize;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
 import weka.filters.unsupervised.attribute.Standardize;
-
-import no.uib.cipr.matrix.*;
-import no.uib.cipr.matrix.Matrix;
-
-import java.util.Collections;
-import java.util.Enumeration;
 
 /**
  * <!-- globalinfo-start --> * Implements Gaussian processes for regression

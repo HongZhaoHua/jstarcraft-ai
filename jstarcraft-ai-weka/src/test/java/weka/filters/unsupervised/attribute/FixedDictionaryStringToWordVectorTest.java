@@ -19,13 +19,13 @@
 
 package weka.filters.unsupervised.attribute;
 
+import java.io.StringReader;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import weka.core.Instances;
 import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
-
-import java.io.StringReader;
 
 /**
  * Tests FixedDictionaryStringToWordVector

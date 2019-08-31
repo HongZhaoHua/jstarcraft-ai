@@ -21,9 +21,9 @@
 
 package weka.core.expressionlanguage.common;
 
-import weka.core.expressionlanguage.core.Node;
-
 import java.io.Serializable;
+
+import weka.core.expressionlanguage.core.Node;
 
 /**
  * A class providing AST (abstract syntax tree) nodes to support primitive

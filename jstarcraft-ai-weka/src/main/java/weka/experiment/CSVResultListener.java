@@ -28,14 +28,14 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Vector;
 
+import javax.swing.JFileChooser;
+
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.gui.FilePropertyMetadata;
-
-import javax.swing.*;
 
 /**
  * <!-- globalinfo-start --> Takes results from a result producer and assembles

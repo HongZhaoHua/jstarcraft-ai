@@ -21,18 +21,15 @@
 
 package weka.core;
 
-import weka.core.DistanceFunction;
-import weka.core.neighboursearch.PerformanceStats;
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Vector;
 
+import weka.core.neighboursearch.PerformanceStats;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.RandomProjection;
 import weka.filters.unsupervised.attribute.Remove;
-
-import java.util.Enumeration;
-import java.util.Vector;
-import java.util.Collections;
-
-import java.io.Serializable;
 
 /**
  * <!-- globalinfo-start --> Applies the given filter before calling the given

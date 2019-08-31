@@ -20,8 +20,6 @@
 
 package weka.core;
 
-import weka.Run;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Array;
@@ -29,6 +27,8 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
+
+import weka.Run;
 
 /**
  * Helper for resources.

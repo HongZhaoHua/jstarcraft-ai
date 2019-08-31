@@ -28,8 +28,19 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.AttributeStats;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionUtils;
+import weka.core.SingleIndex;
+import weka.core.UnsupportedAttributeTypeException;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
 import weka.filters.Filter;
 import weka.filters.UnsupervisedFilter;
 

@@ -28,7 +28,6 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Class for handling an attribute. Once an attribute has been created, it can't

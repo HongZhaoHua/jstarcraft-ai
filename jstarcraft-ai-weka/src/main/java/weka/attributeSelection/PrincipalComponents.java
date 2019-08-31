@@ -25,12 +25,26 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import no.uib.cipr.matrix.*;
-
-import weka.core.*;
+import no.uib.cipr.matrix.Matrices;
+import no.uib.cipr.matrix.SymmDenseEVD;
+import no.uib.cipr.matrix.UpperSymmDenseMatrix;
+import weka.core.Attribute;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionUtils;
+import weka.core.SparseInstance;
+import weka.core.Utils;
 import weka.filters.Filter;
-import weka.filters.unsupervised.attribute.*;
+import weka.filters.unsupervised.attribute.Center;
+import weka.filters.unsupervised.attribute.NominalToBinary;
+import weka.filters.unsupervised.attribute.Remove;
+import weka.filters.unsupervised.attribute.ReplaceMissingValues;
+import weka.filters.unsupervised.attribute.Standardize;
 
 /**
  * <!-- globalinfo-start --> Performs a principal components analysis and

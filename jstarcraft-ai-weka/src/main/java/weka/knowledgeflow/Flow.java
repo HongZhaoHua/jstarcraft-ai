@@ -21,13 +21,6 @@
 
 package weka.knowledgeflow;
 
-import weka.core.WekaException;
-import weka.gui.ExtensionFileFilter;
-import weka.gui.Logger;
-import weka.core.PluginManager;
-import weka.knowledgeflow.steps.SetVariables;
-
-import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
@@ -37,6 +30,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.filechooser.FileFilter;
+
+import weka.core.PluginManager;
+import weka.core.WekaException;
+import weka.gui.ExtensionFileFilter;
+import weka.gui.Logger;
+import weka.knowledgeflow.steps.SetVariables;
 
 /**
  * Class that encapsulates the Steps involved in a Knowledge Flow process.

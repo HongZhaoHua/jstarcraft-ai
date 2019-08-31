@@ -19,15 +19,14 @@
 
 package weka.classifiers.functions.supportVector;
 
+import junit.framework.TestCase;
 import weka.core.Attribute;
 import weka.core.CheckGOE;
 import weka.core.CheckOptionHandler;
+import weka.core.CheckScheme.PostProcessor;
 import weka.core.Instances;
 import weka.core.OptionHandler;
-import weka.core.CheckScheme.PostProcessor;
 import weka.test.Regression;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Test class for Kernels. Internally it uses the class

@@ -21,11 +21,7 @@
 
 package weka.core;
 
-import weka.core.metastore.MetaStore;
-import weka.core.metastore.XMLFileBasedMetaStore;
-import weka.knowledgeflow.LoggingLevel;
-
-import java.awt.*;
+import java.awt.Font;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -34,6 +30,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import weka.core.metastore.MetaStore;
+import weka.core.metastore.XMLFileBasedMetaStore;
+import weka.knowledgeflow.LoggingLevel;
 
 /**
  * Maintains a collection of settings. Settings are key value pairs which can be

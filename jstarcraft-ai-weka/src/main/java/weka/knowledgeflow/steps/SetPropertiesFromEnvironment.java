@@ -21,18 +21,6 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.EnumHelper;
-import weka.core.Environment;
-import weka.core.OptionHandler;
-import weka.core.SelectedTag;
-import weka.core.Tag;
-import weka.core.Utils;
-import weka.core.WekaException;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.JobEnvironment;
-import weka.knowledgeflow.StepManager;
-import weka.knowledgeflow.StepManagerImpl;
-
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -44,6 +32,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import weka.core.EnumHelper;
+import weka.core.Environment;
+import weka.core.OptionHandler;
+import weka.core.SelectedTag;
+import weka.core.Tag;
+import weka.core.Utils;
+import weka.core.WekaException;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.JobEnvironment;
+import weka.knowledgeflow.StepManager;
+import weka.knowledgeflow.StepManagerImpl;
 
 /**
  * Step that accesses property values stored in the flow environment and

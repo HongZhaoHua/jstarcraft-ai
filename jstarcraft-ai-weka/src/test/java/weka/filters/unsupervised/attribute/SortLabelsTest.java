@@ -19,17 +19,16 @@
 
 package weka.filters.unsupervised.attribute;
 
-import weka.core.Attribute;
-import weka.core.Instances;
-import weka.core.SelectedTag;
-import weka.filters.AbstractFilterTest;
-import weka.filters.Filter;
-
 import java.util.HashSet;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
+import weka.core.Attribute;
+import weka.core.Instances;
+import weka.core.SelectedTag;
+import weka.filters.AbstractFilterTest;
+import weka.filters.Filter;
 
 /**
  * Tests SortLabels. Run from the command line with:

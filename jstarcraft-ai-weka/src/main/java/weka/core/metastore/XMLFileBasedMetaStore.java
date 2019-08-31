@@ -21,15 +21,15 @@
 
 package weka.core.metastore;
 
-import weka.core.ResourceUtils;
-import weka.core.xml.XMLBasicSerialization;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+
+import weka.core.ResourceUtils;
+import weka.core.xml.XMLBasicSerialization;
 
 /**
  * A simple default implementation of MetaStore that uses Weka's XML

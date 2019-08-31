@@ -21,6 +21,11 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import weka.core.Environment;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -33,11 +38,6 @@ import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Step that appends a label to incoming instances according to substring

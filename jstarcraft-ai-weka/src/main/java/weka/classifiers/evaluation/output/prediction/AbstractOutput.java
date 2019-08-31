@@ -29,7 +29,14 @@ import java.util.Vector;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.misc.InputMappedClassifier;
-import weka.core.*;
+import weka.core.BatchPredictor;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Range;
+import weka.core.Utils;
+import weka.core.WekaException;
 import weka.core.converters.ConverterUtils.DataSource;
 
 /**

@@ -20,9 +20,6 @@
 
 package weka.core;
 
-import weka.core.Capabilities.Capability;
-import weka.gui.GenericPropertiesCreator;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Enumeration;
@@ -30,6 +27,9 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
+
+import weka.core.Capabilities.Capability;
+import weka.gui.GenericPropertiesCreator;
 
 /**
  * Locates all classes with certain capabilities. One should keep in mind, that

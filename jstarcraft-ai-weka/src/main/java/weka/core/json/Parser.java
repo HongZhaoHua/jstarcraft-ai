@@ -5,10 +5,12 @@
 
 package weka.core.json;
 
-import java_cup.runtime.*;
-import java.io.*;
-import java.util.*;
-import java_cup.runtime.XMLElement;
+import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Stack;
+
+import java_cup.runtime.DefaultSymbolFactory;
+import java_cup.runtime.SymbolFactory;
 
 /**
  * CUP v0.11b 20141202 (SVN rev 60) generated parser.

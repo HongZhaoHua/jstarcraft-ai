@@ -28,7 +28,6 @@ import java.util.Random;
 import java.util.Vector;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.functions.LinearRegression;
 import weka.core.AdditionalMeasureProducer;
 import weka.core.Capabilities;
 import weka.core.Instance;

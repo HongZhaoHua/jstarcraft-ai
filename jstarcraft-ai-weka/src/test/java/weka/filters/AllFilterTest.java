@@ -19,10 +19,9 @@
 
 package weka.filters;
 
-import weka.core.Instances;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.core.Instances;
 
 /**
  * Tests AllFilter. Run from the command line with:

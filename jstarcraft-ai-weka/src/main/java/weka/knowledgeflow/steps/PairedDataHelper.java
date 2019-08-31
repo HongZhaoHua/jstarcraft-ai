@@ -21,13 +21,13 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.WekaException;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import weka.core.WekaException;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * <p>

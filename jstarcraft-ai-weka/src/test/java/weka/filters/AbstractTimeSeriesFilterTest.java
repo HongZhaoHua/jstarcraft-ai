@@ -19,13 +19,12 @@
 
 package weka.filters;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.filters.unsupervised.attribute.TimeSeriesTranslate;
 import weka.filters.unsupervised.attribute.TimeSeriesTranslateTest;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests TimeSeriesTranslateFilter. Run from the command line with:

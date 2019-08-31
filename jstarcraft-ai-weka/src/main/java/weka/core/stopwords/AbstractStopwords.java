@@ -20,15 +20,15 @@
 
 package weka.core.stopwords;
 
-import weka.core.Option;
-import weka.core.OptionHandler;
-import weka.core.Utils;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
+
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Utils;
 
 /**
  * Ancestor for stopwords classes.

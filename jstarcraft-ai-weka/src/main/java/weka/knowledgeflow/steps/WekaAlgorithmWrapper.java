@@ -21,12 +21,12 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.Serializable;
+import java.lang.annotation.Annotation;
+
 import weka.core.Utils;
 import weka.gui.ProgrammaticProperty;
 import weka.gui.knowledgeflow.StepVisual;
-
-import java.io.Serializable;
-import java.lang.annotation.Annotation;
 
 /**
  * A step that wraps a class of standard Weka algorithm (e.g. filter,

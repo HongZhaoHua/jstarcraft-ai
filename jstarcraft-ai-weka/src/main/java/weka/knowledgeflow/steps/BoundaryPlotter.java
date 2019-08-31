@@ -21,6 +21,21 @@
 
 package weka.knowledgeflow.steps;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Future;
+
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.clusterers.AbstractClusterer;
@@ -42,18 +57,6 @@ import weka.knowledgeflow.Data;
 import weka.knowledgeflow.ExecutionResult;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepTask;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.Future;
 
 /**
  * A step that computes visualization data for class/cluster decision

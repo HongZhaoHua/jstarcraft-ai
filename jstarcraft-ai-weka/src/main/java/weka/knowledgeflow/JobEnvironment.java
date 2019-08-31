@@ -21,13 +21,11 @@
 
 package weka.knowledgeflow;
 
-import weka.core.Environment;
-
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import weka.core.Environment;
 
 /**
  * Extended Environment with support for storing results and property values to

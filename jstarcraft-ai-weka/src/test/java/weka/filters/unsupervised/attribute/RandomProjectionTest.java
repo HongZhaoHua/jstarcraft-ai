@@ -19,14 +19,13 @@
 
 package weka.filters.unsupervised.attribute;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.SelectedTag;
 import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests RandomProjection. Run from the command line with:

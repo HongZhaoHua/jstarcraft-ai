@@ -21,15 +21,15 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.Environment;
 import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.JobEnvironment;
 import weka.knowledgeflow.StepManager;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Step that stores incoming non-incremental data in the job environment

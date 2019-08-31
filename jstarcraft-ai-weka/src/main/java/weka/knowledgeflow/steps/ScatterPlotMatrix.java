@@ -21,10 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.gui.knowledgeflow.KFGUIConsts;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import weka.gui.knowledgeflow.KFGUIConsts;
 
 /**
  * Step that collects data for display in a scatter plot matrix.

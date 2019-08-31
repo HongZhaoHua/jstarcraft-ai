@@ -30,8 +30,15 @@ import java.util.Enumeration;
 import java.util.Vector;
 import java.util.zip.GZIPOutputStream;
 
-import weka.core.*;
+import weka.core.AbstractInstance;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedInstancesHandler;
 
 /**
  * Writes to a destination in arff text format.

@@ -21,10 +21,10 @@
 
 package weka.knowledgeflow;
 
+import java.util.List;
+
 import weka.core.WekaException;
 import weka.knowledgeflow.steps.Step;
-
-import java.util.List;
 
 /**
  * A flow runner that runs a flow by injecting data into a target step

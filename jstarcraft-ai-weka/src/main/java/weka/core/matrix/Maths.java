@@ -14,11 +14,11 @@
 
 package weka.core.matrix;
 
+import java.util.Random;
+
 import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.Statistics;
-
-import java.util.Random;
 
 /**
  * Utility class.

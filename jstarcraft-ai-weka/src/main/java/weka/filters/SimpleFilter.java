@@ -21,14 +21,7 @@
 
 package weka.filters;
 
-import java.util.Enumeration;
-import java.util.Vector;
-
-import weka.core.Capabilities;
 import weka.core.Instances;
-import weka.core.Option;
-import weka.core.OptionHandler;
-import weka.core.Utils;
 
 /**
  * This filter contains common behavior of the SimpleBatchFilter and the

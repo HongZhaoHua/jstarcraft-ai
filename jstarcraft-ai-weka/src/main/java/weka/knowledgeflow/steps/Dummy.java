@@ -21,12 +21,12 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.Arrays;
+import java.util.List;
+
 import weka.core.WekaException;
 import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.StepManager;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A "dummy" no-op step

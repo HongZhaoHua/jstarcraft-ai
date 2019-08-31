@@ -5,23 +5,22 @@
 
 package weka.core.expressionlanguage.parser;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import java_cup.runtime.Symbol;
+import weka.core.expressionlanguage.common.NoMacros;
+import weka.core.expressionlanguage.common.NoVariables;
+import weka.core.expressionlanguage.common.Operators;
+import weka.core.expressionlanguage.common.Primitives.BooleanConstant;
+import weka.core.expressionlanguage.common.Primitives.DoubleConstant;
+import weka.core.expressionlanguage.common.Primitives.StringConstant;
+import weka.core.expressionlanguage.core.MacroDeclarations;
 import weka.core.expressionlanguage.core.Node;
-import weka.core.expressionlanguage.core.VariableDeclarations;
 import weka.core.expressionlanguage.core.SemanticException;
 import weka.core.expressionlanguage.core.SyntaxException;
-import weka.core.expressionlanguage.core.MacroDeclarations;
-import weka.core.expressionlanguage.common.Operators;
-import weka.core.expressionlanguage.common.NoVariables;
-import weka.core.expressionlanguage.common.NoMacros;
-import weka.core.expressionlanguage.common.Primitives.DoubleConstant;
-import weka.core.expressionlanguage.common.Primitives.BooleanConstant;
-import weka.core.expressionlanguage.common.Primitives.StringConstant;
-import weka.core.expressionlanguage.parser.Scanner;
-import java_cup.runtime.XMLElement;
+import weka.core.expressionlanguage.core.VariableDeclarations;
 
 /**
  * CUP v0.11b 20141202 (SVN rev 60) generated parser.

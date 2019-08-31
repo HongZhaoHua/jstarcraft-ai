@@ -22,21 +22,26 @@
 package weka.filters.unsupervised.attribute;
 
 import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.List;
-import java.util.TreeMap;
 import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.stopwords.StopwordsHandler;
-import weka.core.stopwords.Null;
+import weka.core.DictionaryBuilder;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Range;
+import weka.core.RevisionUtils;
+import weka.core.SelectedTag;
+import weka.core.Tag;
+import weka.core.Utils;
+import weka.core.WeightedInstancesHandler;
 import weka.core.stemmers.NullStemmer;
 import weka.core.stemmers.Stemmer;
+import weka.core.stopwords.Null;
+import weka.core.stopwords.StopwordsHandler;
 import weka.core.tokenizers.Tokenizer;
 import weka.core.tokenizers.WordTokenizer;
 import weka.filters.Filter;

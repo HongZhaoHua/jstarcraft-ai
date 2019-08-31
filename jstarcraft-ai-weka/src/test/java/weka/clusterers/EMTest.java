@@ -19,9 +19,6 @@
 
 package weka.clusterers;
 
-import weka.clusterers.AbstractClustererTest;
-import weka.clusterers.Clusterer;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

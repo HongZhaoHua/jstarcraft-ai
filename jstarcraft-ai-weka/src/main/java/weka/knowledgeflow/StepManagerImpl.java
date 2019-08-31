@@ -21,10 +21,17 @@
 
 package weka.knowledgeflow;
 
+import java.lang.annotation.Annotation;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import weka.core.Environment;
 import weka.core.Instances;
 import weka.core.OptionHandler;
-import weka.core.SerializationHelper;
 import weka.core.SerializedObject;
 import weka.core.Settings;
 import weka.core.Utils;
@@ -35,14 +42,6 @@ import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.steps.KFStep;
 import weka.knowledgeflow.steps.Step;
 import weka.knowledgeflow.steps.WekaAlgorithmWrapper;
-
-import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Concrete implementation of the StepManager interface. Has a number of

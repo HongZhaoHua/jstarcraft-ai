@@ -19,10 +19,9 @@
 
 package weka.core.converters;
 
-import weka.core.TestInstances;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.core.TestInstances;
 
 /**
  * Tests MatlabLoader/MatlabSaver. Run from the command line with:

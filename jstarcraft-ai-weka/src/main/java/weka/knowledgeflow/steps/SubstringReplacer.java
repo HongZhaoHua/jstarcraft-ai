@@ -21,6 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.WekaException;
@@ -30,10 +34,6 @@ import weka.gui.knowledgeflow.KFGUIConsts;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * A step that can replace sub-strings in the values of string attributes. Only

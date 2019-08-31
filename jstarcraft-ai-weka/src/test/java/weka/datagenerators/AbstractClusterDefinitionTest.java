@@ -19,10 +19,9 @@
 
 package weka.datagenerators;
 
+import junit.framework.TestCase;
 import weka.core.CheckGOE;
 import weka.core.SerializationHelper;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Test class for ClusterDefinitions.

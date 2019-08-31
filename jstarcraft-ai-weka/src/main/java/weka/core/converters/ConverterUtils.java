@@ -21,12 +21,6 @@
 
 package weka.core.converters;
 
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-import weka.core.WekaPackageClassLoaderManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +32,12 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
+
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.RevisionHandler;
+import weka.core.RevisionUtils;
+import weka.core.WekaPackageClassLoaderManager;
 
 /**
  * Utility routines for the converter package.

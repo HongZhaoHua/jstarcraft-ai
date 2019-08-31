@@ -19,9 +19,6 @@
 
 package weka.associations;
 
-import weka.associations.AbstractAssociatorTest;
-import weka.associations.Associator;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

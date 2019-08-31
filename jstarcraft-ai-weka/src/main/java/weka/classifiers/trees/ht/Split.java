@@ -27,8 +27,6 @@ import java.util.List;
 
 import weka.core.Instance;
 
-import java.io.Serializable;
-
 /**
  * Base class for different split types
  * 

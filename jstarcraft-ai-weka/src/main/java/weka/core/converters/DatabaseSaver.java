@@ -21,6 +21,16 @@
 
 package weka.core.converters;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Enumeration;
+import java.util.Vector;
+
+import javax.swing.JFileChooser;
+
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
@@ -35,15 +45,6 @@ import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.gui.FilePropertyMetadata;
 import weka.gui.PasswordProperty;
-
-import javax.swing.*;
-import java.io.File;
-import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Enumeration;
-import java.util.Vector;
 
 /**
  * <!-- globalinfo-start --> Writes to a database (tested with MySQL, InstantDB,

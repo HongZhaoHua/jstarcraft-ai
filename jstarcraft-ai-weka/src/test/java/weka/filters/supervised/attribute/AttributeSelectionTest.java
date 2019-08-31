@@ -19,6 +19,8 @@
 
 package weka.filters.supervised.attribute;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import weka.attributeSelection.ASEvaluation;
 import weka.attributeSelection.ASSearch;
 import weka.core.Attribute;
@@ -26,9 +28,6 @@ import weka.core.Instances;
 import weka.filters.AbstractFilterTest;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.RemoveType;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * Tests AttributeSelection. Run from the command line with:

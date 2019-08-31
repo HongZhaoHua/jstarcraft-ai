@@ -21,6 +21,11 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SerializedObject;
@@ -31,11 +36,6 @@ import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A step that allows the user to define instances to output

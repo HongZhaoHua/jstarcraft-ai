@@ -19,10 +19,9 @@
 
 package weka.core.tokenizers;
 
-import weka.test.WekaTestSuite;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+import weka.test.WekaTestSuite;
 
 /**
  * Test class for all tokenizers. Run from the command line with:

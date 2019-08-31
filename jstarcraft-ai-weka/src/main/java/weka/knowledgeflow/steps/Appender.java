@@ -21,17 +21,6 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.Attribute;
-import weka.core.DenseInstance;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.WekaException;
-import weka.core.converters.SerializedInstancesLoader;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -49,6 +38,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Utils;
+import weka.core.WekaException;
+import weka.core.converters.SerializedInstancesLoader;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * A bean that appends multiple incoming data connections into a single data

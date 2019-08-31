@@ -19,13 +19,12 @@
 
 package weka.core.converters;
 
+import junit.framework.TestCase;
 import weka.core.CheckGOE;
 import weka.core.CheckOptionHandler;
 import weka.core.Instances;
 import weka.core.OptionHandler;
 import weka.core.TestInstances;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Test class for Converters.

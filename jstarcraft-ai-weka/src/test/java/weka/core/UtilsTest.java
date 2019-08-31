@@ -19,11 +19,10 @@
 
 package weka.core;
 
-import weka.filters.unsupervised.attribute.StringToWordVector;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import weka.filters.unsupervised.attribute.StringToWordVector;
 
 /**
  * Tests Utils. Run from the command line with:

@@ -20,12 +20,17 @@
 
 package weka.filters.unsupervised.instance;
 
-import weka.core.*;
-import weka.core.Capabilities.Capability;
-import weka.filters.SimpleBatchFilter;
-import weka.classifiers.rules.DecisionTableHashKey;
-
 import java.util.HashSet;
+
+import weka.classifiers.rules.DecisionTableHashKey;
+import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.RevisionUtils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
+import weka.filters.SimpleBatchFilter;
 
 /**
  * <!-- globalinfo-start --> Removes all duplicate instances from the first

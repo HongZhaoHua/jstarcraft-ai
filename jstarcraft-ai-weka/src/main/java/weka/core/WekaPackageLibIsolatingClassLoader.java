@@ -21,9 +21,11 @@
 
 package weka.core;
 
-import weka.core.packageManagement.Dependency;
-import weka.core.packageManagement.Package;
-import weka.core.packageManagement.PackageConstraint;
+import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_CLASS_NOT_PRESENT_KEY;
+import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_ENV_VAR_NOT_SET_KEY;
+import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_ENV_VAR_NOT_SET_MESSAGE_KEY;
+import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_FILE_NOT_PRESENT_KEY;
+import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_FILE_NOT_PRESENT_MESSAGE_KEY;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -39,14 +41,12 @@ import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
@@ -55,11 +55,9 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_CLASS_NOT_PRESENT_KEY;
-import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_ENV_VAR_NOT_SET_KEY;
-import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_ENV_VAR_NOT_SET_MESSAGE_KEY;
-import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_FILE_NOT_PRESENT_KEY;
-import static weka.core.WekaPackageManager.DO_NOT_LOAD_IF_FILE_NOT_PRESENT_MESSAGE_KEY;
+import weka.core.packageManagement.Dependency;
+import weka.core.packageManagement.Package;
+import weka.core.packageManagement.PackageConstraint;
 
 /**
  * <p>

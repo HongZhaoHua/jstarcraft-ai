@@ -23,7 +23,6 @@ package weka.experiment;
 
 import weka.core.RevisionUtils;
 import weka.core.Statistics;
-import weka.core.Utils;
 
 /**
  * A class for storing stats on a paired comparison. This version is based on

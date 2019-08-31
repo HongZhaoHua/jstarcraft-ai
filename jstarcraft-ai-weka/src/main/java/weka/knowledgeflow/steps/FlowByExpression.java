@@ -21,17 +21,6 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.Attribute;
-import weka.core.Environment;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.WekaException;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.StepManager;
-
-import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +28,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+
+import weka.core.Attribute;
+import weka.core.Environment;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.WekaException;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.StepManager;
 
 /**
  * A step that splits incoming instances (or instance streams) according to the

@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
-import java.util.Properties;
 
 public class AttributeMetaInfo implements Serializable, RevisionHandler {
 

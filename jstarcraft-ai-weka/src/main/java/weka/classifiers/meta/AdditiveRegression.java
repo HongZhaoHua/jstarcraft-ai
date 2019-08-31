@@ -21,17 +21,15 @@
 
 package weka.classifiers.meta;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
-import java.util.ArrayList;
 
-import weka.classifiers.Classifier;
 import weka.classifiers.AbstractClassifier;
+import weka.classifiers.Classifier;
 import weka.classifiers.IteratedSingleClassifierEnhancer;
 import weka.classifiers.IterativeClassifier;
-import weka.classifiers.rules.ZeroR;
-
 import weka.core.AdditionalMeasureProducer;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
@@ -44,9 +42,9 @@ import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import weka.core.TechnicalInformationHandler;
+import weka.core.UnassignedClassException;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.core.UnassignedClassException;
 
 /**
  * <!-- globalinfo-start --> Meta classifier that enhances the performance of a

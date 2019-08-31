@@ -19,14 +19,13 @@
 
 package weka.attributeSelection;
 
+import junit.framework.TestCase;
 import weka.core.Attribute;
 import weka.core.CheckGOE;
 import weka.core.CheckOptionHandler;
-import weka.core.Instances;
 import weka.core.CheckScheme.PostProcessor;
+import weka.core.Instances;
 import weka.test.Regression;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Test class for attribute selection schemes. Internally it uses the

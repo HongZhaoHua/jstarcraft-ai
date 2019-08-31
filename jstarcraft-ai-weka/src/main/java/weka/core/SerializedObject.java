@@ -21,9 +21,6 @@
 
 package weka.core;
 
-import weka.core.scripting.Jython;
-import weka.core.scripting.JythonSerializableObject;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
@@ -38,6 +35,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import weka.core.scripting.Jython;
+import weka.core.scripting.JythonSerializableObject;
 
 /**
  * Class for storing an object in serialized form in memory. It can be used to

@@ -21,6 +21,14 @@
 
 package weka.classifiers.trees;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Random;
+import java.util.Vector;
+
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.core.Attribute;
@@ -38,14 +46,6 @@ import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 import weka.gui.ProgrammaticProperty;
-
-import java.io.Serializable;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Vector;
 
 /**
  * <!-- globalinfo-start --> Class for constructing a tree that considers K

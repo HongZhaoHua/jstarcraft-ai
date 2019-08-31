@@ -1,9 +1,9 @@
 package weka.knowledgeflow;
 
-import weka.knowledgeflow.steps.Step;
-
 import java.io.Serializable;
 import java.util.concurrent.Callable;
+
+import weka.knowledgeflow.steps.Step;
 
 /**
  * A task that can be executed by the ExecutionEnvironment's submitTask()

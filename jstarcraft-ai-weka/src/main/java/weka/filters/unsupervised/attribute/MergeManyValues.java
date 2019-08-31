@@ -26,9 +26,19 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.filters.Filter;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Range;
+import weka.core.SingleIndex;
+import weka.core.UnsupportedAttributeTypeException;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WeightedInstancesHandler;
 import weka.filters.StreamableFilter;
 import weka.filters.UnsupervisedFilter;
 

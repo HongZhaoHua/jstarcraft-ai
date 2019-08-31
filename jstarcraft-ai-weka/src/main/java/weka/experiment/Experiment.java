@@ -22,7 +22,6 @@
 package weka.experiment;
 
 import java.beans.PropertyDescriptor;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;

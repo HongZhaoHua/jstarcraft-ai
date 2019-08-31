@@ -21,9 +21,9 @@
 
 package weka.classifiers.trees.j48;
 
+import weka.core.ContingencyTables;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
-import weka.core.ContingencyTables;
 
 /**
  * Class for computing the entropy for a given distribution.

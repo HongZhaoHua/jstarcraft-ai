@@ -19,9 +19,6 @@
 
 package weka.classifiers.functions.supportVector;
 
-import weka.classifiers.functions.supportVector.AbstractKernelTest;
-import weka.classifiers.functions.supportVector.Kernel;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

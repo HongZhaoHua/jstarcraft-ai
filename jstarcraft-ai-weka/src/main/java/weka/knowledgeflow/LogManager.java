@@ -21,15 +21,15 @@
 
 package weka.knowledgeflow;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import weka.core.LogHandler;
 import weka.core.OptionHandler;
 import weka.core.Utils;
 import weka.gui.Logger;
 import weka.knowledgeflow.steps.Step;
 import weka.knowledgeflow.steps.WekaAlgorithmWrapper;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 /**
  * Class that wraps a {@code weka.gui.Logger} and filters log messages according

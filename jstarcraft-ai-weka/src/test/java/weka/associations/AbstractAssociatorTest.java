@@ -19,15 +19,14 @@
 
 package weka.associations;
 
+import junit.framework.TestCase;
 import weka.core.Attribute;
 import weka.core.CheckGOE;
 import weka.core.CheckOptionHandler;
+import weka.core.CheckScheme.PostProcessor;
 import weka.core.Instances;
 import weka.core.OptionHandler;
-import weka.core.CheckScheme.PostProcessor;
 import weka.test.Regression;
-
-import junit.framework.TestCase;
 
 /**
  * Abstract Test class for Associators. Internally it uses the class

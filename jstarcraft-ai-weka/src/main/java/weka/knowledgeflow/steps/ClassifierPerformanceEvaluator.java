@@ -21,6 +21,10 @@
 
 package weka.knowledgeflow.steps;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 import weka.classifiers.AggregateableEvaluation;
 import weka.classifiers.CostMatrix;
 import weka.classifiers.Evaluation;
@@ -42,10 +46,6 @@ import weka.knowledgeflow.ExecutionResult;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepTask;
 import weka.knowledgeflow.StepTaskCallback;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Step that implements batch classifier evaluation

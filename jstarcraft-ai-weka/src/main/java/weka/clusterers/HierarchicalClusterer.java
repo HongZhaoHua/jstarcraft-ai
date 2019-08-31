@@ -23,10 +23,10 @@ package weka.clusterers;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
+import java.util.Locale;
 import java.util.PriorityQueue;
 import java.util.Vector;
 

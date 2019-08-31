@@ -21,13 +21,21 @@
 
 package weka.filters.supervised.instance;
 
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Random;
 import java.util.Vector;
 
-import weka.core.*;
+import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.Randomizable;
+import weka.core.RevisionUtils;
+import weka.core.Utils;
+import weka.core.WeightedAttributesHandler;
+import weka.core.WekaException;
 import weka.filters.Filter;
 import weka.filters.SupervisedFilter;
 import weka.gui.ProgrammaticProperty;

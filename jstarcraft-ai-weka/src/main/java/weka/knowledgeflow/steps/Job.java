@@ -21,6 +21,14 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+
 import weka.core.Environment;
 import weka.core.OptionMetadata;
 import weka.core.Settings;
@@ -38,15 +46,6 @@ import weka.knowledgeflow.KFDefaults;
 import weka.knowledgeflow.LogManager;
 import weka.knowledgeflow.LoggingLevel;
 import weka.knowledgeflow.StepManager;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Step that executes another flow as a "job". Typically, you would parameterize

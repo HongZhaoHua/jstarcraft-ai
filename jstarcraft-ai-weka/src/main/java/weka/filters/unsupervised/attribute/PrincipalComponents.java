@@ -24,8 +24,9 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import no.uib.cipr.matrix.*;
-
+import no.uib.cipr.matrix.Matrices;
+import no.uib.cipr.matrix.SymmDenseEVD;
+import no.uib.cipr.matrix.UpperSymmDenseMatrix;
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;

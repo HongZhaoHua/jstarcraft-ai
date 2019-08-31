@@ -21,14 +21,14 @@
 
 package weka.core.expressionlanguage.common;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
-import weka.core.expressionlanguage.core.Node;
+import weka.core.expressionlanguage.common.Primitives.DoubleExpression;
 import weka.core.expressionlanguage.core.Macro;
 import weka.core.expressionlanguage.core.MacroDeclarations;
+import weka.core.expressionlanguage.core.Node;
 import weka.core.expressionlanguage.core.SemanticException;
-import weka.core.expressionlanguage.common.Primitives.DoubleExpression;
 
 /**
  * Macro declarations for common mathematical functions.

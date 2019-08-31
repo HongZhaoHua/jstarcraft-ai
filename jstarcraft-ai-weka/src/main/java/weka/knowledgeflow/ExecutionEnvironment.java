@@ -21,14 +21,14 @@
 
 package weka.knowledgeflow;
 
+import java.util.concurrent.Future;
+
 import weka.core.Defaults;
 import weka.core.Environment;
 import weka.core.Settings;
 import weka.core.WekaException;
 import weka.gui.Logger;
 import weka.gui.knowledgeflow.GraphicalEnvironmentCommandHandler;
-
-import java.util.concurrent.Future;
 
 /**
  * Client (i.e. from the Step perspective) interface for an execution

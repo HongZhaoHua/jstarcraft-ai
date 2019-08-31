@@ -31,9 +31,21 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.RandomizableParallelMultipleClassifiersCombiner;
 import weka.classifiers.rules.ZeroR;
-import weka.core.*;
+import weka.core.Attribute;
+import weka.core.BatchPredictor;
+import weka.core.Capabilities;
+import weka.core.CommandlineRunnable;
+import weka.core.DenseInstance;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Option;
+import weka.core.OptionHandler;
+import weka.core.RevisionUtils;
+import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
+import weka.core.TechnicalInformationHandler;
+import weka.core.Utils;
 
 /**
  * <!-- globalinfo-start --> Combines several classifiers using the stacking

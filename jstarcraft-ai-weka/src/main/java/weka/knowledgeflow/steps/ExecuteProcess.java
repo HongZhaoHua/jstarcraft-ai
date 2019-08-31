@@ -21,19 +21,6 @@
 
 package weka.knowledgeflow.steps;
 
-import weka.core.Attribute;
-import weka.core.DenseInstance;
-import weka.core.Environment;
-import weka.core.Instance;
-import weka.core.Instances;
-import weka.core.Utils;
-import weka.core.WekaException;
-import weka.gui.knowledgeflow.KFGUIConsts;
-import weka.knowledgeflow.Data;
-import weka.knowledgeflow.JobEnvironment;
-import weka.knowledgeflow.LogManager;
-import weka.knowledgeflow.StepManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,6 +33,19 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import weka.core.Attribute;
+import weka.core.DenseInstance;
+import weka.core.Environment;
+import weka.core.Instance;
+import weka.core.Instances;
+import weka.core.Utils;
+import weka.core.WekaException;
+import weka.gui.knowledgeflow.KFGUIConsts;
+import weka.knowledgeflow.Data;
+import weka.knowledgeflow.JobEnvironment;
+import weka.knowledgeflow.LogManager;
+import weka.knowledgeflow.StepManager;
 
 /**
  * Knowledge Flow step that can execute static system commands or commands that

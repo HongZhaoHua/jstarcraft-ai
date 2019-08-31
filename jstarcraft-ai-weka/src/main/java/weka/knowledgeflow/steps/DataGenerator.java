@@ -21,6 +21,12 @@
 
 package weka.knowledgeflow.steps;
 
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.WekaException;
@@ -30,12 +36,6 @@ import weka.gui.knowledgeflow.StepVisual;
 import weka.knowledgeflow.Data;
 import weka.knowledgeflow.StepManager;
 import weka.knowledgeflow.StepManagerImpl;
-
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Step that wraps a Weka DataGenerator.

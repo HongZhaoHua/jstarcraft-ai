@@ -27,9 +27,6 @@ import java.util.Random;
 import java.util.Vector;
 
 import weka.classifiers.trees.j48.ModelSelection;
-import weka.core.Capabilities;
-import weka.core.Capabilities.Capability;
-import weka.core.CapabilitiesHandler;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.RevisionHandler;

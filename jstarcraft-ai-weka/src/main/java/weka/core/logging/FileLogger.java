@@ -20,14 +20,14 @@
 
 package weka.core.logging;
 
-import weka.core.ResourceUtils;
-import weka.core.RevisionUtils;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.regex.Matcher;
+
+import weka.core.ResourceUtils;
+import weka.core.RevisionUtils;
 
 /**
  * A simple file logger, that just logs to a single file. Deletes the file when
