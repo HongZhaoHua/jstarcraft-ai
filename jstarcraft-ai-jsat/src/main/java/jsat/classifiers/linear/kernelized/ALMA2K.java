@@ -1,17 +1,21 @@
 package jsat.classifiers.linear.kernelized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
-import jsat.classifiers.linear.ALMA2;
+import jsat.classifiers.BaseUpdateableClassifier;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.DataPoint;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
+import jsat.classifiers.linear.ALMA2;
 import jsat.distributions.Distribution;
 import jsat.distributions.Uniform;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.ScaledVector;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;

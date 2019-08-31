@@ -1,10 +1,16 @@
 
 package jsat.distributions.empirical;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import jsat.distributions.ContinuousDistribution;
-import jsat.distributions.empirical.kernelfunc.*;
+import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
+import jsat.distributions.empirical.kernelfunc.GaussKF;
+import jsat.distributions.empirical.kernelfunc.KernelFunction;
+import jsat.distributions.empirical.kernelfunc.UniformKF;
 import jsat.linear.Vec;
 import jsat.math.OnLineStatistics;
 import jsat.utils.ProbailityMatch;

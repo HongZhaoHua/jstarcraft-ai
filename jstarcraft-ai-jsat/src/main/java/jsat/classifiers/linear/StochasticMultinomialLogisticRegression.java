@@ -1,10 +1,19 @@
 package jsat.classifiers.linear;
 
-import static java.lang.Math.*;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+import static java.lang.Math.log;
+import static java.lang.Math.signum;
+import static java.lang.Math.sqrt;
+
+import java.util.Arrays;
+import java.util.Collections;
+
 import jsat.SimpleWeightVectorModel;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.ConstantVector;
@@ -14,7 +23,6 @@ import jsat.linear.Vec;
 import jsat.math.MathTricks;
 import jsat.math.decayrates.DecayRate;
 import jsat.math.decayrates.ExponetialDecay;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.utils.IntList;
 import jsat.utils.ListUtils;

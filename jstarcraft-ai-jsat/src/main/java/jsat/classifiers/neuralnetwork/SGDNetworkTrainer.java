@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jsat.classifiers.neuralnetwork.activations.ActivationLayer;
 import jsat.classifiers.neuralnetwork.initializers.BiastInitializer;
 import jsat.classifiers.neuralnetwork.initializers.WeightInitializer;
@@ -27,7 +28,6 @@ import jsat.math.optimization.stochastic.GradientUpdater;
 import jsat.math.optimization.stochastic.SimpleSGD;
 import jsat.utils.SystemInfo;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * This class provides a highly configurable and generalized method of training

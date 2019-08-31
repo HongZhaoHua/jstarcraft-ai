@@ -17,6 +17,7 @@
 package jsat.linear.vectorcollection;
 
 import java.util.List;
+
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;

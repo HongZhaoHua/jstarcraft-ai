@@ -1,10 +1,17 @@
 
 package jsat.linear;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.hypot;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.io.Serializable;
-import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.Comparator;
+
 import jsat.math.Complex;
 import jsat.utils.DoubleList;
 import jsat.utils.IndexTable;

@@ -1,10 +1,12 @@
 package jsat.math.optimization.stochastic;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
 import jsat.linear.ScaledVector;
 import jsat.linear.Vec;
-import static java.lang.Math.*;
 
 /**
  * Adam is inspired by {@link RMSProp} and {@link AdaGrad}, where the former can

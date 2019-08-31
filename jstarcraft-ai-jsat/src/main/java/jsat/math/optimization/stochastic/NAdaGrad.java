@@ -17,7 +17,10 @@
 package jsat.math.optimization.stochastic;
 
 import java.util.Arrays;
-import jsat.linear.*;
+
+import jsat.linear.IndexValue;
+import jsat.linear.ScaledVector;
+import jsat.linear.Vec;
 
 /**
  * Normalized AdaGrad provides an adaptive learning rate for each individual

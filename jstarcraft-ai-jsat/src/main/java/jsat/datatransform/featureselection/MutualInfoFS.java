@@ -5,8 +5,10 @@ import static java.lang.Math.log;
 import java.util.Set;
 
 import jsat.DataSet;
-import jsat.classifiers.*;
-import jsat.datatransform.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.datatransform.RemoveAttributeTransform;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;

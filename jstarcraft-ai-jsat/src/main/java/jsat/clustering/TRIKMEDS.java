@@ -17,8 +17,17 @@
 
 package jsat.clustering;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static jsat.clustering.SeedSelectionMethods.selectIntialPoints;
+import static jsat.utils.concurrent.ParallelUtils.run;
+import static jsat.utils.concurrent.ParallelUtils.streamP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -26,18 +35,15 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.DoubleStream;
+
 import jsat.DataSet;
-import static jsat.clustering.SeedSelectionMethods.selectIntialPoints;
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.TrainableDistanceMetric;
-import jsat.utils.concurrent.AtomicDoubleArray;
-import static jsat.utils.concurrent.ParallelUtils.*;
-import static java.lang.Math.*;
-import java.util.*;
 import jsat.utils.IntList;
 import jsat.utils.ListUtils;
 import jsat.utils.concurrent.AtomicDouble;
+import jsat.utils.concurrent.AtomicDoubleArray;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;
 

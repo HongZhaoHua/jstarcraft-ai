@@ -1,7 +1,19 @@
 package jsat.io;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import jsat.DataSet;
 import jsat.DataStore;
 import jsat.RowMajorStore;
@@ -9,7 +21,9 @@ import jsat.classifiers.CategoricalData;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
 import jsat.datatransform.DenseSparceTransform;
-import jsat.linear.*;
+import jsat.linear.IndexValue;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 import jsat.regression.RegressionDataSet;
 import jsat.utils.DoubleList;
 import jsat.utils.IntList;

@@ -3,6 +3,7 @@ package jsat.text;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import jsat.linear.SparseVector;
 import jsat.linear.Vec;
 import jsat.text.tokenizer.Tokenizer;

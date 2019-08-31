@@ -3,6 +3,7 @@ package jsat.classifiers.calibration;
 
 import java.util.Collections;
 import java.util.List;
+
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;

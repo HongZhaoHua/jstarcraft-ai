@@ -1,16 +1,23 @@
 package jsat.parameters;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.PriorityQueue;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.WarmClassifier;
 import jsat.distributions.Distribution;
 import jsat.exceptions.FailedToFitException;
-import jsat.regression.*;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.RegressionModelEvaluation;
+import jsat.regression.Regressor;
+import jsat.regression.WarmRegressor;
 import jsat.utils.DoubleList;
-import jsat.utils.FakeExecutor;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

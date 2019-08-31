@@ -1,7 +1,7 @@
 
 package jsat.clustering;
 
-import jsat.linear.distancemetrics.TrainableDistanceMetric;
+import static jsat.clustering.SeedSelectionMethods.selectIntialPoints;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -11,11 +11,12 @@ import java.util.concurrent.atomic.DoubleAdder;
 import java.util.concurrent.atomic.LongAdder;
 
 import jsat.DataSet;
+import jsat.clustering.SeedSelectionMethods.SeedSelection;
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.TrainableDistanceMetric;
 import jsat.math.OnLineStatistics;
-import static jsat.clustering.SeedSelectionMethods.*;
 import jsat.utils.IntList;
 import jsat.utils.ListUtils;
 import jsat.utils.concurrent.ParallelUtils;

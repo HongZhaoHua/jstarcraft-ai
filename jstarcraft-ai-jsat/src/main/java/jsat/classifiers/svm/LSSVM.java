@@ -1,32 +1,29 @@
 package jsat.classifiers.svm;
 
+import static java.lang.Math.abs;
+
+import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.stream.IntStream;
+
+import jsat.DataSet;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
+import jsat.classifiers.WarmClassifier;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
-import jsat.distributions.kernels.KernelTrick;
-import jsat.regression.RegressionDataSet;
-import jsat.regression.Regressor;
-import static java.lang.Math.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.*;
-import java.util.stream.IntStream;
-import jsat.DataSet;
-import jsat.classifiers.*;
 import jsat.distributions.Distribution;
+import jsat.distributions.kernels.KernelTrick;
 import jsat.distributions.kernels.LinearKernel;
 import jsat.exceptions.FailedToFitException;
-import jsat.parameters.Parameterized;
 import jsat.parameters.Parameter.WarmParameter;
-import jsat.regression.*;
-import jsat.utils.FakeExecutor;
-import jsat.utils.PairedReturn;
-import jsat.utils.SystemInfo;
+import jsat.parameters.Parameterized;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.Regressor;
+import jsat.regression.WarmRegressor;
 import jsat.utils.concurrent.ParallelUtils;
-import static jsat.utils.concurrent.ParallelUtils.*;
 
 /**
  * The Least Squares Support Vector Machine (LS-SVM) is an alternative to the

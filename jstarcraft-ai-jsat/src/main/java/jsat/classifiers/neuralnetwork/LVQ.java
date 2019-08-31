@@ -4,9 +4,16 @@ package jsat.classifiers.neuralnetwork;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.DataPointPair;
 import jsat.clustering.SeedSelectionMethods;
 import jsat.clustering.SeedSelectionMethods.SeedSelection;
 import jsat.linear.Vec;
@@ -15,8 +22,9 @@ import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.TrainableDistanceMetric;
 import jsat.linear.vectorcollection.DefaultVectorCollection;
 import jsat.linear.vectorcollection.VectorCollection;
-import jsat.math.decayrates.*;
-import jsat.parameters.*;
+import jsat.math.decayrates.DecayRate;
+import jsat.math.decayrates.ExponetialDecay;
+import jsat.parameters.Parameterized;
 import jsat.utils.random.RandomUtil;
 
 /**

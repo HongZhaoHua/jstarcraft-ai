@@ -1,7 +1,9 @@
 
 package jsat.math.integration;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+
 import jsat.math.Function1D;
 
 /**

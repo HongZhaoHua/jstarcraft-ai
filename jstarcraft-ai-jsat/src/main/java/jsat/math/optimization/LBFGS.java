@@ -3,8 +3,10 @@ package jsat.math.optimization;
 import java.util.ArrayList;
 import java.util.List;
 
-import jsat.linear.*;
-import jsat.math.*;
+import jsat.linear.IndexValue;
+import jsat.linear.Vec;
+import jsat.math.Function;
+import jsat.math.FunctionVec;
 import jsat.utils.DoubleList;
 
 /**

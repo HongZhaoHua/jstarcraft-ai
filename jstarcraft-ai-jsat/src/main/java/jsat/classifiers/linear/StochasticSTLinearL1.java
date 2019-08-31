@@ -1,7 +1,7 @@
 package jsat.classifiers.linear;
 
 import java.util.Iterator;
-import java.util.List;
+
 import jsat.SingleWeightVectorModel;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.Classifier;
@@ -10,7 +10,6 @@ import jsat.linear.IndexValue;
 import jsat.linear.Vec;
 import jsat.lossfunctions.LogisticLoss;
 import jsat.lossfunctions.SquaredLoss;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.regression.Regressor;
 

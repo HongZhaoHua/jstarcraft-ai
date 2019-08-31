@@ -1,19 +1,19 @@
 package jsat.classifiers.linear.kernelized;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.*;
-import jsat.distributions.kernels.RBFKernel;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.distributions.kernels.RBFKernel;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

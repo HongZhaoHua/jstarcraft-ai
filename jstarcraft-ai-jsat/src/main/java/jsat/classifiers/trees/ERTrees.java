@@ -1,19 +1,17 @@
 
 package jsat.classifiers.trees;
 
-import static java.lang.Math.*;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
+import static java.lang.Math.max;
+import static java.lang.Math.round;
+import static java.lang.Math.sqrt;
+
 import jsat.DataSet;
-import jsat.classifiers.CategoricalData;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
 import jsat.exceptions.FailedToFitException;
 import jsat.math.OnLineStatistics;
 import jsat.regression.RegressionDataSet;
-import jsat.utils.FakeExecutor;
-import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

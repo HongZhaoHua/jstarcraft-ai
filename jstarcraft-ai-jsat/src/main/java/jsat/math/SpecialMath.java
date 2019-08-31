@@ -1,11 +1,22 @@
 
 package jsat.math;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.abs;
+import static java.lang.Math.cos;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+import static java.lang.Math.tan;
+import static jsat.math.MathTricks.hornerPoly;
+import static jsat.math.MathTricks.hornerPolyR;
+
 import jsat.distributions.Normal;
-import jsat.linear.Vec;
 import jsat.math.rootfinding.RiddersMethod;
-import static java.lang.Math.*;
-import static jsat.math.MathTricks.*;
 
 /**
  * This class provides static methods for computing accurate approximations to

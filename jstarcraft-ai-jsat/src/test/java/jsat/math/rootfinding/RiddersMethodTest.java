@@ -4,13 +4,17 @@
  */
 package jsat.math.rootfinding;
 
-import static java.lang.Math.*;
+import static java.lang.Math.PI;
+import static java.lang.Math.pow;
+import static java.lang.Math.sin;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import jsat.math.Function1D;
-import static org.junit.Assert.assertEquals;
 
 /**
  *

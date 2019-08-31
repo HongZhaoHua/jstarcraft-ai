@@ -1,7 +1,10 @@
 
 package jsat.linear;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.util.Arrays;
 import java.util.List;
 

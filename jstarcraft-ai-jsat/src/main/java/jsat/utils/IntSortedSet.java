@@ -2,7 +2,14 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.AbstractSet;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.SortedSet;
 
 /**
  * A utility class for efficiently storing a set of integers. In order to do

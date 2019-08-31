@@ -1,16 +1,19 @@
 package jsat.clustering.kmeans;
 
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import jsat.DataSet;
 import jsat.clustering.KClustererBase;
 import jsat.clustering.SeedSelectionMethods;
 import jsat.clustering.SeedSelectionMethods.SeedSelection;
 import jsat.linear.Vec;
-import jsat.linear.distancemetrics.*;
-import jsat.utils.*;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.TrainableDistanceMetric;
+import jsat.utils.IntList;
+import jsat.utils.ListUtils;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;
 

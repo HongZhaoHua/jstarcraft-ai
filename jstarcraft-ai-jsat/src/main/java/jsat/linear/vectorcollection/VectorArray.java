@@ -4,6 +4,7 @@ package jsat.linear.vectorcollection;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;

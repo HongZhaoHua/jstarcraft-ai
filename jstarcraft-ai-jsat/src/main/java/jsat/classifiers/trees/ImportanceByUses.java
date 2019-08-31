@@ -16,7 +16,6 @@
  */
 package jsat.classifiers.trees;
 
-import java.util.Stack;
 import jsat.DataSet;
 
 /**

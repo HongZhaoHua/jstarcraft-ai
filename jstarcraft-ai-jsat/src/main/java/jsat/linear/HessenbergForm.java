@@ -1,8 +1,9 @@
 package jsat.linear;
 
+import static jsat.linear.Matrix.OuterProductUpdate;
+
 import java.io.Serializable;
 import java.util.concurrent.ExecutorService;
-import static jsat.linear.Matrix.*;
 
 /**
  *

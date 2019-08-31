@@ -16,16 +16,19 @@
  */
 package jsat.linear.distancemetrics;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
 
 /**
  *

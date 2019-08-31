@@ -2,7 +2,7 @@ package jsat.classifiers.trees;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.DataPoint;
 import jsat.linear.DenseVector;

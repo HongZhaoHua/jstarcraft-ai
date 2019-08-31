@@ -1,21 +1,22 @@
 package jsat.clustering;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import jsat.SimpleDataSet;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.Uniform;
 import jsat.utils.GridDataGenerator;
 import jsat.utils.IntSet;
-import jsat.utils.SystemInfo;
 import jsat.utils.random.XORWOW;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
 
 /**
  *

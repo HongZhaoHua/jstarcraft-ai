@@ -1,6 +1,17 @@
 package jsat.linear.vectorcollection.lsh;
 
-import java.util.*;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
@@ -10,14 +21,6 @@ import jsat.linear.vectorcollection.VectorArray;
 import jsat.math.OnLineStatistics;
 import jsat.utils.IntSet;
 import jsat.utils.random.RandomUtil;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  *

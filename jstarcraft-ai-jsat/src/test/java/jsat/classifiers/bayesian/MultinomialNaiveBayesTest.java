@@ -16,21 +16,21 @@
  */
 package jsat.classifiers.bayesian;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.ClassificationModelEvaluation;
-import jsat.datatransform.DataTransformProcess;
-import jsat.datatransform.NumericalToHistogram;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.datatransform.DataTransformProcess;
+import jsat.datatransform.NumericalToHistogram;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

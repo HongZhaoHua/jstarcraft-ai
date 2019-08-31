@@ -1,15 +1,22 @@
 package jsat.clustering;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 import jsat.DataSet;
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.linear.vectorcollection.*;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
+import jsat.linear.vectorcollection.VectorCollectionUtils;
 import jsat.math.OnLineStatistics;
-import jsat.parameters.*;
+import jsat.parameters.Parameterized;
 import jsat.utils.IntList;
 import jsat.utils.IntSet;
 

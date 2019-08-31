@@ -1,25 +1,27 @@
 package jsat.classifiers.linear;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+import jsat.DataSet;
+import jsat.SingleWeightVectorModel;
 import jsat.classifiers.BaseUpdateableClassifier;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.DataPoint;
+import jsat.classifiers.calibration.BinaryScoreClassifier;
+import jsat.distributions.Distribution;
+import jsat.distributions.LogUniform;
 import jsat.distributions.Normal;
+import jsat.distributions.Uniform;
 import jsat.exceptions.FailedToFitException;
+import jsat.exceptions.UntrainedModelException;
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
 import jsat.linear.Matrix;
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import java.util.List;
-import jsat.DataSet;
-import jsat.SingleWeightVectorModel;
-import jsat.classifiers.calibration.BinaryScoreClassifier;
-import jsat.distributions.Distribution;
-import jsat.distributions.LogUniform;
-import jsat.distributions.Uniform;
-import jsat.exceptions.UntrainedModelException;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 
 /**

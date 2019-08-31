@@ -1,20 +1,31 @@
 package jsat.classifiers.knn;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.classifiers.bayesian.NaiveBayesUpdateable;
 import jsat.distributions.Distribution;
 import jsat.distributions.discrete.UniformDiscrete;
-import jsat.distributions.empirical.kernelfunc.*;
+import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
+import jsat.distributions.empirical.kernelfunc.KernelFunction;
+import jsat.distributions.empirical.kernelfunc.UniformKF;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.TrainableDistanceMetric;
-import jsat.linear.vectorcollection.*;
-import jsat.parameters.*;
-import jsat.regression.*;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
+import jsat.parameters.Parameterized;
+import jsat.regression.MultipleLinearRegression;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.Regressor;
 
 /**
  * Locally Weighted Learner (LW) is the combined generalized implementation of

@@ -17,6 +17,7 @@
 package jsat.outlier;
 
 import java.io.Serializable;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 

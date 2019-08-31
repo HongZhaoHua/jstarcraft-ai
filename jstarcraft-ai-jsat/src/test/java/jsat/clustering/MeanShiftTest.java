@@ -4,19 +4,23 @@
  */
 package jsat.clustering;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import jsat.SimpleDataSet;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.Normal;
 import jsat.utils.GridDataGenerator;
 import jsat.utils.IntSet;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
 
 /**
  *

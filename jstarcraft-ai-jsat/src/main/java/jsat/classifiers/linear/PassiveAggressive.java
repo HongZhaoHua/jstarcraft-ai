@@ -1,18 +1,19 @@
 package jsat.classifiers.linear;
 
-import java.util.List;
-import java.util.concurrent.ExecutorService;
 import jsat.DataSet;
 import jsat.SingleWeightVectorModel;
-import jsat.classifiers.*;
+import jsat.classifiers.BaseUpdateableClassifier;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.UpdateableClassifier;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.distributions.Distribution;
-import jsat.distributions.Exponential;
 import jsat.distributions.LogUniform;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.regression.BaseUpdateableRegressor;
 import jsat.regression.RegressionDataSet;

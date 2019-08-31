@@ -1,8 +1,15 @@
 package jsat.classifiers.linear.kernelized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.BaseUpdateableClassifier;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.DataPoint;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.distributions.Distribution;
 import jsat.distributions.LogUniform;
@@ -10,12 +17,10 @@ import jsat.distributions.kernels.KernelTrick;
 import jsat.linear.Vec;
 import jsat.lossfunctions.HingeLoss;
 import jsat.lossfunctions.LossC;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * Bounded Online Gradient Descent (BOGD) is a kernel learning algorithm that

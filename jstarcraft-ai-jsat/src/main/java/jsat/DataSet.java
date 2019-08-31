@@ -1,15 +1,31 @@
 
 package jsat;
 
-import java.lang.ref.SoftReference;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.IntStream;
-import java.util.stream.StreamSupport;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
 import jsat.datatransform.DataTransform;
 import jsat.datatransform.InPlaceTransform;
-import jsat.linear.*;
+import jsat.linear.ConstantVector;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.Matrix;
+import jsat.linear.MatrixOfVecs;
+import jsat.linear.MatrixStatistics;
+import jsat.linear.SparseMatrix;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 import jsat.math.OnLineStatistics;
 import jsat.utils.IntList;
 import jsat.utils.ListUtils;

@@ -16,24 +16,33 @@
  */
 package jsat.linear.distancemetrics;
 
-import java.util.*;
+import static jsat.TestTools.assertEqualsRelDiff;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import jsat.SimpleDataSet;
-import static jsat.TestTools.*;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.DataPoint;
-import jsat.distributions.multivariate.NormalM;
-import jsat.linear.*;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.distributions.multivariate.NormalM;
+import jsat.linear.ConstantVector;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
+import jsat.utils.SystemInfo;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

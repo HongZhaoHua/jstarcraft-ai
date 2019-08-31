@@ -2,7 +2,9 @@
 package jsat.text.wordweighting;
 
 import static java.lang.Math.log;
+
 import java.util.List;
+
 import jsat.linear.Vec;
 
 /**

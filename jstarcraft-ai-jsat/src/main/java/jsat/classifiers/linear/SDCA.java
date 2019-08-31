@@ -18,9 +18,8 @@ package jsat.classifiers.linear;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.SimpleWeightVectorModel;
 import jsat.classifiers.CategoricalResults;
@@ -35,7 +34,12 @@ import jsat.exceptions.FailedToFitException;
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
-import jsat.lossfunctions.*;
+import jsat.lossfunctions.HuberLoss;
+import jsat.lossfunctions.LogisticLoss;
+import jsat.lossfunctions.LossC;
+import jsat.lossfunctions.LossFunc;
+import jsat.lossfunctions.LossMC;
+import jsat.lossfunctions.LossR;
 import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.regression.RegressionDataSet;

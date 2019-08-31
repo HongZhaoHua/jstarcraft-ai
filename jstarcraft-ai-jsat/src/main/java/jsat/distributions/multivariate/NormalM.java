@@ -1,20 +1,22 @@
 
 package jsat.distributions.multivariate;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import jsat.classifiers.DataPoint;
+
 import jsat.linear.CholeskyDecomposition;
-import jsat.linear.DenseMatrix;
 import jsat.linear.DenseVector;
 import jsat.linear.LUPDecomposition;
 import jsat.linear.Matrix;
 import jsat.linear.MatrixStatistics;
 import jsat.linear.SingularValueDecomposition;
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import static jsat.linear.MatrixStatistics.*;
 
 /**
  * Class for the multivariate Normal distribution. It is often called the

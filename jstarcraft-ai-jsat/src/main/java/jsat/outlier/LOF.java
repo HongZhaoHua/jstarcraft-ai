@@ -18,6 +18,7 @@ package jsat.outlier;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.linear.Vec;

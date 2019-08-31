@@ -1,7 +1,7 @@
 package jsat.classifiers.linear.kernelized;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.classifiers.BaseUpdateableClassifier;
 import jsat.classifiers.CategoricalData;
@@ -24,7 +24,6 @@ import jsat.lossfunctions.LossFunc;
 import jsat.lossfunctions.LossMC;
 import jsat.lossfunctions.LossR;
 import jsat.lossfunctions.SoftmaxLoss;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 import jsat.regression.BaseUpdateableRegressor;

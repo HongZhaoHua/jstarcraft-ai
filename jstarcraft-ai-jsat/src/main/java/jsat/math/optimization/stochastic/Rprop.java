@@ -17,6 +17,7 @@
 package jsat.math.optimization.stochastic;
 
 import java.util.Arrays;
+
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
 

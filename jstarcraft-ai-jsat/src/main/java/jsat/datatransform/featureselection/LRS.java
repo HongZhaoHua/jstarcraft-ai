@@ -1,12 +1,14 @@
 package jsat.datatransform.featureselection;
 
-import java.util.*;
+import java.util.Random;
+import java.util.Set;
 
 import jsat.DataSet;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
-import jsat.datatransform.*;
+import jsat.datatransform.DataTransform;
+import jsat.datatransform.RemoveAttributeTransform;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.Regressor;
 import jsat.utils.IntSet;

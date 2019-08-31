@@ -1,20 +1,25 @@
 package jsat.classifiers.linear;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.exp;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.signum;
+import static java.lang.Math.sqrt;
+
 import java.util.Arrays;
-import java.util.concurrent.ExecutorService;
+
+import jsat.SingleWeightVectorModel;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
 import jsat.exceptions.FailedToFitException;
-import jsat.linear.Vec;
-import static java.lang.Math.*;
-import java.util.List;
-import jsat.SingleWeightVectorModel;
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
+import jsat.linear.Vec;
 import jsat.lossfunctions.LogisticLoss;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 
 /**

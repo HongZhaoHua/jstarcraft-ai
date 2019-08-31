@@ -19,20 +19,18 @@ package jsat.datatransform.visualization;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.SimpleDataSet;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
+import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.linear.vectorcollection.DefaultVectorCollection;
 import jsat.linear.vectorcollection.VectorCollection;
-import jsat.utils.FakeExecutor;
 import jsat.utils.FibHeap;
-import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

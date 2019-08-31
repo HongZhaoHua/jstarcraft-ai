@@ -2,6 +2,7 @@
 package jsat.distributions.multivariate;
 
 import java.util.List;
+
 import jsat.distributions.empirical.KernelDensityEstimator;
 import jsat.distributions.empirical.kernelfunc.KernelFunction;
 import jsat.linear.Vec;

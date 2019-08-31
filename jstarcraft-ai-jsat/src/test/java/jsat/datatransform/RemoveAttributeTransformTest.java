@@ -4,14 +4,10 @@
  */
 package jsat.datatransform;
 
-import java.util.*;
+import static org.junit.Assert.assertEquals;
 
-import jsat.SimpleDataSet;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.DataPoint;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import jsat.utils.IntSet;
+import java.util.Arrays;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -19,7 +15,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.DataPoint;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.utils.IntSet;
 
 /**
  *

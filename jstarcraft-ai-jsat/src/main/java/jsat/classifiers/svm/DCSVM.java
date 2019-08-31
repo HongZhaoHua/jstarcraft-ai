@@ -18,37 +18,28 @@ package jsat.classifiers.svm;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
-import jsat.classifiers.neuralnetwork.RBFNet;
 import jsat.clustering.kmeans.ElkanKernelKMeans;
 import jsat.clustering.kmeans.KernelKMeans;
-import jsat.clustering.kmeans.LloydKernelKMeans;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.distributions.kernels.RBFKernel;
-import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.Vec;
 import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;
-import jsat.utils.FakeExecutor;
 import jsat.utils.IntList;
 import jsat.utils.IntSet;
 import jsat.utils.ListUtils;
-import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

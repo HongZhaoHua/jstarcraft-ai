@@ -1,13 +1,15 @@
 package jsat.regression;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.classifiers.DataPoint;
-import jsat.linear.*;
-import jsat.parameters.Parameter;
+import jsat.linear.CholeskyDecomposition;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SingularValueDecomposition;
+import jsat.linear.Vec;
 import jsat.parameters.Parameterized;
-import jsat.utils.FakeExecutor;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

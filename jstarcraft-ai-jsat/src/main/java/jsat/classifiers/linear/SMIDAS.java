@@ -1,9 +1,14 @@
 package jsat.classifiers.linear;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.max;
+import static java.lang.Math.signum;
+
 import java.util.Arrays;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;

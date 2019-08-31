@@ -2,8 +2,11 @@
 package jsat.linear.distancemetrics;
 
 import java.util.List;
+
 import jsat.classifiers.knn.NearestNeighbour;
-import jsat.distributions.kernels.*;
+import jsat.distributions.kernels.KernelTrick;
+import jsat.distributions.kernels.PolynomialKernel;
+import jsat.distributions.kernels.RBFKernel;
 import jsat.linear.Vec;
 
 /**

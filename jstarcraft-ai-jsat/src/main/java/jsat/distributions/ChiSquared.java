@@ -1,10 +1,18 @@
 
 package jsat.distributions;
 
-import jsat.linear.Vec;
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.ceil;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.sqrt;
+import static jsat.math.SpecialMath.gammaP;
+import static jsat.math.SpecialMath.invGammaP;
+import static jsat.math.SpecialMath.lnGamma;
+
 import java.util.Random;
-import static jsat.math.SpecialMath.*;
+
+import jsat.linear.Vec;
 
 /**
  *

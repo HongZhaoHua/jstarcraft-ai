@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import jsat.linear.*;
+
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.RandomMatrix;
+import jsat.linear.Vec;
 import jsat.linear.distancemetrics.CosineDistance;
 import jsat.linear.distancemetrics.CosineDistanceNormalized;
 import jsat.linear.distancemetrics.DistanceMetric;

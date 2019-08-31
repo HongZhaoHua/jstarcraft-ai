@@ -1,7 +1,8 @@
 
 package jsat.math.rootfinding;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+
 import jsat.math.Function1D;
 
 /**

@@ -2,7 +2,12 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.AbstractQueue;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /**
  * This class represents a priority queue specifically designed to contain

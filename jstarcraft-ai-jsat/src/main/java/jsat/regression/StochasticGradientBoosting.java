@@ -1,7 +1,11 @@
 
 package jsat.regression;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import jsat.classifiers.DataPoint;
 import jsat.classifiers.DataPointPair;
 import jsat.exceptions.UntrainedModelException;
@@ -11,7 +15,6 @@ import jsat.math.rootfinding.Zeroin;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;
 import jsat.utils.IntList;
-import jsat.utils.ListUtils;
 import jsat.utils.random.RandomUtil;
 
 /**

@@ -1,6 +1,7 @@
 package jsat.linear;
 
 import java.util.Random;
+
 import jsat.utils.random.RandomUtil;
 
 /**

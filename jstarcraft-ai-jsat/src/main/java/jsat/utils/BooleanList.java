@@ -2,9 +2,14 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EmptyStackException;
+import java.util.List;
+import java.util.RandomAccess;
 
 /**
  * Provides a modifiable implementation of a List using a boolean array. This

@@ -17,6 +17,7 @@
 package jsat.classifiers.trees;
 
 import java.io.Serializable;
+
 import jsat.DataSet;
 
 /**

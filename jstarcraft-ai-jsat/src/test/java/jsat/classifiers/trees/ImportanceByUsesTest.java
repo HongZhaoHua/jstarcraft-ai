@@ -16,6 +16,14 @@
  */
 package jsat.classifiers.trees;
 
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.FixedProblems;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
@@ -24,13 +32,6 @@ import jsat.linear.ConcatenatedVec;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

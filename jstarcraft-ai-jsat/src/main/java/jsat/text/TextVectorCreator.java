@@ -2,6 +2,7 @@ package jsat.text;
 
 import java.io.Serializable;
 import java.util.List;
+
 import jsat.linear.Vec;
 
 /**

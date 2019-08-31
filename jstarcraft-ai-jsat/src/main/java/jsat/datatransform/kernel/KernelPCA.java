@@ -3,6 +3,7 @@ package jsat.datatransform.kernel;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.datatransform.DataTransformBase;

@@ -16,14 +16,15 @@
  */
 package jsat.math.optimization.oned;
 
-import jsat.linear.Vec;
-import jsat.math.Function1D;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.math.Function1D;
 
 /**
  *

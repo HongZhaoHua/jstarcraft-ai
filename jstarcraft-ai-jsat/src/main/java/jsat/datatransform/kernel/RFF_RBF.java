@@ -1,6 +1,7 @@
 package jsat.datatransform.kernel;
 
 import java.util.Random;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.datatransform.DataTransformBase;
@@ -12,7 +13,6 @@ import jsat.linear.RandomMatrix;
 import jsat.linear.RandomVector;
 import jsat.linear.Vec;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * An Implementation of Random Fourier Features for the {@link RBFKernel}. It

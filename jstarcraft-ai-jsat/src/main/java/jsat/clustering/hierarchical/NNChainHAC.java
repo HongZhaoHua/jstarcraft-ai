@@ -16,27 +16,23 @@
  */
 package jsat.clustering.hierarchical;
 
+import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
 import jsat.clustering.KClusterer;
-import jsat.clustering.KClustererBase;
 import jsat.clustering.dissimilarity.LanceWilliamsDissimilarity;
 import jsat.clustering.dissimilarity.WardsDissimilarity;
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.math.OnLineStatistics;
-import jsat.utils.FakeExecutor;
 import jsat.utils.IndexTable;
 import jsat.utils.IntDoubleMap;
 import jsat.utils.IntDoubleMapArray;

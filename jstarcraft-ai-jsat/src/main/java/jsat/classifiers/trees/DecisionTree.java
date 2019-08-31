@@ -1,8 +1,13 @@
 
 package jsat.classifiers.trees;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import static jsat.classifiers.trees.TreePruner.prune;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,9 +16,7 @@ import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
-import jsat.classifiers.DataPointPair;
 import jsat.classifiers.trees.ImpurityScore.ImpurityMeasure;
-import static jsat.classifiers.trees.TreePruner.*;
 import jsat.classifiers.trees.TreePruner.PruningMethod;
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.ModelMismatchException;
@@ -21,7 +24,11 @@ import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.Regressor;
-import jsat.utils.*;
+import jsat.utils.FakeExecutor;
+import jsat.utils.IntList;
+import jsat.utils.IntSet;
+import jsat.utils.ModifiableCountDownLatch;
+import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;
 

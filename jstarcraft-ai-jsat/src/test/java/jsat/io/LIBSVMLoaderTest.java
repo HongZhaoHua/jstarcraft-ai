@@ -16,17 +16,13 @@
  */
 package jsat.io;
 
-import java.io.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import jsat.ColumnMajorStore;
-import jsat.DataStore;
-import jsat.RowMajorStore;
-
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import jsat.regression.RegressionDataSet;
-import jsat.utils.DoubleList;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,7 +30,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.ColumnMajorStore;
+import jsat.DataStore;
+import jsat.RowMajorStore;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.regression.RegressionDataSet;
+import jsat.utils.DoubleList;
 
 /**
  *

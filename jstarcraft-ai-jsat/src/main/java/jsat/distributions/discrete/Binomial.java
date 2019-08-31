@@ -16,8 +16,10 @@
  */
 package jsat.distributions.discrete;
 
-import static jsat.math.SpecialMath.*;
-import static java.lang.Math.*;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static jsat.math.SpecialMath.betaIncReg;
+import static jsat.math.SpecialMath.lnGamma;
 
 /**
  * The Binomial distribution is the distribution for the number of successful,

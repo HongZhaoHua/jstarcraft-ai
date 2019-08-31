@@ -16,11 +16,23 @@
  */
 package jsat.parameters;
 
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.WarmClassifier;
 import jsat.distributions.Distribution;
 import jsat.distributions.Uniform;
 import jsat.distributions.discrete.UniformDiscrete;
@@ -29,13 +41,6 @@ import jsat.parameters.Parameter.WarmParameter;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.Regressor;
 import jsat.regression.WarmRegressor;
-import jsat.utils.SystemInfo;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

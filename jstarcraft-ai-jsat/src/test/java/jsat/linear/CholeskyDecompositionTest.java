@@ -4,15 +4,19 @@
  */
 package jsat.linear;
 
-import jsat.utils.SystemInfo;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.Executors;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.utils.SystemInfo;
 
 /**
  *

@@ -16,15 +16,24 @@
  */
 package jsat.utils;
 
-import java.util.*;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.utils.random.RandomUtil;
 
 /**
  *

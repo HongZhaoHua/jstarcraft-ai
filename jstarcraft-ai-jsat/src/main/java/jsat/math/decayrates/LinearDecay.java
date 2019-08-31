@@ -1,7 +1,5 @@
 package jsat.math.decayrates;
 
-import java.util.List;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 
 /**

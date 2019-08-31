@@ -1,16 +1,23 @@
 
 package jsat.linear.vectorcollection;
 
-import java.util.*;
-import java.util.concurrent.*;
+import static jsat.utils.SystemInfo.LogicalCores;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.math.OnLineStatistics;
 import jsat.utils.ListUtils;
-import static jsat.utils.SystemInfo.LogicalCores;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

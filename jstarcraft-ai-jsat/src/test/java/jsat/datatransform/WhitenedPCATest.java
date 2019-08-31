@@ -4,14 +4,27 @@
  */
 package jsat.datatransform;
 
-import java.util.*;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.SimpleDataSet;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.multivariate.NormalM;
-import jsat.linear.*;
-import static org.junit.Assert.*;
-import org.junit.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.MatrixStatistics;
+import jsat.linear.Vec;
 
 /**
  *

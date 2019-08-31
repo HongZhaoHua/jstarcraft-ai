@@ -1,12 +1,17 @@
 
 package jsat.classifiers.bayesian;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.distributions.multivariate.MultivariateDistribution;
-import jsat.parameters.*;
+import jsat.parameters.Parameterized;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

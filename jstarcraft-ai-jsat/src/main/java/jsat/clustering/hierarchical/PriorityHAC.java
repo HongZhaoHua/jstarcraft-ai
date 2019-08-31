@@ -1,14 +1,19 @@
 package jsat.clustering.hierarchical;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.createDistanceMatrix;
+import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.getDistance;
+import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.setDistance;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.clustering.KClustererBase;
 import jsat.clustering.dissimilarity.UpdatableClusterDissimilarity;
 import jsat.math.OnLineStatistics;
-
-import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.*;
 import jsat.utils.IntPriorityQueue;
 
 /**

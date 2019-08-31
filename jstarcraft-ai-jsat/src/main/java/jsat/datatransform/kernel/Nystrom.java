@@ -1,15 +1,23 @@
 package jsat.datatransform.kernel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import jsat.clustering.kmeans.HamerlyKMeans;
 import jsat.clustering.SeedSelectionMethods;
-import jsat.datatransform.*;
+import jsat.clustering.kmeans.HamerlyKMeans;
+import jsat.datatransform.DataTransformBase;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.distributions.kernels.RBFKernel;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.EigenValueDecomposition;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.utils.DoubleList;

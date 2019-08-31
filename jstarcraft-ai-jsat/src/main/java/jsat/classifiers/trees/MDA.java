@@ -17,6 +17,7 @@
 package jsat.classifiers.trees;
 
 import java.util.Random;
+
 import jsat.DataSet;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;

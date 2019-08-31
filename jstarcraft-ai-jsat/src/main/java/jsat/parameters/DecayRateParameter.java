@@ -2,6 +2,7 @@ package jsat.parameters;
 
 import java.util.Arrays;
 import java.util.List;
+
 import jsat.math.decayrates.DecayRate;
 import jsat.math.decayrates.ExponetialDecay;
 import jsat.math.decayrates.InverseDecay;

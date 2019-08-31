@@ -1,9 +1,11 @@
 
 package jsat.classifiers.calibration;
 
+import static jsat.math.FastMath.exp;
+import static jsat.math.FastMath.log;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.DataPoint;
-import static jsat.math.FastMath.*;
 
 /**
  * Platt Calibration essentially performs logistic regression on the output

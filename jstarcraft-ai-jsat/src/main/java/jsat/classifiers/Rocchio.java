@@ -1,12 +1,17 @@
 
 package jsat.classifiers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.DoubleAdder;
+
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
-import jsat.linear.distancemetrics.*;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.TrainableDistanceMetric;
 import jsat.utils.DoubleList;
 import jsat.utils.concurrent.ParallelUtils;
 

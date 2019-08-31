@@ -30,6 +30,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
+
 import jsat.clustering.MEDDIT;
 import jsat.clustering.PAM;
 import jsat.clustering.TRIKMEDS;
@@ -38,7 +39,6 @@ import jsat.linear.IndexValue;
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.math.FastMath;
 import jsat.utils.BoundedSortedList;
 import jsat.utils.DoubleList;
 import jsat.utils.IndexTable;

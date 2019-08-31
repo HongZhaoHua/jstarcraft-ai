@@ -1,15 +1,28 @@
 
 package jsat.classifiers.knn;
 
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.distributions.Distribution;
 import jsat.distributions.discrete.UniformDiscrete;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.EigenValueDecomposition;
+import jsat.linear.Matrix;
+import jsat.linear.RowColumnOps;
+import jsat.linear.Vec;
+import jsat.linear.VecPaired;
+import jsat.linear.VecPairedComparable;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.linear.distancemetrics.MahalanobisDistance;
 import jsat.linear.vectorcollection.DefaultVectorCollection;

@@ -3,13 +3,10 @@ package jsat;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
-import jsat.linear.DenseVector;
-import jsat.linear.IndexValue;
-import jsat.linear.SparseVector;
-import jsat.linear.Vec;
 import jsat.regression.RegressionDataSet;
 
 /**

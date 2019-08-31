@@ -17,14 +17,17 @@
 
 package jsat.classifiers.neuralnetwork;
 
-import jsat.FixedProblems;
-import jsat.classifiers.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
 
 /**
  *

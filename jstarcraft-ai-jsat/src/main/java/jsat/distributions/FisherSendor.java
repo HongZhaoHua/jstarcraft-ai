@@ -1,9 +1,15 @@
 
 package jsat.distributions;
 
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+import static jsat.math.SpecialMath.betaIncReg;
+import static jsat.math.SpecialMath.invBetaIncReg;
+import static jsat.math.SpecialMath.lnBeta;
+
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import static jsat.math.SpecialMath.*;
 
 /**
  *

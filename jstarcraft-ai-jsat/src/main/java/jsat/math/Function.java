@@ -2,6 +2,7 @@
 package jsat.math;
 
 import java.io.Serializable;
+
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
 

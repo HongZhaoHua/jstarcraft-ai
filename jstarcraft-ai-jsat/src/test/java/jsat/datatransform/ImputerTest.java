@@ -16,21 +16,22 @@
  */
 package jsat.datatransform;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import jsat.DataSet;
-import jsat.SimpleDataSet;
-import jsat.distributions.Normal;
-import jsat.utils.GridDataGenerator;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.SimpleDataSet;
+import jsat.distributions.Normal;
+import jsat.utils.GridDataGenerator;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

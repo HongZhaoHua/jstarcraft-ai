@@ -2,9 +2,14 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.RandomAccess;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Provides a modifiable implementation of a List using a int array. This

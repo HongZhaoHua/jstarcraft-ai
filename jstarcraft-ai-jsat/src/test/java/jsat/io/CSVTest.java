@@ -16,19 +16,22 @@
  */
 package jsat.io;
 
-import java.io.*;
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jsat.DataSet;
-import jsat.SimpleDataSet;
-import jsat.classifiers.*;
-
-import jsat.linear.*;
-import jsat.regression.RegressionDataSet;
-import jsat.utils.DoubleList;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,7 +39,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.DataSet;
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.linear.ConcatenatedVec;
+import jsat.linear.ConstantVector;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.regression.RegressionDataSet;
+import jsat.utils.DoubleList;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

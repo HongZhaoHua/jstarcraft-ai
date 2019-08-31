@@ -1,18 +1,22 @@
 
 package jsat.classifiers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.classifiers.evaluation.ClassificationScore;
 import jsat.datatransform.DataTransformProcess;
 import jsat.exceptions.UntrainedModelException;
 import jsat.math.OnLineStatistics;
-import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;
 

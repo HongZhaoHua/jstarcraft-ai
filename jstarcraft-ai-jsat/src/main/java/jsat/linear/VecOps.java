@@ -2,7 +2,7 @@
 package jsat.linear;
 
 import java.util.Iterator;
-import jsat.math.Function;
+
 import jsat.math.Function1D;
 
 /**

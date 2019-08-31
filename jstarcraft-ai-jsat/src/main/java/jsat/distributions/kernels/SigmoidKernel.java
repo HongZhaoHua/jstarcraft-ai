@@ -1,13 +1,11 @@
 
 package jsat.distributions.kernels;
 
-import java.util.*;
 import jsat.DataSet;
 import jsat.distributions.Distribution;
 import jsat.distributions.LogUniform;
 import jsat.distributions.Uniform;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 
 /**
  * Provides an implementation of the Sigmoid (Hyperbolic Tangent) Kernel, which

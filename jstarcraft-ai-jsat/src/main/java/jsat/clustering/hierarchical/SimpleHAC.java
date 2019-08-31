@@ -1,12 +1,13 @@
 package jsat.clustering.hierarchical;
 
+import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.createDistanceMatrix;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.clustering.KClustererBase;
-import static jsat.clustering.dissimilarity.AbstractClusterDissimilarity.createDistanceMatrix;
 import jsat.clustering.dissimilarity.ClusterDissimilarity;
 import jsat.math.OnLineStatistics;
 import jsat.utils.IntSet;

@@ -1,8 +1,16 @@
 
 package jsat.parameters;
 
-import java.util.*;
-import jsat.distributions.empirical.kernelfunc.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import jsat.distributions.empirical.kernelfunc.BiweightKF;
+import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
+import jsat.distributions.empirical.kernelfunc.GaussKF;
+import jsat.distributions.empirical.kernelfunc.KernelFunction;
+import jsat.distributions.empirical.kernelfunc.TriweightKF;
+import jsat.distributions.empirical.kernelfunc.UniformKF;
 
 /**
  * A default Parameter semi-implementation for classes that require a

@@ -17,6 +17,7 @@
 package jsat.distributions.multivariate;
 
 import java.util.List;
+
 import jsat.linear.DenseMatrix;
 import jsat.linear.DenseVector;
 import jsat.linear.Matrix;

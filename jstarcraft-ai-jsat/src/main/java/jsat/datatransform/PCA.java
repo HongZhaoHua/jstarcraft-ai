@@ -4,6 +4,7 @@ package jsat.datatransform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;

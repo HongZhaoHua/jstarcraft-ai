@@ -2,7 +2,7 @@
 package jsat.regression;
 
 import java.io.Serializable;
-import java.util.concurrent.ExecutorService;
+
 import jsat.classifiers.DataPoint;
 
 /**

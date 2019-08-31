@@ -16,10 +16,16 @@
  */
 package jsat.distributions.discrete;
 
-import static jsat.math.SpecialMath.*;
-import static java.lang.Math.*;
+import static java.lang.Math.PI;
+import static java.lang.Math.exp;
+import static java.lang.Math.floor;
+import static java.lang.Math.log;
+import static java.lang.Math.sqrt;
+import static jsat.math.SpecialMath.gammaQ;
+import static jsat.math.SpecialMath.lnGamma;
+
 import java.util.Random;
-import jsat.linear.DenseVector;
+
 import jsat.math.SpecialMath;
 
 /**

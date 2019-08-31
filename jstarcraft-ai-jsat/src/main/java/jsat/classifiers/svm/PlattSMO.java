@@ -1,26 +1,34 @@
 
 package jsat.classifiers.svm;
 
-import static java.lang.Math.*;
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.WarmClassifier;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.distributions.Distribution;
-import jsat.distributions.Exponential;
 import jsat.distributions.LogUniform;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.distributions.kernels.LinearKernel;
-import jsat.distributions.kernels.RBFKernel;
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.ConstantVector;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
-import jsat.parameters.*;
 import jsat.parameters.Parameter.WarmParameter;
-import jsat.regression.*;
+import jsat.parameters.Parameterized;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.Regressor;
+import jsat.regression.WarmRegressor;
 import jsat.utils.ListUtils;
 
 /**

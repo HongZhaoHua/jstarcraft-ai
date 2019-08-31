@@ -2,7 +2,10 @@ package jsat.datatransform;
 
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SingularValueDecomposition;
+import jsat.linear.Vec;
 
 /**
  * An extension of {@link WhitenedPCA}, is the Whitened Zero Component Analysis.

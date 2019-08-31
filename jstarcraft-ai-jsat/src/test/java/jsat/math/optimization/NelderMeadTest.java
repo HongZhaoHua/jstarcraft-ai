@@ -1,17 +1,18 @@
 
 package jsat.math.optimization;
 
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
-import java.util.List;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import jsat.math.Function;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.math.Function;
 
 /**
  *

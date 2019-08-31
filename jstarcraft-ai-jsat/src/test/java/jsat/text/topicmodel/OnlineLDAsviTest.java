@@ -1,20 +1,14 @@
 package jsat.text.topicmodel;
 
-import jsat.text.topicmodel.OnlineLDAsvi;
+import static org.junit.Assert.assertTrue;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import jsat.SimpleDataSet;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.DataPoint;
-import jsat.distributions.multivariate.Dirichlet;
-import jsat.linear.*;
-import jsat.utils.IntSet;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -22,7 +16,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.DataPoint;
+import jsat.distributions.multivariate.Dirichlet;
+import jsat.linear.ConstantVector;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
+import jsat.utils.IntSet;
+import jsat.utils.SystemInfo;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

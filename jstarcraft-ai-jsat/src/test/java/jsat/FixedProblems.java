@@ -1,6 +1,7 @@
 package jsat;
 
 import java.util.Random;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.distributions.multivariate.NormalM;
@@ -9,7 +10,6 @@ import jsat.linear.Matrix;
 import jsat.linear.Vec;
 import jsat.regression.RegressionDataSet;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * Contains pre determined code for generating specific data sets. The form and

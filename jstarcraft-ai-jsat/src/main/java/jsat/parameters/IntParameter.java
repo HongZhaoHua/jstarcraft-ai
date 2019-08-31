@@ -1,7 +1,9 @@
 package jsat.parameters;
 
 import jsat.DataSet;
+import jsat.classifiers.ClassificationDataSet;
 import jsat.distributions.Distribution;
+import jsat.regression.RegressionDataSet;
 
 /**
  * An integer parameter that may be altered.

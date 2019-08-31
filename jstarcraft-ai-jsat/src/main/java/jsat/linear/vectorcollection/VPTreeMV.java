@@ -3,6 +3,7 @@ package jsat.linear.vectorcollection;
 
 import java.util.List;
 import java.util.Random;
+
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.math.OnLineStatistics;

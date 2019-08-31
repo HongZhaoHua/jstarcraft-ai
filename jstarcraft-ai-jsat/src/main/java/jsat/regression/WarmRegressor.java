@@ -1,7 +1,5 @@
 package jsat.regression;
 
-import java.util.concurrent.ExecutorService;
-
 /**
  * This interface is meant for models that support efficient warm starting from
  * the solution of a previous model. Training with a warm start means that

@@ -16,15 +16,15 @@
  */
 package jsat.linear.distancemetrics;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.distributions.kernels.KernelTrick;
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
-import static java.lang.Math.*;
-import java.util.Collections;
 
 /**
  * This class implements both the weighted Jaccard Distance and the standard

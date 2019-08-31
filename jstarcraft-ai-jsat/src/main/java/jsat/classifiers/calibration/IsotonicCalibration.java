@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.DataPoint;
 

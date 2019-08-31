@@ -1,18 +1,25 @@
 
 package jsat.distributions.multivariate;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
+
 import jsat.distributions.empirical.KernelDensityEstimator;
 import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
 import jsat.distributions.empirical.kernelfunc.KernelFunction;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
-import jsat.linear.distancemetrics.*;
-import jsat.linear.vectorcollection.*;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.TrainableDistanceMetric;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
+import jsat.linear.vectorcollection.VectorCollectionUtils;
 import jsat.math.OnLineStatistics;
-import jsat.parameters.*;
+import jsat.parameters.Parameterized;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

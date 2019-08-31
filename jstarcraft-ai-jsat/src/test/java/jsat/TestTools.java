@@ -16,19 +16,23 @@
  */
 package jsat;
 
-import java.io.*;
+import static org.junit.Assert.assertEquals;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
+
 import jsat.classifiers.DataPoint;
-import jsat.regression.NadarayaWatson;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.RegressionModelEvaluation;
 import jsat.regression.Regressor;
 import jsat.utils.IntSet;
 import jsat.utils.random.RandomUtil;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertEquals;
 
 /**
  *

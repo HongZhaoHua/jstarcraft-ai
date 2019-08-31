@@ -1,12 +1,10 @@
 
 package jsat.classifiers.trees;
 
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
+
 import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.DataPointPair;
 import jsat.regression.RegressionDataSet;
 import jsat.utils.ModifiableCountDownLatch;
 import jsat.utils.random.RandomUtil;

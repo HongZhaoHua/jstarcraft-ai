@@ -16,8 +16,10 @@
  */
 package jsat.distributions.discrete;
 
-import static jsat.math.SpecialMath.*;
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static jsat.math.SpecialMath.harmonic;
+import static jsat.math.SpecialMath.zeta;
+
 import jsat.math.Function1D;
 import jsat.math.rootfinding.Bisection;
 

@@ -1,16 +1,19 @@
 package jsat.distributions;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.Arrays;
 import java.util.Random;
-import jsat.linear.Vec;
-import jsat.utils.random.RandomUtil;
-import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import jsat.linear.Vec;
+import jsat.utils.random.RandomUtil;
 
 public class StudentTTest {
 

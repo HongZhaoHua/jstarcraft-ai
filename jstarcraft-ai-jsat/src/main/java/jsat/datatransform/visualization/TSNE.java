@@ -16,19 +16,30 @@
  */
 package jsat.datatransform.visualization;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import jsat.datatransform.*;
+import jsat.datatransform.DataTransform;
+import jsat.datatransform.PCA;
 import jsat.distributions.Normal;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.linear.vectorcollection.DefaultVectorCollection;
 import jsat.linear.vectorcollection.VectorCollection;
 import jsat.math.FastMath;
-import jsat.math.optimization.stochastic.*;
+import jsat.math.optimization.stochastic.Adam;
+import jsat.math.optimization.stochastic.GradientUpdater;
 import jsat.math.rootfinding.Zeroin;
 import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.AtomicDouble;

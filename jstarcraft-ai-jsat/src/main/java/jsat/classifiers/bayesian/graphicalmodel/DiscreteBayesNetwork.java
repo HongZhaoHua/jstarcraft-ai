@@ -1,10 +1,12 @@
 
 package jsat.classifiers.bayesian.graphicalmodel;
 
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
 
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.CategoricalResults;
@@ -16,7 +18,6 @@ import jsat.classifiers.bayesian.ConditionalProbabilityTable;
 import jsat.classifiers.bayesian.NaiveBayes;
 import jsat.exceptions.FailedToFitException;
 import jsat.utils.IntSet;
-import static java.lang.Math.*;
 
 /**
  * A class for representing a Baysian Network (BN) for discrete variables. A BN

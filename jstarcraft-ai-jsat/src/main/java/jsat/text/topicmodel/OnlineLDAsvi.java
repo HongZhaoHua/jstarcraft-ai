@@ -1,12 +1,17 @@
 package jsat.text.topicmodel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.DenseVector;
@@ -15,7 +20,6 @@ import jsat.linear.ScaledVector;
 import jsat.linear.SparseVector;
 import jsat.linear.Vec;
 import jsat.math.FastMath;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;
 import jsat.utils.FakeExecutor;

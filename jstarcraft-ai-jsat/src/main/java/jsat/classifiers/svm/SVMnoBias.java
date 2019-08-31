@@ -16,17 +16,19 @@
  */
 package jsat.classifiers.svm;
 
-import java.util.concurrent.ExecutorService;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
+import java.util.Arrays;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.distributions.kernels.KernelTrick;
+import jsat.distributions.kernels.NormalizedKernel;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import java.util.Arrays;
-import jsat.distributions.kernels.NormalizedKernel;
 import jsat.utils.concurrent.AtomicDouble;
 import jsat.utils.concurrent.ParallelUtils;
 

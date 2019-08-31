@@ -1,9 +1,18 @@
 package jsat.regression;
 
-import static java.lang.Math.*;
-import java.util.*;
+import static java.lang.Math.pow;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
-import jsat.classifiers.*;
+import java.util.Random;
+import java.util.Set;
+
+import jsat.classifiers.DataPoint;
 import jsat.datatransform.DataTransformProcess;
 import jsat.exceptions.UntrainedModelException;
 import jsat.math.OnLineStatistics;

@@ -1,6 +1,8 @@
 package jsat.clustering;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
+
 import jsat.DataSet;
 import jsat.SimpleDataSet;
 import jsat.classifiers.CategoricalData;
@@ -9,7 +11,10 @@ import jsat.clustering.evaluation.IntraClusterSumEvaluation;
 import jsat.clustering.evaluation.intra.SumOfSqrdPairwiseDistances;
 import jsat.clustering.kmeans.HamerlyKMeans;
 import jsat.clustering.kmeans.KMeans;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SingularValueDecomposition;
+import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.math.OnLineStatistics;

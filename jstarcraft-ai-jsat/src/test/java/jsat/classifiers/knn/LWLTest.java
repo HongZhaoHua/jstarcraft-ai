@@ -17,20 +17,25 @@
 
 package jsat.classifiers.knn;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.FixedProblems;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.ClassificationModelEvaluation;
 import jsat.classifiers.bayesian.NaiveBayesUpdateable;
 import jsat.classifiers.svm.DCDs;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.regression.*;
-import jsat.utils.SystemInfo;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.RegressionModelEvaluation;
+import jsat.regression.Regressor;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
-import org.junit.*;
-import static org.junit.Assert.*;
 
 /**
  *

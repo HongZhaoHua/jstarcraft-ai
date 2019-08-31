@@ -3,6 +3,7 @@ package jsat.classifiers;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;

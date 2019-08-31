@@ -16,18 +16,33 @@
  */
 package jsat.clustering;
 
-import java.util.*;
+import static java.lang.Math.max;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
+import java.util.Set;
+
 import jsat.DataSet;
+import jsat.exceptions.FailedToFitException;
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.linear.vectorcollection.*;
-import jsat.utils.FibHeap;
-import static java.lang.Math.max;
-import jsat.exceptions.FailedToFitException;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
+import jsat.linear.vectorcollection.VectorCollectionUtils;
 import jsat.parameters.Parameterized;
-import jsat.utils.*;
+import jsat.utils.DoubleList;
+import jsat.utils.FibHeap;
+import jsat.utils.IntList;
+import jsat.utils.Pair;
+import jsat.utils.Tuple3;
+import jsat.utils.UnionFind;
 
 /**
  * HDBSCAN is a density based clustering algorithm that is an improvement over

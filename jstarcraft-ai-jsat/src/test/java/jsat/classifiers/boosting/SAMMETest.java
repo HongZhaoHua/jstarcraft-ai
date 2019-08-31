@@ -17,14 +17,19 @@
 
 package jsat.classifiers.boosting;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.FixedProblems;
-import jsat.classifiers.*;
-import jsat.classifiers.trees.*;
-import jsat.utils.SystemInfo;
-import org.junit.*;
-import static org.junit.Assert.*;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.classifiers.trees.DecisionTree;
+import jsat.classifiers.trees.TreePruner;
 
 /**
  *

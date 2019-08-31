@@ -16,21 +16,21 @@
  */
 package jsat.datatransform.kernel;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.*;
-import jsat.classifiers.svm.DCDs;
-import jsat.datatransform.DataModelPipeline;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.svm.DCDs;
+import jsat.datatransform.DataModelPipeline;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

@@ -1,21 +1,21 @@
 package jsat.classifiers.svm;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.DataPointPair;
-import jsat.regression.RegressionDataSet;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPointPair;
+import jsat.regression.RegressionDataSet;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

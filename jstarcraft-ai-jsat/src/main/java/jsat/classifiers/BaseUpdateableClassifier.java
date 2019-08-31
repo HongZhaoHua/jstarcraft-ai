@@ -2,6 +2,7 @@
 package jsat.classifiers;
 
 import java.util.Collections;
+
 import jsat.utils.IntList;
 import jsat.utils.ListUtils;
 

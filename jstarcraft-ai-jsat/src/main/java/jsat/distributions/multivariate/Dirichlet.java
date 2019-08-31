@@ -1,17 +1,20 @@
 
 package jsat.distributions.multivariate;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static jsat.math.SpecialMath.lnGamma;
+
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.List;
-import jsat.classifiers.DataPoint;
+import java.util.Random;
+
 import jsat.distributions.Gamma;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
 import jsat.math.Function;
 import jsat.math.optimization.NelderMead;
-import static java.lang.Math.*;
-import static jsat.math.SpecialMath.*;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

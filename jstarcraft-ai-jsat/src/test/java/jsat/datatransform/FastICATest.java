@@ -1,17 +1,22 @@
 
 package jsat.datatransform;
 
-import jsat.SimpleDataSet;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.DataPoint;
 import static java.lang.Math.abs;
-import jsat.linear.*;
+import static org.junit.Assert.fail;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.DataPoint;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
 
 /**
  *

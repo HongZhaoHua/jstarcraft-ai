@@ -1,24 +1,38 @@
 package jsat.classifiers.neuralnetwork;
 
-import static java.lang.Math.*;
-import java.util.*;
+import static java.lang.Math.max;
+import static java.lang.Math.sqrt;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jsat.DataSet;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
 import jsat.distributions.empirical.kernelfunc.KernelFunction;
 import jsat.exceptions.UntrainedModelException;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.linear.vectorcollection.*;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
 import jsat.math.decayrates.DecayRate;
 import jsat.math.decayrates.ExponetialDecay;
-import jsat.parameters.*;
-import jsat.utils.*;
+import jsat.parameters.Parameterized;
+import jsat.utils.ArrayUtils;
+import jsat.utils.PairedReturn;
+import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;
 

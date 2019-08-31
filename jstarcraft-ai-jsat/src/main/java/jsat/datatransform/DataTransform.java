@@ -2,6 +2,7 @@
 package jsat.datatransform;
 
 import java.io.Serializable;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.exceptions.FailedToFitException;

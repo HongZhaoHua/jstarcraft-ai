@@ -1,8 +1,15 @@
 
 package jsat.linear;
 
-import static java.lang.Math.*;
-import java.util.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
 import jsat.math.Function1D;
 import jsat.math.IndexFunction;
 import jsat.utils.DoubleList;

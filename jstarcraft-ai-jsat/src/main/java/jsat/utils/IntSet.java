@@ -1,10 +1,21 @@
 
 package jsat.utils;
 
-import java.io.Serializable;
-import java.util.*;
-import static jsat.utils.ClosedHashingUtil.*;
+import static jsat.utils.ClosedHashingUtil.DELETED;
+import static jsat.utils.ClosedHashingUtil.EMPTY;
+import static jsat.utils.ClosedHashingUtil.EXTRA_INDEX_INFO;
+import static jsat.utils.ClosedHashingUtil.INT_MASK;
+import static jsat.utils.ClosedHashingUtil.OCCUPIED;
+import static jsat.utils.ClosedHashingUtil.getNextPow2TwinPrime;
 import static jsat.utils.IntDoubleMap.h;
+
+import java.io.Serializable;
+import java.util.AbstractSet;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * A utility class for efficiently storing a set of integers. The implementation

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;
 import jsat.math.Function;

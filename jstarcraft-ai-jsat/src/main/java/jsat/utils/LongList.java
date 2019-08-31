@@ -2,7 +2,11 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Provides a modifiable implementation of a List using an array of longs. This

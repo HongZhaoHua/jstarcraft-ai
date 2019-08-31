@@ -17,11 +17,11 @@
 package jsat.datatransform;
 
 import java.util.Random;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.linear.Vec;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * This transform mostly exists for testing code. It alters a dataset by setting

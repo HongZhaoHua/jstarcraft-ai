@@ -16,22 +16,23 @@
  */
 package jsat.classifiers.calibration;
 
-import jsat.FixedProblems;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.DataPoint;
-import jsat.classifiers.linear.LogisticRegressionDCD;
-import jsat.classifiers.svm.DCDs;
-import jsat.datatransform.LinearTransform;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import jsat.utils.random.RandomUtil;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.svm.DCDs;
+import jsat.datatransform.LinearTransform;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

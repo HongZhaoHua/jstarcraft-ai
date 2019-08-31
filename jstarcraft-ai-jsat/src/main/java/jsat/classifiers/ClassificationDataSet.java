@@ -1,7 +1,12 @@
 
 package jsat.classifiers;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 import jsat.DataSet;
 import jsat.DataStore;
 import jsat.linear.DenseVector;

@@ -17,14 +17,11 @@
 
 package jsat.linear.vectorcollection;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Stack;
+
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import java.util.*;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.RecursiveAction;
 
 /**
  *

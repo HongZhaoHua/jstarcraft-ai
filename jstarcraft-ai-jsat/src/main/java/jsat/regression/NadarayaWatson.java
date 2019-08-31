@@ -1,7 +1,9 @@
 
 package jsat.regression;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import jsat.classifiers.DataPoint;
 import jsat.classifiers.bayesian.BestClassDistribution;
 import jsat.distributions.multivariate.MultivariateKDE;

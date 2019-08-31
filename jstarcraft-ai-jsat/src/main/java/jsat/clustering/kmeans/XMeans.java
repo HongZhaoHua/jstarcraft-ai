@@ -1,14 +1,20 @@
 
 package jsat.clustering.kmeans;
 
-import java.util.*;
+import static java.lang.Math.PI;
+import static java.lang.Math.log;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import jsat.DataSet;
 import jsat.SimpleDataSet;
 import jsat.classifiers.DataPoint;
-import jsat.linear.Vec;
 import jsat.clustering.SeedSelectionMethods;
-import jsat.linear.*;
-import static java.lang.Math.*;
+import jsat.linear.MatrixStatistics;
+import jsat.linear.Vec;
 
 /**
  * This class provides a method of performing {@link KMeans} clustering when the

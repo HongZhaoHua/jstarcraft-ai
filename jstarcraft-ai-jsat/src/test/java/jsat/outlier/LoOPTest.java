@@ -16,15 +16,17 @@
  */
 package jsat.outlier;
 
-import jsat.SimpleDataSet;
-import jsat.distributions.Normal;
-import jsat.utils.GridDataGenerator;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.SimpleDataSet;
+import jsat.distributions.Normal;
+import jsat.utils.GridDataGenerator;
 
 /**
  *

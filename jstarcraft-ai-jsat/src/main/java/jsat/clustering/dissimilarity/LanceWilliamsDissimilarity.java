@@ -2,8 +2,10 @@
 package jsat.clustering.dissimilarity;
 
 import static java.lang.Math.abs;
+
 import java.util.List;
 import java.util.Set;
+
 import jsat.classifiers.DataPoint;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.utils.IntSet;

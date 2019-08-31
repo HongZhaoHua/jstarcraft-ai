@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
 import jsat.linear.DenseVector;
@@ -29,7 +30,6 @@ import jsat.linear.SparseVector;
 import jsat.linear.SubVector;
 import jsat.linear.Vec;
 import jsat.math.OnLineStatistics;
-import jsat.utils.DoubleList;
 import jsat.utils.IntList;
 
 /**

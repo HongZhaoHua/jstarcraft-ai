@@ -16,8 +16,14 @@
  */
 package jsat.classifiers.trees;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.FixedProblems;
 import jsat.TestTools;
 import jsat.classifiers.ClassificationDataSet;
@@ -27,15 +33,7 @@ import jsat.datatransform.InsertMissingValuesTransform;
 import jsat.datatransform.NumericalToHistogram;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.RegressionModelEvaluation;
-import jsat.utils.SystemInfo;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

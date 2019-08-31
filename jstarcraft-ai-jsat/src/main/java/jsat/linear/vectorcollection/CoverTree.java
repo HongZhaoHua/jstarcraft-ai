@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
+
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.math.FastMath;
@@ -35,7 +35,6 @@ import jsat.utils.IntList;
 import jsat.utils.IntSet;
 import jsat.utils.ListUtils;
 import jsat.utils.Pair;
-import jsat.utils.concurrent.AtomicDouble;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.XORWOW;
 

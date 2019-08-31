@@ -1,23 +1,27 @@
 package jsat.classifiers.linear.kernelized;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.signum;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.BaseUpdateableClassifier;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.DataPoint;
-import jsat.classifiers.linear.PassiveAggressive;
 import jsat.classifiers.calibration.BinaryScoreClassifier;
+import jsat.classifiers.linear.PassiveAggressive;
 import jsat.distributions.Distribution;
 import jsat.distributions.LogUniform;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;

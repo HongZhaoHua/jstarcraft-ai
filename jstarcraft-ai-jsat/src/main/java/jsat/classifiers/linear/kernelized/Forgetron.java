@@ -1,8 +1,14 @@
 package jsat.classifiers.linear.kernelized;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.log;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.signum;
+import static java.lang.Math.sqrt;
+
 import java.util.Arrays;
-import java.util.List;
+
 import jsat.classifiers.BaseUpdateableClassifier;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.CategoricalResults;
@@ -12,7 +18,6 @@ import jsat.classifiers.neuralnetwork.Perceptron;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 

@@ -4,16 +4,19 @@
  */
 package jsat.linear.solvers;
 
-import jsat.linear.Matrix;
-import jsat.linear.Vec;
-import jsat.linear.DenseMatrix;
-import jsat.linear.DenseVector;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
 
 /**
  *

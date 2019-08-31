@@ -1,7 +1,11 @@
 package jsat.driftdetectors;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Base class for providing common functionality to drift detection algorithms

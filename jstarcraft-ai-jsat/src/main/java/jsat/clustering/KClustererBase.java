@@ -1,10 +1,5 @@
 package jsat.clustering;
 
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import jsat.DataSet;
-import jsat.classifiers.DataPoint;
-
 /**
  * A base foundation that provides an implementation of the methods that return
  * a list of lists for the clusterings using their int array counterparts.

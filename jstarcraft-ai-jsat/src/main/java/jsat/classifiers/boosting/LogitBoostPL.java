@@ -1,11 +1,13 @@
 
 package jsat.classifiers.boosting;
 
-import java.util.List;
+import static jsat.utils.SystemInfo.LogicalCores;
+
 import java.util.ArrayList;
+import java.util.List;
+
 import jsat.classifiers.ClassificationDataSet;
 import jsat.regression.Regressor;
-import static jsat.utils.SystemInfo.*;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

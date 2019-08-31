@@ -1,8 +1,8 @@
 package jsat.distributions.kernels;
 
 import java.util.List;
+
 import jsat.linear.Vec;
-import jsat.parameters.Parameter;
 import jsat.utils.DoubleList;
 
 /**

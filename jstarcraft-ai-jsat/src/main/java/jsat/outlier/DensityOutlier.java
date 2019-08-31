@@ -17,6 +17,7 @@
 package jsat.outlier;
 
 import java.util.Arrays;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.multivariate.MultivariateDistribution;

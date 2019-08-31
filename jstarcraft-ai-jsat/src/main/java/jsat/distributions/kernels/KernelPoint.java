@@ -1,15 +1,23 @@
 package jsat.distributions.kernels;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import jsat.classifiers.linear.kernelized.Projectron;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SubMatrix;
+import jsat.linear.Vec;
 import jsat.math.FastMath;
-import jsat.math.Function;
 import jsat.math.Function1D;
 import jsat.math.optimization.GoldenSearch;
 import jsat.regression.KernelRLS;

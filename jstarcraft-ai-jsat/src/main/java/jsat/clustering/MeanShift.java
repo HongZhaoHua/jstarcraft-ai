@@ -1,11 +1,15 @@
 package jsat.clustering;
 
+import static jsat.utils.SystemInfo.LogicalCores;
+
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.distributions.empirical.kernelfunc.GaussKF;
 import jsat.distributions.empirical.kernelfunc.KernelFunction;
@@ -18,7 +22,6 @@ import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
-import static jsat.utils.SystemInfo.LogicalCores;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

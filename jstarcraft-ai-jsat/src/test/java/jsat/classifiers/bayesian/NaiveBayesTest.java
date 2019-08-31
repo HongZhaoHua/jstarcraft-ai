@@ -4,19 +4,19 @@
  */
 package jsat.classifiers.bayesian;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
-import java.util.concurrent.Executors;
-import jsat.utils.GridDataGenerator;
-import jsat.utils.SystemInfo;
-import java.util.concurrent.ExecutorService;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.Classifier;
-import jsat.distributions.Normal;
+
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.distributions.Normal;
+import jsat.utils.GridDataGenerator;
 
 /**
  *

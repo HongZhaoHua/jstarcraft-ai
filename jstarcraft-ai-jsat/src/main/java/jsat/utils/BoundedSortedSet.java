@@ -1,7 +1,9 @@
 
 package jsat.utils;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.TreeSet;
 
 /**
  *

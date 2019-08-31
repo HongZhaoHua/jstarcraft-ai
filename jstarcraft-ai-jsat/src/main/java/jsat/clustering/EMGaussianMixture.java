@@ -2,8 +2,11 @@ package jsat.clustering;
 
 import static java.lang.Math.log;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,7 +17,10 @@ import jsat.classifiers.DataPoint;
 import jsat.clustering.SeedSelectionMethods.SeedSelection;
 import jsat.distributions.multivariate.MultivariateDistribution;
 import jsat.distributions.multivariate.NormalM;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.utils.concurrent.ParallelUtils;
 import jsat.utils.random.RandomUtil;

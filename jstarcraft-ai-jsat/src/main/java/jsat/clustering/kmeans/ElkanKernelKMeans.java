@@ -1,16 +1,18 @@
 
 package jsat.clustering.kmeans;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import jsat.DataSet;
 import jsat.clustering.ClusterFailureException;
 import jsat.distributions.kernels.KernelTrick;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.Vec;
-import jsat.linear.distancemetrics.*;
-import jsat.utils.*;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.utils.SystemInfo;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

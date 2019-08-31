@@ -1,22 +1,10 @@
 package jsat.clustering;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.NormalClampedSample;
-
-import jsat.SimpleDataSet;
 import static jsat.TestTools.checkClusteringByCat;
-import jsat.classifiers.DataPoint;
-import jsat.clustering.kmeans.HamerlyKMeans;
-import jsat.distributions.Normal;
-import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.utils.GridDataGenerator;
-import jsat.utils.IntSet;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,7 +12,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.NormalClampedSample;
+import jsat.SimpleDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.utils.GridDataGenerator;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

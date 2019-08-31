@@ -2,15 +2,30 @@
 package jsat.linear.vectorcollection;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
-import jsat.linear.IndexValue;
 
+import jsat.linear.IndexValue;
 import jsat.linear.Vec;
-import jsat.linear.distancemetrics.*;
+import jsat.linear.distancemetrics.ChebyshevDistance;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.ManhattanDistance;
+import jsat.linear.distancemetrics.MinkowskiDistance;
 import jsat.math.FastMath;
 import jsat.math.OnLineStatistics;
-import jsat.utils.*;
+import jsat.utils.BoundedSortedList;
+import jsat.utils.DoubleList;
+import jsat.utils.IndexTable;
+import jsat.utils.IntList;
+import jsat.utils.IntSet;
+import jsat.utils.ListUtils;
+import jsat.utils.ModifiableCountDownLatch;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

@@ -1,8 +1,7 @@
 package jsat.classifiers.linear;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.SimpleWeightVectorModel;
 import jsat.classifiers.BaseUpdateableClassifier;
@@ -25,7 +24,6 @@ import jsat.math.decayrates.DecayRate;
 import jsat.math.decayrates.PowerDecay;
 import jsat.math.optimization.stochastic.GradientUpdater;
 import jsat.math.optimization.stochastic.SimpleSGD;
-import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;
 import jsat.regression.BaseUpdateableRegressor;
 import jsat.regression.RegressionDataSet;

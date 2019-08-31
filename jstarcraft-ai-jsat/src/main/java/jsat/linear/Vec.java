@@ -1,11 +1,15 @@
 
 package jsat.linear;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.io.Serializable;
-import static java.lang.Math.*;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Random;
+
 import jsat.math.Function1D;
 import jsat.math.IndexFunction;
 import jsat.utils.random.RandomUtil;

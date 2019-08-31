@@ -1,12 +1,12 @@
 
 package jsat.datatransform.featureselection;
 
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import jsat.classifiers.ClassificationDataSet;
-import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.utils.IntSet;
-import jsat.utils.random.XORWOW;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,7 +14,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.utils.IntSet;
+import jsat.utils.random.XORWOW;
 
 /**
  *

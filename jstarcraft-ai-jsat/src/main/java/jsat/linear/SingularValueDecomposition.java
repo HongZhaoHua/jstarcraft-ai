@@ -1,10 +1,20 @@
 package jsat.linear;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.hypot;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.nextUp;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+import static jsat.linear.RowColumnOps.addMultCol;
+import static jsat.linear.RowColumnOps.divCol;
+import static jsat.linear.RowColumnOps.multCol;
+import static jsat.linear.RowColumnOps.swapCol;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
-import static java.lang.Math.*;
-import static jsat.linear.RowColumnOps.*;
 
 /**
  * The Singular Value Decomposition (SVD) of a matrix A<sub>m,n </sub> =

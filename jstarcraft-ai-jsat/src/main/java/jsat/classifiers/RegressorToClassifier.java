@@ -2,7 +2,7 @@ package jsat.classifiers;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.classifiers.calibration.BinaryScoreClassifier;
 import jsat.parameters.Parameter;
 import jsat.parameters.Parameterized;

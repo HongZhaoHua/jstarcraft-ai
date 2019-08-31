@@ -1,7 +1,16 @@
 package jsat.math.optimization;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.DataPoint;
@@ -14,12 +23,6 @@ import jsat.lossfunctions.SoftmaxLoss;
 import jsat.math.Function;
 import jsat.math.FunctionVec;
 import jsat.utils.random.RandomUtil;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

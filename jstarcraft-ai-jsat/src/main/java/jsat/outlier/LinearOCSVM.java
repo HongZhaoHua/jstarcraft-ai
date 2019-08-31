@@ -19,6 +19,7 @@ package jsat.outlier;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.linear.DenseVector;

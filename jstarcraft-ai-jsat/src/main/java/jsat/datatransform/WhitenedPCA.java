@@ -1,12 +1,20 @@
 package jsat.datatransform;
 
+import static jsat.linear.MatrixStatistics.covarianceMatrix;
+import static jsat.linear.MatrixStatistics.meanVector;
+
 import java.util.Comparator;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.Distribution;
 import jsat.distributions.discrete.UniformDiscrete;
-import jsat.linear.*;
-import static jsat.linear.MatrixStatistics.*;
+import jsat.linear.DenseVector;
+import jsat.linear.EigenValueDecomposition;
+import jsat.linear.Matrix;
+import jsat.linear.SingularValueDecomposition;
+import jsat.linear.SubMatrix;
+import jsat.linear.Vec;
 
 /**
  * An extension of {@link PCA} that attempts to capture the variance, and make

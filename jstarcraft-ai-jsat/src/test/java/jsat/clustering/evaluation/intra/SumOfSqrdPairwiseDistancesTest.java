@@ -1,17 +1,20 @@
 package jsat.clustering.evaluation.intra;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
-import jsat.SimpleDataSet;
-import jsat.classifiers.CategoricalData;
-import jsat.classifiers.DataPoint;
-import jsat.linear.DenseVector;
-import jsat.linear.distancemetrics.MinkowskiDistance;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.DataPoint;
+import jsat.linear.DenseVector;
+import jsat.linear.distancemetrics.MinkowskiDistance;
 
 /**
  *

@@ -4,11 +4,11 @@ package jsat.classifiers.boosting;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import jsat.classifiers.CategoricalResults;
 import jsat.classifiers.ClassificationDataSet;
 import jsat.classifiers.Classifier;
 import jsat.classifiers.DataPoint;
-import jsat.classifiers.DataPointPair;
 import jsat.classifiers.OneVSAll;
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.UntrainedModelException;

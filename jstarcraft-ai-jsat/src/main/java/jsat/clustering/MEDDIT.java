@@ -16,13 +16,18 @@
  */
 package jsat.clustering;
 
-import java.util.*;
+import static jsat.clustering.SeedSelectionMethods.selectIntialPoints;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.DoubleAdder;
 import java.util.concurrent.atomic.LongAdder;
+
 import jsat.DataSet;
-import static jsat.clustering.SeedSelectionMethods.selectIntialPoints;
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.TrainableDistanceMetric;

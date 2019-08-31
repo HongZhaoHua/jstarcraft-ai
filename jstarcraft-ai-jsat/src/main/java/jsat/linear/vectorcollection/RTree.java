@@ -1,6 +1,8 @@
 
 package jsat.linear.vectorcollection;
 
+import static jsat.linear.VecPaired.extractTrueVec;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,10 +17,9 @@ import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
 import jsat.linear.distancemetrics.EuclideanDistance;
 import jsat.utils.BoundedSortedList;
-import jsat.utils.ProbailityMatch;
-import static jsat.linear.VecPaired.*;
 import jsat.utils.IndexTable;
 import jsat.utils.IntList;
+import jsat.utils.ProbailityMatch;
 
 /**
  *

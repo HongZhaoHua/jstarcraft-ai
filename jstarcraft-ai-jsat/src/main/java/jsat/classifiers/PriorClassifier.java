@@ -1,6 +1,5 @@
 package jsat.classifiers;
 
-import java.util.concurrent.ExecutorService;
 import jsat.exceptions.UntrainedModelException;
 
 /**

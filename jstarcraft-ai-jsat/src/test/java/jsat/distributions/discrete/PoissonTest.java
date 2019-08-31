@@ -16,16 +16,18 @@
  */
 package jsat.distributions.discrete;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
-import jsat.linear.Vec;
-import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.linear.Vec;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

@@ -2,9 +2,13 @@
 package jsat.datatransform;
 
 import java.util.Iterator;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 
 /**
  * Dense sparce transform alters the vectors that store the numerical values.

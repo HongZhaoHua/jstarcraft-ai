@@ -1,10 +1,16 @@
 
 package jsat.distributions;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+import static jsat.math.SpecialMath.erf;
+import static jsat.math.SpecialMath.invGammaP;
+
 import jsat.linear.Vec;
 import jsat.text.GreekLetters;
-import static java.lang.Math.*;
-import static jsat.math.SpecialMath.*;
 
 /**
  *

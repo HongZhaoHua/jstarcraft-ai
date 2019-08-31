@@ -1,31 +1,29 @@
 package jsat.clustering;
 
-import java.util.Set;
-
-import jsat.classifiers.DataPoint;
-
-import jsat.distributions.Uniform;
-import jsat.utils.GridDataGenerator;
-import jsat.SimpleDataSet;
+import static jsat.TestTools.checkClusteringByCat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import static jsat.TestTools.checkClusteringByCat;
-
-import jsat.clustering.SeedSelectionMethods.SeedSelection;
-import jsat.distributions.Normal;
-import jsat.linear.Vec;
-import jsat.linear.distancemetrics.DistanceCounter;
-import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.utils.random.RandomUtil;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import jsat.SimpleDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.clustering.SeedSelectionMethods.SeedSelection;
+import jsat.distributions.Normal;
+import jsat.distributions.Uniform;
+import jsat.linear.Vec;
+import jsat.linear.distancemetrics.DistanceCounter;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.utils.GridDataGenerator;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

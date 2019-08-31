@@ -18,6 +18,7 @@ package jsat.linear.distancemetrics;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+
 import jsat.linear.Vec;
 
 /**

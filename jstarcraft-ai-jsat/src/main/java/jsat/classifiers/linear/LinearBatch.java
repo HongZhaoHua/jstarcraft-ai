@@ -2,20 +2,21 @@ package jsat.classifiers.linear;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.DoubleAdder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import jsat.DataSet;
 import jsat.SimpleWeightVectorModel;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.WarmClassifier;
 import jsat.distributions.Distribution;
 import jsat.distributions.LogUniform;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.ConcatenatedVec;
 import jsat.linear.DenseVector;
-import jsat.linear.IndexValue;
 import jsat.linear.SubVector;
 import jsat.linear.Vec;
 import jsat.lossfunctions.LossC;
@@ -25,11 +26,12 @@ import jsat.lossfunctions.LossR;
 import jsat.lossfunctions.SoftmaxLoss;
 import jsat.math.Function;
 import jsat.math.FunctionVec;
-import jsat.math.optimization.*;
+import jsat.math.optimization.LBFGS;
+import jsat.math.optimization.Optimizer;
 import jsat.parameters.Parameterized;
-import jsat.regression.*;
-import jsat.utils.ListUtils;
-import jsat.utils.SystemInfo;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.Regressor;
+import jsat.regression.WarmRegressor;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

@@ -2,8 +2,12 @@ package jsat.distributions.kernels;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
-import java.util.*;
 import static jsat.distributions.kernels.KernelPoint.getH;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
 import jsat.utils.DoubleList;

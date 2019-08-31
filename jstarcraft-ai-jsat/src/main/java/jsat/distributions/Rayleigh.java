@@ -1,9 +1,14 @@
 
 package jsat.distributions;
 
+import static java.lang.Math.PI;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import jsat.linear.Vec;
 import jsat.text.GreekLetters;
-import static java.lang.Math.*;
 
 /**
  *

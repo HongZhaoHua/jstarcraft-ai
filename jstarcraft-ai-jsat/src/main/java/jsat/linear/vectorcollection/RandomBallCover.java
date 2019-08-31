@@ -1,15 +1,23 @@
 package jsat.linear.vectorcollection;
 
+import static java.lang.Math.ceil;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import jsat.linear.Vec;
 import jsat.linear.distancemetrics.DistanceMetric;
-import jsat.utils.*;
-import static java.lang.Math.*;
 import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.utils.BoundedSortedList;
+import jsat.utils.DoubleList;
+import jsat.utils.IndexTable;
+import jsat.utils.IntList;
+import jsat.utils.ListUtils;
 import jsat.utils.concurrent.ParallelUtils;
 
 /**

@@ -1,14 +1,22 @@
 package jsat.clustering;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Stack;
 
 import jsat.DataSet;
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
-import jsat.linear.distancemetrics.*;
-import jsat.linear.vectorcollection.*;
-import jsat.parameters.*;
-import jsat.utils.*;
+import jsat.linear.distancemetrics.DistanceMetric;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.linear.distancemetrics.TrainableDistanceMetric;
+import jsat.linear.vectorcollection.DefaultVectorCollection;
+import jsat.linear.vectorcollection.VectorCollection;
+import jsat.linear.vectorcollection.VectorCollectionUtils;
+import jsat.parameters.Parameterized;
+import jsat.utils.IndexTable;
 
 /**
  * A parallel implementation of <i>Locally Scaled Density Based Clustering</i>.

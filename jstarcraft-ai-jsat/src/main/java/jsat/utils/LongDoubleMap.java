@@ -1,13 +1,19 @@
 
 package jsat.utils;
 
+import static jsat.utils.ClosedHashingUtil.DELETED;
+import static jsat.utils.ClosedHashingUtil.EMPTY;
+import static jsat.utils.ClosedHashingUtil.EXTRA_INDEX_INFO;
+import static jsat.utils.ClosedHashingUtil.INT_MASK;
+import static jsat.utils.ClosedHashingUtil.OCCUPIED;
+import static jsat.utils.ClosedHashingUtil.getNextPow2TwinPrime;
+
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
-import static jsat.utils.ClosedHashingUtil.*;
 
 /**
  * A hash map for storing the primitive types of long (as keys) to doubles (as

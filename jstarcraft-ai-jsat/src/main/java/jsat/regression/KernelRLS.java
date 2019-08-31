@@ -3,10 +3,15 @@ package jsat.regression;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
 import jsat.distributions.kernels.KernelTrick;
-import jsat.linear.*;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.SubMatrix;
+import jsat.linear.Vec;
 import jsat.parameters.Parameter.ParameterHolder;
 import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;

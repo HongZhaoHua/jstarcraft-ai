@@ -1,7 +1,10 @@
 package jsat.math.optimization;
 
-import jsat.linear.*;
-import jsat.math.*;
+import jsat.linear.IndexValue;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
+import jsat.math.Function;
+import jsat.math.FunctionVec;
 
 /**
  * Implementation of the Broyden–Fletcher–Goldfarb–Shanno (BFGS) algorithm for

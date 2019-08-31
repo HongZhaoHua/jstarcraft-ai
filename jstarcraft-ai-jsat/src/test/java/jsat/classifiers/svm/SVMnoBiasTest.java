@@ -1,21 +1,20 @@
 package jsat.classifiers.svm;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.distributions.kernels.RBFKernel;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.XORWOW;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import static java.lang.Math.*;
-import java.util.Arrays;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.distributions.kernels.RBFKernel;
 import jsat.utils.random.RandomUtil;
 
 /**

@@ -1,11 +1,10 @@
 
 package jsat.math.optimization;
 
-import jsat.linear.DenseVector;
+import static java.lang.Math.pow;
+
 import jsat.linear.Vec;
 import jsat.math.Function;
-import static java.lang.Math.*;
-import java.util.concurrent.ExecutorService;
 import jsat.math.FunctionVec;
 
 /**

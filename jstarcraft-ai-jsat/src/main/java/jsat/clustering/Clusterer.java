@@ -1,12 +1,13 @@
 
 package jsat.clustering;
 
+import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
+
 import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
 
 /**
  * Defines the interface for a generic clustering algorithm.

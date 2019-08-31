@@ -2,7 +2,10 @@
 package jsat.utils;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * The index table provides a way of accessing the sorted view of an array or

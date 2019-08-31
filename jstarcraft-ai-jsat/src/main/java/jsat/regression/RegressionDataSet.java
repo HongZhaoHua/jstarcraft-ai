@@ -1,18 +1,20 @@
 
 package jsat.regression;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import jsat.DataSet;
 import jsat.DataStore;
 import jsat.RowMajorStore;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.DataPoint;
+import jsat.classifiers.DataPointPair;
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
 import jsat.linear.SparseVector;
 import jsat.linear.Vec;
 import jsat.utils.DoubleList;
-import jsat.utils.IntList;
-import jsat.utils.ListUtils;
 
 /**
  * A RegressionDataSet is a data set specifically for the task of performing

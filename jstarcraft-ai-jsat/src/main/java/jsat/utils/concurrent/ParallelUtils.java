@@ -1,6 +1,7 @@
 package jsat.utils.concurrent;
 
 import static java.lang.Math.min;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
 import jsat.utils.FakeExecutor;
 import jsat.utils.ListUtils;
 import jsat.utils.SystemInfo;

@@ -17,9 +17,12 @@
 
 package jsat.distributions;
 
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.pow;
+import static jsat.math.SpecialMath.beta;
+
 import jsat.linear.Vec;
-import static java.lang.Math.*;
-import static jsat.math.SpecialMath.*;
 
 /**
  *

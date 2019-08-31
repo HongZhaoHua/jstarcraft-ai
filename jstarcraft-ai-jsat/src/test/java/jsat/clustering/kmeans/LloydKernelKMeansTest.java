@@ -6,10 +6,18 @@
 
 package jsat.clustering.kmeans;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import jsat.FixedProblems;
 import jsat.classifiers.ClassificationDataSet;
@@ -20,10 +28,6 @@ import jsat.utils.GridDataGenerator;
 import jsat.utils.IntSet;
 import jsat.utils.random.RandomUtil;
 import jsat.utils.random.XORWOW;
-
-import org.junit.*;
-
-import static org.junit.Assert.*;
 
 /**
  *

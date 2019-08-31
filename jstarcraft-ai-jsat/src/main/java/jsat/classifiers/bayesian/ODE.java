@@ -1,7 +1,11 @@
 package jsat.classifiers.bayesian;
 
 import java.util.Arrays;
-import jsat.classifiers.*;
+
+import jsat.classifiers.BaseUpdateableClassifier;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.DataPoint;
 import jsat.exceptions.FailedToFitException;
 
 /**

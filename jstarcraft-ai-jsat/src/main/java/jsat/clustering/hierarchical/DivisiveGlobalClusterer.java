@@ -1,11 +1,15 @@
 package jsat.clustering.hierarchical;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import jsat.DataSet;
 import jsat.SimpleDataSet;
 import jsat.classifiers.DataPoint;
-import jsat.clustering.*;
+import jsat.clustering.ClusterFailureException;
+import jsat.clustering.KClusterer;
+import jsat.clustering.KClustererBase;
 import jsat.clustering.evaluation.ClusterEvaluation;
 
 /**

@@ -1,15 +1,30 @@
 package jsat.classifiers.boosting;
 
-import java.util.*;
+import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import jsat.FixedProblems;
-import jsat.classifiers.*;
-import jsat.classifiers.linear.*;
-import jsat.linear.*;
-import jsat.lossfunctions.*;
-import jsat.regression.*;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPointPair;
+import jsat.classifiers.UpdateableClassifier;
+import jsat.classifiers.linear.LinearSGD;
+import jsat.classifiers.linear.PassiveAggressive;
+import jsat.classifiers.linear.SPA;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.lossfunctions.SoftmaxLoss;
+import jsat.lossfunctions.SquaredLoss;
+import jsat.regression.RegressionDataSet;
+import jsat.regression.UpdateableRegressor;
 import jsat.utils.random.RandomUtil;
-import org.junit.*;
-import static org.junit.Assert.*;
 
 /**
  *

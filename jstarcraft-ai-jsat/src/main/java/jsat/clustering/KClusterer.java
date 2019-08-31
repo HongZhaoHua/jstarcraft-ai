@@ -1,11 +1,12 @@
 
 package jsat.clustering;
 
+import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
+
 import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.DataSet;
 import jsat.classifiers.DataPoint;
-import static jsat.clustering.ClustererBase.createClusterListFromAssignmentArray;
 
 /**
  * Defines a clustering method that requires the number of clusters in the data

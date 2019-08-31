@@ -1,11 +1,19 @@
 package jsat.datatransform;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import jsat.DataSet;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 import jsat.utils.IntList;
 import jsat.utils.IntSet;
 

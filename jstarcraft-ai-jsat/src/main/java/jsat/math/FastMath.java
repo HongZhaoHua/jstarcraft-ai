@@ -1,6 +1,7 @@
 package jsat.math;
 
-import static java.lang.Double.*;
+import static java.lang.Double.doubleToLongBits;
+import static java.lang.Double.longBitsToDouble;
 import static java.lang.Math.PI;
 import static java.lang.Math.tan;
 

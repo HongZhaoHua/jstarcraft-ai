@@ -1,19 +1,22 @@
 package jsat.linear.vectorcollection.lsh;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.utils.random.RandomUtil;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.linear.distancemetrics.EuclideanDistance;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

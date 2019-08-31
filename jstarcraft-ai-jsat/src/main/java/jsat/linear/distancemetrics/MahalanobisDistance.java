@@ -2,9 +2,14 @@
 package jsat.linear.distancemetrics;
 
 import java.util.List;
+
 import jsat.DataSet;
 import jsat.classifiers.ClassificationDataSet;
-import jsat.linear.*;
+import jsat.linear.LUPDecomposition;
+import jsat.linear.Matrix;
+import jsat.linear.MatrixStatistics;
+import jsat.linear.SingularValueDecomposition;
+import jsat.linear.Vec;
 import jsat.regression.RegressionDataSet;
 import jsat.utils.concurrent.ParallelUtils;
 

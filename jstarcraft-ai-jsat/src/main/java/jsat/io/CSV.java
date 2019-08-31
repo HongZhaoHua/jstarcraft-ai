@@ -16,22 +16,38 @@
  */
 package jsat.io;
 
-import java.io.*;
-import java.util.*;
-import jsat.DataSet;
-import jsat.classifiers.*;
-import jsat.linear.Vec;
-import jsat.regression.RegressionDataSet;
-import jsat.utils.DoubleList;
-import jsat.utils.StringUtils;
 import static java.lang.Character.isWhitespace;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import jsat.DataSet;
 import jsat.DataStore;
 import jsat.SimpleDataSet;
-import jsat.linear.*;
-import jsat.utils.*;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.linear.DenseVector;
+import jsat.linear.Vec;
+import jsat.regression.RegressionDataSet;
+import jsat.utils.DoubleList;
+import jsat.utils.IntList;
+import jsat.utils.StringUtils;
 
 /**
  * Provides a reader and writer for CSV style datasets. This CSV reader supports

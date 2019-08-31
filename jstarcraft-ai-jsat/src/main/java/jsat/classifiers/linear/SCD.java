@@ -1,20 +1,25 @@
 package jsat.classifiers.linear;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
+import java.util.Random;
+
 import jsat.SingleWeightVectorModel;
-import jsat.classifiers.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.exceptions.UntrainedModelException;
 import jsat.linear.DenseVector;
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
-import jsat.lossfunctions.*;
-import jsat.parameters.Parameter;
+import jsat.lossfunctions.LogisticLoss;
+import jsat.lossfunctions.LossC;
+import jsat.lossfunctions.LossFunc;
+import jsat.lossfunctions.LossR;
+import jsat.lossfunctions.SquaredLoss;
 import jsat.parameters.Parameterized;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.Regressor;
 import jsat.utils.random.RandomUtil;
-import jsat.utils.random.XORWOW;
 
 /**
  * Implementation of Stochastic Coordinate Descent for L1 regularized

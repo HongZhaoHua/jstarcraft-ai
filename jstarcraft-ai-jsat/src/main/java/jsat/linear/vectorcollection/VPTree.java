@@ -8,11 +8,10 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 import java.util.Random;
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jsat.classifiers.DataPoint;
+
 import jsat.linear.Vec;
 import jsat.linear.VecPaired;
 import jsat.linear.distancemetrics.DistanceMetric;

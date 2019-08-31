@@ -1,14 +1,23 @@
 
 package jsat.classifiers.trees;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jsat.DataSet;
 
-import jsat.classifiers.*;
+import jsat.DataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.classifiers.trees.ImpurityScore.ImpurityMeasure;
 import jsat.exceptions.FailedToFitException;
 import jsat.linear.Vec;
@@ -16,7 +25,12 @@ import jsat.math.OnLineStatistics;
 import jsat.parameters.Parameterized;
 import jsat.regression.RegressionDataSet;
 import jsat.regression.Regressor;
-import jsat.utils.*;
+import jsat.utils.DoubleList;
+import jsat.utils.FakeExecutor;
+import jsat.utils.IntList;
+import jsat.utils.IntSet;
+import jsat.utils.PairedReturn;
+import jsat.utils.QuickSort;
 import jsat.utils.concurrent.AtomicDouble;
 import jsat.utils.concurrent.ParallelUtils;
 

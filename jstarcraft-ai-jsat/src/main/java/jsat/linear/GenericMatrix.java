@@ -1,18 +1,23 @@
 
 package jsat.linear;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.List;
+import static java.lang.Math.min;
+import static java.lang.Math.signum;
+import static java.lang.Math.sqrt;
+import static jsat.utils.SystemInfo.L2CacheSize;
+import static jsat.utils.SystemInfo.LogicalCores;
+
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
-import jsat.utils.FakeExecutor;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static jsat.utils.SystemInfo.*;
-import static java.lang.Math.*;
+
+import jsat.utils.FakeExecutor;
 
 /**
  * This Class provides default implementations of most all functions in row

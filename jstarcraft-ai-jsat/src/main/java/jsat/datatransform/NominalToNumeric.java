@@ -4,7 +4,9 @@ package jsat.datatransform;
 import jsat.DataSet;
 import jsat.classifiers.CategoricalData;
 import jsat.classifiers.DataPoint;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 
 /**
  * This transform converts nominal feature values to numeric ones be adding a

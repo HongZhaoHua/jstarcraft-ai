@@ -1,6 +1,11 @@
 package jsat.text.tokenizer;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This tokenizer wraps another such that any stop words that would have been

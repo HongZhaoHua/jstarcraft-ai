@@ -1,15 +1,25 @@
 
 package jsat.distributions.multivariate;
 
-import static java.lang.Math.*;
+import static java.lang.Math.exp;
+import static java.lang.Math.log;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import jsat.distributions.empirical.KernelDensityEstimator;
 import jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
 import jsat.distributions.empirical.kernelfunc.KernelFunction;
 import jsat.exceptions.UntrainedModelException;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
+import jsat.linear.VecPaired;
 import jsat.utils.IndexTable;
 import jsat.utils.IntSet;
 

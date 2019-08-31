@@ -17,18 +17,19 @@
 
 package jsat.classifiers.neuralnetwork;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.*;
-import jsat.linear.distancemetrics.EuclideanDistance;
-import jsat.utils.SystemInfo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.linear.distancemetrics.EuclideanDistance;
 
 /**
  *

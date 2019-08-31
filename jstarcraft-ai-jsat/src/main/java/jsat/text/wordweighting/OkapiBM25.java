@@ -1,7 +1,9 @@
 package jsat.text.wordweighting;
 
 import java.util.List;
-import jsat.linear.*;
+
+import jsat.linear.IndexValue;
+import jsat.linear.Vec;
 
 /**
  * Implements the <a href="http://en.wikipedia.org/wiki/Okapi_BM25">Okapi BM25

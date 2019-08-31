@@ -1,11 +1,14 @@
 package jsat.classifiers.linear;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+
 import java.util.List;
+
 import jsat.classifiers.ClassificationDataSet;
 import jsat.linear.DenseVector;
-import jsat.linear.Vec;
-import static java.lang.Math.*;
 import jsat.linear.IndexValue;
+import jsat.linear.Vec;
 
 /**
  * This class provides static helper methods that may be useful for various

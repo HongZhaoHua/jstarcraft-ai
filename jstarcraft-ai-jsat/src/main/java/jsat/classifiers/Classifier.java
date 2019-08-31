@@ -2,6 +2,7 @@
 package jsat.classifiers;
 
 import java.io.Serializable;
+
 import jsat.exceptions.FailedToFitException;
 import jsat.exceptions.ModelMismatchException;
 import jsat.exceptions.UntrainedModelException;

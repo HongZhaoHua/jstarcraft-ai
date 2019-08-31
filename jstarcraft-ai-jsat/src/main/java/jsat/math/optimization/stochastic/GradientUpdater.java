@@ -1,6 +1,7 @@
 package jsat.math.optimization.stochastic;
 
 import java.io.Serializable;
+
 import jsat.linear.Vec;
 
 /**

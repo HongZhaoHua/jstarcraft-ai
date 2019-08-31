@@ -3,18 +3,27 @@ package jsat.classifiers.bayesian;
 
 import static java.lang.Math.exp;
 import static java.lang.Math.log;
+import static jsat.distributions.DistributionSearch.getBestDistribution;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
-import jsat.classifiers.*;
-import static jsat.distributions.DistributionSearch.getBestDistribution;
-import jsat.distributions.*;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
+import jsat.distributions.ContinuousDistribution;
+import jsat.distributions.DistributionSearch;
+import jsat.distributions.Normal;
 import jsat.distributions.empirical.KernelDensityEstimator;
-import jsat.linear.*;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.Vec;
 import jsat.math.MathTricks;
-import jsat.parameters.*;
+import jsat.parameters.Parameterized;
 import jsat.utils.DoubleList;
 import jsat.utils.concurrent.ParallelUtils;
 

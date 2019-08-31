@@ -1,19 +1,25 @@
 package jsat.classifiers.linear.kernelized;
 
-import jsat.distributions.kernels.KernelPoint;
-import static java.lang.Math.*;
+import static java.lang.Math.pow;
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 import java.util.Random;
-import jsat.distributions.kernels.LinearKernel;
-import jsat.distributions.multivariate.NormalM;
-import jsat.linear.*;
-import jsat.linear.distancemetrics.EuclideanDistance;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.distributions.kernels.KernelPoint;
+import jsat.distributions.kernels.LinearKernel;
+import jsat.distributions.multivariate.NormalM;
+import jsat.linear.DenseMatrix;
+import jsat.linear.DenseVector;
+import jsat.linear.Matrix;
+import jsat.linear.Vec;
+import jsat.linear.distancemetrics.EuclideanDistance;
 
 /**
  *

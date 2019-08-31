@@ -16,15 +16,31 @@
  */
 package jsat.io;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.EOFException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
-import jsat.*;
-import jsat.classifiers.*;
-import jsat.linear.*;
+
+import jsat.DataSet;
+import jsat.DataStore;
+import jsat.RowMajorStore;
+import jsat.SimpleDataSet;
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPoint;
+import jsat.linear.DenseVector;
+import jsat.linear.IndexValue;
+import jsat.linear.SparseVector;
+import jsat.linear.Vec;
 import jsat.regression.RegressionDataSet;
 import jsat.utils.DoubleList;
 import jsat.utils.IntList;

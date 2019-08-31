@@ -2,6 +2,7 @@
 package jsat.math.rootfinding;
 
 import java.io.Serializable;
+
 import jsat.math.Function1D;
 
 /**

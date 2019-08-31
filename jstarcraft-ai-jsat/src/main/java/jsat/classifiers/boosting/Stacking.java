@@ -4,7 +4,12 @@ package jsat.classifiers.boosting;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import jsat.classifiers.*;
+
+import jsat.classifiers.CategoricalData;
+import jsat.classifiers.CategoricalResults;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.Classifier;
+import jsat.classifiers.DataPoint;
 import jsat.classifiers.linear.LinearBatch;
 import jsat.linear.DenseVector;
 import jsat.linear.Vec;

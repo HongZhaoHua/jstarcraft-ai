@@ -2,8 +2,7 @@
 package jsat.linear.distancemetrics;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
+
 import jsat.linear.IndexValue;
 import jsat.linear.Vec;
 

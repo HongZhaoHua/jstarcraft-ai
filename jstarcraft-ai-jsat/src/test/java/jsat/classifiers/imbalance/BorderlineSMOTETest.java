@@ -16,20 +16,19 @@
  */
 package jsat.classifiers.imbalance;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.DataPointPair;
-import jsat.classifiers.linear.LogisticRegressionDCD;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.DataPointPair;
+import jsat.classifiers.linear.LogisticRegressionDCD;
+import jsat.utils.random.RandomUtil;
 
 /**
  * To make sure these tests exercise the danger list code in SMOTE, we push the

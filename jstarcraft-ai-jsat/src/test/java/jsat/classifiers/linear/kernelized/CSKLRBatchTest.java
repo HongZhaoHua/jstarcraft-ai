@@ -1,26 +1,24 @@
 package jsat.classifiers.linear.kernelized;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import jsat.FixedProblems;
-import jsat.classifiers.CategoricalResults;
-import jsat.classifiers.ClassificationDataSet;
-import jsat.classifiers.ClassificationModelEvaluation;
-import jsat.classifiers.svm.SupportVectorLearner;
-import jsat.distributions.kernels.PukKernel;
-import jsat.distributions.kernels.RBFKernel;
-import jsat.utils.SystemInfo;
-import jsat.utils.random.RandomUtil;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import jsat.FixedProblems;
+import jsat.classifiers.ClassificationDataSet;
+import jsat.classifiers.ClassificationModelEvaluation;
+import jsat.classifiers.svm.SupportVectorLearner;
+import jsat.distributions.kernels.RBFKernel;
+import jsat.utils.random.RandomUtil;
 
 /**
  *

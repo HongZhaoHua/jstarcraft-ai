@@ -1,11 +1,7 @@
 
 package jsat.distributions.kernels;
 
-import java.util.Arrays;
-import java.util.List;
 import jsat.linear.Vec;
-import jsat.parameters.DoubleParameter;
-import jsat.parameters.Parameter;
 
 /**
  * Provides a linear kernel function, which computes the normal dot product.

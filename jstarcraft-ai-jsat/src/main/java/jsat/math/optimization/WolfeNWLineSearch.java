@@ -1,9 +1,14 @@
 package jsat.math.optimization;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.signum;
+
 import jsat.linear.Vec;
 import jsat.math.Function;
 import jsat.math.FunctionVec;
-import static java.lang.Math.*;
 
 /**
  * An implementation of the Wolfe Line Search algorithm described by Nocedal and
