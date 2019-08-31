@@ -1,0 +1,5 @@
+联合概率、边际概率、条件概率:
+https://blog.csdn.net/libing_zeng/article/details/74625849
+
+带你搞懂朴素贝叶斯分类算法:
+https://blog.csdn.net/yizhen_nlp/article/details/70162431
