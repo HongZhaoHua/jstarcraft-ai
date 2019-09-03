@@ -19,3 +19,6 @@ https://github.com/awesomedata/awesome-public-datasets
 
 推荐领域数据集:
 https://www.cnblogs.com/startover/p/3261476.html
+
+数据集市:
+http://www.shujujishi.com/
