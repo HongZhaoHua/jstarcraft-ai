@@ -64,11 +64,6 @@
             <artifactId>parquet-hadoop</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>nz.ac.waikato.cms.weka</groupId>
-            <artifactId>weka-stable</artifactId>
-        </dependency>
-
         <!-- Test框架依赖 -->
         <dependency>
             <groupId>junit</groupId>

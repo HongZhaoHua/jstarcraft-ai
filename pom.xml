@@ -79,12 +79,6 @@
             </dependency>
 
             <dependency>
-                <groupId>nz.ac.waikato.cms.weka</groupId>
-                <artifactId>weka-stable</artifactId>
-                <version>3.8.3</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.apache.parquet</groupId>
                 <artifactId>parquet-avro</artifactId>
                 <version>1.10.1</version>
