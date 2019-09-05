@@ -35,9 +35,9 @@
 
         <!-- 机器学习框架依赖 -->
         <dependency>
-            <groupId>com.googlecode.matrix-toolkits-java</groupId>
-            <artifactId>mtj</artifactId>
-            <version>1.0.4</version>
+            <groupId>nz.ac.waikato.cms.weka</groupId>
+            <artifactId>weka-stable</artifactId>
+            <version>3.8.3</version>
         </dependency>
 
         <!-- Test框架依赖 -->
