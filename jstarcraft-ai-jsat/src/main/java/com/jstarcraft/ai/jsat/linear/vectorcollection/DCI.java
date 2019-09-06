@@ -35,9 +35,9 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.utils.ArrayUtils;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+import com.jstarcraft.core.utility.Double2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
@@ -200,9 +200,9 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
         for (int l = 0; l < L; l++)
             S.add(new HashSet<>());
 
-        List<List<Iterator<Pair<Double, Integer>>>> q_iters = new ArrayList<>(m);
+        List<List<Iterator<Double2IntegerKeyValue>>> q_iters = new ArrayList<>(m);
         for (int j = 0; j < m; j++) {
-            List<Iterator<Pair<Double, Integer>>> iter_m = new ArrayList<>(L);
+            List<Iterator<Double2IntegerKeyValue>> iter_m = new ArrayList<>(L);
             for (int l = 0; l < L; l++) {
                 iter_m.add(T[j][l].nnWalk(q_bar[j][l]));
             }
@@ -213,17 +213,17 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
         for (int l = 0; l < L; l++) {
             Set<Integer> S_l = S.get(l);
             for (int j = 0; j < m; j++) {
-                Iterator<Pair<Double, Integer>> iter_jl = q_iters.get(j).get(l);
+                Iterator<Double2IntegerKeyValue> iter_jl = q_iters.get(j).get(l);
                 while (iter_jl.hasNext()) {
-                    Pair<Double, Integer> pair = iter_jl.next();
+                    Double2IntegerKeyValue pair = iter_jl.next();
                     // projection dist is a lower bound. If its > range, def not a candidate
 
-                    double dist_lower = pair.getFirstItem() - q_bar[j][l];
+                    double dist_lower = pair.getKey() - q_bar[j][l];
 
                     if (dist_lower > range)
                         break;
                     // else, keep going
-                    int indx = pair.getSecondItem();
+                    int indx = pair.getValue();
                     C[l][indx]++;
                     if (C[l][indx] == m)// everyone agrees, you might be it
                         S_l.add(indx);
@@ -276,9 +276,9 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
         for (int l = 0; l < L; l++)
             S.add(new HashSet<>());
 
-        List<List<Iterator<Pair<Double, Integer>>>> q_iters = new ArrayList<>(m);
+        List<List<Iterator<Double2IntegerKeyValue>>> q_iters = new ArrayList<>(m);
         for (int j = 0; j < m; j++) {
-            List<Iterator<Pair<Double, Integer>>> iter_m = new ArrayList<>(L);
+            List<Iterator<Double2IntegerKeyValue>> iter_m = new ArrayList<>(L);
             for (int l = 0; l < L; l++) {
                 iter_m.add(T[j][l].nnWalk(q_bar[j][l]));
             }
@@ -296,9 +296,9 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
             P.add(new PriorityQueue<>((o1, o2) -> Double.compare(o1.getX(), o2.getX())));
         for (int j = 0; j < m; j++)
             for (int l = 0; l < L; l++) {
-                Pair<Double, Integer> ph = q_iters.get(j).get(l).next();
-                double priority = Math.abs(ph.getFirstItem() - q_bar[j][l]);
-                P.get(l).add(new Tuple3<>(priority, j, ph.getSecondItem()));
+                Double2IntegerKeyValue ph = q_iters.get(j).get(l).next();
+                double priority = Math.abs(ph.getKey() - q_bar[j][l]);
+                P.get(l).add(new Tuple3<>(priority, j, ph.getValue()));
             }
 
         /// Now iterate to find indecies
@@ -312,9 +312,9 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
                     int j = ph.getY();
                     int h_jl = ph.getZ();
 
-                    Pair<Double, Integer> next_ph = q_iters.get(j).get(l).next();
-                    double priority = Math.abs(next_ph.getFirstItem() - q_bar[j][l]);
-                    P.get(l).add(new Tuple3<>(priority, j, next_ph.getSecondItem()));
+                    Double2IntegerKeyValue next_ph = q_iters.get(j).get(l).next();
+                    double priority = Math.abs(next_ph.getKey() - q_bar[j][l]);
+                    P.get(l).add(new Tuple3<>(priority, j, next_ph.getValue()));
 
                     C[l][h_jl]++;
 
@@ -405,9 +405,9 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
             return new NearestIterator(this);
         }
 
-        public Iterator<Pair<Double, Integer>> nnWalk(double q) {
+        public Iterator<Double2IntegerKeyValue> nnWalk(double q) {
 
-            return new Iterator<Pair<Double, Integer>>() {
+            return new Iterator<Double2IntegerKeyValue>() {
                 int upper = ArrayUtils.bsIndex2Insert(Arrays.binarySearch(keys, q));
                 // upper is now the lowest index of a point that is >= q
                 int lower = upper - 1;
@@ -418,24 +418,24 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
                 }
 
                 @Override
-                public Pair<Double, Integer> next() {
-                    Pair<Double, Integer> toRet = null;
+                public Double2IntegerKeyValue next() {
+                    Double2IntegerKeyValue toRet = null;
                     if (lower < 0 && upper >= keys.length) {
                         throw new NoSuchElementException();
                     } else if (lower < 0)// upper is only option
                     {
-                        toRet = new Pair<>(keys[upper], vals[upper]);
+                        toRet = new Double2IntegerKeyValue(keys[upper], vals[upper]);
                         upper++;
                     } else if (upper >= keys.length)// lower is only options
                     {
-                        toRet = new Pair<>(keys[lower], vals[lower]);
+                        toRet = new Double2IntegerKeyValue(keys[lower], vals[lower]);
                         lower--;
                     } else if (Math.abs(keys[upper] - q) < Math.abs(keys[lower] - q)) {// upper is closer to q, so return that
-                        toRet = new Pair<>(keys[upper], vals[upper]);
+                        toRet = new Double2IntegerKeyValue(keys[upper], vals[upper]);
                         upper++;
                     } else// lower must be closer
                     {
-                        toRet = new Pair<>(keys[lower], vals[lower]);
+                        toRet = new Double2IntegerKeyValue(keys[lower], vals[lower]);
                         lower--;
                     }
                     return toRet;

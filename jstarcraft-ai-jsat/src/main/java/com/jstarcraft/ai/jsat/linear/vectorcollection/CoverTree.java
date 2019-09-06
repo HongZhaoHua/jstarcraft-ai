@@ -33,9 +33,9 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
-import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
@@ -199,8 +199,8 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             });
             workingNearSet = construct(parallel, p, newNear, newFar, p.level - 1);
         } else {
-            Pair<Set<Integer>, Set<Integer>> pairRet = split(parallel, p.vec_indx, pow(level - 1), near);
-            workingNearSet = construct(parallel, p, pairRet.getFirstItem(), pairRet.getSecondItem(), level - 1);
+            KeyValue<Set<Integer>, Set<Integer>> pairRet = split(parallel, p.vec_indx, pow(level - 1), near);
+            workingNearSet = construct(parallel, p, pairRet.getKey(), pairRet.getValue(), level - 1);
         }
 
         while (!workingNearSet.isEmpty()) {
@@ -213,9 +213,9 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             // (iii) add CHILD to Children(pi)
             p.addChild(q);
             // (iv) let <NEW-NEAR, NEW-FAR> =SPLIT(d(p, ·), 2^i,UNUSED)
-            Pair<Set<Integer>, Set<Integer>> newPiar = split(parallel, p.vec_indx, pow(level), unused);
-            Set<Integer> newNear = newPiar.getFirstItem();
-            Set<Integer> newFar = newPiar.getSecondItem();
+            KeyValue<Set<Integer>, Set<Integer>> newPiar = split(parallel, p.vec_indx, pow(level), unused);
+            Set<Integer> newNear = newPiar.getKey();
+            Set<Integer> newFar = newPiar.getValue();
             // (v) add NEW-FAR to FAR, and NEW-NEAR to NEAR.
             far.addAll(newFar);
             workingNearSet.addAll(newNear);
@@ -224,7 +224,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         return far;
     }
 
-    private Pair<Set<Integer>, Set<Integer>> split(boolean parallel, int p, double r, Set<Integer>... S) {
+    private KeyValue<Set<Integer>, Set<Integer>> split(boolean parallel, int p, double r, Set<Integer>... S) {
         Set<Integer> newNear = getSet(parallel);
         Set<Integer> newFar = getSet(parallel);
 
@@ -246,7 +246,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             S_i.removeAll(IntList.view(toRemove));
         }
 
-        return new Pair<>(newNear, newFar);
+        return new KeyValue<>(newNear, newFar);
     }
 
     private Set<Integer> getSet(boolean parallel) {

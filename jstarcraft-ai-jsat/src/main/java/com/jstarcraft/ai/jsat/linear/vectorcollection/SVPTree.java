@@ -19,10 +19,10 @@ import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
-import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.SimpleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+import com.jstarcraft.core.utility.Double2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
@@ -115,9 +115,9 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         this.allVecs = list;
         distCache = dm.getAccelerationCache(allVecs, parallel);
         // Use simple list so both halves can be modified simultaniously
-        List<Pair<Double, Integer>> tmpList = new SimpleList<>(list.size());
+        List<Double2IntegerKeyValue> tmpList = new SimpleList<>(list.size());
         for (int i = 0; i < allVecs.size(); i++)
-            tmpList.add(new Pair<>(-1.0, i));
+            tmpList.add(new Double2IntegerKeyValue(-1.0, i));
         if (!parallel)
             this.root = makeVPTree(tmpList);
         else {
@@ -132,7 +132,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 System.err.println("Falling back to single threaded VPTree constructor");
                 tmpList.clear();
                 for (int i = 0; i < list.size(); i++)
-                    tmpList.add(new Pair<>(-1.0, i));
+                    tmpList.add(new Double2IntegerKeyValue(-1.0, i));
                 this.root = makeVPTree(tmpList);
             } finally {
                 threadpool.shutdownNow();
@@ -177,8 +177,8 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
             distCache.addAll(dm.getQueryInfo(x));
 
         if (root == null) {
-            ArrayList<Pair<Double, Integer>> list = new ArrayList<>();
-            list.add(new Pair<>(Double.MAX_VALUE, indx));
+            ArrayList<Double2IntegerKeyValue> list = new ArrayList<>();
+            list.add(new Double2IntegerKeyValue(Double.MAX_VALUE, indx));
             root = new VPLeaf(list);
             return;
         }
@@ -192,9 +192,9 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 // hacky, but works
                 int orig_leaf_isze = maxLeafSize;
                 maxLeafSize = maxLeafSize * maxLeafSize;// call normal construct with adjusted leaf size to stop expansion
-                ArrayList<Pair<Double, Integer>> S = new ArrayList<>();
+                ArrayList<Double2IntegerKeyValue> S = new ArrayList<>();
                 for (int i = 0; i < leaf.points.size(); i++)
-                    S.add(new Pair<>(Double.MAX_VALUE, leaf.points.getInt(i)));
+                    S.add(new Double2IntegerKeyValue(Double.MAX_VALUE, leaf.points.getInt(i)));
                 root = makeVPTree(S);
                 maxLeafSize = orig_leaf_isze;// restor
             }
@@ -233,15 +233,15 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
      * @param node the parent node
      * @return the index that was used to split on.
      */
-    private int sortSplitSet(final List<Pair<Double, Integer>> S, final VPNode node) {
-        for (Pair<Double, Integer> S1 : S)
-            S1.setFirstItem(dm.dist(node.p, S1.getSecondItem(), allVecs, distCache)); // Each point gets its distance to the vantage point
-        Collections.sort(S, (Pair<Double, Integer> o1, Pair<Double, Integer> o2) -> Double.compare(o1.getFirstItem(), o2.getFirstItem()));
+    private int sortSplitSet(final List<Double2IntegerKeyValue> S, final VPNode node) {
+        for (Double2IntegerKeyValue S1 : S)
+            S1.setKey(dm.dist(node.p, S1.getValue(), allVecs, distCache)); // Each point gets its distance to the vantage point
+        Collections.sort(S, ( o1,  o2) -> Double.compare(o1.getKey(), o2.getKey()));
         int splitIndex = splitListIndex(S);
-        node.left_low = S.get(0).getFirstItem();
-        node.left_high = S.get(splitIndex).getFirstItem();
-        node.right_low = S.get(splitIndex + 1).getFirstItem();
-        node.right_high = S.get(S.size() - 1).getFirstItem();
+        node.left_low = S.get(0).getKey();
+        node.left_high = S.get(splitIndex).getKey();
+        node.right_low = S.get(splitIndex + 1).getKey();
+        node.right_high = S.get(S.size() - 1).getKey();
         return splitIndex;
     }
 
@@ -252,7 +252,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
      * @return the index that should be used to split on [0, index] belonging to the
      *         left, and (index, S.size() ) belonging to the right.
      */
-    protected int splitListIndex(List<Pair<Double, Integer>> S) {
+    protected int splitListIndex(List<Double2IntegerKeyValue> S) {
         return S.size() / 2;
     }
 
@@ -283,7 +283,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
     }
 
     // The probability match is used to store and sort by median distances.
-    private TreeNode makeVPTree(List<Pair<Double, Integer>> S) {
+    private TreeNode makeVPTree(List<Double2IntegerKeyValue> S) {
         if (S.isEmpty())
             return null;
         else if (S.size() <= maxLeafSize) {
@@ -292,8 +292,8 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         }
 
         int vpIndex = selectVantagePointIndex(S);
-        final VPNode node = new VPNode(S.get(vpIndex).getSecondItem());
-        node.parent_dist = S.get(vpIndex).getFirstItem();
+        final VPNode node = new VPNode(S.get(vpIndex).getValue());
+        node.parent_dist = S.get(vpIndex).getKey();
 
         int splitIndex = sortSplitSet(S, node);
 
@@ -312,7 +312,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         return node;
     }
 
-    private TreeNode makeVPTree(final List<Pair<Double, Integer>> S, final ExecutorService threadpool, final ModifiableCountDownLatch mcdl) {
+    private TreeNode makeVPTree(final List<Double2IntegerKeyValue> S, final ExecutorService threadpool, final ModifiableCountDownLatch mcdl) {
         if (S.isEmpty()) {
             return null;
         } else if (S.size() <= maxLeafSize) {
@@ -321,16 +321,16 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         }
 
         int vpIndex = selectVantagePointIndex(S);
-        final VPNode node = new VPNode(S.get(vpIndex).getSecondItem());
-        node.parent_dist = S.get(vpIndex).getFirstItem();
+        final VPNode node = new VPNode(S.get(vpIndex).getValue());
+        node.parent_dist = S.get(vpIndex).getKey();
 
         int splitIndex = sortSplitSet(S, node);
 
         // Start 2 threads, but only 1 of them is "new"
         mcdl.countUp();
 
-        final List<Pair<Double, Integer>> rightS = S.subList(splitIndex + 1, S.size());
-        final List<Pair<Double, Integer>> leftS = S.subList(0, splitIndex + 1);
+        final List<Double2IntegerKeyValue> rightS = S.subList(splitIndex + 1, S.size());
+        final List<Double2IntegerKeyValue> leftS = S.subList(0, splitIndex + 1);
 
         threadpool.submit(() -> {
             node.right = makeVPTree(rightS, threadpool, mcdl);
@@ -345,7 +345,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         return node;
     }
 
-    private int selectVantagePointIndex(List<Pair<Double, Integer>> S) {
+    private int selectVantagePointIndex(List<Double2IntegerKeyValue> S) {
         int vpIndex;
         vpIndex = RandomUtil.getLocalRandom().nextInt(S.size());
         return vpIndex;
@@ -465,13 +465,13 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 IntList childs_children = ((VPLeaf) child).points;
                 if (childs_children.size() <= maxLeafSize * maxLeafSize)
                     return child;
-                List<Pair<Double, Integer>> S = new ArrayList<>(childs_children.size());
+                List<Double2IntegerKeyValue> S = new ArrayList<>(childs_children.size());
                 for (int indx : childs_children)
-                    S.add(new Pair<>(Double.MAX_VALUE, indx));// double value will be set apprioatly later
+                    S.add(new Double2IntegerKeyValue(Double.MAX_VALUE, indx));// double value will be set apprioatly later
                 int vpIndex = selectVantagePointIndex(S);
 
-                final VPNode node = new VPNode(S.get(vpIndex).getSecondItem());
-                node.parent_dist = S.get(vpIndex).getFirstItem();
+                final VPNode node = new VPNode(S.get(vpIndex).getValue());
+                node.parent_dist = S.get(vpIndex).getKey();
                 node.parent = ((VPLeaf) child).parent;
 
                 // move VP to front, its self dist is zero and we dont want it used in computing
@@ -737,12 +737,12 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
          */
         DoubleArrayList bounds;
 
-        public VPLeaf(List<Pair<Double, Integer>> points) {
+        public VPLeaf(List<Double2IntegerKeyValue> points) {
             this.points = new IntList(points.size());
             this.bounds = new DoubleArrayList(points.size());
             for (int i = 0; i < points.size(); i++) {
-                this.points.add(points.get(i).getSecondItem());
-                this.bounds.add(points.get(i).getFirstItem());
+                this.points.add(points.get(i).getValue());
+                this.bounds.add(points.get(i).getKey());
             }
         }
 

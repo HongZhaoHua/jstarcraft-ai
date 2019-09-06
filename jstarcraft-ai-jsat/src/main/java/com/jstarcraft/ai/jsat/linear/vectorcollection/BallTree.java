@@ -44,10 +44,10 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
-import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
@@ -494,10 +494,10 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         // Ok, now lets go middle-up to finish the tree
         // We will store the costs of merging any pair of anchor_nodes in this map
-        Map<Pair<Integer, Integer>, Double> mergeCost = new HashMap<>();
-        Map<Pair<Integer, Integer>, Vec> pivotCache = new HashMap<>();
+        Map<Integer2IntegerKeyValue, Double> mergeCost = new HashMap<>();
+        Map<Integer2IntegerKeyValue, Vec> pivotCache = new HashMap<>();
         // use a priority queue to pop of workers, and use values from mergeCost to sort
-        List<PriorityQueue<Pair<Integer, Integer>>> mergeQs = new ArrayList<>();
+        List<PriorityQueue<Integer2IntegerKeyValue>> mergeQs = new ArrayList<>();
         PriorityQueue<Integer> QQ = new PriorityQueue<>((q1, q2) -> {
             double v1 = mergeCost.get(mergeQs.get(q1).peek());
             double v2 = mergeCost.get(mergeQs.get(q2).peek());
@@ -506,7 +506,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         /// Initial population of Qs and costs
         for (int k = 0; k < K; k++) {
-            PriorityQueue<Pair<Integer, Integer>> mergeQ_k = new PriorityQueue<>((Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
+            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>(( o1,  o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
             mergeQs.add(mergeQ_k);
             Node n_k = anchor_nodes.get(k);
             IntList owned_nk = new IntList();
@@ -515,7 +515,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             int size_k = owned_nk.size();
             for (int z = k + 1; z < K; z++) {
                 Node n_z = anchor_nodes.get(z);
-                Pair<Integer, Integer> p = new Pair<>(k, z);
+                Integer2IntegerKeyValue p = new Integer2IntegerKeyValue(k, z);
 
                 IntList owned_nkz = new IntList(owned_nk);
                 int size_z, size_nk;
@@ -553,8 +553,8 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         Branch toReturn = null;
         while (!QQ.isEmpty()) {
             int winningQ = QQ.poll();
-            Pair<Integer, Integer> toMerge = mergeQs.get(winningQ).poll();
-            int other = toMerge.getSecondItem();
+            Integer2IntegerKeyValue toMerge = mergeQs.get(winningQ).poll();
+            int other = toMerge.getValue();
             if (anchor_nodes.get(winningQ) == null)// leftover, its gone
                 continue;
             else if (anchor_nodes.get(other) == null) {
@@ -574,7 +574,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             anchor_nodes.set(other, null);
 
             // OK, we have merged two points. Now book keeping. Remove all Qs
-            PriorityQueue<Pair<Integer, Integer>> mergeQ_k = new PriorityQueue<>((Pair<Integer, Integer> o1, Pair<Integer, Integer> o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
+            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>(( o1,  o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
             mergeQs.set(winningQ, mergeQ_k);
 
             Node n_k = merged;
@@ -588,11 +588,11 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
                 if (anchor_nodes.get(z) == null)
                     continue;
                 Node n_z = anchor_nodes.get(z);
-                Pair<Integer, Integer> p;
+                Integer2IntegerKeyValue p;
                 if (winningQ < z)
-                    p = new Pair<>(winningQ, z);
+                    p = new Integer2IntegerKeyValue(winningQ, z);
                 else
-                    p = new Pair<>(z, winningQ);
+                    p = new Integer2IntegerKeyValue(z, winningQ);
 
                 IntList owned_nkz = new IntList(owned_nk);
                 int size_z, size_nk;

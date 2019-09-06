@@ -39,9 +39,9 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.FibHeap;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.UnionFind;
+import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
@@ -322,7 +322,7 @@ public class HDBSCAN implements Clusterer, Parameterized {
         List<DoubleArrayList> entry_size = new ArrayList<>();
         DoubleArrayList birthSize = new DoubleArrayList();
         DoubleArrayList deathSize = new DoubleArrayList();
-        List<Pair<Integer, Integer>> children = new ArrayList<>();
+        List<Integer2IntegerKeyValue> children = new ArrayList<>();
         int[] map_to_cluster_label = new int[N];
         Arrays.fill(map_to_cluster_label, -1);
 
@@ -389,7 +389,7 @@ public class HDBSCAN implements Clusterer, Parameterized {
                     dl.add(weight);
                 entry_size.add(dl);
 
-                children.add(new Pair<>(map_to_cluster_label[mergedClust], map_to_cluster_label[otherClust]));
+                children.add(new Integer2IntegerKeyValue(map_to_cluster_label[mergedClust], map_to_cluster_label[otherClust]));
                 birthSize.add(weight);
                 deathSize.add(Double.MAX_VALUE);// we don't know yet
                 map_to_cluster_label[mergedClust] = next_cluster_label;
@@ -447,15 +447,15 @@ public class HDBSCAN implements Clusterer, Parameterized {
         Queue<Integer> notKeeping = new ArrayDeque<>();
 
         for (int i = 0; i < S.length; i++) {
-            Pair<Integer, Integer> child = children.get(i);
+            Integer2IntegerKeyValue child = children.get(i);
             if (child == null)// I'm a leaf!
             {
                 // for all leaf nodes, set ˆS(C_h)= S(C_h)
                 S_hat[i] = S[i];
                 continue;
             }
-            int il = child.getFirstItem();
-            int ir = child.getSecondItem();
+            int il = child.getKey();
+            int ir = child.getValue();
             // If S(C_i) < ˆS(C_il)+ ˆ S(C_ir ), set ˆS(C_i)= ˆS(C_il)+ ˆS(C_ir )and set δi
             // =0.
             if (S[i] < S_hat[il] + S_hat[ir]) {
@@ -470,11 +470,11 @@ public class HDBSCAN implements Clusterer, Parameterized {
                 while (!notKeeping.isEmpty()) {
                     int c = notKeeping.poll();
                     toKeep[c] = false;
-                    Pair<Integer, Integer> c_children = children.get(c);
+                    Integer2IntegerKeyValue c_children = children.get(c);
                     if (c_children == null)
                         continue;
-                    notKeeping.add(c_children.getFirstItem());
-                    notKeeping.add(c_children.getSecondItem());
+                    notKeeping.add(c_children.getKey());
+                    notKeeping.add(c_children.getValue());
                 }
             }
         }

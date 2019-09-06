@@ -7,7 +7,7 @@ import java.util.Random;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.Pair;
+import com.jstarcraft.core.utility.Double2IntegerKeyValue;
 
 /**
  * The VPTreeMV is an extension of the VPTree, the MV meaning "of Minimum
@@ -62,7 +62,7 @@ public class VPTreeMV<V extends Vec> extends VPTree<V> {
     }
 
     @Override
-    protected int splitListIndex(List<Pair<Double, Integer>> S) {
+    protected int splitListIndex(List<Double2IntegerKeyValue> S) {
         int splitIndex = S.size() / 2;
         int maxLeafSize = getMaxLeafSize();
 
@@ -74,13 +74,13 @@ public class VPTreeMV<V extends Vec> extends VPTree<V> {
             OnLineStatistics rightV = new OnLineStatistics();
             OnLineStatistics leftV = new OnLineStatistics();
             for (int i = 0; i < minSplitSize; i++)
-                leftV.add(S.get(i).getFirstItem());
+                leftV.add(S.get(i).getKey());
             for (int i = minSplitSize; i < S.size(); i++)
-                rightV.add(S.get(i).getFirstItem());
+                rightV.add(S.get(i).getKey());
             splitIndex = minSplitSize;
             double bestVar = leftV.getVarance() * minSplitSize + rightV.getVarance() * (S.size() - minSplitSize);
             for (int i = minSplitSize + 1; i < S.size() - minSplitSize; i++) {
-                double tmp = S.get(i).getFirstItem();
+                double tmp = S.get(i).getKey();
                 leftV.add(tmp);
                 rightV.remove(tmp, 1.0);
                 double testVar = leftV.getVarance() * i + rightV.getVarance() * (S.size() - i);
