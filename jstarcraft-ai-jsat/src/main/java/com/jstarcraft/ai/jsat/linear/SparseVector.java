@@ -15,6 +15,7 @@ import com.jstarcraft.ai.jsat.math.IndexFunction;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleLists;
 
 /**
  * Provides a vector implementation that is sparse. It does not allocate space
@@ -262,7 +263,7 @@ public class SparseVector extends Vec {
 
     @Override
     public Vec sortedCopy() {
-        IndexTable it = new IndexTable(DoubleArrayList.wrap(values, used));
+        IndexTable it = new IndexTable(DoubleLists.unmodifiable(DoubleArrayList.wrap(values, used)));
 
         double[] newValues = new double[used];
         int[] newIndecies = new int[used];

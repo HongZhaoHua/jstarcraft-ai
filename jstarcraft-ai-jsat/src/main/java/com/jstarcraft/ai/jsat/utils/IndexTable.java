@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleLists;
 
 /**
  * The index table provides a way of accessing the sorted view of an array or
@@ -70,7 +71,7 @@ public class IndexTable implements Serializable {
      * @param array the array to create an index table for.
      */
     public IndexTable(double[] array) {
-        this(DoubleArrayList.wrap(array, array.length));
+        this(DoubleLists.unmodifiable(DoubleArrayList.wrap(array, array.length)));
     }
 
     /**
@@ -132,7 +133,7 @@ public class IndexTable implements Serializable {
      * @param array the input to get sorted order of
      */
     public void sort(double[] array) {
-        sort(DoubleArrayList.wrap(array, array.length));
+        sort(DoubleLists.unmodifiable(DoubleArrayList.wrap(array, array.length)));
     }
 
     /**
@@ -142,7 +143,7 @@ public class IndexTable implements Serializable {
      * @param array the input to get sorted order of
      */
     public void sortR(double[] array) {
-        sortR(DoubleArrayList.wrap(array, array.length));
+        sortR(DoubleLists.unmodifiable(DoubleArrayList.wrap(array, array.length)));
     }
 
     /**
