@@ -4,19 +4,15 @@
  */
 package com.jstarcraft.ai.jsat.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 
 import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.ListUtils;
-import com.jstarcraft.ai.jsat.utils.LongList;
 
 /**
  *
@@ -49,44 +45,44 @@ public class ListUtilsTest {
         for (int i = 0; i < 500; i++)
             sourceList.add(i);
         List<List<Integer>> ll1 = ListUtils.splitList(sourceList, 5);
-        assertEquals(5, ll1.size());
+        Assert.assertEquals(5, ll1.size());
 
         for (int i = 0; i < 5; i++) {
             List<Integer> l = ll1.get(i);
-            assertEquals(100, l.size());
+            Assert.assertEquals(100, l.size());
             for (int j = 0; j < l.size(); j++)
-                assertEquals(i * 100 + j, l.get(j).intValue());// intValue called b/c it becomes ambigous to the compiler without it
+                Assert.assertEquals(i * 100 + j, l.get(j).intValue());// intValue called b/c it becomes ambigous to the compiler without it
         }
 
         ll1 = ListUtils.splitList(sourceList, 7);// Non divisible amount
-        assertEquals(7, ll1.size());
+        Assert.assertEquals(7, ll1.size());
         int pos = 0;
         for (List<Integer> l : ll1) {
-            assertTrue("List should have had only 71 or 72 values", l.size() == 72 || l.size() == 71);
+            Assert.assertTrue("List should have had only 71 or 72 values", l.size() == 72 || l.size() == 71);
             for (int j = 0; j < l.size(); j++) {
-                assertEquals(pos + j, l.get(j).intValue());
+                Assert.assertEquals(pos + j, l.get(j).intValue());
             }
             pos += l.size();
         }
-        assertEquals(500, pos);
+        Assert.assertEquals(500, pos);
     }
 
     @Test
     public void testSwap() {
         System.out.println("swap");
-        List<Long> test = new LongList();
-        test.add(1L);
-        test.add(2L);
+        IntList test = new IntList();
+        test.add(1);
+        test.add(2);
         ListUtils.swap(test, 0, 1);
-        assertEquals(2, test.get(0).longValue());
-        assertEquals(1, test.get(1).longValue());
+        Assert.assertEquals(2, test.getInt(0));
+        Assert.assertEquals(1, test.getInt(1));
 
         ListUtils.swap(test, 0, 1);
-        assertEquals(1, test.get(0).longValue());
-        assertEquals(2, test.get(1).longValue());
+        Assert.assertEquals(1, test.getInt(0));
+        Assert.assertEquals(2, test.getInt(1));
 
         ListUtils.swap(test, 0, 0);
-        assertEquals(1, test.get(0).longValue());
-        assertEquals(2, test.get(1).longValue());
+        Assert.assertEquals(1, test.getInt(0));
+        Assert.assertEquals(2, test.getInt(1));
     }
 }
