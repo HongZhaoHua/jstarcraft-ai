@@ -21,7 +21,6 @@ import static com.jstarcraft.ai.jsat.clustering.ClustererBase.createClusterListF
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -34,13 +33,16 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntDoubleMap;
-import com.jstarcraft.ai.jsat.utils.IntDoubleMapArray;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.Int2DoubleArrayMap;
+import it.unimi.dsi.fastutil.ints.Int2DoubleMap;
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
 
 /**
  * This class implements Hierarchical Agglomerative Clustering via the Nearest
@@ -126,7 +128,7 @@ public class NNChainHAC implements KClusterer {
         return cluster(dataSet, 2, (int) Math.sqrt(dataSet.size()), parallel, designations);
     }
 
-    private double getDist(int a, int j, int[] size, List<Vec> vecs, List<Double> cache, List<Map<Integer, Double>> d_xk) {
+    private double getDist(int a, int j, int[] size, List<Vec> vecs, DoubleList cache, List<Int2DoubleMap> d_xk) {
         if (size[j] == 1 && size[a] == 1)
             return dm.dist(a, j, vecs, cache);
         else {
@@ -214,12 +216,12 @@ public class NNChainHAC implements KClusterer {
         final IntList S = new IntList(N);
         ListUtils.addRange(S, 0, N, 1);
 
-        final List<Map<Integer, Double>> dist_map = new ArrayList<>(N);
+        final List<Int2DoubleMap> dist_map = new ArrayList<>(N);
         for (int i = 0; i < N; i++)
             dist_map.add(null);
 
         final List<Vec> vecs = dataSet.getDataVectors();
-        final List<Double> cache = dm.getAccelerationCache(vecs, parallel);
+        final DoubleList cache = dm.getAccelerationCache(vecs, parallel);
 
         int[] chain = new int[N];
         int chainPos = 0;
@@ -316,13 +318,13 @@ public class NNChainHAC implements KClusterer {
             // 24: Update d with the information d[n,x], for all x ∈ S.
 
             boolean singleThread = !parallel || S.size() <= SystemInfo.LogicalCores * 10;
-            final Map<Integer, Double> map_n; // = S.isEmpty() ? null : new IntDoubleMap(S.size());
+            final Int2DoubleMap map_n; // = S.isEmpty() ? null : new IntDoubleMap(S.size());
             if (S.isEmpty())
                 map_n = null;
             else if (S.size() * 100 >= N || !singleThread)// Wastefull, but faster and acceptable
-                map_n = new IntDoubleMapArray(N);
+                map_n = new Int2DoubleArrayMap(N);
             else {
-                map_n = new IntDoubleMap(S.size());
+                map_n = new Int2DoubleOpenHashMap(S.size());
                 // pre fill to guarantee thread safe alteration of values when done in parallel
                 // && using IntDoubleMap implementation
                 for (int x : S)
@@ -337,7 +339,7 @@ public class NNChainHAC implements KClusterer {
                 double d_bx = getDist(b_, x, size, vecs, cache, dist_map);
                 double d_xn = distMeasure.dissimilarity(size_a, size_b, size[x], dist_ab_, d_ax, d_bx);
 
-                Map<Integer, Double> dist_map_x = dist_map.get(x);
+                Int2DoubleMap dist_map_x = dist_map.get(x);
                 if (dist_map_x == null) {
                     // dist_map[x] = new IntDoubleMap(1);
                     // dist_map[x].put(n, d_xn);
@@ -345,12 +347,15 @@ public class NNChainHAC implements KClusterer {
                 {
                     dist_map_x.remove(b_);
                     dist_map_x.put(n, d_xn);
-                    if (dist_map_x.size() * 50 < N && !(dist_map_x instanceof IntDoubleMap))// we are using such a small percentage, put it into a sparser map
-                        dist_map.set(x, new IntDoubleMap(dist_map_x));// distMap is an Array list already filled with entries, so this is thread safe
-                                                                      // set
+                    if (dist_map_x.size() * 50 < N && !(dist_map_x instanceof Int2DoubleOpenHashMap))// we are using such a small percentage, put it into a sparser map
+                        dist_map.set(x, new Int2DoubleOpenHashMap(dist_map_x));// distMap is an Array list already filled with entries, so this is thread safe
+                    // set
                 }
 
-                map_n.put(x, d_xn);
+                // 防止死锁
+                synchronized (map_n) {
+                    map_n.put(x, d_xn);
+                }
             });
 
             dist_map.set(removed, null);// no longer in use no mater what

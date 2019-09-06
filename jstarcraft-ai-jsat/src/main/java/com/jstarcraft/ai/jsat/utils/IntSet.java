@@ -7,7 +7,6 @@ import static com.jstarcraft.ai.jsat.utils.ClosedHashingUtil.EXTRA_INDEX_INFO;
 import static com.jstarcraft.ai.jsat.utils.ClosedHashingUtil.INT_MASK;
 import static com.jstarcraft.ai.jsat.utils.ClosedHashingUtil.OCCUPIED;
 import static com.jstarcraft.ai.jsat.utils.ClosedHashingUtil.getNextPow2TwinPrime;
-import static com.jstarcraft.ai.jsat.utils.IntDoubleMap.h;
 
 import java.io.Serializable;
 import java.util.AbstractSet;
@@ -106,6 +105,20 @@ public class IntSet extends AbstractSet<Integer> implements Serializable {
      */
     public static IntSet from(int... ints) {
         return new IntSet(IntList.view(ints, ints.length));
+    }
+
+    /**
+     * Returns a non-negative hash value
+     * 
+     * @param key
+     * @return
+     */
+    public static int h(int key) {
+        // http://stackoverflow.com/questions/664014/what-integer-hash-function-are-good-that-accepts-an-integer-hash-key
+        key = ((key >>> 16) ^ key) & 0x45f9f3b;
+        key = ((key >>> 16) ^ key) & 0x45f9f3b;
+        key = ((key >>> 16) ^ key);
+        return key;
     }
 
     /**
