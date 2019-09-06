@@ -101,7 +101,7 @@ public class BooleanList extends AbstractList<Boolean> implements Serializable, 
     public boolean pop() {
         if (isEmpty())
             throw new EmptyStackException();
-        return removeB(size() - 1);
+        return removeBoolean(size() - 1);
     }
 
     /**
@@ -221,7 +221,7 @@ public class BooleanList extends AbstractList<Boolean> implements Serializable, 
      * @param index the index to remove
      * @return the value removed
      */
-    public boolean removeB(int index) {
+    public boolean removeBoolean(int index) {
         boundsCheck(index);
         boolean ret = array[index];
         for (int i = index; i < end - 1; i++)
@@ -232,7 +232,7 @@ public class BooleanList extends AbstractList<Boolean> implements Serializable, 
 
     @Override
     public Boolean remove(int index) {
-        return removeB(index);
+        return removeBoolean(index);
     }
 
     /**

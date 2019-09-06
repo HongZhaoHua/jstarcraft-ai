@@ -104,7 +104,7 @@ public class DoubleList extends AbstractList<Double> implements Serializable, Ra
     public double pop() {
         if (isEmpty())
             throw new EmptyStackException();
-        return removeD(size() - 1);
+        return removeDouble(size() - 1);
     }
 
     /**
@@ -224,7 +224,7 @@ public class DoubleList extends AbstractList<Double> implements Serializable, Ra
      * @param index the index to remove
      * @return the value removed
      */
-    public double removeD(int index) {
+    public double removeDouble(int index) {
         boundsCheck(index);
         double ret = array[index];
         for (int i = index; i < end - 1; i++)
@@ -235,7 +235,7 @@ public class DoubleList extends AbstractList<Double> implements Serializable, Ra
 
     @Override
     public Double remove(int index) {
-        return removeD(index);
+        return removeDouble(index);
     }
 
     /**
