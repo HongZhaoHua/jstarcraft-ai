@@ -27,7 +27,6 @@ import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
-import it.unimi.dsi.fastutil.booleans.BooleanList;
 
 /**
  * Provides an implementation of Vantage Point Trees, as described in "Data
@@ -599,7 +598,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
             Deque<VPNode> curNode_stack = new ArrayDeque<VPNode>();
 
             DoubleList distToParrent_stack = new DoubleList();
-            BooleanList search_left_stack = new BooleanArrayList();
+            BooleanArrayList search_left_stack = new BooleanArrayList();
 
             curNode_stack.add(this);
 
