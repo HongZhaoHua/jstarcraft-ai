@@ -15,7 +15,6 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.BooleanList;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
@@ -26,13 +25,17 @@ import com.jstarcraft.ai.jsat.utils.SimpleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
+import it.unimi.dsi.fastutil.booleans.BooleanList;
+
 /**
  * Provides a simplified implementation of Vantage Point Trees, as described in
  * "Data Structures and Algorithms for Nearest Neighbor Search in General Metric
  * Spaces" by Peter N. Yianilos <br>
  * VPTrees are more expensive to create, requiring O(n log n) distance
  * computations. However, they work well for high dimensional data sets, and
- * provide O( log n ) query time for {@link #search(com.jstarcraft.ai.jsat.linear.Vec, int) }
+ * provide O( log n ) query time for
+ * {@link #search(com.jstarcraft.ai.jsat.linear.Vec, int) }
  * 
  * 
  * @author Edward Raff
@@ -502,7 +505,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
             Deque<VPNode> curNode_stack = new ArrayDeque<VPNode>();
 
             DoubleList distToParrent_stack = new DoubleList();
-            BooleanList search_left_stack = new BooleanList();
+            BooleanList search_left_stack = new BooleanArrayList();
 
             curNode_stack.add(this);
 
@@ -544,7 +547,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                     VPNode node = curNode_stack.pop();// pop, we are defintly done with this node after
                     x = distToParrent_stack.pop();
                     double tau = list.get(list.size() - 1).getDist();
-                    Boolean finishLeft = search_left_stack.pop();
+                    boolean finishLeft = search_left_stack.removeBoolean(search_left_stack.size() - 1);
 
                     if (finishLeft) {
                         if (node.searchInLeft(x, tau) || list.size() < k) {
