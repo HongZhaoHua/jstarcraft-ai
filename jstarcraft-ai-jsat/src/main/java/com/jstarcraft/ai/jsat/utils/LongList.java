@@ -121,14 +121,14 @@ public class LongList extends AbstractList<Long> implements Serializable {
      * @param index the index of the value to get
      * @return the value at the index
      */
-    public long getL(int index) {
+    public long getLong(int index) {
         boundsCheck(index);
         return array[index];
     }
 
     @Override
     public Long get(int index) {
-        return getL(index);
+        return getLong(index);
     }
 
     private void boundsCheck(int index) throws IndexOutOfBoundsException {

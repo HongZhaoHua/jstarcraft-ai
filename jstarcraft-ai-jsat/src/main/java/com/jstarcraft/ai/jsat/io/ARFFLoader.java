@@ -203,7 +203,7 @@ public class ARFFLoader {
 
         SimpleDataSet dataSet = new SimpleDataSet(list);
         for (int i = 0; i < weights.size(); i++)
-            dataSet.setWeight(i, weights.getD(i));
+            dataSet.setWeight(i, weights.getDouble(i));
         int k = 0;
         for (int i = 0; i < isReal.size(); i++)
             if (isReal.get(i))

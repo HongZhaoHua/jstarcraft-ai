@@ -124,14 +124,14 @@ public class IntList extends AbstractList<Integer> implements Serializable, Rand
      * @param index the index of the value to get
      * @return the value at the index
      */
-    public int getI(int index) {
+    public int getInt(int index) {
         boundsCheck(index);
         return array[index];
     }
 
     @Override
     public Integer get(int index) {
-        return getI(index);
+        return getInt(index);
     }
 
     private void boundsCheck(int index) throws IndexOutOfBoundsException {

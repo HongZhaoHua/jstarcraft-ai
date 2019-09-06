@@ -135,7 +135,7 @@ public class GeneralRBFKernel extends DistanceMetricBasedKernel {
             Collections.shuffle(randOrder);
             // collet a random sample of data
             for (int i = 0; i < randOrder.size(); i++) {
-                int indx = randOrder.getI(i);
+                int indx = randOrder.getInt(i);
                 if (cdata.getDataPointCategory(indx) == 0 && class0.size() < toSample / 2)
                     class0.add(cdata.getDataPoint(indx).getNumericalValues());
                 else if (cdata.getDataPointCategory(indx) == 1 && class0.size() < toSample / 2)

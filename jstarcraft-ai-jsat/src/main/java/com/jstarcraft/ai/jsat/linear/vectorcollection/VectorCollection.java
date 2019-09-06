@@ -101,7 +101,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
         search(query, range, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
         for (int i = 0; i < neighbors.size(); i++)
-            toRet.add(new VecPaired<>(get(neighbors.getI(i)), distances.getD(i)));
+            toRet.add(new VecPaired<>(get(neighbors.getInt(i)), distances.getDouble(i)));
         return toRet;
     }
 
@@ -122,7 +122,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
         search(query, num_neighbors, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
         for (int i = 0; i < neighbors.size(); i++)
-            toRet.add(new VecPaired<>(get(neighbors.getI(i)), distances.getD(i)));
+            toRet.add(new VecPaired<>(get(neighbors.getInt(i)), distances.getDouble(i)));
         return toRet;
     }
 

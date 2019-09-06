@@ -218,7 +218,7 @@ public class KernelPoints {
         for (int i = 0; i < vecs.size(); i++) {
             double k_ix = k.eval(i, x, qi, vecs, cache);
             for (int j = 0; j < points.size(); j++) {
-                double alpha = points.get(j).alpha.getD(i);
+                double alpha = points.get(j).alpha.getDouble(i);
                 if (alpha != 0)
                     dots[j] += k_ix * alpha;
             }
@@ -424,11 +424,11 @@ public class KernelPoints {
                 int m = 0;
                 double alpha_m = 0;
                 for (KernelPoint kp : points)
-                    alpha_m += pow(kp.alpha.getD(m), 2);
+                    alpha_m += pow(kp.alpha.getDouble(m), 2);
                 for (int i = 1; i < kp_k.alpha.size(); i++) {
                     double tmp = 0;
                     for (KernelPoint kp : points)
-                        tmp += pow(kp.alpha.getD(i), 2);
+                        tmp += pow(kp.alpha.getDouble(i), 2);
                     if (tmp < alpha_m) {
                         alpha_m = tmp;
                         m = i;
@@ -447,8 +447,8 @@ public class KernelPoints {
                             continue;
                         double a_m = 0, a_n = 0;
                         for (KernelPoint kp : points) {
-                            double a1 = kp.alpha.getD(m);
-                            double a2 = kp.alpha.getD(i);
+                            double a1 = kp.alpha.getDouble(m);
+                            double a2 = kp.alpha.getDouble(i);
                             double normalize = a1 + a2;
                             if (normalize < 1e-7)
                                 continue;
@@ -480,8 +480,8 @@ public class KernelPoints {
                          * alphs and alpha_z on its own
                          */
                         for (KernelPoint kp : points) {
-                            double aml = kp.alpha.getD(m);
-                            double anl = kp.alpha.getD(i);
+                            double aml = kp.alpha.getDouble(m);
+                            double anl = kp.alpha.getDouble(i);
                             double alpha_z = aml * k_mz + anl * k_nz;
 
                             loss += aml * aml + anl * anl + 2 * k_mn * aml * anl - alpha_z * alpha_z;
@@ -503,8 +503,8 @@ public class KernelPoints {
                 final List<Double> nz_qi = this.k.getQueryInfo(n_z);
                 for (int z = 0; z < points.size(); z++) {
                     KernelPoint kp = points.get(z);
-                    double aml = kp.alpha.getD(m);
-                    double anl = kp.alpha.getD(n);
+                    double aml = kp.alpha.getDouble(m);
+                    double anl = kp.alpha.getDouble(n);
                     double alpha_z = aml * n_k_mz + anl * n_k_nz;
                     kp.finalMergeStep(m, n, n_z, nz_qi, alpha_z, z == 0);
                 }

@@ -327,9 +327,9 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
             return;// "failed", no update
         final double alpha_t = -eta * Math.signum(lossD) * G;
         // Update the squared norm
-        curSqrdNorm += alpha_t * alpha_t * inputKEvals.getD(0);
+        curSqrdNorm += alpha_t * alpha_t * inputKEvals.getDouble(0);
         for (int i = 0; i < alphas.size(); i++)
-            curSqrdNorm += 2 * alpha_t * alphas.getD(i) * inputKEvals.getD(i + 1);
+            curSqrdNorm += 2 * alpha_t * alphas.getDouble(i) * inputKEvals.getDouble(i + 1);
         // add values
         alphas.add(alpha_t);
         vecs.add(x_t);
@@ -372,7 +372,7 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
         for (int i = 0; i < alphas.size(); i++) {
             double k_ix = k.eval(i, x, qi, vecs, accelCache);
             inputKEvals.add(k_ix);
-            sum += alphas.getD(i) * k_ix;
+            sum += alphas.getDouble(i) * k_ix;
         }
         return sum;
     }
@@ -412,8 +412,8 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
         }
         double w = t - last_t;// time elapsed
         for (int i = 0; i < alphaAveraged.size(); i++) {
-            double delta = alphas.getD(i) - alphaAveraged.getD(i);
-            alphaAveraged.set(i, alphaAveraged.getD(i) + delta * w / t);
+            double delta = alphas.getDouble(i) - alphaAveraged.getDouble(i);
+            alphaAveraged.set(i, alphaAveraged.getDouble(i) + delta * w / t);
         }
         last_t = t;// average done
     }

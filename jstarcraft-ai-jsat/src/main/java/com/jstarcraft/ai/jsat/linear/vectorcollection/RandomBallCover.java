@@ -216,7 +216,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
             // the next representative is tested
             double dist;
             for (int j = 0; j < ownedVecs.get(i).size(); j++) {
-                double rDist = ownedRDists.get(i).getD(j);
+                double rDist = ownedRDists.get(i).getDouble(j);
                 if (queryRDists[i] > range + rDist)// first inqueality on a per point basis
                     continue;
                 if ((dist = dm.dist(ownedVecs.get(i).get(j), query, qi, allVecs, distCache)) <= range) {
@@ -286,7 +286,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
                 final List<Integer> L_i_index = ownedVecs.get(i);
                 final DoubleList L_i_radius = ownedRDists.get(i);
                 for (int j = 0; j < ownedVecs.get(i).size(); j++) {
-                    double rDist = L_i_radius.getD(j);
+                    double rDist = L_i_radius.getDouble(j);
                     // Check the first inequality on a per point basis
                     if (knn.size() == numNeighbors && queryRDists[i] > knn.last().getDist() + rDist)
                         continue;
@@ -391,7 +391,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
             List<Integer> L_ry = ownedVecs.get(i);
             for (int j = 0; j < L_ry.size(); j++) {
                 whoOwnsMe[L_ry.get(j)] = i;
-                distToMyOwner[L_ry.get(j)] = ownedRDists.get(i).getD(j);
+                distToMyOwner[L_ry.get(j)] = ownedRDists.get(i).getDouble(j);
             }
         }
         boolean[] R_is_dirty = new boolean[R.size()];
@@ -399,8 +399,8 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
         R_is_dirty[r_new] = true;
 
         for (int i = 0; i < potentialChildIndx.size(); i++) {
-            double d_y_r_new = potentialChildDist.getD(i);
-            int y_indx = potentialChildIndx.getI(i);
+            double d_y_r_new = potentialChildDist.getDouble(i);
+            int y_indx = potentialChildIndx.getInt(i);
             // find who owns y_indx
             int r_y = whoOwnsMe[y_indx];
             if (r_y == -1)// Represantative, skip

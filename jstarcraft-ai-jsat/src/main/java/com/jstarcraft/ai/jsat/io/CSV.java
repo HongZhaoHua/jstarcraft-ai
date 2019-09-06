@@ -478,7 +478,7 @@ public class CSV {
                         all_vecs.add(new DenseVector(numericFeats));
                         int[] cat_vals = new int[catFeats.size()];
                         for (int i = 0; i < cat_vals.length; i++)
-                            cat_vals[i] = catFeats.getI(i);
+                            cat_vals[i] = catFeats.getInt(i);
                         all_cats.add(cat_vals);
 
                         numericFeats.clear();
@@ -580,14 +580,14 @@ public class CSV {
             ClassificationDataSet d = new ClassificationDataSet(totalCols - cat_array.length - 1, cat_array, target_data);
             d.setDataStore(DataStore.DEFAULT_STORE.emptyClone());
             for (int i = 0; i < all_vecs.size(); i++)
-                d.addDataPoint(all_vecs.get(i), all_cats.get(i), catTargets.getI(i));
+                d.addDataPoint(all_vecs.get(i), all_cats.get(i), catTargets.getInt(i));
 
             return d;
         } else if (numeric_target >= 0) {
             RegressionDataSet d = new RegressionDataSet(totalCols - cat_array.length - 1, cat_array);
             d.setDataStore(DataStore.DEFAULT_STORE.emptyClone());
             for (int i = 0; i < all_vecs.size(); i++)
-                d.addDataPoint(all_vecs.get(i), all_cats.get(i), regressionTargets.getD(i));
+                d.addDataPoint(all_vecs.get(i), all_cats.get(i), regressionTargets.getDouble(i));
 
             return d;
         } else {

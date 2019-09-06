@@ -209,7 +209,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
         if (i >= size())
             throw new IndexOutOfBoundsException("There are not that many samples in the data set");
 
-        return new DataPointPair<>(datapoints.getDataPoint(i), targets.getI(i));
+        return new DataPointPair<>(datapoints.getDataPoint(i), targets.getInt(i));
     }
 
     @Override
@@ -381,7 +381,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
     public List<DataPoint> getSamples(int category) {
         ArrayList<DataPoint> subSet = new ArrayList<>();
         for (int i = 0; i < this.targets.size(); i++)
-            if (this.targets.getI(i) == category)
+            if (this.targets.getInt(i) == category)
                 subSet.add(datapoints.getDataPoint(i));
         return subSet;
     }
@@ -445,7 +445,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
     public List<DataPointPair<Double>> getAsFloatDPPList() {
         List<DataPointPair<Double>> dataPoints = new ArrayList<>(size());
         for (int i = 0; i < size(); i++)
-            dataPoints.add(new DataPointPair<>(datapoints.getDataPoint(i), (double) targets.getI(i)));
+            dataPoints.add(new DataPointPair<>(datapoints.getDataPoint(i), (double) targets.getInt(i)));
 
         return dataPoints;
     }
@@ -462,7 +462,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
         double sum = 0.0;
         for (int i = 0; i < size(); i++) {
             double w = getWeight(i);
-            priors[targets.getI(i)] += w;
+            priors[targets.getInt(i)] += w;
             sum += w;
         }
 

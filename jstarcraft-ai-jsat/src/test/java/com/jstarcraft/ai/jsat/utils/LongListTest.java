@@ -60,7 +60,7 @@ public class LongListTest {
             for (int i = sizes - 1; i >= 0; i--)
                 list.add(0, i);
             for (int i = 0; i < sizes; i++)
-                assertEquals(i, list.getL(i));
+                assertEquals(i, list.getLong(i));
         }
     }
 

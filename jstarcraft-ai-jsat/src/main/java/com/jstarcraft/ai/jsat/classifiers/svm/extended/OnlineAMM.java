@@ -392,8 +392,8 @@ public class OnlineAMM extends BaseUpdateableClassifier implements Parameterized
                 if (norm >= threshold)
                     break;
                 threshold -= norm;
-                int classOf = classOwner.getI(i);
-                weightMatrix.get(classOf).remove(vecID.getI(i));
+                int classOf = classOwner.getInt(i);
+                weightMatrix.get(classOf).remove(vecID.getInt(i));
             }
         }
 

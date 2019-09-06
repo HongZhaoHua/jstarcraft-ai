@@ -228,12 +228,12 @@ public class NNChainHAC implements KClusterer {
             int a, b;
             if (chainPos <= 3) {
                 // 7: a←(any element of S) > E.g. S[0]
-                a = S.getI(0);
+                a = S.getInt(0);
                 // 8: chain ←[a]
                 chainPos = 0;
                 chain[chainPos++] = a;
                 // 9: b←(any element of S \ {a}) > E.g. S[1]
-                b = S.getI(1);
+                b = S.getInt(1);
             } else {
                 // 11: a←chain[−4] > 4th to last element
                 a = chain[chainPos - 4];
@@ -260,7 +260,7 @@ public class NNChainHAC implements KClusterer {
                     int local_c = S.get(start);
 
                     for (int i = start; i < end; i++) {
-                        int j = S.getI(i);
+                        int j = S.getInt(i);
                         if (j == a_ || j == c_)
                             continue;// we already have these guys! just not removed from S yet
                         double dist = getDist(a_, j, size, vecs, cache, dist_map);

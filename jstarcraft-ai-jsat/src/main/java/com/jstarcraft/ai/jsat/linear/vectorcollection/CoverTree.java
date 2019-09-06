@@ -711,7 +711,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
 //            double maxDist = Math.pow(1.3, -110);
             double maxDist = pow(-110);
             for (int i = 0; i < numChildren(); i++)
-                maxDist = Math.max(maxDist, this.children_dists.getD(i));
+                maxDist = Math.max(maxDist, this.children_dists.getDouble(i));
 //            this.level = (int) Math.ceil(Math.log(maxDist)/Math.log(1.3));
             this.level = (int) Math.ceil(FastMath.log2(maxDist) / log2_base + 1e-4);
             fixChildrenLevel();

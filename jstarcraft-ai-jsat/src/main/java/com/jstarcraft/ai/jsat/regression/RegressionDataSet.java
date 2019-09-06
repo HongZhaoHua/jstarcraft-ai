@@ -275,7 +275,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
         DenseVector vals = new DenseVector(size());
 
         for (int i = 0; i < size(); i++)
-            vals.set(i, targets.getD(i));
+            vals.set(i, targets.getDouble(i));
 
         return vals;
     }
@@ -288,7 +288,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
      * @return the target regression value
      */
     public double getTargetValue(int i) {
-        return targets.getD(i);
+        return targets.getDouble(i);
     }
 
     /**

@@ -162,14 +162,14 @@ public class BooleanList extends AbstractList<Boolean> implements Serializable, 
      * @param index the index of the value to get
      * @return the value at the given index
      */
-    public boolean getB(int index) {
+    public boolean getBoolean(int index) {
         boundsCheck(index);
         return array[index];
     }
 
     @Override
     public Boolean get(int index) {
-        return getB(index);
+        return getBoolean(index);
     }
 
     /**

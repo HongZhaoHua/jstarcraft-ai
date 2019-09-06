@@ -424,7 +424,7 @@ public class OnlineLDAsvi implements Parameterized {
         // pre-shrink the lambda values so we can add out updates later
         for (int k = 0; k < K; k++) {
             lambda.get(k).mutableMultiply(1 - rho_t);
-            lambdaSums.set(k, lambdaSums.getD(k) * (1 - rho_t));
+            lambdaSums.set(k, lambdaSums.getDouble(k) * (1 - rho_t));
         }
 
         /*
@@ -472,13 +472,13 @@ public class OnlineLDAsvi implements Parameterized {
                         Collections.shuffle(toUpdate, rand);// helps reduce contention caused by shared iteration order
                         int updatePos = 0;
                         while (!toUpdate.isEmpty()) {
-                            int k = toUpdate.getI(updatePos);
+                            int k = toUpdate.getInt(updatePos);
 
                             if (lambdaLocks.get(k).tryLock()) {
                                 final double coeff = ExpELogTheta_d.get(k) * rho_t * D / docs.size();
                                 final Vec lambda_k = lambda.get(k);
                                 final Vec ExpELogBeta_k = ExpELogBeta.get(k);
-                                double lambdaSum_k = lambdaSums.getD(k);
+                                double lambdaSum_k = lambdaSums.getDouble(k);
 
                                 /*
                                  * iterate and incremebt ourselves so that we can also compute the new sums in 1
@@ -592,7 +592,7 @@ public class OnlineLDAsvi implements Parameterized {
     private void updateBetas(final List<Vec> docs, ExecutorService ex) {
         final double[] digammaLambdaSum = new double[K];// TODO may want to move this out & reuse
         for (int k = 0; k < K; k++)
-            digammaLambdaSum[k] = FastMath.digamma(W * eta + lambdaSums.getD(k));
+            digammaLambdaSum[k] = FastMath.digamma(W * eta + lambdaSums.getDouble(k));
         List<List<Vec>> docSplits = ListUtils.splitList(docs, SystemInfo.LogicalCores);
         final CountDownLatch latch = new CountDownLatch(docSplits.size());
         for (final List<Vec> docsSub : docSplits) {

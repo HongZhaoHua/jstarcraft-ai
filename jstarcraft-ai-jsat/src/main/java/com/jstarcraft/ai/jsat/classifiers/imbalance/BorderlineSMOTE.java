@@ -263,7 +263,7 @@ public class BorderlineSMOTE extends SMOTE {
                     if (danger_id.isEmpty())// danger zeon was empty? Fall back to SMOTE style
                         sampleIndex = i % V_id.size();
                     else
-                        sampleIndex = danger_id.getI(i % danger_id.size());
+                        sampleIndex = danger_id.getInt(i % danger_id.size());
                     Vec vec_nn;
 
                     // which of the neighbors should we use?

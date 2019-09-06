@@ -326,7 +326,7 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
                 for (int i = 0; i < budget; i++) {
                     if (i == toRemove)
                         continue;
-                    double alpha_i = alphas.getD(i);
+                    double alpha_i = alphas.getDouble(i);
                     double sign = Math.signum(alpha_i);
                     alpha_i = Math.abs(alpha_i);
                     double tmp = uniformSampling ? 1.0 / budget : dist[i] / normalize;

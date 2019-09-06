@@ -432,8 +432,8 @@ public class HDBSCAN implements Clusterer, Parameterized {
          */
         double[] S = new double[cluster_options.size()];
         for (int c = 0; c < S.length; c++) {
-            double lambda_min = birthSize.getD(c);
-            double lambda_max = deathSize.getD(c);
+            double lambda_min = birthSize.getDouble(c);
+            double lambda_max = deathSize.getDouble(c);
             double s = 0;
             for (double f_x : entry_size.get(c))
                 s += Math.min(f_x, lambda_max) - lambda_min;

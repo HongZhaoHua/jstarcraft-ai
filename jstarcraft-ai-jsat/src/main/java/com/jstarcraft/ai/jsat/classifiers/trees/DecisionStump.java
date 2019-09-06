@@ -526,7 +526,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                                     bestRatio.add(split_scores[i].getSumOfWeights());
                                 }
                                 for (int i = 0; i < split_scores.length; i++)
-                                    bestRatio.set(i, bestRatio.getD(i) / sum);
+                                    bestRatio.set(i, bestRatio.getDouble(i) / sum);
 
                                 if (attribute >= catAttributes.length) {
                                     boundries = tmp.getFirstItem();
@@ -628,7 +628,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
         for (int i = 0; i < minResultSplitSize; i++) {
             if (i >= dataPoints.size())
                 System.out.println("WHAT?");
-            int indx = workSet.getI(i);
+            int indx = workSet.getInt(i);
             double weight = dataPoints.getWeight(indx);
             int truth = dataPoints.getDataPointCategory(indx);
 
@@ -637,7 +637,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
         }
 
         for (int i = minResultSplitSize; i < dataPoints.size() - minResultSplitSize - 1 - wasNaN.size(); i++) {
-            int indx = workSet.getI(i);
+            int indx = workSet.getInt(i);
             double w = dataPoints.getWeight(indx);
             int y = dataPoints.getDataPointCategory(indx);
             rightSide.removePoint(w, y);
@@ -837,8 +837,8 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                     thisRatio = new double[2];
 
                     for (int i = 0; i < att_vals.size(); i++) {
-                        double weight = weights.getD(i);
-                        double val = targets.getD(i);
+                        double weight = weights.getDouble(i);
+                        double val = targets.getDouble(i);
                         rightSide.remove(val, weight);
                         leftSide.add(val, weight);
 

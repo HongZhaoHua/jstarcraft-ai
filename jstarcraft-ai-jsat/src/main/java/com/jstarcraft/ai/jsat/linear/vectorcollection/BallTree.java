@@ -442,7 +442,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
              * point owned by a^maxrad that is furthest from a^maxrad
              */
             int max_radius_anch = IntStream.range(0, k).mapToObj(z -> new IndexDistPair(z, ownedDist[z].get(ownedDist[z].size() - 1))).max(IndexDistPair::compareTo).get().indx;
-            anchor_point_index[k] = owned[max_radius_anch].getI(owned[max_radius_anch].size() - 1);
+            anchor_point_index[k] = owned[max_radius_anch].getInt(owned[max_radius_anch].size() - 1);
             anchor_index[k] = points.get(anchor_point_index[k]);
             owned[max_radius_anch].remove(owned[max_radius_anch].size() - 1);
             ownedDist[max_radius_anch].remove(ownedDist[max_radius_anch].size() - 1);
@@ -484,7 +484,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         for (int k = 0; k < K; k++) {
             Node n_k = build(IntList.view(owned[k].streamInts().map(i -> points.get(i)).toArray()), parallel);
             n_k.pivot = get(anchor_index[k]);
-            n_k.radius = ownedDist[k].getD(ownedDist[k].size() - 1);
+            n_k.radius = ownedDist[k].getDouble(ownedDist[k].size() - 1);
             anchor_nodes.add(n_k);
         }
 

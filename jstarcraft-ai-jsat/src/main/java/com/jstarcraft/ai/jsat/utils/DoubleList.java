@@ -165,14 +165,14 @@ public class DoubleList extends AbstractList<Double> implements Serializable, Ra
      * @param index the index of the value to get
      * @return the value at the given index
      */
-    public double getD(int index) {
+    public double getDouble(int index) {
         boundsCheck(index);
         return array[index];
     }
 
     @Override
     public Double get(int index) {
-        return getD(index);
+        return getDouble(index);
     }
 
     /**

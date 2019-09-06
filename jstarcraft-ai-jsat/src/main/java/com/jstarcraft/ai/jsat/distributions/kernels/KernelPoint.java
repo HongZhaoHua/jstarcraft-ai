@@ -485,8 +485,8 @@ public class KernelPoint {
                 int m = 0;
                 double alpha_m = abs(alpha.get(m));
                 for (int i = 1; i < alpha.size(); i++)
-                    if (abs(alpha.getD(i)) < abs(alpha_m)) {
-                        alpha_m = alpha.getD(i);
+                    if (abs(alpha.getDouble(i)) < abs(alpha_m)) {
+                        alpha_m = alpha.getDouble(i);
                         m = i;
                     }
 
@@ -499,7 +499,7 @@ public class KernelPoint {
                     for (int i = 0; i < alpha.size(); i++) {
                         if (i == m)
                             continue;
-                        double a_m = alpha_m, a_n = alpha.getD(i);
+                        double a_m = alpha_m, a_n = alpha.getDouble(i);
                         double normalize = a_m + a_n;
                         if (abs(normalize) < tol)// avoid alphas that nearly cancle out
                             continue;

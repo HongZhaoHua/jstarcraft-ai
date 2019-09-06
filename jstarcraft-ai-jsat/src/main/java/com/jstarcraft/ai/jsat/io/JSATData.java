@@ -730,7 +730,7 @@ public class JSATData {
             toRet = new SimpleDataSet(store);
         }
         for (int i = 0; i < weights.size(); i++)
-            toRet.setWeight(i, weights.getD(i));
+            toRet.setWeight(i, weights.getDouble(i));
         return toRet;
     }
 

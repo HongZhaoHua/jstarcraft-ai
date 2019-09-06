@@ -191,7 +191,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 maxLeafSize = maxLeafSize * maxLeafSize;// call normal construct with adjusted leaf size to stop expansion
                 ArrayList<Pair<Double, Integer>> S = new ArrayList<>();
                 for (int i = 0; i < leaf.points.size(); i++)
-                    S.add(new Pair<>(Double.MAX_VALUE, leaf.points.getI(i)));
+                    S.add(new Pair<>(Double.MAX_VALUE, leaf.points.getInt(i)));
                 root = makeVPTree(S);
                 maxLeafSize = orig_leaf_isze;// restor
             }
@@ -762,8 +762,8 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
             // as 0.0 <= Max value will be true
             double tau = list.isEmpty() ? Double.MAX_VALUE : list.get(list.size() - 1).getDist();
             for (int i = 0; i < points.size(); i++) {
-                int point_i = points.getI(i);
-                double bound_i = bounds.getD(i);
+                int point_i = points.getInt(i);
+                double bound_i = bounds.getDouble(i);
                 if (list.size() < k) {
 
                     list.add(new IndexDistPair(point_i, dm.dist(point_i, query, qi, allVecs, distCache)));
@@ -781,8 +781,8 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
             double dist = Double.MAX_VALUE;
 
             for (int i = 0; i < points.size(); i++) {
-                int point_i = points.getI(i);
-                double bound_i = bounds.getD(i);
+                int point_i = points.getInt(i);
+                double bound_i = bounds.getDouble(i);
                 if (bound_i - range <= x && x <= bound_i + range)// Bound check agains the distance to our parrent node, provided by x
                     if ((dist = dm.dist(point_i, query, qi, allVecs, distCache)) < range) {
                         neighbors.add(point_i);
@@ -883,7 +883,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
 
         @Override
         public int getPoint(int indx) {
-            return points.getI(indx);
+            return points.getInt(indx);
         }
     }
 }

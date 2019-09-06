@@ -32,8 +32,8 @@ public class RelativeAbsoluteError extends TotalHistoryRegressionScore {
         double trueMean = truths.getVecView().mean();
         double numer = 0, denom = 0;
         for (int i = 0; i < truths.size(); i++) {
-            numer += Math.abs(predictions.getD(i) - truths.getD(i));
-            denom += Math.abs(trueMean - truths.getD(i));
+            numer += Math.abs(predictions.getDouble(i) - truths.getDouble(i));
+            denom += Math.abs(trueMean - truths.getDouble(i));
         }
         return numer / denom;
     }
