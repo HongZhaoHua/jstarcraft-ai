@@ -31,10 +31,10 @@ import com.jstarcraft.ai.jsat.math.decayrates.DecayRate;
 import com.jstarcraft.ai.jsat.math.decayrates.ExponetialDecay;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.ArrayUtils;
-import com.jstarcraft.ai.jsat.utils.PairedReturn;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 /**
  * An implementation of a Self Organizing Map, also called a Kohonen Map. It is
@@ -263,9 +263,9 @@ public class SOM implements Classifier, Parameterized {
 
     private void iterationStep(final ExecutorService execServ, final int i, final DataSet dataSet, final double nbrRange, final double nbrRangeSqrd, final Vec scratch, final double learnRate) {
         Vec input_i = dataSet.getDataPoint(i).getNumericalValues();
-        PairedReturn<Integer, Integer> closestBMUPR = getBMU(input_i);
-        int xBest = closestBMUPR.getFirstItem();
-        int yBest = closestBMUPR.getSecondItem();
+        Integer2IntegerKeyValue closestBMUPR = getBMU(input_i);
+        int xBest = closestBMUPR.getKey();
+        int yBest = closestBMUPR.getValue();
 
         // The bounding square of values that need to be updated
 
@@ -316,7 +316,7 @@ public class SOM implements Classifier, Parameterized {
      * @param numericalValues the vector to find hte BMU of
      * @return the BMU of the given vector
      */
-    private PairedReturn<Integer, Integer> getBMU(Vec numericalValues) {
+    private Integer2IntegerKeyValue getBMU(Vec numericalValues) {
         double bestDist = Double.MAX_VALUE;
         int x = -1, y = -1;
         for (int i = 0; i < weights.length; i++) {
@@ -331,7 +331,7 @@ public class SOM implements Classifier, Parameterized {
             }
         }
 
-        return new PairedReturn<>(x, y);
+        return new Integer2IntegerKeyValue(x, y);
     }
 
     private void trainSOM(final DataSet dataSet, boolean parallel) throws InterruptedException {
