@@ -33,10 +33,12 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This provides a highly configurable implementation of a Radial Basis Function
@@ -80,7 +82,7 @@ public class RBFNet implements Classifier, Regressor, DataTransform, Parameteriz
     private Classifier baseClassifier;
     private Regressor baseRegressor;
 
-    private List<Double> centroidDistCache;
+    private DoubleList centroidDistCache;
     private List<Vec> centroids;
     private double[] bandwidths;
 
@@ -197,7 +199,7 @@ public class RBFNet implements Classifier, Regressor, DataTransform, Parameteriz
             for (Vec v : toCopy.centroids)
                 this.centroids.add(v.clone());
             if (toCopy.centroidDistCache != null)
-                this.centroidDistCache = new DoubleList(toCopy.centroidDistCache);
+                this.centroidDistCache = new DoubleArrayList(toCopy.centroidDistCache);
         }
 
         if (toCopy.bandwidths != null)

@@ -2,7 +2,6 @@
 package com.jstarcraft.ai.jsat.clustering.kmeans;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -14,6 +13,8 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * An efficient implementation of the K-Means algorithm. This implementation
@@ -55,7 +56,7 @@ public class ElkanKernelKMeans extends KernelKMeans {
     }
 
     @Override
-    public int findClosestCluster(Vec x, List<Double> qi) {
+    public int findClosestCluster(Vec x, DoubleList qi) {
         double min = Double.MAX_VALUE;
         int min_indx = -1;
         // Use triangle inequality to prune out clusters!

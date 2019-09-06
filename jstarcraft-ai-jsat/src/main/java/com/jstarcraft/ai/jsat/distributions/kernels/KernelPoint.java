@@ -21,9 +21,11 @@ import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.math.Function1D;
 import com.jstarcraft.ai.jsat.math.optimization.GoldenSearch;
 import com.jstarcraft.ai.jsat.regression.KernelRLS;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * The Kernel Point represents a kernelized weight vector by a linear
@@ -50,12 +52,12 @@ public class KernelPoint {
     private double errorTolerance;
 
     protected List<Vec> vecs;
-    protected List<Double> kernelAccel;
+    protected DoubleArrayList kernelAccel;
     protected Matrix K;
     protected Matrix InvK;
     protected Matrix KExpanded;
     protected Matrix InvKExpanded;
-    protected DoubleList alpha;
+    protected DoubleArrayList alpha;
     protected BudgetStrategy budgetStrategy = BudgetStrategy.PROJECTION;
     protected int maxBudget = Integer.MAX_VALUE;
 
@@ -136,9 +138,9 @@ public class KernelPoint {
         setBudgetStrategy(BudgetStrategy.PROJECTION);
         setMaxBudget(Integer.MAX_VALUE);
         if (k.supportsAcceleration())
-            kernelAccel = new DoubleList(16);
-        alpha = new DoubleList(16);
-        vecs = new ArrayList<Vec>(16);
+            kernelAccel = new DoubleArrayList();
+        alpha = new DoubleArrayList();
+        vecs = new ArrayList<Vec>();
     }
 
     /**
@@ -154,9 +156,9 @@ public class KernelPoint {
             for (Vec v : toCopy.vecs)
                 this.vecs.add(v.clone());
             if (toCopy.kernelAccel != null)
-                this.kernelAccel = new DoubleList(toCopy.kernelAccel);
+                this.kernelAccel = new DoubleArrayList(toCopy.kernelAccel);
 
-            this.alpha = new DoubleList(toCopy.alpha);
+            this.alpha = new DoubleArrayList(toCopy.alpha);
         }
 
         if (toCopy.KExpanded != null) {
@@ -254,14 +256,14 @@ public class KernelPoint {
             for (int i = 0; i < alpha.size(); i++) {
                 if (K != null)// we already know all the values of K
                 {
-                    sqrdNorm += alpha.get(i) * alpha.get(i) * K.get(i, i);
+                    sqrdNorm += alpha.getDouble(i) * alpha.getDouble(i) * K.get(i, i);
                     for (int j = i + 1; j < alpha.size(); j++)
-                        sqrdNorm += 2 * alpha.get(i) * alpha.get(j) * K.get(i, j);
+                        sqrdNorm += 2 * alpha.getDouble(i) * alpha.getDouble(j) * K.get(i, j);
                 } else// nope, compute as needed
                 {
-                    sqrdNorm += alpha.get(i) * alpha.get(i) * k.eval(i, i, vecs, kernelAccel);
+                    sqrdNorm += alpha.getDouble(i) * alpha.getDouble(i) * k.eval(i, i, vecs, kernelAccel);
                     for (int j = i + 1; j < alpha.size(); j++)
-                        sqrdNorm += 2 * alpha.get(i) * alpha.get(j) * k.eval(i, j, vecs, kernelAccel);
+                        sqrdNorm += 2 * alpha.getDouble(i) * alpha.getDouble(j) * k.eval(i, j, vecs, kernelAccel);
                 }
             }
             normGood = true;
@@ -289,10 +291,10 @@ public class KernelPoint {
      *           kernel in use does not support acceleration.
      * @return the dot product in the kernel space between this point and {@code x}
      */
-    public double dot(Vec x, List<Double> qi) {
+    public double dot(Vec x, DoubleList qi) {
         if (getBasisSize() == 0)
             return 0;
-        return k.evalSum(vecs, kernelAccel, alpha.getBackingArray(), x, qi, 0, alpha.size());
+        return k.evalSum(vecs, kernelAccel, alpha.elements(), x, qi, 0, alpha.size());
     }
 
     /**
@@ -306,7 +308,7 @@ public class KernelPoint {
             return 0;
         int shift = this.alpha.size();
         List<Vec> mergedVecs = ListUtils.mergedView(this.vecs, x.vecs);
-        List<Double> mergedCache;
+        DoubleList mergedCache;
         if (this.kernelAccel == null || x.kernelAccel == null)
             mergedCache = null;
         else
@@ -315,7 +317,7 @@ public class KernelPoint {
         double dot = 0;
         for (int i = 0; i < this.alpha.size(); i++)
             for (int j = 0; j < x.alpha.size(); j++) {
-                dot += this.alpha.get(i) * x.alpha.get(j) * k.eval(i, j + shift, mergedVecs, mergedCache);
+                dot += this.alpha.getDouble(i) * x.alpha.getDouble(j) * k.eval(i, j + shift, mergedVecs, mergedCache);
             }
         return dot;
     }
@@ -342,7 +344,7 @@ public class KernelPoint {
      * @return the Euclidean distance between this point and {@code x} in the kernel
      *         space
      */
-    public double dist(Vec x, List<Double> qi) {
+    public double dist(Vec x, DoubleList qi) {
         double k_xx = k.eval(0, 0, Arrays.asList(x), qi);
         return Math.sqrt(k_xx + getSqrdNorm() - 2 * dot(x, qi));
     }
@@ -373,7 +375,7 @@ public class KernelPoint {
         if (getBasisSize() == 0)
             return;
         sqrdNorm *= c * c;
-        alpha.getVecView().mutableMultiply(c);
+        new DenseVector(alpha.elements(), 0, alpha.size()).mutableMultiply(c);
     }
 
     /**
@@ -403,7 +405,7 @@ public class KernelPoint {
      * @param qi  the query information for the vector, or {@code null} only if the
      *            kernel in use does not support acceleration.
      */
-    public void mutableAdd(double c, Vec x_t, final List<Double> qi) {
+    public void mutableAdd(double c, Vec x_t, final DoubleList qi) {
         if (c == 0)
             return;
         normGood = false;
@@ -469,7 +471,7 @@ public class KernelPoint {
 
             } else// project onto dictionary
             {
-                Vec alphaVec = alpha.getVecView();
+                Vec alphaVec = new DenseVector(alpha.elements(), 0, alpha.size());
                 alphaVec.mutableAdd(y_t, alphas_t);
                 normGood = false;
             }
@@ -590,15 +592,15 @@ public class KernelPoint {
         int smallIndx = min(m, n);
         int largeIndx = max(m, n);
 
-        alpha.remove(largeIndx);
-        alpha.remove(smallIndx);
+        alpha.removeDouble(largeIndx);
+        alpha.removeDouble(smallIndx);
 
         if (alterVecs) {
             vecs.remove(largeIndx);
             vecs.remove(smallIndx);
 
-            kernelAccel.remove(largeIndx);
-            kernelAccel.remove(smallIndx);
+            kernelAccel.removeDouble(largeIndx);
+            kernelAccel.removeDouble(smallIndx);
 
             vecs.add(n_z);
             // XXX the following check was redundant
@@ -666,9 +668,9 @@ public class KernelPoint {
         if (kernelAccel != null) {
             int num = this.kernelAccel.size() / vecs.size();
             for (int i = 0; i < num; i++)
-                kernelAccel.remove(toRemove);
+                kernelAccel.removeDouble(toRemove);
         }
-        alpha.remove(toRemove);
+        alpha.removeDouble(toRemove);
         vecs.remove(toRemove);
     }
 

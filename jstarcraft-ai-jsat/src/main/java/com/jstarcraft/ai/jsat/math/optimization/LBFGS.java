@@ -7,7 +7,8 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.Function;
 import com.jstarcraft.ai.jsat.math.FunctionVec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Implementation of the Limited memory variant of {@link BFGS}. It uses a
@@ -99,7 +100,7 @@ public class LBFGS implements Optimizer {
         final double[] f_xVal = new double[1];// store place for f_x
 
         // history for implicit H
-        List<Double> Rho = new DoubleList(m);
+        DoubleArrayList Rho = new DoubleArrayList(m);
         List<Vec> S = new ArrayList<>(m);
         List<Vec> Y = new ArrayList<>(m);
 

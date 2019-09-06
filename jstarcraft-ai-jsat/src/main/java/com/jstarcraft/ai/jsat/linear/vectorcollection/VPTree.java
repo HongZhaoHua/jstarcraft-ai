@@ -17,7 +17,6 @@ import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
@@ -27,6 +26,8 @@ import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Provides an implementation of Vantage Point Trees, as described in "Data
@@ -47,7 +48,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
 
     private static final long serialVersionUID = -7271540108746353762L;
     private DistanceMetric dm;
-    private List<Double> distCache;
+    private DoubleList distCache;
     private List<V> allVecs;
     private Random rand;
     private int sampleSize;
@@ -112,7 +113,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
         this.vpSelection = sampling;
         this.allVecs = new ArrayList<>();
         if (dm.supportsAcceleration())
-            this.distCache = new DoubleList();
+            this.distCache = new DoubleArrayList();
     }
 
     /**
@@ -132,7 +133,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
         if (toClone.allVecs != null)
             this.allVecs = new ArrayList<>(toClone.allVecs);
         if (toClone.distCache != null)
-            this.distCache = new DoubleList(toClone.distCache);
+            this.distCache = new DoubleArrayList(toClone.distCache);
     }
 
     @Override
@@ -444,7 +445,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 
@@ -597,7 +598,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
         public void searchKNN(Vec query, int k, BoundedSortedList<IndexDistPair> list, double x, List<Double> qi) {
             Deque<VPNode> curNode_stack = new ArrayDeque<VPNode>();
 
-            DoubleList distToParrent_stack = new DoubleList();
+            DoubleArrayList distToParrent_stack = new DoubleArrayList();
             BooleanArrayList search_left_stack = new BooleanArrayList();
 
             curNode_stack.add(this);
@@ -838,11 +839,11 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
         /**
          * The distance of each point in this leaf to the parent node we came from.
          */
-        DoubleList bounds;
+        DoubleArrayList bounds;
 
         public VPLeaf(List<Pair<Double, Integer>> points) {
             this.points = new IntList(points.size());
-            this.bounds = new DoubleList(points.size());
+            this.bounds = new DoubleArrayList(points.size());
             for (int i = 0; i < points.size(); i++) {
                 this.points.add(points.get(i).getSecondItem());
                 this.bounds.add(points.get(i).getFirstItem());
@@ -850,7 +851,7 @@ public class VPTree<V extends Vec> implements IncrementalCollection<V>, DualTree
         }
 
         public VPLeaf(VPLeaf toCopy) {
-            this.bounds = new DoubleList(toCopy.bounds);
+            this.bounds = new DoubleArrayList(toCopy.bounds);
             this.points = new IntList(toCopy.points);
         }
 

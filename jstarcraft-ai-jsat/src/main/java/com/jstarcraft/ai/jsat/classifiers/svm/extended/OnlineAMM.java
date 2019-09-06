@@ -19,9 +19,10 @@ import com.jstarcraft.ai.jsat.linear.ScaledVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecWithNorm;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This is the Online variant of the Adaptive Multi-Hyperplane Machine (AMM)
@@ -374,7 +375,7 @@ public class OnlineAMM extends BaseUpdateableClassifier implements Parameterized
 
             IntList classOwner = new IntList(weightMatrix.size());
             IntList vecID = new IntList(weightMatrix.size());
-            DoubleList normVal = new DoubleList(weightMatrix.size());
+            DoubleArrayList normVal = new DoubleArrayList(weightMatrix.size());
             for (int i = 0; i < weightMatrix.size(); i++) {
                 for (Map.Entry<Integer, Vec> entry : weightMatrix.get(i).entrySet()) {
                     Vec v = entry.getValue();
@@ -388,7 +389,7 @@ public class OnlineAMM extends BaseUpdateableClassifier implements Parameterized
 
             for (int orderIndx = 0; orderIndx < normVal.size(); orderIndx++) {
                 int i = it.index(orderIndx);
-                double norm = normVal.get(i);
+                double norm = normVal.getDouble(i);
                 if (norm >= threshold)
                     break;
                 threshold -= norm;

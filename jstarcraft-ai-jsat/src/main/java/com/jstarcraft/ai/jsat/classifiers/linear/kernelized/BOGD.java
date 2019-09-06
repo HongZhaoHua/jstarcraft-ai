@@ -14,13 +14,16 @@ import com.jstarcraft.ai.jsat.classifiers.calibration.BinaryScoreClassifier;
 import com.jstarcraft.ai.jsat.distributions.Distribution;
 import com.jstarcraft.ai.jsat.distributions.LogUniform;
 import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
+import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.lossfunctions.HingeLoss;
 import com.jstarcraft.ai.jsat.lossfunctions.LossC;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Bounded Online Gradient Descent (BOGD) is a kernel learning algorithm that
@@ -55,9 +58,9 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
     /**
      * Stores the sqrt of each support vector's kernel product with itself
      */
-    private List<Double> selfK;
-    private DoubleList alphas;
-    private List<Double> accelCache;
+    private DoubleArrayList selfK;
+    private DoubleArrayList alphas;
+    private DoubleArrayList accelCache;
     /**
      * Cache of values used for BOGD++ sampling
      */
@@ -114,11 +117,11 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
             this.vecs = new ArrayList<Vec>(budget);
             for (Vec v : toCopy.vecs)
                 this.vecs.add(v.clone());
-            this.selfK = new DoubleList(toCopy.selfK);
-            this.alphas = new DoubleList(toCopy.alphas);
+            this.selfK = new DoubleArrayList(toCopy.selfK);
+            this.alphas = new DoubleArrayList(toCopy.alphas);
         }
         if (toCopy.accelCache != null)
-            this.accelCache = new DoubleList(toCopy.accelCache);
+            this.accelCache = new DoubleArrayList(toCopy.accelCache);
         if (toCopy.dist != null)
             this.dist = Arrays.copyOf(toCopy.dist, toCopy.dist.length);
     }
@@ -258,10 +261,10 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
     @Override
     public void setUp(CategoricalData[] categoricalAttributes, int numericAttributes, CategoricalData predicting) {
         vecs = new ArrayList<Vec>(budget);
-        alphas = new DoubleList(budget);
-        selfK = new DoubleList(budget);
+        alphas = new DoubleArrayList(budget);
+        selfK = new DoubleArrayList(budget);
         if (k.supportsAcceleration())
-            accelCache = new DoubleList(budget);
+            accelCache = new DoubleArrayList(budget);
         else
             accelCache = null;
         if (!uniformSampling)
@@ -275,8 +278,8 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
         return score(x, k.getQueryInfo(x));
     }
 
-    private double score(Vec x, List<Double> qi) {
-        return k.evalSum(vecs, accelCache, alphas.getBackingArray(), x, qi, 0, alphas.size());
+    private double score(Vec x, DoubleList qi) {
+        return k.evalSum(vecs, accelCache, alphas.elements(), x, qi, 0, alphas.size());
     }
 
     @Override
@@ -284,15 +287,15 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
         final Vec x_t = dataPoint.getNumericalValues();
         final double y_t = targetClass * 2 - 1;
 
-        final List<Double> qi = k.getQueryInfo(x_t);
+        final DoubleList qi = k.getQueryInfo(x_t);
         final double score = score(x_t, qi);
         final double lossD = lossC.getDeriv(score, y_t);
 
         if (lossD == 0) {
-            alphas.getVecView().mutableMultiply(1 - eta * reg);
+            new DenseVector(alphas.elements(), 0, alphas.size()).mutableMultiply(1 - eta * reg);
         } else {
             if (vecs.size() < budget) {
-                alphas.getVecView().mutableMultiply(1 - eta * reg);
+                new DenseVector(alphas.elements(), 0, alphas.size()).mutableMultiply(1 - eta * reg);
                 alphas.add(-eta * lossD);
                 selfK.add(Math.sqrt(k.eval(0, 0, Arrays.asList(x_t), qi)));
                 if (k.supportsAcceleration())
@@ -308,18 +311,18 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
                 } else {
                     double s = 0;
                     for (int i = 0; i < budget; i++)
-                        s += Math.abs(alphas.get(i)) * selfK.get(i);
+                        s += Math.abs(alphas.getDouble(i)) * selfK.getDouble(i);
                     s = (budget - 1) / s;
                     final double target = rand.nextDouble();
                     double cur = 0;
                     int i = -1;
                     while (cur < target) {
                         i++;
-                        cur += dist[i] = 1 - s * alphas.get(i) * selfK.get(i);
+                        cur += dist[i] = 1 - s * alphas.getDouble(i) * selfK.getDouble(i);
                     }
                     toRemove = i++;
                     while (i < budget)
-                        cur += dist[i] = 1 - s * alphas.get(i) * selfK.get(i++);
+                        cur += dist[i] = 1 - s * alphas.getDouble(i) * selfK.getDouble(i++);
                     normalize = cur;
                 }
 
@@ -337,11 +340,11 @@ public class BOGD extends BaseUpdateableClassifier implements BinaryScoreClassif
                 if (k.supportsAcceleration()) {
                     int catToRet = accelCache.size() / budget;
                     for (int i = 0; i < catToRet; i++)
-                        accelCache.remove(toRemove * catToRet);
+                        accelCache.removeDouble(toRemove * catToRet);
                 }
-                alphas.remove(toRemove);
+                alphas.removeDouble(toRemove);
                 vecs.remove(toRemove);
-                selfK.remove(toRemove);
+                selfK.removeDouble(toRemove);
 
                 // Add new point
                 alphas.add(-eta * lossD);

@@ -42,8 +42,9 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * JSAT Data Loader provides a simple binary file format for storing and reading
@@ -643,8 +644,8 @@ public class JSATData {
         }
 
         // used for both numeric and categorical target storage
-        DoubleList targets = new DoubleList();
-        DoubleList weights = new DoubleList();
+        DoubleArrayList targets = new DoubleArrayList();
+        DoubleArrayList weights = new DoubleArrayList();
         store.setCategoricalDataInfo(categories);
         store.setNumNumeric(numNumeric);
 

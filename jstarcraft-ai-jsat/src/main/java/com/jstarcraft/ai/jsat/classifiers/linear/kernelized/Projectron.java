@@ -18,9 +18,11 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Matrix;
 import com.jstarcraft.ai.jsat.linear.SubMatrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * An implementation of the Projectron and Projectrion++ algorithms. These are a
@@ -53,9 +55,9 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
     /**
      * Marked as "d" in the original papers
      */
-    private DoubleList alpha;
+    private DoubleArrayList alpha;
     private List<Vec> S;
-    private List<Double> cacheAccel;
+    private DoubleArrayList cacheAccel;
     private Matrix InvK;
     private Matrix InvKExpanded;
     private double[] k_raw;
@@ -103,9 +105,9 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
         this.k = toCopy.k.clone();
         this.eta = toCopy.eta;
         if (toCopy.S != null) {
-            this.alpha = new DoubleList(toCopy.alpha);
+            this.alpha = new DoubleArrayList(toCopy.alpha);
             this.S = new ArrayList<Vec>(toCopy.S);
-            this.cacheAccel = new DoubleList(toCopy.cacheAccel);
+            this.cacheAccel = new DoubleArrayList(toCopy.cacheAccel);
             this.InvKExpanded = toCopy.InvKExpanded.clone();
             this.InvK = new SubMatrix(this.InvKExpanded, 0, 0, toCopy.InvK.rows(), toCopy.InvK.cols());
             this.k_raw = Arrays.copyOf(toCopy.k_raw, toCopy.k_raw.length);
@@ -188,8 +190,8 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
         else if (predicting.getNumOfCategories() != 2)
             throw new FailedToFitException("Projectrion only supports binary classification");
         final int initSize = 50;
-        alpha = new DoubleList(initSize);
-        cacheAccel = new DoubleList(initSize);
+        alpha = new DoubleArrayList(initSize);
+        cacheAccel = new DoubleArrayList(initSize);
         S = new ArrayList<Vec>(initSize);
         InvKExpanded = new DenseMatrix(initSize, initSize);
         k_raw = new double[initSize];
@@ -198,7 +200,7 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
     @Override
     public void update(DataPoint dataPoint, double weight, int targetClass) {
         final Vec x_t = dataPoint.getNumericalValues();
-        final List<Double> qi = k.getQueryInfo(x_t);
+        final DoubleList qi = k.getQueryInfo(x_t);
         final double score = getScore(x_t, qi, k_raw);
         final double y_t = targetClass * 2 - 1;
 
@@ -228,7 +230,7 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
             {
                 // equation (9)
                 for (int i = 0; i < S.size(); i++)
-                    alpha.set(i, alpha.get(i) + y_t * d.get(i));
+                    alpha.set(i, alpha.getDouble(i) + y_t * d.get(i));
             } else// Add to the basis vectors
             {
                 // Make sure we have space
@@ -265,7 +267,7 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
             double tau = Math.max(Math.max(loss / k_t_d, 2 * (loss - delta / eta) / k_t_d), 1.0);
 
             for (int i = 0; i < S.size(); i++)
-                alpha.set(i, alpha.get(i) + y_t * tau * d.get(i));
+                alpha.set(i, alpha.getDouble(i) + y_t * tau * d.get(i));
         }
     }
 
@@ -286,19 +288,19 @@ public class Projectron extends BaseUpdateableClassifier implements BinaryScoreC
         return false;
     }
 
-    private double getScore(Vec x, List<Double> qi, final double[] kStore) {
+    private double getScore(Vec x, DoubleList qi, final double[] kStore) {
         double score = 0;
         for (int i = 0; i < S.size(); i++) {
             double tmp = k.eval(i, x, qi, S, cacheAccel);
             if (kStore != null)
                 kStore[i] = tmp;
-            score += alpha.get(i) * tmp;
+            score += alpha.getDouble(i) * tmp;
         }
         return score;
     }
 
     @Override
     public double getScore(DataPoint dp) {
-        return k.evalSum(S, cacheAccel, alpha.getBackingArray(), dp.getNumericalValues(), 0, S.size());
+        return k.evalSum(S, cacheAccel, alpha.elements(), dp.getNumericalValues(), 0, S.size());
     }
 }

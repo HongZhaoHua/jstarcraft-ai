@@ -15,11 +15,12 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * An efficient implementation of the K-Means algorithm. This implementation
@@ -375,7 +376,7 @@ public class HamerlyKMeans extends KMeans {
         // TODO temp object for puting all the query info into a cache, should probably
         // be cleaned up - or change original code to have one massive list and then use
         // sub lits to get the QIs individualy
-        final DoubleList meanCache = meanQIs.get(0).isEmpty() ? null : new DoubleList(meanQIs.size());
+        final DoubleArrayList meanCache = meanQIs.get(0).isEmpty() ? null : new DoubleArrayList(meanQIs.size());
         if (meanCache != null)
             for (List<Double> qi : meanQIs)
                 meanCache.addAll(qi);

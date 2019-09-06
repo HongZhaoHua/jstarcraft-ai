@@ -16,8 +16,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.jstarcraft.ai.jsat.utils.DoubleList;
-import com.jstarcraft.ai.jsat.utils.IndexTable;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -93,13 +92,13 @@ public class IndexTableTest {
     @Test
     public void testApply_List() {
         IndexTable idt = new IndexTable(array);
-        List<Double> test = new DoubleList();
+        DoubleArrayList test = new DoubleArrayList();
         for (double d : array)
             test.add(d);
 
         idt.apply(test);
         for (int i = 0; i < test.size() - 1; i++)
-            assertTrue(test.get(i) <= test.get(i + 1));
+            assertTrue(test.getDouble(i) <= test.getDouble(i + 1));
     }
 
     @Test

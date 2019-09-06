@@ -19,6 +19,8 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.ProbailityMatch;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+
 /**
  * An implementation of Locality Sensitive Hashing for the
  * {@link CosineDistance} using random projections. This forms a vector
@@ -117,7 +119,7 @@ public class RandomProjectionLSH<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleArrayList getAccelerationCache() {
         return null;
     }
 

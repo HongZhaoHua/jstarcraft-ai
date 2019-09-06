@@ -32,14 +32,10 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.BallTree;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.DualTree;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VPTree;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VPTreeMV;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorArray;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -90,14 +86,14 @@ public class DualTreeTest {
 
         for (int i = 0; i < B.size(); i++) {
             List<Integer> nn = new IntList();
-            List<Double> dd = new DoubleList();
+            DoubleArrayList dd = new DoubleArrayList();
 
             A.search(B.get(i), max_radius, nn, dd);
 
             // remove everyone that was too close
-            while (!dd.isEmpty() && dd.get(0) < min_radius) {
+            while (!dd.isEmpty() && dd.getDouble(0) < min_radius) {
                 nn.remove(0);
-                dd.remove(0);
+                dd.removeDouble(0);
             }
 
             nn_true.add(nn);
@@ -161,7 +157,7 @@ public class DualTreeTest {
 
         for (int i = 0; i < B.size(); i++) {
             List<Integer> nn = new IntList();
-            List<Double> dd = new DoubleList();
+            DoubleArrayList dd = new DoubleArrayList();
 
             A.search(B.get(i), K, nn, dd);
 

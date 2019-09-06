@@ -1,5 +1,7 @@
 package com.jstarcraft.ai.jsat.regression.evaluation;
 
+import com.jstarcraft.ai.jsat.linear.DenseVector;
+
 /**
  * Uses the Coefficient of Determination, also known as R<sup>2</sup>, is an
  * evaluation score in [0,1].
@@ -28,7 +30,7 @@ public class CoefficientOfDetermination extends TotalHistoryRegressionScore {
 
     @Override
     public double getScore() {
-        double trueMean = truths.getVecView().mean();
+        double trueMean = new DenseVector(truths.elements(), 0, truths.size()).mean();
         double numer = 0, denom = 0;
         for (int i = 0; i < truths.size(); i++) {
             numer += Math.pow(predictions.getDouble(i) - truths.getDouble(i), 2);

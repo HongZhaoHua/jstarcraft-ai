@@ -28,7 +28,8 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.Function;
 import com.jstarcraft.ai.jsat.math.FunctionVec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This implements the Modified Orthant-Wise Limited memory
@@ -209,7 +210,7 @@ public class ModifiedOWLQN implements Optimizer {
         Vec x_diff = x0.clone();
 
         // history for implicit H
-        List<Double> Rho = new DoubleList(m);
+        DoubleArrayList Rho = new DoubleArrayList(m);
         List<Vec> S = new ArrayList<>(m);
         List<Vec> Y = new ArrayList<>(m);
         double[] alphas = new double[m];

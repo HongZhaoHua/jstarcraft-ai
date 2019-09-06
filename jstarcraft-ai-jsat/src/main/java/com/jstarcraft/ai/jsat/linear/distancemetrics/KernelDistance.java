@@ -9,6 +9,8 @@ import com.jstarcraft.ai.jsat.distributions.kernels.PolynomialKernel;
 import com.jstarcraft.ai.jsat.distributions.kernels.RBFKernel;
 import com.jstarcraft.ai.jsat.linear.Vec;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * Creates a distance metric from a given kernel trick. For the distance metric
  * to be valid, the kernel used must be positive definite.
@@ -93,7 +95,7 @@ public class KernelDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    public DoubleList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         return null;
     }
 
@@ -108,7 +110,7 @@ public class KernelDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
+    public DoubleList getQueryInfo(Vec q) {
         return null;
     }
 

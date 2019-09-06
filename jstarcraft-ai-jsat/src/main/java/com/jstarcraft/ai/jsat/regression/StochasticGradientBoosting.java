@@ -13,9 +13,10 @@ import com.jstarcraft.ai.jsat.math.Function1D;
 import com.jstarcraft.ai.jsat.math.rootfinding.RootFinder;
 import com.jstarcraft.ai.jsat.math.rootfinding.Zeroin;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * An implementation of Stochastic Gradient Boosting (SGB) for the Squared Error
@@ -76,7 +77,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
     /**
      * The list of learner coefficients for each weak learner.
      */
-    private List<Double> coef;
+    private DoubleArrayList coef;
 
     private double learningRate;
 
@@ -218,7 +219,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
 
         double result = 0;
         for (int i = 0; i < F.size(); i++)
-            result += F.get(i).regress(data) * coef.get(i);
+            result += F.get(i).regress(data) * coef.getDouble(i);
 
         return result;
     }
@@ -230,7 +231,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
         final RegressionDataSet resids = dataSet.shallowClone();
 
         F = new ArrayList<>(maxIterations);
-        coef = new DoubleList(maxIterations);
+        coef = new DoubleArrayList(maxIterations);
 
         // Add the first learner. Either an instance of the weak learner, or a strong
         // initial estimate
@@ -251,7 +252,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
         IntList randOrder = IntList.range(resids.size());
 
         for (int iter = 0; iter < maxIterations; iter++) {
-            final double lastCoef = coef.get(iter);
+            final double lastCoef = coef.getDouble(iter);
             lastF = F.get(iter);
 
             // Compute the new residuals
@@ -372,7 +373,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
                 clone.F.add(f.clone());
         }
         if (coef != null) {
-            clone.coef = new DoubleList(this.coef);
+            clone.coef = new DoubleArrayList(this.coef);
         }
 
         if (strongLearner != null)

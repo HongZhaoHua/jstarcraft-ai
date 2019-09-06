@@ -12,10 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.jstarcraft.ai.jsat.math.FastMath;
-import com.jstarcraft.ai.jsat.math.SpecialMath;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -54,14 +53,14 @@ public class FastMathTest {
     @Test
     public void testLog2() {
         System.out.println("log2");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 1000;
             relErrs.add(relErr(Math.log(x) / Math.log(2), FastMath.log2(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 
     /**
@@ -70,14 +69,14 @@ public class FastMathTest {
     @Test
     public void testLog2_2pd1() {
         System.out.println("log2_2pd1");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 1000;
             relErrs.add(relErr(Math.log(x) / Math.log(2), FastMath.log2_2pd1(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 
     /**
@@ -86,14 +85,14 @@ public class FastMathTest {
     @Test
     public void testLog2_c11() {
         System.out.println("log2_c11");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 1000;
             relErrs.add(relErr(Math.log(x) / Math.log(2), FastMath.log2_c11(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 
     /**
@@ -112,14 +111,14 @@ public class FastMathTest {
     @Test
     public void testPow2_double() {
         System.out.println("pow2");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 20;
             relErrs.add(relErr(Math.pow(2, x), FastMath.pow2(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
 
     }
 
@@ -129,7 +128,7 @@ public class FastMathTest {
     @Test
     public void testPow() {
         System.out.println("pow");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 20;
@@ -138,10 +137,10 @@ public class FastMathTest {
         }
         Collections.sort(relErrs);
         // most should have lowwer rel error for best cases
-        assertTrue(relErrs.get((int) (trials * .10)) <= 1e-4);// usually does better than this
-        assertTrue(relErrs.get((int) (trials * .50)) <= 1e-3);
-        assertTrue(relErrs.get((int) (trials * .75)) <= 1e-2);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-1);
+        assertTrue(relErrs.getDouble((int) (trials * .10)) <= 1e-4);// usually does better than this
+        assertTrue(relErrs.getDouble((int) (trials * .50)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .75)) <= 1e-2);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-1);
     }
 
     /**
@@ -150,14 +149,14 @@ public class FastMathTest {
     @Test
     public void testLog() {
         System.out.println("log");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 20 + 1e-15;
             relErrs.add(relErr(Math.log(x), FastMath.log(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 
     /**
@@ -166,14 +165,14 @@ public class FastMathTest {
     @Test
     public void testExp() {
         System.out.println("exp");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 50 - 25;
             relErrs.add(relErr(Math.exp(x), FastMath.exp(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 
     /**
@@ -182,13 +181,13 @@ public class FastMathTest {
     @Test
     public void testDigamma() {
         System.out.println("digamma");
-        DoubleList relErrs = new DoubleList();
+        DoubleArrayList relErrs = new DoubleArrayList();
         int trials = 10000;
         for (int i = 0; i < trials; i++) {
             double x = rand.nextDouble() * 50;
             relErrs.add(relErr(SpecialMath.digamma(x), FastMath.digamma(x)));
         }
         Collections.sort(relErrs);
-        assertTrue(relErrs.get((int) (trials * .95)) <= 1e-3);
+        assertTrue(relErrs.getDouble((int) (trials * .95)) <= 1e-3);
     }
 }

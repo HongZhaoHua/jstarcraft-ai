@@ -12,6 +12,9 @@ import java.util.concurrent.Future;
 
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.doubles.AbstractDoubleList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  *
  * @author Edward Raff
@@ -73,6 +76,45 @@ public class ListUtils {
                     return left.get(index);
                 else if (index - left.size() < right.size())
                     return right.get(index - left.size());
+                else
+                    throw new IndexOutOfBoundsException("List of lengt " + size() + " has no index " + index);
+            }
+
+            @Override
+            public int size() {
+                return left.size() + right.size();
+            }
+        };
+        return merged;
+    }
+
+    /**
+     * Returns a new unmodifiable view that is the merging of two lists
+     * 
+     * @param       <T> the type the lists hold
+     * @param left  the left portion of the merged view
+     * @param right the right portion of the merged view
+     * @return a list view that contains bot the left and right lists
+     */
+    public static DoubleList mergedView(final DoubleList left, final DoubleList right) {
+        DoubleList merged = new AbstractDoubleList() {
+
+            @Override
+            public Double get(int index) {
+                if (index < left.size())
+                    return left.get(index);
+                else if (index - left.size() < right.size())
+                    return right.get(index - left.size());
+                else
+                    throw new IndexOutOfBoundsException("List of lengt " + size() + " has no index " + index);
+            }
+
+            @Override
+            public double getDouble(int index) {
+                if (index < left.size())
+                    return left.getDouble(index);
+                else if (index - left.size() < right.size())
+                    return right.getDouble(index - left.size());
                 else
                     throw new IndexOutOfBoundsException("List of lengt " + size() + " has no index " + index);
             }

@@ -9,6 +9,8 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.text.GreekLetters;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * Provides a kernel for the Radial Basis Function, which is of the form <br>
  * k(x, y) = exp(-||x-y||<sup>2</sup>/(2*&sigma;<sup>2</sup>))
@@ -45,14 +47,14 @@ public class RBFKernel extends BaseL2Kernel {
     }
 
     @Override
-    public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache) {
+    public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache) {
         if (a == b)
             return 1;
         return Math.exp(-getSqrdNorm(a, b, trainingSet, cache) * sigmaSqrd2Inv);
     }
 
     @Override
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache) {
         return Math.exp(-getSqrdNorm(a, b, qi, vecs, cache) * sigmaSqrd2Inv);
     }
 

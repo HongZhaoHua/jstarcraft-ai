@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+
 /**
  * The index table provides a way of accessing the sorted view of an array or
  * list, without ever sorting the elements of said list. Given an array of
@@ -68,7 +70,7 @@ public class IndexTable implements Serializable {
      * @param array the array to create an index table for.
      */
     public IndexTable(double[] array) {
-        this(DoubleList.unmodifiableView(array, array.length));
+        this(DoubleArrayList.wrap(array, array.length));
     }
 
     /**
@@ -130,7 +132,7 @@ public class IndexTable implements Serializable {
      * @param array the input to get sorted order of
      */
     public void sort(double[] array) {
-        sort(DoubleList.unmodifiableView(array, array.length));
+        sort(DoubleArrayList.wrap(array, array.length));
     }
 
     /**
@@ -140,7 +142,7 @@ public class IndexTable implements Serializable {
      * @param array the input to get sorted order of
      */
     public void sortR(double[] array) {
-        sortR(DoubleList.unmodifiableView(array, array.length));
+        sortR(DoubleArrayList.wrap(array, array.length));
     }
 
     /**
@@ -266,7 +268,7 @@ public class IndexTable implements Serializable {
     public void apply(double[] target) {
         // use DoubleList view b/d we are only using set ops, so we wont run into an
         // issue of re-allocating the array
-        apply(DoubleList.view(target, target.length), new DoubleList(target.length));
+        apply(DoubleArrayList.wrap(target, target.length), new DoubleArrayList(target.length));
     }
 
     /**

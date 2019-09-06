@@ -1,7 +1,5 @@
 package com.jstarcraft.ai.jsat.classifiers.linear.kernelized;
 
-import java.util.List;
-
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.BaseUpdateableClassifier;
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
@@ -24,11 +22,13 @@ import com.jstarcraft.ai.jsat.lossfunctions.LossFunc;
 import com.jstarcraft.ai.jsat.lossfunctions.LossMC;
 import com.jstarcraft.ai.jsat.lossfunctions.LossR;
 import com.jstarcraft.ai.jsat.lossfunctions.SoftmaxLoss;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.BaseUpdateableRegressor;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.UpdateableRegressor;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Kernel SGD is the kernelized counterpart to {@link LinearSGD}, and learns
@@ -328,7 +328,7 @@ public class KernelSGD implements UpdateableClassifier, UpdateableRegressor, Par
     @Override
     public void update(DataPoint dataPoint, double weight, int targetClass) {
         final Vec x = dataPoint.getNumericalValues();
-        final List<Double> qi = kernel.getQueryInfo(x);
+        final DoubleList qi = kernel.getQueryInfo(x);
 
         final double eta_t = getNextEta();
 
@@ -353,7 +353,7 @@ public class KernelSGD implements UpdateableClassifier, UpdateableRegressor, Par
     @Override
     public void update(DataPoint dataPoint, double weight, double targetValue) {
         final Vec x = dataPoint.getNumericalValues();
-        final List<Double> qi = kernel.getQueryInfo(x);
+        final DoubleList qi = kernel.getQueryInfo(x);
 
         final double eta_t = getNextEta();
 
@@ -369,7 +369,7 @@ public class KernelSGD implements UpdateableClassifier, UpdateableRegressor, Par
     @Override
     public CategoricalResults classify(DataPoint data) {
         final Vec x = data.getNumericalValues();
-        final List<Double> qi = kernel.getQueryInfo(x);
+        final DoubleList qi = kernel.getQueryInfo(x);
         if (kpoint != null)
             return ((LossC) loss).getClassification(kpoint.dot(x, qi));
         else {
@@ -382,7 +382,7 @@ public class KernelSGD implements UpdateableClassifier, UpdateableRegressor, Par
     @Override
     public double regress(DataPoint data) {
         final Vec x = data.getNumericalValues();
-        final List<Double> qi = kernel.getQueryInfo(x);
+        final DoubleList qi = kernel.getQueryInfo(x);
         return ((LossR) loss).getRegression(kpoint.dot(x, qi));
     }
 

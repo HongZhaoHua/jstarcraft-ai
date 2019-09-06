@@ -44,15 +44,14 @@ import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.io.CSV;
-import com.jstarcraft.ai.jsat.io.DataWriter;
 import com.jstarcraft.ai.jsat.linear.ConcatenatedVec;
 import com.jstarcraft.ai.jsat.linear.ConstantVector;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -85,7 +84,7 @@ public class CSVTest {
         System.out.println("read (numeric only features)");
 
         List<String> testLines = new ArrayList<String>();
-        List<Double> expetedLabel = new DoubleList();
+        DoubleArrayList expetedLabel = new DoubleArrayList();
         List<Vec> expectedVec = new ArrayList<Vec>();
 
         testLines.add("-1,0.0, 3.0, 0.0,   0.0, 0.0");// normal line
@@ -183,7 +182,7 @@ public class CSVTest {
         System.out.println("read");
 
         List<String> testLines = new ArrayList<String>();
-        List<Double> expetedLabel = new DoubleList();
+        DoubleArrayList expetedLabel = new DoubleArrayList();
         List<Vec> expectedVec = new ArrayList<Vec>();
         List<int[]> expectedCats = new ArrayList<int[]>();
 

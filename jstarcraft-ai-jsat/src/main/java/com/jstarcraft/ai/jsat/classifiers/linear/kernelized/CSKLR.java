@@ -18,8 +18,9 @@ import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * An implementation of Conservative Stochastic Kernel Logistic Regression. This
@@ -54,7 +55,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
 
     private static final long serialVersionUID = 2325605193408720811L;
     private double eta;
-    private DoubleList alpha;
+    private DoubleArrayList alpha;
     private List<Vec> vecs;
     private double curNorm;
     private KernelTrick k;
@@ -62,7 +63,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
     private Random rand;
     private UpdateMode mode;
     private double gamma = 2;
-    private List<Double> accelCache;
+    private DoubleArrayList accelCache;
 
     /**
      * Creates a new CSKLR object
@@ -225,7 +226,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
      */
     protected CSKLR(CSKLR toClone) {
         if (toClone.alpha != null)
-            this.alpha = new DoubleList(toClone.alpha);
+            this.alpha = new DoubleArrayList(toClone.alpha);
         if (toClone.vecs != null) {
             this.vecs = new ArrayList<Vec>(toClone.vecs);
         }
@@ -235,7 +236,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
         this.eta = toClone.eta;
         this.setKernel(toClone.k.clone());
         if (toClone.accelCache != null)
-            this.accelCache = new DoubleList(toClone.accelCache);
+            this.accelCache = new DoubleArrayList(toClone.accelCache);
         this.gamma = toClone.gamma;
         this.rand = RandomUtil.getRandom();
         this.setEpochs(toClone.getEpochs());
@@ -355,7 +356,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
      * @return the margin score
      */
     private double getPreScore(Vec x) {
-        return k.evalSum(vecs, accelCache, alpha.getBackingArray(), x, 0, alpha.size());
+        return k.evalSum(vecs, accelCache, alpha.elements(), x, 0, alpha.size());
     }
 
     /**
@@ -378,12 +379,12 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
     public void setUp(CategoricalData[] categoricalAttributes, int numericAttributes, CategoricalData predicting) {
         if (predicting.getNumOfCategories() != 2)
             throw new FailedToFitException("CSKLR supports only binary classification");
-        alpha = new DoubleList();
+        alpha = new DoubleArrayList();
         vecs = new ArrayList<Vec>();
         curNorm = 0;
         rand = RandomUtil.getRandom();
         if (k.supportsAcceleration())
-            accelCache = new DoubleList();
+            accelCache = new DoubleArrayList();
     }
 
     @Override
@@ -414,7 +415,7 @@ public class CSKLR extends BaseUpdateableClassifier implements Parameterized {
         if (curNorm > R) {
             double coef = R / curNorm;
             for (int i = 0; i < alpha.size(); i++)
-                alpha.set(i, alpha.get(i) * coef);
+                alpha.set(i, alpha.getDouble(i) * coef);
             curNorm = coef;
         }
 

@@ -20,13 +20,15 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.MinkowskiDistance;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Standard KDTree implementation. KDTrees are fast to create with no distance
@@ -62,7 +64,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
     private int size;
     private int leaf_node_size = 20;
     private List<V> allVecs;
-    private List<Double> distCache;
+    private DoubleList distCache;
 
     /**
      * KDTree uses an index of the vector at each stage to use as a pivot, dividing
@@ -143,7 +145,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 
@@ -623,7 +625,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
     public KDTree<V> clone() {
         KDTree<V> clone = new KDTree<>(distanceMetric, pvSelection);
         if (this.distCache != null)
-            clone.distCache = new DoubleList(this.distCache);
+            clone.distCache = new DoubleArrayList(this.distCache);
         if (this.allVecs != null)
             clone.allVecs = new ArrayList<>(this.allVecs);
         clone.size = this.size;

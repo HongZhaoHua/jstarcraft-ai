@@ -15,8 +15,9 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -144,7 +145,7 @@ public class CLARA extends PAM {
          * sampSize] Value is the coresponding index in the full data set
          */
         Map<Integer, Integer> samplePoints = new LinkedHashMap<>();
-        DoubleList subCache = new DoubleList(sampSize);
+        DoubleArrayList subCache = new DoubleArrayList(sampSize);
 
         for (int i = 0; i < sampleCount; i++) {
             // Take a sample and use PAM on it to get medoids

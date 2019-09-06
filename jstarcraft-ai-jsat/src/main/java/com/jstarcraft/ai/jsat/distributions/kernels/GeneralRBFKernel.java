@@ -11,9 +11,11 @@ import com.jstarcraft.ai.jsat.distributions.LogUniform;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This class provides a generalization of the {@link RBFKernel} to arbitrary
@@ -81,14 +83,14 @@ public class GeneralRBFKernel extends DistanceMetricBasedKernel {
     }
 
     @Override
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache) {
         double dist = d.dist(a, b, qi, vecs, cache);
         return Math.exp(-dist * dist * sigmaSqrd2Inv);
 
     }
 
     @Override
-    public double eval(int a, int b, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, int b, List<? extends Vec> vecs, DoubleList cache) {
         double dist = d.dist(a, b, vecs, cache);
         return Math.exp(-dist * dist * sigmaSqrd2Inv);
     }
@@ -124,7 +126,7 @@ public class GeneralRBFKernel extends DistanceMetricBasedKernel {
         if (toSample > 5000)
             toSample = 5000 + (int) Math.floor(Math.sqrt(d.size() - 5000));
 
-        DoubleList vals = new DoubleList(toSample * toSample);
+        DoubleArrayList vals = new DoubleArrayList(toSample * toSample);
 
         if (d instanceof ClassificationDataSet && ((ClassificationDataSet) d).getPredicting().getNumOfCategories() == 2) {
             ClassificationDataSet cdata = (ClassificationDataSet) d;

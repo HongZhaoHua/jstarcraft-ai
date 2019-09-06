@@ -8,6 +8,8 @@ import com.jstarcraft.ai.jsat.distributions.LogUniform;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * The PUK kernel is an alternative to the RBF Kernel. By altering the
  * {@link #setOmega(double) omega} parameter the behavior of the PUK kernel can
@@ -81,12 +83,12 @@ public class PukKernel extends BaseL2Kernel implements Parameterized {
     }
 
     @Override
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache) {
         return getVal(Math.sqrt(getSqrdNorm(a, b, qi, vecs, cache)));
     }
 
     @Override
-    public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache) {
+    public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache) {
         return getVal(Math.sqrt(getSqrdNorm(b, b, trainingSet, cache)));
     }
 

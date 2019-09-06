@@ -22,6 +22,8 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * This class is a generic wrapper for the Vector Collection objects within
  * JSAT. It will attempt to select a good choice for any given dataset and
@@ -67,7 +69,7 @@ public class DefaultVectorCollection<V extends Vec> implements VectorCollection<
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return base.getAccelerationCache();
     }
 

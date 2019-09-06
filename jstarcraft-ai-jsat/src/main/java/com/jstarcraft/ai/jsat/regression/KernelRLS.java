@@ -12,11 +12,13 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Matrix;
 import com.jstarcraft.ai.jsat.linear.SubMatrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Provides an implementation of the Kernel Recursive Least Squares algorithm.
@@ -38,7 +40,7 @@ public class KernelRLS implements UpdateableRegressor, Parameterized {
     private double errorTolerance;
 
     private List<Vec> vecs;
-    private List<Double> kernelAccel;
+    private DoubleArrayList kernelAccel;
     private Matrix K;
     private Matrix InvK;
     private Matrix P;
@@ -172,7 +174,7 @@ public class KernelRLS implements UpdateableRegressor, Parameterized {
     public void setUp(CategoricalData[] categoricalAttributes, int numericAttributes) {
         vecs = new ArrayList<Vec>();
         if (k.supportsAcceleration())
-            kernelAccel = new DoubleList();
+            kernelAccel = new DoubleArrayList();
         else
             kernelAccel = null;
 
@@ -194,7 +196,7 @@ public class KernelRLS implements UpdateableRegressor, Parameterized {
          */
         Vec x_t = dataPoint.getNumericalValues();
 
-        final List<Double> qi = k.getQueryInfo(x_t);
+        final DoubleList qi = k.getQueryInfo(x_t);
         final double k_tt = k.eval(0, 0, Arrays.asList(x_t), qi);
 
         if (K == null)// first point to be added

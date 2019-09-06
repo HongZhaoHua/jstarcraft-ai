@@ -1,6 +1,6 @@
 package com.jstarcraft.ai.jsat.regression.evaluation;
 
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This abstract class provides the work for maintaining the history of
@@ -14,15 +14,15 @@ public abstract class TotalHistoryRegressionScore implements RegressionScore {
     /**
      * List of the true target values
      */
-    protected DoubleList truths;
+    protected DoubleArrayList truths;
     /**
      * List of the predict values for each target
      */
-    protected DoubleList predictions;
+    protected DoubleArrayList predictions;
     /**
      * The weight of importance for each point
      */
-    protected DoubleList weights;
+    protected DoubleArrayList weights;
 
     public TotalHistoryRegressionScore() {
     }
@@ -34,17 +34,17 @@ public abstract class TotalHistoryRegressionScore implements RegressionScore {
      */
     public TotalHistoryRegressionScore(TotalHistoryRegressionScore toCopy) {
         if (toCopy.truths != null) {
-            this.truths = new DoubleList(toCopy.truths);
-            this.predictions = new DoubleList(toCopy.predictions);
-            this.weights = new DoubleList(toCopy.weights);
+            this.truths = new DoubleArrayList(toCopy.truths);
+            this.predictions = new DoubleArrayList(toCopy.predictions);
+            this.weights = new DoubleArrayList(toCopy.weights);
         }
     }
 
     @Override
     public void prepare() {
-        truths = new DoubleList();
-        predictions = new DoubleList();
-        weights = new DoubleList();
+        truths = new DoubleArrayList();
+        predictions = new DoubleArrayList();
+        weights = new DoubleArrayList();
     }
 
     @Override

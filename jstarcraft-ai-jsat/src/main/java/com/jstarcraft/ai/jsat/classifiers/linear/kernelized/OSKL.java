@@ -14,14 +14,17 @@ import com.jstarcraft.ai.jsat.classifiers.calibration.BinaryScoreClassifier;
 import com.jstarcraft.ai.jsat.distributions.Distribution;
 import com.jstarcraft.ai.jsat.distributions.LogUniform;
 import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
+import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.lossfunctions.HingeLoss;
 import com.jstarcraft.ai.jsat.lossfunctions.LogisticLoss;
 import com.jstarcraft.ai.jsat.lossfunctions.LossC;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Online Sparse Kernel Learning by Sampling and Smooth Losses (OSKL) is an
@@ -65,12 +68,12 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
     /**
      * Store the average of the weights over time
      */
-    private DoubleList alphaAveraged;
+    private DoubleArrayList alphaAveraged;
 
     private List<Vec> vecs;
-    private DoubleList alphas;
-    private DoubleList inputKEvals;
-    private List<Double> accelCache;
+    private DoubleArrayList alphas;
+    private DoubleArrayList inputKEvals;
+    private DoubleArrayList accelCache;
     private Random rand;
 
     /**
@@ -135,12 +138,12 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
             this.vecs = new ArrayList<Vec>();
             for (Vec v : toCopy.vecs)
                 this.vecs.add(v.clone());
-            this.alphas = new DoubleList(toCopy.alphas);
-            this.alphaAveraged = new DoubleList(toCopy.alphaAveraged);
-            this.inputKEvals = new DoubleList(toCopy.inputKEvals);
+            this.alphas = new DoubleArrayList(toCopy.alphas);
+            this.alphaAveraged = new DoubleArrayList(toCopy.alphaAveraged);
+            this.inputKEvals = new DoubleArrayList(toCopy.inputKEvals);
         }
         if (toCopy.accelCache != null)
-            this.accelCache = new DoubleList(toCopy.accelCache);
+            this.accelCache = new DoubleArrayList(toCopy.accelCache);
 
         this.rand = RandomUtil.getRandom();
     }
@@ -289,13 +292,13 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
     public void setUp(CategoricalData[] categoricalAttributes, int numericAttributes, CategoricalData predicting) {
         rand = RandomUtil.getRandom();
         vecs = new ArrayList<Vec>();
-        alphas = new DoubleList();
-        alphaAveraged = new DoubleList();
+        alphas = new DoubleArrayList();
+        alphaAveraged = new DoubleArrayList();
         t = 0;
         last_t = 0;
-        inputKEvals = new DoubleList();
+        inputKEvals = new DoubleArrayList();
         if (k.supportsAcceleration())
-            accelCache = new DoubleList();
+            accelCache = new DoubleArrayList();
         else
             accelCache = null;
         curSqrdNorm = 0;
@@ -316,7 +319,7 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
     @Override
     public void update(DataPoint dataPoint, double weight, int targetClass) {
         final Vec x_t = dataPoint.getNumericalValues();
-        final List<Double> qi = k.getQueryInfo(x_t);
+        final DoubleList qi = k.getQueryInfo(x_t);
         final double score = scoreSaveEval(x_t, qi);
         final double y_t = targetClass * 2 - 1;
         // 4: Compute the derivative ℓ′(yt, ft(xt))
@@ -341,19 +344,19 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
         // project alphas to maintain norm if needed
         if (curSqrdNorm > R * R) {
             double coeff = R / Math.sqrt(curSqrdNorm);
-            alphas.getVecView().mutableMultiply(coeff);
+            new DenseVector(alphas.elements(), 0, alphas.size()).mutableMultiply(coeff);
             curSqrdNorm *= coeff * coeff;
         }
     };
 
-    private double score(Vec x, List<Double> qi) {
-        DoubleList alphToUse;
+    private double score(Vec x, DoubleList qi) {
+        DoubleArrayList alphToUse;
         if (useAverageModel && t > burnIn) {
             updateAverage();
             alphToUse = alphaAveraged;
         } else
             alphToUse = alphas;
-        return k.evalSum(vecs, accelCache, alphToUse.getBackingArray(), x, qi, 0, alphToUse.size());
+        return k.evalSum(vecs, accelCache, alphToUse.elements(), x, qi, 0, alphToUse.size());
     }
 
     /**
@@ -365,7 +368,7 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
      * @param qi the query information for the vector
      * @return the dot product in the kernel space
      */
-    private double scoreSaveEval(Vec x, List<Double> qi) {
+    private double scoreSaveEval(Vec x, DoubleList qi) {
         inputKEvals.clear();
         inputKEvals.add(k.eval(0, 0, Arrays.asList(x), qi));
         double sum = 0;
@@ -408,7 +411,7 @@ public class OSKL extends BaseUpdateableClassifier implements BinaryScoreClassif
         else if (last_t < burnIn)// first update since done burning
         {
             for (int i = 0; i < alphaAveraged.size(); i++)
-                alphaAveraged.set(i, alphas.get(i));
+                alphaAveraged.set(i, alphas.getDouble(i));
         }
         double w = t - last_t;// time elapsed
         for (int i = 0; i < alphaAveraged.size(); i++) {

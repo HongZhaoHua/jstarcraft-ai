@@ -22,6 +22,8 @@ import java.util.List;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * This provides a wrapper kernel that produces a normalized kernel trick from
  * any input kernel trick. A normalized kernel has a maximum output of 1 when
@@ -67,22 +69,22 @@ public class NormalizedKernel implements KernelTrick {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> trainingSet) {
+    public DoubleList getAccelerationCache(List<? extends Vec> trainingSet) {
         return k.getAccelerationCache(trainingSet);
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
+    public DoubleList getQueryInfo(Vec q) {
         return k.getQueryInfo(q);
     }
 
     @Override
-    public void addToCache(Vec newVec, List<Double> cache) {
+    public void addToCache(Vec newVec, DoubleList cache) {
         k.addToCache(newVec, cache);
     }
 
     @Override
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache) {
         double aa = k.eval(a, a, vecs, cache);
         double bb = k.eval(0, 0, Arrays.asList(b), qi);
         if (aa == 0 || bb == 0)
@@ -92,7 +94,7 @@ public class NormalizedKernel implements KernelTrick {
     }
 
     @Override
-    public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache) {
+    public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache) {
         double aa = k.eval(a, a, trainingSet, cache);
         double bb = k.eval(b, b, trainingSet, cache);
         if (aa == 0 || bb == 0)
@@ -102,12 +104,12 @@ public class NormalizedKernel implements KernelTrick {
     }
 
     @Override
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, int start, int end) {
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, int start, int end) {
         return evalSum(finalSet, cache, alpha, y, getQueryInfo(y), start, end);
     }
 
     @Override
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, List<Double> qi, int start, int end) {
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, DoubleList qi, int start, int end) {
         double sum = 0;
 
         for (int i = start; i < end; i++)

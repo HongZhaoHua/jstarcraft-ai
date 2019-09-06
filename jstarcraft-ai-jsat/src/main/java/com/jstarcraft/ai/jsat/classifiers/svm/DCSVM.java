@@ -18,7 +18,6 @@ package com.jstarcraft.ai.jsat.classifiers.svm;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,11 +35,13 @@ import com.jstarcraft.ai.jsat.exceptions.UntrainedModelException;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This is an implementation of the Divide-and-Conquer Support Vector Machine
@@ -293,7 +294,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
                 if (group[i] >= 0)
                     return;// you already got assigned above
 
-                List<Double> qi = null;
+                DoubleList qi = null;
                 if (accelCache != null) {
                     int multiplier = accelCache.size() / N;
                     qi = accelCache.subList(i * multiplier, i * multiplier + multiplier);
@@ -306,7 +307,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
             for (int c : found_clusters) {
 //                System.out.println("\tBuilding model for " + c);
                 ClassificationDataSet V_c = new ClassificationDataSet(dataSet.getNumNumericalVars(), dataSet.getCategories(), dataSet.getPredicting());
-                DoubleList V_alphas = new DoubleList();
+                DoubleArrayList V_alphas = new DoubleArrayList();
                 IntList orig_index = new IntList();
                 for (int i = 0; i < N; i++) {
                     if (group[i] != c)
@@ -328,7 +329,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
                     svm.train(V_c, parallel);
                 else// warm start
                 {
-                    svm.train(V_c, V_alphas.getBackingArray(), parallel);
+                    svm.train(V_c, V_alphas.elements(), parallel);
                 }
                 early_models.put(c, svm);
 

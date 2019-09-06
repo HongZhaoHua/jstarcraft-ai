@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * A distance metric defines the distance between two points in a metric space.
  * There are three necessary properties for a metric to be valid,
@@ -124,7 +126,7 @@ public interface DistanceMetric extends Cloneable, Serializable {
      * @param vecs the list of vectors to build an acceleration cache for
      * @return the list of double for the cache
      */
-    default public List<Double> getAccelerationCache(List<? extends Vec> vecs) {
+    default public DoubleList getAccelerationCache(List<? extends Vec> vecs) {
         return getAccelerationCache(vecs, false);
     }
 
@@ -140,7 +142,7 @@ public interface DistanceMetric extends Cloneable, Serializable {
      *                 threaded manner.
      * @return the list of double for the cache
      */
-    default public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    default public DoubleList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         return null;
     }
 
@@ -187,7 +189,7 @@ public interface DistanceMetric extends Cloneable, Serializable {
      * @param q the query point to generate cache information for
      * @return the cache information for the query point
      */
-    default public List<Double> getQueryInfo(Vec q) {
+    default public DoubleList getQueryInfo(Vec q) {
         return null;
     }
 

@@ -21,6 +21,8 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ProbailityMatch;
 
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+
 /**
  *
  * @author Edward Raff
@@ -148,7 +150,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleArrayList getAccelerationCache() {
         return null;
     }
 

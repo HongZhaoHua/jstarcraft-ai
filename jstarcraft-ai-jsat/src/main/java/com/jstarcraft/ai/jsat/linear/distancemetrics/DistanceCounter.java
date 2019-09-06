@@ -21,6 +21,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * This class exists primarily as a sanity/benchmarking utility. It takes a
  * given base distance metric, which will be used as the actual method of
@@ -102,7 +104,7 @@ public class DistanceCounter implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    public DoubleList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         return base.getAccelerationCache(vecs, parallel);
     }
 
@@ -119,7 +121,7 @@ public class DistanceCounter implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
+    public DoubleList getQueryInfo(Vec q) {
         return base.getQueryInfo(q);
     }
 

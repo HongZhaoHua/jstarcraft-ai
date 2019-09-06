@@ -12,7 +12,8 @@ import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.calibration.BinaryScoreClassifier;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Modest Ada Boost is a generalization of Discrete Ada Boost that attempts to
@@ -42,7 +43,7 @@ public class ModestAdaBoost implements Classifier, Parameterized, BinaryScoreCla
     /**
      * The weights for each weak learner
      */
-    protected List<Double> hypWeights;
+    protected DoubleArrayList hypWeights;
     protected CategoricalData predicting;
 
     /**
@@ -64,7 +65,7 @@ public class ModestAdaBoost implements Classifier, Parameterized, BinaryScoreCla
     protected ModestAdaBoost(ModestAdaBoost toClone) {
         this(toClone.weakLearner.clone(), toClone.maxIterations);
         if (toClone.hypWeights != null) {
-            this.hypWeights = new DoubleList(toClone.hypWeights);
+            this.hypWeights = new DoubleArrayList(toClone.hypWeights);
             this.hypoths = new ArrayList<Classifier>(toClone.maxIterations);
             for (Classifier weak : toClone.hypoths)
                 this.hypoths.add(weak.clone());
@@ -132,7 +133,7 @@ public class ModestAdaBoost implements Classifier, Parameterized, BinaryScoreCla
     public double getScore(DataPoint dp) {
         double score = 0;
         for (int i = 0; i < hypoths.size(); i++)
-            score += (hypoths.get(i).classify(dp).getProb(1) * 2 - 1) * hypWeights.get(i);
+            score += (hypoths.get(i).classify(dp).getProb(1) * 2 - 1) * hypWeights.getDouble(i);
         return score;
     }
 
@@ -154,7 +155,7 @@ public class ModestAdaBoost implements Classifier, Parameterized, BinaryScoreCla
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
         predicting = dataSet.getPredicting();
-        hypWeights = new DoubleList(maxIterations);
+        hypWeights = new DoubleArrayList(maxIterations);
         hypoths = new ArrayList<Classifier>(maxIterations);
         final int N = dataSet.size();
 

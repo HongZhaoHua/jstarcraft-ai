@@ -10,9 +10,11 @@ import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
 import com.jstarcraft.ai.jsat.distributions.kernels.LinearKernel;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ConcurrentCacheLRU;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Base class for support vector style learners. This means that the learner
@@ -52,7 +54,7 @@ public abstract class SupportVectorLearner implements Serializable {
     /**
      * Kernel evaluation acceleration cache
      */
-    protected List<Double> accelCache = null;
+    protected DoubleList accelCache = null;
 
     private double[][] fullCache;
     /**
@@ -160,7 +162,7 @@ public abstract class SupportVectorLearner implements Serializable {
             this.alphas = Arrays.copyOf(toCopy.alphas, toCopy.alphas.length);
         this.cacheMode = toCopy.cacheMode;
         if (toCopy.accelCache != null)
-            this.accelCache = new DoubleList(toCopy.accelCache);
+            this.accelCache = new DoubleArrayList(toCopy.accelCache);
         if (toCopy.fullCache != null) {
             this.fullCache = new double[toCopy.fullCache.length][];
             for (int i = 0; i < toCopy.fullCache.length; i++)

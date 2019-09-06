@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * In many applications, the squared {@link EuclideanDistance} is used because
@@ -77,7 +79,7 @@ public class SquaredEuclideanDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    public DoubleList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         // Store the pnorms in the cache
         double[] cache = new double[vecs.size()];
         ParallelUtils.run(parallel, vecs.size(), (start, end) -> {
@@ -86,7 +88,7 @@ public class SquaredEuclideanDistance implements DistanceMetric {
                 cache[i] = v.dot(v);
             }
         });
-        return DoubleList.view(cache, vecs.size());
+        return DoubleArrayList.wrap(cache, vecs.size());
     }
 
     @Override
@@ -106,8 +108,8 @@ public class SquaredEuclideanDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
-        DoubleList qi = new DoubleList(1);
+    public DoubleArrayList getQueryInfo(Vec q) {
+        DoubleArrayList qi = new DoubleArrayList(1);
         qi.add(q.dot(q));
         return qi;
     }

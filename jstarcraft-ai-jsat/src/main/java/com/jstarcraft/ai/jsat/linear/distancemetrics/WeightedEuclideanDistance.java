@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecOps;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Implements the weighted Euclidean distance such that d(a, b) =
@@ -100,7 +102,7 @@ public class WeightedEuclideanDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    public DoubleList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         // Store the pnorms in the cache
         double[] cache = new double[vecs.size()];
         ParallelUtils.run(parallel, vecs.size(), (start, end) -> {
@@ -109,7 +111,7 @@ public class WeightedEuclideanDistance implements DistanceMetric {
                 cache[i] = VecOps.weightedDot(w, v, v);
             }
         });
-        return DoubleList.view(cache, vecs.size());
+        return DoubleArrayList.wrap(cache, vecs.size());
     }
 
     @Override
@@ -129,8 +131,8 @@ public class WeightedEuclideanDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
-        DoubleList qi = new DoubleList(1);
+    public DoubleList getQueryInfo(Vec q) {
+        DoubleArrayList qi = new DoubleArrayList(1);
         qi.add(VecOps.weightedDot(w, q, q));
         return qi;
     }

@@ -37,12 +37,13 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.DefaultVectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.FibHeap;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.UnionFind;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * HDBSCAN is a density based clustering algorithm that is an improvement over
@@ -318,9 +319,9 @@ public class HDBSCAN implements Clusterer, Parameterized {
          * Stores a list for each cluster. Each value in the sub list is the weight at
          * which that data point was added to the cluster
          */
-        List<DoubleList> entry_size = new ArrayList<>();
-        DoubleList birthSize = new DoubleList();
-        DoubleList deathSize = new DoubleList();
+        List<DoubleArrayList> entry_size = new ArrayList<>();
+        DoubleArrayList birthSize = new DoubleArrayList();
+        DoubleArrayList deathSize = new DoubleArrayList();
         List<Pair<Integer, Integer>> children = new ArrayList<>();
         int[] map_to_cluster_label = new int[N];
         Arrays.fill(map_to_cluster_label, -1);
@@ -363,7 +364,7 @@ public class HDBSCAN implements Clusterer, Parameterized {
             if (new_size >= m_clSize && a_size < m_clSize && b_size < m_clSize) {// birth of a new cluster!
                 cluster_options.add(currentGroups.get(mergedClust));
 
-                DoubleList dl = new DoubleList(new_size);
+                DoubleArrayList dl = new DoubleArrayList(new_size);
                 for (int i = 0; i < new_size; i++)
                     dl.add(weight);
                 entry_size.add(dl);
@@ -383,7 +384,7 @@ public class HDBSCAN implements Clusterer, Parameterized {
                 currentGroups.set(mergedClust, new IntList(currentGroups.get(mergedClust)));
 
                 cluster_options.add(currentGroups.get(mergedClust));
-                DoubleList dl = new DoubleList(new_size);
+                DoubleArrayList dl = new DoubleArrayList(new_size);
                 for (int i = 0; i < new_size; i++)
                     dl.add(weight);
                 entry_size.add(dl);
@@ -423,8 +424,8 @@ public class HDBSCAN implements Clusterer, Parameterized {
         // Remove the last "cluster" because its the dumb one of everything
         cluster_options.remove(cluster_options.size() - 1);
         entry_size.remove(entry_size.size() - 1);
-        birthSize.remove(birthSize.size() - 1);
-        deathSize.remove(deathSize.size() - 1);
+        birthSize.removeDouble(birthSize.size() - 1);
+        deathSize.removeDouble(deathSize.size() - 1);
         children.remove(children.size() - 1);
 
         /**

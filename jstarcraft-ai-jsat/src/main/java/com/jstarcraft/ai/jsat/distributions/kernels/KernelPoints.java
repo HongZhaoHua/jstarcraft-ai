@@ -10,8 +10,10 @@ import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This class represents a list of {@link KernelPoint} objects. This is done to
@@ -87,7 +89,7 @@ public class KernelPoints {
                 standardMove(toAdd, source);
                 toAdd.kernelAccel = source.kernelAccel;
                 toAdd.vecs = source.vecs;
-                toAdd.alpha = new DoubleList(toCopy.points.get(i).alpha);
+                toAdd.alpha = new DoubleArrayList(toCopy.points.get(i).alpha);
             }
         }
     }
@@ -193,7 +195,7 @@ public class KernelPoints {
      * @return the dot product between the {@code k}'th KernelPoint and the given
      *         vector
      */
-    public double dot(int k, Vec x, List<Double> qi) {
+    public double dot(int k, Vec x, DoubleList qi) {
         return points.get(k).dot(x, qi);
     }
 
@@ -211,10 +213,10 @@ public class KernelPoints {
      * @return an array where the <i>i'th</i> index contains the dot product of the
      *         <i>i'th</i> KernelPoint and the given vector
      */
-    public double[] dot(Vec x, List<Double> qi) {
+    public double[] dot(Vec x, DoubleList qi) {
         double[] dots = new double[points.size()];
         final List<Vec> vecs = points.get(0).vecs;
-        final List<Double> cache = points.get(0).kernelAccel;
+        final DoubleArrayList cache = points.get(0).kernelAccel;
         for (int i = 0; i < vecs.size(); i++) {
             double k_ix = k.eval(i, x, qi, vecs, cache);
             for (int j = 0; j < points.size(); j++) {
@@ -268,7 +270,7 @@ public class KernelPoints {
      * @return the Euclidean distance between the {@code k}'th KernelPoint and
      *         {@code x} in the kernel space
      */
-    public double dist(int k, Vec x, List<Double> qi) {
+    public double dist(int k, Vec x, DoubleList qi) {
         return points.get(k).dist(x, qi);
     }
 
@@ -333,7 +335,7 @@ public class KernelPoints {
      * @param qi  the query information for the vector, or {@code null} only if the
      *            kernel in use does not support acceleration.
      */
-    public void mutableAdd(int k, double c, Vec x_t, final List<Double> qi) {
+    public void mutableAdd(int k, double c, Vec x_t, final DoubleList qi) {
 
     }
 
@@ -348,7 +350,7 @@ public class KernelPoints {
      * @param qi  the query information for the vector, or {@code null} only if the
      *            kernel in use does not support acceleration.
      */
-    public void mutableAdd(Vec x_t, Vec cs, final List<Double> qi) {
+    public void mutableAdd(Vec x_t, Vec cs, final DoubleList qi) {
         int origSize = getBasisSize();
         if (cs.nnz() == 0)
             return;
@@ -373,7 +375,7 @@ public class KernelPoints {
                         kp_i.kernelAccel = kp_k.kernelAccel;
                         kp_i.vecs = kp_k.vecs;
                         // and then everyone gets their own private alphas added too
-                        kp_i.alpha = new DoubleList(16);
+                        kp_i.alpha = new DoubleArrayList(16);
                         kp_i.alpha.add(0.0);
                     }
                 } else// standard case
@@ -551,7 +553,7 @@ public class KernelPoints {
         standardMove(toAdd, source);
         toAdd.kernelAccel = source.kernelAccel;
         toAdd.vecs = source.vecs;
-        toAdd.alpha = new DoubleList(source.alpha.size());
+        toAdd.alpha = new DoubleArrayList(source.alpha.size());
         for (int i = 0; i < source.alpha.size(); i++)
             toAdd.alpha.add(0.0);
         points.add(toAdd);

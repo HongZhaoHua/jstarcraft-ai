@@ -14,7 +14,8 @@ import com.jstarcraft.ai.jsat.classifiers.OneVSAll;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Implementation of Experiments with a New Boosting Algorithm, by Yoav
@@ -47,7 +48,7 @@ public class AdaBoostM1 implements Classifier, Parameterized {
     /**
      * The weights for each weak learner
      */
-    protected List<Double> hypWeights;
+    protected DoubleArrayList hypWeights;
     protected CategoricalData predicting;
 
     public AdaBoostM1(Classifier weakLearner, int maxIterations) {
@@ -58,7 +59,7 @@ public class AdaBoostM1 implements Classifier, Parameterized {
     public AdaBoostM1(AdaBoostM1 toCopy) {
         this(toCopy.weakLearner.clone(), toCopy.maxIterations);
         if (toCopy.hypWeights != null)
-            this.hypWeights = new DoubleList(toCopy.hypWeights);
+            this.hypWeights = new DoubleArrayList(toCopy.hypWeights);
         if (toCopy.hypoths != null) {
             this.hypoths = new ArrayList<>(toCopy.hypoths.size());
             for (int i = 0; i < toCopy.hypoths.size(); i++)
@@ -132,7 +133,7 @@ public class AdaBoostM1 implements Classifier, Parameterized {
         CategoricalResults cr = new CategoricalResults(predicting.getNumOfCategories());
 
         for (int i = 0; i < hypoths.size(); i++)
-            cr.incProb(hypoths.get(i).classify(data).mostLikely(), hypWeights.get(i));
+            cr.incProb(hypoths.get(i).classify(data).mostLikely(), hypWeights.getDouble(i));
 
         cr.normalize();
         return cr;
@@ -145,7 +146,7 @@ public class AdaBoostM1 implements Classifier, Parameterized {
          * weight values by the smallest weight value
          */
         predicting = dataSet.getPredicting();
-        hypWeights = new DoubleList(maxIterations);
+        hypWeights = new DoubleArrayList(maxIterations);
         hypoths = new ArrayList<>(maxIterations);
 
         Vec origWeights = dataSet.getDataWeights();

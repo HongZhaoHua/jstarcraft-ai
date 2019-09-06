@@ -7,6 +7,8 @@ import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.distributions.Distribution;
 import com.jstarcraft.ai.jsat.linear.Vec;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * Provides an implementation of the Rational Quadratic Kernel, which is of the
  * form: <br>
@@ -55,13 +57,13 @@ public class RationalQuadraticKernel extends BaseL2Kernel {
     }
 
     @Override
-    public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache) {
+    public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache) {
         double dist = getSqrdNorm(a, b, trainingSet, cache);
         return 1 - dist / (dist + c);
     }
 
     @Override
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache) {
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache) {
         double dist = getSqrdNorm(a, b, qi, vecs, cache);
         return 1 - dist / (dist + c);
     }

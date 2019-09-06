@@ -45,9 +45,10 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.StringUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Provides a reader and writer for CSV style datasets. This CSV reader supports
@@ -320,7 +321,7 @@ public class CSV {
         /**
          * The target values if doing regression
          */
-        DoubleList regressionTargets = new DoubleList();
+        DoubleArrayList regressionTargets = new DoubleArrayList();
         /**
          * The target values if doing classification
          */
@@ -354,7 +355,7 @@ public class CSV {
          * can sanity check
          */
         int totalCols = -1;
-        DoubleList numericFeats = new DoubleList();
+        DoubleArrayList numericFeats = new DoubleArrayList();
         IntList catFeats = new IntList();
         int cur_column = 0;
 

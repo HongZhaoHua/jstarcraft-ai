@@ -33,10 +33,11 @@ import java.util.concurrent.RecursiveAction;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -132,7 +133,7 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
             IntList n = new IntList(numNeighbors);
-            DoubleList d = new DoubleList(numNeighbors);
+            DoubleArrayList d = new DoubleArrayList(numNeighbors);
 
             BoundedSortedList<IndexDistPair> knn = allPriorities.get(i);
             for (int j = 0; j < knn.size(); j++) {
@@ -221,7 +222,7 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
             neighbors.add(new IntList());
-            distances.add(new DoubleList());
+            distances.add(new DoubleArrayList());
         }
 
         /// For simplicity and fast calculations, lets combine acceleration caches into

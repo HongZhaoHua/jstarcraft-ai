@@ -11,9 +11,11 @@ import java.util.stream.IntStream;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * A Vector Collection is a collection of vectors that is meant to be used to
@@ -97,7 +99,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      */
     default public List<? extends VecPaired<V, Double>> search(Vec query, double range) {
         IntList neighbors = new IntList();
-        DoubleList distances = new DoubleList();
+        DoubleArrayList distances = new DoubleArrayList();
         search(query, range, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
         for (int i = 0; i < neighbors.size(); i++)
@@ -118,7 +120,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      */
     default public List<? extends VecPaired<V, Double>> search(Vec query, int num_neighbors) {
         IntList neighbors = new IntList();
-        DoubleList distances = new DoubleList();
+        DoubleArrayList distances = new DoubleArrayList();
         search(query, num_neighbors, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
         for (int i = 0; i < neighbors.size(); i++)
@@ -165,7 +167,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      */
     public V get(int indx);
 
-    public List<Double> getAccelerationCache();
+    public DoubleList getAccelerationCache();
 
     /**
      * Returns the number of vectors stored in the collection

@@ -25,8 +25,9 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Imputes missing values in a dataset by finding reasonable default values. For
@@ -78,8 +79,8 @@ public class Imputer implements InPlaceTransform {
     public void fit(DataSet d) {
         numeric_imputs = new double[d.getNumNumericalVars()];
         cat_imputs = new int[d.getNumCategoricalVars()];
-        List<List<Double>> columnCounts = null;
-        List<List<Double>> columnWeights = null;
+        List<DoubleArrayList> columnCounts = null;
+        List<DoubleArrayList> columnWeights = null;
         double[] colSoW = null;
 
         switch (mode) {
@@ -90,12 +91,12 @@ public class Imputer implements InPlaceTransform {
                 numeric_imputs[i] = stats[i].getMean();
             break;
         case MEDIAN:
-            columnCounts = new ArrayList<List<Double>>(d.getNumNumericalVars());
-            columnWeights = new ArrayList<List<Double>>(d.getNumNumericalVars());
+            columnCounts = new ArrayList<>(d.getNumNumericalVars());
+            columnWeights = new ArrayList<>(d.getNumNumericalVars());
             colSoW = new double[d.getNumNumericalVars()];
             for (int i = 0; i < d.getNumNumericalVars(); i++) {
-                columnCounts.add(new DoubleList(d.size()));
-                columnWeights.add(new DoubleList(d.size()));
+                columnCounts.add(new DoubleArrayList(d.size()));
+                columnWeights.add(new DoubleArrayList(d.size()));
             }
             break;
         }
@@ -129,8 +130,8 @@ public class Imputer implements InPlaceTransform {
         if (mode == NumericImputionMode.MEDIAN) {
             IndexTable it = new IndexTable(d.getNumNumericalVars());
             for (int col = 0; col < d.getNumNumericalVars(); col++) {
-                List<Double> colVal = columnCounts.get(col);
-                List<Double> colWeight = columnWeights.get(col);
+                DoubleArrayList colVal = columnCounts.get(col);
+                DoubleArrayList colWeight = columnWeights.get(col);
                 it.reset();
                 it.sort(colVal);
 
@@ -142,8 +143,8 @@ public class Imputer implements InPlaceTransform {
                 // loop breaks one we pass the median, so last seen is the median
                 for (int i = 0; i < it.length() && curWeight < goal; i++) {
                     int indx = it.index(i);
-                    lastSeen = colVal.get(indx);
-                    curWeight += colWeight.get(indx);
+                    lastSeen = colVal.getDouble(indx);
+                    curWeight += colWeight.getDouble(indx);
                 }
 
                 numeric_imputs[col] = lastSeen;

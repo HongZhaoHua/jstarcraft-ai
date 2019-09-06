@@ -3,7 +3,9 @@ package com.jstarcraft.ai.jsat.distributions.kernels;
 import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Many Kernels can be described in terms the L2 norm with some operations
@@ -80,38 +82,38 @@ public abstract class BaseL2Kernel implements KernelTrick {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> trainingSet) {
-        DoubleList cache = new DoubleList(trainingSet.size());
+    public DoubleList getAccelerationCache(List<? extends Vec> trainingSet) {
+        DoubleArrayList cache = new DoubleArrayList(trainingSet.size());
         for (int i = 0; i < trainingSet.size(); i++)
             cache.add(trainingSet.get(i).dot(trainingSet.get(i)));
         return cache;
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
-        DoubleList dl = new DoubleList(1);
+    public DoubleList getQueryInfo(Vec q) {
+        DoubleArrayList dl = new DoubleArrayList(1);
         dl.add(q.dot(q));
         return dl;
     }
 
     @Override
-    public void addToCache(Vec newVec, List<Double> cache) {
+    public void addToCache(Vec newVec, DoubleList cache) {
         cache.add(newVec.dot(newVec));
     }
 
     @Override
-    abstract public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache);
+    abstract public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache);
 
     @Override
-    abstract public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache);
+    abstract public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache);
 
     @Override
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, int start, int end) {
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, int start, int end) {
         return evalSum(finalSet, cache, alpha, y, getQueryInfo(y), start, end);
     }
 
     @Override
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, List<Double> qi, int start, int end) {
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, DoubleList qi, int start, int end) {
         double sum = 0;
 
         for (int i = start; i < end; i++)

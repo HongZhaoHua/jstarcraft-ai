@@ -16,10 +16,11 @@ import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.linear.ScaledVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Provides a kernelized version of the {@link ALMA2} algorithm. It is important
@@ -48,9 +49,9 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
     @ParameterHolder
     private KernelTrick K;
     private List<Vec> supports;
-    private List<Double> signedEtas;
-    private List<Double> associatedScores;
-    private List<Double> normalizers;
+    private DoubleArrayList signedEtas;
+    private DoubleArrayList associatedScores;
+    private DoubleArrayList normalizers;
     private List<Integer> rounds;
 
     private boolean averaged = false;
@@ -83,9 +84,9 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
             this.supports = new ArrayList<Vec>(other.supports.size());
             for (Vec v : other.supports)
                 this.supports.add(v.clone());
-            this.signedEtas = new DoubleList(other.signedEtas);
-            this.associatedScores = new DoubleList(other.associatedScores);
-            this.normalizers = new DoubleList(other.normalizers);
+            this.signedEtas = new DoubleArrayList(other.signedEtas);
+            this.associatedScores = new DoubleArrayList(other.associatedScores);
+            this.normalizers = new DoubleArrayList(other.normalizers);
             this.rounds = new IntList(other.rounds);
         }
     }
@@ -212,9 +213,9 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
             throw new FailedToFitException("ALMA2 works only for binary classification");
 
         supports = new ArrayList<Vec>();
-        signedEtas = new DoubleList();
-        associatedScores = new DoubleList();
-        normalizers = new DoubleList();
+        signedEtas = new DoubleArrayList();
+        associatedScores = new DoubleArrayList();
+        normalizers = new DoubleArrayList();
         rounds = new IntList();
         k = 1;
         curRounds = 0;
@@ -263,9 +264,9 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
         double finalScore = 0;
 
         for (int i = 0; i < supports.size(); i++) {
-            double eta_s = signedEtas.get(i);
-            double tmp = eta_s * K.eval(supports.get(i), x) / normalizers.get(i);
-            double denom_tmp = 2 * eta_s * associatedScores.get(i) + eta_s * eta_s;
+            double eta_s = signedEtas.getDouble(i);
+            double tmp = eta_s * K.eval(supports.get(i), x) / normalizers.getDouble(i);
+            double denom_tmp = 2 * eta_s * associatedScores.getDouble(i) + eta_s * eta_s;
             denom += denom / Math.max(1, denom) + denom_tmp;
             score += tmp / Math.max(1, denom);
             if (averaged)

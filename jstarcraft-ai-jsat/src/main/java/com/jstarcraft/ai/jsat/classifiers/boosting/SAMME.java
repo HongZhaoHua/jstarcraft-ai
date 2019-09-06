@@ -11,7 +11,8 @@ import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This is an implementation of the Multi-Class AdaBoost method SAMME (Stagewise
@@ -38,7 +39,7 @@ public class SAMME implements Classifier, Parameterized {
     /**
      * The weights for each weak learner
      */
-    private List<Double> hypWeights;
+    private DoubleArrayList hypWeights;
     private CategoricalData predicting;
 
     public SAMME(Classifier weakLearner, int maxIterations) {
@@ -55,7 +56,7 @@ public class SAMME implements Classifier, Parameterized {
         CategoricalResults cr = new CategoricalResults(predicting.getNumOfCategories());
 
         for (int i = 0; i < hypoths.size(); i++)
-            cr.incProb(hypoths.get(i).classify(data).mostLikely(), hypWeights.get(i));
+            cr.incProb(hypoths.get(i).classify(data).mostLikely(), hypWeights.getDouble(i));
 
         cr.normalize();
         return cr;
@@ -80,7 +81,7 @@ public class SAMME implements Classifier, Parameterized {
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
         predicting = dataSet.getPredicting();
-        hypWeights = new DoubleList(maxIterations);
+        hypWeights = new DoubleArrayList(maxIterations);
         hypoths = new ArrayList<>();
         /**
          * The number of classes we are predicting
@@ -137,7 +138,7 @@ public class SAMME implements Classifier, Parameterized {
     public SAMME clone() {
         SAMME clone = new SAMME(weakLearner.clone(), maxIterations);
         if (this.hypWeights != null)
-            clone.hypWeights = new DoubleList(this.hypWeights);
+            clone.hypWeights = new DoubleArrayList(this.hypWeights);
         if (this.hypoths != null) {
             clone.hypoths = new ArrayList<>(this.hypoths.size());
             for (int i = 0; i < this.hypoths.size(); i++)

@@ -10,7 +10,9 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.IndexFunction;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This transform applies a shifted Box-Cox transform for several fixed values
@@ -46,7 +48,7 @@ public class AutoDeskewTransform implements InPlaceTransform {
             return transform(value, finalLambdas[index], mins[index]);
         }
     };
-    private static final DoubleList defaultList = new DoubleList(7);
+    private static final DoubleArrayList defaultList = new DoubleArrayList(7);
 
     static {
         defaultList.add(-1.0);
@@ -73,7 +75,7 @@ public class AutoDeskewTransform implements InPlaceTransform {
      * @param lambdas the list of lambda values to evaluate
      */
     public AutoDeskewTransform(final double... lambdas) {
-        this(true, DoubleList.view(lambdas, lambdas.length));
+        this(true, DoubleArrayList.wrap(lambdas, lambdas.length));
     }
 
     /**

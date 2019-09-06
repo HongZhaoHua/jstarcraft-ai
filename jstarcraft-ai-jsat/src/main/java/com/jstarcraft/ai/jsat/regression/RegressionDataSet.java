@@ -14,7 +14,8 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * A RegressionDataSet is a data set specifically for the task of performing
@@ -27,7 +28,7 @@ import com.jstarcraft.ai.jsat.utils.DoubleList;
  */
 public class RegressionDataSet extends DataSet<RegressionDataSet> {
 
-    protected DoubleList targets;
+    protected DoubleArrayList targets;
 
     /**
      * Creates a new empty data set for regression
@@ -40,7 +41,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
      */
     public RegressionDataSet(int numerical, CategoricalData[] categories) {
         super(numerical, categories);
-        targets = new DoubleList();
+        targets = new DoubleArrayList();
     }
 
     /**
@@ -52,7 +53,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
      */
     public RegressionDataSet(DataStore datapoints, List<Double> targets) {
         super(datapoints);
-        this.targets = new DoubleList(targets);
+        this.targets = new DoubleArrayList(targets);
     }
 
     /**
@@ -70,7 +71,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
         DataPoint tmp = data.get(0);
         categories = new CategoricalData[tmp.numCategoricalValues()];
         System.arraycopy(tmp.getCategoricalData(), 0, categories, 0, categories.length);
-        targets = new DoubleList(data.size());
+        targets = new DoubleArrayList(data.size());
 
         // Fill up data
         for (DataPoint dp : data) {
@@ -106,7 +107,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
     public RegressionDataSet(List<DataPointPair<Double>> list) {
         super(list.get(0).getDataPoint().numNumericalValues(), CategoricalData.copyOf(list.get(0).getDataPoint().getCategoricalData()));
         this.datapoints = new RowMajorStore(numNumerVals, categories);
-        this.targets = new DoubleList();
+        this.targets = new DoubleArrayList();
         for (DataPointPair<Double> dpp : list) {
             datapoints.addDataPoint(dpp.getDataPoint());
             targets.add(dpp.getPair());
@@ -212,7 +213,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
      * @return the i'th DataPOintPair
      */
     public DataPointPair<Double> getDataPointPair(int i) {
-        return new DataPointPair<>(getDataPoint(i), targets.get(i));
+        return new DataPointPair<>(getDataPoint(i), targets.getDouble(i));
     }
 
     /**
@@ -225,7 +226,7 @@ public class RegressionDataSet extends DataSet<RegressionDataSet> {
     public List<DataPointPair<Double>> getAsDPPList() {
         ArrayList<DataPointPair<Double>> list = new ArrayList<>(size());
         for (int i = 0; i < size(); i++)
-            list.add(new DataPointPair<>(getDataPoint(i).clone(), targets.get(i)));
+            list.add(new DataPointPair<>(getDataPoint(i).clone(), targets.getDouble(i)));
         return list;
     }
 

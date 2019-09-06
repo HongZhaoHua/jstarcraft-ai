@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -25,9 +24,10 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.StringUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Loads a LIBSVM data file into a {@link DataSet}. LIVSM files do not indicate
@@ -275,7 +275,7 @@ public class LIBSVMLoader {
         /**
          * The category "label" for each value loaded in
          */
-        List<Double> labelVals = new DoubleList();
+        DoubleArrayList labelVals = new DoubleArrayList();
         Map<Double, Integer> possibleCats = new HashMap<>();
         int maxLen = 1;
 
@@ -448,10 +448,10 @@ public class LIBSVMLoader {
 
             // Give categories a unique ordering to avoid loading issues based on the order
             // categories are presented
-            List<Double> allCatKeys = new DoubleList(possibleCats.keySet());
+            DoubleArrayList allCatKeys = new DoubleArrayList(possibleCats.keySet());
             Collections.sort(allCatKeys);
             for (int i = 0; i < allCatKeys.size(); i++)
-                possibleCats.put(allCatKeys.get(i), i);
+                possibleCats.put(allCatKeys.getDouble(i), i);
             // apply to target values now
 
             IntList label_targets = IntList.view(labelVals.stream().mapToInt(possibleCats::get).toArray());

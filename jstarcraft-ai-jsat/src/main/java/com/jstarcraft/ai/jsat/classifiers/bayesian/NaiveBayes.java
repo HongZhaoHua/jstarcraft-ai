@@ -24,8 +24,9 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.MathTricks;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -355,7 +356,7 @@ public class NaiveBayes implements Classifier, Parameterized {
         Vec vals = dataSet.getSampleVariableVector(category, j);
 
         if (sparceInput) {
-            List<Double> nonZeroVals = new DoubleList();
+            DoubleArrayList nonZeroVals = new DoubleArrayList();
             for (int i = 0; i < vals.length(); i++)
                 if (vals.get(i) != 0)
                     nonZeroVals.add(vals.get(i));

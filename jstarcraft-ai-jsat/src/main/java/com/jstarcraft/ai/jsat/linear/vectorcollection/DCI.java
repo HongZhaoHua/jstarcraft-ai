@@ -34,11 +34,13 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.utils.ArrayUtils;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This class implements the Dynamic Continuous Indexing algorithm for nearest
@@ -85,7 +87,7 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
     private NearestIterator[][] T;
 
     private List<V> vecs;
-    private List<Double> cache;
+    private DoubleList cache;
 
     /**
      * Creates a new DCI object, that should provide relatively good result quality.
@@ -119,7 +121,7 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
             this.u = new Vec[m][L];
             this.T = new NearestIterator[m][L];
             this.vecs = new ArrayList<>(toCopy.vecs);
-            this.cache = new DoubleList(toCopy.cache);
+            this.cache = new DoubleArrayList(toCopy.cache);
             for (int j = 0; j < m; j++) {
                 for (int l = 0; l < L; l++) {
                     this.u[j][l] = toCopy.u[j][l].clone();
@@ -354,7 +356,7 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return cache;
     }
 

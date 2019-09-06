@@ -12,8 +12,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  *
@@ -24,7 +26,7 @@ public class Rocchio implements Classifier {
     private static final long serialVersionUID = 889524967453326516L;
     private List<Vec> rocVecs;
     private final DistanceMetric dm;
-    private List<Double> rocCache;
+    private DoubleList rocCache;
 
     public Rocchio() {
         this(new EuclideanDistance());
@@ -112,7 +114,7 @@ public class Rocchio implements Classifier {
             copy.rocVecs = new ArrayList<>(this.rocVecs.size());
             for (Vec v : this.rocVecs)
                 copy.rocVecs.add(v.clone());
-            copy.rocCache = new DoubleList(rocCache);
+            copy.rocCache = new DoubleArrayList(rocCache);
         }
         return copy;
     }

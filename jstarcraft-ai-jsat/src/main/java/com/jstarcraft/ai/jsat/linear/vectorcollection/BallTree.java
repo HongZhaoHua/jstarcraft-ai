@@ -40,7 +40,6 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
@@ -49,6 +48,9 @@ import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This class implements the Ball Tree algorithm for accelerating nearest
@@ -82,7 +84,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
     private int leaf_size = DEFAULT_LEAF_SIZE;
     private DistanceMetric dm;
     private List<V> allVecs;
-    private List<Double> cache;
+    private DoubleList cache;
     private ConstructionMethod construction_method;
     private PivotSelection pivot_method;
     private Node root;
@@ -93,7 +95,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return cache;
     }
 
@@ -228,7 +230,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         if (toCopy.allVecs != null)
             this.allVecs = new ArrayList<>(toCopy.allVecs);
         if (toCopy.cache != null)
-            this.cache = new DoubleList(toCopy.cache);
+            this.cache = new DoubleArrayList(toCopy.cache);
         if (toCopy.root != null)
             this.root = cloneChangeContext(toCopy.root);
         this.leaf_size = toCopy.leaf_size;
@@ -419,7 +421,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         DoubleList[] ownedDist = new DoubleList[K];
         for (int k = 1; k < K; k++) {
             owned[k] = new IntList();
-            ownedDist[k] = new DoubleList();
+            ownedDist[k] = new DoubleArrayList();
         }
 
         Random rand = RandomUtil.getRandom();
@@ -428,7 +430,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         anchor_point_index[0] = rand.nextInt(points.size());
         anchor_index[0] = points.get(anchor_point_index[0]);
         owned[0] = IntList.range(points.size());
-        ownedDist[0] = DoubleList.view(ParallelUtils.streamP(owned[0].streamInts(), parallel).mapToDouble(i -> dm.dist(anchor_index[0], points.get(i), allVecs, cache)).toArray(), points.size());
+        ownedDist[0] = DoubleArrayList.wrap(ParallelUtils.streamP(owned[0].streamInts(), parallel).mapToDouble(i -> dm.dist(anchor_index[0], points.get(i), allVecs, cache)).toArray(), points.size());
 
         IndexTable it = new IndexTable(ownedDist[0]);
         it.apply(owned[0]);
@@ -766,7 +768,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
     private abstract class Node implements Cloneable, Serializable, Iterable<Integer>, IndexNode<Node> {
         Vec pivot;
-        List<Double> pivot_qi;
+        DoubleList pivot_qi;
         double radius;
         Node parent;
         double parrent_dist = Double.POSITIVE_INFINITY;
@@ -778,7 +780,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             if (toCopy.pivot != null)
                 this.pivot = toCopy.pivot.clone();
             if (toCopy.pivot_qi != null)
-                this.pivot_qi = new DoubleList(toCopy.pivot_qi);
+                this.pivot_qi = new DoubleArrayList(toCopy.pivot_qi);
             this.radius = toCopy.radius;
         }
 

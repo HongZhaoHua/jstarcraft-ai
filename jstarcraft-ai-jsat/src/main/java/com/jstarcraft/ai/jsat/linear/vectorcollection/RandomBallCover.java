@@ -14,11 +14,13 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * An implementation of the exact search for the Random Ball Cover algorithm.
@@ -48,14 +50,14 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
      * value indicates the distance of the point to its owner. They are not in any
      * order
      */
-    private List<DoubleList> ownedRDists;
+    private List<DoubleArrayList> ownedRDists;
     /**
      * The list of representatives
      */
     private List<Integer> R;
     private int size;
     private List<V> allVecs;
-    private List<Double> distCache;
+    private DoubleList distCache;
 
     /**
      * Distance from representative i to its farthest neighbor it owns
@@ -90,7 +92,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
         this.size = 0;
         this.allVecs = new ArrayList<>();
         if (dm.supportsAcceleration())
-            this.distCache = new DoubleList();
+            this.distCache = new DoubleArrayList();
         this.R = new IntList();
     }
 
@@ -109,14 +111,14 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
         if (other.allVecs != null)
             this.allVecs = new ArrayList<>(other.allVecs);
         if (other.distCache != null)
-            this.distCache = new DoubleList(other.distCache);
+            this.distCache = new DoubleArrayList(other.distCache);
         if (other.ownedVecs != null)
             this.ownedVecs = new ArrayList<>(other.ownedVecs.size());
         if (other.ownedRDists != null)
             this.ownedRDists = new ArrayList<>(other.ownedRDists.size());
         if (other.ownedRDists != null)
             for (int i = 0; i < other.ownedRDists.size(); i++) {
-                this.ownedRDists.add(new DoubleList(other.ownedRDists.get(i)));
+                this.ownedRDists.add(new DoubleArrayList(other.ownedRDists.get(i)));
                 this.ownedVecs.add(new IntList(other.ownedVecs.get(i)));
             }
         this.R = new IntList(other.R);
@@ -136,7 +138,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 
@@ -152,7 +154,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
 
         for (int i = 0; i < repCount; i++) {
             ownedVecs.add(new IntList(repCount));
-            ownedRDists.add(new DoubleList(repCount));
+            ownedRDists.add(new DoubleArrayList(repCount));
         }
 
         ParallelUtils.run(parallel, vecIndicesSub.size(), (start, end) -> {
@@ -284,7 +286,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
                 // the next representative is tested
                 knn.add(new IndexDistPair(R.get(i), queryRDists[i]));
                 final List<Integer> L_i_index = ownedVecs.get(i);
-                final DoubleList L_i_radius = ownedRDists.get(i);
+                final DoubleArrayList L_i_radius = ownedRDists.get(i);
                 for (int j = 0; j < ownedVecs.get(i).size(); j++) {
                     double rDist = L_i_radius.getDouble(j);
                     // Check the first inequality on a per point basis
@@ -349,7 +351,7 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
                 else// found the list to grab from
                 {
                     new_r_vec_indx = ownedVecs.get(R_pos).remove(ran_val);
-                    ownedRDists.get(R_pos).remove(ran_val);
+                    ownedRDists.get(R_pos).removeDouble(ran_val);
                     // update radius
                     repRadius[R_pos] = 0;
                     for (double d : ownedRDists.get(R_pos))
@@ -366,13 +368,13 @@ public class RandomBallCover<V extends Vec> implements IncrementalCollection<V> 
         for (double d : repRadius)
             max_radius = Math.max(max_radius, d);
         IntList potentialChildIndx = new IntList();
-        DoubleList potentialChildDist = new DoubleList();
+        DoubleArrayList potentialChildDist = new DoubleArrayList();
         search(get(new_r_vec_indx), max_radius, potentialChildIndx, potentialChildDist);
 
         // add new R to set after to avoid search issues
         repRadius = Arrays.copyOf(repRadius, repRadius.length + 1);
         R.add(new_r_vec_indx);
-        ownedRDists.add(new DoubleList());
+        ownedRDists.add(new DoubleArrayList());
         ownedVecs.add(new IntList());
         final int r_new = R.size() - 1;
 

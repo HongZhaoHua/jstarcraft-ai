@@ -29,7 +29,6 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
@@ -37,6 +36,9 @@ import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.Pair;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This class implements the Cover-tree algorithm for answering nearest neighbor
@@ -59,7 +61,7 @@ import com.jstarcraft.ai.jsat.utils.random.XORWOW;
 public final class CoverTree<V extends Vec> implements IncrementalCollection<V> {
     private DistanceMetric dm;
     private List<V> vecs;
-    private List<Double> accell_cache = null;
+    private DoubleList accell_cache = null;
     private TreeNode root = null;
     private boolean maxDistDirty = false;
 //    private boolean nearest_ancestor = false;
@@ -104,13 +106,13 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         this.looseBounds = toCopy.looseBounds;
         this.vecs = new ArrayList<>(toCopy.vecs);
         if (toCopy.accell_cache != null)
-            this.accell_cache = new DoubleList(toCopy.accell_cache);
+            this.accell_cache = new DoubleArrayList(toCopy.accell_cache);
         if (toCopy.root != null)
             this.root = new TreeNode(toCopy.root);
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return accell_cache;
     }
 
@@ -318,7 +320,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         int x_indx = this.vecs.size();
         this.vecs.add(x);
         if (this.accell_cache == null && dm.supportsAcceleration())
-            this.accell_cache = new DoubleList();
+            this.accell_cache = new DoubleArrayList();
         if (this.accell_cache != null)
             this.accell_cache.addAll(dm.getQueryInfo(x));
 
@@ -434,7 +436,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         TreeNode parent = null;
         int level;
         int vec_indx;
-        DoubleList children_dists;
+        DoubleArrayList children_dists;
         List<TreeNode> children;
         boolean is_sorted = true;
         double maxdist = -1;
@@ -447,7 +449,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             this.vec_indx = vec_indx;
             this.level = level;
             children = new ArrayList<>();
-            children_dists = new DoubleList();
+            children_dists = new DoubleArrayList();
         }
 
         /**
@@ -461,7 +463,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             this.vec_indx = toCopy.vec_indx;
             if (toCopy.children != null) {
                 this.children = new ArrayList<>(toCopy.children.size());
-                this.children_dists = new DoubleList(toCopy.children_dists);
+                this.children_dists = new DoubleArrayList(toCopy.children_dists);
                 for (TreeNode childToCopy : toCopy.children) {
                     TreeNode child = new TreeNode(childToCopy);
                     child.parent = this;
@@ -491,7 +493,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
 
         public void findNN(int k, Vec query, List<Double> x_qi, BoundedSortedList<IndexDistPair> knn) {
             Stack<TreeNode> toEval_stack = new Stack<>();
-            DoubleList dist_to_q_stack = new DoubleList();
+            DoubleArrayList dist_to_q_stack = new DoubleArrayList();
             {// Quick, add root info to stack for search & prime search Q
                 double p_x_dist = this.dist(query, x_qi);
                 dist_to_q_stack.push(p_x_dist);

@@ -9,8 +9,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * This is the naive implementation of a Vector collection. Construction time is
@@ -25,7 +27,7 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 public class VectorArray<V extends Vec> extends ArrayList<V> implements IncrementalCollection<V> {
     private static final long serialVersionUID = 5365949686370986234L;
     private DistanceMetric distanceMetric;
-    private List<Double> distCache;
+    private DoubleList distCache;
 
     public VectorArray() {
         this(new EuclideanDistance(), 20);
@@ -35,7 +37,7 @@ public class VectorArray<V extends Vec> extends ArrayList<V> implements Incremen
         super(initialCapacity);
         this.distanceMetric = distanceMetric;
         if (distanceMetric.supportsAcceleration())
-            distCache = new DoubleList(initialCapacity);
+            distCache = new DoubleArrayList(initialCapacity);
     }
 
     public VectorArray(DistanceMetric distanceMetric, Collection<? extends V> c) {
@@ -49,7 +51,7 @@ public class VectorArray<V extends Vec> extends ArrayList<V> implements Incremen
         super();
         this.distanceMetric = distanceMetric;
         if (distanceMetric.supportsAcceleration())
-            distCache = new DoubleList();
+            distCache = new DoubleArrayList();
     }
 
     @Override
@@ -82,7 +84,7 @@ public class VectorArray<V extends Vec> extends ArrayList<V> implements Incremen
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 

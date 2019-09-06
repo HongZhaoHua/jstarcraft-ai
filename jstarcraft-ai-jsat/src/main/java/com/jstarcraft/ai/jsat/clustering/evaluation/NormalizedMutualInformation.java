@@ -5,7 +5,8 @@ import java.util.List;
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Normalized Mutual Information (NMI) is a measure to evaluate a cluster based
@@ -15,9 +16,9 @@ import com.jstarcraft.ai.jsat.utils.DoubleList;
  * {@link ClusterEvaluation} interface, the value returned by evaluate will be
  * 1.0-NMI . <br>
  * <b>NOTE:</b> Because the NMI needs to know the true class labels, only
- * {@link #evaluate(int[], com.jstarcraft.ai.jsat.DataSet) } will work, since it provides the data
- * set as an argument. The dataset given must be an instance of
- * {@link ClassificationDataSet}
+ * {@link #evaluate(int[], com.jstarcraft.ai.jsat.DataSet) } will work, since it
+ * provides the data set as an argument. The dataset given must be an instance
+ * of {@link ClassificationDataSet}
  * 
  * @author Edward Raff
  */
@@ -32,7 +33,7 @@ public class NormalizedMutualInformation implements ClusterEvaluation {
         double nmiC = 0.0;
         double nmiK = 0.0;
 
-        DoubleList kPriors = new DoubleList();
+        DoubleArrayList kPriors = new DoubleArrayList();
 
         for (int i = 0; i < cds.size(); i++) {
             int ki = designations[i];
@@ -40,15 +41,15 @@ public class NormalizedMutualInformation implements ClusterEvaluation {
                 continue;
             while (kPriors.size() <= ki)
                 kPriors.add(0.0);
-            kPriors.set(ki, kPriors.get(ki) + cds.getWeight(i));
+            kPriors.set(ki, kPriors.getDouble(ki) + cds.getWeight(i));
         }
 
         double N = 0.0;
         for (int i = 0; i < kPriors.size(); i++)
-            N += kPriors.get(i);
+            N += kPriors.getDouble(i);
         for (int i = 0; i < kPriors.size(); i++) {
-            kPriors.set(i, kPriors.get(i) / N);
-            double pKi = kPriors.get(i);
+            kPriors.set(i, kPriors.getDouble(i) / N);
+            double pKi = kPriors.getDouble(i);
             if (pKi > 0)
                 nmiK += -pKi * Math.log(pKi);
         }
@@ -72,7 +73,7 @@ public class NormalizedMutualInformation implements ClusterEvaluation {
                 continue;
             double logPCi = Math.log(pCi);
             for (int j = 0; j < kPriors.size(); j++) {
-                double pKj = kPriors.get(j);
+                double pKj = kPriors.getDouble(j);
                 if (pKj <= 0.0)
                     continue;
                 double pCiKj = ck[i][j] / N;

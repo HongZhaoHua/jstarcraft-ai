@@ -21,13 +21,14 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This class provides an implementation of <i>Latent Dirichlet Allocation</i>
@@ -135,7 +136,7 @@ public class OnlineLDAsvi implements Parameterized {
      * Used to store the sum of each vector in {@link #lambda}. Updated live to
      * avoid uncessary changes
      */
-    private DoubleList lambdaSums;
+    private DoubleArrayList lambdaSums;
     private int[] lastUsed;
     private List<Vec> ELogBeta;// See equation 6 in 2010 paper
     private List<Vec> ExpELogBeta;// See line 7 update in 2013 paper / equation (5) in 2010 paper
@@ -749,7 +750,7 @@ public class OnlineLDAsvi implements Parameterized {
         // 1: Initialize λ(0) randomly
         lambda = new ArrayList<Vec>(K);
         lambdaLocks = new ArrayList<Lock>(K);
-        lambdaSums = new DoubleList(K);
+        lambdaSums = new DoubleArrayList(K);
         ELogBeta = new ArrayList<Vec>(K);
         ExpELogBeta = new ArrayList<Vec>(K);
         lastUsed = new int[W];

@@ -17,8 +17,9 @@ import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.RegressionModelEvaluation;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.regression.WarmRegressor;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * GridSearch is a simple method for tuning the parameters of a classification
@@ -43,7 +44,7 @@ public class GridSearch extends ModelSearch {
      * The matching list of values we will test. This includes the integer
      * parameters, which will have to be cast back and forth from doubles.
      */
-    private List<List<Double>> searchValues;
+    private List<DoubleArrayList> searchValues;
 
     /**
      * Use warm starts when possible
@@ -63,7 +64,7 @@ public class GridSearch extends ModelSearch {
      */
     public GridSearch(Regressor baseRegressor, int folds) {
         super(baseRegressor, folds);
-        searchValues = new ArrayList<List<Double>>();
+        searchValues = new ArrayList<>();
     }
 
     /**
@@ -79,7 +80,7 @@ public class GridSearch extends ModelSearch {
      */
     public GridSearch(Classifier baseClassifier, int folds) {
         super(baseClassifier, folds);
-        searchValues = new ArrayList<List<Double>>();
+        searchValues = new ArrayList<>();
     }
 
     /**
@@ -92,9 +93,9 @@ public class GridSearch extends ModelSearch {
         this.useWarmStarts = toCopy.useWarmStarts;
 
         if (toCopy.searchValues != null) {
-            this.searchValues = new ArrayList<List<Double>>();
-            for (List<Double> ld : toCopy.searchValues) {
-                List<Double> newVals = new DoubleList(ld);
+            this.searchValues = new ArrayList<>();
+            for (DoubleArrayList ld : toCopy.searchValues) {
+                DoubleArrayList newVals = new DoubleArrayList(ld);
                 this.searchValues.add(newVals);
             }
         }
@@ -217,10 +218,10 @@ public class GridSearch extends ModelSearch {
         if (param == null)
             throw new IllegalArgumentException("null not allowed for parameter");
         searchParams.add(param);
-        DoubleList dl = new DoubleList(initialSearchValues.length);
+        DoubleArrayList dl = new DoubleArrayList(initialSearchValues.length);
         for (double d : initialSearchValues)
             dl.add(d);
-        Arrays.sort(dl.getBackingArray());// convience, only really needed if param is warm
+        Arrays.sort(dl.elements());// convience, only really needed if param is warm
         if (param.isWarmParameter() && !param.preferredLowToHigh())
             Collections.reverse(dl);// put it in the prefered order
         if (param.isWarmParameter())// put it at the front!
@@ -252,10 +253,10 @@ public class GridSearch extends ModelSearch {
      */
     public void addParameter(IntParameter param, int... initialSearchValues) {
         searchParams.add(param);
-        DoubleList dl = new DoubleList(initialSearchValues.length);
+        DoubleArrayList dl = new DoubleArrayList(initialSearchValues.length);
         for (double d : initialSearchValues)
             dl.add(d);
-        Arrays.sort(dl.getBackingArray());// convience, only really needed if param is warm
+        Arrays.sort(dl.elements());// convience, only really needed if param is warm
         if (param.isWarmParameter() && !param.preferredLowToHigh())
             Collections.reverse(dl);// put it in the prefered order
         if (param.isWarmParameter())// put it at the front!

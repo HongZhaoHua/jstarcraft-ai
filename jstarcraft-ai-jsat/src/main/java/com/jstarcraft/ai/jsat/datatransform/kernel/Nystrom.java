@@ -20,9 +20,11 @@ import com.jstarcraft.ai.jsat.linear.Matrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * An implementation of the Nystrom approximation for any Kernel Trick. The full
@@ -65,7 +67,7 @@ public class Nystrom extends DataTransformBase {
     private boolean sampleWithReplacment;
 
     private List<Vec> basisVecs;
-    private List<Double> accelCache;
+    private DoubleList accelCache;
     private Matrix transform;
 
     /**
@@ -233,7 +235,7 @@ public class Nystrom extends DataTransformBase {
             for (Vec v : toCopy.basisVecs)
                 this.basisVecs.add(v.clone());
             if (toCopy.accelCache != null)
-                this.accelCache = new DoubleList(toCopy.accelCache);
+                this.accelCache = new DoubleArrayList(toCopy.accelCache);
         }
         if (toCopy.transform != null)
             this.transform = toCopy.transform.clone();
@@ -272,7 +274,7 @@ public class Nystrom extends DataTransformBase {
             for (int i = 0; i < N; i++)
                 gramVecs.add(new DenseVector(N));
 
-            List<Double> tmpCache = k.getAccelerationCache(X);
+            DoubleList tmpCache = k.getAccelerationCache(X);
             for (int i = 0; i < N; i++) {
                 gramVecs.get(i).set(i, k.eval(i, i, X, tmpCache));
                 for (int j = i + 1; j < N; j++) {
@@ -345,7 +347,7 @@ public class Nystrom extends DataTransformBase {
     @Override
     public DataPoint transform(DataPoint dp) {
         Vec x = dp.getNumericalValues();
-        List<Double> qi = k.getQueryInfo(x);
+        DoubleList qi = k.getQueryInfo(x);
         Vec kVec = new DenseVector(basisVecs.size());
         for (int i = 0; i < basisVecs.size(); i++)
             kVec.set(i, k.eval(i, x, qi, basisVecs, accelCache));

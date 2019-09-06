@@ -9,11 +9,13 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * An implementation of the on shot search for the Random Ball Cover algorithm.
@@ -42,7 +44,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
     private List<List<Integer>> ownedVecs;
     private List<Integer> R;
     private List<V> allVecs;
-    private List<Double> distCache;
+    private DoubleList distCache;
 
     /**
      * The number of points each representative will consider
@@ -121,7 +123,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
         this.repRadius = Arrays.copyOf(other.repRadius, other.repRadius.length);
         this.s = other.s;
         if (other.distCache != null)
-            this.distCache = new DoubleList(other.distCache);
+            this.distCache = new DoubleArrayList(other.distCache);
         if (other.allVecs != null)
             this.allVecs = new ArrayList<>(other.allVecs);
     }
@@ -165,7 +167,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 

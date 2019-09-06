@@ -4,8 +4,9 @@ package com.jstarcraft.ai.jsat.linear.distancemetrics;
 import java.util.List;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * The Cosine Distance is a adaption of the Cosine Similarity's range from [-1,
@@ -75,14 +76,14 @@ public class CosineDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
+    public DoubleArrayList getAccelerationCache(List<? extends Vec> vecs, boolean parallel) {
         // Store the pnorms in the cache
         double[] cache = new double[vecs.size()];
         ParallelUtils.run(parallel, vecs.size(), (start, end) -> {
             for (int i = start; i < end; i++)
                 cache[i] = vecs.get(i).pNorm(2);
         });
-        return DoubleList.view(cache, vecs.size());
+        return DoubleArrayList.wrap(cache, vecs.size());
     }
 
     @Override
@@ -108,8 +109,8 @@ public class CosineDistance implements DistanceMetric {
     }
 
     @Override
-    public List<Double> getQueryInfo(Vec q) {
-        DoubleList qi = new DoubleList(1);
+    public DoubleArrayList getQueryInfo(Vec q) {
+        DoubleArrayList qi = new DoubleArrayList(1);
         qi.add(q.pNorm(2));
         return qi;
     }

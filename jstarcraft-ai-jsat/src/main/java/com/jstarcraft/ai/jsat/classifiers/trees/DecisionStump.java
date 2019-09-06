@@ -20,12 +20,12 @@ import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.trees.ImpurityScore.ImpurityMeasure;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
+import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.IntSet;
@@ -33,6 +33,8 @@ import com.jstarcraft.ai.jsat.utils.PairedReturn;
 import com.jstarcraft.ai.jsat.utils.QuickSort;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * This class is a 1-rule. It creates one rule that is used to classify all
@@ -75,7 +77,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
     /**
      * Used only in classification. Contains the numeric boundaries to split on
      */
-    private List<Double> boundries;
+    private DoubleArrayList boundries;
     /**
      * Used only in classification. Contains the most likely class corresponding to
      * each boundary split
@@ -415,7 +417,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
          * best gain in information we have seen so far
          */
         final AtomicDouble bestGain = new AtomicDouble(-1);
-        final DoubleList bestRatio = new DoubleList();
+        final DoubleArrayList bestRatio = new DoubleArrayList();
         /**
          * The best attribute to split on
          */
@@ -433,7 +435,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                     final double[] gainRet = new double[] { Double.NaN };
                     gainRet[0] = Double.NaN;
                     List<ClassificationDataSet> aSplit;
-                    PairedReturn<List<Double>, List<Integer>> tmp = null;// Used on numerical attributes
+                    PairedReturn<DoubleArrayList, List<Integer>> tmp = null;// Used on numerical attributes
 
                     ImpurityScore[] split_scores = null;// used for cat
                     double weightScale = 1.0;
@@ -563,7 +565,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
         if (splittingAttribute < catAttributes.length || removeContinuousAttributes)
             options.remove(splittingAttribute);
         results = new CategoricalResults[bestSplit.size()];
-        pathRatio = bestRatio.getVecView().arrayCopy();
+        pathRatio = new DenseVector(bestRatio.elements(), 0, bestRatio.size()).arrayCopy();
         for (int i = 0; i < bestSplit.size(); i++)
             results[i] = new CategoricalResults(bestSplit.get(i).getPriors());
 
@@ -585,7 +587,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
      *         split boundaries, and the integers containing the path number.
      *         Multiple splits could go down the same path.
      */
-    private PairedReturn<List<Double>, List<Integer>> createNumericCSplit(ClassificationDataSet dataPoints, int N, final int attribute, List<ClassificationDataSet> aSplit, ImpurityScore origScore, double[] finalGain, ImpurityScore[] subScores) {
+    private PairedReturn<DoubleArrayList, List<Integer>> createNumericCSplit(ClassificationDataSet dataPoints, int N, final int attribute, List<ClassificationDataSet> aSplit, ImpurityScore origScore, double[] finalGain, ImpurityScore[] subScores) {
         // cache misses are killing us, move data into a double[] to get more juice!
         double[] vals = new double[dataPoints.size()];// TODO put this in a thread local somewhere and re-use
         IntList workSet = new IntList(dataPoints.size());
@@ -678,7 +680,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
             double weightScale = leftSide.getSumOfWeights() / (leftSide.getSumOfWeights() + rightSide.getSumOfWeights() + 0.0);
             distributMissing(aSplit, new double[] { weightScale, 1 - weightScale }, dataPoints, wasNaN);
         }
-        PairedReturn<List<Double>, List<Integer>> tmp = new PairedReturn<>(Arrays.asList(bestSplit, Double.POSITIVE_INFINITY), Arrays.asList(0, 1));
+        PairedReturn<DoubleArrayList, List<Integer>> tmp = new PairedReturn<>(new DoubleArrayList(new double[] { bestSplit, Double.POSITIVE_INFINITY }), Arrays.asList(0, 1));
 
         return tmp;
 
@@ -809,10 +811,10 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                     OnLineStatistics leftSide = new OnLineStatistics();
 
                     // We need our list in sorted order by attribute!
-                    DoubleList att_vals = new DoubleList(DPs.size());
+                    DoubleArrayList att_vals = new DoubleArrayList(DPs.size());
                     IntList order = new IntList(DPs.size());
-                    DoubleList weights = new DoubleList(DPs.size());
-                    DoubleList targets = new DoubleList(DPs.size());
+                    DoubleArrayList weights = new DoubleArrayList(DPs.size());
+                    DoubleArrayList targets = new DoubleArrayList(DPs.size());
                     IntList wasNaN = new IntList();
                     for (int i = 0; i < DPs.size(); i++) {
                         double v = DPs.getDataPoint(i).getNumericalValues().get(numAttri);
@@ -827,7 +829,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                             targets.add(DPs.getTargetValue(i));
                         }
                     }
-                    QuickSort.sort(att_vals.getBackingArray(), 0, att_vals.size(), Arrays.asList(order, weights, targets));
+                    QuickSort.sort(att_vals.elements(), 0, att_vals.size(), Arrays.asList(order, weights, targets));
 
                     int bestS = 0;
                     thisSplitSqrdErr = Double.POSITIVE_INFINITY;
@@ -855,7 +857,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                             thisMeans[0] = leftSide.getMean();
                             thisMeans[1] = rightSide.getMean();
                             // Third spot contains the split value!
-                            thisMeans[2] = (att_vals.get(bestS) + att_vals.get(bestS + 1)) / 2.0;
+                            thisMeans[2] = (att_vals.getDouble(bestS) + att_vals.getDouble(bestS + 1)) / 2.0;
                             thisRatio[0] = leftSide.getSumOfWeights() / allWeight;
                             thisRatio[1] = rightSide.getSumOfWeights() / allWeight;
                         }
@@ -966,7 +968,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
         copy.removeContinuousAttributes = this.removeContinuousAttributes;
         copy.splittingAttribute = this.splittingAttribute;
         if (this.boundries != null)
-            copy.boundries = new DoubleList(this.boundries);
+            copy.boundries = new DoubleArrayList(this.boundries);
         if (this.owners != null)
             copy.owners = new IntList(this.owners);
         if (this.predicting != null)

@@ -36,13 +36,11 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.CoverTree;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorArray;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -178,10 +176,10 @@ public class CoverTreeTest {
             collection0.insert(v);
 
         IntList trueNN = new IntList();
-        DoubleList trueNN_dists = new DoubleList();
+        DoubleArrayList trueNN_dists = new DoubleArrayList();
 
         IntList foundNN = new IntList();
-        DoubleList foundNN_dists = new DoubleList();
+        DoubleArrayList foundNN_dists = new DoubleArrayList();
         for (int iters = 0; iters < 10; iters++)
             for (int neighbours : new int[] { 1, 2, 5, 10, 20 }) {
                 int randIndex = rand.nextInt(vecCol.size());

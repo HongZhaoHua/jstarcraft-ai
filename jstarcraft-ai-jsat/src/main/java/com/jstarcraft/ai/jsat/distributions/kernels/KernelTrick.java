@@ -7,6 +7,8 @@ import java.util.List;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+
 /**
  * The KernelTrick is a method can can be used to alter an algorithm to do its
  * calculations in a projected feature space, without explicitly forming the
@@ -64,7 +66,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param trainingSet the list of training set vectors
      * @return a list of cache values that may be used by this kernel
      */
-    public List<Double> getAccelerationCache(List<? extends Vec> trainingSet);
+    public DoubleList getAccelerationCache(List<? extends Vec> trainingSet);
 
     /**
      * Pre computes query information that would have be generated if the query was
@@ -78,7 +80,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param q the query point to generate cache information for
      * @return the cache information for the query point
      */
-    public List<Double> getQueryInfo(Vec q);
+    public DoubleList getQueryInfo(Vec q);
 
     /**
      * Appends the new cache values for the given vector to the list of cache
@@ -97,7 +99,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param newVec the new vector to add to the cache values
      * @param cache  the original list of cache values to add to
      */
-    public void addToCache(Vec newVec, List<Double> cache);
+    public void addToCache(Vec newVec, DoubleList cache);
 
     /**
      * Computes the kernel product between one vector in the original list of
@@ -113,7 +115,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param cache the cache associated with the given list of vectors
      * @return the kernel product of the two vectors
      */
-    public double eval(int a, Vec b, List<Double> qi, List<? extends Vec> vecs, List<Double> cache);
+    public double eval(int a, Vec b, DoubleList qi, List<? extends Vec> vecs, DoubleList cache);
 
     /**
      * Produces the correct kernel evaluation given the training set and the cache
@@ -128,7 +130,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @return the same kernel evaluation result as
      *         {@link #eval(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) }
      */
-    public double eval(int a, int b, List<? extends Vec> trainingSet, List<Double> cache);
+    public double eval(int a, int b, List<? extends Vec> trainingSet, DoubleList cache);
 
     /**
      * Performs an efficient summation of kernel products of the form <br>
@@ -144,7 +146,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param end      the ending index (exclusive) to sum from
      * @return the sum of the multiplied kernel products
      */
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, int start, int end);
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, int start, int end);
 
     /**
      * Performs an efficient summation of kernel products of the form <br>
@@ -161,7 +163,7 @@ public interface KernelTrick extends Parameterized, Cloneable, Serializable {
      * @param end      the ending index (exclusive) to sum from
      * @return the sum of the multiplied kernel products
      */
-    public double evalSum(List<? extends Vec> finalSet, List<Double> cache, double[] alpha, Vec y, List<Double> qi, int start, int end);
+    public double evalSum(List<? extends Vec> finalSet, DoubleList cache, double[] alpha, Vec y, DoubleList qi, int start, int end);
 
     /**
      * This method indicates if a kernel is a normalized kernel or not. A normalized

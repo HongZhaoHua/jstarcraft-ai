@@ -1,5 +1,7 @@
 package com.jstarcraft.ai.jsat.regression.evaluation;
 
+import com.jstarcraft.ai.jsat.linear.DenseVector;
+
 /**
  * Uses the Sum of Absolute Errors divided by the sum of the absolute value of
  * the true values subtracted from their mean. This produces an error metric
@@ -29,7 +31,7 @@ public class RelativeAbsoluteError extends TotalHistoryRegressionScore {
 
     @Override
     public double getScore() {
-        double trueMean = truths.getVecView().mean();
+        double trueMean = new DenseVector(truths.elements(), 0, truths.size()).mean();
         double numer = 0, denom = 0;
         for (int i = 0; i < truths.size(); i++) {
             numer += Math.abs(predictions.getDouble(i) - truths.getDouble(i));

@@ -34,14 +34,10 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.DCI;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.IncrementalCollection;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VPTree;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorArray;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -96,8 +92,8 @@ public class DCITest {
                     IntList nn_true = new IntList();
                     IntList nn_test = new IntList();
 
-                    DoubleList nd_true = new DoubleList();
-                    DoubleList nd_test = new DoubleList();
+                    DoubleArrayList nd_true = new DoubleArrayList();
+                    DoubleArrayList nd_test = new DoubleArrayList();
 
                     vecCol.search(vecCol.get(randIndex), range, nn_true, nd_true);
                     collection0.search(vecCol.get(randIndex), range, nn_test, nd_test);
@@ -143,8 +139,8 @@ public class DCITest {
                     IntList nn_true = new IntList();
                     IntList nn_test = new IntList();
 
-                    DoubleList nd_true = new DoubleList();
-                    DoubleList nd_test = new DoubleList();
+                    DoubleArrayList nd_true = new DoubleArrayList();
+                    DoubleArrayList nd_test = new DoubleArrayList();
 
                     vecCol.search(vecCol.get(randIndex), neighbours, nn_true, nd_true);
                     collection0.search(vecCol.get(randIndex), neighbours, nn_test, nd_test);

@@ -11,11 +11,13 @@ import com.jstarcraft.ai.jsat.clustering.KClustererBase;
 import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
 import com.jstarcraft.ai.jsat.linear.ConstantVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Base class for various Kernel K Means implementations. Because the Kernelized
@@ -50,7 +52,7 @@ public abstract class KernelKMeans extends KClustererBase implements Parameteriz
     /**
      * THe acceleration cache for the kernel
      */
-    protected List<Double> accel;
+    protected DoubleList accel;
     /**
      * The value of k(x,x) for every point in {@link #X}
      */
@@ -102,7 +104,7 @@ public abstract class KernelKMeans extends KClustererBase implements Parameteriz
 
         }
         if (toCopy.accel != null)
-            this.accel = new DoubleList(toCopy.accel);
+            this.accel = new DoubleArrayList(toCopy.accel);
         if (toCopy.selfK != null)
             this.selfK = Arrays.copyOf(toCopy.selfK, toCopy.selfK.length);
 
@@ -195,7 +197,7 @@ public abstract class KernelKMeans extends KClustererBase implements Parameteriz
      * @return the sum <big>&Sigma;</big>k(x<sub>i</sub>, x<sub>j</sub>), &forall;
      *         j, d[<i>j</i>] == <i>clusterID</i>
      */
-    protected double evalSumK(Vec x, List<Double> qi, int clusterID, int[] d) {
+    protected double evalSumK(Vec x, DoubleList qi, int clusterID, int[] d) {
         double sum = 0;
         for (int j = 0; j < X.size(); j++)
             if (d[j] == clusterID)
@@ -293,7 +295,7 @@ public abstract class KernelKMeans extends KClustererBase implements Parameteriz
      * @param k  the cluster id to get the distance to
      * @return the distance between the given data point and the specified cluster
      */
-    public double distance(Vec x, List<Double> qi, int k) {
+    public double distance(Vec x, DoubleList qi, int k) {
         if (k >= meanSqrdNorms.length || k < 0)
             throw new IndexOutOfBoundsException("Only " + meanSqrdNorms.length + " clusters. " + k + " is not a valid index");
         return Math.sqrt(Math.max(kernel.eval(0, 0, Arrays.asList(x), qi) - 2.0 / ownes[k] * evalSumK(x, qi, k, newDesignations) + meanSqrdNorms[k] * normConsts[k], 0));
@@ -318,7 +320,7 @@ public abstract class KernelKMeans extends KClustererBase implements Parameteriz
      *           {@link KernelTrick#getQueryInfo(com.jstarcraft.ai.jsat.linear.Vec) }
      * @return the index of the closest cluster
      */
-    public int findClosestCluster(Vec x, List<Double> qi) {
+    public int findClosestCluster(Vec x, DoubleList qi) {
         double min = Double.MAX_VALUE;
         int min_indx = -1;
         for (int i = 0; i < meanSqrdNorms.length; i++) {

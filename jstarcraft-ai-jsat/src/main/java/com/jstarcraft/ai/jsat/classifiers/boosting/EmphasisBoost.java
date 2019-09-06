@@ -14,9 +14,10 @@ import com.jstarcraft.ai.jsat.classifiers.calibration.BinaryScoreClassifier;
 import com.jstarcraft.ai.jsat.classifiers.trees.DecisionTree;
 import com.jstarcraft.ai.jsat.distributions.Distribution;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Emphasis Boost is a generalization of the Real AdaBoost algorithm, expanding
@@ -51,7 +52,7 @@ public class EmphasisBoost implements Classifier, Parameterized, BinaryScoreClas
     /**
      * The weights for each weak learner
      */
-    protected List<Double> hypWeights;
+    protected DoubleArrayList hypWeights;
     protected CategoricalData predicting;
     private double lambda;
 
@@ -83,7 +84,7 @@ public class EmphasisBoost implements Classifier, Parameterized, BinaryScoreClas
     protected EmphasisBoost(EmphasisBoost toClone) {
         this(toClone.weakLearner.clone(), toClone.maxIterations, toClone.lambda);
         if (toClone.hypWeights != null) {
-            this.hypWeights = new DoubleList(toClone.hypWeights);
+            this.hypWeights = new DoubleArrayList(toClone.hypWeights);
             this.hypoths = new ArrayList<Classifier>(toClone.maxIterations);
             for (Classifier weak : toClone.hypoths)
                 this.hypoths.add(weak.clone());
@@ -194,7 +195,7 @@ public class EmphasisBoost implements Classifier, Parameterized, BinaryScoreClas
     public double getScore(DataPoint dp) {
         double score = 0;
         for (int i = 0; i < hypoths.size(); i++)
-            score += H(hypoths.get(i), dp) * hypWeights.get(i);
+            score += H(hypoths.get(i), dp) * hypWeights.getDouble(i);
         return score;
     }
 
@@ -222,7 +223,7 @@ public class EmphasisBoost implements Classifier, Parameterized, BinaryScoreClas
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
         predicting = dataSet.getPredicting();
-        hypWeights = new DoubleList(maxIterations);
+        hypWeights = new DoubleArrayList(maxIterations);
         hypoths = new ArrayList<>(maxIterations);
         final int N = dataSet.size();
 

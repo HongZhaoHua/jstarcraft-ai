@@ -27,7 +27,8 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Class for loading ARFF files. ARFF is a human readable file format used by
@@ -78,7 +79,7 @@ public class ARFFLoader {
      */
     public static SimpleDataSet loadArffFile(Reader input, DataStore store) {
         DataStore list = store.emptyClone();
-        DoubleList weights = new DoubleList();
+        DoubleArrayList weights = new DoubleArrayList();
 
         BufferedReader br = new BufferedReader(input);
 

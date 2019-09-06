@@ -13,8 +13,9 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 import com.jstarcraft.ai.jsat.math.Complex;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  * Class for performing the Eigen Value Decomposition of a matrix. The EVD of a
@@ -617,7 +618,7 @@ public class EigenValueDecomposition implements Serializable {
     public void sortByEigenValue(Comparator<Double> cmp) {
         if (isComplex())
             throw new ArithmeticException("Eigen values can not be sorted due to complex results");
-        IndexTable it = new IndexTable(DoubleList.unmodifiableView(d, d.length), cmp);
+        IndexTable it = new IndexTable(DoubleArrayList.wrap(d, d.length), cmp);
 
         for (int i = 0; i < d.length; i++) {
             RowColumnOps.swapCol(V, i, it.index(i));

@@ -33,12 +33,11 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.ColumnMajorStore;
 import com.jstarcraft.ai.jsat.DataStore;
 import com.jstarcraft.ai.jsat.RowMajorStore;
-import com.jstarcraft.ai.jsat.io.DataWriter;
-import com.jstarcraft.ai.jsat.io.LIBSVMLoader;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
+
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 
 /**
  *
@@ -73,7 +72,7 @@ public class LIBSVMLoaderTest {
         System.out.println("loadR");
 
         List<String> testLines = new ArrayList<String>();
-        List<Double> expetedLabel = new DoubleList();
+        DoubleArrayList expetedLabel = new DoubleArrayList();
         List<Vec> expectedVec = new ArrayList<Vec>();
 
         testLines.add("-1 2:3.0");// normal line

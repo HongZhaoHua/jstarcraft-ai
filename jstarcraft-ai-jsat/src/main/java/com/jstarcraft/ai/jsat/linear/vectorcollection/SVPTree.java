@@ -16,7 +16,6 @@ import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.DoubleList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
@@ -26,6 +25,8 @@ import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 
 /**
  * Provides a simplified implementation of Vantage Point Trees, as described in
@@ -44,7 +45,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
 
     private static final long serialVersionUID = -7271540108746353762L;
     private DistanceMetric dm;
-    private List<Double> distCache;
+    private DoubleList distCache;
     private List<V> allVecs;
     protected volatile TreeNode root;
     private int size;
@@ -74,7 +75,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         this.size = 0;
         this.allVecs = new ArrayList<>();
         if (dm.supportsAcceleration())
-            this.distCache = new DoubleList();
+            this.distCache = new DoubleArrayList();
     }
 
     /**
@@ -90,11 +91,11 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         if (toClone.allVecs != null)
             this.allVecs = new ArrayList<>(toClone.allVecs);
         if (toClone.distCache != null)
-            this.distCache = new DoubleList(toClone.distCache);
+            this.distCache = new DoubleArrayList(toClone.distCache);
     }
 
     @Override
-    public List<Double> getAccelerationCache() {
+    public DoubleList getAccelerationCache() {
         return distCache;
     }
 
@@ -503,7 +504,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         public void searchKNN(Vec query, int k, BoundedSortedList<IndexDistPair> list, double x, List<Double> qi) {
             Deque<VPNode> curNode_stack = new ArrayDeque<VPNode>();
 
-            DoubleList distToParrent_stack = new DoubleList();
+            DoubleArrayList distToParrent_stack = new DoubleArrayList();
             BooleanArrayList search_left_stack = new BooleanArrayList();
 
             curNode_stack.add(this);
@@ -513,7 +514,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 {
                     VPNode node = curNode_stack.peek();
                     x = dm.dist(node.p, query, qi, allVecs, distCache);
-                    distToParrent_stack.push(x);
+                    distToParrent_stack.add(x);
                     if (list.size() < k || x < list.get(k - 1).getDist())
                         list.add(new IndexDistPair(node.p, x));
                     double tau = list.get(list.size() - 1).getDist();
@@ -734,11 +735,11 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         /**
          * The distance of each point in this leaf to the parent node we came from.
          */
-        DoubleList bounds;
+        DoubleArrayList bounds;
 
         public VPLeaf(List<Pair<Double, Integer>> points) {
             this.points = new IntList(points.size());
-            this.bounds = new DoubleList(points.size());
+            this.bounds = new DoubleArrayList(points.size());
             for (int i = 0; i < points.size(); i++) {
                 this.points.add(points.get(i).getSecondItem());
                 this.bounds.add(points.get(i).getFirstItem());
@@ -746,7 +747,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         }
 
         public VPLeaf(VPLeaf toCopy) {
-            this.bounds = new DoubleList(toCopy.bounds);
+            this.bounds = new DoubleArrayList(toCopy.bounds);
             this.points = new IntList(toCopy.points);
         }
 
