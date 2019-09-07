@@ -2,11 +2,12 @@
 package com.jstarcraft.ai.jsat.clustering.dissimilarity;
 
 import java.util.List;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
+
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Measures the dissimilarity of two clusters by returning the value of the
@@ -60,7 +61,7 @@ public class CompleteLinkDissimilarity extends LanceWilliamsDissimilarity implem
     }
 
     @Override
-    public double dissimilarity(Set<Integer> a, Set<Integer> b, double[][] distanceMatrix) {
+    public double dissimilarity(IntSet a, IntSet b, double[][] distanceMatrix) {
         double maxDiss = Double.MIN_VALUE;
 
         for (int ai : a)

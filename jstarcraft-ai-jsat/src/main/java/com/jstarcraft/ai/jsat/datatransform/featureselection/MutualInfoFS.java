@@ -2,8 +2,6 @@ package com.jstarcraft.ai.jsat.datatransform.featureselection;
 
 import static java.lang.Math.log;
 
-import java.util.Set;
-
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
@@ -13,7 +11,8 @@ import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * Performs greedy feature selection based on Mutual Information of the features
@@ -223,8 +222,8 @@ public class MutualInfoFS extends RemoveAttributeTransform {
 
         IndexTable sortedOrder = new IndexTable(mis);
 
-        Set<Integer> catToRemove = new IntSet();
-        Set<Integer> numToRemove = new IntSet();
+        IntOpenHashSet catToRemove = new IntOpenHashSet();
+        IntOpenHashSet numToRemove = new IntOpenHashSet();
 
         for (int i = 0; i < consideredCount - featureCount; i++) {
             int removingIndex = sortedOrder.index(i);

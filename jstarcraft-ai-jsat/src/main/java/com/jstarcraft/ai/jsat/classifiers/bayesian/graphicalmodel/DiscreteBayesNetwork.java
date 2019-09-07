@@ -17,7 +17,8 @@ import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
 import com.jstarcraft.ai.jsat.classifiers.bayesian.ConditionalProbabilityTable;
 import com.jstarcraft.ai.jsat.classifiers.bayesian.NaiveBayes;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * A class for representing a Baysian Network (BN) for discrete variables. A BN
@@ -118,7 +119,7 @@ public class DiscreteBayesNetwork implements Classifier {
         predicting = dataSet.getPredicting();
         priors = dataSet.getPriors();
         cpts = new HashMap<Integer, ConditionalProbabilityTable>();
-        Set<Integer> cptTrainSet = new IntSet();
+        IntOpenHashSet cptTrainSet = new IntOpenHashSet();
 
         if (dag.getNodes().isEmpty()) {
             for (int i = 0; i < classID; i++)

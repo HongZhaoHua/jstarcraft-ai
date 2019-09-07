@@ -15,7 +15,8 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.exceptions.UntrainedModelException;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * The conditional probability table (CPT) is a classifier for categorical
@@ -128,7 +129,7 @@ public class ConditionalProbabilityTable implements Classifier {
     }
 
     public void train(ClassificationDataSet dataSet) {
-        Set<Integer> all = new IntSet();
+        IntOpenHashSet all = new IntOpenHashSet();
         for (int i = 0; i < dataSet.getNumCategoricalVars() + 1; i++)
             all.add(i);
         trainC(dataSet, all);

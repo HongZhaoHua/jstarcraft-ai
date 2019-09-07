@@ -1,24 +1,27 @@
 package com.jstarcraft.ai.jsat.clustering.hierarchical;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.junit.*;
+import java.util.List;
+import java.util.Random;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.clustering.evaluation.DaviesBouldinIndex;
-import com.jstarcraft.ai.jsat.clustering.hierarchical.DivisiveLocalClusterer;
 import com.jstarcraft.ai.jsat.clustering.kmeans.ElkanKMeans;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -60,7 +63,7 @@ public class DivisiveLocalClustererTest {
         System.out.println("cluster(dataset, int)");
         List<List<DataPoint>> clusters = dlc.cluster(easyData, 10);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -74,7 +77,7 @@ public class DivisiveLocalClustererTest {
         System.out.println("cluster(dataset, int, ExecutorService)");
         List<List<DataPoint>> clusters = dlc.cluster(easyData, 10, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

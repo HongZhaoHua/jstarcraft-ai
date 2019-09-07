@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,11 +16,12 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.knn.NearestNeighbour;
-import com.jstarcraft.ai.jsat.datatransform.featureselection.SBS;
 import com.jstarcraft.ai.jsat.regression.MultipleLinearRegression;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  *
@@ -59,9 +59,9 @@ public class SBSTest {
         SBS sbs = new SBS(1, 7, (Classifier) new NearestNeighbour(7), 1e-3).clone();
         sbs.setFolds(5);
         sbs.fit(cds);
-        Set<Integer> found = sbs.getSelectedNumerical();
+        IntSet found = sbs.getSelectedNumerical();
 
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
         assertEquals(shouldHave.size(), found.size());
         assertTrue(shouldHave.containsAll(found));
@@ -80,9 +80,9 @@ public class SBSTest {
         SBS sbs = new SBS(1, 7, new MultipleLinearRegression(), 1.0).clone();
         sbs.setFolds(5);
         sbs.fit(cds);
-        Set<Integer> found = sbs.getSelectedNumerical();
+        IntSet found = sbs.getSelectedNumerical();
 
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
         assertEquals(shouldHave.size(), found.size());
         assertTrue(shouldHave.containsAll(found));

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicIntegerArray;
@@ -33,12 +32,12 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This provides a highly configurable implementation of a Radial Basis Function
@@ -263,7 +262,7 @@ public class RBFNet implements Classifier, Regressor, DataTransform, Parameteriz
             protected List<Vec> getCentroids(DataSet data, int centroids, DistanceMetric dm, boolean parallel) {
                 Random rand = RandomUtil.getRandom();
                 List<Vec> toRet = new ArrayList<>();
-                Set<Integer> points = new IntSet();
+                IntOpenHashSet points = new IntOpenHashSet();
 
                 while (points.size() < centroids)
                     points.add(rand.nextInt(data.size()));

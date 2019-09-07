@@ -25,10 +25,10 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.text.topicmodel.OnlineLDAsvi;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -163,7 +163,7 @@ public class OnlineLDAsviTest {
         }
 
         // make sure no basis was closest to 2 or more topics
-        if (basis.size() != new IntSet(ldaTopicToBasis.values()).size())
+        if (basis.size() != new IntOpenHashSet(ldaTopicToBasis.values()).size())
             return false;
 
         // make sure that computing the topic distirbution works

@@ -15,9 +15,10 @@ import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -51,7 +52,7 @@ public class ID3 implements Classifier {
         attributes = dataSet.getCategories();
         List<DataPointPair<Integer>> dataPoints = dataSet.getAsDPPList();
 
-        Set<Integer> availableAttributes = new IntSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet availableAttributes = new IntOpenHashSet(dataSet.getNumCategoricalVars());
         for (int i = 0; i < dataSet.getNumCategoricalVars(); i++)
             availableAttributes.add(i);
         latch = new ModifiableCountDownLatch(1);
@@ -105,7 +106,7 @@ public class ID3 implements Classifier {
         }
 
         final ID3Node node = new ID3Node(attributes[bestAttribute].getNumOfCategories(), bestAttribute);
-        final Set<Integer> newRemaining = new IntSet(remainingAtribues);
+        final IntOpenHashSet newRemaining = new IntOpenHashSet(remainingAtribues);
         newRemaining.remove(bestAttribute);
         for (int i = 0; i < bestSplit.size(); i++) {
             final int ii = i;

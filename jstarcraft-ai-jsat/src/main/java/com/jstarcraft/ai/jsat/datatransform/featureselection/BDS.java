@@ -1,7 +1,6 @@
 package com.jstarcraft.ai.jsat.datatransform.featureselection;
 
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
@@ -11,9 +10,11 @@ import com.jstarcraft.ai.jsat.datatransform.DataTransform;
 import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Bidirectional Search (BDS) is a greedy method of selecting a subset of
@@ -29,8 +30,8 @@ public class BDS implements DataTransform {
 
     private static final long serialVersionUID = 8633823674617843754L;
     private RemoveAttributeTransform finalTransform;
-    private Set<Integer> catSelected;
-    private Set<Integer> numSelected;
+    private IntOpenHashSet catSelected;
+    private IntOpenHashSet numSelected;
     private int featureCount;
     private int folds;
     private Object evaluator;
@@ -46,8 +47,8 @@ public class BDS implements DataTransform {
         this.evaluator = toClone.evaluator;
         if (toClone.finalTransform != null) {
             this.finalTransform = toClone.finalTransform.clone();
-            this.catSelected = new IntSet(toClone.catSelected);
-            this.numSelected = new IntSet(toClone.numSelected);
+            this.catSelected = new IntOpenHashSet(toClone.catSelected);
+            this.numSelected = new IntOpenHashSet(toClone.numSelected);
         }
     }
 
@@ -123,8 +124,8 @@ public class BDS implements DataTransform {
      * 
      * @return the set of categorical features to use
      */
-    public Set<Integer> getSelectedCategorical() {
-        return new IntSet(catSelected);
+    public IntSet getSelectedCategorical() {
+        return new IntOpenHashSet(catSelected);
     }
 
     /**
@@ -133,8 +134,8 @@ public class BDS implements DataTransform {
      * 
      * @return the set of numeric features to use
      */
-    public Set<Integer> getSelectedNumerical() {
-        return new IntSet(numSelected);
+    public IntSet getSelectedNumerical() {
+        return new IntOpenHashSet(numSelected);
     }
 
     @Override
@@ -148,26 +149,26 @@ public class BDS implements DataTransform {
         int nCat = dataSet.getNumCategoricalVars();
 
         // True selected, also used for SFS
-        catSelected = new IntSet(dataSet.getNumCategoricalVars());
-        numSelected = new IntSet(dataSet.getNumNumericalVars());
+        catSelected = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        numSelected = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
         // Structs for SFS side
-        Set<Integer> availableSFS = new IntSet();
+        IntOpenHashSet availableSFS = new IntOpenHashSet();
         ListUtils.addRange(availableSFS, 0, nF, 1);
 
-        Set<Integer> catToRemoveSFS = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numToRemoveSFS = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catToRemoveSFS = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numToRemoveSFS = new IntOpenHashSet(dataSet.getNumNumericalVars());
         ListUtils.addRange(catToRemoveSFS, 0, nCat, 1);
         ListUtils.addRange(numToRemoveSFS, 0, nF - nCat, 1);
 
         /// Structes fro SBS side
-        Set<Integer> availableSBS = new IntSet();
+        IntOpenHashSet availableSBS = new IntOpenHashSet();
         ListUtils.addRange(availableSBS, 0, nF, 1);
-        Set<Integer> catSelecteedSBS = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numSelectedSBS = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catSelecteedSBS = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numSelectedSBS = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
-        Set<Integer> catToRemoveSBS = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numToRemoveSBS = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catToRemoveSBS = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numToRemoveSBS = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
         // Start will all selected, and prune them out
         ListUtils.addRange(catSelecteedSBS, 0, nCat, 1);

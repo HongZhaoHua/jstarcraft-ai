@@ -2,11 +2,12 @@ package com.jstarcraft.ai.jsat.clustering.dissimilarity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
+
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Also known as Group-Average Agglomerative Clustering (GAAC) and UPGMA, this
@@ -55,7 +56,7 @@ public class AverageLinkDissimilarity extends LanceWilliamsDissimilarity impleme
     }
 
     @Override
-    public double dissimilarity(Set<Integer> a, Set<Integer> b, double[][] distanceMatrix) {
+    public double dissimilarity(IntSet a, IntSet b, double[][] distanceMatrix) {
         double disSum = 0;
 
         int allSize = a.size() + b.size();

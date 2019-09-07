@@ -17,11 +17,11 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.knn.NearestNeighbour;
-import com.jstarcraft.ai.jsat.datatransform.featureselection.BDS;
 import com.jstarcraft.ai.jsat.regression.MultipleLinearRegression;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -56,7 +56,7 @@ public class BDSTest {
         System.out.println("transformC");
         Random rand = new XORWOW(13);
         int t0 = 1, t1 = 5, t2 = 8;
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
 
         ClassificationDataSet cds = SFSTest.generate3DimIn10(rand, t0, t1, t2);
@@ -76,7 +76,7 @@ public class BDSTest {
         System.out.println("transformR");
         Random rand = new XORWOW(13);
         int t0 = 1, t1 = 5, t2 = 8;
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
 
         RegressionDataSet rds = SFSTest.generate3DimIn10R(rand, t0, t1, t2);

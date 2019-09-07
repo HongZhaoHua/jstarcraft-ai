@@ -20,9 +20,10 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * The ExtraTree is an Extremely Randomized Tree. Splits are chosen at random,
@@ -249,12 +250,12 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
                 if (binaryCategoricalSplitting || vals == 2) {
                     scores = createScores(2);
-                    Set<Integer> catsValsInUse = new IntSet(vals * 2);
+                    IntOpenHashSet catsValsInUse = new IntOpenHashSet(vals * 2);
                     for (int j = 0; j < subSet.size(); j++)
                         catsValsInUse.add(subSet.getDataPoint(j).getCategoricalValue(a));
                     if (catsValsInUse.size() == 1)
                         return new NodeC(setScore.getResults());
-                    leftSide = new IntSet(vals);
+                    leftSide = new IntOpenHashSet(vals);
                     int toUse = rand.nextInt(catsValsInUse.size() - 1) + 1;
                     ListUtils.randomSample(catsValsInUse, leftSide, toUse, rand);
                     // Now we have anything in leftSide is path 0, we can do the bining
@@ -394,12 +395,12 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
                 if (binaryCategoricalSplitting || vals == 2) {
                     stats = createStats(2);
-                    Set<Integer> catsValsInUse = new IntSet(vals * 2);
+                    IntOpenHashSet catsValsInUse = new IntOpenHashSet(vals * 2);
                     for (int j = 0; j < subSet.size(); j++)
                         catsValsInUse.add(subSet.getDataPoint(j).getCategoricalValue(a));
                     if (catsValsInUse.size() == 1)
                         return new NodeR(setScore.getMean());
-                    leftSide = new IntSet(vals);
+                    leftSide = new IntOpenHashSet(vals);
                     int toUse = rand.nextInt(catsValsInUse.size() - 1) + 1;
                     ListUtils.randomSample(catsValsInUse, leftSide, toUse, rand);
                     // Now we have anything in leftSide is path 0, we can do the bining

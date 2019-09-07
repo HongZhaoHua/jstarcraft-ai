@@ -4,29 +4,28 @@
  */
 package com.jstarcraft.ai.jsat.clustering.hierarchical;
 
-import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.junit.*;
+import java.util.List;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.clustering.evaluation.DaviesBouldinIndex;
-import com.jstarcraft.ai.jsat.clustering.hierarchical.DivisiveGlobalClusterer;
-import com.jstarcraft.ai.jsat.clustering.kmeans.ElkanKMeans;
-import com.jstarcraft.ai.jsat.clustering.kmeans.HamerlyKMeans;
 import com.jstarcraft.ai.jsat.clustering.kmeans.NaiveKMeans;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
-import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -64,7 +63,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset, int)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData, 4);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -78,7 +77,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -92,7 +91,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset, ExecutorService)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData, true);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -106,7 +105,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset, int, int)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData, 2, 20);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -120,7 +119,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset, int, int, ExecutorService)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData, 2, 20, true);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -134,7 +133,7 @@ public class DivisiveGlobalClustererTest {
         System.out.println("cluster(dataset, int, ExecutorService)");
         List<List<DataPoint>> clusters = dgc.cluster(easyData, 4, true);
         assertEquals(4, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

@@ -9,8 +9,9 @@ import java.util.Set;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * An implementation of the K2 algorithm for learning the structure of a
@@ -86,13 +87,13 @@ public class K2NetworkLearner extends DiscreteBayesNetwork {
         /**
          * Stores the set of variables preceding the current one being evaluated
          */
-        Set<Integer> preceding = new IntSet();
+        IntOpenHashSet preceding = new IntOpenHashSet();
         for (int i : varOrder)// Loop of the variables in the intended order
         {
-            Set<Integer> pi = new IntSet();// The current parrents of variable i
+            IntOpenHashSet pi = new IntOpenHashSet();// The current parrents of variable i
             double pOld = f(i, pi, D);
             boolean OKToProceed = true;
-            Set<Integer> candidates = new IntSet(preceding);
+            IntOpenHashSet candidates = new IntOpenHashSet(preceding);
             while (OKToProceed && pi.size() < u) {
                 if (candidates.isEmpty())
                     break;// Break out of the loop, no candidates left.

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,10 +14,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
-import com.jstarcraft.ai.jsat.datatransform.featureselection.ReliefF;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -53,14 +52,14 @@ public class ReliefFTest {
         System.out.println("transformC");
         Random rand = new XORWOW(13);
         int t0 = 1, t1 = 5, t2 = 8;
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
 
         ClassificationDataSet cds = SFSTest.generate3DimIn10(rand, t0, t1, t2);
 
         ReliefF relieff = new ReliefF(3, 50, 7, new EuclideanDistance()).clone();
         relieff.fit(cds);
-        Set<Integer> found = new IntSet(relieff.getKeptNumeric());
+        IntOpenHashSet found = new IntOpenHashSet(relieff.getKeptNumeric());
 
         assertEquals(shouldHave.size(), found.size());
         assertTrue(shouldHave.containsAll(found));

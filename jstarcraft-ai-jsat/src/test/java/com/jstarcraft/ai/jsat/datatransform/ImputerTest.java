@@ -18,10 +18,6 @@ package com.jstarcraft.ai.jsat.datatransform;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -29,13 +25,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.SimpleDataSet;
-import com.jstarcraft.ai.jsat.datatransform.Imputer;
-import com.jstarcraft.ai.jsat.datatransform.InsertMissingValuesTransform;
-import com.jstarcraft.ai.jsat.datatransform.NumericalToHistogram;
-import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.distributions.Normal;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSets;
 
 /**
  *
@@ -72,7 +67,7 @@ public class ImputerTest {
 
         SimpleDataSet data = gdg.generateData(10000);
         // remove class label feature
-        data.applyTransform(new RemoveAttributeTransform(data, new HashSet<Integer>(Arrays.asList(0)), Collections.EMPTY_SET));
+        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] {0}), IntSets.EMPTY_SET));
 
         // true mean and median should be 0
         data.applyTransform(new InsertMissingValuesTransform(0.1));
@@ -94,7 +89,7 @@ public class ImputerTest {
         // test categorical features
         data = gdg.generateData(10000);
         // remove class label feature
-        data.applyTransform(new RemoveAttributeTransform(data, new HashSet<Integer>(Arrays.asList(0)), Collections.EMPTY_SET));
+        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] {0}), IntSets.EMPTY_SET));
         // breaking into 3 even sized bins, so the middle bin, indx 1, should be the
         // mode
         data.applyTransform(new NumericalToHistogram(data, 3));

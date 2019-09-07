@@ -24,15 +24,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.RegressionModelEvaluation;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -82,7 +82,7 @@ public class TestTools {
      * @return true if the clustering is good, false otherwise
      */
     public static boolean checkClusteringByCat(List<List<DataPoint>> clusters) {
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             if (seenBefore.contains(thisClass) != false)

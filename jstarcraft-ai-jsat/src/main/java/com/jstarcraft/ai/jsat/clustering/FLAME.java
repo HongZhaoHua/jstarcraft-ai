@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.DoubleAdder;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -20,8 +19,9 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * Provides an implementation of the FLAME clustering algorithm. The original
@@ -224,7 +224,7 @@ public class FLAME extends ClustererBase implements Parameterized {
                 weights[i][j] /= sum;
         }
         final Map<Integer, Integer> CSOs = new HashMap<>();
-        final Set<Integer> outliers = new IntSet();
+        final IntOpenHashSet outliers = new IntOpenHashSet();
         Arrays.fill(designations, -1);
         final double threshold = densityStats.getMean() + densityStats.getStandardDeviation() * stndDevs;
         for (int i = 0; i < density.length; i++) {
@@ -260,7 +260,7 @@ public class FLAME extends ClustererBase implements Parameterized {
 
             if (origSize != CSOs.size())// we did a removal, re-order clusters
             {
-                Set<Integer> keys = new IntSet(CSOs.keySet());
+                IntOpenHashSet keys = new IntOpenHashSet(CSOs.keySet());
                 CSOs.clear();
                 for (int i : keys)
                     CSOs.put(i, CSOs.size());

@@ -19,7 +19,6 @@ package com.jstarcraft.ai.jsat.linear.vectorcollection;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,8 +26,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
 import com.jstarcraft.ai.jsat.clustering.MEDDIT;
@@ -42,7 +39,6 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
@@ -51,6 +47,7 @@ import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This class implements the Ball Tree algorithm for accelerating nearest
@@ -81,6 +78,9 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
  */
 public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTree<V> {
     public static final int DEFAULT_LEAF_SIZE = 40;
+    
+    private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
+    
     private int leaf_size = DEFAULT_LEAF_SIZE;
     private DistanceMetric dm;
     private List<V> allVecs;
@@ -346,15 +346,11 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         // If sparse, keep a set of indexes we HAVE NOT SEEN
         // these have implicity zeros we need to add back at the end
-        final Set<Integer> neverSeen;
+        final IntOpenHashSet neverSeen;
         if (isSparse)
-            if (parallel) {
-                neverSeen = ConcurrentHashMap.newKeySet();
-                ListUtils.addRange(neverSeen, 0, D, 1);
-            } else
-                neverSeen = new IntSet(ListUtils.range(0, D));
+            neverSeen = new IntOpenHashSet(ListUtils.range(0, D));
         else
-            neverSeen = Collections.EMPTY_SET;
+            neverSeen = EMPTY;
 
         AtomicDoubleArray mins = new AtomicDoubleArray(D);
         mins.fill(Double.POSITIVE_INFINITY);
@@ -365,7 +361,9 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
                 int d = iv.getIndex();
                 mins.updateAndGet(d, (m_d) -> Math.min(m_d, iv.getValue()));
                 maxs.updateAndGet(d, (m_d) -> Math.max(m_d, iv.getValue()));
-                neverSeen.remove(d);
+                synchronized (neverSeen) {
+                    neverSeen.remove(d);
+                }
             }
         });
 
@@ -506,7 +504,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         /// Initial population of Qs and costs
         for (int k = 0; k < K; k++) {
-            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>(( o1,  o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
+            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>((o1, o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
             mergeQs.add(mergeQ_k);
             Node n_k = anchor_nodes.get(k);
             IntList owned_nk = new IntList();
@@ -574,7 +572,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             anchor_nodes.set(other, null);
 
             // OK, we have merged two points. Now book keeping. Remove all Qs
-            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>(( o1,  o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
+            PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>((o1, o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
             mergeQs.set(winningQ, mergeQ_k);
 
             Node n_k = merged;

@@ -1,10 +1,10 @@
 package com.jstarcraft.ai.jsat.clustering.hierarchical;
 
-import java.util.Set;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,13 +14,10 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.clustering.dissimilarity.SingleLinkDissimilarity;
-import com.jstarcraft.ai.jsat.clustering.hierarchical.NNChainHAC;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
-import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 
-import static org.junit.Assert.*;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -64,7 +61,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset, int)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10, 10);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -78,7 +75,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -92,7 +89,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset, ExecutorService)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -106,7 +103,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset, int, int)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10, 2, 20);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -120,7 +117,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset, int, int, ExecutorService)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10, 2, 20, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -137,7 +134,7 @@ public class NNChainHACTest {
         System.out.println("cluster(dataset, int, ExecutorService)");
         List<List<DataPoint>> clusters = hac.cluster(easyData10, 10, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

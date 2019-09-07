@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.logging.Level;
@@ -26,9 +25,11 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.DefaultVectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSets;
 
 /**
  * Provides an implementation of the ReliefF algorithm for feature importance
@@ -281,11 +282,11 @@ public class ReliefF extends RemoveAttributeTransform {
 
         IndexTable it = new IndexTable(w);
 
-        Set<Integer> numericalToRemove = new IntSet(w.length * 2);
+        IntOpenHashSet numericalToRemove = new IntOpenHashSet(w.length * 2);
 
         for (int i = 0; i < w.length - featureCount; i++)
             numericalToRemove.add(it.index(i));
-        setUp(cds, Collections.EMPTY_SET, numericalToRemove);
+        setUp(cds, IntSets.EMPTY_SET, numericalToRemove);
     }
 
     /**

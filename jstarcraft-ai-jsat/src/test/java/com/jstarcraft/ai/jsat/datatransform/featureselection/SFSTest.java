@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,12 +17,13 @@ import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.knn.NearestNeighbour;
-import com.jstarcraft.ai.jsat.datatransform.featureselection.SFS;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.MultipleLinearRegression;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  *
@@ -63,9 +63,9 @@ public class SFSTest {
 
         SFS sfs = new SFS(3, 7, (Classifier) new NearestNeighbour(7), 1e-3).clone();
         sfs.fit(cds);
-        Set<Integer> found = sfs.getSelectedNumerical();
+        IntSet found = sfs.getSelectedNumerical();
 
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
         assertEquals(shouldHave.size(), found.size());
         assertTrue(shouldHave.containsAll(found));
@@ -83,9 +83,9 @@ public class SFSTest {
 
         SFS sfs = new SFS(3, 7, new MultipleLinearRegression(), 10.0).clone();
         sfs.fit(rds);
-        Set<Integer> found = sfs.getSelectedNumerical();
+        IntSet found = sfs.getSelectedNumerical();
 
-        Set<Integer> shouldHave = new IntSet();
+        IntOpenHashSet shouldHave = new IntOpenHashSet();
         shouldHave.addAll(Arrays.asList(t0, t1, t2));
         assertEquals(shouldHave.size(), found.size());
         assertTrue(shouldHave.containsAll(found));

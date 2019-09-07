@@ -17,11 +17,12 @@ import com.jstarcraft.ai.jsat.distributions.ChiSquared;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.MahalanobisDistance;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This class provides methods useful for statistical operations that involve
@@ -479,7 +480,7 @@ public class MatrixStatistics {
             }).collect(Collectors.toList());
 
             // "in the merged set, repeat for each of the 50 solutions
-            IntSet splits_merged = new IntSet();
+            IntOpenHashSet splits_merged = new IntOpenHashSet();
             for (int i = 0; i < splits.length; i++)
                 splits_merged.addAll(splits[i]);
             int h_merged = (splits_merged.size() * h) / N;

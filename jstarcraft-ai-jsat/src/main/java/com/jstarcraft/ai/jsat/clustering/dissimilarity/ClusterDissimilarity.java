@@ -1,9 +1,10 @@
 package com.jstarcraft.ai.jsat.clustering.dissimilarity;
 
 import java.util.List;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
+
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * This interface provides the basic contract for measuring the dissimilarity
@@ -48,7 +49,7 @@ public interface ClusterDissimilarity {
      * @return a value &gt;= 0 that describes the dissimilarity of the two clusters.
      *         The larger the value, the more different the two clusterings are.
      */
-    public double dissimilarity(Set<Integer> a, Set<Integer> b, double[][] distanceMatrix);
+    public double dissimilarity(IntSet a, IntSet b, double[][] distanceMatrix);
 
     public ClusterDissimilarity clone();
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
@@ -15,7 +14,9 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * This Data Transform allows the complete removal of specific features from the
@@ -36,8 +37,8 @@ public class RemoveAttributeTransform implements DataTransform {
     protected int[] numIndexMap;
     protected CategoricalData[] newCatHeader;
 
-    private Set<Integer> categoricalToRemove;
-    private Set<Integer> numericalToRemove;
+    private IntSet categoricalToRemove;
+    private IntSet numericalToRemove;
 
     /**
      * Empty constructor that may be used by extending classes. Transforms that
@@ -60,7 +61,7 @@ public class RemoveAttributeTransform implements DataTransform {
      *                            rage of [0,
      *                            {@link DataSet#getNumNumericalVars() }).
      */
-    public RemoveAttributeTransform(Set<Integer> categoricalToRemove, Set<Integer> numericalToRemove) {
+    public RemoveAttributeTransform(IntSet categoricalToRemove, IntSet numericalToRemove) {
         this.categoricalToRemove = categoricalToRemove;
         this.numericalToRemove = numericalToRemove;
 
@@ -77,7 +78,7 @@ public class RemoveAttributeTransform implements DataTransform {
      *                            rage of [0,
      *                            {@link DataSet#getNumNumericalVars() }).
      */
-    public RemoveAttributeTransform(DataSet dataSet, Set<Integer> categoricalToRemove, Set<Integer> numericalToRemove) {
+    public RemoveAttributeTransform(DataSet dataSet, IntSet categoricalToRemove, IntSet numericalToRemove) {
         this.categoricalToRemove = categoricalToRemove;
         this.numericalToRemove = numericalToRemove;
         setUp(dataSet, categoricalToRemove, numericalToRemove);
@@ -142,7 +143,7 @@ public class RemoveAttributeTransform implements DataTransform {
      * @param categoricalToRemove the categorical attributes to remove
      * @param numericalToRemove   the numeric attributes to remove
      */
-    protected final void setUp(DataSet dataSet, Set<Integer> categoricalToRemove, Set<Integer> numericalToRemove) {
+    protected final void setUp(DataSet dataSet, IntSet categoricalToRemove, IntSet numericalToRemove) {
         for (int i : categoricalToRemove)
             if (i >= dataSet.getNumCategoricalVars())
                 throw new RuntimeException("The data set does not have a categorical value " + i + " to remove");
@@ -175,9 +176,9 @@ public class RemoveAttributeTransform implements DataTransform {
      */
     protected RemoveAttributeTransform(RemoveAttributeTransform other) {
         if (other.categoricalToRemove != null)
-            this.categoricalToRemove = new IntSet(other.categoricalToRemove);
+            this.categoricalToRemove = new IntOpenHashSet(other.categoricalToRemove);
         if (other.numericalToRemove != null)
-            this.numericalToRemove = new IntSet(other.numericalToRemove);
+            this.numericalToRemove = new IntOpenHashSet(other.numericalToRemove);
         if (other.catIndexMap != null)
             this.catIndexMap = Arrays.copyOf(other.catIndexMap, other.catIndexMap.length);
         if (other.numIndexMap != null)

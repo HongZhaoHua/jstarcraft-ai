@@ -8,7 +8,9 @@ import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * This class provides a base implementation of a Lance Williams (LW)
@@ -113,25 +115,25 @@ public abstract class LanceWilliamsDissimilarity extends DistanceMetricDissimila
     }
 
     @Override
-    public double dissimilarity(Set<Integer> a, Set<Integer> b, double[][] distanceMatrix) {
+    public double dissimilarity(IntSet a, IntSet b, double[][] distanceMatrix) {
         if (a.size() == 1 && b.size() == 1)
             return getDistance(distanceMatrix, getVal(a), getVal(b));
 
-        Set<Integer> CI;
-        Set<Integer> CJ;
-        Set<Integer> CK;
+        IntSet CI;
+        IntSet CJ;
+        IntSet CK;
 
         if (a.size() > 1) {
-            CI = new IntSet();
+            CI = new IntOpenHashSet();
             CI.add(getVal(a));
-            CJ = new IntSet(a);
+            CJ = new IntOpenHashSet(a);
             CJ.removeAll(CI);
             CK = b;
         } else// a == 1, b > 1
         {
-            CI = new IntSet();
+            CI = new IntOpenHashSet();
             CI.add(getVal(b));
-            CJ = new IntSet(b);
+            CJ = new IntOpenHashSet(b);
             CJ.removeAll(CI);
             CK = a;
         }

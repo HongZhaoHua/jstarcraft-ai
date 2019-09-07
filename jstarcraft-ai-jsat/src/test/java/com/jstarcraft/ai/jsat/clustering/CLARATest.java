@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,11 +12,11 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.clustering.CLARA;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -57,7 +56,7 @@ public class CLARATest {
         toUse.setSampleSize(easyData10.size() / 2);
         List<List<DataPoint>> clusters = toUse.cluster(easyData10, 6);
         assertEquals(6, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -74,7 +73,7 @@ public class CLARATest {
         toUse.setSampleSize(easyData10.size() / 2);
         List<List<DataPoint>> clusters = toUse.cluster(easyData10, 6, true);
         assertEquals(6, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -89,7 +88,7 @@ public class CLARATest {
         CLARA toUse = algo.clone();
         List<List<DataPoint>> clusters = toUse.cluster(easyData2, true);
         assertEquals(2, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

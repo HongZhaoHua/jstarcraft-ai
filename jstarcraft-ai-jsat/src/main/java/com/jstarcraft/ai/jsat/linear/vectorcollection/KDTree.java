@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ExecutorService;
 
 import com.jstarcraft.ai.jsat.linear.IndexValue;
@@ -22,13 +21,13 @@ import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * Standard KDTree implementation. KDTrees are fast to create with no distance
@@ -57,6 +56,8 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
  */
 public class KDTree<V extends Vec> implements IncrementalCollection<V> {
 
+    private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
+    
     private static final long serialVersionUID = -7401342201406776463L;
     private DistanceMetric distanceMetric;
     private KDNode root;
@@ -451,7 +452,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
             Arrays.fill(maxs, Double.NEGATIVE_INFINITY);
             // If sparse, keep a set of indexes we HAVE NOT SEEN
             // these have implicity zeros we need to add back at the end
-            final Set<Integer> neverSeen = isSparse ? new IntSet(ListUtils.range(0, get(0).length())) : Collections.EMPTY_SET;
+            final IntOpenHashSet neverSeen = isSparse ? new IntOpenHashSet(ListUtils.range(0, get(0).length())) : EMPTY;
             for (int i : data) {
                 V v = get(i);
                 for (IndexValue iv : v) {

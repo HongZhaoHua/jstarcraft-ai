@@ -5,7 +5,6 @@ import static com.jstarcraft.ai.jsat.datatransform.featureselection.SFS.removeFe
 
 import java.util.Arrays;
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
@@ -14,9 +13,11 @@ import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Sequential Backward Selection (SBS) is a greedy method of selecting a subset
@@ -131,13 +132,13 @@ public class SBS extends RemoveAttributeTransform {
         int nF = dataSet.getNumFeatures();
         int nCat = dataSet.getNumCategoricalVars();
 
-        Set<Integer> available = new IntSet();
+        IntOpenHashSet available = new IntOpenHashSet();
         ListUtils.addRange(available, 0, nF, 1);
-        Set<Integer> catSelected = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numSelected = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catSelected = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numSelected = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
-        Set<Integer> catToRemove = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numToRemove = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catToRemove = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numToRemove = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
         // Start will all selected, and prune them out
         ListUtils.addRange(catSelected, 0, nCat, 1);
@@ -176,8 +177,8 @@ public class SBS extends RemoveAttributeTransform {
      * 
      * @return the set of categorical features to use
      */
-    public Set<Integer> getSelectedCategorical() {
-        return new IntSet(IntList.view(catIndexMap, catIndexMap.length));
+    public IntSet getSelectedCategorical() {
+        return new IntOpenHashSet(IntList.view(catIndexMap, catIndexMap.length));
     }
 
     /**
@@ -186,8 +187,8 @@ public class SBS extends RemoveAttributeTransform {
      * 
      * @return the set of numeric features to use
      */
-    public Set<Integer> getSelectedNumerical() {
-        return new IntSet(IntList.view(numIndexMap, numIndexMap.length));
+    public IntSet getSelectedNumerical() {
+        return new IntOpenHashSet(IntList.view(numIndexMap, numIndexMap.length));
     }
 
     /**
@@ -212,7 +213,7 @@ public class SBS extends RemoveAttributeTransform {
      * @return the feature that was selected to be removed, or -1 if none were
      *         removed
      */
-    protected static int SBSRemoveFeature(Set<Integer> available, DataSet dataSet, Set<Integer> catToRemove, Set<Integer> numToRemove, Set<Integer> catSelecteed, Set<Integer> numSelected, Object evaluater, int folds, Random rand, int maxFeatures, double[] PbestScore, double maxDecrease) {
+    protected static int SBSRemoveFeature(IntSet available, DataSet dataSet, IntSet catToRemove, IntSet numToRemove, IntSet catSelecteed, IntSet numSelected, Object evaluater, int folds, Random rand, int maxFeatures, double[] PbestScore, double maxDecrease) {
         int curBest = -1;
         int nCat = dataSet.getNumCategoricalVars();
         double curBestScore = Double.POSITIVE_INFINITY;

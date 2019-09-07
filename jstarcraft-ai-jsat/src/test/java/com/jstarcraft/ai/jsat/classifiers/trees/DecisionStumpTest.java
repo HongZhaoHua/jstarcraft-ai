@@ -8,7 +8,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import org.junit.After;
@@ -20,14 +19,13 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
-import com.jstarcraft.ai.jsat.classifiers.trees.DecisionStump;
-import com.jstarcraft.ai.jsat.classifiers.trees.ImpurityScore;
 import com.jstarcraft.ai.jsat.datatransform.InsertMissingValuesTransform;
 import com.jstarcraft.ai.jsat.datatransform.NumericalToHistogram;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -173,7 +171,7 @@ public class DecisionStumpTest {
     public void testTrainC_List_Set() {
         System.out.println("trainC(List<DataPointPair>, Set<integer>)");
         stump.setPredicting(easyNumAtTrain.getPredicting());
-        stump.trainC(easyNumAtTrain, new IntSet(Arrays.asList(0)));
+        stump.trainC(easyNumAtTrain, new IntOpenHashSet(new int[] { 0 }));
         for (int i = 0; i < easyNumAtTest.size(); i++)
             assertEquals(easyNumAtTest.getDataPointCategory(i), stump.classify(easyNumAtTest.getDataPoint(i)).mostLikely());
     }

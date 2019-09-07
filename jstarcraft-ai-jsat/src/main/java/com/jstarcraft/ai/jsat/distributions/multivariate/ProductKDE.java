@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.distributions.empirical.KernelDensityEstimator;
 import com.jstarcraft.ai.jsat.distributions.empirical.kernelfunc.EpanechnikovKF;
@@ -21,7 +20,9 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * The Product Kernel Density Estimator is a generalization of the
@@ -89,7 +90,7 @@ public class ProductKDE extends MultivariateKDE {
     public List<VecPaired<VecPaired<Vec, Integer>, Double>> getNearby(Vec x) {
 
         SparseVector logProd = new SparseVector(sortedDimVals[0].length);
-        Set<Integer> validIndecies = new IntSet();
+        IntOpenHashSet validIndecies = new IntOpenHashSet();
         double logH = queryWork(x, validIndecies, logProd);
         List<VecPaired<VecPaired<Vec, Integer>, Double>> results = new ArrayList<>(validIndecies.size());
 
@@ -112,7 +113,7 @@ public class ProductKDE extends MultivariateKDE {
         int N = sortedDimVals[0].length;
 
         SparseVector logProd = new SparseVector(sortedDimVals[0].length);
-        Set<Integer> validIndecies = new IntSet();
+        IntOpenHashSet validIndecies = new IntOpenHashSet();
         double logH = queryWork(x, validIndecies, logProd);
 
         for (int i : validIndecies)
@@ -137,7 +138,7 @@ public class ProductKDE extends MultivariateKDE {
      * @return The log product of the bandwidths that normalizes the values stored
      *         in the <tt>logProd</tt> vector.
      */
-    private double queryWork(Vec x, Set<Integer> validIndecies, SparseVector logProd) {
+    private double queryWork(Vec x, IntSet validIndecies, SparseVector logProd) {
         if (originalVecs == null)
             throw new UntrainedModelException("Model has not yet been created, queries can not be perfomed");
         double logH = 0;
@@ -155,7 +156,7 @@ public class ProductKDE extends MultivariateKDE {
             // inseration points
             from = from < 0 ? -from - 1 : from;
             to = to < 0 ? -to - 1 : to;
-            Set<Integer> subIndecies = new IntSet();
+            IntOpenHashSet subIndecies = new IntOpenHashSet();
             for (int j = max(0, from); j < min(X.length, to + 1); j++) {
                 int trueIndex = sortedIndexVals[i][j];
 

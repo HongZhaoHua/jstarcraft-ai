@@ -13,9 +13,11 @@ import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.RegressionModelEvaluation;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Sequential Forward Selection (SFS) is a greedy method of selecting a subset
@@ -28,8 +30,8 @@ public class SFS implements DataTransform {
 
     private static final long serialVersionUID = 140187978708131002L;
     private RemoveAttributeTransform finalTransform;
-    private Set<Integer> catSelected;
-    private Set<Integer> numSelected;
+    private IntOpenHashSet catSelected;
+    private IntOpenHashSet numSelected;
     private double maxIncrease;
     private Classifier classifier;
     private Regressor regressor;
@@ -45,8 +47,8 @@ public class SFS implements DataTransform {
     private SFS(SFS toClone) {
         if (toClone.catSelected != null) {
             this.finalTransform = toClone.finalTransform.clone();
-            this.catSelected = new IntSet(toClone.catSelected);
-            this.numSelected = new IntSet(toClone.numSelected);
+            this.catSelected = new IntOpenHashSet(toClone.catSelected);
+            this.numSelected = new IntOpenHashSet(toClone.numSelected);
         }
 
         this.maxIncrease = toClone.maxIncrease;
@@ -140,13 +142,13 @@ public class SFS implements DataTransform {
         int nF = dataSet.getNumFeatures();
         int nCat = dataSet.getNumCategoricalVars();
 
-        Set<Integer> available = new IntSet();
+        IntOpenHashSet available = new IntOpenHashSet();
         ListUtils.addRange(available, 0, nF, 1);
-        catSelected = new IntSet(dataSet.getNumCategoricalVars());
-        numSelected = new IntSet(dataSet.getNumNumericalVars());
+        catSelected = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        numSelected = new IntOpenHashSet(dataSet.getNumNumericalVars());
 
-        Set<Integer> catToRemove = new IntSet(dataSet.getNumCategoricalVars());
-        Set<Integer> numToRemove = new IntSet(dataSet.getNumNumericalVars());
+        IntOpenHashSet catToRemove = new IntOpenHashSet(dataSet.getNumCategoricalVars());
+        IntOpenHashSet numToRemove = new IntOpenHashSet(dataSet.getNumNumericalVars());
         ListUtils.addRange(catToRemove, 0, nCat, 1);
         ListUtils.addRange(numToRemove, 0, nF - nCat, 1);
 
@@ -209,8 +211,8 @@ public class SFS implements DataTransform {
      * 
      * @return the set of categorical features to use
      */
-    public Set<Integer> getSelectedCategorical() {
-        return new IntSet(catSelected);
+    public IntSet getSelectedCategorical() {
+        return new IntOpenHashSet(catSelected);
     }
 
     /**
@@ -219,8 +221,8 @@ public class SFS implements DataTransform {
      * 
      * @return the set of numeric features to use
      */
-    public Set<Integer> getSelectedNumerical() {
-        return new IntSet(numSelected);
+    public IntSet getSelectedNumerical() {
+        return new IntOpenHashSet(numSelected);
     }
 
     /**
@@ -243,7 +245,7 @@ public class SFS implements DataTransform {
      * @param minFeatures  the minimum number of features needed
      * @return the feature that was selected to add, or -1 if none were added.
      */
-    static protected int SFSSelectFeature(Set<Integer> available, DataSet dataSet, Set<Integer> catToRemove, Set<Integer> numToRemove, Set<Integer> catSelecteed, Set<Integer> numSelected, Object evaluater, int folds, Random rand, double[] PbestScore, int minFeatures) {
+    static protected int SFSSelectFeature(IntSet available, DataSet dataSet, IntSet catToRemove, IntSet numToRemove, IntSet catSelecteed, IntSet numSelected, Object evaluater, int folds, Random rand, double[] PbestScore, int minFeatures) {
         int nCat = dataSet.getNumCategoricalVars();
         int curBest = -1;
         double curBestScore = Double.POSITIVE_INFINITY;

@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
@@ -31,7 +29,6 @@ import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
@@ -39,6 +36,8 @@ import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * This class implements the Cover-tree algorithm for answering nearest neighbor
@@ -157,11 +156,11 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
      * @param p the point p
      * @return
      */
-    private Set<Integer> construct(boolean parallel, TreeNode p, Set<Integer> near, Set<Integer> far, int level) {
+    private IntSet construct(boolean parallel, TreeNode p, IntSet near, IntSet far, int level) {
         if (near.isEmpty())
             return far;
 
-        Set<Integer> workingNearSet;
+        IntSet workingNearSet;
         if (level == Integer.MAX_VALUE)// We need to figure out the correct level and do the split at once to avoid
                                        // duplicate work
         {
@@ -183,23 +182,31 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             double r_split = pow(p.level - 1);
 
             near.clear();
-            Set<Integer> newNear = getSet(parallel);
-            Set<Integer> newFar = getSet(parallel);
+            IntOpenHashSet newNear = new IntOpenHashSet();
+            IntOpenHashSet newFar = new IntOpenHashSet();
             ParallelUtils.run(parallel, points.length, (start, end) -> {
 
                 for (int i = start; i < end; i++) {
                     double d_i = dists[i];
-                    if (d_i <= r_split)
-                        newNear.add(points[i]);
-                    else if (d_i < 2 * r_split)
-                        newFar.add(points[i]);
-                    else
-                        near.add(points[i]);
+                    if (d_i <= r_split) {
+                        synchronized (newNear) {
+                            newNear.add(points[i]);
+                        }
+                    } else if (d_i < 2 * r_split) {
+                        synchronized (newFar) {
+                            newFar.add(points[i]);
+                        }
+                    } else {
+                        synchronized (near) {
+                            near.add(points[i]);
+                        }
+                    }
+
                 }
             });
             workingNearSet = construct(parallel, p, newNear, newFar, p.level - 1);
         } else {
-            KeyValue<Set<Integer>, Set<Integer>> pairRet = split(parallel, p.vec_indx, pow(level - 1), near);
+            KeyValue<IntSet, IntSet> pairRet = split(parallel, p.vec_indx, pow(level - 1), near);
             workingNearSet = construct(parallel, p, pairRet.getKey(), pairRet.getValue(), level - 1);
         }
 
@@ -209,13 +216,13 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
             workingNearSet.remove(q_indx);
             TreeNode q = new TreeNode(q_indx, level - 1);
             // (ii) <CHILD, UNUSED> = Construct (q, SPLIT(d(q, ·), 2^(i−1),NEAR,FAR), i−1)
-            Set<Integer> unused = construct(parallel, q, workingNearSet, far, level - 1);
+            IntSet unused = construct(parallel, q, workingNearSet, far, level - 1);
             // (iii) add CHILD to Children(pi)
             p.addChild(q);
             // (iv) let <NEW-NEAR, NEW-FAR> =SPLIT(d(p, ·), 2^i,UNUSED)
-            KeyValue<Set<Integer>, Set<Integer>> newPiar = split(parallel, p.vec_indx, pow(level), unused);
-            Set<Integer> newNear = newPiar.getKey();
-            Set<Integer> newFar = newPiar.getValue();
+            KeyValue<IntSet, IntSet> newPiar = split(parallel, p.vec_indx, pow(level), unused);
+            IntSet newNear = newPiar.getKey();
+            IntSet newFar = newPiar.getValue();
             // (v) add NEW-FAR to FAR, and NEW-NEAR to NEAR.
             far.addAll(newFar);
             workingNearSet.addAll(newNear);
@@ -224,22 +231,25 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         return far;
     }
 
-    private KeyValue<Set<Integer>, Set<Integer>> split(boolean parallel, int p, double r, Set<Integer>... S) {
-        Set<Integer> newNear = getSet(parallel);
-        Set<Integer> newFar = getSet(parallel);
+    private KeyValue<IntSet, IntSet> split(boolean parallel, int p, double r, IntSet... S) {
+        IntOpenHashSet newNear = new IntOpenHashSet();
+        IntOpenHashSet newFar = new IntOpenHashSet();
 
-        for (Set<Integer> S_i : S) {
+        for (IntSet S_i : S) {
             int[] toRemove = ParallelUtils.streamP(S_i.stream(), parallel).mapToInt(i -> {
                 double d_i = dm.dist(p, i, vecs, accell_cache);
-
-                if (d_i <= r)
-                    newNear.add(i);
-                else if (d_i < 2 * r)
-                    newFar.add(i);
-                else
+                if (d_i <= r) {
+                    synchronized (newNear) {
+                        newNear.add(i);
+                    }
+                } else if (d_i < 2 * r) {
+                    synchronized (newFar) {
+                        newFar.add(i);
+                    }
+                } else {
                     return -1;// -1 will be 'removed' from the set S_i. but -1 isn't a valid index. So no
                               // impact
-
+                }
                 return i;
             }).distinct().toArray();
 
@@ -247,15 +257,6 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         }
 
         return new KeyValue<>(newNear, newFar);
-    }
-
-    private Set<Integer> getSet(boolean parallel) {
-        Set<Integer> newNear;
-        if (parallel)
-            newNear = ConcurrentHashMap.newKeySet();
-        else
-            newNear = new IntSet();
-        return newNear;
     }
 
     @Override

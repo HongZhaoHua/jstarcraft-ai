@@ -2,12 +2,10 @@
 package com.jstarcraft.ai.jsat.text;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Level;
@@ -23,7 +21,8 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.text.tokenizer.Tokenizer;
 import com.jstarcraft.ai.jsat.text.wordweighting.WordWeighting;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This class provides a framework for loading datasets made of Text documents
@@ -50,6 +49,8 @@ import com.jstarcraft.ai.jsat.utils.IntSet;
  * @author Edward Raff
  */
 public abstract class TextDataLoader implements TextVectorCreator {
+    
+    private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
 
     private static final long serialVersionUID = -657253682338792871L;
     /**
@@ -386,11 +387,11 @@ public abstract class TextDataLoader implements TextVectorCreator {
     @SuppressWarnings("unchecked")
     public RemoveAttributeTransform getMinimumOccurrenceDTF(int minCount) {
 
-        final Set<Integer> numericToRemove = new IntSet();
+        final IntOpenHashSet numericToRemove = new IntOpenHashSet();
         for (int i = 0; i < termDocumentFrequencys.size(); i++)
             if (termDocumentFrequencys.get(i).get() < minCount)
                 numericToRemove.add(i);
 
-        return new RemoveAttributeTransform(Collections.EMPTY_SET, numericToRemove);
+        return new RemoveAttributeTransform(EMPTY, numericToRemove);
     }
 }

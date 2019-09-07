@@ -2,11 +2,12 @@
 package com.jstarcraft.ai.jsat.clustering.dissimilarity;
 
 import java.util.List;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
+
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Average similarity of all data point pairs between clusters, inter-cluster
@@ -48,7 +49,7 @@ public class CentroidDissimilarity extends LanceWilliamsDissimilarity implements
     }
 
     @Override
-    public double dissimilarity(Set<Integer> a, Set<Integer> b, double[][] distanceMatrix) {
+    public double dissimilarity(IntSet a, IntSet b, double[][] distanceMatrix) {
         double sumDiss = 0;
 
         for (int ai : a)

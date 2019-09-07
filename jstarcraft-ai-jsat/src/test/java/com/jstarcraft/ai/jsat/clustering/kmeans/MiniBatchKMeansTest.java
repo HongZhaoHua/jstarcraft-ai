@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -16,11 +15,11 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.clustering.SeedSelectionMethods;
-import com.jstarcraft.ai.jsat.clustering.kmeans.MiniBatchKMeans;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -62,7 +61,7 @@ public class MiniBatchKMeansTest {
         MiniBatchKMeans kMeans = new MiniBatchKMeans(new EuclideanDistance(), 50, 50, SeedSelectionMethods.SeedSelection.FARTHEST_FIRST);
         List<List<DataPoint>> clusters = kMeans.cluster(easyData10, 10);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -80,7 +79,7 @@ public class MiniBatchKMeansTest {
         MiniBatchKMeans kMeans = new MiniBatchKMeans(new EuclideanDistance(), 50, 50, SeedSelectionMethods.SeedSelection.FARTHEST_FIRST);
         List<List<DataPoint>> clusters = kMeans.cluster(easyData10, 10, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

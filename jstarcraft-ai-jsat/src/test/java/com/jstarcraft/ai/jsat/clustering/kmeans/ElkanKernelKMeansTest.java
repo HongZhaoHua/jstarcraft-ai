@@ -21,15 +21,14 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.FixedProblems;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
-import com.jstarcraft.ai.jsat.clustering.kmeans.ElkanKernelKMeans;
-import com.jstarcraft.ai.jsat.clustering.kmeans.LloydKernelKMeans;
 import com.jstarcraft.ai.jsat.distributions.Uniform;
 import com.jstarcraft.ai.jsat.distributions.kernels.LinearKernel;
 import com.jstarcraft.ai.jsat.distributions.kernels.RBFKernel;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -66,9 +65,9 @@ public class ElkanKernelKMeansTest {
         int[] result = kmeans.cluster(toCluster, 2, true, (int[]) null);
         // make sure each cluster has points from only 1 class. If true then everyone is
         // good
-        Map<Integer, Set<Integer>> tmp = new HashMap<>();
+        Map<Integer, IntOpenHashSet> tmp = new HashMap<>();
         for (int c = 0; c < toCluster.getClassSize(); c++)
-            tmp.put(c, new IntSet());
+            tmp.put(c, new IntOpenHashSet());
         for (int i = 0; i < result.length; i++)
             tmp.get(toCluster.getDataPointCategory(i)).add(result[i]);
         for (Set<Integer> set : tmp.values())
@@ -86,9 +85,9 @@ public class ElkanKernelKMeansTest {
         int[] result = kmeans.cluster(toCluster, 2, (int[]) null);
         // make sure each cluster has points from only 1 class. If true then everyone is
         // good
-        Map<Integer, Set<Integer>> tmp = new HashMap<>();
+        Map<Integer, IntOpenHashSet> tmp = new HashMap<>();
         for (int c = 0; c < toCluster.getClassSize(); c++)
-            tmp.put(c, new IntSet());
+            tmp.put(c, new IntOpenHashSet());
         for (int i = 0; i < result.length; i++)
             tmp.get(toCluster.getDataPointCategory(i)).add(result[i]);
         for (Set<Integer> set : tmp.values())
@@ -112,15 +111,15 @@ public class ElkanKernelKMeansTest {
         int[] result = kmeans.cluster(toCluster, 2, (int[]) null);
         // make sure each cluster has points from only 1 class. If true then everyone is
         // good
-        Map<Integer, Set<Integer>> tmp = new HashMap<>();
-        IntSet allSeen = new IntSet();
+        Map<Integer, IntOpenHashSet> tmp = new HashMap<>();
+        IntOpenHashSet allSeen = new IntOpenHashSet();
         for (int c = 0; c < toCluster.getClassSize(); c++)
-            tmp.put(c, new IntSet());
+            tmp.put(c, new IntOpenHashSet());
         for (int i = 0; i < result.length - 1; i++) {
             tmp.get(toCluster.getDataPointCategory(i)).add(result[i]);
             allSeen.add(result[i]);
         }
-        for (Set<Integer> set : tmp.values())
+        for (IntOpenHashSet set : tmp.values())
             assertEquals(1, set.size());
         assertEquals(2, allSeen.size());// make sure we saw both clusters!
 
@@ -128,14 +127,14 @@ public class ElkanKernelKMeansTest {
         // make sure each cluster has points from only 1 class. If true then everyone is
         // good
         tmp = new HashMap<>();
-        allSeen = new IntSet();
+        allSeen = new IntOpenHashSet();
         for (int c = 0; c < toCluster.getClassSize(); c++)
-            tmp.put(c, new IntSet());
+            tmp.put(c, new IntOpenHashSet());
         for (int i = 0; i < result.length - 1; i++) {
             tmp.get(toCluster.getDataPointCategory(i)).add(result[i]);
             allSeen.add(result[i]);
         }
-        for (Set<Integer> set : tmp.values())
+        for (IntOpenHashSet set : tmp.values())
             assertEquals(1, set.size());
         assertEquals(2, allSeen.size());// make sure we saw both clusters!
     }

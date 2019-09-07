@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,10 +17,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.CosineDistanceNormalized;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorArray;
-import com.jstarcraft.ai.jsat.linear.vectorcollection.lsh.RandomProjectionLSH;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -76,7 +75,7 @@ public class RandomProjectionLSHTest {
             knnStats.add(naiveVC.search(v, 11).get(10).getPair());// first nn is itselft
 
         double searchDist = knnStats.getMean() + knnStats.getStandardDeviation() * 2;
-        Set<Integer> inTruth = new IntSet();
+        IntOpenHashSet inTruth = new IntOpenHashSet();
 
         for (Vec v : normalVecs)// now use the stats to compare results
         {
@@ -118,7 +117,7 @@ public class RandomProjectionLSHTest {
         VectorArray<VecPaired<Vec, Integer>> naiveVC = new VectorArray<VecPaired<Vec, Integer>>(dm, normalVecs);
         RandomProjectionLSH<VecPaired<Vec, Integer>> rpVC = new RandomProjectionLSH<VecPaired<Vec, Integer>>(normalVecs, 16, true);
 
-        Set<Integer> inTruth = new IntSet();
+        IntOpenHashSet inTruth = new IntOpenHashSet();
 
         for (Vec v : normalVecs)// now use the stats to compare results
         {

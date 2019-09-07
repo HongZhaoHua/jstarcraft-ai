@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -16,13 +15,14 @@ import java.util.logging.Logger;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * RANSAC is a randomized meta algorithm that is useful for fitting a model to a
@@ -120,7 +120,7 @@ public class RANSAC implements Regressor, Parameterized {
 
             boolean[] working_set = new boolean[dataset.size()];
 
-            Set<Integer> maybe_inliers = new IntSet(initialTrainSize * 2);
+            IntOpenHashSet maybe_inliers = new IntOpenHashSet(initialTrainSize * 2);
 
             for (int iter = 0; iter < maxIterations; iter++) {
                 // Create sub data set sample

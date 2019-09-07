@@ -26,11 +26,13 @@ import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Creates a decision tree from {@link DecisionStump DecisionStumps}. How this
@@ -67,17 +69,17 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
 
     @Override
     public void train(RegressionDataSet dataSet, boolean parallel) {
-        Set<Integer> options = new IntSet(dataSet.getNumFeatures());
+        IntOpenHashSet options = new IntOpenHashSet(dataSet.getNumFeatures());
         for (int i = 0; i < dataSet.getNumFeatures(); i++)
             options.add(i);
         train(dataSet, options, parallel);
     }
 
-    public void train(RegressionDataSet dataSet, Set<Integer> options) {
+    public void train(RegressionDataSet dataSet, IntSet options) {
         train(dataSet, options, false);
     }
 
-    public void train(RegressionDataSet dataSet, Set<Integer> options, boolean parallel) {
+    public void train(RegressionDataSet dataSet, IntSet options, boolean parallel) {
         ModifiableCountDownLatch mcdl = new ModifiableCountDownLatch(1);
         root = makeNodeR(dataSet, options, 0, parallel, mcdl);
         try {
@@ -301,7 +303,7 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
 
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
-        Set<Integer> options = new IntSet(dataSet.getNumFeatures());
+        IntOpenHashSet options = new IntOpenHashSet(dataSet.getNumFeatures());
         for (int i = 0; i < dataSet.getNumFeatures(); i++)
             options.add(i);
         trainC(dataSet, options, parallel);
@@ -390,10 +392,10 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
                 mcdl.countUp();
                 if (depthPara) {
                     (parallel ? ParallelUtils.CACHED_THREAD_POOL : new FakeExecutor()).submit(() -> {
-                        node.paths[ii] = makeNodeC(splitI, new IntSet(options), depth + 1, parallel, mcdl);
+                        node.paths[ii] = makeNodeC(splitI, new IntOpenHashSet(options), depth + 1, parallel, mcdl);
                     });
                 } else
-                    node.paths[ii] = makeNodeC(splitI, new IntSet(options), depth + 1, parallel, mcdl);
+                    node.paths[ii] = makeNodeC(splitI, new IntOpenHashSet(options), depth + 1, parallel, mcdl);
             }
 
         mcdl.countDown();
@@ -411,7 +413,7 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
      * @param mcdl       count down latch
      * @return the node created, or null if no node was created
      */
-    protected Node makeNodeR(RegressionDataSet dataPoints, final Set<Integer> options, final int depth, final boolean parallel, final ModifiableCountDownLatch mcdl) {
+    protected Node makeNodeR(RegressionDataSet dataPoints, final IntSet options, final int depth, final boolean parallel, final ModifiableCountDownLatch mcdl) {
         // figure out what level of parallelism we are going to use, feature wise or
         // depth wise
         boolean mePara = (1L << depth) < SystemInfo.LogicalCores * 2;// should THIS node use the Stump parallelism
@@ -441,10 +443,10 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
                 mcdl.countUp();
                 if (depthPara) {
                     (parallel ? ParallelUtils.CACHED_THREAD_POOL : new FakeExecutor()).submit(() -> {
-                        node.paths[ii] = makeNodeR(splitI, new IntSet(options), depth + 1, parallel, mcdl);
+                        node.paths[ii] = makeNodeR(splitI, new IntOpenHashSet(options), depth + 1, parallel, mcdl);
                     });
                 } else
-                    node.paths[ii] = makeNodeR(splitI, new IntSet(options), depth + 1, parallel, mcdl);
+                    node.paths[ii] = makeNodeR(splitI, new IntOpenHashSet(options), depth + 1, parallel, mcdl);
             }
 
         mcdl.countDown();

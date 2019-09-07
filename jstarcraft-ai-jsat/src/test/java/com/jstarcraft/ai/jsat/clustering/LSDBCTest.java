@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,11 +13,10 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.clustering.Clusterer;
-import com.jstarcraft.ai.jsat.clustering.LSDBC;
 import com.jstarcraft.ai.jsat.distributions.Normal;
 import com.jstarcraft.ai.jsat.utils.GridDataGenerator;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -54,7 +52,7 @@ public class LSDBCTest {
         Clusterer toUse = algo.clone();
         List<List<DataPoint>> clusters = toUse.cluster(easyData10);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));
@@ -69,7 +67,7 @@ public class LSDBCTest {
         Clusterer toUse = algo.clone();
         List<List<DataPoint>> clusters = toUse.cluster(easyData10, true);
         assertEquals(10, clusters.size());
-        Set<Integer> seenBefore = new IntSet();
+        IntOpenHashSet seenBefore = new IntOpenHashSet();
         for (List<DataPoint> cluster : clusters) {
             int thisClass = cluster.get(0).getCategoricalValue(0);
             assertFalse(seenBefore.contains(thisClass));

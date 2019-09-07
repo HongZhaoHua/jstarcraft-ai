@@ -3,7 +3,6 @@ package com.jstarcraft.ai.jsat.classifiers.trees;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -23,12 +22,13 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * Random Forest is an extension of {@link Bagging} that is applied only to
@@ -418,7 +418,7 @@ public class RandomForest implements Classifier, Regressor, Parameterized {
 
         @Override
         public LearningWorker call() throws Exception {
-            Set<Integer> features = new IntSet(baseLearner.getRandomFeatureCount());
+            IntOpenHashSet features = new IntOpenHashSet(baseLearner.getRandomFeatureCount());
             int[] sampleCounts = new int[dataSet.size()];
             for (int i = 0; i < toLearn; i++) {
                 // Sample to get the training points

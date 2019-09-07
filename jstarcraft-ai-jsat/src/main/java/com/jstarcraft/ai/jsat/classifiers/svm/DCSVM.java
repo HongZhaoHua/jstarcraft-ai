@@ -19,7 +19,6 @@ package com.jstarcraft.ai.jsat.classifiers.svm;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.jstarcraft.ai.jsat.classifiers.CategoricalResults;
@@ -36,12 +35,12 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This is an implementation of the Divide-and-Conquer Support Vector Machine
@@ -284,7 +283,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
             // create partitioning
             // First, don't bother with distance computations for people we just clustered
             Arrays.fill(group, -1);
-            Set<Integer> found_clusters = new IntSet(k_l);
+            IntOpenHashSet found_clusters = new IntOpenHashSet(k_l);
             for (int i = 0; i < sub_results.length; i++) {
                 group[indicies.get(i)] = sub_results[i];
                 found_clusters.add(sub_results[i]);

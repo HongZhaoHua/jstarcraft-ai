@@ -7,7 +7,6 @@ package com.jstarcraft.ai.jsat.datatransform;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
-import java.util.Set;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,10 +17,10 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.SimpleDataSet;
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  *
@@ -61,9 +60,9 @@ public class RemoveAttributeTransformTest {
         DataPoint dp = new DataPoint(numVals, catVals, catIndo);
         SimpleDataSet dataSet = new SimpleDataSet(Arrays.asList(dp));
 
-        Set<Integer> catToRemove = new IntSet();
+        IntOpenHashSet catToRemove = new IntOpenHashSet();
         catToRemove.add(1);
-        Set<Integer> numToRemove = new IntSet();
+        IntOpenHashSet numToRemove = new IntOpenHashSet();
         numToRemove.addAll(Arrays.asList(0, 2, 3));
 
         RemoveAttributeTransform transform = new RemoveAttributeTransform(dataSet, catToRemove, numToRemove);
@@ -108,9 +107,9 @@ public class RemoveAttributeTransformTest {
         DataPoint dp = new DataPoint(numVals, catVals, catIndo);
         SimpleDataSet dataSet = new SimpleDataSet(Arrays.asList(dp));
 
-        Set<Integer> catToRemove = new IntSet();
+        IntOpenHashSet catToRemove = new IntOpenHashSet();
         catToRemove.add(1);
-        Set<Integer> numToRemove = new IntSet();
+        IntOpenHashSet numToRemove = new IntOpenHashSet();
         numToRemove.addAll(Arrays.asList(0, 2, 3));
 
         RemoveAttributeTransform transform = new RemoveAttributeTransform(dataSet, catToRemove, numToRemove);
@@ -142,9 +141,9 @@ public class RemoveAttributeTransformTest {
         DataPoint dp = new DataPoint(numVals, catVals, catIndo);
         SimpleDataSet dataSet = new SimpleDataSet(Arrays.asList(dp));
 
-        Set<Integer> catToRemove = new IntSet();
+        IntOpenHashSet catToRemove = new IntOpenHashSet();
         catToRemove.add(1);
-        Set<Integer> numToRemove = new IntSet();
+        IntOpenHashSet numToRemove = new IntOpenHashSet();
         numToRemove.addAll(Arrays.asList(0, 2, 3));
 
         RemoveAttributeTransform transform = new RemoveAttributeTransform(dataSet, catToRemove, numToRemove);

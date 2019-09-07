@@ -18,7 +18,8 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * An Implementation of the OPTICS algorithm, which is a generalization of
@@ -352,7 +353,7 @@ public class OPTICS extends ClustererBase implements Parameterized {
         /// Now obtain clustering
         /// Extract CLustering
         int clustersFound = 0;
-        Set<Integer> sdaSet = new IntSet();
+        IntOpenHashSet sdaSet = new IntOpenHashSet();
         int orderIndex = 0;
         double mib = 0;
         double[] mibVals = new double[n];

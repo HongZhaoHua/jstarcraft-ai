@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
@@ -20,11 +19,11 @@ import com.jstarcraft.ai.jsat.linear.Matrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * An implementation of the Nystrom approximation for any Kernel Trick. The full
@@ -298,7 +297,7 @@ public class Nystrom extends DataTransformBase {
         case UNIFORM:
         default:
             if (sampleWithReplacment) {
-                Set<Integer> sampled = new IntSet(basisSize);
+                IntOpenHashSet sampled = new IntOpenHashSet(basisSize);
                 while (sampled.size() < basisSize)
                     sampled.add(rand.nextInt(N));
                 for (int indx : sampled)
@@ -323,7 +322,7 @@ public class Nystrom extends DataTransformBase {
      * @param basisVecs            the list to store the vecs in
      */
     private static void sample(int basisSize, Random rand, double[] weightSume, List<Vec> X, boolean sampleWithReplacment, List<Vec> basisVecs) {
-        Set<Integer> sampled = new IntSet(basisSize);
+        IntOpenHashSet sampled = new IntOpenHashSet(basisSize);
 
         double max = weightSume[weightSume.length - 1];
         for (int i = 0; i < basisSize; i++) {

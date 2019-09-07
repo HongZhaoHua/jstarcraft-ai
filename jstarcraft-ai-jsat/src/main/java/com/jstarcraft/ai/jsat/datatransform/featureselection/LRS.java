@@ -1,7 +1,6 @@
 package com.jstarcraft.ai.jsat.datatransform.featureselection;
 
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
@@ -11,9 +10,11 @@ import com.jstarcraft.ai.jsat.datatransform.DataTransform;
 import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * plus-L minus-R Selection (LRS) is a greedy method of selecting a subset of
@@ -34,8 +35,8 @@ public class LRS implements DataTransform {
 
     private static final long serialVersionUID = 3065300352046535656L;
     private RemoveAttributeTransform finalTransform;
-    private Set<Integer> catSelected;
-    private Set<Integer> numSelected;
+    private IntOpenHashSet catSelected;
+    private IntOpenHashSet numSelected;
     private int L;
     private int R;
     private Object evaluater;
@@ -53,8 +54,8 @@ public class LRS implements DataTransform {
         this.evaluater = toClone.evaluater;
         if (toClone.catSelected != null) {
             this.finalTransform = toClone.finalTransform.clone();
-            this.catSelected = new IntSet(toClone.catSelected);
-            this.numSelected = new IntSet(toClone.numSelected);
+            this.catSelected = new IntOpenHashSet(toClone.catSelected);
+            this.numSelected = new IntOpenHashSet(toClone.numSelected);
         }
     }
 
@@ -135,8 +136,8 @@ public class LRS implements DataTransform {
      * 
      * @return the set of categorical features to use
      */
-    public Set<Integer> getSelectedCategorical() {
-        return new IntSet(catSelected);
+    public IntSet getSelectedCategorical() {
+        return new IntOpenHashSet(catSelected);
     }
 
     /**
@@ -145,8 +146,8 @@ public class LRS implements DataTransform {
      * 
      * @return the set of numeric features to use
      */
-    public Set<Integer> getSelectedNumerical() {
-        return new IntSet(numSelected);
+    public IntSet getSelectedNumerical() {
+        return new IntOpenHashSet(numSelected);
     }
 
     @Override
@@ -158,12 +159,12 @@ public class LRS implements DataTransform {
         int nF = cds.getNumFeatures();
         int nCat = cds.getNumCategoricalVars();
 
-        catSelected = new IntSet(nCat);
-        numSelected = new IntSet(nF - nCat);
-        Set<Integer> catToRemove = new IntSet(nCat);
-        Set<Integer> numToRemove = new IntSet(nF - nCat);
+        catSelected = new IntOpenHashSet(nCat);
+        numSelected = new IntOpenHashSet(nF - nCat);
+        IntOpenHashSet catToRemove = new IntOpenHashSet(nCat);
+        IntOpenHashSet numToRemove = new IntOpenHashSet(nF - nCat);
 
-        Set<Integer> available = new IntSet(nF);
+        IntOpenHashSet available = new IntOpenHashSet(nF);
         ListUtils.addRange(available, 0, nF, 1);
 
         Random rand = RandomUtil.getRandom();

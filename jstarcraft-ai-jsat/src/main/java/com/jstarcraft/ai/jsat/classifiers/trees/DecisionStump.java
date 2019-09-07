@@ -28,13 +28,13 @@ import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.QuickSort;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This class is a 1-rule. It creates one rule that is used to classify all
@@ -226,7 +226,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
 
     @Override
     public void train(RegressionDataSet dataSet, boolean parallel) {
-        Set<Integer> options = new IntSet(dataSet.getNumFeatures());
+        IntOpenHashSet options = new IntOpenHashSet(dataSet.getNumFeatures());
         for (int i = 0; i < dataSet.getNumFeatures(); i++)
             options.add(i);
         List<RegressionDataSet> split = trainR(dataSet, options, parallel);
@@ -362,7 +362,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
 
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
-        Set<Integer> splitOptions = new IntSet(dataSet.getNumFeatures());
+        IntOpenHashSet splitOptions = new IntOpenHashSet(dataSet.getNumFeatures());
         for (int i = 0; i < dataSet.getNumFeatures(); i++)
             splitOptions.add(i);
 

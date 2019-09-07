@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -14,8 +13,9 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This class provides methods for sampling a data set for a set of initial
@@ -216,7 +216,7 @@ public class SeedSelectionMethods {
         if (null != selectionMethod)
             switch (selectionMethod) {
             case RANDOM:
-                Set<Integer> indecies = new IntSet(k);
+                IntOpenHashSet indecies = new IntOpenHashSet(k);
                 while (indecies.size() != k)// Keep sampling, we cant use the same point twice.
                     indecies.add(rand.nextInt(d.size()));// TODO create method to do uniform sampleling for a select range
                 int j = 0;
@@ -278,7 +278,7 @@ public class SeedSelectionMethods {
 
             if (sqrdDistSum <= 1e-6)// everyone is too close, randomly fill rest
             {
-                Set<Integer> ind = new IntSet();
+                IntOpenHashSet ind = new IntOpenHashSet();
                 for (int i = 0; i < j; i++)
                     ind.add(indices[i]);
                 while (ind.size() < k)

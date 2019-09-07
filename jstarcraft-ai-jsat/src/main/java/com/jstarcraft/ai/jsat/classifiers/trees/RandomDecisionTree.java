@@ -9,6 +9,8 @@ import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntSet;
+
 /**
  * An extension of Decision Trees, it ignores the given set of features to use-
  * and selects a new random subset of features at each node for use. <br>
@@ -94,7 +96,7 @@ public class RandomDecisionTree extends DecisionTree {
     }
 
     @Override
-    protected Node makeNodeR(RegressionDataSet dataPoints, Set<Integer> options, int depth, boolean parallel, ModifiableCountDownLatch mcdl) {
+    protected Node makeNodeR(RegressionDataSet dataPoints, IntSet options, int depth, boolean parallel, ModifiableCountDownLatch mcdl) {
         if (dataPoints.isEmpty()) {
             mcdl.countDown();
             return null;

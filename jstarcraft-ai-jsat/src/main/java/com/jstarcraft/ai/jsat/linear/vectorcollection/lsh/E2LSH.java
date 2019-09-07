@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 import com.jstarcraft.ai.jsat.distributions.Normal;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
@@ -27,8 +26,9 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.ManhattanDistance;
 import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.IntSet;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * This is an implementation of Locality Sensitive Hashing for the
@@ -196,7 +196,7 @@ public class E2LSH<V extends Vec> {
     public List<? extends VecPaired<Vec, Double>> searchR(Vec q, boolean approx) {
         List<VecPairedComparable<Vec, Double>> toRet = new ArrayList<VecPairedComparable<Vec, Double>>();
 
-        Set<Integer> candidates = new IntSet();
+        IntOpenHashSet candidates = new IntOpenHashSet();
         for (int l = 0; l < L; l++) {
             int hash = hash(l, q);
             List<Integer> list = tables.get(l).get(hash);

@@ -10,7 +10,8 @@ import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.clustering.KClustererBase;
 import com.jstarcraft.ai.jsat.clustering.dissimilarity.ClusterDissimilarity;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntSet;
+
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
  * Provides a naive implementation of hierarchical agglomerative clustering
@@ -83,9 +84,9 @@ public class SimpleHAC extends KClustererBase {
 
         // Represent each cluster by a set of indices, intialy each data point is its
         // own cluster
-        List<Set<Integer>> clusters = new ArrayList<Set<Integer>>(dataSet.size());
+        List<IntOpenHashSet> clusters = new ArrayList<>(dataSet.size());
         for (int i = 0; i < dataSet.size(); i++) {
-            Set<Integer> set = new IntSet();
+            IntOpenHashSet set = new IntOpenHashSet();
             set.add(i);
             clusters.add(set);
         }
