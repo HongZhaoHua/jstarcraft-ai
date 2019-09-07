@@ -6,7 +6,6 @@ import static com.jstarcraft.ai.jsat.clustering.dissimilarity.AbstractClusterDis
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -14,7 +13,10 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.clustering.KClustererBase;
 import com.jstarcraft.ai.jsat.clustering.dissimilarity.UpdatableClusterDissimilarity;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntPriorityQueue;
+
+import it.unimi.dsi.fastutil.ints.AbstractIntComparator;
+import it.unimi.dsi.fastutil.ints.IntRBTreeSet;
+import it.unimi.dsi.fastutil.ints.IntSortedSet;
 
 /**
  *
@@ -77,12 +79,12 @@ public class PriorityHAC extends KClustererBase {
         return cluster(dataSet, lowK, highK, designations);
     }
 
-    private void updateDistanceTableAndQueues(List<IntPriorityQueue> P, int[] I, int k1, int k2, final double[][] distanceMatrix) {
-        IntPriorityQueue Pk1 = P.get(k1);
+    private void updateDistanceTableAndQueues(List<IntSortedSet> P, int[] I, int k1, int k2, final double[][] distanceMatrix) {
+        IntSortedSet Pk1 = P.get(k1);
         for (int i = 0; i < P.size(); i++) {
             if (I[i] == 0 || i == k2 || i == k1)
                 continue;
-            IntPriorityQueue curTargetQ = P.get(i);
+            IntSortedSet curTargetQ = P.get(i);
 
             curTargetQ.remove(k1);
             curTargetQ.remove(k2);
@@ -94,20 +96,20 @@ public class PriorityHAC extends KClustererBase {
         }
     }
 
-    private List<IntPriorityQueue> setUpProrityQueue(int[] I, final double[][] distanceMatrix) {
-        List<IntPriorityQueue> P = new ArrayList<IntPriorityQueue>(I.length);
+    private List<IntSortedSet> setUpProrityQueue(int[] I, final double[][] distanceMatrix) {
+        List<IntSortedSet> P = new ArrayList<IntSortedSet>(I.length);
         for (int i = 0; i < I.length; i++) {
             // The row index we are considering
             final int supremeIndex = i;
-            IntPriorityQueue pq = new IntPriorityQueue(I.length, new Comparator<Integer>() {
+            IntSortedSet pq = new IntRBTreeSet(new AbstractIntComparator() {
                 @Override
-                public int compare(Integer o1, Integer o2) {
+                public int compare(int o1, int o2) {
                     double d1 = getDistance(distanceMatrix, supremeIndex, o1);
                     double d2 = getDistance(distanceMatrix, supremeIndex, o2);
 
                     return Double.compare(d1, d2);
                 }
-            }, IntPriorityQueue.Mode.BOUNDED);
+            });
 
             // Fill up the priority que
             for (int j = 0; j < I.length; j++) {
@@ -145,7 +147,7 @@ public class PriorityHAC extends KClustererBase {
         final double[][] distanceMatrix = createDistanceMatrix(dataSet, distMeasure);
 
         // Create priority ques for each data point
-        List<IntPriorityQueue> P = setUpProrityQueue(I, distanceMatrix);
+        List<IntSortedSet> P = setUpProrityQueue(I, distanceMatrix);
 
         // We will choose the cluster size as the most abnormal jump in dissimilarity
         // from a merge
@@ -161,10 +163,10 @@ public class PriorityHAC extends KClustererBase {
             double dk1 = Double.MAX_VALUE, tmp;
 
             for (int i = 0; i < P.size(); i++)
-                if (I[i] > 0 && (tmp = getDistance(distanceMatrix, i, P.get(i).element())) < dk1) {
+                if (I[i] > 0 && (tmp = getDistance(distanceMatrix, i, P.get(i).firstInt())) < dk1) {
                     dk1 = tmp;
                     k1 = i;
-                    k2 = P.get(i).element();
+                    k2 = P.get(i).firstInt();
                 }
 
             // Keep track of the changes in cluster size, and mark if this one was abnormall
