@@ -19,7 +19,6 @@ import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
 import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
-import com.jstarcraft.ai.jsat.utils.SimpleList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 import com.jstarcraft.core.utility.Double2IntegerKeyValue;
@@ -115,7 +114,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         this.allVecs = list;
         distCache = dm.getAccelerationCache(allVecs, parallel);
         // Use simple list so both halves can be modified simultaniously
-        List<Double2IntegerKeyValue> tmpList = new SimpleList<>(list.size());
+        List<Double2IntegerKeyValue> tmpList = new ArrayList<>(list.size());
         for (int i = 0; i < allVecs.size(); i++)
             tmpList.add(new Double2IntegerKeyValue(-1.0, i));
         if (!parallel)
