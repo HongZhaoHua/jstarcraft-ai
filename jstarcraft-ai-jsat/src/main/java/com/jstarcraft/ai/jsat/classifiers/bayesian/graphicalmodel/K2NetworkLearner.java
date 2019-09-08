@@ -8,9 +8,9 @@ import java.util.Set;
 
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -70,7 +70,7 @@ public class K2NetworkLearner extends DiscreteBayesNetwork {
      * @param D the data set to learn the network from
      */
     public void learnNetwork(ClassificationDataSet D) {
-        IntList varOrder = new IntList(D.getNumCategoricalVars() + 1);
+        IntArrayList varOrder = new IntArrayList(D.getNumCategoricalVars() + 1);
         varOrder.add(D.getNumCategoricalVars());// Classification target will be evaluated first
         ListUtils.addRange(varOrder, 0, D.getNumCategoricalVars(), 1);
         ri = new int[varOrder.size()];

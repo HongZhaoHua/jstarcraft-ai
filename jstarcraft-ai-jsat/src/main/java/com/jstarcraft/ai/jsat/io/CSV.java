@@ -45,10 +45,10 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.StringUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Provides a reader and writer for CSV style datasets. This CSV reader supports
@@ -325,7 +325,7 @@ public class CSV {
         /**
          * The target values if doing classification
          */
-        IntList catTargets = new IntList();
+        IntArrayList catTargets = new IntArrayList();
 
         /**
          * Fist mapping is for each column that contains categorical variables. The
@@ -356,7 +356,7 @@ public class CSV {
          */
         int totalCols = -1;
         DoubleArrayList numericFeats = new DoubleArrayList();
-        IntList catFeats = new IntList();
+        IntArrayList catFeats = new IntArrayList();
         int cur_column = 0;
 
         List<Vec> all_vecs = new ArrayList<>();

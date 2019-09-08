@@ -22,13 +22,13 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class provides an implementation of <i>Latent Dirichlet Allocation</i>
@@ -468,7 +468,7 @@ public class OnlineLDAsvi implements Parameterized {
                         computePhi(doc, indexMap, phiCols, K, gamma_d, ELogTheta_d, ExpELogTheta_d);
 
                         // accumulate updates, the "M" step
-                        IntList toUpdate = new IntList(K);
+                        IntArrayList toUpdate = new IntArrayList(K);
                         ListUtils.addRange(toUpdate, 0, K, 1);
                         Collections.shuffle(toUpdate, rand);// helps reduce contention caused by shared iteration order
                         int updatePos = 0;

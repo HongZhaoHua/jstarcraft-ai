@@ -41,6 +41,7 @@ import com.jstarcraft.core.utility.Double2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class implements the Dynamic Continuous Indexing algorithm for nearest
@@ -188,7 +189,7 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         int n = vecs.size();
 
         int[][] C = new int[L][n];
@@ -263,7 +264,7 @@ public class DCI<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         int n = vecs.size();
         int k1 = (int) (m * numNeighbors * (FastMath.log(n) - FastMath.log(numNeighbors)));
 

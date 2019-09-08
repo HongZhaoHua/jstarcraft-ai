@@ -18,9 +18,9 @@ import com.jstarcraft.ai.jsat.linear.ScaledVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Provides a kernelized version of the {@link ALMA2} algorithm. It is important
@@ -52,7 +52,7 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
     private DoubleArrayList signedEtas;
     private DoubleArrayList associatedScores;
     private DoubleArrayList normalizers;
-    private List<Integer> rounds;
+    private IntArrayList rounds;
 
     private boolean averaged = false;
 
@@ -87,7 +87,7 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
             this.signedEtas = new DoubleArrayList(other.signedEtas);
             this.associatedScores = new DoubleArrayList(other.associatedScores);
             this.normalizers = new DoubleArrayList(other.normalizers);
-            this.rounds = new IntList(other.rounds);
+            this.rounds = new IntArrayList(other.rounds);
         }
     }
 
@@ -216,7 +216,7 @@ public class ALMA2K extends BaseUpdateableClassifier implements BinaryScoreClass
         signedEtas = new DoubleArrayList();
         associatedScores = new DoubleArrayList();
         normalizers = new DoubleArrayList();
-        rounds = new IntList();
+        rounds = new IntArrayList();
         k = 1;
         curRounds = 0;
     }

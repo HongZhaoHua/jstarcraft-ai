@@ -16,8 +16,11 @@ import com.jstarcraft.ai.jsat.linear.Matrix;
 import com.jstarcraft.ai.jsat.linear.RandomMatrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * The Johnson-Lindenstrauss (JL) Transform is a type of random projection down
@@ -99,7 +102,7 @@ public class JLTransform extends DataTransformBase {
         if (transform.sparse_jl_map != null) {
             this.sparse_jl_map = new ArrayList<>(transform.sparse_jl_map.size());
             for (IntList a : transform.sparse_jl_map)
-                this.sparse_jl_map.add(new IntList(a));
+                this.sparse_jl_map.add(new IntArrayList(a));
         }
         this.sparse_jl_cnst = transform.sparse_jl_cnst;
     }
@@ -182,11 +185,11 @@ public class JLTransform extends DataTransformBase {
 
             // Lets set up some random mats.
             sparse_jl_map = new ArrayList<>(d);
-            IntList all_embed_dims = IntList.range(0, k);
+            IntList all_embed_dims = ListUtils.range(0, k);
             int nnz = k / s;
             for (int j = 0; j < d; j++) {
                 Collections.shuffle(all_embed_dims, rand);
-                IntList x_j_map = new IntList(nnz);
+                IntList x_j_map = new IntArrayList(nnz);
                 // First 1/(2 s) become the positives
                 for (int i = 0; i < nnz; i++)
                     x_j_map.add(i);

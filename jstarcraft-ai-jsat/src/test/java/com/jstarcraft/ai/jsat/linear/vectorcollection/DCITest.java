@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -34,10 +35,10 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  *
@@ -89,8 +90,8 @@ public class DCITest {
                 for (double range : new double[] { 0.25, 0.5, 0.75, 2.0 }) {
                     int randIndex = rand.nextInt(vecCol.size());
 
-                    IntList nn_true = new IntList();
-                    IntList nn_test = new IntList();
+                    IntArrayList nn_true = new IntArrayList();
+                    IntArrayList nn_test = new IntArrayList();
 
                     DoubleArrayList nd_true = new DoubleArrayList();
                     DoubleArrayList nd_test = new DoubleArrayList();
@@ -98,14 +99,14 @@ public class DCITest {
                     vecCol.search(vecCol.get(randIndex), range, nn_true, nd_true);
                     collection0.search(vecCol.get(randIndex), range, nn_test, nd_test);
 
-                    int found = (int) nn_test.streamInts().filter(nn_true::contains).count();
+                    int found = (int) IntStream.of(nn_test.elements()).limit(nn_test.size()).filter(nn_true::contains).count();
 
                     // Since DCI is approximate, allow for missing half
                     assertEquals(nn_true.size(), found, nn_true.size() / 2.0);
 
                     collection1.search(vecCol.get(randIndex), range, nn_test, nd_test);
 
-                    found = (int) nn_test.streamInts().filter(nn_true::contains).count();
+                    found = (int) IntStream.of(nn_test.elements()).limit(nn_test.size()).filter(nn_true::contains).count();
 
                     // Since DCI is approximate, allow for missing half
                     assertEquals(nn_true.size(), found, nn_true.size() / 2.0);
@@ -136,8 +137,8 @@ public class DCITest {
                 for (int neighbours : new int[] { 1, 2, 4, 10, 20 }) {
                     int randIndex = rand.nextInt(vecCol.size());
 
-                    IntList nn_true = new IntList();
-                    IntList nn_test = new IntList();
+                    IntArrayList nn_true = new IntArrayList();
+                    IntArrayList nn_test = new IntArrayList();
 
                     DoubleArrayList nd_true = new DoubleArrayList();
                     DoubleArrayList nd_test = new DoubleArrayList();
@@ -145,14 +146,14 @@ public class DCITest {
                     vecCol.search(vecCol.get(randIndex), neighbours, nn_true, nd_true);
                     collection0.search(vecCol.get(randIndex), neighbours, nn_test, nd_test);
 
-                    int found = (int) nn_test.streamInts().filter(nn_true::contains).count();
+                    int found = (int) IntStream.of(nn_test.elements()).limit(nn_test.size()).filter(nn_true::contains).count();
 
                     // Since DCI is approximate, allow for missing half
                     assertEquals(neighbours, found, neighbours / 2.0);
 
                     collection1.search(vecCol.get(randIndex), neighbours, nn_test, nd_test);
 
-                    found = (int) nn_test.streamInts().filter(nn_true::contains).count();
+                    found = (int) IntStream.of(nn_test.elements()).limit(nn_test.size()).filter(nn_true::contains).count();
 
                     // Since DCI is approximate, allow for missing half
                     assertEquals(neighbours, found, neighbours / 2.0);

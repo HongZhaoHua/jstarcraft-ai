@@ -24,8 +24,9 @@ import com.jstarcraft.ai.jsat.math.MathTricks;
 import com.jstarcraft.ai.jsat.math.decayrates.DecayRate;
 import com.jstarcraft.ai.jsat.math.decayrates.ExponetialDecay;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This is a Stochastic implementation of Multinomial Logistic Regression. It
@@ -526,7 +527,7 @@ public class StochasticMultinomialLogisticRegression implements Classifier, Para
         for (int i = 0; i < B.length; i++)
             B[i] = new DenseVector(d);
 
-        IntList randOrder = new IntList(n);
+        IntArrayList randOrder = new IntArrayList(n);
         ListUtils.addRange(randOrder, 0, n, 1);
 
         Vec means = null, stdDevs = null;

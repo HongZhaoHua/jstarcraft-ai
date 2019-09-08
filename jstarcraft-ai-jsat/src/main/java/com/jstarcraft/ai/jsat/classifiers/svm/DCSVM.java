@@ -34,12 +34,12 @@ import com.jstarcraft.ai.jsat.exceptions.UntrainedModelException;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -232,7 +232,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
          * Used to select subsamples of data points for clustering, and to map them back
          * to their original indicies
          */
-        IntList indicies = new IntList();
+        IntArrayList indicies = new IntArrayList();
         // for l = lmax, . . . , 1 do
         for (int l = l_max; l >= l_early; l--) {
 //            System.out.println("Level " + l);
@@ -285,7 +285,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
             Arrays.fill(group, -1);
             IntOpenHashSet found_clusters = new IntOpenHashSet(k_l);
             for (int i = 0; i < sub_results.length; i++) {
-                group[indicies.get(i)] = sub_results[i];
+                group[indicies.getInt(i)] = sub_results[i];
                 found_clusters.add(sub_results[i]);
             }
             // find who everyone else belongs to
@@ -307,7 +307,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
 //                System.out.println("\tBuilding model for " + c);
                 ClassificationDataSet V_c = new ClassificationDataSet(dataSet.getNumNumericalVars(), dataSet.getCategories(), dataSet.getPredicting());
                 DoubleArrayList V_alphas = new DoubleArrayList();
-                IntList orig_index = new IntList();
+                IntArrayList orig_index = new IntArrayList();
                 for (int i = 0; i < N; i++) {
                     if (group[i] != c)
                         continue;// well get to you later
@@ -334,7 +334,7 @@ public class DCSVM extends SupportVectorLearner implements Classifier, Parameter
 
                 // Update larger set of alphas
                 for (int i = 0; i < orig_index.size(); i++)
-                    this.alphas[orig_index.get(i)] = svm.alphas[i];
+                    this.alphas[orig_index.getInt(i)] = svm.alphas[i];
             }
         }
 

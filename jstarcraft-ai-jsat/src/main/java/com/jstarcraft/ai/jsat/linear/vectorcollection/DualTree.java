@@ -34,10 +34,12 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -57,10 +59,10 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances);
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances);
 
     @Override
-    default public void search(VectorCollection<V> VC, int numNeighbors, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(VectorCollection<V> VC, int numNeighbors, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         if (!(VC instanceof DualTree)) {
             VectorCollection.super.search(VC, numNeighbors, neighbors, distances, parallel);
             return;
@@ -132,7 +134,7 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
         neighbors.clear();
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
-            IntList n = new IntList(numNeighbors);
+            IntArrayList n = new IntArrayList(numNeighbors);
             DoubleArrayList d = new DoubleArrayList(numNeighbors);
 
             BoundedSortedList<IndexDistPair> knn = allPriorities.get(i);
@@ -211,7 +213,7 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
     }
 
     @Override
-    default public void search(VectorCollection<V> VC, double r_min, double r_max, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(VectorCollection<V> VC, double r_min, double r_max, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         if (!(VC instanceof DualTree)) {
             VectorCollection.super.search(VC, r_min, r_max, neighbors, distances, parallel);
             return;
@@ -221,7 +223,7 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
         neighbors.clear();
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
-            neighbors.add(new IntList());
+            neighbors.add(new IntArrayList());
             distances.add(new DoubleArrayList());
         }
 
@@ -261,10 +263,10 @@ public interface DualTree<V extends Vec> extends VectorCollection<V> {
 
             if (r_min < d_min && d_max < r_max)// Bound says ALL DECENDENTS BELONG, so lets do that!
             {
-                IntList r_dec = new IntList();
+                IntArrayList r_dec = new IntArrayList();
                 for (Iterator<Integer> iter = ref.DescendantIterator(); iter.hasNext();)
                     r_dec.add(iter.next());
-                IntList q_dec = new IntList();
+                IntArrayList q_dec = new IntArrayList();
                 for (Iterator<Integer> iter = query.DescendantIterator(); iter.hasNext();)
                     q_dec.add(iter.next());
                 for (int i : r_dec) {

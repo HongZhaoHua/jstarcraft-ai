@@ -24,10 +24,10 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.StringUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Loads a LIBSVM data file into a {@link DataSet}. LIVSM files do not indicate
@@ -454,7 +454,7 @@ public class LIBSVMLoader {
                 possibleCats.put(allCatKeys.getDouble(i), i);
             // apply to target values now
 
-            IntList label_targets = IntList.view(labelVals.stream().mapToInt(possibleCats::get).toArray());
+            IntArrayList label_targets = IntArrayList.wrap(labelVals.stream().mapToInt(possibleCats::get).toArray());
 
             sparceVecs.setNumNumeric(maxLen);
             sparceVecs.finishAdding();

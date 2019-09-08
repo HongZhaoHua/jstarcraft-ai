@@ -19,10 +19,10 @@ import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -187,7 +187,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
     @Override
     public void train(ClassificationDataSet dataSet, boolean parallel) {
         Random rand = RandomUtil.getRandom();
-        IntList features = new IntList(dataSet.getNumFeatures());
+        IntArrayList features = new IntArrayList(dataSet.getNumFeatures());
         ListUtils.addRange(features, 0, dataSet.getNumFeatures(), 1);
 
         predicting = dataSet.getPredicting();
@@ -555,7 +555,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
     @Override
     public void train(RegressionDataSet dataSet) {
         Random rand = RandomUtil.getRandom();
-        IntList features = new IntList(dataSet.getNumFeatures());
+        IntArrayList features = new IntArrayList(dataSet.getNumFeatures());
         ListUtils.addRange(features, 0, dataSet.getNumFeatures(), 1);
 
         OnLineStatistics score = new OnLineStatistics();
@@ -635,7 +635,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
         @Override
         public Collection<Integer> featuresUsed() {
-            IntList used = new IntList(1);
+            IntArrayList used = new IntArrayList(1);
             used.add(catAtt + numNumericFeatures);
             return used;
         }
@@ -677,7 +677,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
         @Override
         public Collection<Integer> featuresUsed() {
-            IntList used = new IntList(1);
+            IntArrayList used = new IntArrayList(1);
             used.add(numerAtt);
             return used;
         }
@@ -889,7 +889,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
         @Override
         public Collection<Integer> featuresUsed() {
-            IntList used = new IntList(1);
+            IntArrayList used = new IntArrayList(1);
             used.add(numerAtt);
             return used;
         }
@@ -946,7 +946,7 @@ public class ExtraTree implements Classifier, Regressor, TreeLearner, Parameteri
 
         @Override
         public Collection<Integer> featuresUsed() {
-            IntList used = new IntList(1);
+            IntArrayList used = new IntArrayList(1);
             used.add(catAtt + numNumericFeatures);
             return used;
         }

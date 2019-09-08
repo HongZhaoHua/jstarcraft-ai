@@ -32,12 +32,15 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -121,7 +124,7 @@ public class MEDDIT extends PAM {
             });
 
             // Update the medoids
-            IntList owned_by_k = new IntList(N);
+            IntArrayList owned_by_k = new IntArrayList(N);
             for (int k = 0; k < medioids.length; k++) {
                 owned_by_k.clear();
                 for (int i = 0; i < N; i++)
@@ -162,9 +165,9 @@ public class MEDDIT extends PAM {
      * @return the index of the point in <tt>X</tt> that is the medoid
      */
     public static int medoid(boolean parallel, List<? extends Vec> X, double tol, DistanceMetric dm) {
-        IntList order = new IntList(X.size());
+        IntList order = new IntArrayList(X.size());
         ListUtils.addRange(order, 0, X.size(), 1);
-        List<Double> accel = dm.getAccelerationCache(X, parallel);
+        DoubleList accel = dm.getAccelerationCache(X, parallel);
         return medoid(parallel, order, tol, X, dm, accel);
     }
 
@@ -298,12 +301,12 @@ public class MEDDIT extends PAM {
         /**
          * The levers we will pull this iteration, and then add back in
          */
-        IntList to_pull = new IntList();
+        IntArrayList to_pull = new IntArrayList();
         /**
          * the levers we must add back in but not update b/c they hit max evaluations
          * and the confidence bound is tight
          */
-        IntList toAddBack = new IntList();
+        IntArrayList toAddBack = new IntArrayList();
         boolean[] isExact = new boolean[N];
         Arrays.fill(isExact, false);
         int numExact = 0;
@@ -357,7 +360,7 @@ public class MEDDIT extends PAM {
                 Random rand = localRand.get();
                 OnLineStatistics localStats = new OnLineStatistics();
                 for (int i_count = start; i_count < end; i_count++) {
-                    int i = to_pull.get(i_count);
+                    int i = to_pull.getInt(i_count);
                     for (int j_count = 0; j_count < samples; j_count++) {
                         int j = rand.nextInt(N);
                         while (j == i)

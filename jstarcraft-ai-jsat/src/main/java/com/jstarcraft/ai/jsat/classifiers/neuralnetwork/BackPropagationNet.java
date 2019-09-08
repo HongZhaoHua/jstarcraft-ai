@@ -33,9 +33,10 @@ import com.jstarcraft.ai.jsat.parameters.Parameter;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * An implementation of a Feed Forward Neural Network (NN) trained by Back
@@ -172,7 +173,7 @@ public class BackPropagationNet implements Classifier, Regressor, Parameterized 
             }
         }
 
-        IntList iterOrder = new IntList(dataSet.size());
+        IntArrayList iterOrder = new IntArrayList(dataSet.size());
         ListUtils.addRange(iterOrder, 0, dataSet.size(), 1);
 
         final double bSizeInv = 1.0 / batchSize;
@@ -189,7 +190,7 @@ public class BackPropagationNet implements Classifier, Regressor, Parameterized 
 
                 // Feed batches thought network and get final mistakes
                 for (int bi = 0; bi < batchSize; bi++) {
-                    final int idx = iterOrder.get(iter + bi);
+                    final int idx = iterOrder.getInt(iter + bi);
                     Vec x = dataSet.getDataPoint(idx).getNumericalValues();
                     cur_x.add(x);
                     feedForward(x, activations.get(bi), derivatives.get(bi));

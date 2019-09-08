@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
@@ -30,7 +31,9 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.SubVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -40,7 +43,7 @@ public class ColumnMajorStore implements DataStore {
     private boolean sparse;
     int size = 0;
     List<Vec> columns;
-    List<IntList> cat_columns;
+    List<IntArrayList> cat_columns;
     CategoricalData[] cat_info;
 
     /**
@@ -90,7 +93,7 @@ public class ColumnMajorStore implements DataStore {
         this.cat_info = cat_info;
         this.cat_columns = new ArrayList<>();
         for (int i = 0; i < (cat_info == null ? 0 : cat_info.length); i++)
-            this.cat_columns.add(new IntList());
+            this.cat_columns.add(new IntArrayList());
 
     }
 
@@ -105,7 +108,7 @@ public class ColumnMajorStore implements DataStore {
             this.columns.add(v.clone());
         this.cat_columns = new ArrayList<>(toCopy.cat_columns.size());
         for (IntList cv : toCopy.cat_columns)
-            this.cat_columns.add(new IntList(cv));
+            this.cat_columns.add(new IntArrayList(cv));
 
         if (toCopy.cat_info != null)
             this.cat_info = CategoricalData.copyOf(toCopy.cat_info);
@@ -158,7 +161,7 @@ public class ColumnMajorStore implements DataStore {
         while (cat_columns.size() < x_c.length) {
             int[] newCol = new int[size];
             Arrays.fill(newCol, -1);// All previous entries have a missing value indication (-1) now.
-            cat_columns.add(IntList.view(newCol));
+            cat_columns.add(IntArrayList.wrap(newCol));
         }
 
         // add numeric features
@@ -243,7 +246,8 @@ public class ColumnMajorStore implements DataStore {
         if (cat_info == null) {
             cat_info = new CategoricalData[numCategorical()];
             for (int j = 0; j < cat_info.length; j++) {
-                int options = cat_columns.get(j).streamInts().max().orElse(1);
+                IntArrayList elements = cat_columns.get(j);
+                int options = IntStream.of(elements.elements()).limit(elements.size()).max().orElse(1);
                 cat_info[j] = new CategoricalData(Math.max(options, 1));// max incase all are missing
             }
         }
@@ -298,7 +302,7 @@ public class ColumnMajorStore implements DataStore {
     public int[] getCatColumn(int i) {
         if (i < 0 || i >= numCategorical())
             throw new IndexOutOfBoundsException("There is no index for column " + i);
-        return Arrays.copyOf(cat_columns.get(i).streamInts().toArray(), size());
+        return Arrays.copyOf(cat_columns.get(i).toIntArray(), size());
     }
 
 }

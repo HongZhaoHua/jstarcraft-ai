@@ -31,10 +31,13 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.DefaultVectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class implements the Borderline extension of the {@link SMOTE} algorithm
@@ -178,9 +181,9 @@ public class BorderlineSMOTE extends SMOTE {
             throw new FailedToFitException("SMOTE only works with numeric-only feature values");
 
         List<Vec> vAll = dataSet.getDataVectors();
-        IntList[] classIndex = new IntList[dataSet.getClassSize()];
+        IntArrayList[] classIndex = new IntArrayList[dataSet.getClassSize()];
         for (int i = 0; i < classIndex.length; i++)
-            classIndex[i] = new IntList();
+            classIndex[i] = new IntArrayList();
         for (int i = 0; i < dataSet.size(); i++)
             classIndex[dataSet.getDataPointCategory(i)].add(i);
 
@@ -210,8 +213,8 @@ public class BorderlineSMOTE extends SMOTE {
             VectorCollection<Vec> VC_id = new DefaultVectorCollection<>(dm, V_id, parallel);
             // Step 1. For every p ii =( 1,2,..., pnum) in the minority class P,
             // we calculate its m nearest neighbors from the whole training set T
-            List<List<Integer>> allNeighbors = new ArrayList<>();
-            List<List<Double>> allDistances = new ArrayList<>();
+            List<IntList> allNeighbors = new ArrayList<>();
+            List<DoubleList> allDistances = new ArrayList<>();
             VC_all.search(V_id, smoteNeighbors + 1, allNeighbors, allDistances, parallel);
             /**
              * A list of the vectors for only the neighbors who were not members of the same
@@ -223,11 +226,11 @@ public class BorderlineSMOTE extends SMOTE {
                     otherClassSamples.add(new ArrayList<>(smoteNeighbors));
 
             // Step 2.
-            final IntList danger_id = new IntList();
+            final IntArrayList danger_id = new IntArrayList();
 
             for (int i = 0; i < VC_id.size(); i++) {
                 int same_class = 0;
-                List<Integer> neighors_of_i = allNeighbors.get(i);
+                IntList neighors_of_i = allNeighbors.get(i);
                 for (int j = 1; j < smoteNeighbors + 1; j++) {
                     if (classID == dataSet.getDataPointCategory(neighors_of_i.get(j)))
                         same_class++;
@@ -251,8 +254,8 @@ public class BorderlineSMOTE extends SMOTE {
 
             // find all the nearest neighbors for each point so we know who to interpolate
             // with
-            List<List<Integer>> idNeighbors = new ArrayList<>();
-            List<List<Double>> idDistances = new ArrayList<>();
+            List<IntList> idNeighbors = new ArrayList<>();
+            List<DoubleList> idDistances = new ArrayList<>();
             VC_id.search(VC_id, smoteNeighbors + 1, idNeighbors, idDistances, parallel);
 
             ParallelUtils.run(parallel, samplesNeeded, (start, end) -> {

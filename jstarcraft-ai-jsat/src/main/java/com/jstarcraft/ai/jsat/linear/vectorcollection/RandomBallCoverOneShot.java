@@ -10,12 +10,13 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * An implementation of the on shot search for the Random Ball Cover algorithm.
@@ -41,8 +42,8 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
 
     private static final long serialVersionUID = -2562499883847452797L;
     private DistanceMetric dm;
-    private List<List<Integer>> ownedVecs;
-    private List<Integer> R;
+    private List<IntArrayList> ownedVecs;
+    private IntList R;
     private List<V> allVecs;
     private DoubleList distCache;
 
@@ -117,9 +118,9 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
         this.dm = other.dm.clone();
         this.ownedVecs = new ArrayList<>(other.ownedVecs.size());
         for (int i = 0; i < other.ownedVecs.size(); i++) {
-            this.ownedVecs.add(new IntList(other.ownedVecs.get(i)));
+            this.ownedVecs.add(new IntArrayList(other.ownedVecs.get(i)));
         }
-        this.R = new IntList(other.R);
+        this.R = new IntArrayList(other.R);
         this.repRadius = Arrays.copyOf(other.repRadius, other.repRadius.length);
         this.s = other.s;
         if (other.distCache != null)
@@ -132,7 +133,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
     public void build(boolean parallel, List<V> collection, DistanceMetric dm) {
         this.allVecs = new ArrayList<>(collection);
         distCache = dm.getAccelerationCache(collection, parallel);
-        IntList allIndices = new IntList(allVecs.size());
+        IntList allIndices = new IntArrayList(allVecs.size());
         ListUtils.addRange(allIndices, 0, allVecs.size(), 1);
         if (s < 0)
             s = (int) Math.sqrt(allVecs.size());
@@ -140,7 +141,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
         setUp(allIndices, parallel);
     }
 
-    private void setUp(List<Integer> allIndices, boolean parallel) {
+    private void setUp(IntList allIndices, boolean parallel) {
         int repCount = (int) Math.max(1, Math.sqrt(allIndices.size()));
         Collections.shuffle(allIndices);
 
@@ -150,7 +151,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
         ownedVecs = new ArrayList<>(repCount);
 
         for (int i = 0; i < repCount; i++) {
-            ownedVecs.add(new IntList(s));
+            ownedVecs.add(new IntArrayList(s));
         }
 
         ParallelUtils.run(parallel, R.size(), (i) -> {
@@ -172,7 +173,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
 
@@ -205,7 +206,7 @@ public class RandomBallCoverOneShot<V extends Vec> implements VectorCollection<V
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
 

@@ -27,9 +27,12 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.math.SpecialMath;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -71,7 +74,7 @@ public class IsolationForest implements Outlier {
         int D = d.getNumNumericalVars();
         // Build all the trees
         ParallelUtils.streamP(roots.stream(), parallel).forEach(r -> {
-            r.build(0, l, d, IntList.range(d.size()), new double[D], new double[D]);
+            r.build(0, l, d, ListUtils.range(0, d.size()), new double[D], new double[D]);
         });
     }
 
@@ -159,8 +162,8 @@ public class IsolationForest implements Outlier {
             splitVal = RandomUtil.getLocalRandom().nextDouble();
             splitVal = minVals[q] + (maxVals[q] - minVals[q]) * splitVal;
 
-            IntList X_l = new IntList();
-            IntList X_r = new IntList();
+            IntArrayList X_l = new IntArrayList();
+            IntArrayList X_r = new IntArrayList();
             for (int x : X)
                 if (source.getDataPoint(x).getNumericalValues().get(q) < splitVal)
                     X_l.add(x);

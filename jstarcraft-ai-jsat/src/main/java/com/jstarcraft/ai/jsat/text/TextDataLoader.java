@@ -20,8 +20,8 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.text.tokenizer.Tokenizer;
 import com.jstarcraft.ai.jsat.text.wordweighting.WordWeighting;
-import com.jstarcraft.ai.jsat.utils.IntList;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -281,7 +281,7 @@ public abstract class TextDataLoader implements TextVectorCreator {
             // Make sure all the vectors have the same length
             vec.setLength(finalLength);
         }
-        weighting.setWeight(vectors, IntList.view(frqs, finalLength));
+        weighting.setWeight(vectors, IntArrayList.wrap(frqs, finalLength));
 
         System.out.println("Final Length: " + finalLength);
         for (SparseVector vec : vectors) {

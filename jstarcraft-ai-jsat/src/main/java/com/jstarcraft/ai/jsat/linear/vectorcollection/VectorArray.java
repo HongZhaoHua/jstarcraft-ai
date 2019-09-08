@@ -13,6 +13,7 @@ import com.jstarcraft.ai.jsat.utils.IndexTable;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This is the naive implementation of a Vector collection. Construction time is
@@ -110,7 +111,7 @@ public class VectorArray<V extends Vec> extends ArrayList<V> implements Incremen
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
         List<Double> qi = distanceMetric.getQueryInfo(query);
@@ -129,7 +130,7 @@ public class VectorArray<V extends Vec> extends ArrayList<V> implements Incremen
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
         BoundedSortedList<IndexDistPair> knns = new BoundedSortedList<>(numNeighbors);

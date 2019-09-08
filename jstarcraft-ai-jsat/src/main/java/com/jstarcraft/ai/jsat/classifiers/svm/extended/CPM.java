@@ -38,8 +38,9 @@ import com.jstarcraft.ai.jsat.linear.MatrixOfVecs;
 import com.jstarcraft.ai.jsat.linear.ScaledVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class implements the Convex Polytope Machine (CPM), which is an
@@ -406,7 +407,7 @@ public class CPM implements BinaryScoreClassifier, Classifier, Parameterized {
      *                 positive or negative class is to be enveloped by the polytype
      */
     private void sgdTrain(ClassificationDataSet D, MatrixOfVecs W, Vec b, int sign_mul, boolean parallel) {
-        IntList order = new IntList(D.size());
+        IntArrayList order = new IntArrayList(D.size());
         ListUtils.addRange(order, 0, D.size(), 1);
 
         final double lambda_adj = lambda / (D.size() * epochs);

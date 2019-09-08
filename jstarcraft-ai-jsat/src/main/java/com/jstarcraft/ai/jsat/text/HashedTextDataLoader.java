@@ -16,7 +16,9 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.text.tokenizer.Tokenizer;
 import com.jstarcraft.ai.jsat.text.wordweighting.WordWeighting;
-import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntLists;
 
 /**
  * This class provides a framework for loading datasets made of Text documents
@@ -175,7 +177,7 @@ abstract public class HashedTextDataLoader implements TextVectorCreator {
         final int[] frqs = new int[dimensionSize];
         for (int i = 0; i < termDocumentFrequencys.length(); i++)
             frqs[i] = termDocumentFrequencys.get(i);
-        weighting.setWeight(vectors, IntList.unmodifiableView(frqs, dimensionSize));
+        weighting.setWeight(vectors, IntLists.unmodifiable(IntArrayList.wrap(frqs, dimensionSize)));
         for (SparseVector vec : vectors)
             weighting.applyTo(vec);
         termDocumentFrequencys = null;

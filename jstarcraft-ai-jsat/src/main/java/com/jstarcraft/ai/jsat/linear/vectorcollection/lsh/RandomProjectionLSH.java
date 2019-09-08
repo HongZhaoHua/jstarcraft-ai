@@ -20,6 +20,8 @@ import com.jstarcraft.ai.jsat.utils.ProbailityMatch;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * An implementation of Locality Sensitive Hashing for the
@@ -143,7 +145,7 @@ public class RandomProjectionLSH<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         int minHammingDist = (int) cosineToHamming(CosineDistance.distanceToCosine(range));
 
         final int[] queryProj = new int[slotsPerEntry];
@@ -169,7 +171,7 @@ public class RandomProjectionLSH<V extends Vec> implements VectorCollection<V> {
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         BoundedSortedList<ProbailityMatch<Integer>> toRet = new BoundedSortedList<>(numNeighbors);
 
         final int[] queryProj = new int[slotsPerEntry];

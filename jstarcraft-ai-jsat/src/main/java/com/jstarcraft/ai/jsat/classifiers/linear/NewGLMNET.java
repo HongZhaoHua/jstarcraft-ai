@@ -30,10 +30,11 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.lossfunctions.LogisticLoss;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.WarmParameter;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * NewGLMNET is a batch method for solving Elastic Net regularized Logistic
@@ -449,7 +450,7 @@ public class NewGLMNET implements WarmClassifier, Parameterized, SingleWeightVec
         for (int k = 0; k < maxOuterIters; k++)// For k = 1, 2, 3, . . .
         {
             // algo 3, Step 1.
-            IntList J = new IntList(n);
+            IntArrayList J = new IntArrayList(n);
             ListUtils.addRange(J, 0, n, 1);
             double M = 0;
             double M_bar = 0;
@@ -535,7 +536,7 @@ public class NewGLMNET implements WarmClassifier, Parameterized, SingleWeightVec
             // algo 3, Step 5. Run algo 4
             // START: Algorithm 4 Inner iterations of NewGLMNET with shrinking
             double M_in = Double.POSITIVE_INFINITY;
-            IntList T = new IntList(J);
+            IntArrayList T = new IntArrayList(J);
 
             d.zeroOut();
             d_bias = 0;

@@ -16,12 +16,13 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.distributions.ChiSquared;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.MahalanobisDistance;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -398,7 +399,7 @@ public class MatrixStatistics {
                 IntList randOrder = ListUtils.range(0, N);
                 Collections.shuffle(randOrder, rand);
 
-                IntList h_prev = new IntList(randOrder.subList(0, D + 1));
+                IntArrayList h_prev = new IntArrayList(randOrder.subList(0, D + 1));
 
                 meanVector(subset_mean, dataset, h_prev);
                 covarianceMatrix(subset_mean, subset_cov, dataset, h_prev);
@@ -414,7 +415,7 @@ public class MatrixStatistics {
             for (Tuple3<Double, Vec, Matrix> initSolution : top10) {
                 double prevDev = initSolution.getX();
 
-                IntList h_prev = new IntList(h);// This will get populated by the call to C_Step below
+                IntArrayList h_prev = new IntArrayList(h);// This will get populated by the call to C_Step below
                 Vec m = initSolution.getY();
                 Matrix c = initSolution.getZ();
                 for (int iter = 0; iter < 20; iter++) {
@@ -443,9 +444,9 @@ public class MatrixStatistics {
             // Populate the sub-splits
             IntList randOrderAll = ListUtils.range(0, N);
             Collections.shuffle(randOrderAll, RandomUtil.getLocalRandom());
-            IntList[] splits = new IntList[numSplits];
+            IntArrayList[] splits = new IntArrayList[numSplits];
             for (int i = 0; i < numSplits; i++)
-                splits[i] = new IntList();
+                splits[i] = new IntArrayList();
 
             for (int i = 0; i < Math.min(1500, randOrderAll.size()); i++)
                 splits[i % splits.length].add(randOrderAll.get(i));
@@ -462,10 +463,10 @@ public class MatrixStatistics {
                     Vec subset_mean = mean.clone();
                     Matrix subset_cov = cov.clone();
 
-                    IntList randOrderSplit = new IntList(split);
+                    IntArrayList randOrderSplit = new IntArrayList(split);
                     Collections.shuffle(randOrderSplit, rand);
 
-                    IntList h_prev = new IntList(randOrderSplit.subList(0, D + 1));
+                    IntArrayList h_prev = new IntArrayList(randOrderSplit.subList(0, D + 1));
 
                     meanVector(subset_mean, dataset, h_prev);
                     covarianceMatrix(subset_mean, subset_cov, dataset, h_prev);
@@ -489,7 +490,7 @@ public class MatrixStatistics {
                 Vec subset_mean = tuple.getY();
                 Matrix subset_cov = tuple.getZ();
 
-                IntList h_prev = new IntList();
+                IntArrayList h_prev = new IntArrayList();
 
                 double det = 0;
                 // Run C step 3 times. 1 for intiailization from p-set, 2 for the 2 runs after
@@ -503,7 +504,7 @@ public class MatrixStatistics {
             for (Tuple3<Double, Vec, Matrix> initSolution : top10) {
                 double prevDev = initSolution.getX();
 
-                IntList h_prev = new IntList(h);// This will get populated by the call to C_Step below
+                IntArrayList h_prev = new IntArrayList(h);// This will get populated by the call to C_Step below
                 Vec m = initSolution.getY();
                 Matrix c = initSolution.getZ();
                 for (int iter = 0; iter < 20; iter++) {

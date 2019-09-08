@@ -17,8 +17,8 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -359,8 +359,8 @@ public class OPTICS extends ClustererBase implements Parameterized {
         double[] mibVals = new double[n];
 
         List<OPTICSCluster> clusters = new ArrayList<OPTICSCluster>();
-        List<Integer> allSteepUp = new IntList();
-        List<Integer> allSDA = new IntList();
+        IntArrayList allSteepUp = new IntArrayList();
+        IntArrayList allSDA = new IntArrayList();
         /*
          * Ugly else if to increment orderIndex counter and avoid geting stuck in
          * infinite loops. Can I write that a better way?
@@ -505,7 +505,7 @@ public class OPTICS extends ClustererBase implements Parameterized {
 
         radius = stats.getMean() + stats.getStandardDeviation() * 3;
 
-        List<Integer> orderedFile = new IntList(n);
+        IntArrayList orderedFile = new IntArrayList(n);
 
         // Main clustering loop
         for (int i = 0; i < dataSet.size(); i++) {
@@ -528,7 +528,7 @@ public class OPTICS extends ClustererBase implements Parameterized {
         double[] newReach = new double[reach_d.length];
         Arrays.fill(newReach, Double.POSITIVE_INFINITY);
         for (int i = 0; i < orderedFile.size(); i++)
-            newReach[i] = reach_d[orderedFile.get(i)];
+            newReach[i] = reach_d[orderedFile.getInt(i)];
         reach_d = newReach;
 
         return designations;

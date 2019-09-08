@@ -25,7 +25,10 @@ import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.classifiers.DataPointPair;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * Determines the importance of features by measuring the decrease in impurity
@@ -74,7 +77,7 @@ public class MDI implements TreeFeatureImportanceInference {
         for (int i = 0; i < data.size(); i++)
             score.addPoint(data.getWeight(i), ((ClassificationDataSet) data).getDataPointCategory(i));
 
-        visit(model.getTreeNodeVisitor(), score, (ClassificationDataSet) data, IntList.range(data.size()), features, score.getSumOfWeights(), K);
+        visit(model.getTreeNodeVisitor(), score, (ClassificationDataSet) data, ListUtils.range(0, data.size()), features, score.getSumOfWeights(), K);
 
         return features;
     }
@@ -92,7 +95,7 @@ public class MDI implements TreeFeatureImportanceInference {
         splitsData.add(subset);
         splitScores.add(score);
         for (int i = 0; i < node.childrenCount() - 1; i++) {
-            splitsData.add(new IntList());
+            splitsData.add(new IntArrayList());
             splitScores.add(new ImpurityScore(K, im));
         }
 

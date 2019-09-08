@@ -11,11 +11,12 @@ import java.util.stream.IntStream;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecPaired;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * A Vector Collection is a collection of vectors that is meant to be used to
@@ -98,7 +99,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      *             in the future.
      */
     default public List<? extends VecPaired<V, Double>> search(Vec query, double range) {
-        IntList neighbors = new IntList();
+        IntArrayList neighbors = new IntArrayList();
         DoubleArrayList distances = new DoubleArrayList();
         search(query, range, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
@@ -119,7 +120,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      *             in the future.
      */
     default public List<? extends VecPaired<V, Double>> search(Vec query, int num_neighbors) {
-        IntList neighbors = new IntList();
+        IntArrayList neighbors = new IntArrayList();
         DoubleArrayList distances = new DoubleArrayList();
         search(query, num_neighbors, neighbors, distances);
         List<VecPaired<V, Double>> toRet = new ArrayList<>();
@@ -142,7 +143,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      *                  in. Will be sorted, and paired with the values in
      *                  <tt>neighbors</tt>.
      */
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances);
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances);
 
     /**
      * Performs k-Nearest Neighbor search of the current collection. The index and
@@ -157,7 +158,7 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      *                     query in. Will be sorted, and paired with the values in
      *                     <tt>neighbors</tt>.
      */
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances);
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances);
 
     /**
      * Accesses a vector from this collection via index.
@@ -176,17 +177,17 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
      */
     public int size();
 
-    default public void search(List<V> Q, double r_min, double r_max, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(List<V> Q, double r_min, double r_max, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         VectorCollection<V> vc = new VectorArray<>(getDistanceMetric(), Q);
         search(vc, r_min, r_max, neighbors, distances, parallel);
     }
 
-    default public void search(VectorCollection<V> Q, double r_min, double r_max, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(VectorCollection<V> Q, double r_min, double r_max, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         neighbors.clear();
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
-            neighbors.add(new ArrayList<>());
-            distances.add(new ArrayList<>());
+            neighbors.add(new IntArrayList());
+            distances.add(new DoubleArrayList());
         }
 
         ParallelUtils.range(Q.size(), parallel).forEach(i -> {
@@ -201,17 +202,17 @@ public interface VectorCollection<V extends Vec> extends Cloneable, Serializable
         });
     }
 
-    default public void search(List<V> Q, int numNeighbors, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(List<V> Q, int numNeighbors, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         VectorCollection<V> vc = new VectorArray<>(getDistanceMetric(), Q);
         search(vc, numNeighbors, neighbors, distances, parallel);
     }
 
-    default public void search(VectorCollection<V> Q, int numNeighbors, List<List<Integer>> neighbors, List<List<Double>> distances, boolean parallel) {
+    default public void search(VectorCollection<V> Q, int numNeighbors, List<IntList> neighbors, List<DoubleList> distances, boolean parallel) {
         neighbors.clear();
         distances.clear();
         for (int i = 0; i < Q.size(); i++) {
-            neighbors.add(new ArrayList<>());
-            distances.add(new ArrayList<>());
+            neighbors.add(new IntArrayList());
+            distances.add(new DoubleArrayList());
         }
 
         ParallelUtils.range(Q.size(), parallel).forEach(i -> {

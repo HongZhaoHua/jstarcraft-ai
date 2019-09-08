@@ -35,17 +35,20 @@ import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.stream.DoubleStream;
+import java.util.stream.IntStream;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class implements the TRIKMEDS algorithm for PAM clustering. It returns
@@ -304,9 +307,9 @@ public class TRIKMEDS extends PAM {
      * @return the index of the point in <tt>X</tt> that is the medoid
      */
     public static int medoid(boolean parallel, List<? extends Vec> X, DistanceMetric dm) {
-        IntList order = new IntList(X.size());
+        IntArrayList order = new IntArrayList(X.size());
         ListUtils.addRange(order, 0, X.size(), 1);
-        List<Double> accel = dm.getAccelerationCache(X, parallel);
+        DoubleList accel = dm.getAccelerationCache(X, parallel);
         return medoid(parallel, order, X, dm, accel);
     }
 
@@ -327,10 +330,10 @@ public class TRIKMEDS extends PAM {
 
         AtomicDouble e_cl = new AtomicDouble(Double.POSITIVE_INFINITY);
 
-        IntList rand_order = new IntList(indecies);
+        IntArrayList rand_order = new IntArrayList(indecies);
         Collections.shuffle(rand_order, RandomUtil.getRandom());
         ThreadLocal<double[]> d_local = ThreadLocal.withInitial(() -> new double[N]);
-        ParallelUtils.streamP(rand_order.streamInts(), parallel).forEach(i -> {
+        ParallelUtils.streamP(IntStream.of(rand_order.elements()).limit(rand_order.size()), parallel).forEach(i -> {
             double[] d = d_local.get();
             double d_avg = 0;
             if (l.get(i) < e_cl.get()) {

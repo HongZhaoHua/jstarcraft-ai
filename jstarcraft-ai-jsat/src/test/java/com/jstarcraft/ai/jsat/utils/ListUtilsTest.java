@@ -14,6 +14,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
 /**
  *
  * @author Edward Raff
@@ -41,7 +43,7 @@ public class ListUtilsTest {
     @Test
     public void testSplitList() {
         System.out.println("splitList");
-        List<Integer> sourceList = new IntList(500);
+        IntArrayList sourceList = new IntArrayList(500);
         for (int i = 0; i < 500; i++)
             sourceList.add(i);
         List<List<Integer>> ll1 = ListUtils.splitList(sourceList, 5);
@@ -70,7 +72,7 @@ public class ListUtilsTest {
     @Test
     public void testSwap() {
         System.out.println("swap");
-        IntList test = new IntList();
+        IntArrayList test = new IntArrayList();
         test.add(1);
         test.add(2);
         ListUtils.swap(test, 0, 1);

@@ -12,10 +12,10 @@ import com.jstarcraft.ai.jsat.classifiers.Classifier;
 import com.jstarcraft.ai.jsat.datatransform.RemoveAttributeTransform;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
@@ -178,7 +178,7 @@ public class SBS extends RemoveAttributeTransform {
      * @return the set of categorical features to use
      */
     public IntSet getSelectedCategorical() {
-        return new IntOpenHashSet(IntList.view(catIndexMap, catIndexMap.length));
+        return new IntOpenHashSet(IntArrayList.wrap(catIndexMap, catIndexMap.length));
     }
 
     /**
@@ -188,7 +188,7 @@ public class SBS extends RemoveAttributeTransform {
      * @return the set of numeric features to use
      */
     public IntSet getSelectedNumerical() {
-        return new IntOpenHashSet(IntList.view(numIndexMap, numIndexMap.length));
+        return new IntOpenHashSet(IntArrayList.wrap(numIndexMap, numIndexMap.length));
     }
 
     /**

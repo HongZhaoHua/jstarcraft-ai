@@ -11,11 +11,11 @@ import com.jstarcraft.ai.jsat.distributions.LogUniform;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class provides a generalization of the {@link RBFKernel} to arbitrary
@@ -132,7 +132,7 @@ public class GeneralRBFKernel extends DistanceMetricBasedKernel {
             ClassificationDataSet cdata = (ClassificationDataSet) d;
             List<Vec> class0 = new ArrayList<Vec>(toSample / 2);
             List<Vec> class1 = new ArrayList<Vec>(toSample / 2);
-            IntList randOrder = new IntList(d.size());
+            IntArrayList randOrder = new IntArrayList(d.size());
             ListUtils.addRange(randOrder, 0, d.size(), 1);
             Collections.shuffle(randOrder);
             // collet a random sample of data

@@ -28,7 +28,6 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.XORWOW;
@@ -36,6 +35,8 @@ import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
@@ -122,7 +123,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
         this.vecs = new ArrayList<>(collection);
         this.accell_cache = dm.getAccelerationCache(vecs, parallel);
         // Cover Tree is sensative to insertion order, so lets make sure its random
-        IntList order = new IntList(this.vecs.size());
+        IntArrayList order = new IntArrayList(this.vecs.size());
         ListUtils.addRange(order, 0, this.vecs.size(), 1);
 
 //        Set<Integer> S = getSet(parallel);
@@ -253,7 +254,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
                 return i;
             }).distinct().toArray();
 
-            S_i.removeAll(IntList.view(toRemove));
+            S_i.removeAll(IntArrayList.wrap(toRemove));
         }
 
         return new KeyValue<>(newNear, newFar);
@@ -274,7 +275,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
 
@@ -286,7 +287,7 @@ public final class CoverTree<V extends Vec> implements IncrementalCollection<V> 
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
 //        if(maxDistDirty && ! looseBounds)
 //        {
 //            this.root.invalidateMaxDist();

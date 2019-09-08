@@ -27,13 +27,15 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.QuickSort;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.core.utility.KeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -77,12 +79,12 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
     /**
      * Used only in classification. Contains the numeric boundaries to split on
      */
-    private DoubleArrayList boundries;
+    private DoubleList boundries;
     /**
      * Used only in classification. Contains the most likely class corresponding to
      * each boundary split
      */
-    private List<Integer> owners;
+    private IntList owners;
     /**
      * Used only in classification. Contains the results for each of the split
      * options
@@ -435,7 +437,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                     final double[] gainRet = new double[] { Double.NaN };
                     gainRet[0] = Double.NaN;
                     List<ClassificationDataSet> aSplit;
-                    KeyValue<DoubleArrayList, List<Integer>> tmp = null;// Used on numerical attributes
+                    KeyValue<DoubleList, IntList> tmp = null;// Used on numerical attributes
 
                     ImpurityScore[] split_scores = null;// used for cat
                     double weightScale = 1.0;
@@ -448,7 +450,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                         for (int i = 0; i < split_scores.length; i++)
                             split_scores[i] = new ImpurityScore(predicting.getNumOfCategories(), gainMethod);
 
-                        IntList wasMissing = new IntList();
+                        IntArrayList wasMissing = new IntArrayList();
                         double missingSum = 0.0;
                         // Now seperate the values in our current list into their proper split bins
                         for (int i = 0; i < data.size(); i++) {
@@ -587,11 +589,11 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
      *         split boundaries, and the integers containing the path number.
      *         Multiple splits could go down the same path.
      */
-    private KeyValue<DoubleArrayList, List<Integer>> createNumericCSplit(ClassificationDataSet dataPoints, int N, final int attribute, List<ClassificationDataSet> aSplit, ImpurityScore origScore, double[] finalGain, ImpurityScore[] subScores) {
+    private KeyValue<DoubleList, IntList> createNumericCSplit(ClassificationDataSet dataPoints, int N, final int attribute, List<ClassificationDataSet> aSplit, ImpurityScore origScore, double[] finalGain, ImpurityScore[] subScores) {
         // cache misses are killing us, move data into a double[] to get more juice!
         double[] vals = new double[dataPoints.size()];// TODO put this in a thread local somewhere and re-use
-        IntList workSet = new IntList(dataPoints.size());
-        IntList wasNaN = new IntList();
+        IntArrayList workSet = new IntArrayList(dataPoints.size());
+        IntArrayList wasNaN = new IntArrayList();
         for (int i = 0; i < dataPoints.size(); i++) {
             double val = dataPoints.getDataPoint(i).getNumericalValues().get(attribute);
             if (!Double.isNaN(val)) {
@@ -680,7 +682,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
             double weightScale = leftSide.getSumOfWeights() / (leftSide.getSumOfWeights() + rightSide.getSumOfWeights() + 0.0);
             distributMissing(aSplit, new double[] { weightScale, 1 - weightScale }, dataPoints, wasNaN);
         }
-        KeyValue<DoubleArrayList, List<Integer>> tmp = new KeyValue<>(new DoubleArrayList(new double[] { bestSplit, Double.POSITIVE_INFINITY }), Arrays.asList(0, 1));
+        KeyValue<DoubleList, IntList> tmp = new KeyValue<>(DoubleArrayList.wrap(new double[] { bestSplit, Double.POSITIVE_INFINITY }), IntArrayList.wrap(new int[] { 0, 1 }));
 
         return tmp;
 
@@ -777,7 +779,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
                     for (int i = 0; i < thisSplit.size(); i++)
                         stats[i] = new OnLineStatistics();
                     // Now seperate the values in our current list into their proper split bins
-                    IntList wasMissing = new IntList();
+                    IntArrayList wasMissing = new IntArrayList();
                     for (int i = 0; i < DPs.size(); i++) {
                         int category = DPs.getDataPoint(i).getCategoricalValue(attribute);
                         if (category >= 0) {
@@ -812,10 +814,10 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
 
                     // We need our list in sorted order by attribute!
                     DoubleArrayList att_vals = new DoubleArrayList(DPs.size());
-                    IntList order = new IntList(DPs.size());
+                    IntArrayList order = new IntArrayList(DPs.size());
                     DoubleArrayList weights = new DoubleArrayList(DPs.size());
                     DoubleArrayList targets = new DoubleArrayList(DPs.size());
-                    IntList wasNaN = new IntList();
+                    IntArrayList wasNaN = new IntArrayList();
                     for (int i = 0; i < DPs.size(); i++) {
                         double v = DPs.getDataPoint(i).getNumericalValues().get(numAttri);
                         if (Double.isNaN(v))
@@ -970,7 +972,7 @@ public class DecisionStump implements Classifier, Regressor, Parameterized {
         if (this.boundries != null)
             copy.boundries = new DoubleArrayList(this.boundries);
         if (this.owners != null)
-            copy.owners = new IntList(this.owners);
+            copy.owners = new IntArrayList(this.owners);
         if (this.predicting != null)
             copy.predicting = this.predicting.clone();
         if (regressionResults != null)

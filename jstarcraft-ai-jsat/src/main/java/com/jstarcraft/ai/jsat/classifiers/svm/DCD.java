@@ -5,7 +5,6 @@ import static com.jstarcraft.ai.jsat.classifiers.svm.DCDs.eq24;
 
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import com.jstarcraft.ai.jsat.SingleWeightVectorModel;
@@ -20,9 +19,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Implements Dual Coordinate Descent (DCD) training algorithms for a Linear
@@ -298,7 +298,7 @@ public class DCD implements BinaryScoreClassifier, Regressor, Parameterized, Sin
         }
         w = new DenseVector(vecs[0].length());
 
-        List<Integer> A = new IntList(vecs.length);
+        IntArrayList A = new IntArrayList(vecs.length);
         ListUtils.addRange(A, 0, vecs.length, 1);
 
         Random rand = RandomUtil.getRandom();
@@ -378,7 +378,7 @@ public class DCD implements BinaryScoreClassifier, Regressor, Parameterized, Sin
         }
         w = new DenseVector(vecs[0].length());
 
-        IntList activeSet = new IntList(vecs.length);
+        IntArrayList activeSet = new IntArrayList(vecs.length);
         ListUtils.addRange(activeSet, 0, vecs.length, 1);
 
         @SuppressWarnings("unused")

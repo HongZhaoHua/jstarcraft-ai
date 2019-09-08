@@ -38,7 +38,6 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDoubleArray;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
@@ -47,6 +46,8 @@ import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -78,9 +79,9 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
  */
 public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTree<V> {
     public static final int DEFAULT_LEAF_SIZE = 40;
-    
+
     private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
-    
+
     private int leaf_size = DEFAULT_LEAF_SIZE;
     private DistanceMetric dm;
     private List<V> allVecs;
@@ -307,8 +308,8 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         int f2 = ParallelUtils.streamP(points.stream(), parallel).map(i -> new IndexDistPair(i, dm.dist(i, f1, allVecs, cache))).max(IndexDistPair::compareTo).orElse(new IndexDistPair(1, 0.0)).indx;
 
         // Now split children based on who is closes to f1 and f2
-        IntList left_children = new IntList();
-        IntList right_children = new IntList();
+        IntArrayList left_children = new IntArrayList();
+        IntArrayList right_children = new IntArrayList();
         for (int p : points) {
             double d_f1 = dm.dist(p, f1, allVecs, cache);
             double d_f2 = dm.dist(p, f2, allVecs, cache);
@@ -378,7 +379,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         if (maxSpread.dist == 0)// all the data is the same? Return a leaf
         {
-            Leaf leaf = new Leaf(new IntList(points));
+            Leaf leaf = new Leaf(new IntArrayList(points));
             leaf.setPivot(points);
             leaf.setRadius(points);
             return leaf;
@@ -413,12 +414,12 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         int[] anchor_point_index = new int[K];
         int[] anchor_index = new int[K];
-        IntList[] owned = new IntList[K];
+        IntArrayList[] owned = new IntArrayList[K];
         // anchor paper says sort from hight dist to low, we do reverse for convience
         // and removal efficiancy
         DoubleList[] ownedDist = new DoubleList[K];
         for (int k = 1; k < K; k++) {
-            owned[k] = new IntList();
+            owned[k] = new IntArrayList();
             ownedDist[k] = new DoubleArrayList();
         }
 
@@ -427,8 +428,9 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         // First case is special, select anchor at random and create list
         anchor_point_index[0] = rand.nextInt(points.size());
         anchor_index[0] = points.get(anchor_point_index[0]);
-        owned[0] = IntList.range(points.size());
-        ownedDist[0] = DoubleArrayList.wrap(ParallelUtils.streamP(owned[0].streamInts(), parallel).mapToDouble(i -> dm.dist(anchor_index[0], points.get(i), allVecs, cache)).toArray(), points.size());
+        owned[0] = new IntArrayList();
+        ListUtils.addRange(owned[0], 0, points.size(), 1);
+        ownedDist[0] = DoubleArrayList.wrap(ParallelUtils.streamP(IntStream.of(owned[0].elements()).limit(owned[0].size()), parallel).mapToDouble(i -> dm.dist(anchor_index[0], points.get(i), allVecs, cache)).toArray(), points.size());
 
         IndexTable it = new IndexTable(ownedDist[0]);
         it.apply(owned[0]);
@@ -482,7 +484,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         // for each anchor
         List<Node> anchor_nodes = new ArrayList<>();
         for (int k = 0; k < K; k++) {
-            Node n_k = build(IntList.view(owned[k].streamInts().map(i -> points.get(i)).toArray()), parallel);
+            Node n_k = build(IntArrayList.wrap(IntStream.of(owned[k].elements()).limit(owned[k].size()).map(i -> points.get(i)).toArray()), parallel);
             n_k.pivot = get(anchor_index[k]);
             n_k.radius = ownedDist[k].getDouble(ownedDist[k].size() - 1);
             anchor_nodes.add(n_k);
@@ -507,7 +509,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             PriorityQueue<Integer2IntegerKeyValue> mergeQ_k = new PriorityQueue<>((o1, o2) -> Double.compare(mergeCost.get(o1), mergeCost.get(o2)));
             mergeQs.add(mergeQ_k);
             Node n_k = anchor_nodes.get(k);
-            IntList owned_nk = new IntList();
+            IntArrayList owned_nk = new IntArrayList();
             for (int i : n_k)
                 owned_nk.add(i);
             int size_k = owned_nk.size();
@@ -515,7 +517,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
                 Node n_z = anchor_nodes.get(z);
                 Integer2IntegerKeyValue p = new Integer2IntegerKeyValue(k, z);
 
-                IntList owned_nkz = new IntList(owned_nk);
+                IntArrayList owned_nkz = new IntArrayList(owned_nk);
                 int size_z, size_nk;
 
                 for (int i : n_z)
@@ -576,7 +578,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             mergeQs.set(winningQ, mergeQ_k);
 
             Node n_k = merged;
-            IntList owned_nk = new IntList();
+            IntArrayList owned_nk = new IntArrayList();
             for (int i : n_k)
                 owned_nk.add(i);
             int size_k = owned_nk.size();
@@ -592,7 +594,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
                 else
                     p = new Integer2IntegerKeyValue(z, winningQ);
 
-                IntList owned_nkz = new IntList(owned_nk);
+                IntArrayList owned_nkz = new IntArrayList(owned_nk);
                 int size_z, size_nk;
 
                 for (int i : n_z)
@@ -637,7 +639,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
     private Node build(List<Integer> points, boolean parallel) {
         // universal base case
         if (points.size() <= leaf_size) {
-            Leaf leaf = new Leaf(new IntList(points));
+            Leaf leaf = new Leaf(new IntArrayList(points));
             leaf.setPivot(points);
             leaf.setRadius(points);
             return leaf;
@@ -652,7 +654,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             return build_far_top_down(points, parallel);
 
         }
-        return new Leaf(new IntList(0));
+        return new Leaf(new IntArrayList(0));
     }
 
     @Override
@@ -660,7 +662,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
         this.allVecs = new ArrayList<>(collection);
         setDistanceMetric(dm);
         this.cache = dm.getAccelerationCache(allVecs, parallel);
-        this.root = build(IntList.range(collection.size()), parallel);
+        this.root = build(ListUtils.range(0, collection.size()), parallel);
     }
 
     @Override
@@ -671,7 +673,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
             allVecs.add(x);
             cache = dm.getAccelerationCache(allVecs);
 
-            root = new Leaf(IntList.range(1));
+            root = new Leaf(ListUtils.range(0, 1));
             root.pivot = x.clone();
             root.pivot_qi = dm.getQueryInfo(x);
             root.radius = 0;
@@ -731,7 +733,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
         root.search(query, dm.getQueryInfo(query), range, neighbors, distances);
@@ -742,7 +744,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         neighbors.clear();
         distances.clear();
 
@@ -860,7 +862,7 @@ public class BallTree<V extends Vec> implements IncrementalCollection<V>, DualTr
 
         public Leaf(Leaf toCopy) {
             super(toCopy);
-            this.children = new IntList(toCopy.children);
+            this.children = new IntArrayList(toCopy.children);
         }
 
         @Override

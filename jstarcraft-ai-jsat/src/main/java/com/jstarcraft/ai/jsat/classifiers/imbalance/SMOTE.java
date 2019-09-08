@@ -32,12 +32,15 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.DefaultVectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
-import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class implements the Synthetic Minority Over-sampling TEchnique (SMOTE)
@@ -219,9 +222,9 @@ public class SMOTE implements Classifier, Parameterized {
             throw new FailedToFitException("SMOTE only works with numeric-only feature values");
 
         List<Vec> vAll = dataSet.getDataVectors();
-        IntList[] classIndex = new IntList[dataSet.getClassSize()];
+        IntArrayList[] classIndex = new IntArrayList[dataSet.getClassSize()];
         for (int i = 0; i < classIndex.length; i++)
-            classIndex[i] = new IntList();
+            classIndex[i] = new IntArrayList();
         for (int i = 0; i < dataSet.size(); i++)
             classIndex[dataSet.getDataPointCategory(i)].add(i);
 
@@ -247,8 +250,8 @@ public class SMOTE implements Classifier, Parameterized {
             VectorCollection<Vec> VC_id = new DefaultVectorCollection<>(dm, V_id, parallel);
             // find all the nearest neighbors for each point so we know who to interpolate
             // with
-            List<List<Integer>> neighbors = new ArrayList<>();
-            List<List<Double>> distances = new ArrayList<>();
+            List<IntList> neighbors = new ArrayList<>();
+            List<DoubleList> distances = new ArrayList<>();
             VC_id.search(VC_id, smoteNeighbors + 1, neighbors, distances, parallel);
 
             ParallelUtils.run(parallel, samplesNeeded, (start, end) -> {

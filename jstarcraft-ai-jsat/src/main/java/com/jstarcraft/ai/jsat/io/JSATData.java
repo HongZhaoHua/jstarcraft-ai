@@ -42,9 +42,9 @@ import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
-import com.jstarcraft.ai.jsat.utils.IntList;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * JSAT Data Loader provides a simple binary file format for storing and reading
@@ -721,7 +721,7 @@ public class JSATData {
         DataSet toRet;
         switch (marker) {
         case CLASSIFICATION:
-            IntList targets_i = IntList.view(targets.stream().mapToInt(Double::intValue).toArray());
+            IntArrayList targets_i = IntArrayList.wrap(targets.stream().mapToInt(Double::intValue).toArray());
             toRet = new ClassificationDataSet(store, targets_i, predicting);
             break;
         case REGRESSION:

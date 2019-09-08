@@ -14,6 +14,9 @@ import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.AbstractDoubleList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntCollection;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -170,7 +173,7 @@ public class ListUtils {
      * @param step  the step size.
      * @throws RuntimeException if the step size is zero or negative.
      */
-    public static void addRange(Collection<Integer> c, int start, int to, int step) {
+    public static void addRange(IntCollection c, int start, int to, int step) {
         if (step <= 0)
             throw new RuntimeException("Would create an infinite loop");
 
@@ -202,7 +205,7 @@ public class ListUtils {
             throw new RuntimeException("starting index " + start + " must be less than or equal to ending index" + to);
         else if (step < 1)
             throw new RuntimeException("Step size must be a positive integer, not " + step);
-        IntList toRet = new IntList((to - start) / step);
+        IntArrayList toRet = new IntArrayList((to - start) / step);
         for (int i = start; i < to; i += step)
             toRet.add(i);
         return toRet;

@@ -1,12 +1,11 @@
 package com.jstarcraft.ai.jsat.text;
 
-import java.util.List;
-
 import com.jstarcraft.ai.jsat.classifiers.CategoricalData;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.text.tokenizer.Tokenizer;
 import com.jstarcraft.ai.jsat.text.wordweighting.WordWeighting;
-import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class provides a framework for loading classification datasets made of
@@ -29,7 +28,7 @@ public abstract class ClassificationTextDataLoader extends TextDataLoader {
      * The list of the true class labels for the data that was loaded before
      * {@link #finishAdding() } was called.
      */
-    protected final List<Integer> classLabels;
+    protected final IntArrayList classLabels;
     /**
      * The information about the class label that would be predicted for a
      * classification data set.
@@ -45,7 +44,7 @@ public abstract class ClassificationTextDataLoader extends TextDataLoader {
      */
     public ClassificationTextDataLoader(Tokenizer tokenizer, WordWeighting weighting) {
         super(tokenizer, weighting);
-        classLabels = new IntList();
+        classLabels = new IntArrayList();
     }
 
     /**

@@ -3,8 +3,9 @@ package com.jstarcraft.ai.jsat.classifiers;
 
 import java.util.Collections;
 
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * A base implementation of the UpdateableClassifier.
@@ -80,7 +81,7 @@ public abstract class BaseUpdateableClassifier implements UpdateableClassifier {
         if (epochs < 1)
             throw new IllegalArgumentException("epochs must be positive");
         toTrain.setUp(dataSet.getCategories(), dataSet.getNumNumericalVars(), dataSet.getPredicting());
-        IntList randomOrder = new IntList(dataSet.size());
+        IntArrayList randomOrder = new IntArrayList(dataSet.size());
         ListUtils.addRange(randomOrder, 0, dataSet.size(), 1);
         for (int epoch = 0; epoch < epochs; epoch++) {
             Collections.shuffle(randomOrder);

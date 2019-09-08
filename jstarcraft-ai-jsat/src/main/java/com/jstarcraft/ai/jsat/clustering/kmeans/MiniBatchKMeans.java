@@ -12,10 +12,11 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.TrainableDistanceMetric;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Implements the mini-batch algorithms for k-means. This is a stochastic
@@ -235,8 +236,8 @@ public class MiniBatchKMeans extends KClustererBase {
          * Store the indices of the sampled points instead of sampling, that way we can
          * use the distance acceleration cache.
          */
-        final List<Integer> M = new IntList(usedBatchSize);
-        final List<Integer> allIndx = new IntList(source.size());
+        final IntArrayList M = new IntArrayList(usedBatchSize);
+        final IntArrayList allIndx = new IntArrayList(source.size());
         ListUtils.addRange(allIndx, 0, source.size(), 1);
         final int[] nearestCenter = new int[usedBatchSize];
 

@@ -26,10 +26,12 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.DefaultVectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class implements the Local Outlier Factor (LOF) algorithm for outlier
@@ -88,8 +90,8 @@ public class LOF implements Outlier {
 
         int N = X.size();
         k_distance = new double[N];
-        List<List<Integer>> all_knn = new ArrayList<>();
-        List<List<Double>> all_knn_dists = new ArrayList<>();
+        List<IntList> all_knn = new ArrayList<>();
+        List<DoubleList> all_knn_dists = new ArrayList<>();
 
         vc.search(X, minPnts + 1, all_knn, all_knn_dists, parallel);// +1 to avoid self distance
 
@@ -122,7 +124,7 @@ public class LOF implements Outlier {
 
     @Override
     public double score(DataPoint x) {
-        IntList knn = new IntList(minPnts);
+        IntArrayList knn = new IntArrayList(minPnts);
         DoubleArrayList dists = new DoubleArrayList(minPnts);
 
         vc.search(x.getNumericalValues(), minPnts, knn, dists);

@@ -32,10 +32,12 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -85,7 +87,7 @@ public class DualTreeTest {
         double max_radius = 0.2;
 
         for (int i = 0; i < B.size(); i++) {
-            List<Integer> nn = new IntList();
+            IntArrayList nn = new IntArrayList();
             DoubleArrayList dd = new DoubleArrayList();
 
             A.search(B.get(i), max_radius, nn, dd);
@@ -114,8 +116,8 @@ public class DualTreeTest {
 
                 B_dt.build(B);
 
-                List<List<Integer>> nn_found = new ArrayList<>();
-                List<List<Double>> dists_found = new ArrayList<>();
+                List<IntList> nn_found = new ArrayList<>();
+                List<DoubleList> dists_found = new ArrayList<>();
 
                 A_dt.search(B_dt, min_radius, max_radius, nn_found, dists_found, parallel);
 
@@ -156,7 +158,7 @@ public class DualTreeTest {
         int K = 9;
 
         for (int i = 0; i < B.size(); i++) {
-            List<Integer> nn = new IntList();
+            IntArrayList nn = new IntArrayList();
             DoubleArrayList dd = new DoubleArrayList();
 
             A.search(B.get(i), K, nn, dd);
@@ -175,8 +177,8 @@ public class DualTreeTest {
                 A_dt.build(A);
                 B_dt.build(B);
 
-                List<List<Integer>> nn_found = new ArrayList<>();
-                List<List<Double>> dists_found = new ArrayList<>();
+                List<IntList> nn_found = new ArrayList<>();
+                List<DoubleList> dists_found = new ArrayList<>();
 
                 A_dt.search(B_dt, K, nn_found, dists_found, parallel);
 

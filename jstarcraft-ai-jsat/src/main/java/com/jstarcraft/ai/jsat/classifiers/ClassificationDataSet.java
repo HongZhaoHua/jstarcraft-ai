@@ -11,8 +11,9 @@ import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.DataStore;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * ClassificationDataSet is a data set meant specifically for classification
@@ -32,7 +33,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
     /**
      * the target values
      */
-    protected IntList targets;
+    protected IntArrayList targets;
 
     /**
      * Creates a new data set for classification problems.
@@ -69,7 +70,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
         this.datapoints.setCategoricalDataInfo(categories);
 
         this.predicting = tmp.getCategoricalData()[predicting];
-        targets = new IntList(data.size());
+        targets = new IntArrayList(data.size());
 
         // Fill up data
         for (DataPoint dp : data) {
@@ -110,7 +111,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
      */
     public ClassificationDataSet(DataStore datapoints, List<Integer> targets, CategoricalData predicting) {
         super(datapoints);
-        this.targets = new IntList(targets);
+        this.targets = new IntArrayList(targets);
         this.predicting = predicting;
     }
 
@@ -125,7 +126,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
         super(data.get(0).getVector().length(), data.get(0).getDataPoint().getCategoricalData());
         this.predicting = predicting;
         categories = CategoricalData.copyOf(data.get(0).getDataPoint().getCategoricalData());
-        targets = new IntList(data.size());
+        targets = new IntArrayList(data.size());
         for (DataPointPair<Integer> dpp : data) {
             datapoints.addDataPoint(dpp.getDataPoint());
             targets.add(dpp.getPair());
@@ -143,7 +144,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
     public ClassificationDataSet(int numerical, CategoricalData[] categories, CategoricalData predicting) {
         super(numerical, categories);
         this.predicting = predicting;
-        targets = new IntList();
+        targets = new IntArrayList();
     }
 
     /**
@@ -253,7 +254,7 @@ public class ClassificationDataSet extends DataSet<ClassificationDataSet> {
             cvList.add(clone);
         }
 
-        IntList rndOrder = new IntList();
+        IntArrayList rndOrder = new IntArrayList();
 
         int curFold = 0;
         for (int c = 0; c < getClassSize(); c++) {

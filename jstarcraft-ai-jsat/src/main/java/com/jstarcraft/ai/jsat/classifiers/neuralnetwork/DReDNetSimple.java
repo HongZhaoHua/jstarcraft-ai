@@ -21,9 +21,10 @@ import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.optimization.stochastic.AdaDelta;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class provides a neural network based on Geoffrey Hinton's <b>D</b>eep
@@ -140,7 +141,7 @@ public class DReDNetSimple implements Classifier, Parameterized {
             sv.set(dataSet.getDataPointCategory(i), 1.0);
             Y.add(sv);
         }
-        IntList randOrder = new IntList(X.size());
+        IntArrayList randOrder = new IntArrayList(X.size());
         ListUtils.addRange(randOrder, 0, X.size(), 1);
         List<Vec> Xmini = new ArrayList<>(batchSize);
         List<Vec> Ymini = new ArrayList<>(batchSize);

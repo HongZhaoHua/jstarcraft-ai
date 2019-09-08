@@ -25,9 +25,9 @@ import com.jstarcraft.ai.jsat.linear.VecPairedComparable;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.ManhattanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -310,7 +310,7 @@ public class E2LSH<V extends Vec> {
                 int hash = hash(l, vecs.get(id));
                 List<Integer> ints = tables.get(l).get(hash);
                 if (ints == null) {
-                    ints = new IntList(3);
+                    ints = new IntArrayList(3);
                     tables.get(l).put(hash, ints);
                 }
                 ints.add(id);

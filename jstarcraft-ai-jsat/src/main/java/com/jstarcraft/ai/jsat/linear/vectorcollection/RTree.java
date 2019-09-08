@@ -18,10 +18,12 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ProbailityMatch;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  *
@@ -33,7 +35,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
     private static final long serialVersionUID = -7067110612346062800L;
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         Rectangle searchSpace = new Rectangle(dim, range, query);
 
         neighbors.clear();
@@ -62,7 +64,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         /**
          * Match up nodes with the minDist from the query to that node
          */
@@ -157,7 +159,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
     private class RNode<V extends Vec> implements Comparable<RNode<V>>, Cloneable {
         List<RNode<V>> children;
         RNode<V> parent;
-        IntList points;
+        IntArrayList points;
         Rectangle bound;
 
         /**
@@ -166,7 +168,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
          * @param points
          */
         public RNode(List<Integer> points) {
-            this.points = new IntList(points);
+            this.points = new IntArrayList(points);
             children = new ArrayList<>();
             bound = Rectangle.contains(points.stream().map(i -> get(i)).collect(Collectors.toList()));
         }
@@ -186,7 +188,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
         }
 
         public RNode() {
-            points = new IntList();
+            points = new IntArrayList();
             children = new ArrayList<>();
             bound = null;
         }
@@ -617,16 +619,16 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
         }
 
         if (toSplit.isLeaf()) {
-            IntList group1 = new IntList(m + 1);
-            IntList group2 = new IntList(m + 1);
+            IntArrayList group1 = new IntArrayList(m + 1);
+            IntArrayList group2 = new IntArrayList(m + 1);
 
-            IntList toAsign = toSplit.points;// toSplit.points will get overwritten
+            IntArrayList toAsign = toSplit.points;// toSplit.points will get overwritten
 
-            group2.add(toAsign.remove(e2));
-            group1.add(toAsign.remove(e1));
+            group2.add(toAsign.removeInt(e2));
+            group1.add(toAsign.removeInt(e1));
 
-            Rectangle rec2 = new Rectangle(get(group2.get(0)));
-            Rectangle rec1 = new Rectangle(get(group1.get(0)));
+            Rectangle rec2 = new Rectangle(get(group2.getInt(0)));
+            Rectangle rec1 = new Rectangle(get(group1.getInt(0)));
 
             while (!toAsign.isEmpty()) {
                 /*
@@ -663,8 +665,8 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
                 int index = -1;// the index we are picking next
                 boolean toG1 = false;// whether it should be placed into group 1 or group 2
                 for (int i = 0; i < toAsign.size(); i++) {
-                    double enlarg1 = rec1.increasedArea(get(toAsign.get(i)));
-                    double enlarg2 = rec2.increasedArea(get(toAsign.get(i)));
+                    double enlarg1 = rec1.increasedArea(get(toAsign.getInt(i)));
+                    double enlarg2 = rec2.increasedArea(get(toAsign.getInt(i)));
                     boolean thisToG1 = enlarg1 < enlarg2;
                     double enlarg = Math.min(enlarg1, enlarg2);
 
@@ -675,7 +677,7 @@ public class RTree<V extends Vec> implements IncrementalCollection<V> {
                     }
                 }
                 // Place it
-                (toG1 ? group1 : group2).add(toAsign.remove(index));
+                (toG1 ? group1 : group2).add(toAsign.removeInt(index));
             }
 
             toSplit.points = group1;

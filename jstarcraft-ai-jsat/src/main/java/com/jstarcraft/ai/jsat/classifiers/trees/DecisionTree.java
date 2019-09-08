@@ -25,12 +25,12 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.utils.FakeExecutor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
@@ -562,7 +562,7 @@ public class DecisionTree implements Classifier, Regressor, Parameterized, TreeL
 
         @Override
         public Collection<Integer> featuresUsed() {
-            IntList used = new IntList(1);
+            IntArrayList used = new IntArrayList(1);
             used.add(stump.getSplittingAttribute());
             return used;
         }

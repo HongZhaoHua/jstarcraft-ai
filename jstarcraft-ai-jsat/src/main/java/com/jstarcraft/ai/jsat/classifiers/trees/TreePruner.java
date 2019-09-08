@@ -6,7 +6,8 @@ import java.util.List;
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 import com.jstarcraft.ai.jsat.math.SpecialMath;
-import com.jstarcraft.ai.jsat.utils.IntList;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Provides post-pruning algorithms for any decision tree that can be altered
@@ -89,7 +90,7 @@ public class TreePruner {
             // path
             int numSplits = current.childrenCount();
             List<ClassificationDataSet> splits = new ArrayList<>(numSplits);
-            IntList hadMissing = new IntList();
+            IntArrayList hadMissing = new IntArrayList();
             double[] fracs = new double[numSplits];
             double wSum = 0;
 
@@ -171,7 +172,7 @@ public class TreePruner {
             return computeBinomialUpperBound(N, alpha, errors);
         }
         List<ClassificationDataSet> splitSet = new ArrayList<>(current.childrenCount());
-        IntList hadMissing = new IntList();
+        IntArrayList hadMissing = new IntArrayList();
         for (int i = 0; i < current.childrenCount(); i++)
             splitSet.add(testSet.emptyClone());
 

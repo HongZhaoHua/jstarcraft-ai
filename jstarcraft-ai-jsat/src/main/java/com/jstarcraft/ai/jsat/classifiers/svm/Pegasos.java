@@ -17,8 +17,9 @@ import com.jstarcraft.ai.jsat.linear.ScaledVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.VecWithNorm;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Implements the linear kernel mini-batch version of the Pegasos SVM
@@ -244,8 +245,8 @@ public class Pegasos implements BinaryScoreClassifier, Parameterized, SingleWeig
         w = new ScaledVector(w);
         bias = 0;
 
-        IntList miniBatch = new IntList(batchSize);
-        IntList randOrder = new IntList(m);
+        IntArrayList miniBatch = new IntArrayList(batchSize);
+        IntArrayList randOrder = new IntArrayList(m);
         ListUtils.addRange(randOrder, 0, m, 1);
 
         int t = 0;

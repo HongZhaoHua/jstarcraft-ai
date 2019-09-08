@@ -17,7 +17,6 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
@@ -26,6 +25,8 @@ import com.jstarcraft.core.utility.Double2IntegerKeyValue;
 import it.unimi.dsi.fastutil.booleans.BooleanArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * Provides a simplified implementation of Vantage Point Trees, as described in
@@ -202,7 +203,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         List<Double> qi = dm.getQueryInfo(query);
         root.searchRange(VecPaired.extractTrueVec(query), range, neighbors, distances, 0.0, qi);
 
@@ -212,7 +213,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         BoundedSortedList<IndexDistPair> boundedList = new BoundedSortedList<>(numNeighbors, numNeighbors);
 
         List<Double> qi = dm.getQueryInfo(query);
@@ -544,7 +545,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
                 } else// we are poping up the search patch
                 {
                     VPNode node = curNode_stack.pop();// pop, we are defintly done with this node after
-                    x = distToParrent_stack.pop();
+                    x = distToParrent_stack.popDouble();
                     double tau = list.get(list.size() - 1).getDist();
                     boolean finishLeft = search_left_stack.removeBoolean(search_left_stack.size() - 1);
 
@@ -730,14 +731,14 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
         /**
          * The index in {@link #allVecs} for each data point stored in this Leaf node
          */
-        IntList points;
+        IntArrayList points;
         /**
          * The distance of each point in this leaf to the parent node we came from.
          */
         DoubleArrayList bounds;
 
         public VPLeaf(List<Double2IntegerKeyValue> points) {
-            this.points = new IntList(points.size());
+            this.points = new IntArrayList(points.size());
             this.bounds = new DoubleArrayList(points.size());
             for (int i = 0; i < points.size(); i++) {
                 this.points.add(points.get(i).getValue());
@@ -747,7 +748,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
 
         public VPLeaf(VPLeaf toCopy) {
             this.bounds = new DoubleArrayList(toCopy.bounds);
-            this.points = new IntList(toCopy.points);
+            this.points = new IntArrayList(toCopy.points);
         }
 
         @Override

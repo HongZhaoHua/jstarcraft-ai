@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 import com.jstarcraft.ai.jsat.DataSet;
 import com.jstarcraft.ai.jsat.classifiers.DataPoint;
@@ -33,7 +34,6 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.SystemInfo;
 import com.jstarcraft.ai.jsat.utils.concurrent.AtomicDouble;
@@ -43,6 +43,8 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
 import it.unimi.dsi.fastutil.ints.Int2DoubleArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2DoubleMap;
 import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class implements Hierarchical Agglomerative Clustering via the Nearest
@@ -196,11 +198,11 @@ public class NNChainHAC implements KClusterer {
          * Keeps track of which index was removed from the list due to being merged at
          * the given point
          */
-        IntList merge_removed = new IntList(N);
+        IntArrayList merge_removed = new IntArrayList(N);
         /**
          * Keeps track of which index was kept and was in the merge at the given point
          */
-        IntList merge_kept = new IntList(N);
+        IntArrayList merge_kept = new IntArrayList(N);
         /**
          * The number of items in the cluster denoted at the given index
          */
@@ -213,7 +215,7 @@ public class NNChainHAC implements KClusterer {
         double[] mergedDistance = new double[N - 1];
         int L_pos = 0;
 
-        final IntList S = new IntList(N);
+        final IntArrayList S = new IntArrayList(N);
         ListUtils.addRange(S, 0, N, 1);
 
         final List<Int2DoubleMap> dist_map = new ArrayList<>(N);
@@ -334,7 +336,7 @@ public class NNChainHAC implements KClusterer {
             final int a_ = a;
             final int b_ = b;
             final double dist_ab_ = dist_ab;
-            ParallelUtils.streamP(S.streamInts(), !singleThread).forEach(x -> {
+            ParallelUtils.streamP(IntStream.of(S.elements()).limit(S.size()), !singleThread).forEach(x -> {
                 double d_ax = getDist(a_, x, size, vecs, cache, dist_map);
                 double d_bx = getDist(b_, x, size, vecs, cache, dist_map);
                 double d_xn = distMeasure.dissimilarity(size_a, size_b, size[x], dist_ab_, d_ax, d_bx);

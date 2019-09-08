@@ -17,9 +17,10 @@ import com.jstarcraft.ai.jsat.distributions.kernels.KernelTrick;
 import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * An implementation of Conservative Stochastic Kernel Logistic Regression. This
@@ -250,7 +251,7 @@ public class CSKLRBatch extends SupportVectorLearner implements Parameterized, C
         T = 0;
         Random rand = RandomUtil.getRandom();
 
-        IntList sampleOrder = new IntList(N);
+        IntArrayList sampleOrder = new IntArrayList(N);
         ListUtils.addRange(sampleOrder, 0, N, 1);
 
         setCacheMode(getCacheMode());// Initiates the cahce

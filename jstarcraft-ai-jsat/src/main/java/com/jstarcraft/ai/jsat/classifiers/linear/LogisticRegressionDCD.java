@@ -17,8 +17,9 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.lossfunctions.LogisticLoss;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This provides an implementation of regularized logistic regression using Dual
@@ -221,7 +222,7 @@ public class LogisticRegressionDCD implements Classifier, Parameterized, SingleW
                 bias += alpha[0] * y[i];
         }
 
-        IntList permutation = new IntList(N);
+        IntArrayList permutation = new IntArrayList(N);
         ListUtils.addRange(permutation, 0, N, 1);
 
         for (int iter = 0; iter < maxIterations; iter++) {

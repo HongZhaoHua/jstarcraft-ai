@@ -11,8 +11,9 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.decayrates.DecayRate;
 import com.jstarcraft.ai.jsat.math.decayrates.NoDecay;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * A Stochastic implementation of Ridge Regression. Ridge Regression is
@@ -215,7 +216,7 @@ public class StochasticRidgeRegression implements Regressor, Parameterized, Sing
         int batch = Math.min(batchSize, dataSet.size());
         w = new DenseVector(dataSet.getNumNumericalVars());
 
-        IntList sample = new IntList(dataSet.size());
+        IntArrayList sample = new IntArrayList(dataSet.size());
         ListUtils.addRange(sample, 0, dataSet.size(), 1);
 
         // Time and last time used to lazy update the parameters that do not get touched

@@ -30,10 +30,10 @@ import org.junit.Test;
 import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  *
@@ -80,10 +80,10 @@ public class BallTreeTest {
                         collection0.build(parallel, vecCol);
                         collection0 = collection0.clone();
 
-                        IntList trueNN = new IntList();
+                        IntArrayList trueNN = new IntArrayList();
                         DoubleArrayList trueNN_dists = new DoubleArrayList();
 
-                        IntList foundNN = new IntList();
+                        IntArrayList foundNN = new IntArrayList();
                         DoubleArrayList foundNN_dists = new DoubleArrayList();
 
                         for (int iters = 0; iters < 10; iters++)
@@ -127,10 +127,10 @@ public class BallTreeTest {
                         collection0.build(parallel, vecCol);
                         collection0 = collection0.clone();
 
-                        IntList trueNN = new IntList();
+                        IntArrayList trueNN = new IntArrayList();
                         DoubleArrayList trueNN_dists = new DoubleArrayList();
 
-                        IntList foundNN = new IntList();
+                        IntArrayList foundNN = new IntArrayList();
                         DoubleArrayList foundNN_dists = new DoubleArrayList();
 
                         for (int iters = 0; iters < 10; iters++)
@@ -171,10 +171,10 @@ public class BallTreeTest {
                     for (Vec v : vecCol)
                         collection0.insert(v);
 
-                    IntList trueNN = new IntList();
+                    IntArrayList trueNN = new IntArrayList();
                     DoubleArrayList trueNN_dists = new DoubleArrayList();
 
-                    IntList foundNN = new IntList();
+                    IntArrayList foundNN = new IntArrayList();
                     DoubleArrayList foundNN_dists = new DoubleArrayList();
                     for (int iters = 0; iters < 10; iters++)
                         for (int neighbours : new int[] { 1, 2, 5, 10, 20 }) {

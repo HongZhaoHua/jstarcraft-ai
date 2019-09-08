@@ -13,10 +13,11 @@ import com.jstarcraft.ai.jsat.math.Function1D;
 import com.jstarcraft.ai.jsat.math.rootfinding.RootFinder;
 import com.jstarcraft.ai.jsat.math.rootfinding.Zeroin;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
+import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * An implementation of Stochastic Gradient Boosting (SGB) for the Squared Error
@@ -249,7 +250,7 @@ public class StochasticGradientBoosting implements Regressor, Parameterized {
         final int randSampleSize = (int) Math.round(resids.size() * trainingProportion);
         final List<DataPointPair<Double>> randSampleList = new ArrayList<>(randSampleSize);
         final Random rand = RandomUtil.getRandom();
-        IntList randOrder = IntList.range(resids.size());
+        IntList randOrder = ListUtils.range(0, resids.size());
 
         for (int iter = 0; iter < maxIterations; iter++) {
             final double lastCoef = coef.getDouble(iter);

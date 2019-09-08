@@ -9,6 +9,8 @@ import java.util.List;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleLists;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * The index table provides a way of accessing the sorted view of an array or
@@ -60,7 +62,7 @@ public class IndexTable implements Serializable {
      * @param size the size of the index table to create
      */
     public IndexTable(int size) {
-        index = new IntList(size);
+        index = new IntArrayList(size);
         ListUtils.addRange(index, 0, size, 1);
     }
 
@@ -81,7 +83,7 @@ public class IndexTable implements Serializable {
      * @param array the array to create an index table for
      */
     public <T extends Comparable<T>> IndexTable(T[] array) {
-        index = new IntList(array.length);
+        index = new IntArrayList(array.length);
         ListUtils.addRange(index, 0, array.length, 1);
         Collections.sort(index, new IndexViewCompG(array));
     }
@@ -104,7 +106,7 @@ public class IndexTable implements Serializable {
      * @param comparator the comparator to determined the sorted order
      */
     public <T> IndexTable(List<T> list, Comparator<T> comparator) {
-        index = new IntList(list.size());
+        index = new IntArrayList(list.size());
         ListUtils.addRange(index, 0, list.size(), 1);
         sort(list, comparator);
     }
@@ -284,7 +286,7 @@ public class IndexTable implements Serializable {
     public void apply(int[] target) {
         // use DoubleList view b/d we are only using set ops, so we wont run into an
         // issue of re-allocating the array
-        apply(IntList.view(target, target.length), new IntList(target.length));
+        apply(IntArrayList.wrap(target, target.length), new IntArrayList(target.length));
     }
 
     /**

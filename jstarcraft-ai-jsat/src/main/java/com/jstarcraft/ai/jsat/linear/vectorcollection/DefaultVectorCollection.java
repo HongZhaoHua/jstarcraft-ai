@@ -23,6 +23,7 @@ import com.jstarcraft.ai.jsat.linear.distancemetrics.DistanceMetric;
 import com.jstarcraft.ai.jsat.linear.distancemetrics.EuclideanDistance;
 
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * This class is a generic wrapper for the Vector Collection objects within
@@ -84,12 +85,12 @@ public class DefaultVectorCollection<V extends Vec> implements VectorCollection<
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         base.search(query, range, neighbors, distances);
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         base.search(query, numNeighbors, neighbors, distances);
     }
 

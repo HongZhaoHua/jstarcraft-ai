@@ -18,6 +18,9 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
+import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntList;
+
 /**
  * A density-based algorithm for discovering clusters in large spatial databases
  * with noise (1996) by Martin Ester , Hans-peter Kriegel , Jörg S , Xiaowei Xu
@@ -100,8 +103,8 @@ public class DBSCAN extends ClustererBase {
         TrainableDistanceMetric.trainIfNeeded(dm, dataSet, parallel);
         vc.build(parallel, getVecIndexPairs(dataSet), dm);
 
-        List<List<Integer>> neighbors = new ArrayList<>();
-        List<List<Double>> distances = new ArrayList<>();
+        List<IntList> neighbors = new ArrayList<>();
+        List<DoubleList> distances = new ArrayList<>();
         vc.search(vc, minPts + 1, neighbors, distances, parallel);
 
         OnLineStatistics stats = ParallelUtils.run(parallel, dataSet.size(), (start, end) -> {
@@ -147,8 +150,8 @@ public class DBSCAN extends ClustererBase {
         Arrays.fill(pointCats, UNCLASSIFIED);
 
         vc.build(parallel, getVecIndexPairs(dataSet), dm);
-        List<List<Integer>> neighbors = new ArrayList<>();
-        List<List<Double>> distances = new ArrayList<>();
+        List<IntList> neighbors = new ArrayList<>();
+        List<DoubleList> distances = new ArrayList<>();
         vc.search(vc, 0, eps, neighbors, distances, parallel);
 
         int curClusterID = 0;
@@ -175,7 +178,7 @@ public class DBSCAN extends ClustererBase {
      * @return true if a cluster was expanded, false if the point was marked as
      *         noise
      */
-    private boolean expandCluster(int[] pointCats, DataSet dataSet, int point, int clId, double eps, int minPts, List<List<Integer>> neighbors) {
+    private boolean expandCluster(int[] pointCats, DataSet dataSet, int point, int clId, double eps, int minPts, List<IntList> neighbors) {
         List<Integer> seeds = neighbors.get(point);
 
         if (seeds.size() < minPts)// no core point

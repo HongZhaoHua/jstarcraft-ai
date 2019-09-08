@@ -38,12 +38,13 @@ import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollection;
 import com.jstarcraft.ai.jsat.linear.vectorcollection.VectorCollectionUtils;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.utils.FibHeap;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.Tuple3;
 import com.jstarcraft.ai.jsat.utils.UnionFind;
 import com.jstarcraft.core.utility.Integer2IntegerKeyValue;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 
 /**
  * HDBSCAN is a density based clustering algorithm that is an improvement over
@@ -303,9 +304,9 @@ public class HDBSCAN implements Clusterer, Parameterized {
         edgeQ.addAll(mst_edges);
 
         // everyone starts in their own cluster!
-        List<List<Integer>> currentGroups = new ArrayList<>();
+        List<IntList> currentGroups = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            IntList il = new IntList(1);
+            IntArrayList il = new IntArrayList(1);
             il.add(i);
             currentGroups.add(il);
         }
@@ -381,7 +382,7 @@ public class HDBSCAN implements Clusterer, Parameterized {
 
                 // replace with new object so that old references in cluster_options are not
                 // altered further
-                currentGroups.set(mergedClust, new IntList(currentGroups.get(mergedClust)));
+                currentGroups.set(mergedClust, new IntArrayList(currentGroups.get(mergedClust)));
 
                 cluster_options.add(currentGroups.get(mergedClust));
                 DoubleArrayList dl = new DoubleArrayList(new_size);

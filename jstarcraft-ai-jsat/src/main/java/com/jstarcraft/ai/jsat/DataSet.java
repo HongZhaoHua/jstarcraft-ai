@@ -27,10 +27,11 @@ import com.jstarcraft.ai.jsat.linear.SparseMatrix;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This is the base class for representing a data set. A data set contains
@@ -482,7 +483,7 @@ public abstract class DataSet<Type extends DataSet> {
      *         features dropped
      */
     public Type getMissingDropped() {
-        List<Integer> hasNoMissing = new IntList();
+        IntArrayList hasNoMissing = new IntArrayList();
         for (int i = 0; i < size(); i++) {
             DataPoint dp = getDataPoint(i);
             boolean missing = dp.getNumericalValues().countNaNs() > 0;
@@ -508,7 +509,7 @@ public abstract class DataSet<Type extends DataSet> {
     public List<Type> randomSplit(Random rand, double... splits) {
         if (splits.length < 1)
             throw new IllegalArgumentException("Input array of split fractions must be non-empty");
-        IntList randOrder = new IntList(size());
+        IntArrayList randOrder = new IntArrayList(size());
         ListUtils.addRange(randOrder, 0, size(), 1);
         Collections.shuffle(randOrder, rand);
 

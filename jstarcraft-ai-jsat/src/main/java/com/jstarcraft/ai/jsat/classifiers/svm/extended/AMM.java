@@ -6,9 +6,10 @@ import java.util.Random;
 
 import com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This is the batch variant of the Adaptive Multi-Hyperplane Machine (AMM)
@@ -113,7 +114,7 @@ public class AMM extends OnlineAMM {
 
     @Override
     public void train(ClassificationDataSet dataSet) {
-        IntList randOrder = new IntList(dataSet.size());
+        IntArrayList randOrder = new IntArrayList(dataSet.size());
         ListUtils.addRange(randOrder, 0, dataSet.size(), 1);
         Random rand = RandomUtil.getRandom();
 

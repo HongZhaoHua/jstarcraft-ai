@@ -14,11 +14,11 @@ import com.jstarcraft.ai.jsat.linear.SubMatrix;
 import com.jstarcraft.ai.jsat.linear.Vec;
 import com.jstarcraft.ai.jsat.parameters.Parameter.ParameterHolder;
 import com.jstarcraft.ai.jsat.parameters.Parameterized;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Provides an implementation of the Kernel Recursive Least Squares algorithm.
@@ -154,7 +154,7 @@ public class KernelRLS implements UpdateableRegressor, Parameterized {
     @Override
     public void train(RegressionDataSet dataSet) {
         setUp(dataSet.getCategories(), dataSet.getNumNumericalVars());
-        IntList randOrder = new IntList(dataSet.size());
+        IntArrayList randOrder = new IntArrayList(dataSet.size());
         ListUtils.addRange(randOrder, 0, dataSet.size(), 1);
         for (int i : randOrder)
             update(dataSet.getDataPoint(i), dataSet.getWeight(i), dataSet.getTargetValue(i));

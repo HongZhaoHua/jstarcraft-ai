@@ -3,7 +3,6 @@ package com.jstarcraft.ai.jsat.classifiers.svm;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -23,9 +22,10 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.regression.WarmRegressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * Implements Dual Coordinate Descent with shrinking (DCDs) training algorithms
@@ -317,7 +317,7 @@ public class DCDs implements BinaryScoreClassifier, Regressor, Parameterized, Si
         }
         w = new DenseVector(vecs[0].length());
 
-        List<Integer> A = new IntList(vecs.length);
+        IntArrayList A = new IntArrayList(vecs.length);
         ListUtils.addRange(A, 0, vecs.length, 1);
 
         if (warmSolution != null) {
@@ -507,7 +507,7 @@ public class DCDs implements BinaryScoreClassifier, Regressor, Parameterized, Si
         }
         w = new DenseVector(vecs[0].length());
 
-        IntList activeSet = new IntList(2 * vecs.length);
+        IntArrayList activeSet = new IntArrayList(2 * vecs.length);
         ListUtils.addRange(activeSet, 0, vecs.length, 1);
 
         if (warmSolution != null) {

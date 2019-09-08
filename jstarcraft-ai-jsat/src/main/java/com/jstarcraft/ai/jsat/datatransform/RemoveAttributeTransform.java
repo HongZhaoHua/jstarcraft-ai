@@ -3,7 +3,6 @@ package com.jstarcraft.ai.jsat.datatransform;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import com.jstarcraft.ai.jsat.DataSet;
@@ -13,8 +12,10 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
 import com.jstarcraft.ai.jsat.linear.IndexValue;
 import com.jstarcraft.ai.jsat.linear.SparseVector;
 import com.jstarcraft.ai.jsat.linear.Vec;
-import com.jstarcraft.ai.jsat.utils.IntList;
 
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import it.unimi.dsi.fastutil.ints.IntLists;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 
@@ -90,8 +91,8 @@ public class RemoveAttributeTransform implements DataTransform {
      * 
      * @return the numeric indices that are not removed by this transform
      */
-    public List<Integer> getKeptNumeric() {
-        return IntList.unmodifiableView(numIndexMap, numIndexMap.length);
+    public IntList getKeptNumeric() {
+        return IntLists.unmodifiable(IntArrayList.wrap(numIndexMap, numIndexMap.length));
     }
 
     /**
@@ -113,8 +114,8 @@ public class RemoveAttributeTransform implements DataTransform {
      * 
      * @return the nominal indices that are not removed by this transform
      */
-    public List<Integer> getKeptNominal() {
-        return IntList.unmodifiableView(catIndexMap, catIndexMap.length);
+    public IntList getKeptNominal() {
+        return IntLists.unmodifiable(IntArrayList.wrap(catIndexMap, catIndexMap.length));
     }
 
     /**

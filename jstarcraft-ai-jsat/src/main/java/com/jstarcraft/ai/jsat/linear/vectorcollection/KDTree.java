@@ -20,13 +20,14 @@ import com.jstarcraft.ai.jsat.math.FastMath;
 import com.jstarcraft.ai.jsat.math.OnLineStatistics;
 import com.jstarcraft.ai.jsat.utils.BoundedSortedList;
 import com.jstarcraft.ai.jsat.utils.IndexTable;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.ModifiableCountDownLatch;
 import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
 import it.unimi.dsi.fastutil.doubles.DoubleList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 
 /**
@@ -188,7 +189,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
         this.size = vecs.size();
         allVecs = vecs = new ArrayList<>(vecs);// copy to avoid altering the input set
         distCache = distanceMetric.getAccelerationCache(vecs, parallel);
-        List<Integer> vecIndices = new IntList(size);
+        IntArrayList vecIndices = new IntArrayList(size);
         ListUtils.addRange(vecIndices, 0, size, 1);
 
         if (!parallel)
@@ -212,7 +213,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
             allVecs = new ArrayList<>();
             distCache = distanceMetric.getAccelerationCache(allVecs);
             this.size = 0;
-            this.root = new KDLeaf(0, new IntList());
+            this.root = new KDLeaf(0, new IntArrayList());
         }
         int indx = size++;
         allVecs.add(x);
@@ -220,7 +221,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
             distCache.addAll(distanceMetric.getQueryInfo(x));
 
         if (root.insert(indx))
-            root = buildTree(IntList.range(size), 0, null, null);
+            root = buildTree(ListUtils.range(0, size), 0, null, null);
     }
 
     private class KDNode implements Cloneable, Serializable {
@@ -338,12 +339,12 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
 
         public KDLeaf(int axis, List<Integer> toOwn) {
             super(axis);
-            this.owned = new IntList(toOwn);
+            this.owned = new IntArrayList(toOwn);
         }
 
         public KDLeaf(KDLeaf toCopy) {
             super(toCopy);
-            this.owned = new IntList(toCopy.owned);
+            this.owned = new IntArrayList(toCopy.owned);
         }
 
         @Override
@@ -545,8 +546,8 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
         } else// multi threaded
         {
             mcdl.countUp();
-            IntList data_l = new IntList(data.subList(0, splitIndex + 1));
-            IntList data_r = new IntList(data.subList(splitIndex + 1, data.size()));
+            IntArrayList data_l = new IntArrayList(data.subList(0, splitIndex + 1));
+            IntArrayList data_r = new IntArrayList(data.subList(splitIndex + 1, data.size()));
             // Right side first, it will start running on a different core
             threadpool.submit(() -> {
                 node.setRight(buildTree(data_r, depth + 1, threadpool, mcdl));
@@ -578,7 +579,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
     }
 
     @Override
-    public void search(Vec query, int numNeighbors, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, int numNeighbors, IntList neighbors, DoubleList distances) {
         if (numNeighbors < 1)
             throw new RuntimeException("Invalid number of neighbors to search for");
 
@@ -607,7 +608,7 @@ public class KDTree<V extends Vec> implements IncrementalCollection<V> {
     }
 
     @Override
-    public void search(Vec query, double range, List<Integer> neighbors, List<Double> distances) {
+    public void search(Vec query, double range, IntList neighbors, DoubleList distances) {
         if (range <= 0)
             throw new RuntimeException("Range must be a positive number");
         neighbors.clear();

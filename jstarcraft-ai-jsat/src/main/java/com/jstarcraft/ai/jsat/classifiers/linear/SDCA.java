@@ -45,9 +45,10 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
 import com.jstarcraft.ai.jsat.regression.RegressionDataSet;
 import com.jstarcraft.ai.jsat.regression.Regressor;
 import com.jstarcraft.ai.jsat.regression.WarmRegressor;
-import com.jstarcraft.ai.jsat.utils.IntList;
 import com.jstarcraft.ai.jsat.utils.ListUtils;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  * This class implements the Proximal Stochastic Dual Coordinate Ascent (SDCA)
@@ -449,7 +450,7 @@ public class SDCA implements Classifier, Regressor, Parameterized, SimpleWeightV
 
         double gamma = loss.lipschitz();
 
-        IntList epoch_order = new IntList(N);
+        IntArrayList epoch_order = new IntArrayList(N);
         ListUtils.addRange(epoch_order, 0, N, 1);
 
         epochs_taken = 0;

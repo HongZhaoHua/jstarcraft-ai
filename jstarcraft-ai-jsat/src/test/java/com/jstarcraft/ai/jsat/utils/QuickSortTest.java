@@ -13,9 +13,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.jstarcraft.ai.jsat.utils.IntList;
-import com.jstarcraft.ai.jsat.utils.QuickSort;
 import com.jstarcraft.ai.jsat.utils.random.RandomUtil;
+
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 
 /**
  *
@@ -67,7 +67,7 @@ public class QuickSortTest {
     public void testSortDP() {
         System.out.println("sort");
 
-        IntList ints = new IntList();
+        IntArrayList ints = new IntArrayList();
         Collection<List<?>> paired = new ArrayList<List<?>>();
         paired.add(ints);
         for (int size = 2; size < 10000; size *= 2) {
@@ -91,7 +91,7 @@ public class QuickSortTest {
     public void testSortFP() {
         System.out.println("sort");
 
-        IntList ints = new IntList();
+        IntArrayList ints = new IntArrayList();
         Collection<List<?>> paired = new ArrayList<List<?>>();
         paired.add(ints);
         for (int size = 2; size < 10000; size *= 2) {
