@@ -7,11 +7,15 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
+        ArffConverterTestCase.class,
+
         CsvConverterTestCase.class,
 
-        QueryConverterTestCase.class,
+        JsonConverterTestCase.class,
 
-        JsonConverterTestCase.class })
+        ParquetConverterTestCase.class,
+
+        QueryConverterTestCase.class })
 public class DataConverterTestSuite {
 
 }
