@@ -953,10 +953,10 @@ public class HashMatrix implements MathMatrix, ModemCycle {
 
     @Override
     public Iterator<MatrixScalar> iterator() {
-        return new RandomMatrixIterator();
+        return new HashMatrixIterator();
     }
 
-    private class RandomMatrixIterator implements Iterator<MatrixScalar> {
+    private class HashMatrixIterator implements Iterator<MatrixScalar> {
 
         private Iterator<Entry> iterator = keyValues.long2FloatEntrySet().iterator();
 
