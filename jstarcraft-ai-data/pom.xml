@@ -99,7 +99,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <version>1.0.0-beta3</version> <scope>test</scope> </dependency> -->
+        <!-- <dependency> <groupId>org.nd4j</groupId> <artifactId>nd4j-cuda-9.2-platform</artifactId> <scope>test</scope> </dependency> -->
 
         <dependency>
             <groupId>org.apache.hadoop</groupId>
