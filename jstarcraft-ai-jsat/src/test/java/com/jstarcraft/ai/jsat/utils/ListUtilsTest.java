@@ -4,8 +4,6 @@
  */
 package com.jstarcraft.ai.jsat.utils;
 
-
-
 import java.util.List;
 
 import org.junit.AfterClass;

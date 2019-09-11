@@ -202,8 +202,8 @@ public class KernelPoints {
     /**
      * Computes the dot product between each KernelPoint in this set and the given
      * vector in the kernel space. The results are equivalent to an array and
-     * setting each value using {@link #dot(int, com.jstarcraft.ai.jsat.linear.Vec, java.util.List) }
-     * <br>
+     * setting each value using
+     * {@link #dot(int, com.jstarcraft.ai.jsat.linear.Vec, java.util.List) } <br>
      * This method should be faster than computing the dot products individual since
      * it avoids redundant kernel computations
      * 

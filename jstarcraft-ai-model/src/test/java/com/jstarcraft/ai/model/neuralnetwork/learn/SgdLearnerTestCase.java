@@ -9,17 +9,17 @@ import com.jstarcraft.ai.model.neuralnetwork.learn.SgdLearner;
 
 public class SgdLearnerTestCase extends LearnerTestCase {
 
-	@Override
-	protected GradientUpdater<?> getOldFunction(long	[] shape) {
-		Sgd configuration = new Sgd();
-		GradientUpdater<?> oldFunction = new SgdUpdater(configuration);
-		return oldFunction;
-	}
+    @Override
+    protected GradientUpdater<?> getOldFunction(long[] shape) {
+        Sgd configuration = new Sgd();
+        GradientUpdater<?> oldFunction = new SgdUpdater(configuration);
+        return oldFunction;
+    }
 
-	@Override
-	protected Learner getNewFunction(long[] shape) {
-		Learner newFuction = new SgdLearner();
-		return newFuction;
-	}
+    @Override
+    protected Learner getNewFunction(long[] shape) {
+        Learner newFuction = new SgdLearner();
+        return newFuction;
+    }
 
 }

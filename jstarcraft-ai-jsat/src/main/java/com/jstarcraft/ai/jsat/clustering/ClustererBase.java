@@ -10,8 +10,8 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
 /**
  * A base foundation that provides an implementation of
  * {@link #cluster(com.jstarcraft.ai.jsat.DataSet) } and
- * {@link #cluster(com.jstarcraft.ai.jsat.DataSet, java.util.concurrent.ExecutorService) } using
- * their int array counterparts. <br>
+ * {@link #cluster(com.jstarcraft.ai.jsat.DataSet, java.util.concurrent.ExecutorService) }
+ * using their int array counterparts. <br>
  * <br>
  * By default it is assumed that a cluster does not support weighted data. If
  * this is incorrect, you need to overwrite the {@link #supportsWeightedData() }

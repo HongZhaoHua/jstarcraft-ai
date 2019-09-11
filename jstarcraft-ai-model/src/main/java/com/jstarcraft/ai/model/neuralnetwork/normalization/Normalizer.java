@@ -12,14 +12,14 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  */
 public interface Normalizer {
 
-	public enum Mode {
+    public enum Mode {
 
-		GLOBAL,
+        GLOBAL,
 
-		LOCAL;
+        LOCAL;
 
-	}
+    }
 
-	void normalize(Map<String, MathMatrix> gradients);
+    void normalize(Map<String, MathMatrix> gradients);
 
 }

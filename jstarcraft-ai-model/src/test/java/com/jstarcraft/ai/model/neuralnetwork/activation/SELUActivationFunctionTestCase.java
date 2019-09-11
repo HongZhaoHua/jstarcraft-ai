@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.SELUActivationFunction;
 
 public class SELUActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationSELU();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationSELU();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new SELUActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new SELUActivationFunction();
+    }
 
 }

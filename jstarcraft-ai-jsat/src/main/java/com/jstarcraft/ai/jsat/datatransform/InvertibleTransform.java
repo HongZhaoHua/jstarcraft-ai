@@ -15,8 +15,8 @@ public interface InvertibleTransform extends DataTransform {
 
     /**
      * Applies the inverse or "reverse" transform to approximately undo the effect
-     * of {@link #transform(com.jstarcraft.ai.jsat.classifiers.DataPoint) } to recover an
-     * approximation of the original data point.
+     * of {@link #transform(com.jstarcraft.ai.jsat.classifiers.DataPoint) } to
+     * recover an approximation of the original data point.
      *
      * @param dp the transformed data point
      * @return the original data point, or a reasonable approximation

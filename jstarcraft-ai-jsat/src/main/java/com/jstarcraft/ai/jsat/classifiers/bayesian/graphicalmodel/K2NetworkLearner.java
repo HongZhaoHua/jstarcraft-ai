@@ -18,7 +18,8 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
  * Bayesian Network. When trained, if no network has been specified, the K2
  * algorithm will attempt to learn a network structure. The network structure
  * can also be learned by calling
- * {@link #learnNetwork(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) } directly. <br>
+ * {@link #learnNetwork(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }
+ * directly. <br>
  * <br>
  * Note, that the K2 algorithm attempts to learn a whole network structure, and
  * may learn things that are relevant for the classification task. K2 often does

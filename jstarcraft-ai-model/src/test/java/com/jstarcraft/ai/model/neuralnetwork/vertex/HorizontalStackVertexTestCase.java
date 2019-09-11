@@ -12,25 +12,25 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.HorizontalAtt
 
 public class HorizontalStackVertexTestCase extends VertexTestCase {
 
-	@Override
-	protected INDArray getError() {
-		return Nd4j.linspace(-2.5D, 2.5D, 20).reshape(5, 4);
-	}
+    @Override
+    protected INDArray getError() {
+        return Nd4j.linspace(-2.5D, 2.5D, 20).reshape(5, 4);
+    }
 
-	@Override
-	protected int getSize() {
-		return 2;
-	}
+    @Override
+    protected int getSize() {
+        return 2;
+    }
 
-	@Override
-	protected GraphVertex getOldFunction() {
-		return new MergeVertex(null, "old", 0);
-	}
+    @Override
+    protected GraphVertex getOldFunction() {
+        return new MergeVertex(null, "old", 0);
+    }
 
-	@Override
-	protected Vertex getNewFunction() {
-		MathCache cache = new DenseCache();
-		return new HorizontalAttachVertex("new", cache);
-	}
+    @Override
+    protected Vertex getNewFunction() {
+        MathCache cache = new DenseCache();
+        return new HorizontalAttachVertex("new", cache);
+    }
 
 }

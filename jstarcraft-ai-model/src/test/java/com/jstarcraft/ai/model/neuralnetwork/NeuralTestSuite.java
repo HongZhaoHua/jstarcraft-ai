@@ -13,17 +13,17 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.VertexTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		GraphTestCase.class,
+        GraphTestCase.class,
 
-		ActivationFunctionTestSuite.class,
+        ActivationFunctionTestSuite.class,
 
-		LayerTestSuite.class,
+        LayerTestSuite.class,
 
-		LearnerTestSuite.class,
+        LearnerTestSuite.class,
 
-		LossFunctionTestSuite.class,
+        LossFunctionTestSuite.class,
 
-		VertexTestSuite.class })
+        VertexTestSuite.class })
 public class NeuralTestSuite {
 
 }

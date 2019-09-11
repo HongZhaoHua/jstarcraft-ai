@@ -13,40 +13,40 @@ package com.jstarcraft.ai.modem;
  */
 class ModemData {
 
-	/**
-	 * 类型(格式为JavaType)
-	 */
-	private byte[] keyData;
+    /**
+     * 类型(格式为JavaType)
+     */
+    private byte[] keyData;
 
-	/**
-	 * 内容(格式由ContentCodec决定)
-	 */
-	private byte[] valueData;
+    /**
+     * 内容(格式由ContentCodec决定)
+     */
+    private byte[] valueData;
 
-	/**
-	 * 数量
-	 */
-	private int size;
+    /**
+     * 数量
+     */
+    private int size;
 
-	ModemData() {
-	}
+    ModemData() {
+    }
 
-	ModemData(byte[] keyData, byte[] valueData, int size) {
-		this.keyData = keyData;
-		this.valueData = valueData;
-		this.size = size;
-	}
+    ModemData(byte[] keyData, byte[] valueData, int size) {
+        this.keyData = keyData;
+        this.valueData = valueData;
+        this.size = size;
+    }
 
-	public byte[] getKeyData() {
-		return keyData;
-	}
+    public byte[] getKeyData() {
+        return keyData;
+    }
 
-	public byte[] getValueData() {
-		return valueData;
-	}
+    public byte[] getValueData() {
+        return valueData;
+    }
 
-	public int getSize() {
-		return size;
-	}
+    public int getSize() {
+        return size;
+    }
 
 }

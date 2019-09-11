@@ -37,8 +37,8 @@ public class WeightedEuclideanDistance implements DistanceMetric {
     /**
      * Returns the weight vector used by this object. Altering the returned vector
      * is visible to this object, so there is no need to set it again using
-     * {@link #setWeight(com.jstarcraft.ai.jsat.linear.Vec) }. If you do not want to alter it, you
-     * will need to clone the returned object and modify that.
+     * {@link #setWeight(com.jstarcraft.ai.jsat.linear.Vec) }. If you do not want to
+     * alter it, you will need to clone the returned object and modify that.
      * 
      * @return the weight vector used by this object
      */

@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.TanHActivationFunction;
 
 public class TanHActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationTanH();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationTanH();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new TanHActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new TanHActivationFunction();
+    }
 
 }

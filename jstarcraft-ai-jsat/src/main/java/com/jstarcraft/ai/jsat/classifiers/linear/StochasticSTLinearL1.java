@@ -329,9 +329,10 @@ public abstract class StochasticSTLinearL1 implements Classifier, Regressor, Par
     }
 
     /**
-     * Computes {@link #w}.{@link Vec#dot(com.jstarcraft.ai.jsat.linear.Vec) }<tt>x</tt> and does so
-     * by rescaling <tt>x</tt> as needed automatically and efficiently, even if
-     * <tt>x</tt> is sparse.
+     * Computes
+     * {@link #w}.{@link Vec#dot(com.jstarcraft.ai.jsat.linear.Vec) }<tt>x</tt> and
+     * does so by rescaling <tt>x</tt> as needed automatically and efficiently, even
+     * if <tt>x</tt> is sparse.
      * 
      * @param x the value to compute the dot product with
      * @return the dot produce of w and x with the bias term

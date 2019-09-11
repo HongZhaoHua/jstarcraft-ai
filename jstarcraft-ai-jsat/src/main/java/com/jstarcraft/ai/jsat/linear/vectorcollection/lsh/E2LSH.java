@@ -39,10 +39,11 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
  * returned, and it is possible no points will be returned when the truth is
  * that some data points do exist. <br>
  * <br>
- * Searching is done using the {@link #searchR(com.jstarcraft.ai.jsat.linear.Vec, boolean) }
- * methods. While the set of points returned is approximate, the distance values
- * are exact. This is because no approximate distance is available, so the
- * distances must be computed to remove violators. <br>
+ * Searching is done using the
+ * {@link #searchR(com.jstarcraft.ai.jsat.linear.Vec, boolean) } methods. While
+ * the set of points returned is approximate, the distance values are exact.
+ * This is because no approximate distance is available, so the distances must
+ * be computed to remove violators. <br>
  * <br>
  * LSH may be useful if any of the following apply to your problem<br>
  * <ul>

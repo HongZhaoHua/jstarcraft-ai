@@ -10,11 +10,11 @@ import com.jstarcraft.ai.math.structure.table.TableTestSuite;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		ScalarIteratorTestCase.class,
+        ScalarIteratorTestCase.class,
 
-		MatrixTestSuite.class,
+        MatrixTestSuite.class,
 
-		TableTestSuite.class })
+        TableTestSuite.class })
 public class StructureTestSuite {
 
 }

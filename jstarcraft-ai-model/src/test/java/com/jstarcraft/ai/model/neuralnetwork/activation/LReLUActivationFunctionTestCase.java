@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.LReLUActivationFunction;
 
 public class LReLUActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationLReLU();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationLReLU();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new LReLUActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new LReLUActivationFunction();
+    }
 
 }

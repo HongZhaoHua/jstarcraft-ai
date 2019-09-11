@@ -14,15 +14,15 @@ import com.jstarcraft.ai.model.neuralnetwork.step.StepFunction;
  */
 public interface Optimizer {
 
-	StepFunction getFunction();
+    StepFunction getFunction();
 
-	void doCache(Callable<Float> scorer, Map<String, MathMatrix> gradients, Map<String, MathMatrix> parameters);
+    void doCache(Callable<Float> scorer, Map<String, MathMatrix> gradients, Map<String, MathMatrix> parameters);
 
-	/**
-	 * Calls optimize
-	 * 
-	 * @return whether the convex optimizer converted or not
-	 */
-	boolean optimize(float score);
+    /**
+     * Calls optimize
+     * 
+     * @return whether the convex optimizer converted or not
+     */
+    boolean optimize(float score);
 
 }

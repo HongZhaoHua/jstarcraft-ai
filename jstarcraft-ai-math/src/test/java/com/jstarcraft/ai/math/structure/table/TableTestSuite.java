@@ -7,9 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		DenseTableTestCase.class,
+        DenseTableTestCase.class,
 
-		SparseTableTestCase.class })
+        SparseTableTestCase.class })
 public class TableTestSuite {
 
 }

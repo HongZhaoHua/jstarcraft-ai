@@ -10,27 +10,27 @@ import com.jstarcraft.core.utility.Integer2FloatKeyValue;
  */
 public abstract class AbstractEvaluator<L, R> implements Evaluator<L, R> {
 
-	/**
-	 * 统计
-	 * 
-	 * @param collection
-	 * @param list
-	 * @return
-	 */
-	protected abstract int count(L collection, R list);
+    /**
+     * 统计
+     * 
+     * @param collection
+     * @param list
+     * @return
+     */
+    protected abstract int count(L collection, R list);
 
-	/**
-	 * 测量
-	 * 
-	 * @param collection
-	 * @param list
-	 * @return
-	 */
-	protected abstract float measure(L collection, R list);
+    /**
+     * 测量
+     * 
+     * @param collection
+     * @param list
+     * @return
+     */
+    protected abstract float measure(L collection, R list);
 
-	@Override
+    @Override
     public final Integer2FloatKeyValue evaluate(L collection, R list) {
-		return new Integer2FloatKeyValue(count(collection, list), measure(collection, list));
-	}
+        return new Integer2FloatKeyValue(count(collection, list), measure(collection, list));
+    }
 
 }

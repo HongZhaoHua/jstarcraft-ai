@@ -67,7 +67,7 @@ public class ImputerTest {
 
         SimpleDataSet data = gdg.generateData(10000);
         // remove class label feature
-        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] {0}), IntSets.EMPTY_SET));
+        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] { 0 }), IntSets.EMPTY_SET));
 
         // true mean and median should be 0
         data.applyTransform(new InsertMissingValuesTransform(0.1));
@@ -89,7 +89,7 @@ public class ImputerTest {
         // test categorical features
         data = gdg.generateData(10000);
         // remove class label feature
-        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] {0}), IntSets.EMPTY_SET));
+        data.applyTransform(new RemoveAttributeTransform(data, new IntOpenHashSet(new int[] { 0 }), IntSets.EMPTY_SET));
         // breaking into 3 even sized bins, so the middle bin, indx 1, should be the
         // mode
         data.applyTransform(new NumericalToHistogram(data, 3));

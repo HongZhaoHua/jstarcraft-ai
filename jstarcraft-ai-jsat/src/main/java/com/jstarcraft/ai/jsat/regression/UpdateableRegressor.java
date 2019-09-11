@@ -12,21 +12,25 @@ import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
  * Some Online learners behave differently in when they are updated. The
  * UpdateableRegressor is an online learner that specifically only performs
  * additional learning when a new example is provided via the
- * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) } method. <br>
+ * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) }
+ * method. <br>
  * The standard behavior for an UpdateableRegressor is that the user first calls
  * {@link #train(jsat.regression.RegressionDataSet) } to first train the
- * classifier, or {@link #setUp(com.jstarcraft.ai.jsat.classifiers.CategoricalData[], int) } to
+ * classifier, or
+ * {@link #setUp(com.jstarcraft.ai.jsat.classifiers.CategoricalData[], int) } to
  * prepare for online updates. Once one of these is called, it should then be
- * safe to call {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) } without
- * getting a {@link FailedToFitException}. Some online learners may require one
- * of the train methods to be called first.
+ * safe to call
+ * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) }
+ * without getting a {@link FailedToFitException}. Some online learners may
+ * require one of the train methods to be called first.
  * 
  * @author Edward Raff
  */
 public interface UpdateableRegressor extends Regressor {
     /**
      * Prepares the classifier to begin learning from its
-     * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) } method.
+     * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, double) }
+     * method.
      * 
      * @param categoricalAttributes an array containing the categorical attributes
      *                              that will be in each data point

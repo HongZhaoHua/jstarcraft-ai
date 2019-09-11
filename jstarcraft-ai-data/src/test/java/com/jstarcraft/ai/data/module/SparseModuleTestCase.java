@@ -7,9 +7,9 @@ import com.jstarcraft.core.utility.KeyValue;
 
 public class SparseModuleTestCase extends DataModuleTestCase {
 
-	@Override
-	protected DataModule getDataModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity) {
-		return new SparseModule(moduleName, moduleDefinition, instanceCapacity);
-	}
+    @Override
+    protected DataModule getDataModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity) {
+        return new SparseModule(moduleName, moduleDefinition, instanceCapacity);
+    }
 
 }

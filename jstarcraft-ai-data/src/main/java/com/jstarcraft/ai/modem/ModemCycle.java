@@ -8,14 +8,14 @@ package com.jstarcraft.ai.modem;
  */
 public interface ModemCycle {
 
-	/**
-	 * 在保存之前执行
-	 */
-	void beforeSave();
+    /**
+     * 在保存之前执行
+     */
+    void beforeSave();
 
-	/**
-	 * 在加载之后执行
-	 */
-	void afterLoad();
+    /**
+     * 在加载之后执行
+     */
+    void afterLoad();
 
 }

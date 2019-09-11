@@ -33,8 +33,8 @@ import com.jstarcraft.ai.jsat.parameters.Parameterized;
  * {@link #finalizeModel() finalizing} the model. This prevents the model from
  * being updated further, but reduces classification time. By default, this will
  * be done after a call to
- * {@link #train(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) } but not after
- * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, int) }
+ * {@link #train(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) } but
+ * not after {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, int) }
  * 
  * @author Edward Raff
  */
@@ -128,9 +128,9 @@ public class MultinomialNaiveBayes extends BaseUpdateableClassifier implements P
 
     /**
      * If set {@code true}, the model will be finalized after a call to
-     * {@link #train(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }. This prevents the
-     * model from being updated in an online fashion for an reduction in
-     * classification time.
+     * {@link #train(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }.
+     * This prevents the model from being updated in an online fashion for an
+     * reduction in classification time.
      * 
      * @param finalizeAfterTraining {@code true} to finalize after a call to train,
      *                              {@code false} to keep the model updatable.
@@ -170,7 +170,8 @@ public class MultinomialNaiveBayes extends BaseUpdateableClassifier implements P
 
     /**
      * Finalizes the current model. This prevents the model from being updated
-     * further, causing {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, int) } to throw
+     * further, causing
+     * {@link #update(com.jstarcraft.ai.jsat.classifiers.DataPoint, int) } to throw
      * an exception. This finalization reduces the cost of calling
      * {@link #classify(com.jstarcraft.ai.jsat.classifiers.DataPoint) }
      */

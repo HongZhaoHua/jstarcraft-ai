@@ -10,14 +10,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.MCXENTLossFunction;
 
 public class MCXENTLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossMCXENT();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossMCXENT();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new MCXENTLossFunction(function instanceof SoftMaxActivationFunction);
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new MCXENTLossFunction(function instanceof SoftMaxActivationFunction);
+    }
 
 }

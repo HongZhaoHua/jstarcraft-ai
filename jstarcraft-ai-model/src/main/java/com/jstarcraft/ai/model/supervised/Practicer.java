@@ -10,12 +10,12 @@ import com.jstarcraft.ai.data.DataModule;
  */
 public interface Practicer {
 
-	/**
-	 * 训练
-	 * 
-	 * @param module
-	 * @param contexts
-	 */
-	void practice(DataModule module, DataModule... contexts);
+    /**
+     * 训练
+     * 
+     * @param module
+     * @param contexts
+     */
+    void practice(DataModule module, DataModule... contexts);
 
 }

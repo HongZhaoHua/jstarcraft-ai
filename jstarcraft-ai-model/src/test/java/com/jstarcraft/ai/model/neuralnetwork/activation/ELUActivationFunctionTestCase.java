@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.ELUActivationFunction;
 
 public class ELUActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationELU(0.5F);
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationELU(0.5F);
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new ELUActivationFunction(0.5F);
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new ELUActivationFunction(0.5F);
+    }
 
 }

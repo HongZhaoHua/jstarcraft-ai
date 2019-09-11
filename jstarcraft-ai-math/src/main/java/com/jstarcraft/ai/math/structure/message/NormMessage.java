@@ -16,37 +16,37 @@ import com.jstarcraft.ai.math.structure.message.AccumulationMessage;
  */
 public class NormMessage implements AccumulationMessage<Float> {
 
-	private int power;
+    private int power;
 
-	private float value = 0F;
+    private float value = 0F;
 
-	public NormMessage(int power) {
-		this.power = power;
-	}
+    public NormMessage(int power) {
+        this.power = power;
+    }
 
-	@Override
-	public void attach(MathMessage message) {
-		value += NormMessage.class.cast(message).value;
-	}
+    @Override
+    public void attach(MathMessage message) {
+        value += NormMessage.class.cast(message).value;
+    }
 
-	@Override
-	public MathMessage detach() {
-		MathMessage message = new NormMessage(power);
-		return message;
-	}
+    @Override
+    public MathMessage detach() {
+        MathMessage message = new NormMessage(power);
+        return message;
+    }
 
-	@Override
-	public void accumulateValue(float value) {
-		this.value += Math.pow(Math.abs(value), power);
-	}
+    @Override
+    public void accumulateValue(float value) {
+        this.value += Math.pow(Math.abs(value), power);
+    }
 
-	@Override
-	public Float getValue() {
-		return value;
-	}
+    @Override
+    public Float getValue() {
+        return value;
+    }
 
-	public int getPower() {
-		return power;
-	}
+    public int getPower() {
+        return power;
+    }
 
 }

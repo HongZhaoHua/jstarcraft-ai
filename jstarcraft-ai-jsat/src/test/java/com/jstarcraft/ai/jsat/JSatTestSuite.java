@@ -17,9 +17,9 @@ import com.jstarcraft.ai.jsat.regression.RegressorTestSuite;
         ClassfierTestSuite.class,
 
         ClustererTestSuite.class,
-        
+
         DataTransformTestSuite.class,
-        
+
         DistributionTestSuite.class,
 
         LinearTestSuite.class,

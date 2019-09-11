@@ -14,9 +14,9 @@ import com.jstarcraft.ai.jsat.exceptions.FailedToFitException;
  * mechanism. <br>
  * A transform may or may not require training, it could be fully specified at
  * construction, or learned from the data set. Learning is done via the
- * {@link #fit(com.jstarcraft.ai.jsat.DataSet) fit method}. Many DataTransforms will include a
- * constructor that takes a dataset as a parameter. These transforms will fit
- * the data when constructed, and exist for convenience.
+ * {@link #fit(com.jstarcraft.ai.jsat.DataSet) fit method}. Many DataTransforms
+ * will include a constructor that takes a dataset as a parameter. These
+ * transforms will fit the data when constructed, and exist for convenience.
  *
  * @author Edward Raff
  */

@@ -333,8 +333,8 @@ public class StochasticMultinomialLogisticRegression implements Classifier, Para
     /**
      * Sets the initial learning rate to use for the first epoch. The learning rate
      * will decay according to the
-     * {@link #setLearningRateDecay(com.jstarcraft.ai.jsat.math.decayrates.DecayRate) decay rate} in
-     * use.
+     * {@link #setLearningRateDecay(com.jstarcraft.ai.jsat.math.decayrates.DecayRate)
+     * decay rate} in use.
      * 
      * @param initialLearningRate the initial learning rate to use
      */

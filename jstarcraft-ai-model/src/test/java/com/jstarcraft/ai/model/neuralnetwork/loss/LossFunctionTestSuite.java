@@ -6,36 +6,36 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 损失函数测试集
-		BinaryXENTLossFunctionTestCase.class,
+        // 损失函数测试集
+        BinaryXENTLossFunctionTestCase.class,
 
-		CosineProximityLossFunctionTestCase.class,
+        CosineProximityLossFunctionTestCase.class,
 
-		FMeasureLossFunctionTestCase.class,
+        FMeasureLossFunctionTestCase.class,
 
-		HingeLossFunctionTestCase.class,
+        HingeLossFunctionTestCase.class,
 
-		KLDLossFunctionTestCase.class,
+        KLDLossFunctionTestCase.class,
 
-		L1LossFunctionTestCase.class,
+        L1LossFunctionTestCase.class,
 
-		L2LossFunctionTestCase.class,
+        L2LossFunctionTestCase.class,
 
-		MAELossFunctionTestCase.class,
+        MAELossFunctionTestCase.class,
 
-		MAPELossFunctionTestCase.class,
+        MAPELossFunctionTestCase.class,
 
-		MCXENTLossFunctionTestCase.class,
+        MCXENTLossFunctionTestCase.class,
 
-		MixtureDensityLossFunctionTestCase.class,
+        MixtureDensityLossFunctionTestCase.class,
 
-		MSELossFunctionTestCase.class,
+        MSELossFunctionTestCase.class,
 
-		MSLELossFunctionTestCase.class,
+        MSLELossFunctionTestCase.class,
 
-		PoissonLossFunctionTestCase.class,
+        PoissonLossFunctionTestCase.class,
 
-		SquaredHingeLossFunctionTestCase.class, })
+        SquaredHingeLossFunctionTestCase.class, })
 public class LossFunctionTestSuite {
 
 }

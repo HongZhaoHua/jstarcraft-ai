@@ -204,8 +204,9 @@ public class RegressionModelEvaluation {
      * so desire, and when the same folds will be used multiple times. Doing so
      * allows the algorithms called to take advantage of any potential caching of
      * results based on the data set and avoid all possible excessive memory
-     * movement. (For example, {@link com.jstarcraft.ai.jsat.DataSet#getNumericColumns() } may get
-     * re-used and benefit from its caching)<br>
+     * movement. (For example,
+     * {@link com.jstarcraft.ai.jsat.DataSet#getNumericColumns() } may get re-used
+     * and benefit from its caching)<br>
      * The same behavior of this method can be obtained by calling
      * {@link #evaluateCrossValidation(java.util.List) }.
      *
@@ -330,13 +331,13 @@ public class RegressionModelEvaluation {
     /**
      * Adds a new score object that will be used as part of the evaluation when
      * calling {@link #evaluateCrossValidation(int, java.util.Random) } or
-     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.regression.RegressionDataSet) }. The statistics
-     * for the given score are reset on every call, and the mean / standard
-     * deviation comes from multiple folds in cross validation. <br>
+     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.regression.RegressionDataSet) }.
+     * The statistics for the given score are reset on every call, and the mean /
+     * standard deviation comes from multiple folds in cross validation. <br>
      * <br>
      * The score statistics can be obtained from
-     * {@link #getScoreStats(com.jstarcraft.ai.jsat.regression.evaluation.RegressionScore) } after one
-     * of the evaluation methods have been called.
+     * {@link #getScoreStats(com.jstarcraft.ai.jsat.regression.evaluation.RegressionScore) }
+     * after one of the evaluation methods have been called.
      * 
      * @param scorer the score method to keep track of.
      */
@@ -348,8 +349,8 @@ public class RegressionModelEvaluation {
      * Gets the statistics associated with the given score. If the score is not
      * currently in the model evaluation {@code null} will be returned. The object
      * passed in does not need to be the exact same object passed to
-     * {@link #addScorer(com.jstarcraft.ai.jsat.regression.evaluation.RegressionScore) }, it only
-     * needs to be equal to the object.
+     * {@link #addScorer(com.jstarcraft.ai.jsat.regression.evaluation.RegressionScore) },
+     * it only needs to be equal to the object.
      * 
      * @param score the score type to get the result statistics
      * @return the result statistics for the given score, or {@code null} if the

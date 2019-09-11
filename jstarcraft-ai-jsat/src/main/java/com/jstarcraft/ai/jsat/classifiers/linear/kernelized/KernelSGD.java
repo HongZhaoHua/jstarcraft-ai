@@ -36,7 +36,8 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
  * {@link KernelPoint} and {@link KernelPoints} to support budgeted learning.
  * Following the LinearSGD implementation, whether or not this algorithm
  * supports regression, binary-classification, or multi-class classification is
- * controlled by the {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss function}
+ * controlled by the
+ * {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss function}
  * used. <br>
  * <br>
  * The learning rate decay is not configurable for this implementation, and is

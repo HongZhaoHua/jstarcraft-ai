@@ -5,18 +5,18 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 public class DistributionParameterFactory implements ParameterFactory {
 
-	private Probability<Number> probability;
+    private Probability<Number> probability;
 
-	DistributionParameterFactory() {
-	}
+    DistributionParameterFactory() {
+    }
 
-	public DistributionParameterFactory(Probability<Number> probability) {
-		this.probability = probability;
-	}
+    public DistributionParameterFactory(Probability<Number> probability) {
+        this.probability = probability;
+    }
 
-	@Override
-	public void setValues(MathMatrix matrix) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    public void setValues(MathMatrix matrix) {
+        // TODO Auto-generated method stub
+    }
 
 }

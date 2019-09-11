@@ -31,12 +31,13 @@ import com.jstarcraft.ai.jsat.regression.UpdateableRegressor;
 
 /**
  * LinearSGD learns either a classification or regression problem depending on
- * the {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss function &#x2113;(w,x)}
- * used. The solution attempts to minimize <big>&sum;</big><sub>i</sub>
- * &#x2113;(w,x<sub>i</sub>) + {@link #setLambda0(double)
- * &lambda;<sub>0</sub>}/2 ||w||<sub>2</sub><sup>2</sup> +
- * {@link #setLambda1(double) &lambda;<sub>1</sub>} ||w||<sub>1</sub>, and is
- * trained by Stochastic Gradient Descent. <br>
+ * the {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss
+ * function &#x2113;(w,x)} used. The solution attempts to minimize
+ * <big>&sum;</big><sub>i</sub> &#x2113;(w,x<sub>i</sub>) +
+ * {@link #setLambda0(double) &lambda;<sub>0</sub>}/2
+ * ||w||<sub>2</sub><sup>2</sup> + {@link #setLambda1(double)
+ * &lambda;<sub>1</sub>} ||w||<sub>1</sub>, and is trained by Stochastic
+ * Gradient Descent. <br>
  * <br>
  * <br>
  * NOTE: To support L<sub>1</sub> regularization with sparse results and online

@@ -12,6 +12,6 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  */
 public interface StepFunction {
 
-	void step(float step, Map<String, MathMatrix> directions, Map<String, MathMatrix> parameters);
+    void step(float step, Map<String, MathMatrix> directions, Map<String, MathMatrix> parameters);
 
 }

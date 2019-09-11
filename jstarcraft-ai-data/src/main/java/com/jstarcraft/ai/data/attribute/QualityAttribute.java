@@ -11,14 +11,14 @@ import com.jstarcraft.ai.data.DataAttribute;
  */
 public interface QualityAttribute<T extends Comparable<T>> extends DataAttribute<T> {
 
-	/**
-	 * 转换属性值
-	 * 
-	 * @param data
-	 * @return
-	 */
-	int convertData(T data);
+    /**
+     * 转换属性值
+     * 
+     * @param data
+     * @return
+     */
+    int convertData(T data);
 
-	int getSize();
+    int getSize();
 
 }

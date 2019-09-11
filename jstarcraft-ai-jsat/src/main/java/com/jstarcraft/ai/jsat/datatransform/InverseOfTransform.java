@@ -27,8 +27,8 @@ public class InverseOfTransform implements DataTransform {
 
     /**
      * Creates a new transform that uses the
-     * {@link InvertibleTransform#transform(com.jstarcraft.ai.jsat.classifiers.DataPoint) transform}
-     * of the given transform
+     * {@link InvertibleTransform#transform(com.jstarcraft.ai.jsat.classifiers.DataPoint)
+     * transform} of the given transform
      * 
      * @param transform the transform to use the inverse function of
      */

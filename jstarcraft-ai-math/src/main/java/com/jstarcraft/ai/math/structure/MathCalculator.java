@@ -10,26 +10,26 @@ import java.util.concurrent.Semaphore;
  */
 public enum MathCalculator {
 
-	/** 串行 */
-	SERIAL,
+    /** 串行 */
+    SERIAL,
 
-	/** 并行 */
-	PARALLEL;
+    /** 并行 */
+    PARALLEL;
 
-	private final static ThreadLocal<Semaphore> semaphores = new ThreadLocal<>();
+    private final static ThreadLocal<Semaphore> semaphores = new ThreadLocal<>();
 
-	/**
-	 * 获取信号量
-	 * 
-	 * @return
-	 */
-	public static Semaphore getSemaphore() {
-		Semaphore semaphore = semaphores.get();
-		if (semaphore == null) {
-			semaphore = new Semaphore(0);
-			semaphores.set(semaphore);
-		}
-		return semaphore;
-	}
+    /**
+     * 获取信号量
+     * 
+     * @return
+     */
+    public static Semaphore getSemaphore() {
+        Semaphore semaphore = semaphores.get();
+        if (semaphore == null) {
+            semaphore = new Semaphore(0);
+            semaphores.set(semaphore);
+        }
+        return semaphore;
+    }
 
 }

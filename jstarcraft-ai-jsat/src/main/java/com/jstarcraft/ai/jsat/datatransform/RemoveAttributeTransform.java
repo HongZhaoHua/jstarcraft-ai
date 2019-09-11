@@ -44,8 +44,8 @@ public class RemoveAttributeTransform implements DataTransform {
     /**
      * Empty constructor that may be used by extending classes. Transforms that
      * extend this will need to call
-     * {@link #setUp(com.jstarcraft.ai.jsat.DataSet, java.util.Set, java.util.Set) } once the
-     * attributes to remove have been selected
+     * {@link #setUp(com.jstarcraft.ai.jsat.DataSet, java.util.Set, java.util.Set) }
+     * once the attributes to remove have been selected
      */
     protected RemoveAttributeTransform() {
 
@@ -53,7 +53,8 @@ public class RemoveAttributeTransform implements DataTransform {
 
     /**
      * Creates a new transform for removing specified features from a data set.
-     * Needs to still call {@link #fit(com.jstarcraft.ai.jsat.DataSet) } before ready to be used.
+     * Needs to still call {@link #fit(com.jstarcraft.ai.jsat.DataSet) } before
+     * ready to be used.
      *
      * @param categoricalToRemove the set of categorical attributes to remove, in
      *                            the rage of [0,

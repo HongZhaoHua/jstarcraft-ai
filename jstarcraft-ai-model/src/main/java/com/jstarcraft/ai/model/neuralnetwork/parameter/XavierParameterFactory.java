@@ -9,12 +9,12 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 
 public class XavierParameterFactory implements ParameterFactory {
 
-	@Override
-	public void setValues(MathMatrix matrix) {
-		INDArray ndArray = Nd4j.randn(new int[] { matrix.getRowSize(), matrix.getColumnSize() }).muli(FastMath.sqrt(2D / (matrix.getRowSize() + matrix.getColumnSize())));
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(ndArray.getFloat(scalar.getRow(), scalar.getColumn()));
-		});
-	}
+    @Override
+    public void setValues(MathMatrix matrix) {
+        INDArray ndArray = Nd4j.randn(new int[] { matrix.getRowSize(), matrix.getColumnSize() }).muli(FastMath.sqrt(2D / (matrix.getRowSize() + matrix.getColumnSize())));
+        matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            scalar.setValue(ndArray.getFloat(scalar.getRow(), scalar.getColumn()));
+        });
+    }
 
 }

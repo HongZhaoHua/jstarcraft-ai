@@ -6,12 +6,12 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 概率测试集
-		BinomialProbabilityTestCase.class,
+        // 概率测试集
+        BinomialProbabilityTestCase.class,
 
-		NormalProbabilityTestCase.class,
+        NormalProbabilityTestCase.class,
 
-		UniformProbabilityTestCase.class })
+        UniformProbabilityTestCase.class })
 public class ProbabilityTestSuite {
 
 }

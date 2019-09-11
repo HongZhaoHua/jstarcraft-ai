@@ -18,13 +18,13 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  */
 public interface Masker {
 
-	/**
-	 * 掩盖
-	 * 
-	 * @param middleData
-	 * @param iteration
-	 * @param epoch
-	 */
-	void mask(MathMatrix middleData, int iteration, int epoch);
+    /**
+     * 掩盖
+     * 
+     * @param middleData
+     * @param iteration
+     * @param epoch
+     */
+    void mask(MathMatrix middleData, int iteration, int epoch);
 
 }

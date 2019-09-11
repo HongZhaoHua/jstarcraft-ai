@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.HardSigmoidActivationFun
 
 public class HardSigmoidActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationHardSigmoid();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationHardSigmoid();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new HardSigmoidActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new HardSigmoidActivationFunction();
+    }
 
 }

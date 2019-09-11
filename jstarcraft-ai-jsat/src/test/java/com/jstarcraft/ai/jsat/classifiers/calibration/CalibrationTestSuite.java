@@ -7,9 +7,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-    IsotonicCalibrationTest.class,
+        IsotonicCalibrationTest.class,
 
-    PlattCalibrationTest.class })
+        PlattCalibrationTest.class })
 public class CalibrationTestSuite {
 
 }

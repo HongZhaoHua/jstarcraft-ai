@@ -15,8 +15,8 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public interface MathCache {
 
-	MathMatrix makeMatrix(int rowSize, int columnSize);
+    MathMatrix makeMatrix(int rowSize, int columnSize);
 
-	MathVector makeVector(int capacitySize);
+    MathVector makeVector(int capacitySize);
 
 }

@@ -20,42 +20,42 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 
 public class DataSelectorTestCase {
 
-	private String moduleName = "module";
+    private String moduleName = "module";
 
-	private int order = 10;
+    private int order = 10;
 
-	private int instanceCapacity = 10;
+    private int instanceCapacity = 10;
 
-	private DataModule getDataModule() {
-		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
-		for (int index = 0; index < order; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
-		}
-		DataModule module = new SparseModule(moduleName, moduleDefinition, instanceCapacity);
-		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
-		Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
-		for (int index = 0; index < instanceCapacity; index++) {
-			qualityFeatures.clear();
-			qualityFeatures.put(0, index);
-			module.associateInstance(qualityFeatures, quantityFeatures);
-		}
-		return module;
-	}
+    private DataModule getDataModule() {
+        List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
+        for (int index = 0; index < order; index++) {
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
+        }
+        DataModule module = new SparseModule(moduleName, moduleDefinition, instanceCapacity);
+        Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
+        Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
+        for (int index = 0; index < instanceCapacity; index++) {
+            qualityFeatures.clear();
+            qualityFeatures.put(0, index);
+            module.associateInstance(qualityFeatures, quantityFeatures);
+        }
+        return module;
+    }
 
-	@Test
-	public void testSelect() {
-		DataModule module = getDataModule();
-		DataSelector selector = new DataSelector() {
+    @Test
+    public void testSelect() {
+        DataModule module = getDataModule();
+        DataSelector selector = new DataSelector() {
 
-			@Override
-			public boolean select(DataInstance instance) {
-				return false;
-			}
+            @Override
+            public boolean select(DataInstance instance) {
+                return false;
+            }
 
-		};
-		module = selector.select(module);
-		Assert.assertEquals(0, module.getSize());
-	}
+        };
+        module = selector.select(module);
+        Assert.assertEquals(0, module.getSize());
+    }
 
 }

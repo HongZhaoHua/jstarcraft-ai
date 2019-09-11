@@ -26,111 +26,111 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class SigmoidActivationFunction implements ActivationFunction {
 
-	private boolean threshold;
+    private boolean threshold;
 
-	public SigmoidActivationFunction() {
-		this(false);
-	}
+    public SigmoidActivationFunction() {
+        this(false);
+    }
 
-	public SigmoidActivationFunction(boolean threshold) {
-		this.threshold = threshold;
-	}
+    public SigmoidActivationFunction(boolean threshold) {
+        this.threshold = threshold;
+    }
 
-	@Override
-	public void forward(MathMatrix input, MathMatrix output) {
-		if (input instanceof Nd4jMatrix && output instanceof Nd4jMatrix) {
-			INDArray inputArray = Nd4jMatrix.class.cast(input).getArray();
-			INDArray outputArray = Nd4jMatrix.class.cast(output).getArray();
-			Nd4j.getExecutioner().execAndReturn(new Sigmoid(inputArray, outputArray));
-		} else {
-			output.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
-				int row = scalar.getRow();
-				int column = scalar.getColumn();
-				float value = input.getValue(row, column);
-				value = (float) (1F / (1F + FastMath.exp(-value)));
-				if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
-					value = MathUtility.EPSILON;
-				}
-				scalar.setValue(value);
-			});
-		}
-	}
+    @Override
+    public void forward(MathMatrix input, MathMatrix output) {
+        if (input instanceof Nd4jMatrix && output instanceof Nd4jMatrix) {
+            INDArray inputArray = Nd4jMatrix.class.cast(input).getArray();
+            INDArray outputArray = Nd4jMatrix.class.cast(output).getArray();
+            Nd4j.getExecutioner().execAndReturn(new Sigmoid(inputArray, outputArray));
+        } else {
+            output.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
+                int row = scalar.getRow();
+                int column = scalar.getColumn();
+                float value = input.getValue(row, column);
+                value = (float) (1F / (1F + FastMath.exp(-value)));
+                if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                    value = MathUtility.EPSILON;
+                }
+                scalar.setValue(value);
+            });
+        }
+    }
 
-	@Override
-	public void forward(MathVector input, MathVector output) {
-		output.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			int index = scalar.getIndex();
-			float value = input.getValue(index);
-			value = (float) (1F / (1F + FastMath.exp(-value)));
-			if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
-				value = MathUtility.EPSILON;
-			}
-			scalar.setValue(value);
-		});
-	}
+    @Override
+    public void forward(MathVector input, MathVector output) {
+        output.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            int index = scalar.getIndex();
+            float value = input.getValue(index);
+            value = (float) (1F / (1F + FastMath.exp(-value)));
+            if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                value = MathUtility.EPSILON;
+            }
+            scalar.setValue(value);
+        });
+    }
 
-	@Override
-	public void backward(MathMatrix input, MathMatrix error, MathMatrix output) {
-		if (input instanceof Nd4jMatrix && output instanceof Nd4jMatrix && error instanceof Nd4jMatrix) {
-			INDArray inputArray = Nd4jMatrix.class.cast(input).getArray();
-			INDArray outputArray = Nd4jMatrix.class.cast(output).getArray();
-			INDArray errorArray = Nd4jMatrix.class.cast(error).getArray();
-			Nd4j.getExecutioner().execAndReturn(new SigmoidDerivative(inputArray, outputArray));
-			outputArray.muli(errorArray);
-		} else {
-			output.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
-				int row = scalar.getRow();
-				int column = scalar.getColumn();
-				float value = input.getValue(row, column);
-				value = (float) (1F / (1F + FastMath.exp(-value)));
-				value = value * (1F - value);
-				if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
-					value = MathUtility.EPSILON;
-				}
-				value *= error.getValue(row, column);
-				scalar.setValue(value);
-			});
-		}
-	}
+    @Override
+    public void backward(MathMatrix input, MathMatrix error, MathMatrix output) {
+        if (input instanceof Nd4jMatrix && output instanceof Nd4jMatrix && error instanceof Nd4jMatrix) {
+            INDArray inputArray = Nd4jMatrix.class.cast(input).getArray();
+            INDArray outputArray = Nd4jMatrix.class.cast(output).getArray();
+            INDArray errorArray = Nd4jMatrix.class.cast(error).getArray();
+            Nd4j.getExecutioner().execAndReturn(new SigmoidDerivative(inputArray, outputArray));
+            outputArray.muli(errorArray);
+        } else {
+            output.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
+                int row = scalar.getRow();
+                int column = scalar.getColumn();
+                float value = input.getValue(row, column);
+                value = (float) (1F / (1F + FastMath.exp(-value)));
+                value = value * (1F - value);
+                if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                    value = MathUtility.EPSILON;
+                }
+                value *= error.getValue(row, column);
+                scalar.setValue(value);
+            });
+        }
+    }
 
-	@Override
-	public void backward(MathVector input, MathVector error, MathVector output) {
-		output.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			int index = scalar.getIndex();
-			float value = input.getValue(index);
-			value = (float) (1F / (1F + FastMath.exp(-value)));
-			value = value * (1F - value);
-			if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
-				value = MathUtility.EPSILON;
-			}
-			value *= error.getValue(index);
-			scalar.setValue(value);
-		});
-	}
+    @Override
+    public void backward(MathVector input, MathVector error, MathVector output) {
+        output.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            int index = scalar.getIndex();
+            float value = input.getValue(index);
+            value = (float) (1F / (1F + FastMath.exp(-value)));
+            value = value * (1F - value);
+            if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                value = MathUtility.EPSILON;
+            }
+            value *= error.getValue(index);
+            scalar.setValue(value);
+        });
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object == null) {
-			return false;
-		}
-		if (getClass() != object.getClass()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
-	@Override
-	public String toString() {
-		return "SigmoidActivationFunction(threshold=" + threshold + ")";
-	}
+    @Override
+    public String toString() {
+        return "SigmoidActivationFunction(threshold=" + threshold + ")";
+    }
 
 }

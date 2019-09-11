@@ -109,7 +109,8 @@ public class DataTransformProcess implements DataTransform, Parameterized {
      * after each transform is learned so the next transform can be learned as well.
      * <br>
      * The results are equivalent to calling
-     * {@link #learnApplyTransforms(com.jstarcraft.ai.jsat.DataSet) } on the data set and then calling
+     * {@link #learnApplyTransforms(com.jstarcraft.ai.jsat.DataSet) } on the data
+     * set and then calling
      * {@link DataSet#applyTransform(jsat.datatransform.DataTransform) } with this
      * DataTransformProces.
      * 

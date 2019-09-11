@@ -11,20 +11,20 @@ import com.jstarcraft.ai.model.neuralnetwork.learn.NadamLearner;
 
 public class NadamLearnerTestCase extends LearnerTestCase {
 
-	@Override
-	protected GradientUpdater<?> getOldFunction(long[] shape) {
-		Nadam configuration = new Nadam();
-		GradientUpdater<?> oldFunction = new NadamUpdater(configuration);
-		int length = (int) (shape[0] * configuration.stateSize(shape[1]));
-		INDArray view = Nd4j.zeros(length);
-		oldFunction.setStateViewArray(view, shape, 'c', true);
-		return oldFunction;
-	}
+    @Override
+    protected GradientUpdater<?> getOldFunction(long[] shape) {
+        Nadam configuration = new Nadam();
+        GradientUpdater<?> oldFunction = new NadamUpdater(configuration);
+        int length = (int) (shape[0] * configuration.stateSize(shape[1]));
+        INDArray view = Nd4j.zeros(length);
+        oldFunction.setStateViewArray(view, shape, 'c', true);
+        return oldFunction;
+    }
 
-	@Override
-	protected Learner getNewFunction(long[] shape) {
-		Learner newFuction = new NadamLearner();
-		return newFuction;
-	}
+    @Override
+    protected Learner getNewFunction(long[] shape) {
+        Learner newFuction = new NadamLearner();
+        return newFuction;
+    }
 
 }

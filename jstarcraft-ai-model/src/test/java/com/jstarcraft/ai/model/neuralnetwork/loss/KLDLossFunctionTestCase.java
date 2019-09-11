@@ -9,14 +9,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.LossFunction;
 
 public class KLDLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossKLD();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossKLD();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new KLDLossFunction();
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new KLDLossFunction();
+    }
 
 }

@@ -6,10 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 层测试集
-		EmbedLayerTestCase.class,
+        // 层测试集
+        EmbedLayerTestCase.class,
 
-		WeightLayerTestCase.class, })
+        WeightLayerTestCase.class, })
 public class LayerTestSuite {
 
 }

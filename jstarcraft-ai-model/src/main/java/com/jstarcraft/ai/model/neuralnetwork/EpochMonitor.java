@@ -2,12 +2,12 @@ package com.jstarcraft.ai.model.neuralnetwork;
 
 public interface EpochMonitor {
 
-	void beforeForward();
+    void beforeForward();
 
-	void afterForward();
+    void afterForward();
 
-	void beforeBackward();
+    void beforeBackward();
 
-	void afterBackward();
+    void afterBackward();
 
 }

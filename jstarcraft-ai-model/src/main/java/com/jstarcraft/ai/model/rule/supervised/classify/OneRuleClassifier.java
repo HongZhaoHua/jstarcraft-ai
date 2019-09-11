@@ -13,16 +13,16 @@ import com.jstarcraft.ai.model.supervised.Predictor;
  */
 public class OneRuleClassifier implements Practicer, Predictor {
 
-	@Override
-	public void practice(DataModule module, DataModule... contexts) {
-		// TODO Auto-generated method stub
+    @Override
+    public void practice(DataModule module, DataModule... contexts) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void predict(DataInstance instance, DataInstance... contexts) {
-		// TODO Auto-generated method stub
+    @Override
+    public void predict(DataInstance instance, DataInstance... contexts) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

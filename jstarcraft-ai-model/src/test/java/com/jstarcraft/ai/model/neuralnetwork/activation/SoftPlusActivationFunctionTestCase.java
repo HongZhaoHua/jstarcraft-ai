@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.SoftPlusActivationFuncti
 
 public class SoftPlusActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationSoftPlus();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationSoftPlus();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new SoftPlusActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new SoftPlusActivationFunction();
+    }
 
 }

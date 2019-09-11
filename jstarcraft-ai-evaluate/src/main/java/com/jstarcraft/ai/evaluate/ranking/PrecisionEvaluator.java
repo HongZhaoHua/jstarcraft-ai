@@ -16,22 +16,22 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  */
 public class PrecisionEvaluator extends RankingEvaluator {
 
-	public PrecisionEvaluator(int size) {
-		super(size);
-	}
+    public PrecisionEvaluator(int size) {
+        super(size);
+    }
 
-	@Override
-	protected float measure(IntSet checkCollection, IntList rankList) {
-		if (rankList.size() > size) {
-		    rankList = rankList.subList(0, size);
-		}
-		int count = 0;
-		for (int itemIndex : rankList) {
-			if (checkCollection.contains(itemIndex)) {
-				count++;
-			}
-		}
-		return count / (size + 0F);
-	}
+    @Override
+    protected float measure(IntSet checkCollection, IntList rankList) {
+        if (rankList.size() > size) {
+            rankList = rankList.subList(0, size);
+        }
+        int count = 0;
+        for (int itemIndex : rankList) {
+            if (checkCollection.contains(itemIndex)) {
+                count++;
+            }
+        }
+        return count / (size + 0F);
+    }
 
 }

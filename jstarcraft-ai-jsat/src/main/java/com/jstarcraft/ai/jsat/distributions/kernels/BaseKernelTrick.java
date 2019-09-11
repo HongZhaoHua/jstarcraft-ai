@@ -10,9 +10,9 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
 /**
  * This provides a simple base implementation for the cache related methods in
  * Kernel Trick. By default they will all call
- * {@link #eval(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) } directly. For this reason
- * {@link #supportsAcceleration() } defaults to returning false. If the Kernel
- * supports cache acceleration,
+ * {@link #eval(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) }
+ * directly. For this reason {@link #supportsAcceleration() } defaults to
+ * returning false. If the Kernel supports cache acceleration,
  * {@link #evalSum(java.util.List, java.util.List, double[], com.jstarcraft.ai.jsat.linear.Vec, int, int) }
  * will make use of the acceleration. All other methods must be overloaded.
  * 

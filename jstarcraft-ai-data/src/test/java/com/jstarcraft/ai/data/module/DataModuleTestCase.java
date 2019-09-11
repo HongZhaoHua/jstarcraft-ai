@@ -23,73 +23,73 @@ import it.unimi.dsi.fastutil.ints.Int2IntSortedMap;
 
 public abstract class DataModuleTestCase {
 
-	protected abstract DataModule getDataModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity);
+    protected abstract DataModule getDataModule(String moduleName, List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition, int instanceCapacity);
 
-	@Test
-	public void testInnerWithOuter() {
-		String moduleName = "module";
-		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
-		for (int index = 0; index < 10; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("user", true), 1));
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("item", true), 1));
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("score", false), 1));
-		}
-		int qualityOrder = 10, quantityOrder = 10, instanceCapacity = 10;
-		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
-		Assert.assertThat(module.getQualityInner("user"), CoreMatchers.equalTo(10));
-		Assert.assertThat(module.getQualityInner("item"), CoreMatchers.equalTo(0));
-		Assert.assertThat(module.getQuantityInner("score"), CoreMatchers.equalTo(0));
-		for (int index = 0; index < 10;) {
-			{
-				Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
-				Assert.assertThat(term.getKey(), CoreMatchers.equalTo(index));
-				index++;
-			}
-			{
-				Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
-				Assert.assertThat(term.getKey(), CoreMatchers.equalTo(index));
-				index++;
-			}
-		}
-	}
+    @Test
+    public void testInnerWithOuter() {
+        String moduleName = "module";
+        List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
+        for (int index = 0; index < 10; index++) {
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("user", true), 1));
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("item", true), 1));
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("score", false), 1));
+        }
+        int qualityOrder = 10, quantityOrder = 10, instanceCapacity = 10;
+        DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
+        Assert.assertThat(module.getQualityInner("user"), CoreMatchers.equalTo(10));
+        Assert.assertThat(module.getQualityInner("item"), CoreMatchers.equalTo(0));
+        Assert.assertThat(module.getQuantityInner("score"), CoreMatchers.equalTo(0));
+        for (int index = 0; index < 10;) {
+            {
+                Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
+                Assert.assertThat(term.getKey(), CoreMatchers.equalTo(index));
+                index++;
+            }
+            {
+                Entry<Integer, KeyValue<String, Boolean>> term = module.getOuterKeyValue(index);
+                Assert.assertThat(term.getKey(), CoreMatchers.equalTo(index));
+                index++;
+            }
+        }
+    }
 
-	@Test
-	public void testAssociateInstance() {
-		String moduleName = "module";
-		List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
-		for (int index = 0; index < 10; index++) {
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
-			moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
-		}
-		int qualityOrder = 10, quantityOrder = 10, instanceCapacity = 10;
-		DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
-		Assert.assertEquals(0, module.getSize());
+    @Test
+    public void testAssociateInstance() {
+        String moduleName = "module";
+        List<KeyValue<KeyValue<String, Boolean>, Integer>> moduleDefinition = new LinkedList<>();
+        for (int index = 0; index < 10; index++) {
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("quality", true), 1));
+            moduleDefinition.add(new KeyValue<>(new KeyValue<>("ontinuous", false), 1));
+        }
+        int qualityOrder = 10, quantityOrder = 10, instanceCapacity = 10;
+        DataModule module = getDataModule(moduleName, moduleDefinition, instanceCapacity);
+        Assert.assertEquals(0, module.getSize());
 
-		Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
-		for (int index = 0; index < qualityOrder; index++) {
-			qualityFeatures.put(index, RandomUtility.randomInteger(1));
-		}
-		Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
-		for (int index = 0; index < quantityOrder; index++) {
-			quantityFeatures.put(index, RandomUtility.randomFloat(1F));
-		}
-		for (int index = 0; index < instanceCapacity; index++) {
-			module.associateInstance(qualityFeatures, quantityFeatures);
-			Assert.assertEquals(index + 1, module.getSize());
-			DataInstance instance = module.getInstance(index);
-			for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
-				Assert.assertEquals(term.getIntValue(), instance.getQualityFeature(term.getIntKey()), 0F);
-			}
-			for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
-				Assert.assertEquals(term.getFloatValue(), instance.getQuantityFeature(term.getIntKey()), 0F);
-			}
-		}
+        Int2IntSortedMap qualityFeatures = new Int2IntAVLTreeMap();
+        for (int index = 0; index < qualityOrder; index++) {
+            qualityFeatures.put(index, RandomUtility.randomInteger(1));
+        }
+        Int2FloatSortedMap quantityFeatures = new Int2FloatAVLTreeMap();
+        for (int index = 0; index < quantityOrder; index++) {
+            quantityFeatures.put(index, RandomUtility.randomFloat(1F));
+        }
+        for (int index = 0; index < instanceCapacity; index++) {
+            module.associateInstance(qualityFeatures, quantityFeatures);
+            Assert.assertEquals(index + 1, module.getSize());
+            DataInstance instance = module.getInstance(index);
+            for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
+                Assert.assertEquals(term.getIntValue(), instance.getQualityFeature(term.getIntKey()), 0F);
+            }
+            for (Int2FloatMap.Entry term : quantityFeatures.int2FloatEntrySet()) {
+                Assert.assertEquals(term.getFloatValue(), instance.getQuantityFeature(term.getIntKey()), 0F);
+            }
+        }
 
-		try {
-			module.associateInstance(qualityFeatures, quantityFeatures);
-			Assert.fail();
-		} catch (DataCapacityException exception) {
-		}
-	}
+        try {
+            module.associateInstance(qualityFeatures, quantityFeatures);
+            Assert.fail();
+        } catch (DataCapacityException exception) {
+        }
+    }
 
 }

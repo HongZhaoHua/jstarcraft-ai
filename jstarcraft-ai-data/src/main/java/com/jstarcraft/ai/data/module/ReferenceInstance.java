@@ -14,92 +14,92 @@ import com.jstarcraft.ai.data.QualityAccessor;
  */
 public class ReferenceInstance implements DataInstance {
 
-	/** 游标 */
-	private int cursor;
+    /** 游标 */
+    private int cursor;
 
-	/** 引用 */
-	private IntegerArray references;
+    /** 引用 */
+    private IntegerArray references;
 
-	/** 实例 */
-	private DataInstance instance;
+    /** 实例 */
+    private DataInstance instance;
 
-	public ReferenceInstance(int cursor, IntegerArray references, DataModule module) {
-		this.cursor = cursor;
-		this.references = references;
-		this.instance = module.getInstance(references.getData(cursor));
-	}
+    public ReferenceInstance(int cursor, IntegerArray references, DataModule module) {
+        this.cursor = cursor;
+        this.references = references;
+        this.instance = module.getInstance(references.getData(cursor));
+    }
 
-	@Override
-	public void setCursor(int cursor) {
-		this.cursor = cursor;
-		instance.setCursor(references.getData(cursor));
-	}
+    @Override
+    public void setCursor(int cursor) {
+        this.cursor = cursor;
+        instance.setCursor(references.getData(cursor));
+    }
 
-	@Override
-	public int getCursor() {
-		return cursor;
-	}
+    @Override
+    public int getCursor() {
+        return cursor;
+    }
 
-	@Override
-	public int getQualityFeature(int dimension) {
-		return instance.getQualityFeature(dimension);
-	}
+    @Override
+    public int getQualityFeature(int dimension) {
+        return instance.getQualityFeature(dimension);
+    }
 
-	@Override
-	public float getQuantityFeature(int dimension) {
-		return instance.getQuantityFeature(dimension);
-	}
+    @Override
+    public float getQuantityFeature(int dimension) {
+        return instance.getQuantityFeature(dimension);
+    }
 
-	@Override
-	public DataInstance iterateQualityFeatures(QualityAccessor accessor) {
-		instance.iterateQualityFeatures(accessor);
-		return this;
-	}
+    @Override
+    public DataInstance iterateQualityFeatures(QualityAccessor accessor) {
+        instance.iterateQualityFeatures(accessor);
+        return this;
+    }
 
-	@Override
-	public DataInstance iterateQuantityFeatures(QuantityAccessor accessor) {
-		instance.iterateQuantityFeatures(accessor);
-		return this;
-	}
+    @Override
+    public DataInstance iterateQuantityFeatures(QuantityAccessor accessor) {
+        instance.iterateQuantityFeatures(accessor);
+        return this;
+    }
 
-	@Override
-	public int getQualityOrder() {
-		return instance.getQualityOrder();
-	}
+    @Override
+    public int getQualityOrder() {
+        return instance.getQualityOrder();
+    }
 
-	@Override
-	public int getQuantityOrder() {
-		return instance.getQuantityOrder();
-	}
+    @Override
+    public int getQuantityOrder() {
+        return instance.getQuantityOrder();
+    }
 
-	@Override
-	public int getQualityMark() {
-		return instance.getQualityMark();
-	}
+    @Override
+    public int getQualityMark() {
+        return instance.getQualityMark();
+    }
 
-	@Override
-	public float getQuantityMark() {
-		return instance.getQuantityMark();
-	}
+    @Override
+    public float getQuantityMark() {
+        return instance.getQuantityMark();
+    }
 
-	@Override
-	public float getWeight() {
-		return instance.getWeight();
-	}
+    @Override
+    public float getWeight() {
+        return instance.getWeight();
+    }
 
-	@Override
-	public void setQualityMark(int mark) {
-		instance.setQualityMark(mark);
-	}
+    @Override
+    public void setQualityMark(int mark) {
+        instance.setQualityMark(mark);
+    }
 
-	@Override
-	public void setQuantityMark(float mark) {
-		instance.setQuantityMark(mark);
-	}
+    @Override
+    public void setQuantityMark(float mark) {
+        instance.setQuantityMark(mark);
+    }
 
-	@Override
-	public void setWeight(float weight) {
-		instance.setWeight(weight);
-	}
+    @Override
+    public void setWeight(float weight) {
+        instance.setWeight(weight);
+    }
 
 }

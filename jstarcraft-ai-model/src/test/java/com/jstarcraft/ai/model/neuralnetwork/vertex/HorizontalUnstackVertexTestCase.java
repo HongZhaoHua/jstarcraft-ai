@@ -16,39 +16,39 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.HorizontalDet
 
 public class HorizontalUnstackVertexTestCase extends VertexTestCase {
 
-	@Override
-	protected MathMatrix getMatrix(INDArray array) {
-		int size = array.columns();
-		MathMatrix[] components = new MathMatrix[size];
-		for (int index = 0; index < size; index++) {
-			components[index] = DenseMatrix.valueOf(array.rows(), 1);
-		}
-		MathMatrix matrix = ColumnGlobalMatrix.attachOf(components);
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
-		});
-		return matrix;
-	}
+    @Override
+    protected MathMatrix getMatrix(INDArray array) {
+        int size = array.columns();
+        MathMatrix[] components = new MathMatrix[size];
+        for (int index = 0; index < size; index++) {
+            components[index] = DenseMatrix.valueOf(array.rows(), 1);
+        }
+        MathMatrix matrix = ColumnGlobalMatrix.attachOf(components);
+        matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
+        });
+        return matrix;
+    }
 
-	@Override
-	protected INDArray getError() {
-		return Nd4j.linspace(-2.5D, 2.5D, 5).reshape(5, 1);
-	}
+    @Override
+    protected INDArray getError() {
+        return Nd4j.linspace(-2.5D, 2.5D, 5).reshape(5, 1);
+    }
 
-	@Override
-	protected int getSize() {
-		return 1;
-	}
+    @Override
+    protected int getSize() {
+        return 1;
+    }
 
-	@Override
-	protected GraphVertex getOldFunction() {
-		return new SubsetVertex(null, "old", 0, 1, 2);
-	}
+    @Override
+    protected GraphVertex getOldFunction() {
+        return new SubsetVertex(null, "old", 0, 1, 2);
+    }
 
-	@Override
-	protected Vertex getNewFunction() {
-		MathCache cache = new DenseCache();
-		return new HorizontalDetachVertex("new", cache, 1, 2);
-	}
+    @Override
+    protected Vertex getNewFunction() {
+        MathCache cache = new DenseCache();
+        return new HorizontalDetachVertex("new", cache, 1, 2);
+    }
 
 }

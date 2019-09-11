@@ -12,25 +12,25 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.accumulation.EuclideanVertex
 
 public class EuclideanVertexTestCase extends VertexTestCase {
 
-	@Override
-	protected INDArray getError() {
-		return Nd4j.linspace(-2.5D, 2.5D, 5).reshape(5, 1);
-	}
+    @Override
+    protected INDArray getError() {
+        return Nd4j.linspace(-2.5D, 2.5D, 5).reshape(5, 1);
+    }
 
-	@Override
-	protected int getSize() {
-		return 2;
-	}
+    @Override
+    protected int getSize() {
+        return 2;
+    }
 
-	@Override
-	protected GraphVertex getOldFunction() {
-		return new L2Vertex(null, "old", 0, EuclideanVertex.DEFAULT_EPSILON);
-	}
+    @Override
+    protected GraphVertex getOldFunction() {
+        return new L2Vertex(null, "old", 0, EuclideanVertex.DEFAULT_EPSILON);
+    }
 
-	@Override
-	protected Vertex getNewFunction() {
-		MathCache cache = new DenseCache();
-		return new EuclideanVertex("new", cache);
-	}
+    @Override
+    protected Vertex getNewFunction() {
+        MathCache cache = new DenseCache();
+        return new EuclideanVertex("new", cache);
+    }
 
 }

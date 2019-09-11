@@ -20,14 +20,14 @@ package com.jstarcraft.ai.model.neuralnetwork;
  */
 public interface Model {
 
-	/**
-	 * 正向传递(每次iteration调用)
-	 */
-	void doForward();
+    /**
+     * 正向传递(每次iteration调用)
+     */
+    void doForward();
 
-	/**
-	 * 反向传递(每次iteration调用)
-	 */
-	void doBackward();
+    /**
+     * 反向传递(每次iteration调用)
+     */
+    void doBackward();
 
 }

@@ -58,7 +58,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 public class KDTree<V extends Vec> implements IncrementalCollection<V> {
 
     private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
-    
+
     private static final long serialVersionUID = -7401342201406776463L;
     private DistanceMetric distanceMetric;
     private KDNode root;

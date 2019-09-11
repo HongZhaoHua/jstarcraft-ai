@@ -236,7 +236,7 @@ public class SVPTree<V extends Vec> implements IncrementalCollection<V>, DualTre
     private int sortSplitSet(final List<Double2IntegerKeyValue> S, final VPNode node) {
         for (Double2IntegerKeyValue S1 : S)
             S1.setKey(dm.dist(node.p, S1.getValue(), allVecs, distCache)); // Each point gets its distance to the vantage point
-        Collections.sort(S, ( o1,  o2) -> Double.compare(o1.getKey(), o2.getKey()));
+        Collections.sort(S, (o1, o2) -> Double.compare(o1.getKey(), o2.getKey()));
         int splitIndex = splitListIndex(S);
         node.left_low = S.get(0).getKey();
         node.left_high = S.get(splitIndex).getKey();

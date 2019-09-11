@@ -7,25 +7,25 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		ColumnArrayMatrixTestCase.class,
+        ColumnArrayMatrixTestCase.class,
 
-		ColumnGlobalMatrixTestCase.class,
+        ColumnGlobalMatrixTestCase.class,
 
-		ColumnHashMatrixTestCase.class,
+        ColumnHashMatrixTestCase.class,
 
-		DenseMatrixTestCase.class,
+        DenseMatrixTestCase.class,
 
-		Nd4jMatrixTestCase.class,
+        Nd4jMatrixTestCase.class,
 
-		RowArrayMatrixTestCase.class,
+        RowArrayMatrixTestCase.class,
 
-		RowGlobalMatrixTestCase.class,
+        RowGlobalMatrixTestCase.class,
 
-		RowHashMatrixTestCase.class,
+        RowHashMatrixTestCase.class,
 
-		SparseMatrixTestCase.class,
+        SparseMatrixTestCase.class,
 
-		SymmetryMatrixTestCase.class })
+        SymmetryMatrixTestCase.class })
 public class MatrixTestSuite {
 
 }

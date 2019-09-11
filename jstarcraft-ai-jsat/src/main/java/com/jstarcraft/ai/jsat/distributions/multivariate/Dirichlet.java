@@ -21,8 +21,8 @@ import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
  * An implementation of the Dirichlet distribution. The Dirichlet distribution
  * takes a vector of positive alphas as its argument, which also specifies the
  * dimension of the distribution. The Dirichlet distribution has a non zero
- * {@link #pdf(com.jstarcraft.ai.jsat.linear.Vec) PDF} only when the input vector sums to 1.0, and
- * contains no negative or zero values.
+ * {@link #pdf(com.jstarcraft.ai.jsat.linear.Vec) PDF} only when the input
+ * vector sums to 1.0, and contains no negative or zero values.
  * 
  * @author Edward Raff
  */

@@ -29,7 +29,8 @@ public interface DenseSparseMetric extends DistanceMetric {
      * Efficiently computes the distance from one main vector that is used many
      * times, to some sparse target vector. If the target vector dose not return
      * true for {@link Vec#isSparse() }, the distance will be calculated using
-     * {@link #dist(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) } instead.
+     * {@link #dist(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) }
+     * instead.
      * 
      * @param summaryConst the summary constant for the main vector obtained with
      *                     {@link #getVectorConstant(com.jstarcraft.ai.jsat.linear.Vec) }

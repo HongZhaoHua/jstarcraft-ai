@@ -17,53 +17,53 @@ import com.jstarcraft.core.utility.KeyValue;
 @ModemDefinition(value = { "vertexName", "factory" })
 public abstract class AbstractVertex implements Vertex {
 
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected String vertexName;
+    protected String vertexName;
 
-	protected MathCache factory;
+    protected MathCache factory;
 
-	/** 键为inputData(不可以为null),值为outerError(可以为null) */
-	protected KeyValue<MathMatrix, MathMatrix>[] inputKeyValues;
+    /** 键为inputData(不可以为null),值为outerError(可以为null) */
+    protected KeyValue<MathMatrix, MathMatrix>[] inputKeyValues;
 
-	/** 键为outputData(不可以为null),值为innerError(不可以为null) */
-	protected KeyValue<MathMatrix, MathMatrix> outputKeyValue;
+    /** 键为outputData(不可以为null),值为innerError(不可以为null) */
+    protected KeyValue<MathMatrix, MathMatrix> outputKeyValue;
 
-	protected AbstractVertex() {
-	}
+    protected AbstractVertex() {
+    }
 
-	protected AbstractVertex(String name, MathCache factory) {
-		this.vertexName = name;
-		this.factory = factory;
-	}
+    protected AbstractVertex(String name, MathCache factory) {
+        this.vertexName = name;
+        this.factory = factory;
+    }
 
-	@Override
-	public void doCache(KeyValue<MathMatrix, MathMatrix>... samples) {
-		// 检查样本
-		if (samples.length == 0) {
-			throw new IllegalArgumentException();
-		}
+    @Override
+    public void doCache(KeyValue<MathMatrix, MathMatrix>... samples) {
+        // 检查样本
+        if (samples.length == 0) {
+            throw new IllegalArgumentException();
+        }
 
-		this.inputKeyValues = samples;
-		this.outputKeyValue = new KeyValue<>(null, null);
-	}
+        this.inputKeyValues = samples;
+        this.outputKeyValue = new KeyValue<>(null, null);
+    }
 
-	@Override
-	public String getVertexName() {
-		return vertexName;
-	}
+    @Override
+    public String getVertexName() {
+        return vertexName;
+    }
 
-	@Override
-	public KeyValue<MathMatrix, MathMatrix> getInputKeyValue(int position) {
-		return inputKeyValues[position];
-	}
+    @Override
+    public KeyValue<MathMatrix, MathMatrix> getInputKeyValue(int position) {
+        return inputKeyValues[position];
+    }
 
-	@Override
-	public KeyValue<MathMatrix, MathMatrix> getOutputKeyValue() {
-		return outputKeyValue;
-	}
+    @Override
+    public KeyValue<MathMatrix, MathMatrix> getOutputKeyValue() {
+        return outputKeyValue;
+    }
 
-	@Override
-	public abstract String toString();
+    @Override
+    public abstract String toString();
 
 }

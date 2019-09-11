@@ -17,26 +17,26 @@ import com.jstarcraft.ai.evaluate.rating.MSEEvaluatorTestCase;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 评估器测试集
-		AUCEvaluatorTestCase.class,
+        // 评估器测试集
+        AUCEvaluatorTestCase.class,
 
-		MAPEvaluatorTestCase.class,
+        MAPEvaluatorTestCase.class,
 
-		DiversityEvaluatorTestCase.class,
+        DiversityEvaluatorTestCase.class,
 
-		NDCGEvaluatorTestCase.class,
+        NDCGEvaluatorTestCase.class,
 
-		PrecisionEvaluatorTestCase.class,
+        PrecisionEvaluatorTestCase.class,
 
-		RecallEvaluatorTestCase.class,
+        RecallEvaluatorTestCase.class,
 
-		MRREvaluatorTestCase.class,
+        MRREvaluatorTestCase.class,
 
-		MAEEvaluatorTestCase.class,
+        MAEEvaluatorTestCase.class,
 
-		MPEEvaluatorTestCase.class,
+        MPEEvaluatorTestCase.class,
 
-		MSEEvaluatorTestCase.class })
+        MSEEvaluatorTestCase.class })
 public class EvaluatorTestSuite {
 
 }

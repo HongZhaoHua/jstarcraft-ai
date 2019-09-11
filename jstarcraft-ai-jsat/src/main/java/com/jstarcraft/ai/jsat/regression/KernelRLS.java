@@ -132,7 +132,8 @@ public class KernelRLS implements UpdateableRegressor, Parameterized {
      * memory. One training is completed, these matrices are no longer needed - and
      * can be removed to reclaim memory by finalizing the model. Once finalized, the
      * model can no longer be updated - unless reset (destroying the model) by
-     * calling {@link #setUp(com.jstarcraft.ai.jsat.classifiers.CategoricalData[], int) }
+     * calling
+     * {@link #setUp(com.jstarcraft.ai.jsat.classifiers.CategoricalData[], int) }
      */
     public void finalizeModel() {
         alphaExpanded = Arrays.copyOf(alphaExpanded, vecs.size());// dont need extra

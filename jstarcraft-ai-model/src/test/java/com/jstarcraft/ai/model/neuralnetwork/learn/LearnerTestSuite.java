@@ -6,24 +6,24 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 学习器测试集
-		AdaDeltaLearnerTestCase.class,
+        // 学习器测试集
+        AdaDeltaLearnerTestCase.class,
 
-		AdaGradLearnerTestCase.class,
+        AdaGradLearnerTestCase.class,
 
-		AdaMaxLearnerTestCase.class,
+        AdaMaxLearnerTestCase.class,
 
-		AdamLearnerTestCase.class,
+        AdamLearnerTestCase.class,
 
-		IgnoreLearnerTestCase.class,
+        IgnoreLearnerTestCase.class,
 
-		NadamLearnerTestCase.class,
+        NadamLearnerTestCase.class,
 
-		NesterovLearnerTestCase.class,
+        NesterovLearnerTestCase.class,
 
-		RmsPropLearnerTestCase.class,
+        RmsPropLearnerTestCase.class,
 
-		SgdLearnerTestCase.class, })
+        SgdLearnerTestCase.class, })
 public class LearnerTestSuite {
 
 }

@@ -17,24 +17,23 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  */
 public class MRREvaluator extends RankingEvaluator {
 
-	public MRREvaluator(int size) {
-		super(size);
-	}
+    public MRREvaluator(int size) {
+        super(size);
+    }
 
-	
-	@Override
-	protected float measure(IntSet checkCollection, IntList rankList) {
-		if (rankList.size() > size) {
-		    rankList = rankList.subList(0, size);
-		}
-		int size = rankList.size();
-		for (int index = 0; index < size; index++) {
-			int itemIndex = rankList.get(index);
-			if (checkCollection.contains(itemIndex)) {
-				return 1F / (index + 1);
-			}
-		}
-		return 0F;
-	}
+    @Override
+    protected float measure(IntSet checkCollection, IntList rankList) {
+        if (rankList.size() > size) {
+            rankList = rankList.subList(0, size);
+        }
+        int size = rankList.size();
+        for (int index = 0; index < size; index++) {
+            int itemIndex = rankList.get(index);
+            if (checkCollection.contains(itemIndex)) {
+                return 1F / (index + 1);
+            }
+        }
+        return 0F;
+    }
 
 }

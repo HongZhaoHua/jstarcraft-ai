@@ -10,14 +10,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.LossFunction;
 
 public class BinaryXENTLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossBinaryXENT();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossBinaryXENT();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new BinaryXENTLossFunction(function instanceof SoftMaxActivationFunction);
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new BinaryXENTLossFunction(function instanceof SoftMaxActivationFunction);
+    }
 
 }

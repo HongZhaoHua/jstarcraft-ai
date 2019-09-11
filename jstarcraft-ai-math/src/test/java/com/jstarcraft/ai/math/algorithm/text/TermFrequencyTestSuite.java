@@ -7,15 +7,15 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		BinaryTermFrequencyTestCase.class,
+        BinaryTermFrequencyTestCase.class,
 
-		CountTermFrequencyTestCase.class,
+        CountTermFrequencyTestCase.class,
 
-		LogarithmTermFrequencyTestCase.class,
+        LogarithmTermFrequencyTestCase.class,
 
-		NaturalTermFrequencyTestCase.class,
+        NaturalTermFrequencyTestCase.class,
 
-		NormalizationTermFrequencyTestCase.class })
+        NormalizationTermFrequencyTestCase.class })
 public class TermFrequencyTestSuite {
 
 }

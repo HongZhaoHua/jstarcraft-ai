@@ -5,10 +5,10 @@ import com.jstarcraft.core.codec.annotation.ProtocolConfiguration;
 @ProtocolConfiguration
 public enum MockEnumeration {
 
-	PROTOSS,	
-	
-	TERRAN,
-	
-	ZERG;
+    PROTOSS,
+
+    TERRAN,
+
+    ZERG;
 
 }

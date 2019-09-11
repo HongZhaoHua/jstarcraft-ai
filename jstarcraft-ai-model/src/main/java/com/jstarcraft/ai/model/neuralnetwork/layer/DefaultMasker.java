@@ -17,20 +17,20 @@ import com.jstarcraft.core.utility.RandomUtility;
  */
 public class DefaultMasker implements Masker {
 
-	private Schedule schedule;
+    private Schedule schedule;
 
-	public DefaultMasker(Schedule schedule) {
-		this.schedule = schedule;
-	}
+    public DefaultMasker(Schedule schedule) {
+        this.schedule = schedule;
+    }
 
-	@Override
-	public void mask(MathMatrix matrix, int iteration, int epoch) {
-		float current = schedule.valueAt(iteration, epoch);
+    @Override
+    public void mask(MathMatrix matrix, int iteration, int epoch) {
+        float current = schedule.valueAt(iteration, epoch);
 
-		matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
-			float value = scalar.getValue();
-			scalar.setValue(RandomUtility.randomFloat(1F) < current ? 0F : value);
-		});
-	}
+        matrix.iterateElement(MathCalculator.PARALLEL, (scalar) -> {
+            float value = scalar.getValue();
+            scalar.setValue(RandomUtility.randomFloat(1F) < current ? 0F : value);
+        });
+    }
 
 }

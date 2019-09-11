@@ -14,22 +14,22 @@ import com.jstarcraft.core.utility.StringUtility;
  */
 class Nd4jEnvironmentThreadFactory extends NameThreadFactory {
 
-	private static final AffinityManager manager = Nd4j.getAffinityManager();
+    private static final AffinityManager manager = Nd4j.getAffinityManager();
 
-	private EnvironmentContext context;
+    private EnvironmentContext context;
 
-	public Nd4jEnvironmentThreadFactory(EnvironmentContext context) {
-		super(context.getClass().getName());
-		this.context = context;
-	}
+    public Nd4jEnvironmentThreadFactory(EnvironmentContext context) {
+        super(context.getClass().getName());
+        this.context = context;
+    }
 
-	@Override
-	public Thread newThread(Runnable runnable) {
-		int index = number.getAndIncrement();
-		String name = group.getName() + StringUtility.COLON + index;
-		Thread thread = new Nd4jEnvironmentThread(context, group, runnable, name, 0);
-		manager.attachThreadToDevice(thread, index % manager.getNumberOfDevices());
-		return thread;
-	}
+    @Override
+    public Thread newThread(Runnable runnable) {
+        int index = number.getAndIncrement();
+        String name = group.getName() + StringUtility.COLON + index;
+        Thread thread = new Nd4jEnvironmentThread(context, group, runnable, name, 0);
+        manager.attachThreadToDevice(thread, index % manager.getNumberOfDevices());
+        return thread;
+    }
 
 }

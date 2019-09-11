@@ -8,12 +8,12 @@ package com.jstarcraft.ai.data;
  */
 public interface QuantityAccessor {
 
-	/**
-	 * 访问特征
-	 * 
-	 * @param dimension
-	 * @param value
-	 */
-	void accessorFeature(int dimension, float value);
+    /**
+     * 访问特征
+     * 
+     * @param dimension
+     * @param value
+     */
+    void accessorFeature(int dimension, float value);
 
 }

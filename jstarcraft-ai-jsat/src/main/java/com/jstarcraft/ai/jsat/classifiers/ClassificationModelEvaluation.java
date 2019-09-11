@@ -355,8 +355,8 @@ public class ClassificationModelEvaluation {
     /**
      * Adds a new score object that will be used as part of the evaluation when
      * calling {@link #evaluateCrossValidation(int, java.util.Random) } or
-     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }. The
-     * statistics for the given score are reset on every call, and the mean /
+     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }.
+     * The statistics for the given score are reset on every call, and the mean /
      * standard deviation comes from multiple folds in cross validation. <br>
      * <br>
      * The score statistics can be obtained from
@@ -526,7 +526,8 @@ public class ClassificationModelEvaluation {
      * Returns the object that keeps track of the error on individual evaluations.
      * If cross-validation was used, it is the statistics for the errors of each
      * fold. If not, it is for each time
-     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) } was called.
+     * {@link #evaluateTestSet(com.jstarcraft.ai.jsat.classifiers.ClassificationDataSet) }
+     * was called.
      * 
      * @return the statistics for the error of all evaluation sets
      */

@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.IdentityActivationFuncti
 
 public class IdentityActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationIdentity();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationIdentity();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new IdentityActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new IdentityActivationFunction();
+    }
 
 }

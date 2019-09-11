@@ -9,14 +9,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.LossFunction;
 
 public class FMeasureLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossFMeasure();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossFMeasure();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new FMeasureLossFunction();
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new FMeasureLossFunction();
+    }
 
 }

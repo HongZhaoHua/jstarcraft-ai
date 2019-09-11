@@ -9,14 +9,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.LossFunction;
 
 public class CosineProximityLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossCosineProximity();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossCosineProximity();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new CosineProximityLossFunction();
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new CosineProximityLossFunction();
+    }
 
 }

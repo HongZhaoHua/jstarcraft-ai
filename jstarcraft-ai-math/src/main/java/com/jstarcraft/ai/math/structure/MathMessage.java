@@ -9,32 +9,32 @@ package com.jstarcraft.ai.math.structure;
 // TODO 可能会定义为一种辅助结构,重构到core.utility
 public interface MathMessage<T> {
 
-	/**
-	 * 合并
-	 * 
-	 * @param message
-	 */
-	void attach(MathMessage<T> message);
+    /**
+     * 合并
+     * 
+     * @param message
+     */
+    void attach(MathMessage<T> message);
 
-	/**
-	 * 分离
-	 * 
-	 * @return
-	 */
-	MathMessage<T> detach();
+    /**
+     * 分离
+     * 
+     * @return
+     */
+    MathMessage<T> detach();
 
-	/**
-	 * 累计值
-	 * 
-	 * @param value
-	 */
-	void accumulateValue(float value);
+    /**
+     * 累计值
+     * 
+     * @param value
+     */
+    void accumulateValue(float value);
 
-	/**
-	 * 获取值
-	 * 
-	 * @return
-	 */
-	T getValue();
+    /**
+     * 获取值
+     * 
+     * @return
+     */
+    T getValue();
 
 }

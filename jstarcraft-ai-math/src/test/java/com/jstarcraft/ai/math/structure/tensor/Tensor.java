@@ -3,7 +3,7 @@ package com.jstarcraft.ai.math.structure.tensor;
 import java.util.Random;
 
 public class Tensor {
-    
+
     private int[] shape;
     private double[] data;
 

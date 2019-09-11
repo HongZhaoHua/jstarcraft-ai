@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.CubeActivationFunction;
 
 public class CubeActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationCube();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationCube();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new CubeActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new CubeActivationFunction();
+    }
 
 }

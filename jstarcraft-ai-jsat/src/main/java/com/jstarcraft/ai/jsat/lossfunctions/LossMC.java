@@ -8,9 +8,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
  * function must support a raw vector of scores for each class, where positive
  * values indicate preference for the class associated with the same index. <br>
  * <br>
- * Calling {@link #process(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) } on the raw scores
- * is a mandatory first step, and will transform the raw scores into a usable
- * form for the loss function. <br>
+ * Calling
+ * {@link #process(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) }
+ * on the raw scores is a mandatory first step, and will transform the raw
+ * scores into a usable form for the loss function. <br>
  * <br>
  * 
  * @author Edward Raff
@@ -48,8 +49,10 @@ public interface LossMC extends LossC {
     public void deriv(Vec processed, Vec derivs, int y);
 
     /**
-     * Given the {@link #process(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec) processed}
-     * predictions, returns the classification results for said predictions.
+     * Given the
+     * {@link #process(com.jstarcraft.ai.jsat.linear.Vec, com.jstarcraft.ai.jsat.linear.Vec)
+     * processed} predictions, returns the classification results for said
+     * predictions.
      * 
      * @param processed the processed score/prediction vector
      * @return the classification results

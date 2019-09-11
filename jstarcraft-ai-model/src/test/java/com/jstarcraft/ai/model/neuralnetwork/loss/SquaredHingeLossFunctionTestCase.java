@@ -9,14 +9,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.SquaredHingeLossFunction;
 
 public class SquaredHingeLossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossSquaredHinge();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossSquaredHinge();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new SquaredHingeLossFunction();
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new SquaredHingeLossFunction();
+    }
 
 }

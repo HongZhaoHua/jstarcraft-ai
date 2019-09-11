@@ -16,39 +16,39 @@ import com.jstarcraft.ai.model.neuralnetwork.vertex.transformation.VerticalDetac
 
 public class VerticalUnstackVertexTestCase extends VertexTestCase {
 
-	@Override
-	protected MathMatrix getMatrix(INDArray array) {
-		int size = array.rows();
-		MathMatrix[] components = new MathMatrix[size];
-		for (int index = 0; index < size; index++) {
-			components[index] = DenseMatrix.valueOf(1, array.columns());
-		}
-		MathMatrix matrix = RowGlobalMatrix.attachOf(components);
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
-		});
-		return matrix;
-	}
+    @Override
+    protected MathMatrix getMatrix(INDArray array) {
+        int size = array.rows();
+        MathMatrix[] components = new MathMatrix[size];
+        for (int index = 0; index < size; index++) {
+            components[index] = DenseMatrix.valueOf(1, array.columns());
+        }
+        MathMatrix matrix = RowGlobalMatrix.attachOf(components);
+        matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
+        });
+        return matrix;
+    }
 
-	@Override
-	protected INDArray getError() {
-		return Nd4j.linspace(-2.5D, 2.5D, 4).reshape(2, 2);
-	}
+    @Override
+    protected INDArray getError() {
+        return Nd4j.linspace(-2.5D, 2.5D, 4).reshape(2, 2);
+    }
 
-	@Override
-	protected int getSize() {
-		return 1;
-	}
+    @Override
+    protected int getSize() {
+        return 1;
+    }
 
-	@Override
-	protected GraphVertex getOldFunction() {
-		return new UnstackVertex(null, "old", 0, 1, 2);
-	}
+    @Override
+    protected GraphVertex getOldFunction() {
+        return new UnstackVertex(null, "old", 0, 1, 2);
+    }
 
-	@Override
-	protected Vertex getNewFunction() {
-		MathCache cache = new DenseCache();
-		return new VerticalDetachVertex("new", cache, 2, 4);
-	}
+    @Override
+    protected Vertex getNewFunction() {
+        MathCache cache = new DenseCache();
+        return new VerticalDetachVertex("new", cache, 2, 4);
+    }
 
 }

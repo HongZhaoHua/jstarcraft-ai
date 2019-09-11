@@ -6,32 +6,32 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 激活函数测试集
-		CubeActivationFunctionTestCase.class,
+        // 激活函数测试集
+        CubeActivationFunctionTestCase.class,
 
-		ELUActivationFunctionTestCase.class,
+        ELUActivationFunctionTestCase.class,
 
-		HardSigmoidActivationFunctionTestCase.class,
+        HardSigmoidActivationFunctionTestCase.class,
 
-		HardTanHActivationFunctionTestCase.class,
+        HardTanHActivationFunctionTestCase.class,
 
-		IdentityActivationFunctionTestCase.class,
+        IdentityActivationFunctionTestCase.class,
 
-		LReLUActivationFunctionTestCase.class,
+        LReLUActivationFunctionTestCase.class,
 
-		ReLUActivationFunctionTestCase.class,
+        ReLUActivationFunctionTestCase.class,
 
-		SELUActivationFunctionTestCase.class,
+        SELUActivationFunctionTestCase.class,
 
-		SigmoidActivationFunctionTestCase.class,
+        SigmoidActivationFunctionTestCase.class,
 
-		SoftMaxActivationFunctionTestCase.class,
+        SoftMaxActivationFunctionTestCase.class,
 
-		SoftPlusActivationFunctionTestCase.class,
+        SoftPlusActivationFunctionTestCase.class,
 
-		SoftSignActivationFunctionTestCase.class,
+        SoftSignActivationFunctionTestCase.class,
 
-		TanHActivationFunctionTestCase.class, })
+        TanHActivationFunctionTestCase.class, })
 public class ActivationFunctionTestSuite {
 
 }

@@ -17,92 +17,92 @@ import com.jstarcraft.core.utility.HashUtility;
  */
 class JavaEnvironmentContext extends EnvironmentContext {
 
-	static final JavaEnvironmentContext INSTANCE;
+    static final JavaEnvironmentContext INSTANCE;
 
-	static {
-		INSTANCE = new JavaEnvironmentContext();
-		INSTANCE.numberOfThreads = Runtime.getRuntime().availableProcessors();
-		{
-			int numberOfTasks = 1;
-			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
-			INSTANCE.taskExecutor = Executors.newFixedThreadPool(numberOfTasks, factory);
-		}
-		{
-			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
-			INSTANCE.algorithmExecutors = new ExecutorService[INSTANCE.numberOfThreads];
-			for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
-				INSTANCE.algorithmExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
-			}
-		}
-		{
-			JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
-			INSTANCE.structureExecutors = new ExecutorService[INSTANCE.numberOfThreads];
-			for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
-				INSTANCE.structureExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
-			}
-		}
-	}
+    static {
+        INSTANCE = new JavaEnvironmentContext();
+        INSTANCE.numberOfThreads = Runtime.getRuntime().availableProcessors();
+        {
+            int numberOfTasks = 1;
+            JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
+            INSTANCE.taskExecutor = Executors.newFixedThreadPool(numberOfTasks, factory);
+        }
+        {
+            JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
+            INSTANCE.algorithmExecutors = new ExecutorService[INSTANCE.numberOfThreads];
+            for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
+                INSTANCE.algorithmExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
+            }
+        }
+        {
+            JavaEnvironmentThreadFactory factory = new JavaEnvironmentThreadFactory(INSTANCE);
+            INSTANCE.structureExecutors = new ExecutorService[INSTANCE.numberOfThreads];
+            for (int threadIndex = 0; threadIndex < INSTANCE.numberOfThreads; threadIndex++) {
+                INSTANCE.structureExecutors[threadIndex] = Executors.newSingleThreadExecutor(factory);
+            }
+        }
+    }
 
-	private int numberOfThreads;
+    private int numberOfThreads;
 
-	private ExecutorService taskExecutor;
+    private ExecutorService taskExecutor;
 
-	private ExecutorService[] algorithmExecutors;
+    private ExecutorService[] algorithmExecutors;
 
-	private ExecutorService[] structureExecutors;
+    private ExecutorService[] structureExecutors;
 
-	private JavaEnvironmentContext() {
-	}
+    private JavaEnvironmentContext() {
+    }
 
-	@Override
-	public Future<?> doTask(Runnable command) {
-		Future<?> task = taskExecutor.submit(() -> {
-		    command.run();
-			// 必须触发垃圾回收.
-			System.gc();
-		});
-		return task;
-	}
+    @Override
+    public Future<?> doTask(Runnable command) {
+        Future<?> task = taskExecutor.submit(() -> {
+            command.run();
+            // 必须触发垃圾回收.
+            System.gc();
+        });
+        return task;
+    }
 
-	@Override
-	public void doAlgorithmByAny(int code, Runnable command) {
-		int threadIndex = FastMath.abs(HashUtility.twNumberHash32(code)) % numberOfThreads;
-		algorithmExecutors[threadIndex].execute(command);
-	}
+    @Override
+    public void doAlgorithmByAny(int code, Runnable command) {
+        int threadIndex = FastMath.abs(HashUtility.twNumberHash32(code)) % numberOfThreads;
+        algorithmExecutors[threadIndex].execute(command);
+    }
 
-	@Override
-	public synchronized void doAlgorithmByEvery(Runnable command) {
-		try {
-			for (int threadIndex = 0; threadIndex < numberOfThreads; threadIndex++) {
-				algorithmExecutors[threadIndex].submit(() -> {
-					command.run();
-				}).get();
-			}
-		} catch (Exception exception) {
-			throw new RuntimeException(exception);
-		}
-	}
+    @Override
+    public synchronized void doAlgorithmByEvery(Runnable command) {
+        try {
+            for (int threadIndex = 0; threadIndex < numberOfThreads; threadIndex++) {
+                algorithmExecutors[threadIndex].submit(() -> {
+                    command.run();
+                }).get();
+            }
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 
-	@Override
-	public void doStructureByAny(int code, Runnable command) {
-		int threadIndex = FastMath.abs(HashUtility.twNumberHash32(code)) % numberOfThreads;
-		structureExecutors[threadIndex].execute(command);
-	}
+    @Override
+    public void doStructureByAny(int code, Runnable command) {
+        int threadIndex = FastMath.abs(HashUtility.twNumberHash32(code)) % numberOfThreads;
+        structureExecutors[threadIndex].execute(command);
+    }
 
-	@Override
-	public synchronized void doStructureByEvery(Runnable command) {
-		CountDownLatch latch = new CountDownLatch(numberOfThreads);
-		for (int threadIndex = 0; threadIndex < numberOfThreads; threadIndex++) {
-			structureExecutors[threadIndex].execute(() -> {
-				command.run();
-				latch.countDown();
-			});
-		}
-		try {
-			latch.await();
-		} catch (Exception exception) {
-			throw new RuntimeException(exception);
-		}
-	}
+    @Override
+    public synchronized void doStructureByEvery(Runnable command) {
+        CountDownLatch latch = new CountDownLatch(numberOfThreads);
+        for (int threadIndex = 0; threadIndex < numberOfThreads; threadIndex++) {
+            structureExecutors[threadIndex].execute(() -> {
+                command.run();
+                latch.countDown();
+            });
+        }
+        try {
+            latch.await();
+        } catch (Exception exception) {
+            throw new RuntimeException(exception);
+        }
+    }
 
 }

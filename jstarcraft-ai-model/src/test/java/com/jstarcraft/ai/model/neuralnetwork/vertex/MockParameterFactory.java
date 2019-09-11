@@ -10,38 +10,38 @@ import com.jstarcraft.ai.model.neuralnetwork.parameter.ParameterFactory;
 
 public class MockParameterFactory implements ParameterFactory {
 
-	@Override
-	public void setValues(MathMatrix matrix) {
-		Nd4j.getRandom().setSeed(6L);
-		INDArray array = Nd4j.randn(new int[] { matrix.getRowSize(), matrix.getColumnSize() }).divi(FastMath.sqrt(matrix.getRowSize()));
-		matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
-			scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
-		});
-	}
+    @Override
+    public void setValues(MathMatrix matrix) {
+        Nd4j.getRandom().setSeed(6L);
+        INDArray array = Nd4j.randn(new int[] { matrix.getRowSize(), matrix.getColumnSize() }).divi(FastMath.sqrt(matrix.getRowSize()));
+        matrix.iterateElement(MathCalculator.SERIAL, (scalar) -> {
+            scalar.setValue(array.getFloat(scalar.getRow(), scalar.getColumn()));
+        });
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object == null) {
-			return false;
-		}
-		if (getClass() != object.getClass()) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
-	@Override
-	public String toString() {
-		return "MockParameterFactory()";
-	}
+    @Override
+    public String toString() {
+        return "MockParameterFactory()";
+    }
 
 }

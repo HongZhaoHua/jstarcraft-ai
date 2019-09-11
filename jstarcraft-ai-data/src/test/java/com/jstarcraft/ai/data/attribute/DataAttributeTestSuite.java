@@ -7,13 +7,13 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		MemoryQuantityAttributeTestCase.class,
+        MemoryQuantityAttributeTestCase.class,
 
-		MemoryQualityAttributeTestCase.class,
+        MemoryQualityAttributeTestCase.class,
 
-		RedisQuantityAttributeTestCase.class,
+        RedisQuantityAttributeTestCase.class,
 
-		RedisQualityAttributeTestCase.class })
+        RedisQualityAttributeTestCase.class })
 public class DataAttributeTestSuite {
 
 }

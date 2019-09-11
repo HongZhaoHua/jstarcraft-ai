@@ -19,22 +19,22 @@ import com.jstarcraft.ai.data.exception.DataException;
  */
 public abstract class StreamConverter extends AbstractConverter<InputStream> {
 
-	protected StreamConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
-		super(qualityAttributes, quantityAttributes);
-	}
+    protected StreamConverter(Collection<QualityAttribute> qualityAttributes, Collection<QuantityAttribute> quantityAttributes) {
+        super(qualityAttributes, quantityAttributes);
+    }
 
-	protected abstract int parseData(DataModule module, BufferedReader buffer) throws IOException;
+    protected abstract int parseData(DataModule module, BufferedReader buffer) throws IOException;
 
-	@Override
-	public int convert(DataModule module, InputStream iterator) {
-		try {
-			try (InputStreamReader reader = new InputStreamReader(iterator); BufferedReader buffer = new BufferedReader(reader)) {
-				return parseData(module, buffer);
-			}
-		} catch (Exception exception) {
-			// TODO 处理日志.
-			throw new DataException(exception);
-		}
-	}
+    @Override
+    public int convert(DataModule module, InputStream iterator) {
+        try {
+            try (InputStreamReader reader = new InputStreamReader(iterator); BufferedReader buffer = new BufferedReader(reader)) {
+                return parseData(module, buffer);
+            }
+        } catch (Exception exception) {
+            // TODO 处理日志.
+            throw new DataException(exception);
+        }
+    }
 
 }

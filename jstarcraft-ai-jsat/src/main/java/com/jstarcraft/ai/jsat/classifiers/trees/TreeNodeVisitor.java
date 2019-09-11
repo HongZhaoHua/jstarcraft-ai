@@ -21,8 +21,8 @@ import com.jstarcraft.ai.jsat.linear.DenseVector;
  * 
  * The implementation for a given tree should override
  * {@link #localClassify(com.jstarcraft.ai.jsat.classifiers.DataPoint) } and
- * {@link #localRegress(com.jstarcraft.ai.jsat.classifiers.DataPoint) } if the operations are
- * supported.
+ * {@link #localRegress(com.jstarcraft.ai.jsat.classifiers.DataPoint) } if the
+ * operations are supported.
  * 
  * @author Edward Raff
  * @see TreeLearner

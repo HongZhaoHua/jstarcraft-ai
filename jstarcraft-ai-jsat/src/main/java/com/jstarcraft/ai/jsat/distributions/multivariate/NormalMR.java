@@ -26,9 +26,10 @@ import com.jstarcraft.ai.jsat.linear.Vec;
 
 /**
  * This class implements the Multivariate Normal Distribution, but augments it
- * so that {@link #setUsingData(com.jstarcraft.ai.jsat.DataSet, boolean) fitting} the distribution
- * uses a robust estimate of the distribution parameters. This comes at
- * increased cost that is cubic with respect to the number of variables.
+ * so that {@link #setUsingData(com.jstarcraft.ai.jsat.DataSet, boolean)
+ * fitting} the distribution uses a robust estimate of the distribution
+ * parameters. This comes at increased cost that is cubic with respect to the
+ * number of variables.
  *
  * @author Edward Raff
  */

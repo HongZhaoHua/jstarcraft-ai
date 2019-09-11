@@ -7,36 +7,36 @@ import org.junit.Test;
 
 public class EnvironmentContextTestCase {
 
-	private EnvironmentContext[] managers = new EnvironmentContext[] { EnvironmentFactory.CPU, EnvironmentFactory.GPU, EnvironmentFactory.JAVA };
+    private EnvironmentContext[] managers = new EnvironmentContext[] { EnvironmentFactory.CPU, EnvironmentFactory.GPU, EnvironmentFactory.JAVA };
 
-	@Test
-	public void testGetInstance() throws Exception {
-		try {
-		    EnvironmentThread.getThread(EnvironmentThread.class);
-			Assert.fail();
-		} catch (ClassCastException exception) {
-		}
+    @Test
+    public void testGetInstance() throws Exception {
+        try {
+            EnvironmentThread.getThread(EnvironmentThread.class);
+            Assert.fail();
+        } catch (ClassCastException exception) {
+        }
 
-		for (EnvironmentContext manager : managers) {
-			Future<?> task = manager.doTask(() -> {
-				Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
+        for (EnvironmentContext manager : managers) {
+            Future<?> task = manager.doTask(() -> {
+                Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
 
-				manager.doAlgorithmByEvery(() -> {
-					Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
-				});
+                manager.doAlgorithmByEvery(() -> {
+                    Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
+                });
 
-				manager.doStructureByEvery(() -> {
-					Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
-				});
-			});
-			task.get();
-		}
+                manager.doStructureByEvery(() -> {
+                    Assert.assertEquals(manager, EnvironmentThread.getThread(EnvironmentThread.class).getContext());
+                });
+            });
+            task.get();
+        }
 
-		try {
-		    EnvironmentThread.getThread(EnvironmentThread.class);
-			Assert.fail();
-		} catch (ClassCastException exception) {
-		}
-	}
+        try {
+            EnvironmentThread.getThread(EnvironmentThread.class);
+            Assert.fail();
+        } catch (ClassCastException exception) {
+        }
+    }
 
 }

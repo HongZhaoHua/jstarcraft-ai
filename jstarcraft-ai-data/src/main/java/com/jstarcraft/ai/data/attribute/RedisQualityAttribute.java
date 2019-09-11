@@ -19,68 +19,68 @@ import com.googlecode.concurrentlinkedhashmap.ConcurrentLinkedHashMap.Builder;
  */
 public class RedisQualityAttribute<T extends Comparable<T>> implements QualityAttribute<T> {
 
-	private final static String indexLua = "local index = redis.call('hget', KEYS[1], ARGV[1]); if (not index) then index = redis.call('incr', KEYS[2]) - 1; redis.call('hset', KEYS[1], ARGV[1], index); end; return index;";
+    private final static String indexLua = "local index = redis.call('hget', KEYS[1], ARGV[1]); if (not index) then index = redis.call('incr', KEYS[2]) - 1; redis.call('hset', KEYS[1], ARGV[1], index); end; return index;";
 
-	private final static String indexSuffix = "_indexes";
+    private final static String indexSuffix = "_indexes";
 
-	private final static String sizeSuffix = "_size";
+    private final static String sizeSuffix = "_size";
 
-	/** 属性名称 */
-	private String name;
+    /** 属性名称 */
+    private String name;
 
-	/** 属性类型 */
-	private Class<T> type;
+    /** 属性类型 */
+    private Class<T> type;
 
-	private String indexKey;
+    private String indexKey;
 
-	private String sizeKey;
+    private String sizeKey;
 
-	private ConcurrentLinkedHashMap<T, Integer> indexCache;
+    private ConcurrentLinkedHashMap<T, Integer> indexCache;
 
-	private RScript script;
+    private RScript script;
 
-	private String indexSignature;
+    private String indexSignature;
 
-	private RAtomicLong sizeAtomic;
+    private RAtomicLong sizeAtomic;
 
-	public RedisQualityAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
-		this.name = name;
-		this.type = type;
-		this.indexKey = name + indexSuffix;
-		this.sizeKey = name + sizeSuffix;
-		Builder<T, Integer> builder = new Builder<>();
-		builder.initialCapacity(minimunSize);
-		builder.maximumWeightedCapacity(maximunSize);
-		this.indexCache = builder.build();
-		this.script = redisson.getScript();
-		this.indexSignature = script.scriptLoad(indexLua);
-		this.sizeAtomic = redisson.getAtomicLong(sizeKey);
-	}
+    public RedisQualityAttribute(String name, Class<T> type, int minimunSize, int maximunSize, Redisson redisson) {
+        this.name = name;
+        this.type = type;
+        this.indexKey = name + indexSuffix;
+        this.sizeKey = name + sizeSuffix;
+        Builder<T, Integer> builder = new Builder<>();
+        builder.initialCapacity(minimunSize);
+        builder.maximumWeightedCapacity(maximunSize);
+        this.indexCache = builder.build();
+        this.script = redisson.getScript();
+        this.indexSignature = script.scriptLoad(indexLua);
+        this.sizeAtomic = redisson.getAtomicLong(sizeKey);
+    }
 
-	@Override
-	public String getName() {
-		return name;
-	}
+    @Override
+    public String getName() {
+        return name;
+    }
 
-	@Override
-	public Class<T> getType() {
-		return type;
-	}
+    @Override
+    public Class<T> getType() {
+        return type;
+    }
 
-	@Override
-	public int convertData(T data) {
-		Integer index = indexCache.get(data);
-		if (index == null) {
-			Number number = script.evalSha(Mode.READ_WRITE, indexSignature, ReturnType.INTEGER, Arrays.asList(indexKey, sizeKey), data);
-			index = number.intValue();
-			indexCache.put(data, index);
-		}
-		return index;
-	}
+    @Override
+    public int convertData(T data) {
+        Integer index = indexCache.get(data);
+        if (index == null) {
+            Number number = script.evalSha(Mode.READ_WRITE, indexSignature, ReturnType.INTEGER, Arrays.asList(indexKey, sizeKey), data);
+            index = number.intValue();
+            indexCache.put(data, index);
+        }
+        return index;
+    }
 
-	@Override
-	public int getSize() {
-		return (int) sizeAtomic.get();
-	}
+    @Override
+    public int getSize() {
+        return (int) sizeAtomic.get();
+    }
 
 }

@@ -55,7 +55,8 @@ public interface DataStore {
      * more features (numeric or categorical) than is expected, the store will
      * automatically expand to accept the given features.<br>
      * If you want an error to be thrown on miss-match between current and given
-     * data, use {@link #addDataPointCheck(com.jstarcraft.ai.jsat.classifiers.DataPoint) }.
+     * data, use
+     * {@link #addDataPointCheck(com.jstarcraft.ai.jsat.classifiers.DataPoint) }.
      *
      *
      * @param dp the data point to add

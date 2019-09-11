@@ -7,11 +7,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		DenseModuleTestCase.class,
+        DenseModuleTestCase.class,
 
-		SparseModuleTestCase.class,
+        SparseModuleTestCase.class,
 
-		ReferenceModuleTestCase.class })
+        ReferenceModuleTestCase.class })
 public class DataModuleTestSuite {
 
 }

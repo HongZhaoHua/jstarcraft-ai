@@ -28,8 +28,8 @@ public class CholeskyDecomposition implements Serializable {
     /**
      * Contains the matrix 'L', but instead of just keeping the lower triangular, we
      * keep it in a symmetric copy so
-     * {@link LUPDecomposition#forwardSub(com.jstarcraft.ai.jsat.linear.Matrix, com.jstarcraft.ai.jsat.linear.Vec) } and
-     * backSub can be done without copying.
+     * {@link LUPDecomposition#forwardSub(com.jstarcraft.ai.jsat.linear.Matrix, com.jstarcraft.ai.jsat.linear.Vec) }
+     * and backSub can be done without copying.
      */
     private Matrix L;
 

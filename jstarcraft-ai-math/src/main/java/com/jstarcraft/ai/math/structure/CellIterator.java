@@ -8,12 +8,12 @@ package com.jstarcraft.ai.math.structure;
  */
 public interface CellIterator<T> extends MathIterator<MathCell<T>> {
 
-	/**
-	 * 设置所有单元的值
-	 * 
-	 * @param value
-	 * @return
-	 */
-	CellIterator<T> setValues(T value);
+    /**
+     * 设置所有单元的值
+     * 
+     * @param value
+     * @return
+     */
+    CellIterator<T> setValues(T value);
 
 }

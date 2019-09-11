@@ -8,18 +8,18 @@ package com.jstarcraft.ai.data;
  */
 public interface DataAttribute<T> {
 
-	/**
-	 * 获取属性名称
-	 * 
-	 * @return
-	 */
-	String getName();
+    /**
+     * 获取属性名称
+     * 
+     * @return
+     */
+    String getName();
 
-	/**
-	 * 获取属性类型
-	 * 
-	 * @return
-	 */
-	Class<T> getType();
+    /**
+     * 获取属性类型
+     * 
+     * @return
+     */
+    Class<T> getType();
 
 }

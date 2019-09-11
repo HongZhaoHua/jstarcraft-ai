@@ -10,12 +10,12 @@ import com.jstarcraft.ai.data.DataInstance;
  */
 public interface Predictor {
 
-	/**
-	 * 预测
-	 * 
-	 * @param instance
-	 * @param contexts
-	 */
-	void predict(DataInstance instance, DataInstance... contexts);
+    /**
+     * 预测
+     * 
+     * @param instance
+     * @param contexts
+     */
+    void predict(DataInstance instance, DataInstance... contexts);
 
 }

@@ -6,24 +6,24 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-		// 节点测试集
-		EuclideanVertexTestCase.class,
+        // 节点测试集
+        EuclideanVertexTestCase.class,
 
-		HorizontalStackVertexTestCase.class,
+        HorizontalStackVertexTestCase.class,
 
-		HorizontalUnstackVertexTestCase.class,
+        HorizontalUnstackVertexTestCase.class,
 
-		MinusVertexTestCase.class,
+        MinusVertexTestCase.class,
 
-		MultiplyVertexTestCase.class,
+        MultiplyVertexTestCase.class,
 
-		PlusVertexTestCase.class,
+        PlusVertexTestCase.class,
 
-		ShareVertexTestCase.class,
+        ShareVertexTestCase.class,
 
-		VerticalStackVertexTestCase.class,
+        VerticalStackVertexTestCase.class,
 
-		VerticalUnstackVertexTestCase.class, })
+        VerticalUnstackVertexTestCase.class, })
 public class VertexTestSuite {
 
 }

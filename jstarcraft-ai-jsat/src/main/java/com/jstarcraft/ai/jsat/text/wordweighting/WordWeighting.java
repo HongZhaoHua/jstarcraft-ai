@@ -34,12 +34,14 @@ public interface WordWeighting extends IndexFunction {
     /**
      * The implementation may want to pre compute come values based on the vector it
      * is about to be applied to. This should be called in place of
-     * {@link Vec#applyIndexFunction(com.jstarcraft.ai.jsat.math.IndexFunction) } . The vector should
-     * be in a bag-of-words form where each index value indicates how many times the
-     * word for that index occurred in the document represented by the vector.
+     * {@link Vec#applyIndexFunction(com.jstarcraft.ai.jsat.math.IndexFunction) } .
+     * The vector should be in a bag-of-words form where each index value indicates
+     * how many times the word for that index occurred in the document represented
+     * by the vector.
      * 
      * @param vec the vector to set up for and then alter by invoking
-     *            {@link Vec#applyIndexFunction(com.jstarcraft.ai.jsat.math.IndexFunction) } on
+     *            {@link Vec#applyIndexFunction(com.jstarcraft.ai.jsat.math.IndexFunction) }
+     *            on
      */
     public void applyTo(Vec vec);
 }

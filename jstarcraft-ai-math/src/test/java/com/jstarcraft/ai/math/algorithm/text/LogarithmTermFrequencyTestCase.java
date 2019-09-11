@@ -12,17 +12,17 @@ import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 
 public class LogarithmTermFrequencyTestCase extends TermFrequencyTestCase {
 
-	@Override
-	protected TermFrequency getTermFrequency(List<Integer> document) {
-		return new LogarithmTermFrequency(new Int2FloatAVLTreeMap(), document);
-	}
+    @Override
+    protected TermFrequency getTermFrequency(List<Integer> document) {
+        return new LogarithmTermFrequency(new Int2FloatAVLTreeMap(), document);
+    }
 
-	@Override
-	protected Int2FloatMap calculateTermFrequency(Int2FloatMap keyValues) {
-		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-			term.setValue((float) FastMath.log(1F + term.getFloatValue()));
-		}
-		return keyValues;
-	}
+    @Override
+    protected Int2FloatMap calculateTermFrequency(Int2FloatMap keyValues) {
+        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
+            term.setValue((float) FastMath.log(1F + term.getFloatValue()));
+        }
+        return keyValues;
+    }
 
 }

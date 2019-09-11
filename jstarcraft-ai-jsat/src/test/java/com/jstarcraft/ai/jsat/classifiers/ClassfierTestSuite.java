@@ -34,11 +34,11 @@ import com.jstarcraft.ai.jsat.classifiers.trees.TreeTestSuite;
         KnnTestSuite.class,
 
         LinearTestSuite.class,
-        
+
         TreeTestSuite.class,
-        
+
         NeuralNetworkTestSuite.class,
-        
+
         SvmTestSuite.class,
 
         TreeTestSuite.class,

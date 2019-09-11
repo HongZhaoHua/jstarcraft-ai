@@ -10,11 +10,11 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  */
 public interface ParameterFactory {
 
-	/**
-	 * 设置参数值
-	 * 
-	 * @param matrix
-	 */
-	void setValues(MathMatrix matrix);
+    /**
+     * 设置参数值
+     * 
+     * @param matrix
+     */
+    void setValues(MathMatrix matrix);
 
 }

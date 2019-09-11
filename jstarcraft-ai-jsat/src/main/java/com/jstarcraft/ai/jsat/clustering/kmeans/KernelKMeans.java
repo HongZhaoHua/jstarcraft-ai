@@ -26,8 +26,9 @@ import it.unimi.dsi.fastutil.doubles.DoubleList;
  * <br>
  * KernelKMeans keeps a reference to the data passed in for clustering so that
  * queries can be conveniently answered, such as getting
- * {@link #findClosestCluster(com.jstarcraft.ai.jsat.linear.Vec) the closest cluster} or finding
- * the {@link #meanToMeanDistance(int, int) distance between means}
+ * {@link #findClosestCluster(com.jstarcraft.ai.jsat.linear.Vec) the closest
+ * cluster} or finding the {@link #meanToMeanDistance(int, int) distance between
+ * means}
  * 
  * @author Edward Raff
  */

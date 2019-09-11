@@ -7,15 +7,15 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-		MaximumInverseDocumentFrequencyTestCase.class,
+        MaximumInverseDocumentFrequencyTestCase.class,
 
-		NaturalInverseDocumentFrequencyTestCase.class,
+        NaturalInverseDocumentFrequencyTestCase.class,
 
-		ProbabilisticInverseDocumentFrequencyTestCase.class,
+        ProbabilisticInverseDocumentFrequencyTestCase.class,
 
-		SmoothInverseDocumentFrequencyTestCase.class,
+        SmoothInverseDocumentFrequencyTestCase.class,
 
-		UnaryInverseDocumentFrequencyTestCase.class })
+        UnaryInverseDocumentFrequencyTestCase.class })
 public class InverseDocumentFrequencyTestSuite {
 
 }

@@ -18,9 +18,9 @@ import com.jstarcraft.ai.jsat.classifiers.DataPoint;
  * interface, the value returned by evaluate will be 1.0-Adjusted Rand Index so
  * the best value becomes 0.0 and the worse value becomes 2.0. <br>
  * <b>NOTE:</b> Because the ARI needs to know the true class labels, only
- * {@link #evaluate(int[], com.jstarcraft.ai.jsat.DataSet) } will work, since it provides the data
- * set as an argument. The dataset given must be an instance of
- * {@link ClassificationDataSet}
+ * {@link #evaluate(int[], com.jstarcraft.ai.jsat.DataSet) } will work, since it
+ * provides the data set as an argument. The dataset given must be an instance
+ * of {@link ClassificationDataSet}
  * 
  * @author Edward Raff
  */

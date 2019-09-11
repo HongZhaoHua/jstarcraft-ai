@@ -12,38 +12,38 @@ import org.redisson.config.Config;
 
 public class RedisQuantityAttributeTestCase extends QuantityAttributeTestCase {
 
-	private static Redisson redisson;
+    private static Redisson redisson;
 
-	@BeforeClass
-	public static void beforeClass() {
-		// 注意此处的编解码器
-		Codec codec = new JsonJacksonCodec();
-		Config configuration = new Config();
-		configuration.setCodec(codec);
-		configuration.useSingleServer().setAddress("redis://127.0.0.1:6379");
-		redisson = (Redisson) Redisson.create(configuration);
-	}
+    @BeforeClass
+    public static void beforeClass() {
+        // 注意此处的编解码器
+        Codec codec = new JsonJacksonCodec();
+        Config configuration = new Config();
+        configuration.setCodec(codec);
+        configuration.useSingleServer().setAddress("redis://127.0.0.1:6379");
+        redisson = (Redisson) Redisson.create(configuration);
+    }
 
-	@AfterClass
-	public static void afterClass() {
-		redisson.shutdown();
-	}
+    @AfterClass
+    public static void afterClass() {
+        redisson.shutdown();
+    }
 
-	@Before
-	public void beforeTest() {
-		RKeys keys = redisson.getKeys();
-		keys.flushdb();
-	}
+    @Before
+    public void beforeTest() {
+        RKeys keys = redisson.getKeys();
+        keys.flushdb();
+    }
 
-	@After
-	public void afterTest() {
-		RKeys keys = redisson.getKeys();
-		keys.flushdb();
-	}
+    @After
+    public void afterTest() {
+        RKeys keys = redisson.getKeys();
+        keys.flushdb();
+    }
 
-	@Override
-	protected QuantityAttribute<Float> getQuantityAttribute() {
-		return new RedisQuantityAttribute<>("test", Float.class, redisson);
-	}
+    @Override
+    protected QuantityAttribute<Float> getQuantityAttribute() {
+        return new RedisQuantityAttribute<>("test", Float.class, redisson);
+    }
 
 }

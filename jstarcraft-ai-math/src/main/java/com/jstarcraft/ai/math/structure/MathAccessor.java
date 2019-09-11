@@ -12,15 +12,15 @@ package com.jstarcraft.ai.math.structure;
  */
 public interface MathAccessor<T> {
 
-	/**
-	 * 访问元素
-	 * 
-	 * <pre>
-	 * 与{@link MathIterator#iterateElement(MathCalculator, MathAccessor...)}相关
-	 * </pre>
-	 * 
-	 * @param element
-	 */
-	void accessElement(T element);
+    /**
+     * 访问元素
+     * 
+     * <pre>
+     * 与{@link MathIterator#iterateElement(MathCalculator, MathAccessor...)}相关
+     * </pre>
+     * 
+     * @param element
+     */
+    void accessElement(T element);
 
 }

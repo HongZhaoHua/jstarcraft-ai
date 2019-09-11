@@ -10,13 +10,13 @@ import com.jstarcraft.core.utility.Integer2FloatKeyValue;
  */
 public interface Evaluator<L, R> {
 
-	/**
-	 * 评估
-	 * 
-	 * @param collection
-	 * @param list
-	 * @return
-	 */
-	Integer2FloatKeyValue evaluate(L collection, R list);
+    /**
+     * 评估
+     * 
+     * @param collection
+     * @param list
+     * @return
+     */
+    Integer2FloatKeyValue evaluate(L collection, R list);
 
 }

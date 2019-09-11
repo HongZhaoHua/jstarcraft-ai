@@ -36,9 +36,10 @@ import com.jstarcraft.ai.jsat.utils.concurrent.ParallelUtils;
 
 /**
  * LinearBatch learns either a classification or regression problem depending on
- * the {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss function &#8467;(w,x)}
- * used. The solution attempts to minimize <big>&sum;</big><sub>i</sub>
- * &#8467;(w,x<sub>i</sub>) + {@link #setLambda0(double) &lambda;<sub>0</sub>}/2
+ * the {@link #setLoss(com.jstarcraft.ai.jsat.lossfunctions.LossFunc) loss
+ * function &#8467;(w,x)} used. The solution attempts to minimize
+ * <big>&sum;</big><sub>i</sub> &#8467;(w,x<sub>i</sub>) +
+ * {@link #setLambda0(double) &lambda;<sub>0</sub>}/2
  * ||w||<sub>2</sub><sup>2</sup>, and is trained using a batch optimization
  * method. <br>
  * <br>

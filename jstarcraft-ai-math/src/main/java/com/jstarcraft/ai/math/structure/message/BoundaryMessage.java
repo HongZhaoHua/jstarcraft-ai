@@ -14,53 +14,53 @@ import com.jstarcraft.core.utility.KeyValue;
  */
 public class BoundaryMessage implements AccumulationMessage<KeyValue<Float, Float>> {
 
-	private boolean absolute;
+    private boolean absolute;
 
-	private float maximum = Float.NEGATIVE_INFINITY;
+    private float maximum = Float.NEGATIVE_INFINITY;
 
-	private float minimum = Float.POSITIVE_INFINITY;
+    private float minimum = Float.POSITIVE_INFINITY;
 
-	public BoundaryMessage(boolean absolute) {
-		this.absolute = absolute;
-	}
+    public BoundaryMessage(boolean absolute) {
+        this.absolute = absolute;
+    }
 
-	@Override
-	public void attach(MathMessage message) {
-		BoundaryMessage that = BoundaryMessage.class.cast(message);
-		if (this.maximum < that.maximum) {
-			this.maximum = that.maximum;
-		}
-		if (this.minimum > that.minimum) {
-			this.minimum = that.minimum;
-		}
-	}
+    @Override
+    public void attach(MathMessage message) {
+        BoundaryMessage that = BoundaryMessage.class.cast(message);
+        if (this.maximum < that.maximum) {
+            this.maximum = that.maximum;
+        }
+        if (this.minimum > that.minimum) {
+            this.minimum = that.minimum;
+        }
+    }
 
-	@Override
-	public MathMessage detach() {
-		MathMessage message = new BoundaryMessage(absolute);
-		return message;
-	}
+    @Override
+    public MathMessage detach() {
+        MathMessage message = new BoundaryMessage(absolute);
+        return message;
+    }
 
-	@Override
-	public void accumulateValue(float value) {
-		if (absolute) {
-			value = FastMath.abs(value);
-		}
-		if (maximum < value) {
-			maximum = value;
-		}
-		if (minimum > value) {
-			minimum = value;
-		}
-	}
+    @Override
+    public void accumulateValue(float value) {
+        if (absolute) {
+            value = FastMath.abs(value);
+        }
+        if (maximum < value) {
+            maximum = value;
+        }
+        if (minimum > value) {
+            minimum = value;
+        }
+    }
 
-	@Override
-	public KeyValue<Float, Float> getValue() {
-		return new KeyValue<>(minimum, maximum);
-	}
+    @Override
+    public KeyValue<Float, Float> getValue() {
+        return new KeyValue<>(minimum, maximum);
+    }
 
-	public boolean isAbsolute() {
-		return absolute;
-	}
+    public boolean isAbsolute() {
+        return absolute;
+    }
 
 }

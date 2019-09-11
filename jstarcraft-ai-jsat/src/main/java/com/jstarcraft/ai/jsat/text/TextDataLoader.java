@@ -49,7 +49,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
  * @author Edward Raff
  */
 public abstract class TextDataLoader implements TextVectorCreator {
-    
+
     private static final IntOpenHashSet EMPTY = new IntOpenHashSet();
 
     private static final long serialVersionUID = -657253682338792871L;

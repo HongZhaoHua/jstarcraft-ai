@@ -21,75 +21,75 @@ import com.jstarcraft.core.utility.KeyValue;
  */
 public class HorizontalAttachVertex extends AbstractVertex {
 
-	protected HorizontalAttachVertex() {
-	}
+    protected HorizontalAttachVertex() {
+    }
 
-	public HorizontalAttachVertex(String name, MathCache factory) {
-		super(name, factory);
-	}
+    public HorizontalAttachVertex(String name, MathCache factory) {
+        super(name, factory);
+    }
 
-	@Override
-	public void doCache(KeyValue<MathMatrix, MathMatrix>... samples) {
-		super.doCache(samples);
+    @Override
+    public void doCache(KeyValue<MathMatrix, MathMatrix>... samples) {
+        super.doCache(samples);
 
-		// 检查样本的数量是否一样
-		int rowSize = samples[0].getKey().getRowSize();
-		for (int position = 1; position < samples.length; position++) {
-			if (rowSize != samples[position].getKey().getRowSize()) {
-				throw new IllegalArgumentException();
-			}
-		}
+        // 检查样本的数量是否一样
+        int rowSize = samples[0].getKey().getRowSize();
+        for (int position = 1; position < samples.length; position++) {
+            if (rowSize != samples[position].getKey().getRowSize()) {
+                throw new IllegalArgumentException();
+            }
+        }
 
-		// 获取样本的维度
-		MathMatrix[] keys = new MathMatrix[inputKeyValues.length];
-		MathMatrix[] values = new MathMatrix[inputKeyValues.length];
-		for (int position = 0; position < inputKeyValues.length; position++) {
-			keys[position] = inputKeyValues[position].getKey();
-			values[position] = inputKeyValues[position].getValue();
-		}
+        // 获取样本的维度
+        MathMatrix[] keys = new MathMatrix[inputKeyValues.length];
+        MathMatrix[] values = new MathMatrix[inputKeyValues.length];
+        for (int position = 0; position < inputKeyValues.length; position++) {
+            keys[position] = inputKeyValues[position].getKey();
+            values[position] = inputKeyValues[position].getValue();
+        }
 
-		MathMatrix outputData = ColumnGlobalMatrix.attachOf(keys);
-		outputKeyValue.setKey(outputData);
-		MathMatrix innerError = ColumnGlobalMatrix.attachOf(values);
-		outputKeyValue.setValue(innerError);
-	}
+        MathMatrix outputData = ColumnGlobalMatrix.attachOf(keys);
+        outputKeyValue.setKey(outputData);
+        MathMatrix innerError = ColumnGlobalMatrix.attachOf(values);
+        outputKeyValue.setValue(innerError);
+    }
 
-	@Override
-	public void doForward() {
-	}
+    @Override
+    public void doForward() {
+    }
 
-	@Override
-	public void doBackward() {
-	}
+    @Override
+    public void doBackward() {
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object == null) {
-			return false;
-		}
-		if (getClass() != object.getClass()) {
-			return false;
-		} else {
-			HorizontalAttachVertex that = (HorizontalAttachVertex) object;
-			EqualsBuilder equal = new EqualsBuilder();
-			equal.append(this.vertexName, that.vertexName);
-			return equal.isEquals();
-		}
-	}
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null) {
+            return false;
+        }
+        if (getClass() != object.getClass()) {
+            return false;
+        } else {
+            HorizontalAttachVertex that = (HorizontalAttachVertex) object;
+            EqualsBuilder equal = new EqualsBuilder();
+            equal.append(this.vertexName, that.vertexName);
+            return equal.isEquals();
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		HashCodeBuilder hash = new HashCodeBuilder();
-		hash.append(vertexName);
-		return hash.toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        HashCodeBuilder hash = new HashCodeBuilder();
+        hash.append(vertexName);
+        return hash.toHashCode();
+    }
 
-	@Override
-	public String toString() {
-		return "HorizontalStackVertex(name=" + vertexName + ")";
-	}
+    @Override
+    public String toString() {
+        return "HorizontalStackVertex(name=" + vertexName + ")";
+    }
 
 }

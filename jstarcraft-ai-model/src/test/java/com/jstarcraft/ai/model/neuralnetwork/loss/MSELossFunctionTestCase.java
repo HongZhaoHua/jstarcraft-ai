@@ -9,14 +9,14 @@ import com.jstarcraft.ai.model.neuralnetwork.loss.MSELossFunction;
 
 public class MSELossFunctionTestCase extends LossFunctionTestCase {
 
-	@Override
-	protected ILossFunction getOldFunction() {
-		return new LossMSE();
-	}
+    @Override
+    protected ILossFunction getOldFunction() {
+        return new LossMSE();
+    }
 
-	@Override
-	protected LossFunction getNewFunction(ActivationFunction function) {
-		return new MSELossFunction();
-	}
+    @Override
+    protected LossFunction getNewFunction(ActivationFunction function) {
+        return new MSELossFunction();
+    }
 
 }

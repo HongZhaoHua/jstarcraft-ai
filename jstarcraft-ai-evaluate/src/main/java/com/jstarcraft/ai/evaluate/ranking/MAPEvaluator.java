@@ -18,25 +18,25 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  */
 public class MAPEvaluator extends RankingEvaluator {
 
-	public MAPEvaluator(int size) {
-		super(size);
-	}
+    public MAPEvaluator(int size) {
+        super(size);
+    }
 
-	@Override
-	protected float measure(IntSet checkCollection, IntList rankList) {
-		if (rankList.size() > size) {
-		    rankList = rankList.subList(0, size);
-		}
-		int count = 0;
-		float map = 0F;
-		for (int index = 0; index < rankList.size(); index++) {
-			int itemIndex = rankList.get(index);
-			if (checkCollection.contains(itemIndex)) {
-				count++;
-				map += 1F * count / (index + 1);
-			}
-		}
-		return map / (checkCollection.size() < rankList.size() ? checkCollection.size() : rankList.size());
-	}
+    @Override
+    protected float measure(IntSet checkCollection, IntList rankList) {
+        if (rankList.size() > size) {
+            rankList = rankList.subList(0, size);
+        }
+        int count = 0;
+        float map = 0F;
+        for (int index = 0; index < rankList.size(); index++) {
+            int itemIndex = rankList.get(index);
+            if (checkCollection.contains(itemIndex)) {
+                count++;
+                map += 1F * count / (index + 1);
+            }
+        }
+        return map / (checkCollection.size() < rankList.size() ? checkCollection.size() : rankList.size());
+    }
 
 }

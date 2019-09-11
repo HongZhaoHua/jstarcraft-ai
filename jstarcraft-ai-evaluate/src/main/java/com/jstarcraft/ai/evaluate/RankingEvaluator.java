@@ -11,16 +11,16 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  */
 public abstract class RankingEvaluator extends AbstractEvaluator<IntSet, IntList> {
 
-	/** 大小 */
-	protected int size;
+    /** 大小 */
+    protected int size;
 
-	protected RankingEvaluator(int size) {
-		this.size = size;
-	}
+    protected RankingEvaluator(int size) {
+        this.size = size;
+    }
 
-	@Override
-	protected int count(IntSet checkCollection, IntList rankList) {
-		return 1;
-	}
+    @Override
+    protected int count(IntSet checkCollection, IntList rankList) {
+        return 1;
+    }
 
 }

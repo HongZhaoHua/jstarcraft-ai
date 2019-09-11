@@ -8,14 +8,14 @@ import com.jstarcraft.ai.model.neuralnetwork.activation.SoftMaxActivationFunctio
 
 public class SoftMaxActivationFunctionTestCase extends ActivationFunctionTestCase {
 
-	@Override
-	protected IActivation getOldFunction() {
-		return new ActivationSoftmax();
-	}
+    @Override
+    protected IActivation getOldFunction() {
+        return new ActivationSoftmax();
+    }
 
-	@Override
-	protected ActivationFunction getNewFunction() {
-		return new SoftMaxActivationFunction();
-	}
+    @Override
+    protected ActivationFunction getNewFunction() {
+        return new SoftMaxActivationFunction();
+    }
 
 }

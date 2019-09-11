@@ -228,7 +228,8 @@ public class ConditionalProbabilityTable implements Classifier {
      *                    <tt>targetClass</tt> may contain any value.
      * @return the probability in [0, 1] of the <tt>targetClass</tt> occurring with
      *         the <tt>targetValue</tt> given the information in <tt>cord</tt>
-     * @see #dataPointToCord(com.jstarcraft.ai.jsat.classifiers.DataPointPair, int, int[])
+     * @see #dataPointToCord(com.jstarcraft.ai.jsat.classifiers.DataPointPair, int,
+     *      int[])
      */
     public double query(int targetClass, int targetValue, int[] cord) {
         double sumVal = 0;
