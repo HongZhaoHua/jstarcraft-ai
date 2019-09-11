@@ -64,6 +64,13 @@
             <artifactId>parquet-hadoop</artifactId>
         </dependency>
 
+        <!-- 准备替代 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+        </dependency>
+
         <!-- Test框架依赖 -->
         <dependency>
             <groupId>junit</groupId>
