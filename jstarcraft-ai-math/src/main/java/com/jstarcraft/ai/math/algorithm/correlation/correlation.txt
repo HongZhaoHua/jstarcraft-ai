@@ -1,0 +1,8 @@
+距离和相似度度量方法:
+https://blog.csdn.net/pipisorry/article/details/45651315
+
+similarity(相似度计算工具包,java编写)
+https://github.com/shibing624/similarity
+
+Java Machine Learning Library:
+https://github.com/AbeelLab/javaml/tree/master/src/net/sf/javaml/distance

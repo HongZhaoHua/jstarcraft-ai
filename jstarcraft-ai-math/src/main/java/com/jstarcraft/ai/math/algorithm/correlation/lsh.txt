@@ -1,0 +1,29 @@
+LSH的基本思想:
+将原始数据空间中的两个相邻数据点通过相同的映射后,这两个数据点在新的数据空间中仍然相邻的概率很大,而不相邻的数据点被映射到同一个桶的概率很小.也就是说,如果我们对原始数据进行一些hash映射后,我们希望原先相邻的两个数据能够被hash到相同的桶内,具有相同的桶号.因此,LSH算法使用的关键是针对某一种相似度计算方法,找到一个具有以上描述特性的hash函数.如果能够找到这样一些hash functions,使得经过它们的哈希映射变换后,原始空间中相邻的数据落入相同的桶内,那么我们在该数据集合中进行近邻查找就变得容易,只需要将查询数据进行哈希映射得到其桶号,然后取出该桶号对应桶内的所有数据,再进行线性匹配即可查找到与查询数据相邻的数据.如果不相似的pairs哈希到同一个桶中,这样会使结果的false positive增加;反之,如果真正相似的pairs哈希到不同的桶中,那么会使结果的false negative增加.我们的目标是让false positive和false negative的比例尽可能的小.
+
+局部敏感哈希(LSH)——Locality Sensitive Hashing:
+http://cherishher.github.io/2018/09/19/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/
+
+局部敏感哈希-Locality-Sensitive-Hashing-LSH:
+http://blog.rexking6.top/2018/10/09/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C-Locality-Sensitive-Hashing-LSH/
+
+深入浅出LSH
+http://www.cppblog.com/humanchao/archive/2018/02/24/215521.html
+
+通过找到一些hash functions，使得经过它们的哈希映射变换后，就可以使原始空间中相邻的数据落入相同的桶内，那具有怎样特点的hash function才能够使得原本相邻的两个数据点经过hash变换后会落入相同的桶内？
+https://blog.csdn.net/aspirinvagrant/article/details/41284491
+
+海量数据相似度计算之simhash和海明距离:
+http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html
+
+使用SimHash进行海量文本去重:
+https://www.cnblogs.com/maybe2030/p/5203186.html
+
+A Java implementation of Locality Sensitive Hashing (LSH):
+https://github.com/tdebatty/java-LSH
+
+TarsosLSH – Locality Sensitive Hashing (LSH) in Java:
+https://github.com/JorenSix/TarsosLSH
+
+JImageHash is a performant perceptual image fingerprinting library entirely written in Java:
+https://github.com/KilianB/JImageHash
