@@ -12,6 +12,7 @@
         <module>jstarcraft-ai-environment</module>
         <module>jstarcraft-ai-evaluate</module>
         <module>jstarcraft-ai-jsat</module>
+        <module>jstarcraft-ai-lsh</module>
         <module>jstarcraft-ai-math</module>
         <module>jstarcraft-ai-model</module>
         <module>jstarcraft-ai-weka</module>
