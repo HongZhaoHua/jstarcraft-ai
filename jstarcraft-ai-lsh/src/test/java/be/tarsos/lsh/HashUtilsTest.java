@@ -18,7 +18,7 @@
 * 
 */
 
-package be.tarsos.lsh.test;
+package be.tarsos.lsh;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
