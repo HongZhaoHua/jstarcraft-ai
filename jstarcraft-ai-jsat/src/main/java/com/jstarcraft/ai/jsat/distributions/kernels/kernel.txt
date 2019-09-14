@@ -1,0 +1,2 @@
+通俗理解核方法(kernel function):
+https://blog.csdn.net/u014662865/article/details/80970470
