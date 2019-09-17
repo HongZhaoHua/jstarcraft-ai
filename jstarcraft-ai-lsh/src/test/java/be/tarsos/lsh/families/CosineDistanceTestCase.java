@@ -18,7 +18,7 @@
 * 
 */
 
-package be.tarsos.lsh;
+package be.tarsos.lsh.families;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +27,7 @@ import org.junit.Test;
 import be.tarsos.lsh.Vector;
 import be.tarsos.lsh.families.CosineDistance;
 
-public class CosineDistanceTest {
+public class CosineDistanceTestCase {
 
     @Test
     public void testDistance() {
@@ -43,7 +43,7 @@ public class CosineDistanceTest {
 
         CosineDistance distance = new CosineDistance();
         double distanceValue = distance.distance(v, other);
-        assertEquals("Expected about 0.002585", 0.00258509695, distanceValue, 0.00001);
+        assertEquals("Expected about 0.00258509695", 0.00258509695, distanceValue, 0.00001);
         assertEquals("d(one,two) = d(two,one)", distance.distance(other, v), distanceValue, 0.00001);
         assertEquals("d(one,one) = 0", distance.distance(other, other), 0, 0.00001);
 
