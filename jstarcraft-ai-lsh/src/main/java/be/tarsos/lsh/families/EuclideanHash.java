@@ -33,8 +33,7 @@ public class EuclideanHash implements HashFunction {
     private int offset;
     private int w;
 
-    public EuclideanHash(int dimensions, int w) {
-        Random rand = new Random();
+    public EuclideanHash(Random rand, int dimensions, int w) {
         this.w = w;
         this.offset = rand.nextInt(w);
 

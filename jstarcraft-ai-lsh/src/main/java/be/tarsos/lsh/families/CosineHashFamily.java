@@ -21,6 +21,7 @@
 package be.tarsos.lsh.families;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class CosineHashFamily implements HashFamily {
 
@@ -36,7 +37,8 @@ public class CosineHashFamily implements HashFamily {
 
     @Override
     public HashFunction createHashFunction() {
-        return new CosineHash(dimensions);
+        Random rand = new Random();
+        return new CosineHash(rand, dimensions);
     }
 
     @Override

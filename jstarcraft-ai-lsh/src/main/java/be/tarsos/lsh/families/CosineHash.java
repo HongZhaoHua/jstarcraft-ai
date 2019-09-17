@@ -31,8 +31,7 @@ public class CosineHash implements HashFunction {
     private static final long serialVersionUID = 778951747630668248L;
     final Vector randomProjection;
 
-    public CosineHash(int dimensions) {
-        Random rand = new Random();
+    public CosineHash(Random rand, int dimensions) {
         randomProjection = new Vector(dimensions);
         for (int d = 0; d < dimensions; d++) {
             // mean 0

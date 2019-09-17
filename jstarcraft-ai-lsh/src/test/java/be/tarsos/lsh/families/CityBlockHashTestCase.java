@@ -20,38 +20,27 @@
 
 package be.tarsos.lsh.families;
 
-import java.util.Arrays;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Random;
 
-public class CityBlockHashFamily implements HashFamily {
+import org.junit.Test;
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8926838846356323484L;
-    private int dimensions;
-    private int w;
+import be.tarsos.lsh.Vector;
 
-    public CityBlockHashFamily(int w, int dimensions) {
-        this.dimensions = dimensions;
-        this.w = w;
-    }
+public class CityBlockHashTestCase {
 
-    @Override
-    public HashFunction createHashFunction() {
-        Random rand = new Random();
-        return new CityBlockHash(rand, dimensions, w);
-    }
+    @Test
+    public void testHash() {
+        Vector v = new Vector(3);
+        v.set(0, 1);
+        v.set(1, 2);
+        v.set(2, 3);
 
-    @Override
-    public String combine(int[] hashes) {
-        // return Arrays.hashCode(hashes);
-        return Arrays.toString(hashes);
-    }
-
-    @Override
-    public DistanceMeasure createDistanceMeasure() {
-        return new CityBlockDistance();
+        Random rand = new Random(0);
+        CityBlockHash hash = new CityBlockHash(rand, 3, 4);
+        int hashValue = hash.hash(v);
+        assertEquals("Expected about 28830", 28830, hashValue);
     }
 
 }
