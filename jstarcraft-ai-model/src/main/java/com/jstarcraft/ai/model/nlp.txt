@@ -1,3 +1,6 @@
+项目是一个基本包.封装了大多数nlp项目中常用工具:
+https://github.com/NLPchina/nlp-lang
+
 word2vec java版本的一个实现:
 https://github.com/NLPchina/Word2VEC_java
 

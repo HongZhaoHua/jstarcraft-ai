@@ -3,10 +3,6 @@ https://www.javacodegeeks.com/2016/07/applying-tf-idf-algorithm-practice.html
 
 https://en.wikipedia.org/wiki/Tf%E2%80%93idf
 
-中文分词:
-https://github.com/NLPchina/ansj_seg
-https://github.com/lionsoul2014/jcseg
-
 http://hanlp.linrunsoft.com/
 
 用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践:
