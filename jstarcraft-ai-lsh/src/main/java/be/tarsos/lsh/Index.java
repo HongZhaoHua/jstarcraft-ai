@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -74,11 +75,11 @@ public class Index implements Serializable {
      *                           increases. Time needed to compute a hash also
      *                           increases marginally.
      */
-    public Index(HashFamily family, int numberOfHashes, int numberOfHashTables) {
+    public Index(Random rand, HashFamily family, int numberOfHashes, int numberOfHashTables) {
         this.family = family;
         hashTable = new ArrayList<HashTable>();
         for (int i = 0; i < numberOfHashTables; i++) {
-            hashTable.add(new HashTable(numberOfHashes, family));
+            hashTable.add(new HashTable(rand, numberOfHashes, family));
         }
         evaluated = 0;
     }
@@ -197,8 +198,8 @@ public class Index implements Serializable {
      * @param numberOfHashTables The number of hash tables
      * @return a new, or deserialized object.
      */
-    public static Index deserialize(HashFamily family, int numberOfHashes, int numberOfHashTables) {
-        Index index = new Index(family, numberOfHashes, numberOfHashTables);
+    public static Index deserialize(Random rand, HashFamily family, int numberOfHashes, int numberOfHashTables) {
+        Index index = new Index(rand, family, numberOfHashes, numberOfHashTables);
         String serializationFile = serializationName(index);
         if (FileUtils.exists(serializationFile)) {
             try {

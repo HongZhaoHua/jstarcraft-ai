@@ -66,6 +66,7 @@ public class CommandLineInterface {
      * Parses the arguments currently stored in the argument list.
      */
     public void parseArguments() {
+        Random rand = new Random(0L);
         numberOfHashTables = getIntegerValue("-t", 4);
         numberOfHashes = getIntegerValue("-h", 4);
         numberOfNeighbours = getIntegerValue("-n", 4);
@@ -83,7 +84,6 @@ public class CommandLineInterface {
             if (radius == 0) {
                 radius = 10;
             }
-            Random rand = new Random(0L);
             dataset = TestUtils.generate(rand, dimensions, 100, 512);
             TestUtils.addNeighbours(rand, dataset, 4, radius);
         }
@@ -97,10 +97,10 @@ public class CommandLineInterface {
         }
         if (radius == 0 && hashFamilyType.equalsIgnoreCase("l1")) {
             measure = new CityBlockDistance();
-            radius = LSH.determineRadius(dataset, measure, timeout);
+            radius = LSH.determineRadius(rand, dataset, measure, timeout);
         } else if (radius == 0 && hashFamilyType.equalsIgnoreCase("l2")) {
             measure = new EuclideanDistance();
-            radius = LSH.determineRadius(dataset, measure, timeout);
+            radius = LSH.determineRadius(rand, dataset, measure, timeout);
         }
         family = getHashFamily(radius, hashFamilyType, dimensions);
     }
@@ -120,6 +120,7 @@ public class CommandLineInterface {
     }
 
     public void startBenchmark() {
+        Random rand = new Random(0L);
         System.out.println("Starting TarsosLSH benchmark with " + dataset.size() + " random vectors");
         System.out.println("   Four close neighbours have been added to 100 vectors (100+4x100=500).");
         System.out.println("   The results of LSH are compared with a linear search.");
@@ -127,9 +128,9 @@ public class CommandLineInterface {
 
         // determine the radius for hash bins automatically
         System.out.println("Radius for Euclidean distance.");
-        int radiusEuclidean = (int) LSH.determineRadius(dataset, new EuclideanDistance(), 20);
+        int radiusEuclidean = (int) LSH.determineRadius(rand, dataset, new EuclideanDistance(), 20);
         System.out.println("\nRadius for City block distance.");
-        int radiusCityBlock = (int) LSH.determineRadius(dataset, new CityBlockDistance(), 20);
+        int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new CityBlockDistance(), 20);
 
         HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new CityBlockHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
 
@@ -148,7 +149,7 @@ public class CommandLineInterface {
             System.out.printf("%10s%15s%10s%10s%10s%10s%10s%10s\n", "#hashes", "#hashTables", "Correct", "Touched", "linear", "LSH", "Precision", "Recall");
             for (int i = 0; i < numberOfHashes.length; i++) {
                 for (int j = 0; j < numberOfHashTables.length; j++) {
-                    lsh.buildIndex(numberOfHashes[i], numberOfHashTables[j]);
+                    lsh.buildIndex(rand, numberOfHashes[i], numberOfHashTables[j]);
                     lsh.benchmark(4, family.createDistanceMeasure());
                 }
             }
@@ -171,8 +172,9 @@ public class CommandLineInterface {
                 }
             }
         } else {
+            Random rand = new Random(0L);
             LSH lsh = new LSH(dataset, family);
-            lsh.buildIndex(numberOfHashes, numberOfHashTables);
+            lsh.buildIndex(rand, numberOfHashes, numberOfHashTables);
             if (queries != null) {
                 for (Vector query : queries) {
                     List<Vector> neighbours = lsh.query(query, numberOfNeighbours);

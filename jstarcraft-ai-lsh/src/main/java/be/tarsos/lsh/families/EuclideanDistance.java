@@ -40,12 +40,12 @@ public class EuclideanDistance implements DistanceMeasure {
      * Vector, be.hogent.tarsos.lsh.Vector)
      */
     @Override
-    public double distance(Vector one, Vector other) {
-        double sum = 0.0;
+    public float distance(Vector one, Vector other) {
+        float sum = 0F;
         for (int d = 0; d < one.getDimensions(); d++) {
-            double delta = one.get(d) - other.get(d);
+            float delta = one.get(d) - other.get(d);
             sum += delta * delta;
         }
-        return Math.sqrt(sum);
+        return (float) Math.sqrt(sum);
     }
 }

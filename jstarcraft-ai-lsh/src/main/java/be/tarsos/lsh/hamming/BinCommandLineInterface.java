@@ -21,6 +21,7 @@
 package be.tarsos.lsh.hamming;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * A class implementing a command line interface for the LSH program.
@@ -76,8 +77,9 @@ public class BinCommandLineInterface {
     }
 
     private void startLSH() {
+        Random rand = new Random(0L);
         BinLSH lsh = new BinLSH(dataset);
-        lsh.buildIndex(numberOfHashes, numberOfHashTables, 12);
+        lsh.buildIndex(rand, numberOfHashes, numberOfHashTables, 12);
         if (queries != null) {
             for (BinVector query : queries) {
                 List<BinVector> neighbours = lsh.query(query, numberOfNeighbours);

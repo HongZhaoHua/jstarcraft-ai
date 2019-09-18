@@ -37,8 +37,7 @@ public class EuclidianHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction() {
-        Random rand = new Random();
+    public HashFunction createHashFunction(Random rand) {
         return new EuclideanHash(rand, dimensions, w);
     }
 

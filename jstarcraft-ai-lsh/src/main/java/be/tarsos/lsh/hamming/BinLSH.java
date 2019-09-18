@@ -36,8 +36,8 @@ public class BinLSH {
         this.dataset = dataset;
     }
 
-    public void buildIndex(int numberOfHashes, int numberOfHashTables, int nbitsForProjection) {
-        this.buildIndex(numberOfHashes, numberOfHashTables, nbitsForProjection, new Random().nextLong());
+    public void buildIndex(Random rand, int numberOfHashes, int numberOfHashTables, int nbitsForProjection) {
+        this.buildIndex(numberOfHashes, numberOfHashTables, nbitsForProjection, rand.nextLong());
     }
 
     public void buildIndex(int numberOfHashes, int numberOfHashTables, int nbitsForProjection, long seed) {

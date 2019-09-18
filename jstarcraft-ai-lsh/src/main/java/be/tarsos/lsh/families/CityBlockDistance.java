@@ -52,8 +52,8 @@ public class CityBlockDistance implements DistanceMeasure {
      * Vector, be.hogent.tarsos.lsh.Vector)
      */
     @Override
-    public double distance(Vector one, Vector other) {
-        double distance = 0;
+    public float distance(Vector one, Vector other) {
+        float distance = 0F;
         for (int d = 0; d < one.getDimensions(); d++) {
             distance += Math.abs(one.get(d) - other.get(d));
         }

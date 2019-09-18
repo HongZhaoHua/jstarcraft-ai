@@ -38,5 +38,5 @@ public interface DistanceMeasure {
      * @param other The other vector
      * @return A value representing the distance between two vectors.
      */
-    double distance(Vector one, Vector other);
+    float distance(Vector one, Vector other);
 }

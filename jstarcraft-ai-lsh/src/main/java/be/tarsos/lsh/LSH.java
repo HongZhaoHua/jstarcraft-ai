@@ -60,12 +60,12 @@ public class LSH {
      * @param numberOfHashes     The number of hashes to use in each hash table.
      * @param numberOfHashTables The number of hash tables to use.
      */
-    public void buildIndex(int numberOfHashes, int numberOfHashTables) {
+    public void buildIndex(Random rand, int numberOfHashes, int numberOfHashTables) {
         // Do we want to deserialize or build a new index???
         // index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
         // Deserialization can cause duplicates?
         // index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
-        index = new Index(hashFamily, numberOfHashes, numberOfHashTables);
+        index = new Index(rand, hashFamily, numberOfHashes, numberOfHashTables);
         if (dataset != null) {
             for (Vector vector : dataset) {
                 index.index(vector);
@@ -231,10 +231,10 @@ public class LSH {
         return ret;
     }
 
-    static float determineRadius(List<Vector> dataset, DistanceMeasure measure, int timeout) {
+    static float determineRadius(Random rand, List<Vector> dataset, DistanceMeasure measure, int timeout) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         float radius = 0f;
-        DetermineRadiusTask drt = new DetermineRadiusTask(dataset, measure);
+        DetermineRadiusTask drt = new DetermineRadiusTask(rand, dataset, measure);
         Future<Float> future = executor.submit(drt);
         try {
             System.out.println("Determine radius..");
@@ -260,9 +260,9 @@ public class LSH {
         private final Random rand;
         private final DistanceMeasure measure;
 
-        public DetermineRadiusTask(List<Vector> dataset, DistanceMeasure measure) {
+        public DetermineRadiusTask(Random rand, List<Vector> dataset, DistanceMeasure measure) {
             this.dataset = dataset;
-            this.rand = new Random();
+            this.rand = rand;
             this.measure = measure;
         }
 

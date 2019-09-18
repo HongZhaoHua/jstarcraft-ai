@@ -36,8 +36,7 @@ public class CosineHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction() {
-        Random rand = new Random();
+    public HashFunction createHashFunction(Random rand) {
         return new CosineHash(rand, dimensions);
     }
 

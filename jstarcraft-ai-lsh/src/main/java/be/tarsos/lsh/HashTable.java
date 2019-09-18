@@ -24,6 +24,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import be.tarsos.lsh.families.HashFamily;
 import be.tarsos.lsh.families.HashFunction;
@@ -55,11 +56,11 @@ class HashTable implements Serializable {
      * @param family         The hash function family knows how to create new hash
      *                       functions, and is used therefore.
      */
-    public HashTable(int numberOfHashes, HashFamily family) {
+    public HashTable(Random rand, int numberOfHashes, HashFamily family) {
         hashTable = new HashMap<String, List<Vector>>();
         this.hashFunctions = new HashFunction[numberOfHashes];
         for (int i = 0; i < numberOfHashes; i++) {
-            hashFunctions[i] = family.createHashFunction();
+            hashFunctions[i] = family.createHashFunction(rand);
         }
         this.family = family;
     }

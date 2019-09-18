@@ -38,8 +38,7 @@ public class CityBlockHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction() {
-        Random rand = new Random();
+    public HashFunction createHashFunction(Random rand) {
         return new CityBlockHash(rand, dimensions, w);
     }
 

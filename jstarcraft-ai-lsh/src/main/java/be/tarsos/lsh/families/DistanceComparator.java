@@ -53,8 +53,8 @@ public class DistanceComparator implements Comparator<Vector> {
      */
     @Override
     public int compare(Vector one, Vector other) {
-        Double oneDistance = distanceMeasure.distance(query, one);
-        Double otherDistance = distanceMeasure.distance(query, other);
-        return oneDistance.compareTo(otherDistance);
+        float oneDistance = distanceMeasure.distance(query, one);
+        float otherDistance = distanceMeasure.distance(query, other);
+        return Float.compare(oneDistance, otherDistance);
     }
 }

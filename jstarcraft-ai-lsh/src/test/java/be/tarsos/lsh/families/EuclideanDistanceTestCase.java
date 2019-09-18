@@ -21,39 +21,23 @@
 package be.tarsos.lsh.families;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 import be.tarsos.lsh.Vector;
-import be.tarsos.lsh.families.EuclideanDistance;
 
 public class EuclideanDistanceTestCase {
 
     @Test
     public void testDistance() {
-        Vector v = new Vector(3);
-        v.set(0, 1);
-        v.set(1, 2);
-        v.set(2, 3);
-
-        Vector other = new Vector(3);
-        other.set(0, 3);
-        other.set(1, 5);
-        other.set(2, 7);
+        Vector v = new Vector("left", new float[] { 1F, 2F, 3F });
+        Vector other = new Vector("left", new float[] { 3F, 5F, 7F });
 
         EuclideanDistance distance = new EuclideanDistance();
-        double distanceValue = distance.distance(v, other);
-        assertEquals("Expected about 5.385164807134504", 5.385164807134504, distanceValue, 0.00001);
-        assertEquals("d(one,two) = d(two,one)", distance.distance(other, v), distanceValue, 0.00001);
-        assertEquals("d(one,one) = 0", distance.distance(other, other), 0, 0.00001);
-
-        // move other closer
-        other.set(0, 1);
-        other.set(1, 2);
-        other.set(2, 3);
-        double newDistanceValue = distance.distance(v, other);
-        assertTrue("Expected a smaller distance, since vectors are closer", newDistanceValue < distanceValue);
+        float distanceValue = distance.distance(v, other);
+        assertEquals(5.3851647F, distanceValue, 0F);
+        assertEquals(distance.distance(other, v), distanceValue, 0F);
+        assertEquals(distance.distance(other, other), 0F, 0F);
     }
 
 }
