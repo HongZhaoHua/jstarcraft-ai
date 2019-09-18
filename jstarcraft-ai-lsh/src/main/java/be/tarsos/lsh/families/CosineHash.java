@@ -36,7 +36,7 @@ public class CosineHash implements HashFunction {
         for (int d = 0; d < dimensions; d++) {
             // mean 0
             // standard deviation 1.0
-            double val = rand.nextGaussian();
+            float val = (float) rand.nextGaussian();
             randomProjection.set(d, val);
         }
     }
@@ -44,7 +44,7 @@ public class CosineHash implements HashFunction {
     @Override
     public int hash(Vector vector) {
         // calculate the dot product.
-        double result = vector.dot(randomProjection);
+        float result = vector.dot(randomProjection);
         // returns a 'bit' encoded as an integer.
         // 1 when positive or zero, 0 otherwise.
         return result > 0 ? 1 : 0;

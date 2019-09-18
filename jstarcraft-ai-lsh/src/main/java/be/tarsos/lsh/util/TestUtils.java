@@ -47,7 +47,7 @@ public class TestUtils {
         for (int i = 0; i < datasetSize; i++) {
             Vector item = new Vector(dimensions);
             for (int d = 0; d < dimensions; d++) {
-                double point = rand.nextInt(maxValue);
+                float point = rand.nextInt(maxValue);
                 item.set(d, point);
             }
             ret.add(item);
@@ -70,7 +70,7 @@ public class TestUtils {
      *                                dimension a random number between -radius and
      *                                +radius is added to the current value.
      */
-    public static void addNeighbours(Random rand, List<Vector> dataset, int numberOfNeighboursToAdd, double radius) {
+    public static void addNeighbours(Random rand, List<Vector> dataset, int numberOfNeighboursToAdd, float radius) {
         int datasetSize = dataset.size();
         for (int i = 0; i < datasetSize; i++) {
             Vector original = dataset.get(i);
@@ -78,8 +78,8 @@ public class TestUtils {
                 Vector neighbour = new Vector(original);
                 for (int d = 0; d < neighbour.getDimensions(); d++) {
                     // copy the point but add or subtract a value between -radius and +radius
-                    double diff = radius + (-radius - radius) * rand.nextDouble();
-                    double point = neighbour.get(d) + diff;
+                    float diff = radius + (-radius - radius) * rand.nextFloat();
+                    float point = neighbour.get(d) + diff;
                     neighbour.set(d, point);
                 }
                 dataset.add(neighbour);

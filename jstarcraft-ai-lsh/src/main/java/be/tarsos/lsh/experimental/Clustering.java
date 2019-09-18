@@ -55,7 +55,7 @@ public class Clustering {
                     newSeed.set(d, newSeed.get(d) + v.get(d));
                 }
             }
-            double memberSize = members.size();
+            float memberSize = members.size();
             for (int d = 0; d < newSeed.getDimensions(); d++) {
                 newSeed.set(d, newSeed.get(d) / memberSize);
             }

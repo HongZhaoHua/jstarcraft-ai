@@ -41,13 +41,13 @@ public class EuclideanHash implements HashFunction {
         for (int d = 0; d < dimensions; d++) {
             // mean 0
             // standard deviation 1.0
-            double val = rand.nextGaussian();
+            float val = (float) rand.nextGaussian();
             randomProjection.set(d, val);
         }
     }
 
     public int hash(Vector vector) {
-        double hashValue = (vector.dot(randomProjection) + offset) / Double.valueOf(w);
+        double hashValue = (vector.dot(randomProjection) + offset) / Float.valueOf(w);
         return (int) Math.round(hashValue);
     }
 }

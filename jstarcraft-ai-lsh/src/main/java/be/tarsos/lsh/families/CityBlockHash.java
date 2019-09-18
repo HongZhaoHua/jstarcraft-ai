@@ -40,7 +40,7 @@ public class CityBlockHash implements HashFunction {
         for (int d = 0; d < dimensions; d++) {
             // mean 0
             // standard deviation 1.0
-            double val = rand.nextDouble() * w;
+            float val = rand.nextFloat() * w;
             randomPartition.set(d, val);
         }
     }
@@ -48,7 +48,7 @@ public class CityBlockHash implements HashFunction {
     public int hash(Vector vector) {
         int hash[] = new int[randomPartition.getDimensions()];
         for (int d = 0; d < randomPartition.getDimensions(); d++) {
-            hash[d] = (int) Math.floor((vector.get(d) - randomPartition.get(d)) / Double.valueOf(w));
+            hash[d] = (int) Math.floor((vector.get(d) - randomPartition.get(d)) / Float.valueOf(w));
         }
         return Arrays.hashCode(hash);
     }

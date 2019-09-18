@@ -223,7 +223,7 @@ public class LSH {
                 item.setKey(row[0]);
             }
             for (int d = startIndex; d < row.length; d++) {
-                double value = Double.parseDouble(row[d]);
+                float value = Float.parseFloat(row[d]);
                 item.set(d - startIndex, value);
             }
             ret.add(item);
@@ -231,31 +231,31 @@ public class LSH {
         return ret;
     }
 
-    static double determineRadius(List<Vector> dataset, DistanceMeasure measure, int timeout) {
+    static float determineRadius(List<Vector> dataset, DistanceMeasure measure, int timeout) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        double radius = 0.0;
+        float radius = 0f;
         DetermineRadiusTask drt = new DetermineRadiusTask(dataset, measure);
-        Future<Double> future = executor.submit(drt);
+        Future<Float> future = executor.submit(drt);
         try {
             System.out.println("Determine radius..");
-            radius = 0.90 * future.get(timeout, TimeUnit.SECONDS);
+            radius = 0.9F * future.get(timeout, TimeUnit.SECONDS);
             System.out.println("Determined radius: " + radius);
         } catch (TimeoutException e) {
             System.err.println("Terminated!");
-            radius = 0.90 * drt.getRadius();
+            radius = 0.9F * drt.getRadius();
         } catch (InterruptedException e) {
             System.err.println("Execution interrupted!" + e.getMessage());
-            radius = 0.90 * drt.getRadius();
+            radius = 0.9F * drt.getRadius();
         } catch (ExecutionException e) {
-            radius = 0.90 * drt.getRadius();
+            radius = 0.9F * drt.getRadius();
         }
         executor.shutdownNow();
         return radius;
     }
 
-    static class DetermineRadiusTask implements Callable<Double> {
-        private double queriesDone = 0;
-        private double radiusSum = 0.0;
+    static class DetermineRadiusTask implements Callable<Float> {
+        private float queriesDone = 0F;
+        private float radiusSum = 0F;
         private final List<Vector> dataset;
         private final Random rand;
         private final DistanceMeasure measure;
@@ -267,7 +267,7 @@ public class LSH {
         }
 
         @Override
-        public Double call() throws Exception {
+        public Float call() throws Exception {
             for (int i = 0; i < 30; i++) {
                 Vector query = dataset.get(rand.nextInt(dataset.size()));
                 List<Vector> result = linearSearch(dataset, query, 2, measure);
@@ -278,7 +278,7 @@ public class LSH {
             return radiusSum / queriesDone;
         }
 
-        public double getRadius() {
+        public float getRadius() {
             return radiusSum / queriesDone;
         }
     }

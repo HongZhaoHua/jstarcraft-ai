@@ -44,7 +44,7 @@ public class CommandLineInterface {
     private int numberOfHashTables;
     private int numberOfHashes;
     private int numberOfNeighbours;
-    private double radius;
+    private float radius;
 
     private List<Vector> dataset;
     private List<Vector> queries;
@@ -73,7 +73,7 @@ public class CommandLineInterface {
 
         linear = hasOption("-l");
 
-        radius = getDoubleValue("-r", 0.0);
+        radius = getFloatValue("-r", 0F);
         printHelp = hasOption("--help") || arguments.length == 0;
         benchmark = hasOption("-b");
         String datasetFile = getValue("-d", null);
@@ -228,11 +228,11 @@ public class CommandLineInterface {
         return integerValue;
     }
 
-    private Double getDoubleValue(String option, Double defaultValue) {
+    private Float getFloatValue(String option, Float defaultValue) {
         String value = getValue(option, defaultValue.toString());
-        Double doubleValue = null;
+        Float doubleValue = null;
         try {
-            doubleValue = Double.parseDouble(value);
+            doubleValue = Float.parseFloat(value);
         } catch (NumberFormatException e) {
             String message;
             message = "Expected integer argument for option " + option + ",  " + value + " is" + " not an integer.";

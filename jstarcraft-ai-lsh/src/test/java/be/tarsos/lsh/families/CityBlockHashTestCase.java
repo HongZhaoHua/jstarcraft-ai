@@ -40,7 +40,7 @@ public class CityBlockHashTestCase {
         Random rand = new Random(0);
         CityBlockHash hash = new CityBlockHash(rand, 3, 4);
         int hashValue = hash.hash(v);
-        assertEquals("Expected about 28830", 28830, hashValue);
+        assertEquals("Expected about 28799", 28799, hashValue);
     }
 
 }

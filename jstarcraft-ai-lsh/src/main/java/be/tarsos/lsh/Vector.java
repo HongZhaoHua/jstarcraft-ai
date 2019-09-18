@@ -22,7 +22,6 @@ package be.tarsos.lsh;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * An Vector contains a vector of 'dimension' values. It serves as the main data
@@ -37,7 +36,7 @@ public class Vector implements Serializable {
     /**
      * Values are stored here.
      */
-    private double[] values;
+    private float[] values;
 
     /**
      * An optional key, identifier for the vector.
@@ -50,7 +49,7 @@ public class Vector implements Serializable {
      * @param dimensions The number of dimensions.
      */
     public Vector(int dimensions) {
-        this(null, new double[dimensions]);
+        this(null, new float[dimensions]);
     }
 
     /**
@@ -69,7 +68,7 @@ public class Vector implements Serializable {
      * @param key    The key of the vector.
      * @param values The values of the vector.
      */
-    public Vector(String key, double[] values) {
+    public Vector(String key, float[] values) {
         this.values = values;
         this.key = key;
     }
@@ -80,7 +79,7 @@ public class Vector implements Serializable {
      * @param dimension The dimension, index for the value.
      * @param value     The value to set.
      */
-    public void set(int dimension, double value) {
+    public void set(int dimension, float value) {
         values[dimension] = value;
     }
 
@@ -90,7 +89,7 @@ public class Vector implements Serializable {
      * @param dimension The dimension, index for the value.
      * @return Returns the value at the requested dimension.
      */
-    public double get(int dimension) {
+    public float get(int dimension) {
         return values[dimension];
     }
 
@@ -110,8 +109,8 @@ public class Vector implements Serializable {
      * @exception ArrayIndexOutOfBoundsException when the two vectors do not have
      *                                           the same dimensions.
      */
-    public double dot(Vector other) {
-        double sum = 0.0;
+    public float dot(Vector other) {
+        float sum = 0F;
         for (int i = 0; i < getDimensions(); i++) {
             sum += values[i] * other.values[i];
         }
