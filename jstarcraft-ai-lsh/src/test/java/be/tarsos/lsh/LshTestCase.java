@@ -20,7 +20,7 @@ public class LshTestCase {
         Random rand = new Random(0L);
         int dimensions = 256;
         int radius = 10;
-        List<Vector> dataset = TestUtils.generate(dimensions, 100, 512);
+        List<Vector> dataset = TestUtils.generate(rand, dimensions, 100, 512);
         TestUtils.addNeighbours(rand, dataset, 4, radius);
 
         System.out.println("Radius for Euclidean distance.");

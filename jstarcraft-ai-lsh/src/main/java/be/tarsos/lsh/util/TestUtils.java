@@ -42,8 +42,7 @@ public class TestUtils {
      *                    number between 0 and maxValue is chosen randomly).
      * @return A data set with the properties described above.
      */
-    public static List<Vector> generate(int dimensions, int datasetSize, int maxValue) {
-        Random rand = new Random();
+    public static List<Vector> generate(Random rand, int dimensions, int datasetSize, int maxValue) {
         List<Vector> ret = new ArrayList<Vector>();
         for (int i = 0; i < datasetSize; i++) {
             Vector item = new Vector(dimensions);

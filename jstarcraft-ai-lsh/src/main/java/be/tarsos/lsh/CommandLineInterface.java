@@ -83,8 +83,8 @@ public class CommandLineInterface {
             if (radius == 0) {
                 radius = 10;
             }
-            dataset = TestUtils.generate(dimensions, 100, 512);
             Random rand = new Random(0L);
+            dataset = TestUtils.generate(rand, dimensions, 100, 512);
             TestUtils.addNeighbours(rand, dataset, 4, radius);
         }
         if (datasetFile != null) {
