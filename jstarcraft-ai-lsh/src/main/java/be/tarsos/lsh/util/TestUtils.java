@@ -71,13 +71,18 @@ public class TestUtils {
      *                                dimension a random number between -radius and
      *                                +radius is added to the current value.
      */
-    public static void addNeighbours(List<Vector> dataset, int numberOfNeighboursToAdd, double radius) {
+    public static void addNeighbours(Random rand, List<Vector> dataset, int numberOfNeighboursToAdd, double radius) {
         int datasetSize = dataset.size();
         for (int i = 0; i < datasetSize; i++) {
             Vector original = dataset.get(i);
             for (int neighbours = 0; neighbours < numberOfNeighboursToAdd; neighbours++) {
                 Vector neighbour = new Vector(original);
-                neighbour.moveSlightly(radius);
+                for (int d = 0; d < neighbour.getDimensions(); d++) {
+                    // copy the point but add or subtract a value between -radius and +radius
+                    double diff = radius + (-radius - radius) * rand.nextDouble();
+                    double point = neighbour.get(d) + diff;
+                    neighbour.set(d, point);
+                }
                 dataset.add(neighbour);
             }
         }

@@ -1,6 +1,7 @@
 package be.tarsos.lsh;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -16,10 +17,11 @@ public class LshTestCase {
 
     @Test
     public void test() {
+        Random rand = new Random(0L);
         int dimensions = 256;
         int radius = 10;
         List<Vector> dataset = TestUtils.generate(dimensions, 100, 512);
-        TestUtils.addNeighbours(dataset, 4, radius);
+        TestUtils.addNeighbours(rand, dataset, 4, radius);
 
         System.out.println("Radius for Euclidean distance.");
         int radiusEuclidean = (int) LSH.determineRadius(dataset, new EuclideanDistance(), 20);

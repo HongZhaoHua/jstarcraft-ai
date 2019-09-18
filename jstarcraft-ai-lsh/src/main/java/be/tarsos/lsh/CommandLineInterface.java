@@ -21,6 +21,7 @@
 package be.tarsos.lsh;
 
 import java.util.List;
+import java.util.Random;
 
 import be.tarsos.lsh.families.CityBlockDistance;
 import be.tarsos.lsh.families.CityBlockHashFamily;
@@ -83,7 +84,8 @@ public class CommandLineInterface {
                 radius = 10;
             }
             dataset = TestUtils.generate(dimensions, 100, 512);
-            TestUtils.addNeighbours(dataset, 4, radius);
+            Random rand = new Random(0L);
+            TestUtils.addNeighbours(rand, dataset, 4, radius);
         }
         if (datasetFile != null) {
             dataset = LSH.readDataset(datasetFile, Integer.MAX_VALUE);

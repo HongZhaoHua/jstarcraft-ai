@@ -75,22 +75,6 @@ public class Vector implements Serializable {
     }
 
     /**
-     * Moves the vector slightly, adds a value selected from -radius to +radius to
-     * each element.
-     * 
-     * @param radius The radius determines the amount to change the vector.
-     */
-    public void moveSlightly(double radius) {
-        Random rand = new Random();
-        for (int d = 0; d < getDimensions(); d++) {
-            // copy the point but add or subtract a value between -radius and +radius
-            double diff = radius + (-radius - radius) * rand.nextDouble();
-            double point = get(d) + diff;
-            set(d, point);
-        }
-    }
-
-    /**
      * Set a value at a certain dimension d.
      * 
      * @param dimension The dimension, index for the value.
