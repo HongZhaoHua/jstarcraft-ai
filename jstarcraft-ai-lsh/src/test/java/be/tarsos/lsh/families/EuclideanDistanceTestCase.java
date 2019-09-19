@@ -11,7 +11,7 @@ public class EuclideanDistanceTestCase {
     @Test
     public void testDistance() {
         Vector v = new Vector("left", new float[] { 1F, 2F, 3F });
-        Vector other = new Vector("left", new float[] { 3F, 5F, 7F });
+        Vector other = new Vector("right", new float[] { 3F, 5F, 7F });
 
         EuclideanDistance distance = new EuclideanDistance();
         float distanceValue = distance.distance(v, other);

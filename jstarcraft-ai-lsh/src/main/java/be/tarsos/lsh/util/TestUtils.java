@@ -25,7 +25,7 @@ public class TestUtils {
     public static List<Vector> generate(Random rand, int dimensions, int datasetSize, int maxValue) {
         List<Vector> ret = new ArrayList<Vector>();
         for (int i = 0; i < datasetSize; i++) {
-            Vector item = new Vector(dimensions);
+            Vector item = new Vector(String.valueOf(i), dimensions);
             for (int d = 0; d < dimensions; d++) {
                 float point = rand.nextInt(maxValue);
                 item.setValue(d, point);
@@ -55,8 +55,8 @@ public class TestUtils {
         for (int i = 0; i < datasetSize; i++) {
             Vector original = dataset.get(i);
             for (int neighbours = 0; neighbours < numberOfNeighboursToAdd; neighbours++) {
-                Vector neighbour = new Vector(original);
-                for (int d = 0; d < neighbour.getDimensions(); d++) {
+                Vector neighbour = new Vector(original.getKey() + "_" + neighbours, original);
+                for (int d = 0; d < neighbour.getDimensionSize(); d++) {
                     // copy the point but add or subtract a value between -radius and +radius
                     float diff = radius + (-radius - radius) * rand.nextFloat();
                     float point = neighbour.getValue(d) + diff;

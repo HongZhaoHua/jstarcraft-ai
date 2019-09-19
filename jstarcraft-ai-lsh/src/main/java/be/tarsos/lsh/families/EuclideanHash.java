@@ -17,7 +17,7 @@ public class EuclideanHash implements HashFunction {
         this.w = w;
         this.offset = rand.nextInt(w);
 
-        randomProjection = new Vector(dimensions);
+        randomProjection = new Vector("random", dimensions);
         for (int d = 0; d < dimensions; d++) {
             // mean 0
             // standard deviation 1.0

@@ -16,7 +16,7 @@ public class CityBlockHash implements HashFunction {
     public CityBlockHash(Random rand, int dimensions, int width) {
         this.w = width;
 
-        randomPartition = new Vector(dimensions);
+        randomPartition = new Vector("random", dimensions);
         for (int d = 0; d < dimensions; d++) {
             // mean 0
             // standard deviation 1.0
@@ -26,8 +26,8 @@ public class CityBlockHash implements HashFunction {
     }
 
     public int hash(Vector vector) {
-        int hash[] = new int[randomPartition.getDimensions()];
-        for (int d = 0; d < randomPartition.getDimensions(); d++) {
+        int hash[] = new int[randomPartition.getDimensionSize()];
+        for (int d = 0; d < randomPartition.getDimensionSize(); d++) {
             hash[d] = (int) Math.floor((vector.getValue(d) - randomPartition.getValue(d)) / Float.valueOf(w));
         }
         return Arrays.hashCode(hash);

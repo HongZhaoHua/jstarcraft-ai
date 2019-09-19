@@ -34,7 +34,7 @@ public class CityBlockDistance implements DistanceMeasure {
     @Override
     public float distance(Vector one, Vector other) {
         float distance = 0F;
-        for (int d = 0; d < one.getDimensions(); d++) {
+        for (int d = 0; d < one.getDimensionSize(); d++) {
             distance += Math.abs(one.getValue(d) - other.getValue(d));
         }
         return distance;

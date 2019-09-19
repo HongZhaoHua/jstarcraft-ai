@@ -1,16 +1,10 @@
 package be.tarsos.lsh;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 import com.jstarcraft.ai.math.structure.DefaultScalar;
-import com.jstarcraft.ai.math.structure.MathAccessor;
-import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.MathIterator;
 import com.jstarcraft.ai.math.structure.MathScalar;
-import com.jstarcraft.ai.math.structure.ScalarIterator;
-import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.math.structure.vector.VectorScalar;
+import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 
 /**
  * An Vector contains a vector of 'dimension' values. It serves as the main data
@@ -18,14 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.VectorScalar;
  * 
  * @author Joren Six
  */
-public class Vector implements MathVector {
-
-    private static final long serialVersionUID = 5169504339456492327L;
-
-    /**
-     * Values are stored here.
-     */
-    private float[] values;
+public class Vector extends ArrayVector {
 
     /**
      * An optional key, identifier for the vector.
@@ -37,8 +24,8 @@ public class Vector implements MathVector {
      * 
      * @param dimensions The number of dimensions.
      */
-    public Vector(int dimensions) {
-        this(null, new float[dimensions]);
+    public Vector(String key, int dimensions) {
+        this(key, new float[dimensions]);
     }
 
     /**
@@ -46,9 +33,9 @@ public class Vector implements MathVector {
      * 
      * @param other The other vector.
      */
-    public Vector(Vector other) {
+    public Vector(String key, Vector other) {
         // copy the values
-        this(other.getKey(), Arrays.copyOf(other.values, other.values.length));
+        this(key, Arrays.copyOf(other.values, other.values.length));
     }
 
     /**
@@ -58,90 +45,13 @@ public class Vector implements MathVector {
      * @param values The values of the vector.
      */
     public Vector(String key, float[] values) {
-        this.values = values;
+        super(values.length, values);
         this.key = key;
-    }
-
-    /**
-     * Returns the value at the requested dimension.
-     * 
-     * @param position The dimension, index for the value.
-     * @return Returns the value at the requested dimension.
-     */
-    @Override
-    public float getValue(int position) {
-        return values[position];
-    }
-
-    @Override
-    public ScalarIterator<VectorScalar> scaleValues(float value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ScalarIterator<VectorScalar> setValues(float value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public ScalarIterator<VectorScalar> shiftValues(float value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public int getElementSize() {
-        return getDimensions();
-    }
-
-    @Override
-    public int getKnownSize() {
-        return getDimensions();
-    }
-
-    @Override
-    public int getUnknownSize() {
-        return 0;
-    }
-
-    @Override
-    public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Iterator<VectorScalar> iterator() {
-        throw new UnsupportedOperationException();
     }
 
     @Override
     public boolean isConstant() {
         return true;
-    }
-
-    @Override
-    public int getIndex(int position) {
-        return position;
-    }
-
-    public void setValue(int position, float value) {
-        values[position] = value;
-    }
-
-    @Override
-    public void scaleValue(int position, float value) {
-        values[position] *= value;
-    }
-
-    @Override
-    public void shiftValue(int position, float value) {
-        values[position] += value;
-    }
-
-    /**
-     * @return The number of dimensions this vector has.
-     */
-    public int getDimensions() {
-        return values.length;
     }
 
     /**
@@ -171,14 +81,21 @@ public class Vector implements MathVector {
         return key;
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("values:[");
-        for (int d = 0; d < getDimensions() - 1; d++) {
-            sb.append(values[d]).append(",");
-        }
-        sb.append(values[getDimensions() - 1]).append("]");
-        return sb.toString();
+    @Override
+    public boolean equals(Object object) {
+        if (this == object)
+            return true;
+        if (object == null)
+            return false;
+        if (getClass() != object.getClass())
+            return false;
+        Vector that = (Vector) object;
+        return this.key.equals(that.key);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.key.hashCode();
     }
 
 }

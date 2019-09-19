@@ -197,8 +197,9 @@ public class LSH {
         }
         int dimensions = firstColumnIsKey ? data.get(0).length - 1 : data.get(0).length;
         int startIndex = firstColumnIsKey ? 1 : 0;
+        int index = 0;
         for (String[] row : data) {
-            Vector item = new Vector(dimensions);
+            Vector item = new Vector(String.valueOf(index), dimensions);
             if (firstColumnIsKey) {
                 item.setKey(row[0]);
             }

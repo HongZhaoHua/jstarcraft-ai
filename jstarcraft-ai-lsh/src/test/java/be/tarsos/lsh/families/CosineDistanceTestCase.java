@@ -12,7 +12,7 @@ public class CosineDistanceTestCase {
     @Test
     public void testDistance() {
         Vector v = new Vector("left", new float[] { 1F, 2F, 3F });
-        Vector other = new Vector("left", new float[] { 3F, 5F, 7F });
+        Vector other = new Vector("right", new float[] { 3F, 5F, 7F });
 
         CosineDistance distance = new CosineDistance();
         float distanceValue = distance.distance(v, other);

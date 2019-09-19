@@ -69,11 +69,11 @@ public class CommandLineInterface {
         }
         if (datasetFile != null) {
             dataset = LSH.readDataset(datasetFile, Integer.MAX_VALUE);
-            dimensions = dataset.get(0).getDimensions();
+            dimensions = dataset.get(0).getDimensionSize();
         }
         if (queryFile != null) {
             queries = LSH.readDataset(queryFile, Integer.MAX_VALUE);
-            dimensions = queries.get(0).getDimensions();
+            dimensions = queries.get(0).getDimensionSize();
         }
         if (radius == 0 && hashFamilyType.equalsIgnoreCase("l1")) {
             measure = new CityBlockDistance();

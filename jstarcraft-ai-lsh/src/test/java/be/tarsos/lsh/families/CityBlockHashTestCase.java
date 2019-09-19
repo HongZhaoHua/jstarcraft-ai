@@ -12,7 +12,7 @@ public class CityBlockHashTestCase {
 
     @Test
     public void testHash() {
-        Vector v = new Vector(3);
+        Vector v = new Vector("hash", 3);
         v.setValue(0, 1);
         v.setValue(1, 2);
         v.setValue(2, 3);
