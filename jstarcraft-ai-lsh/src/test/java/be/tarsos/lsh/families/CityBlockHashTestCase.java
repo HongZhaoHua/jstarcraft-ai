@@ -13,9 +13,9 @@ public class CityBlockHashTestCase {
     @Test
     public void testHash() {
         Vector v = new Vector(3);
-        v.set(0, 1);
-        v.set(1, 2);
-        v.set(2, 3);
+        v.setValue(0, 1);
+        v.setValue(1, 2);
+        v.setValue(2, 3);
 
         Random rand = new Random(0);
         CityBlockHash hash = new CityBlockHash(rand, 3, 4);

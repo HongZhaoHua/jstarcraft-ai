@@ -21,14 +21,14 @@ public class CityBlockHash implements HashFunction {
             // mean 0
             // standard deviation 1.0
             float val = rand.nextFloat() * w;
-            randomPartition.set(d, val);
+            randomPartition.setValue(d, val);
         }
     }
 
     public int hash(Vector vector) {
         int hash[] = new int[randomPartition.getDimensions()];
         for (int d = 0; d < randomPartition.getDimensions(); d++) {
-            hash[d] = (int) Math.floor((vector.get(d) - randomPartition.get(d)) / Float.valueOf(w));
+            hash[d] = (int) Math.floor((vector.getValue(d) - randomPartition.getValue(d)) / Float.valueOf(w));
         }
         return Arrays.hashCode(hash);
     }

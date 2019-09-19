@@ -204,7 +204,7 @@ public class LSH {
             }
             for (int d = startIndex; d < row.length; d++) {
                 float value = Float.parseFloat(row[d]);
-                item.set(d - startIndex, value);
+                item.setValue(d - startIndex, value);
             }
             ret.add(item);
         }

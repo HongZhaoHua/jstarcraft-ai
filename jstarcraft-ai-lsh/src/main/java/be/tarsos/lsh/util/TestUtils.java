@@ -28,7 +28,7 @@ public class TestUtils {
             Vector item = new Vector(dimensions);
             for (int d = 0; d < dimensions; d++) {
                 float point = rand.nextInt(maxValue);
-                item.set(d, point);
+                item.setValue(d, point);
             }
             ret.add(item);
         }
@@ -59,8 +59,8 @@ public class TestUtils {
                 for (int d = 0; d < neighbour.getDimensions(); d++) {
                     // copy the point but add or subtract a value between -radius and +radius
                     float diff = radius + (-radius - radius) * rand.nextFloat();
-                    float point = neighbour.get(d) + diff;
-                    neighbour.set(d, point);
+                    float point = neighbour.getValue(d) + diff;
+                    neighbour.setValue(d, point);
                 }
                 dataset.add(neighbour);
             }

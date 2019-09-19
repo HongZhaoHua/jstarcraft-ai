@@ -22,7 +22,7 @@ public class EuclideanHash implements HashFunction {
             // mean 0
             // standard deviation 1.0
             float val = (float) rand.nextGaussian();
-            randomProjection.set(d, val);
+            randomProjection.setValue(d, val);
         }
     }
 

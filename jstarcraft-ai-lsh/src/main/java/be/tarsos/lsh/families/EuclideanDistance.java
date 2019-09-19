@@ -23,7 +23,7 @@ public class EuclideanDistance implements DistanceMeasure {
     public float distance(Vector one, Vector other) {
         float sum = 0F;
         for (int d = 0; d < one.getDimensions(); d++) {
-            float delta = one.get(d) - other.get(d);
+            float delta = one.getValue(d) - other.getValue(d);
             sum += delta * delta;
         }
         return (float) Math.sqrt(sum);

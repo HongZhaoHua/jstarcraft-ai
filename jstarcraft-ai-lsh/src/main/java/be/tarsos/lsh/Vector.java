@@ -1,7 +1,14 @@
 package be.tarsos.lsh;
 
-import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Iterator;
+
+import com.jstarcraft.ai.math.structure.MathAccessor;
+import com.jstarcraft.ai.math.structure.MathCalculator;
+import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
 /**
  * An Vector contains a vector of 'dimension' values. It serves as the main data
@@ -9,7 +16,7 @@ import java.util.Arrays;
  * 
  * @author Joren Six
  */
-public class Vector implements Serializable {
+public class Vector implements MathVector {
 
     private static final long serialVersionUID = 5169504339456492327L;
 
@@ -54,23 +61,78 @@ public class Vector implements Serializable {
     }
 
     /**
-     * Set a value at a certain dimension d.
-     * 
-     * @param dimension The dimension, index for the value.
-     * @param value     The value to set.
-     */
-    public void set(int dimension, float value) {
-        values[dimension] = value;
-    }
-
-    /**
      * Returns the value at the requested dimension.
      * 
-     * @param dimension The dimension, index for the value.
+     * @param position The dimension, index for the value.
      * @return Returns the value at the requested dimension.
      */
-    public float get(int dimension) {
-        return values[dimension];
+    @Override
+    public float getValue(int position) {
+        return values[position];
+    }
+
+    @Override
+    public ScalarIterator<VectorScalar> scaleValues(float value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ScalarIterator<VectorScalar> setValues(float value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public ScalarIterator<VectorScalar> shiftValues(float value) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public int getElementSize() {
+        return getDimensions();
+    }
+
+    @Override
+    public int getKnownSize() {
+        return getDimensions();
+    }
+
+    @Override
+    public int getUnknownSize() {
+        return 0;
+    }
+
+    @Override
+    public MathIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Iterator<VectorScalar> iterator() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isConstant() {
+        return true;
+    }
+
+    @Override
+    public int getIndex(int position) {
+        return position;
+    }
+
+    public void setValue(int position, float value) {
+        values[position] = value;
+    }
+
+    @Override
+    public void scaleValue(int position, float value) {
+        values[position] *= value;
+    }
+
+    @Override
+    public void shiftValue(int position, float value) {
+        values[position] += value;
     }
 
     /**
