@@ -3,9 +3,11 @@ package be.tarsos.lsh;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import com.jstarcraft.ai.math.structure.DefaultScalar;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
 import com.jstarcraft.ai.math.structure.MathIterator;
+import com.jstarcraft.ai.math.structure.MathScalar;
 import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
@@ -152,11 +154,13 @@ public class Vector implements MathVector {
      *                                           the same dimensions.
      */
     public float dot(Vector other) {
-        float sum = 0F;
-        for (int i = 0; i < getDimensions(); i++) {
-            sum += values[i] * other.values[i];
-        }
-        return sum;
+        MathScalar scalar = DefaultScalar.getInstance();
+        return scalar.dotProduct(this, other).getValue();
+//        float sum = 0F;
+//        for (int i = 0; i < getDimensions(); i++) {
+//            sum += values[i] * other.values[i];
+//        }
+//        return sum;
     }
 
     public void setKey(String key) {
