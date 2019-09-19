@@ -59,6 +59,11 @@ public class Nd4jVector implements MathVector, ModemCycle {
     }
 
     @Override
+    public int getDimensionSize() {
+        return size;
+    }
+
+    @Override
     public int getElementSize() {
         return size;
     }

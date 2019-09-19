@@ -49,6 +49,11 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
     }
 
     @Override
+    public int getDimensionSize() {
+        return knownSize + unknownSize;
+    }
+
+    @Override
     public int getElementSize() {
         return elementSize;
     }

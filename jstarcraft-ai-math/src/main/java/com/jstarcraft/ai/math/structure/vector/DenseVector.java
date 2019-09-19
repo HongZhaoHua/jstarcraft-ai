@@ -21,19 +21,24 @@ import com.jstarcraft.ai.math.structure.ScalarIterator;
 public class DenseVector implements MathVector {
 
     /** 游标 */
-    private int cursor;
+    protected int cursor;
     /** 偏移量 */
-    private int delta;
+    protected int delta;
     /** 大小 */
-    private int size;
+    protected int size;
     /** 数据 */
-    private float[] values;
+    protected float[] values;
 
     public DenseVector(float[] data, int cursor, int delta, int size) {
         this.values = data;
         this.cursor = cursor;
         this.delta = delta;
         this.size = size;
+    }
+
+    @Override
+    public int getDimensionSize() {
+        return size;
     }
 
     @Override

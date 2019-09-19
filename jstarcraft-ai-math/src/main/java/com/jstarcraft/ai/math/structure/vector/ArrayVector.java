@@ -26,17 +26,22 @@ import com.jstarcraft.ai.math.structure.MathMonitor;
  */
 public class ArrayVector implements MathVector {
 
-    private int capacity;
+    protected int capacity;
 
-    private int size;
+    protected int size;
 
     /** 索引 */
-    private int[] indexes;
+    protected int[] indexes;
 
     /** 值 */
-    private float[] values;
+    protected float[] values;
 
-    private transient WeakHashMap<MathMonitor<VectorScalar>, Object> monitors = new WeakHashMap<>();
+    protected transient WeakHashMap<MathMonitor<VectorScalar>, Object> monitors = new WeakHashMap<>();
+
+    @Override
+    public int getDimensionSize() {
+        return size;
+    }
 
     @Override
     public int getElementSize() {
@@ -319,6 +324,14 @@ public class ArrayVector implements MathVector {
         assert capacity >= size;
         this.indexes = indexes;
         this.values = new float[size];
+    }
+
+    public ArrayVector(int capacity, float[] values) {
+        this.capacity = capacity;
+        this.size = values.length;
+        assert capacity >= size;
+        this.indexes = new int[size];
+        this.values = values;
     }
 
     public ArrayVector(int capacity, int[] indexes, float[] values) {

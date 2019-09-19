@@ -37,6 +37,11 @@ public class LocalVector implements MathVector {
         this.knownSize = elementSize;
         this.unknownSize = 0;
     }
+    
+    @Override
+    public int getDimensionSize() {
+        return knownSize + unknownSize;
+    }
 
     @Override
     public int getElementSize() {

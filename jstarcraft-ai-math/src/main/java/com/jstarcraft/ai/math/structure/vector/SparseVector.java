@@ -31,6 +31,11 @@ public class SparseVector implements MathVector, Iterable<VectorScalar> {
     private int beginIndex, endIndex;
 
     @Override
+    public int getDimensionSize() {
+        return endIndex - beginIndex;
+    }
+    
+    @Override
     public int getElementSize() {
         return endIndex - beginIndex;
     }

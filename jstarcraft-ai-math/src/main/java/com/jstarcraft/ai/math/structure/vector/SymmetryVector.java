@@ -30,6 +30,11 @@ public class SymmetryVector implements MathVector {
     private int[] point;
 
     @Override
+    public int getDimensionSize() {
+        return dimension;
+    }
+
+    @Override
     public int getElementSize() {
         return dimension;
     }

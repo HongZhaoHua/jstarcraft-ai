@@ -58,6 +58,11 @@ public class HashVector implements MathVector, ModemCycle {
     }
 
     @Override
+    public int getDimensionSize() {
+        return keyValues.size();
+    }
+
+    @Override
     public int getElementSize() {
         return keyValues.size();
     }

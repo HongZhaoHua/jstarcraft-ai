@@ -15,6 +15,13 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  *
  */
 public interface MathVector extends ScalarIterator<VectorScalar> {
+    
+    /**
+     * 获取维度的大小
+     * 
+     * @return
+     */
+    int getDimensionSize();
 
     /**
      * 是否位置等于索引
