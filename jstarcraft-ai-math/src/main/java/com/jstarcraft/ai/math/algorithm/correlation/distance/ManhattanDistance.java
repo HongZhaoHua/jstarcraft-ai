@@ -33,18 +33,11 @@ public class ManhattanDistance extends AbstractDistance {
     }
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
-        // compute similarity
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
         int count = scoreList.size();
-        float similarity = getCoefficient(count, scoreList);
-        // shrink to account for vector size
-        if (!Double.isNaN(similarity)) {
-            if (scale > 0) {
-                similarity *= count / (count + scale);
-            }
-        }
-        return similarity;
+        float coefficient = getCoefficient(count, scoreList);
+        return coefficient;
     }
 
 }

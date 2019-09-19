@@ -36,8 +36,7 @@ public class ConsistencyIndexSimilarity extends AbstractSimilarity {
     }
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
-        // compute similarity
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         int intersection = 0;
         int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
 

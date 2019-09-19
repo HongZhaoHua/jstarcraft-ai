@@ -28,8 +28,7 @@ public class SpearmanRankCorrelation extends AbstractSimilarity {
     }
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
-        // compute similarity
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
         int count = scoreList.size();
         float numerator = getCoefficient(count, scoreList);

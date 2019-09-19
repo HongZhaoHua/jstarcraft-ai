@@ -28,7 +28,7 @@ public class AngularDistance extends AbstractDistance {
     }
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         float leftTheta = calculateTheta(leftVector);
         float leftPhi = calculatePhi(leftVector);
         float rightTheta = calculateTheta(rightVector);

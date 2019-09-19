@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.environment;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,6 +53,17 @@ class JavaEnvironmentContext extends EnvironmentContext {
     private ExecutorService[] structureExecutors;
 
     private JavaEnvironmentContext() {
+    }
+
+    @Override
+    public <T> Future<T> doTask(Callable<T> command) {
+        Future<T> task = taskExecutor.submit(() -> {
+            T value = command.call();
+            // 必须触发垃圾回收.
+            System.gc();
+            return value;
+        });
+        return task;
     }
 
     @Override

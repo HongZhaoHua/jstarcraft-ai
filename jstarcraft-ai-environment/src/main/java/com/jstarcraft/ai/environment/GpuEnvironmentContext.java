@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.environment;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -26,6 +27,26 @@ class GpuEnvironmentContext extends EnvironmentContext {
     private ExecutorService executor;
 
     private GpuEnvironmentContext() {
+    }
+
+    @Override
+    public <T> Future<T> doTask(Callable<T> command) {
+        Future<T> task = executor.submit(() -> {
+            int size = 1024 * 1024 * 10;
+            {
+                Nd4jEnvironmentThread thread = Nd4jEnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.constructCache(size);
+            }
+            T value = command.call();
+            {
+                Nd4jEnvironmentThread thread = Nd4jEnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.destroyCache();
+            }
+            // 必须触发垃圾回收.
+            System.gc();
+            return value;
+        });
+        return task;
     }
 
     @Override

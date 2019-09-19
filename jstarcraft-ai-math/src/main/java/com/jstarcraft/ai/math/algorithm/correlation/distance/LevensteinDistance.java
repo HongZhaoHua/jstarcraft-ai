@@ -16,7 +16,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 public class LevensteinDistance extends AbstractDistance {
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         int leftSize = leftVector.getElementSize();
         int rightSize = rightVector.getElementSize();
 

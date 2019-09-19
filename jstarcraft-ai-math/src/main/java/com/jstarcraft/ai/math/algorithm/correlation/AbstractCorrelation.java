@@ -14,7 +14,7 @@ public abstract class AbstractCorrelation implements Correlation {
     protected abstract List<Float2FloatKeyValue> getScoreList(MathVector leftVector, MathVector rightVector);
 
     @Override
-    public SymmetryMatrix makeCorrelationMatrix(MathMatrix scoreMatrix, boolean transpose, float scale) {
+    public SymmetryMatrix makeCorrelationMatrix(MathMatrix scoreMatrix, boolean transpose) {
         EnvironmentContext context = EnvironmentContext.getContext();
         Semaphore semaphore = new Semaphore(0);
         int count = transpose ? scoreMatrix.getColumnSize() : scoreMatrix.getRowSize();
@@ -35,7 +35,7 @@ public abstract class AbstractCorrelation implements Correlation {
                 int leftCursor = leftIndex;
                 int rightCursor = rightIndex;
                 context.doAlgorithmByAny(leftIndex * rightIndex, () -> {
-                    float similarity = getCoefficient(thisVector, thatVector, scale);
+                    float similarity = getCoefficient(thisVector, thatVector);
                     if (!Double.isNaN(similarity)) {
                         similarityMatrix.setValue(leftCursor, rightCursor, similarity);
                     }

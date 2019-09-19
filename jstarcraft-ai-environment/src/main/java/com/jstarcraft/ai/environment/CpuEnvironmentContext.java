@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.environment;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -52,6 +53,42 @@ class CpuEnvironmentContext extends EnvironmentContext {
     private ExecutorService[] structureExecutors;
 
     private CpuEnvironmentContext() {
+    }
+
+    @Override
+    public <T> Future<T> doTask(Callable<T> command) {
+        Future<T> task = taskExecutor.submit(() -> {
+            int size = 1024 * 1024 * 10;
+            {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.constructCache(size);
+            }
+            doAlgorithmByEvery(() -> {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.constructCache(size);
+            });
+            doStructureByEvery(() -> {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.constructCache(size);
+            });
+            T value = command.call();
+            doStructureByEvery(() -> {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.destroyCache();
+            });
+            doAlgorithmByEvery(() -> {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.destroyCache();
+            });
+            {
+                Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
+                thread.destroyCache();
+            }
+            // 必须触发垃圾回收.
+            System.gc();
+            return value;
+        });
+        return task;
     }
 
     @Override

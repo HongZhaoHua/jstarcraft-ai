@@ -1,5 +1,6 @@
 package com.jstarcraft.ai.environment;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 /**
@@ -12,6 +13,14 @@ public abstract class EnvironmentContext {
 
     EnvironmentContext() {
     }
+
+    /**
+     * 执行任务指令
+     * 
+     * @param command
+     * @return
+     */
+    abstract public <T> Future<T> doTask(Callable<T> command);
 
     /**
      * 执行任务指令

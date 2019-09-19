@@ -31,14 +31,14 @@ public class LevensteinDistanceTestCase extends AbstractDistanceTestCase {
     public void testSimilarity() {
         LevensteinDistance distance = new LevensteinDistance();
 
-        Assert.assertEquals(0F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraftR"), 0F), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("LJStarCraft"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraftR"), getVector("JStarCraft"), 0F), 0F);
-        Assert.assertEquals(0.6F, distance.getCoefficient(getVector("JStarCraft"), getVector("Star"), 0F), 0F);
-        Assert.assertEquals(0.8F, distance.getCoefficient(getVector("JStarCraft"), getVector("SC"), 0F), 0F);
-        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("HongZhaoHua"), 0F), 0F);
+        Assert.assertEquals(0F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraft")), 0F);
+        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft")), 0F);
+        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraftR")), 0F);
+        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("LJStarCraft"), getVector("JStarCraft")), 0F);
+        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraftR"), getVector("JStarCraft")), 0F);
+        Assert.assertEquals(0.6F, distance.getCoefficient(getVector("JStarCraft"), getVector("Star")), 0F);
+        Assert.assertEquals(0.8F, distance.getCoefficient(getVector("JStarCraft"), getVector("SC")), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("HongZhaoHua")), 0F);
     }
 
 }

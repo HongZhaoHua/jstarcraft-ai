@@ -20,7 +20,7 @@ public class CPCSimilarity extends AbstractSimilarity {
     private double median;
 
     @Override
-    public SymmetryMatrix makeCorrelationMatrix(MathMatrix trainMatrix, boolean transpose, float scale) {
+    public SymmetryMatrix makeCorrelationMatrix(MathMatrix trainMatrix, boolean transpose) {
         float maximum = 0F;
         float minimum = 0F;
         for (MatrixScalar term : trainMatrix) {
@@ -32,11 +32,10 @@ public class CPCSimilarity extends AbstractSimilarity {
             }
         }
         median = (maximum + minimum) / 2;
-        return super.makeCorrelationMatrix(trainMatrix, transpose, scale);
+        return super.makeCorrelationMatrix(trainMatrix, transpose);
     }
 
     private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
-        // compute similarity
         if (count == 0) {
             return Float.NaN;
         }
@@ -52,18 +51,11 @@ public class CPCSimilarity extends AbstractSimilarity {
     }
 
     @Override
-    public float getCoefficient(MathVector leftVector, MathVector rightVector, float scale) {
-        // compute similarity
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
         int count = scoreList.size();
-        float similarity = getCoefficient(count, scoreList);
-        // shrink to account for vector size
-        if (!Double.isNaN(similarity)) {
-            if (scale > 0) {
-                similarity *= count / (count + scale);
-            }
-        }
-        return similarity;
+        float coefficient = getCoefficient(count, scoreList);
+        return coefficient;
     }
 
 }
