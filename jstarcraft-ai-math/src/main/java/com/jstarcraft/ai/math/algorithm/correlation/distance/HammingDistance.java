@@ -14,22 +14,21 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  */
 public class HammingDistance extends AbstractDistance {
 
-    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
-        float similarity = 0F;
-        for (Float2FloatKeyValue term : scoreList) {
+    private float getCoefficient(List<Float2FloatKeyValue> scores) {
+        float coefficient = 0F;
+        for (Float2FloatKeyValue term : scores) {
             float distance = term.getKey() - term.getValue();
             if (distance != 0F) {
-                similarity++;
+                coefficient++;
             }
         }
-        return similarity;
+        return coefficient;
     }
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
-        int count = scoreList.size();
-        float coefficient = getCoefficient(count, scoreList);
+        List<Float2FloatKeyValue> scores = getUnionScores(leftVector, rightVector);
+        float coefficient = getCoefficient(scores);
         return coefficient;
     }
 

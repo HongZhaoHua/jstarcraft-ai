@@ -1,5 +1,7 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
@@ -7,11 +9,166 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
+import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 public abstract class AbstractCorrelation implements Correlation {
 
-    protected abstract List<Float2FloatKeyValue> getScoreList(MathVector leftVector, MathVector rightVector);
+    /**
+     * 交集
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @return
+     */
+    protected List<Float2FloatKeyValue> getIntersectionScores(MathVector leftVector, MathVector rightVector) {
+        LinkedList<Float2FloatKeyValue> scores = new LinkedList<>();
+        int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+        if (leftSize != 0 && rightSize != 0) {
+            Iterator<VectorScalar> leftIterator = leftVector.iterator();
+            Iterator<VectorScalar> rightIterator = rightVector.iterator();
+            VectorScalar leftTerm = leftIterator.next();
+            VectorScalar rightTerm = rightIterator.next();
+            // 判断两个有序数组中是否存在相同的数字
+            while (leftCursor < leftSize && rightCursor < rightSize) {
+                if (leftTerm.getIndex() == rightTerm.getIndex()) {
+                    scores.add(new Float2FloatKeyValue(leftTerm.getValue(), rightTerm.getValue()));
+                    leftTerm = leftIterator.next();
+                    rightTerm = rightIterator.next();
+                    leftCursor++;
+                    rightCursor++;
+                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+                    rightTerm = rightIterator.next();
+                    rightCursor++;
+                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+                    leftTerm = leftIterator.next();
+                    leftCursor++;
+                }
+            }
+        }
+        return scores;
+    }
+
+    /**
+     * 并集
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @return
+     */
+    protected List<Float2FloatKeyValue> getUnionScores(MathVector leftVector, MathVector rightVector) {
+        LinkedList<Float2FloatKeyValue> scores = new LinkedList<>();
+        Iterator<VectorScalar> leftIterator = leftVector.iterator();
+        Iterator<VectorScalar> rightIterator = rightVector.iterator();
+        VectorScalar leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+        VectorScalar rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+        // 判断两个有序数组中是否存在相同的数字
+        while (leftTerm != null || rightTerm != null) {
+            if (leftTerm != null && rightTerm != null) {
+                if (leftTerm.getIndex() == rightTerm.getIndex()) {
+                    scores.add(new Float2FloatKeyValue(leftTerm.getValue(), rightTerm.getValue()));
+                    leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                    rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+                    scores.add(new Float2FloatKeyValue(Float.NaN, rightTerm.getValue()));
+                    rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+                    scores.add(new Float2FloatKeyValue(leftTerm.getValue(), Float.NaN));
+                    leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                }
+                continue;
+            }
+            if (leftTerm != null) {
+                scores.add(new Float2FloatKeyValue(leftTerm.getValue(), Float.NaN));
+                leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                continue;
+            }
+            if (rightTerm != null) {
+                scores.add(new Float2FloatKeyValue(Float.NaN, rightTerm.getValue()));
+                rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                continue;
+            }
+        }
+        return scores;
+    }
+
+    /**
+     * 交集
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @return
+     */
+    protected int getIntersectionSize(MathVector leftVector, MathVector rightVector) {
+        int size = 0;
+        int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+        if (leftSize != 0 && rightSize != 0) {
+            Iterator<VectorScalar> leftIterator = leftVector.iterator();
+            Iterator<VectorScalar> rightIterator = rightVector.iterator();
+            VectorScalar leftTerm = leftIterator.next();
+            VectorScalar rightTerm = rightIterator.next();
+            // 判断两个有序数组中是否存在相同的数字
+            while (leftCursor < leftSize && rightCursor < rightSize) {
+                if (leftTerm.getIndex() == rightTerm.getIndex()) {
+                    size++;
+                    leftTerm = leftIterator.next();
+                    rightTerm = rightIterator.next();
+                    leftCursor++;
+                    rightCursor++;
+                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+                    rightTerm = rightIterator.next();
+                    rightCursor++;
+                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+                    leftTerm = leftIterator.next();
+                    leftCursor++;
+                }
+            }
+        }
+        return size;
+    }
+
+    /**
+     * 并集
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @return
+     */
+    protected int getUnionSize(MathVector leftVector, MathVector rightVector) {
+        int size = 0;
+        Iterator<VectorScalar> leftIterator = leftVector.iterator();
+        Iterator<VectorScalar> rightIterator = rightVector.iterator();
+        VectorScalar leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+        VectorScalar rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+        // 判断两个有序数组中是否存在相同的数字
+        while (leftTerm != null || rightTerm != null) {
+            if (leftTerm != null && rightTerm != null) {
+                if (leftTerm.getIndex() == rightTerm.getIndex()) {
+                    size++;
+                    leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                    rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
+                    size++;
+                    rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
+                    size++;
+                    leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                }
+                continue;
+            }
+            if (leftTerm != null) {
+                size++;
+                leftTerm = leftIterator.hasNext() ? leftIterator.next() : null;
+                continue;
+            }
+            if (rightTerm != null) {
+                size++;
+                rightTerm = rightIterator.hasNext() ? rightIterator.next() : null;
+                continue;
+            }
+        }
+        return size;
+    }
 
     @Override
     public SymmetryMatrix makeCorrelationMatrix(MathMatrix scoreMatrix, boolean transpose) {

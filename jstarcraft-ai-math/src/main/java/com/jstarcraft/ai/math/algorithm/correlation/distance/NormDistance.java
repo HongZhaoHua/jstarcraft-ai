@@ -40,22 +40,22 @@ public class NormDistance extends AbstractDistance {
         this.power = power;
     }
 
-    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
+    private float getCoefficient(List<Float2FloatKeyValue> scores) {
         // TODO 此处对称矩阵可能会存在错误,需要Override
         // 处理power为0的情况
         if (power == 0F) {
-            return count;
+            return scores.size();
         } else {
             float norm = 0F;
             if (power == 1F) {
-                for (Float2FloatKeyValue term : scoreList) {
+                for (Float2FloatKeyValue term : scores) {
                     float distance = term.getKey() - term.getValue();
                     norm += FastMath.abs(distance);
                 }
                 return norm;
             }
             if (power == 2F) {
-                for (Float2FloatKeyValue term : scoreList) {
+                for (Float2FloatKeyValue term : scores) {
                     float distance = term.getKey() - term.getValue();
                     norm += distance * distance;
                 }
@@ -63,12 +63,12 @@ public class NormDistance extends AbstractDistance {
             }
             // 处理power为2的倍数次方的情况
             if ((int) power == power && power % 2F == 0F) {
-                for (Float2FloatKeyValue term : scoreList) {
+                for (Float2FloatKeyValue term : scores) {
                     float distance = term.getKey() - term.getValue();
                     norm += FastMath.pow(distance, power);
                 }
             } else {
-                for (Float2FloatKeyValue term : scoreList) {
+                for (Float2FloatKeyValue term : scores) {
                     float distance = term.getKey() - term.getValue();
                     norm += FastMath.pow(FastMath.abs(distance), power);
                 }
@@ -79,9 +79,15 @@ public class NormDistance extends AbstractDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
-        int count = scoreList.size();
-        float coefficient = getCoefficient(count, scoreList);
+        List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
+        int intersection = scores.size();
+        if (intersection == 0) {
+            return Float.POSITIVE_INFINITY;
+        }
+        int union = leftVector.getElementSize() + rightVector.getElementSize() - intersection;
+        float coefficient = getCoefficient(scores);
+        coefficient *= union;
+        coefficient /= intersection;
         return coefficient;
     }
 

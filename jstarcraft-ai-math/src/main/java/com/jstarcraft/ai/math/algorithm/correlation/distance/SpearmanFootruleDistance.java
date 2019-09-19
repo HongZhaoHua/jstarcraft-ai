@@ -16,20 +16,19 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  */
 public class SpearmanFootruleDistance extends AbstractDistance {
 
-    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
-        float similarity = 0F;
-        for (Float2FloatKeyValue term : scoreList) {
+    private float getCoefficient(List<Float2FloatKeyValue> scores) {
+        float coefficient = 0F;
+        for (Float2FloatKeyValue term : scores) {
             float distance = term.getKey() - term.getValue();
-            similarity += FastMath.abs(distance);
+            coefficient += FastMath.abs(distance);
         }
-        return similarity;
+        return coefficient;
     }
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
-        int count = scoreList.size();
-        float numerator = getCoefficient(count, scoreList);
+        List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
+        float numerator = getCoefficient(scores);
         int size = leftVector.getKnownSize() + leftVector.getUnknownSize();
         float denominator;
         if (size % 2 == 0) {

@@ -15,12 +15,13 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  */
 public class KRCCSimilarity extends AbstractSimilarity {
 
-    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
+    private float getCoefficient(List<Float2FloatKeyValue> scores) {
+        int count = scores.size();
         if (count < 2) {
-            return Float.NaN;
+            return 0F;
         }
         float sum = 0F;
-        Iterator<Float2FloatKeyValue> iterator = scoreList.iterator();
+        Iterator<Float2FloatKeyValue> iterator = scores.iterator();
         Float2FloatKeyValue previousTerm = iterator.next();
         Float2FloatKeyValue nextTerm = null;
         while (iterator.hasNext()) {
@@ -37,9 +38,8 @@ public class KRCCSimilarity extends AbstractSimilarity {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
-        int count = scoreList.size();
-        float coefficient = getCoefficient(count, scoreList);
+        List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
+        float coefficient = getCoefficient(scores);
         return coefficient;
     }
 

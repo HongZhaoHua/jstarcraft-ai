@@ -16,9 +16,9 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  */
 public class ChebychevDistance extends AbstractDistance {
 
-    private float getCoefficient(int count, List<Float2FloatKeyValue> scoreList) {
+    private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float coefficient = 0F;
-        for (Float2FloatKeyValue term : scoreList) {
+        for (Float2FloatKeyValue term : scores) {
             float distance = term.getKey() - term.getValue();
             coefficient = Math.max(coefficient, FastMath.abs(distance));
         }
@@ -27,9 +27,15 @@ public class ChebychevDistance extends AbstractDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        List<Float2FloatKeyValue> scoreList = getScoreList(leftVector, rightVector);
-        int count = scoreList.size();
-        float coefficient = getCoefficient(count, scoreList);
+        List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
+        int intersection = scores.size();
+        if (intersection == 0) {
+            return Float.POSITIVE_INFINITY;
+        }
+        int union = leftVector.getElementSize() + rightVector.getElementSize() - intersection;
+        float coefficient = getCoefficient(scores);
+        coefficient *= union;
+        coefficient /= intersection;
         return coefficient;
     }
 

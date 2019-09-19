@@ -37,40 +37,13 @@ public class ConsistencyIndexSimilarity extends AbstractSimilarity {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        int intersection = 0;
-        int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
-
-        int k = Math.max(leftSize, rightSize);
+        int k = Math.max(leftVector.getElementSize(), rightVector.getElementSize());
         /* exceptional cases */
         if (k == 0 || k == n) {
             return 0;
         }
-
-        if (leftSize != 0 && rightSize != 0) {
-            Iterator<VectorScalar> leftIterator = leftVector.iterator();
-            Iterator<VectorScalar> rightIterator = rightVector.iterator();
-            VectorScalar leftTerm = leftIterator.next();
-            VectorScalar rightTerm = rightIterator.next();
-            // 判断两个有序数组中是否存在相同的数字
-            while (leftCursor < leftSize && rightCursor < rightSize) {
-                if (leftTerm.getIndex() == rightTerm.getIndex()) {
-                    intersection++;
-                    leftTerm = leftIterator.next();
-                    rightTerm = rightIterator.next();
-                    leftCursor++;
-                    rightCursor++;
-                } else if (leftTerm.getIndex() > rightTerm.getIndex()) {
-                    rightTerm = rightIterator.next();
-                    rightCursor++;
-                } else if (leftTerm.getIndex() < rightTerm.getIndex()) {
-                    leftTerm = leftIterator.next();
-                    leftCursor++;
-                }
-            }
-        }
-
         /* normal calculation */
-        return (intersection * n - k * k) * 1F / (k * (n - k));
+        return (getIntersectionSize(leftVector, rightVector) * n - k * k) * 1F / (k * (n - k));
     }
 
 }

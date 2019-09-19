@@ -4,7 +4,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.jstarcraft.ai.math.algorithm.correlation.similarity.BinarySimilarityTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.CPCSimilarityTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.ConsistencyIndexSimilarityTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.CosineSimilarityTestCase;
@@ -18,8 +17,6 @@ import com.jstarcraft.ai.math.algorithm.correlation.similarity.TanimotoSimilarit
 @RunWith(Suite.class)
 @SuiteClasses({
         // 相似度测试集
-        BinarySimilarityTestCase.class,
-
         ConsistencyIndexSimilarityTestCase.class,
 
         CosineSimilarityTestCase.class,
