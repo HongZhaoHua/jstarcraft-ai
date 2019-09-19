@@ -26,8 +26,8 @@ public class CommandLineInterface {
     private int numberOfNeighbours;
     private float radius;
 
-    private List<Vector> dataset;
-    private List<Vector> queries;
+    private List<KeyVector> dataset;
+    private List<KeyVector> queries;
 
     private int dimensions;
     private DistanceMeasure measure;
@@ -139,11 +139,11 @@ public class CommandLineInterface {
     private void startLSH() {
         if (linear) {
             if (queries != null) {
-                for (Vector query : queries) {
-                    List<Vector> neighbours = LSH.linearSearch(dataset, query, numberOfNeighbours, measure);
+                for (KeyVector query : queries) {
+                    List<KeyVector> neighbours = LSH.linearSearch(dataset, query, numberOfNeighbours, measure);
                     System.out.print(query.getKey() + ";");
                     double sum = 0.0;
-                    for (Vector neighbour : neighbours) {
+                    for (KeyVector neighbour : neighbours) {
                         sum += measure.distance(query, neighbour);
                         System.out.print(neighbour.getKey() + ";");
                     }
@@ -156,10 +156,10 @@ public class CommandLineInterface {
             LSH lsh = new LSH(dataset, family);
             lsh.buildIndex(rand, numberOfHashes, numberOfHashTables);
             if (queries != null) {
-                for (Vector query : queries) {
-                    List<Vector> neighbours = lsh.query(query, numberOfNeighbours);
+                for (KeyVector query : queries) {
+                    List<KeyVector> neighbours = lsh.query(query, numberOfNeighbours);
                     System.out.print(query.getKey() + ";");
-                    for (Vector neighbour : neighbours) {
+                    for (KeyVector neighbour : neighbours) {
                         System.out.print(neighbour.getKey() + ";");
                     }
                     System.out.print("\n");

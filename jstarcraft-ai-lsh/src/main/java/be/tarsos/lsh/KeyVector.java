@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.ArrayVector;
  * 
  * @author Joren Six
  */
-public class Vector extends ArrayVector {
+public class KeyVector extends ArrayVector {
 
     /**
      * An optional key, identifier for the vector.
@@ -24,7 +24,7 @@ public class Vector extends ArrayVector {
      * 
      * @param dimensions The number of dimensions.
      */
-    public Vector(String key, int dimensions) {
+    public KeyVector(String key, int dimensions) {
         this(key, new float[dimensions]);
     }
 
@@ -33,7 +33,7 @@ public class Vector extends ArrayVector {
      * 
      * @param other The other vector.
      */
-    public Vector(String key, Vector other) {
+    public KeyVector(String key, KeyVector other) {
         // copy the values
         this(key, Arrays.copyOf(other.values, other.values.length));
     }
@@ -44,7 +44,7 @@ public class Vector extends ArrayVector {
      * @param key    The key of the vector.
      * @param values The values of the vector.
      */
-    public Vector(String key, float[] values) {
+    public KeyVector(String key, float[] values) {
         super(values.length, values);
         this.key = key;
     }
@@ -63,18 +63,9 @@ public class Vector extends ArrayVector {
      * @exception ArrayIndexOutOfBoundsException when the two vectors do not have
      *                                           the same dimensions.
      */
-    public float dot(Vector other) {
+    public float dot(KeyVector other) {
         MathScalar scalar = DefaultScalar.getInstance();
         return scalar.dotProduct(this, other).getValue();
-//        float sum = 0F;
-//        for (int i = 0; i < getDimensions(); i++) {
-//            sum += values[i] * other.values[i];
-//        }
-//        return sum;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
     }
 
     public String getKey() {
@@ -89,7 +80,7 @@ public class Vector extends ArrayVector {
             return false;
         if (getClass() != object.getClass())
             return false;
-        Vector that = (Vector) object;
+        KeyVector that = (KeyVector) object;
         return this.key.equals(that.key);
     }
 

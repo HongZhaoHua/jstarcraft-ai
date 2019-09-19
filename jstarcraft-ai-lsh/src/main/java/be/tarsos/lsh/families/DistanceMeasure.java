@@ -1,6 +1,6 @@
 package be.tarsos.lsh.families;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 /**
  * A distance measure defines how distance is calculated, measured as it were,
@@ -18,5 +18,5 @@ public interface DistanceMeasure {
      * @param other The other vector
      * @return A value representing the distance between two vectors.
      */
-    float distance(Vector one, Vector other);
+    float distance(KeyVector one, KeyVector other);
 }

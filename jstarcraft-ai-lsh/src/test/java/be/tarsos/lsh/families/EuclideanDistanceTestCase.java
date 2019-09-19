@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 public class EuclideanDistanceTestCase {
 
     @Test
     public void testDistance() {
-        Vector v = new Vector("left", new float[] { 1F, 2F, 3F });
-        Vector other = new Vector("right", new float[] { 3F, 5F, 7F });
+        KeyVector v = new KeyVector("left", new float[] { 1F, 2F, 3F });
+        KeyVector other = new KeyVector("right", new float[] { 3F, 5F, 7F });
 
         EuclideanDistance distance = new EuclideanDistance();
         float distanceValue = distance.distance(v, other);

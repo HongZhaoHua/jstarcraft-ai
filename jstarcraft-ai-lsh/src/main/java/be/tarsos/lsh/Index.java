@@ -70,7 +70,7 @@ public class Index implements Serializable {
      * 
      * @param vector The vector to add.
      */
-    public void index(Vector vector) {
+    public void index(KeyVector vector) {
         for (HashTable table : hashTable) {
             table.add(vector);
         }
@@ -106,13 +106,13 @@ public class Index implements Serializable {
      * @return A list of nearest neighbours, the number of neighbours returned lays
      *         between zero and a chosen maximum.
      */
-    public List<Vector> query(final Vector query, int maxSize) {
-        Set<Vector> candidateSet = new HashSet<Vector>();
+    public List<KeyVector> query(final KeyVector query, int maxSize) {
+        Set<KeyVector> candidateSet = new HashSet<KeyVector>();
         for (HashTable table : hashTable) {
-            List<Vector> v = table.query(query);
+            List<KeyVector> v = table.query(query);
             candidateSet.addAll(v);
         }
-        List<Vector> candidates = new ArrayList<Vector>(candidateSet);
+        List<KeyVector> candidates = new ArrayList<KeyVector>(candidateSet);
         evaluated += candidates.size();
         DistanceMeasure measure = family.createDistanceMeasure();
         DistanceComparator dc = new DistanceComparator(query, measure);

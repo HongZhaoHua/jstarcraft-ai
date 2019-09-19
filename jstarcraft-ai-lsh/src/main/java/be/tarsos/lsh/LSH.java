@@ -25,11 +25,11 @@ import be.tarsos.lsh.util.FileUtils;
  * @author Joren Six
  */
 public class LSH {
-    List<Vector> dataset;
+    List<KeyVector> dataset;
     private Index index;
     private final HashFamily hashFamily;
 
-    public LSH(List<Vector> dataset, HashFamily hashFamily) {
+    public LSH(List<KeyVector> dataset, HashFamily hashFamily) {
         this.dataset = dataset;
         this.hashFamily = hashFamily;
     }
@@ -47,7 +47,7 @@ public class LSH {
         // index = Index.deserialize(hashFamily, numberOfHashes, numberOfHashTables);
         index = new Index(rand, hashFamily, numberOfHashes, numberOfHashTables);
         if (dataset != null) {
-            for (Vector vector : dataset) {
+            for (KeyVector vector : dataset) {
                 index.index(vector);
             }
             Index.serialize(index);
@@ -70,16 +70,16 @@ public class LSH {
         int falseNegatives = 0;
         // int intersectionSize = 0;
         for (int i = 0; i < dataset.size(); i++) {
-            Vector query = dataset.get(i);
+            KeyVector query = dataset.get(i);
             startTime = System.currentTimeMillis();
-            List<Vector> lshResult = index.query(query, neighboursSize);
+            List<KeyVector> lshResult = index.query(query, neighboursSize);
             lshSearchTime += System.currentTimeMillis() - startTime;
 
             startTime = System.currentTimeMillis();
-            List<Vector> linearResult = linearSearch(dataset, query, neighboursSize, measure);
+            List<KeyVector> linearResult = linearSearch(dataset, query, neighboursSize, measure);
             linearSearchTime += System.currentTimeMillis() - startTime;
 
-            Set<Vector> set = new HashSet<Vector>();
+            Set<KeyVector> set = new HashSet<KeyVector>();
             set.addAll(lshResult);
             set.addAll(linearResult);
             // intersectionSize += set.size();
@@ -130,7 +130,7 @@ public class LSH {
      *         list length contains the maximum number of elements, or less. Zero
      *         elements are possible.
      */
-    public List<Vector> query(final Vector query, int neighboursSize) {
+    public List<KeyVector> query(final KeyVector query, int neighboursSize) {
         return index.query(query, neighboursSize);
     }
 
@@ -148,11 +148,11 @@ public class LSH {
      * @return The list of k nearest neighbours to the query vector, according to
      *         the given distance measure.
      */
-    public static List<Vector> linearSearch(List<Vector> dataset, final Vector query, int resultSize, DistanceMeasure measure) {
+    public static List<KeyVector> linearSearch(List<KeyVector> dataset, final KeyVector query, int resultSize, DistanceMeasure measure) {
         DistanceComparator dc = new DistanceComparator(query, measure);
-        PriorityQueue<Vector> pq = new PriorityQueue<Vector>(dataset.size(), dc);
+        PriorityQueue<KeyVector> pq = new PriorityQueue<KeyVector>(dataset.size(), dc);
         pq.addAll(dataset);
-        List<Vector> vectors = new ArrayList<Vector>();
+        List<KeyVector> vectors = new ArrayList<KeyVector>();
         for (int i = 0; i < resultSize; i++) {
             vectors.add(pq.poll());
         }
@@ -183,8 +183,8 @@ public class LSH {
      *                file defines more points).
      * @return a list of vectors, the data set.
      */
-    public static List<Vector> readDataset(String file, int maxSize) {
-        List<Vector> ret = new ArrayList<Vector>();
+    public static List<KeyVector> readDataset(String file, int maxSize) {
+        List<KeyVector> ret = new ArrayList<KeyVector>();
         List<String[]> data = FileUtils.readCSVFile(file, " ", -1);
         if (data.size() > maxSize) {
             data = data.subList(0, maxSize);
@@ -199,10 +199,7 @@ public class LSH {
         int startIndex = firstColumnIsKey ? 1 : 0;
         int index = 0;
         for (String[] row : data) {
-            Vector item = new Vector(String.valueOf(index), dimensions);
-            if (firstColumnIsKey) {
-                item.setKey(row[0]);
-            }
+            KeyVector item = new KeyVector(String.valueOf(firstColumnIsKey ? row[0] : index), dimensions);
             for (int d = startIndex; d < row.length; d++) {
                 float value = Float.parseFloat(row[d]);
                 item.setValue(d - startIndex, value);
@@ -212,7 +209,7 @@ public class LSH {
         return ret;
     }
 
-    static float determineRadius(Random rand, List<Vector> dataset, DistanceMeasure measure, int timeout) {
+    static float determineRadius(Random rand, List<KeyVector> dataset, DistanceMeasure measure, int timeout) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         float radius = 0f;
         DetermineRadiusTask drt = new DetermineRadiusTask(rand, dataset, measure);
@@ -237,11 +234,11 @@ public class LSH {
     static class DetermineRadiusTask implements Callable<Float> {
         private float queriesDone = 0F;
         private float radiusSum = 0F;
-        private final List<Vector> dataset;
+        private final List<KeyVector> dataset;
         private final Random rand;
         private final DistanceMeasure measure;
 
-        public DetermineRadiusTask(Random rand, List<Vector> dataset, DistanceMeasure measure) {
+        public DetermineRadiusTask(Random rand, List<KeyVector> dataset, DistanceMeasure measure) {
             this.dataset = dataset;
             this.rand = rand;
             this.measure = measure;
@@ -250,8 +247,8 @@ public class LSH {
         @Override
         public Float call() throws Exception {
             for (int i = 0; i < 30; i++) {
-                Vector query = dataset.get(rand.nextInt(dataset.size()));
-                List<Vector> result = linearSearch(dataset, query, 2, measure);
+                KeyVector query = dataset.get(rand.nextInt(dataset.size()));
+                List<KeyVector> result = linearSearch(dataset, query, 2, measure);
                 // the first vector is the query self, the second the closest.
                 radiusSum += measure.distance(query, result.get(1));
                 queriesDone++;

@@ -1,6 +1,6 @@
 package be.tarsos.lsh.families;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 /**
  * This distance measure calculates the city block distance between two vectors.
@@ -32,7 +32,7 @@ public class CityBlockDistance implements DistanceMeasure {
      * Vector, be.hogent.tarsos.lsh.Vector)
      */
     @Override
-    public float distance(Vector one, Vector other) {
+    public float distance(KeyVector one, KeyVector other) {
         float distance = 0F;
         for (int d = 0; d < one.getDimensionSize(); d++) {
             distance += Math.abs(one.getValue(d) - other.getValue(d));

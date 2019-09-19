@@ -8,8 +8,8 @@ public class VectorTests {
 
     @Test
     public void testDotProduct() {
-        Vector one = new Vector("left", 3);
-        Vector two = new Vector("right", 3);
+        KeyVector one = new KeyVector("left", 3);
+        KeyVector two = new KeyVector("right", 3);
         one.setValue(0, 1);
         two.setValue(0, 7);
         one.setValue(1, 1);

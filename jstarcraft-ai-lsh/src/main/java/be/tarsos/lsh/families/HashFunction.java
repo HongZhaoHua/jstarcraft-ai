@@ -2,7 +2,7 @@ package be.tarsos.lsh.families;
 
 import java.io.Serializable;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 /**
  * A hash function can hash a vector of arbitrary dimensions to an integer
@@ -24,5 +24,5 @@ public interface HashFunction extends Serializable {
      * @return A locality sensitive hash (LSH). Vectors that are 'close' according
      *         to some metric have a high probability to end up with the same hash.
      */
-    int hash(Vector vector);
+    int hash(KeyVector vector);
 }

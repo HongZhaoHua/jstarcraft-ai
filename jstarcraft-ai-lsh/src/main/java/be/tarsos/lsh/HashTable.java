@@ -24,7 +24,7 @@ class HashTable implements Serializable {
      * Contains the mapping between a combination of a number of hashes (encoded
      * using an integer) and a list of possible nearest neighbours
      */
-    private HashMap<String, List<Vector>> hashTable;
+    private HashMap<String, List<KeyVector>> hashTable;
     private HashFunction[] hashFunctions;
     private HashFamily family;
 
@@ -37,7 +37,7 @@ class HashTable implements Serializable {
      *                       functions, and is used therefore.
      */
     public HashTable(Random rand, int numberOfHashes, HashFamily family) {
-        hashTable = new HashMap<String, List<Vector>>();
+        hashTable = new HashMap<String, List<KeyVector>>();
         this.hashFunctions = new HashFunction[numberOfHashes];
         for (int i = 0; i < numberOfHashes; i++) {
             hashFunctions[i] = family.createHashFunction(rand);
@@ -55,12 +55,12 @@ class HashTable implements Serializable {
      *         candidates are found, an empty list is returned, otherwise, the list
      *         of candidates is returned.
      */
-    public List<Vector> query(Vector query) {
+    public List<KeyVector> query(KeyVector query) {
         String combinedHash = hash(query);
         if (hashTable.containsKey(combinedHash))
             return hashTable.get(combinedHash);
         else
-            return new ArrayList<Vector>();
+            return new ArrayList<KeyVector>();
     }
 
     /**
@@ -68,10 +68,10 @@ class HashTable implements Serializable {
      * 
      * @param vector
      */
-    public void add(Vector vector) {
+    public void add(KeyVector vector) {
         String combinedHash = hash(vector);
         if (!hashTable.containsKey(combinedHash)) {
-            hashTable.put(combinedHash, new ArrayList<Vector>());
+            hashTable.put(combinedHash, new ArrayList<KeyVector>());
         }
         hashTable.get(combinedHash).add(vector);
     }
@@ -82,7 +82,7 @@ class HashTable implements Serializable {
      * @param vector The vector to calculate the combined hash for.
      * @return An integer representing a combined hash.
      */
-    private String hash(Vector vector) {
+    private String hash(KeyVector vector) {
         int hashes[] = new int[hashFunctions.length];
         for (int i = 0; i < hashFunctions.length; i++) {
             hashes[i] = hashFunctions[i].hash(vector);

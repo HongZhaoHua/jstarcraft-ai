@@ -6,13 +6,13 @@ import java.util.Random;
 
 import org.junit.Test;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 public class CosineHashTestCase {
 
     @Test
     public void testHash() {
-        Vector v = new Vector("hash", 3);
+        KeyVector v = new KeyVector("hash", 3);
         v.setValue(0, 1);
         v.setValue(1, 2);
         v.setValue(2, 3);

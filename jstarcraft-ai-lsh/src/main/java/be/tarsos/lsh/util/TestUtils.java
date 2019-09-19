@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import be.tarsos.lsh.Vector;
+import be.tarsos.lsh.KeyVector;
 
 /**
  * Makes it easy to generate random test data sets.
@@ -22,10 +22,10 @@ public class TestUtils {
      *                    number between 0 and maxValue is chosen randomly).
      * @return A data set with the properties described above.
      */
-    public static List<Vector> generate(Random rand, int dimensions, int datasetSize, int maxValue) {
-        List<Vector> ret = new ArrayList<Vector>();
+    public static List<KeyVector> generate(Random rand, int dimensions, int datasetSize, int maxValue) {
+        List<KeyVector> ret = new ArrayList<KeyVector>();
         for (int i = 0; i < datasetSize; i++) {
-            Vector item = new Vector(String.valueOf(i), dimensions);
+            KeyVector item = new KeyVector(String.valueOf(i), dimensions);
             for (int d = 0; d < dimensions; d++) {
                 float point = rand.nextInt(maxValue);
                 item.setValue(d, point);
@@ -50,12 +50,12 @@ public class TestUtils {
      *                                dimension a random number between -radius and
      *                                +radius is added to the current value.
      */
-    public static void addNeighbours(Random rand, List<Vector> dataset, int numberOfNeighboursToAdd, float radius) {
+    public static void addNeighbours(Random rand, List<KeyVector> dataset, int numberOfNeighboursToAdd, float radius) {
         int datasetSize = dataset.size();
         for (int i = 0; i < datasetSize; i++) {
-            Vector original = dataset.get(i);
+            KeyVector original = dataset.get(i);
             for (int neighbours = 0; neighbours < numberOfNeighboursToAdd; neighbours++) {
-                Vector neighbour = new Vector(original.getKey() + "_" + neighbours, original);
+                KeyVector neighbour = new KeyVector(original.getKey() + "_" + neighbours, original);
                 for (int d = 0; d < neighbour.getDimensionSize(); d++) {
                     // copy the point but add or subtract a value between -radius and +radius
                     float diff = radius + (-radius - radius) * rand.nextFloat();
