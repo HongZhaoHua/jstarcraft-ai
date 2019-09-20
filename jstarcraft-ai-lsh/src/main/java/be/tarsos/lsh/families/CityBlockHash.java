@@ -3,6 +3,8 @@ package be.tarsos.lsh.families;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+
 import be.tarsos.lsh.KeyVector;
 
 public class CityBlockHash implements HashFunction {
@@ -11,7 +13,7 @@ public class CityBlockHash implements HashFunction {
      */
     private static final long serialVersionUID = -635398900309516287L;
     private int w;
-    private KeyVector randomPartition;
+    private MathVector randomPartition;
 
     public CityBlockHash(Random rand, int dimensions, int width) {
         this.w = width;
@@ -25,7 +27,7 @@ public class CityBlockHash implements HashFunction {
         }
     }
 
-    public int hash(KeyVector vector) {
+    public int hash(MathVector vector) {
         int hash[] = new int[randomPartition.getDimensionSize()];
         for (int d = 0; d < randomPartition.getDimensionSize(); d++) {
             hash[d] = (int) Math.floor((vector.getValue(d) - randomPartition.getValue(d)) / Float.valueOf(w));

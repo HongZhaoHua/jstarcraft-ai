@@ -1,5 +1,7 @@
 package be.tarsos.lsh.families;
 
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+
 import be.tarsos.lsh.KeyVector;
 
 /**
@@ -32,7 +34,7 @@ public class CityBlockDistance implements DistanceMeasure {
      * Vector, be.hogent.tarsos.lsh.Vector)
      */
     @Override
-    public float distance(KeyVector one, KeyVector other) {
+    public float distance(MathVector one, MathVector other) {
         float distance = 0F;
         for (int d = 0; d < one.getDimensionSize(); d++) {
             distance += Math.abs(one.getValue(d) - other.getValue(d));

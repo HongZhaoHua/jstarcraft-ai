@@ -1,6 +1,6 @@
 package be.tarsos.lsh.families;
 
-import be.tarsos.lsh.KeyVector;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
  * A distance measure defines how distance is calculated, measured as it were,
@@ -14,9 +14,9 @@ public interface DistanceMeasure {
     /**
      * Calculate the distance between two vectors. From one to two.
      * 
-     * @param one   The first vector.
-     * @param other The other vector
+     * @param left   The first vector.
+     * @param right The other vector
      * @return A value representing the distance between two vectors.
      */
-    float distance(KeyVector one, KeyVector other);
+    float distance(MathVector left, MathVector right);
 }

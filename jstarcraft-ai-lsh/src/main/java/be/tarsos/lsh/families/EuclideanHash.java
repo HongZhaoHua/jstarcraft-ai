@@ -2,6 +2,10 @@ package be.tarsos.lsh.families;
 
 import java.util.Random;
 
+import com.jstarcraft.ai.math.structure.DefaultScalar;
+import com.jstarcraft.ai.math.structure.MathScalar;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+
 import be.tarsos.lsh.KeyVector;
 
 public class EuclideanHash implements HashFunction {
@@ -9,7 +13,7 @@ public class EuclideanHash implements HashFunction {
      * 
      */
     private static final long serialVersionUID = -3784656820380622717L;
-    private KeyVector randomProjection;
+    private MathVector randomProjection;
     private int offset;
     private int w;
 
@@ -26,8 +30,9 @@ public class EuclideanHash implements HashFunction {
         }
     }
 
-    public int hash(KeyVector vector) {
-        double hashValue = (vector.dot(randomProjection) + offset) / Float.valueOf(w);
+    public int hash(MathVector vector) {
+        MathScalar scalar = DefaultScalar.getInstance();
+        double hashValue = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
         return (int) Math.round(hashValue);
     }
 }

@@ -1,6 +1,6 @@
 package be.tarsos.lsh.families;
 
-import be.tarsos.lsh.KeyVector;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
  * Calculates the
@@ -20,10 +20,10 @@ public class EuclideanDistance implements DistanceMeasure {
      * Vector, be.hogent.tarsos.lsh.Vector)
      */
     @Override
-    public float distance(KeyVector one, KeyVector other) {
+    public float distance(MathVector left, MathVector right) {
         float sum = 0F;
-        for (int d = 0; d < one.getDimensionSize(); d++) {
-            float delta = one.getValue(d) - other.getValue(d);
+        for (int dimension = 0; dimension < left.getDimensionSize(); dimension++) {
+            float delta = left.getValue(dimension) - right.getValue(dimension);
             sum += delta * delta;
         }
         return (float) Math.sqrt(sum);

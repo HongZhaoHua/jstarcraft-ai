@@ -1,13 +1,16 @@
 package be.tarsos.lsh.families;
 
-import be.tarsos.lsh.KeyVector;
+import com.jstarcraft.ai.math.structure.DefaultScalar;
+import com.jstarcraft.ai.math.structure.MathScalar;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class CosineDistance implements DistanceMeasure {
 
     @Override
-    public float distance(KeyVector one, KeyVector other) {
+    public float distance(MathVector left, MathVector right) {
+        MathScalar scalar = DefaultScalar.getInstance();
         float distance = 0F;
-        float similarity = one.dot(other) / (float) Math.sqrt(one.dot(one) * other.dot(other));
+        float similarity = scalar.dotProduct(left, right).getValue() / (float) Math.sqrt(scalar.dotProduct(left, left).getValue() * scalar.dotProduct(right, right).getValue());
         distance = 1 - similarity;
         return distance;
     }
