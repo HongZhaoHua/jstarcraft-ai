@@ -2,8 +2,6 @@ package be.tarsos.lsh;
 
 import java.util.Arrays;
 
-import com.jstarcraft.ai.math.structure.DefaultScalar;
-import com.jstarcraft.ai.math.structure.MathScalar;
 import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 
 /**
@@ -52,20 +50,6 @@ public class KeyVector extends ArrayVector {
     @Override
     public boolean isConstant() {
         return true;
-    }
-
-    /**
-     * Calculates the dot product, or scalar product, of this vector with the other
-     * vector.
-     * 
-     * @param other The other vector, should have the same number of dimensions.
-     * @return The dot product of this vector with the other vector.
-     * @exception ArrayIndexOutOfBoundsException when the two vectors do not have
-     *                                           the same dimensions.
-     */
-    public float dot(KeyVector other) {
-        MathScalar scalar = DefaultScalar.getInstance();
-        return scalar.dotProduct(this, other).getValue();
     }
 
     public String getKey() {
