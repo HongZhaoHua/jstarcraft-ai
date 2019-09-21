@@ -4,3 +4,6 @@ https://deeplearning4j.org/docs/latest/nd4j-overview
 
 Java Machine Learning Library:
 https://github.com/Daniel-Liu-c0deb0t/Java-Machine-Learning/blob/master/src/javamachinelearning/utils/Tensor.java
+
+Colt provides a set of Open Source Libraries for High Performance Scientific and Technical Computing in Java:
+http://dst.lbl.gov/ACSSoftware/colt/
