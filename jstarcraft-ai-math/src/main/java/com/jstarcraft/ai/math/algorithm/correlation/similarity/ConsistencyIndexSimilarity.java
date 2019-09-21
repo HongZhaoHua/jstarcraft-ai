@@ -1,10 +1,12 @@
 package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 
 import java.util.Iterator;
+import java.util.List;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
+import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
  * Consistency index for a pair of subsets.
@@ -37,13 +39,14 @@ public class ConsistencyIndexSimilarity extends AbstractSimilarity {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
+        List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
         int k = Math.max(leftVector.getElementSize(), rightVector.getElementSize());
         /* exceptional cases */
         if (k == 0 || k == n) {
             return 0;
         }
         /* normal calculation */
-        return (getIntersectionSize(leftVector, rightVector) * n - k * k) * 1F / (k * (n - k));
+        return (scores.size() * n - k * k) * 1F / (k * (n - k));
     }
 
 }

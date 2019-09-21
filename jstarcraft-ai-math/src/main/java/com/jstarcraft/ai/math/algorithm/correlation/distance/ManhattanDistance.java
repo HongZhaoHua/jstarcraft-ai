@@ -22,11 +22,7 @@ public class ManhattanDistance extends AbstractDistance {
             float distance = term.getKey() - term.getValue();
             coefficient += FastMath.abs(distance);
         }
-        if (coefficient == 0F) {
-            return coefficient;
-        } else {
-            return (float) FastMath.sqrt(coefficient);
-        }
+        return coefficient;
     }
 
     @Override

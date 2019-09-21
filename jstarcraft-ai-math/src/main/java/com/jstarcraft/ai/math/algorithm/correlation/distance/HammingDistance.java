@@ -17,8 +17,7 @@ public class HammingDistance extends AbstractDistance {
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float coefficient = 0F;
         for (Float2FloatKeyValue term : scores) {
-            float distance = term.getKey() - term.getValue();
-            if (distance != 0F) {
+            if (term.getKey() != term.getValue()) {
                 coefficient++;
             }
         }
