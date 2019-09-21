@@ -151,6 +151,14 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
         return this;
     }
 
+    /**
+     * 向量叉积运算
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @param mode
+     * @return
+     */
     default MathVector crossProduct(MathVector leftVector, MathVector rightVector, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {
