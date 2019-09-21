@@ -32,7 +32,7 @@ public class EuclideanHash implements HashFunction {
 
     public int hash(MathVector vector) {
         MathScalar scalar = DefaultScalar.getInstance();
-        double hashValue = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
-        return (int) Math.round(hashValue);
+        float hashValue = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
+        return Math.round(hashValue);
     }
 }
