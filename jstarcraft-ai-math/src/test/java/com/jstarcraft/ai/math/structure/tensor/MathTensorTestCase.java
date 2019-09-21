@@ -10,19 +10,13 @@ import org.nd4j.linalg.factory.Nd4j;
 
 import com.jstarcraft.ai.math.structure.MathCalculator;
 
-public class TensorTestCase {
+public class MathTensorTestCase {
 
     @Test
     public void test() {
         int[] shape = new int[] { 3, 3 };
         float[] cData = new float[] { 0F, 8F, 4F, 5F, 3F, 5F, 2F, 3F, 6F };
         float[] fData = new float[] { 0F, 5F, 2F, 8F, 3F, 5F, 4F, 5F, 6F };
-        {
-//            Tensor tensor = new Tensor(shape, 1);
-//            System.out.println(Arrays.toString(tensor.shape()));
-//            System.out.println(Arrays.toString(tensor.mult()));
-//            System.out.println(tensor.size());
-        }
 
         {
             INDArray array = Nd4j.create(cData, shape, 'c');
@@ -37,6 +31,7 @@ public class TensorTestCase {
                 Assert.assertEquals(scalar.getValue(), tensor.getValue(scalar.getIndexes()), 0F);
             });
         }
+
         {
             INDArray array = Nd4j.create(fData, shape, 'f');
             FloatPointer pointer = (FloatPointer) array.data().pointer();

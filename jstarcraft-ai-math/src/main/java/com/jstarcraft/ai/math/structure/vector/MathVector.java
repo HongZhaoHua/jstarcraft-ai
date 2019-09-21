@@ -15,7 +15,7 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
  *
  */
 public interface MathVector extends ScalarIterator<VectorScalar> {
-    
+
     /**
      * 获取维度的大小
      * 
@@ -149,6 +149,63 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
             setValue(position, vector.getValue(position));
         }
         return this;
+    }
+
+    default MathVector crossProduct(MathVector leftVector, MathVector rightVector, MathCalculator mode) {
+        switch (mode) {
+        case SERIAL: {
+            for (VectorScalar term : this) {
+                int index = term.getIndex();
+                term.setValue(0F);
+                for (VectorScalar leftScalar : leftVector) {
+                    if (index != leftScalar.getIndex()) {
+                        for (VectorScalar rightScalar : rightVector) {
+                            if (index != rightScalar.getIndex()) {
+                                if (rightScalar.getIndex() > leftScalar.getIndex()) {
+                                    term.shiftValue(leftScalar.getValue() * rightScalar.getValue());
+                                } else if (rightScalar.getIndex() < leftScalar.getIndex()) {
+                                    term.shiftValue(-leftScalar.getValue() * rightScalar.getValue());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return this;
+        }
+        default: {
+            int size = this.getElementSize();
+            EnvironmentContext context = EnvironmentContext.getContext();
+            CountDownLatch latch = new CountDownLatch(size);
+            for (int position = 0; position < size; position++) {
+                int index = this.getIndex(position);
+                int cursor = position;
+                context.doStructureByAny(position, () -> {
+                    this.setValue(cursor, 0F);
+                    for (VectorScalar leftScalar : leftVector) {
+                        if (index != leftScalar.getIndex()) {
+                            for (VectorScalar rightScalar : rightVector) {
+                                if (index != rightScalar.getIndex()) {
+                                    if (rightScalar.getIndex() > leftScalar.getIndex()) {
+                                        this.shiftValue(cursor, leftScalar.getValue() * rightScalar.getValue());
+                                    } else if (rightScalar.getIndex() < leftScalar.getIndex()) {
+                                        this.shiftValue(cursor, -leftScalar.getValue() * rightScalar.getValue());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    latch.countDown();
+                });
+            }
+            try {
+                latch.await();
+            } catch (Exception exception) {
+                throw new RuntimeException(exception);
+            }
+            return this;
+        }
+        }
     }
 
     /**
