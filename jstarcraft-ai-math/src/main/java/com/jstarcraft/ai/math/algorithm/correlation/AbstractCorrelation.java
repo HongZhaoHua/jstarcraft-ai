@@ -1,9 +1,12 @@
 package com.jstarcraft.ai.math.algorithm.correlation;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+
+import org.apache.commons.math3.util.FastMath;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
@@ -22,8 +25,8 @@ public abstract class AbstractCorrelation implements Correlation {
      * @return
      */
     protected List<Float2FloatKeyValue> getIntersectionScores(MathVector leftVector, MathVector rightVector) {
-        LinkedList<Float2FloatKeyValue> scores = new LinkedList<>();
         int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
+        List<Float2FloatKeyValue> scores = new ArrayList<>(FastMath.max(leftSize, rightSize));
         if (leftSize != 0 && rightSize != 0) {
             Iterator<VectorScalar> leftIterator = leftVector.iterator();
             Iterator<VectorScalar> rightIterator = rightVector.iterator();
