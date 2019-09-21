@@ -2,7 +2,7 @@ package be.tarsos.lsh.families;
 
 import java.util.Comparator;
 
-import be.tarsos.lsh.KeyVector;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
  * This comparator can be used to sort candidate neighbours according to their
@@ -11,9 +11,9 @@ import be.tarsos.lsh.KeyVector;
  * 
  * @author Joren Six
  */
-public class DistanceComparator implements Comparator<KeyVector> {
+public class DistanceComparator implements Comparator<MathVector> {
 
-    private final KeyVector query;
+    private final MathVector query;
     private final DistanceMeasure distanceMeasure;
 
     /**
@@ -21,20 +21,15 @@ public class DistanceComparator implements Comparator<KeyVector> {
      * @param query           The query vector.
      * @param distanceMeasure The distance vector to use.
      */
-    public DistanceComparator(KeyVector query, DistanceMeasure distanceMeasure) {
+    public DistanceComparator(MathVector query, DistanceMeasure distanceMeasure) {
         this.query = query;
         this.distanceMeasure = distanceMeasure;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-     */
     @Override
-    public int compare(KeyVector one, KeyVector other) {
-        float oneDistance = distanceMeasure.distance(query, one);
-        float otherDistance = distanceMeasure.distance(query, other);
+    public int compare(MathVector left, MathVector right) {
+        float oneDistance = distanceMeasure.distance(query, left);
+        float otherDistance = distanceMeasure.distance(query, right);
         return Float.compare(oneDistance, otherDistance);
     }
 }
