@@ -7,5 +7,7 @@ https://github.com/AbeelLab/javaml
 Java Statistical Analysis Tool, a Java library for Machine Learning:
 https://github.com/EdwardRaff/JSAT
 
+clust4j:A Java-based set of classification clustering algorithms:
+
 Machine learning, in numpy:
 https://github.com/ddbourgin/numpy-ml
