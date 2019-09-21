@@ -3,11 +3,12 @@ package be.tarsos.lsh;
 import java.util.List;
 import java.util.Random;
 
-import be.tarsos.lsh.families.CityBlockDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
+
 import be.tarsos.lsh.families.CityBlockHashFamily;
 import be.tarsos.lsh.families.CosineHashFamily;
-import be.tarsos.lsh.families.DistanceMeasure;
-import be.tarsos.lsh.families.EuclideanDistance;
 import be.tarsos.lsh.families.EuclidianHashFamily;
 import be.tarsos.lsh.families.HashFamily;
 import be.tarsos.lsh.util.TestUtils;
@@ -30,7 +31,7 @@ public class CommandLineInterface {
     private List<KeyVector> queries;
 
     private int dimensions;
-    private DistanceMeasure measure;
+    private AbstractDistance measure;
     private int timeout = 40; // seconds timeout for radius search.
     private HashFamily family;
 
@@ -76,7 +77,7 @@ public class CommandLineInterface {
             dimensions = queries.get(0).getDimensionSize();
         }
         if (radius == 0 && hashFamilyType.equalsIgnoreCase("l1")) {
-            measure = new CityBlockDistance();
+            measure = new ManhattanDistance();
             radius = LSH.determineRadius(rand, dataset, measure, timeout);
         } else if (radius == 0 && hashFamilyType.equalsIgnoreCase("l2")) {
             measure = new EuclideanDistance();
@@ -110,7 +111,7 @@ public class CommandLineInterface {
         System.out.println("Radius for Euclidean distance.");
         int radiusEuclidean = (int) LSH.determineRadius(rand, dataset, new EuclideanDistance(), 20);
         System.out.println("\nRadius for City block distance.");
-        int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new CityBlockDistance(), 20);
+        int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
 
         HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new CityBlockHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
 
@@ -144,7 +145,7 @@ public class CommandLineInterface {
                     System.out.print(query.getKey() + ";");
                     double sum = 0.0;
                     for (KeyVector neighbour : neighbours) {
-                        sum += measure.distance(query, neighbour);
+                        sum += measure.getCoefficient(query, neighbour);
                         System.out.print(neighbour.getKey() + ";");
                     }
                     System.out.print(sum + ";");

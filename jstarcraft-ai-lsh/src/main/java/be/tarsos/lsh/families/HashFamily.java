@@ -3,6 +3,8 @@ package be.tarsos.lsh.families;
 import java.io.Serializable;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+
 /**
  * An interface representing a family of hash functions. A hash family has the
  * ability to generate a new member of the family, and can combine hashes
@@ -34,6 +36,6 @@ public interface HashFamily extends Serializable {
      * 
      * @return The distance measure used to sort neighbourhood candidates.
      */
-    DistanceMeasure createDistanceMeasure();
+    AbstractDistance createDistanceMeasure();
 
 }

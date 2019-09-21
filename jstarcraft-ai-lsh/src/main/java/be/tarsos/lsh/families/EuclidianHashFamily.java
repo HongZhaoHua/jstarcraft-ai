@@ -3,6 +3,9 @@ package be.tarsos.lsh.families;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
+
 public class EuclidianHashFamily implements HashFamily {
     /**
      * 
@@ -28,7 +31,7 @@ public class EuclidianHashFamily implements HashFamily {
     }
 
     @Override
-    public DistanceMeasure createDistanceMeasure() {
+    public AbstractDistance createDistanceMeasure() {
         return new EuclideanDistance();
     }
 }

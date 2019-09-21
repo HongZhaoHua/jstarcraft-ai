@@ -3,6 +3,9 @@ package be.tarsos.lsh.families;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
+
 public class CityBlockHashFamily implements HashFamily {
 
     /**
@@ -29,8 +32,8 @@ public class CityBlockHashFamily implements HashFamily {
     }
 
     @Override
-    public DistanceMeasure createDistanceMeasure() {
-        return new CityBlockDistance();
+    public AbstractDistance createDistanceMeasure() {
+        return new ManhattanDistance();
     }
 
 }

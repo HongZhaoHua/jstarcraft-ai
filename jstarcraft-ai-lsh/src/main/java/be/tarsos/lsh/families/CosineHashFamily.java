@@ -3,6 +3,10 @@ package be.tarsos.lsh.families;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.similarity.CosineSimilarity;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
+
 public class CosineHashFamily implements HashFamily {
 
     /**
@@ -37,7 +41,15 @@ public class CosineHashFamily implements HashFamily {
     }
 
     @Override
-    public DistanceMeasure createDistanceMeasure() {
-        return new CosineDistance();
+    public AbstractDistance createDistanceMeasure() {
+        CosineSimilarity similarity = new CosineSimilarity();
+        return new AbstractDistance() {
+
+            @Override
+            public float getCoefficient(MathVector leftVector, MathVector rightVector) {
+                return 1F - similarity.getCoefficient(leftVector, rightVector);
+            }
+
+        };
     }
 }

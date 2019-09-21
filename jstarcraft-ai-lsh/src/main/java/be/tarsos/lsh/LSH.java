@@ -14,8 +14,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+
 import be.tarsos.lsh.families.DistanceComparator;
-import be.tarsos.lsh.families.DistanceMeasure;
 import be.tarsos.lsh.families.HashFamily;
 import be.tarsos.lsh.util.FileUtils;
 
@@ -60,7 +61,7 @@ public class LSH {
      * @param neighboursSize the expected size of the neighbourhood.
      * @param measure        The measure to use to check for correctness.
      */
-    public void benchmark(int neighboursSize, DistanceMeasure measure) {
+    public void benchmark(int neighboursSize, AbstractDistance measure) {
         long startTime = 0;
         double linearSearchTime = 0;
         double lshSearchTime = 0;
@@ -148,7 +149,7 @@ public class LSH {
      * @return The list of k nearest neighbours to the query vector, according to
      *         the given distance measure.
      */
-    public static List<KeyVector> linearSearch(List<KeyVector> dataset, final KeyVector query, int resultSize, DistanceMeasure measure) {
+    public static List<KeyVector> linearSearch(List<KeyVector> dataset, final KeyVector query, int resultSize, AbstractDistance measure) {
         DistanceComparator dc = new DistanceComparator(query, measure);
         PriorityQueue<KeyVector> pq = new PriorityQueue<KeyVector>(dataset.size(), dc);
         pq.addAll(dataset);
@@ -209,7 +210,7 @@ public class LSH {
         return ret;
     }
 
-    static float determineRadius(Random rand, List<KeyVector> dataset, DistanceMeasure measure, int timeout) {
+    static float determineRadius(Random rand, List<KeyVector> dataset, AbstractDistance measure, int timeout) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         float radius = 0f;
         DetermineRadiusTask drt = new DetermineRadiusTask(rand, dataset, measure);
@@ -236,9 +237,9 @@ public class LSH {
         private float radiusSum = 0F;
         private final List<KeyVector> dataset;
         private final Random rand;
-        private final DistanceMeasure measure;
+        private final AbstractDistance measure;
 
-        public DetermineRadiusTask(Random rand, List<KeyVector> dataset, DistanceMeasure measure) {
+        public DetermineRadiusTask(Random rand, List<KeyVector> dataset, AbstractDistance measure) {
             this.dataset = dataset;
             this.rand = rand;
             this.measure = measure;
@@ -250,7 +251,7 @@ public class LSH {
                 KeyVector query = dataset.get(rand.nextInt(dataset.size()));
                 List<KeyVector> result = linearSearch(dataset, query, 2, measure);
                 // the first vector is the query self, the second the closest.
-                radiusSum += measure.distance(query, result.get(1));
+                radiusSum += measure.getCoefficient(query, result.get(1));
                 queriesDone++;
             }
             return radiusSum / queriesDone;
