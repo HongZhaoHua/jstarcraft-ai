@@ -100,17 +100,17 @@ public abstract class AbstractCorrelation implements Correlation {
     }
 
     @Override
-    public SymmetryMatrix makeCorrelationMatrix(MathMatrix scoreMatrix, boolean transpose) {
+    public SymmetryMatrix calculateCoefficients(MathMatrix scoreMatrix, boolean transpose) {
         EnvironmentContext context = EnvironmentContext.getContext();
         Semaphore semaphore = new Semaphore(0);
         int count = transpose ? scoreMatrix.getColumnSize() : scoreMatrix.getRowSize();
-        SymmetryMatrix similarityMatrix = new SymmetryMatrix(count);
+        SymmetryMatrix coefficientMatrix = new SymmetryMatrix(count);
         for (int leftIndex = 0; leftIndex < count; leftIndex++) {
             MathVector thisVector = transpose ? scoreMatrix.getColumnVector(leftIndex) : scoreMatrix.getRowVector(leftIndex);
             if (thisVector.getElementSize() == 0) {
                 continue;
             }
-            similarityMatrix.setValue(leftIndex, leftIndex, getIdentical());
+            coefficientMatrix.setValue(leftIndex, leftIndex, getIdentical());
             // user/item itself exclusive
             int permits = 0;
             for (int rightIndex = leftIndex + 1; rightIndex < count; rightIndex++) {
@@ -121,9 +121,9 @@ public abstract class AbstractCorrelation implements Correlation {
                 int leftCursor = leftIndex;
                 int rightCursor = rightIndex;
                 context.doAlgorithmByAny(leftIndex * rightIndex, () -> {
-                    float similarity = getCoefficient(thisVector, thatVector);
-                    if (!Double.isNaN(similarity)) {
-                        similarityMatrix.setValue(leftCursor, rightCursor, similarity);
+                    float coefficient = getCoefficient(thisVector, thatVector);
+                    if (!Double.isNaN(coefficient)) {
+                        coefficientMatrix.setValue(leftCursor, rightCursor, coefficient);
                     }
                     semaphore.release();
                 });
@@ -135,7 +135,7 @@ public abstract class AbstractCorrelation implements Correlation {
                 throw new RuntimeException(exception);
             }
         }
-        return similarityMatrix;
+        return coefficientMatrix;
     }
 
 }

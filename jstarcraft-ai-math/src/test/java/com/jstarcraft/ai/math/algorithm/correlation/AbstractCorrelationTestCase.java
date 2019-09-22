@@ -46,7 +46,7 @@ public abstract class AbstractCorrelationTestCase {
             SparseMatrix scoreMatrix = SparseMatrix.valueOf(rowSize, columnSize, table);
 
             Correlation similarity = getCorrelation();
-            SymmetryMatrix similarityMatrix = similarity.makeCorrelationMatrix(scoreMatrix, false);
+            SymmetryMatrix similarityMatrix = similarity.calculateCoefficients(scoreMatrix, false);
             assertEquals(rowSize, similarityMatrix.getRowSize());
             for (MatrixScalar term : similarityMatrix) {
                 assertTrue(checkCorrelation(term.getValue()));
@@ -61,7 +61,7 @@ public abstract class AbstractCorrelationTestCase {
                 Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
             }
 
-            similarityMatrix = similarity.makeCorrelationMatrix(scoreMatrix, true);
+            similarityMatrix = similarity.calculateCoefficients(scoreMatrix, true);
             assertEquals(columnSize, similarityMatrix.getRowSize());
             for (MatrixScalar term : similarityMatrix) {
                 assertTrue(checkCorrelation(term.getValue()));

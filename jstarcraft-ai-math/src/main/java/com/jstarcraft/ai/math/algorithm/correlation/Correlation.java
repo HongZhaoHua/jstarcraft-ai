@@ -20,7 +20,7 @@ public interface Correlation {
      * @param scale
      * @return
      */
-    SymmetryMatrix makeCorrelationMatrix(MathMatrix scoreMatrix, boolean transpose);
+    SymmetryMatrix calculateCoefficients(MathMatrix scoreMatrix, boolean transpose);
 
     /**
      * 获取两个向量的相关系数
