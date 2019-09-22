@@ -20,33 +20,34 @@ public class LevenshteinDistance extends AbstractDistance {
         int leftSize = leftVector.getElementSize();
         int rightSize = rightVector.getElementSize();
 
-        if (leftSize == 0 || rightSize == 0) {
-            return leftSize == rightSize ? 1 : 0;
+        if (leftSize == 0) {
+            return rightSize;
+        } else if (rightSize == 0) {
+            return leftSize;
         }
 
-        int previous[] = new int[leftSize + 1]; // 上一次计算的值
-        int next[] = new int[leftSize + 1]; // 下一次计算的值
-        int exchange[];
+        int indexes[] = new int[leftSize + 1];
+        int previous;
+        int next;
 
         for (int index = 0; index <= leftSize; index++) {
-            previous[index] = index;
+            indexes[index] = index;
         }
 
         for (int rightIndex = 1; rightIndex <= rightSize; rightIndex++) {
+            previous = indexes[0];
             float value = rightVector.getValue(rightIndex - 1);
-            next[0] = rightIndex;
+            indexes[0] = rightIndex;
 
             for (int leftIndex = 1; leftIndex <= leftSize; leftIndex++) {
+                next = indexes[leftIndex];
                 int shift = leftVector.getValue(leftIndex - 1) == value ? 0 : 1;
-                next[leftIndex] = Math.min(Math.min(next[leftIndex - 1] + 1, previous[leftIndex] + 1), previous[leftIndex - 1] + shift);
+                indexes[leftIndex] = Math.min(Math.min(indexes[leftIndex - 1] + 1, indexes[leftIndex] + 1), previous + shift);
+                previous = next;
             }
-
-            exchange = previous;
-            previous = next;
-            next = exchange;
         }
 
-        return (float) previous[leftSize] / Math.max(rightSize, leftSize);
+        return indexes[leftSize];
     }
 
 }

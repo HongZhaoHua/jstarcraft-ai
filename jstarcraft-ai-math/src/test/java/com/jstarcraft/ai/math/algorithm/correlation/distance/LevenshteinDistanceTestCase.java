@@ -28,17 +28,17 @@ public class LevenshteinDistanceTestCase extends AbstractDistanceTestCase {
     }
 
     @Test
-    public void testSimilarity() {
+    public void testDistance() {
         LevenshteinDistance distance = new LevenshteinDistance();
 
         Assert.assertEquals(0F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraft")), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft")), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraftR")), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("LJStarCraft"), getVector("JStarCraft")), 0F);
-        Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraftR"), getVector("JStarCraft")), 0F);
-        Assert.assertEquals(0.6F, distance.getCoefficient(getVector("JStarCraft"), getVector("Star")), 0F);
-        Assert.assertEquals(0.8F, distance.getCoefficient(getVector("JStarCraft"), getVector("SC")), 0F);
-        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("HongZhaoHua")), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft")), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraftR")), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("LJStarCraft"), getVector("JStarCraft")), 0F);
+        Assert.assertEquals(1F, distance.getCoefficient(getVector("JStarCraftR"), getVector("JStarCraft")), 0F);
+        Assert.assertEquals(6F, distance.getCoefficient(getVector("JStarCraft"), getVector("Star")), 0F);
+        Assert.assertEquals(8F, distance.getCoefficient(getVector("JStarCraft"), getVector("SC")), 0F);
+        Assert.assertEquals(11F, distance.getCoefficient(getVector("JStarCraft"), getVector("HongZhaoHua")), 0F);
     }
 
 }
