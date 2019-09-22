@@ -117,6 +117,8 @@ public interface MathScalar {
      * @param leftVector
      * @param rightVector
      */
+    @Deprecated
+    // TODO 准备与dotProduct整合
     default MathScalar accumulateProduct(MathVector leftVector, MathVector rightVector) {
         Float one = 1F;
         float zero = 0F;

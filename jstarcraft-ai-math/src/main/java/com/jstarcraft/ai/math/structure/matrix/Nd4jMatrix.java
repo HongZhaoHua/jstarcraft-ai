@@ -548,6 +548,8 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
         if (leftMatrix instanceof Nd4jMatrix && rightMatrix instanceof Nd4jMatrix) {
             Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);
@@ -566,6 +568,8 @@ public class Nd4jMatrix implements MathMatrix, ModemCycle {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
         if (rowVector instanceof Nd4jVector && columnVector instanceof Nd4jVector) {
             Nd4jEnvironmentThread thread = EnvironmentThread.getThread(Nd4jEnvironmentThread.class);

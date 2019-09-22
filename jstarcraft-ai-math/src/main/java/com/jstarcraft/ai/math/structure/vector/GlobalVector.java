@@ -267,6 +267,8 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathVector accumulateProduct(MathMatrix leftMatrix, boolean transpose, MathVector rightVector, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {
@@ -304,6 +306,8 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathVector accumulateProduct(MathVector leftVector, MathMatrix rightMatrix, boolean transpose, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {

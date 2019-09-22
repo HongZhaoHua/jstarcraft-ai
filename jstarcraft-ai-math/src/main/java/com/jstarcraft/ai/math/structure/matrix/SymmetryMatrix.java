@@ -330,6 +330,8 @@ public class SymmetryMatrix implements MathMatrix {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
         boolean isSymmetry = (leftMatrix == rightMatrix && leftTranspose != rightTranspose);
         assert isSymmetry;
@@ -338,6 +340,8 @@ public class SymmetryMatrix implements MathMatrix {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
         boolean isSymmetry = (rowVector == columnVector);
         assert isSymmetry;

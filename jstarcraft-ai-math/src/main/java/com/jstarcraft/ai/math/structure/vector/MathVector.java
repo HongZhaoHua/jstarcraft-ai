@@ -313,6 +313,8 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
      * @param mode
      * @return
      */
+    @Deprecated
+    // TODO 准备与dotProduct整合
     default MathVector accumulateProduct(MathMatrix leftMatrix, boolean transpose, MathVector rightVector, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {
@@ -357,6 +359,8 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
      * @param mode
      * @return
      */
+    @Deprecated
+    // TODO 准备与dotProduct整合
     default MathVector accumulateProduct(MathVector leftVector, MathMatrix rightMatrix, boolean transpose, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {

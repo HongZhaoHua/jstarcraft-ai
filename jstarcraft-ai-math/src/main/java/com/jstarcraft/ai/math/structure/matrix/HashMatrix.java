@@ -528,6 +528,8 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
         // TODO 此处可以考虑性能优化.
         // TODO 可能触发元素变更.
@@ -595,6 +597,8 @@ public class HashMatrix implements MathMatrix, ModemCycle {
     }
 
     @Override
+    @Deprecated
+    // TODO 准备与dotProduct整合
     public MathMatrix accumulateProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
         // TODO 可能触发元素变更.
         switch (mode) {

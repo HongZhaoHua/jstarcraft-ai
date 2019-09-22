@@ -616,6 +616,8 @@ public interface MathMatrix extends ScalarIterator<MatrixScalar> {
      * @param mode
      * @return
      */
+    @Deprecated
+    // TODO 准备与dotProduct整合
     default MathMatrix accumulateProduct(MathMatrix leftMatrix, boolean leftTranspose, MathMatrix rightMatrix, boolean rightTranspose, MathCalculator mode) {
         assert getUnknownSize() == 0;
         // TODO 判断是否为对称?可以节省运算.
@@ -692,6 +694,8 @@ public interface MathMatrix extends ScalarIterator<MatrixScalar> {
      * @param mode
      * @return
      */
+    @Deprecated
+    // TODO 准备与dotProduct整合
     default MathMatrix accumulateProduct(MathVector rowVector, MathVector columnVector, MathCalculator mode) {
         assert getUnknownSize() == 0;
         // TODO 判断是否为对称?可以节省运算.
