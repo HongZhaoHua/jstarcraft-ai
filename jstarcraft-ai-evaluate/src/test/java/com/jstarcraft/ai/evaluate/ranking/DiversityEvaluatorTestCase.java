@@ -33,7 +33,7 @@ public class DiversityEvaluatorTestCase extends AbstractRankingEvaluatorTestCase
 
     @Override
     protected float getMeasure() {
-        return 0.24876F;
+        return 0.74845463F;
     }
 
 }
