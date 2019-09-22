@@ -24,6 +24,8 @@ public abstract class AbstractCorrelation implements Correlation {
      * @param rightVector
      * @return
      */
+    // TODO 准备使用Coefficient代替
+    @Deprecated
     protected List<Float2FloatKeyValue> getIntersectionScores(MathVector leftVector, MathVector rightVector) {
         int leftCursor = 0, rightCursor = 0, leftSize = leftVector.getElementSize(), rightSize = rightVector.getElementSize();
         List<Float2FloatKeyValue> scores = new ArrayList<>(FastMath.max(leftSize, rightSize));
@@ -59,6 +61,8 @@ public abstract class AbstractCorrelation implements Correlation {
      * @param rightVector
      * @return
      */
+    // TODO 准备使用Coefficient代替
+    @Deprecated
     protected List<Float2FloatKeyValue> getUnionScores(MathVector leftVector, MathVector rightVector) {
         LinkedList<Float2FloatKeyValue> scores = new LinkedList<>();
         Iterator<VectorScalar> leftIterator = leftVector.iterator();
