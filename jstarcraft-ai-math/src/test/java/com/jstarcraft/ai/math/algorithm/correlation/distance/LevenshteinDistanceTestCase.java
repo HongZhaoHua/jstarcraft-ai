@@ -5,15 +5,15 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
-import com.jstarcraft.ai.math.algorithm.correlation.distance.LevensteinDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.LevenshteinDistance;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class LevensteinDistanceTestCase extends AbstractDistanceTestCase {
+public class LevenshteinDistanceTestCase extends AbstractDistanceTestCase {
 
     @Override
     protected Correlation getCorrelation() {
-        return new LevensteinDistance();
+        return new LevenshteinDistance();
     }
 
     private MathVector getVector(String string) {
@@ -29,7 +29,7 @@ public class LevensteinDistanceTestCase extends AbstractDistanceTestCase {
 
     @Test
     public void testSimilarity() {
-        LevensteinDistance distance = new LevensteinDistance();
+        LevenshteinDistance distance = new LevenshteinDistance();
 
         Assert.assertEquals(0F, distance.getCoefficient(getVector("JStarCraft"), getVector("JStarCraft")), 0F);
         Assert.assertEquals(0.09090909F, distance.getCoefficient(getVector("JStarCraft"), getVector("LJStarCraft")), 0F);

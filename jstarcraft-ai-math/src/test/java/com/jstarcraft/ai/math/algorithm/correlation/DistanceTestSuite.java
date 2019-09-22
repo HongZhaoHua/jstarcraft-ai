@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ChebychevDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.HammingDistanceTestCase;
-import com.jstarcraft.ai.math.algorithm.correlation.distance.LevensteinDistanceTestCase;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.LevenshteinDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.MSDDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.MSEDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistanceTestCase;
@@ -23,7 +23,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.SpearmanFootruleDis
 
         HammingDistanceTestCase.class,
 
-        LevensteinDistanceTestCase.class,
+        LevenshteinDistanceTestCase.class,
 
         ManhattanDistanceTestCase.class,
 

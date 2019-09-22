@@ -13,7 +13,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public class LevensteinDistance extends AbstractDistance {
+public class LevenshteinDistance extends AbstractDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
