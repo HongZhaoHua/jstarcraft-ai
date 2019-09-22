@@ -21,8 +21,9 @@ public class DiversityEvaluatorTestCase extends AbstractRankingEvaluatorTestCase
         Correlation correlation = new CosineSimilarity();
         EnvironmentContext context = EnvironmentFactory.getContext();
         Future<SymmetryMatrix> task = context.doTask(() -> {
-            SymmetryMatrix similarityMatrix = correlation.calculateCoefficients(featureMatrix, true);
-            return similarityMatrix;
+            SymmetryMatrix symmetryMatrix = new SymmetryMatrix(featureMatrix.getColumnSize());
+            correlation.calculateCoefficients(featureMatrix, true, symmetryMatrix::setValue);
+            return symmetryMatrix;
         });
         try {
             return new DiversityEvaluator(10, task.get());
