@@ -99,43 +99,4 @@ public abstract class AbstractCorrelation implements Correlation {
         return scores;
     }
 
-    @Override
-    public SymmetryMatrix calculateCoefficients(MathMatrix scoreMatrix, boolean transpose) {
-        EnvironmentContext context = EnvironmentContext.getContext();
-        Semaphore semaphore = new Semaphore(0);
-        int count = transpose ? scoreMatrix.getColumnSize() : scoreMatrix.getRowSize();
-        SymmetryMatrix coefficientMatrix = new SymmetryMatrix(count);
-        for (int leftIndex = 0; leftIndex < count; leftIndex++) {
-            MathVector thisVector = transpose ? scoreMatrix.getColumnVector(leftIndex) : scoreMatrix.getRowVector(leftIndex);
-            if (thisVector.getElementSize() == 0) {
-                continue;
-            }
-            coefficientMatrix.setValue(leftIndex, leftIndex, getIdentical());
-            // user/item itself exclusive
-            int permits = 0;
-            for (int rightIndex = leftIndex + 1; rightIndex < count; rightIndex++) {
-                MathVector thatVector = transpose ? scoreMatrix.getColumnVector(rightIndex) : scoreMatrix.getRowVector(rightIndex);
-                if (thatVector.getElementSize() == 0) {
-                    continue;
-                }
-                int leftCursor = leftIndex;
-                int rightCursor = rightIndex;
-                context.doAlgorithmByAny(leftIndex * rightIndex, () -> {
-                    float coefficient = getCoefficient(thisVector, thatVector);
-                    if (!Double.isNaN(coefficient)) {
-                        coefficientMatrix.setValue(leftCursor, rightCursor, coefficient);
-                    }
-                    semaphore.release();
-                });
-                permits++;
-            }
-            try {
-                semaphore.acquire(permits);
-            } catch (Exception exception) {
-                throw new RuntimeException(exception);
-            }
-        }
-        return coefficientMatrix;
-    }
-
 }

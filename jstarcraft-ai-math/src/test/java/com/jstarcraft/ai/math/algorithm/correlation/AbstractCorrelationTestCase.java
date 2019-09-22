@@ -45,29 +45,31 @@ public abstract class AbstractCorrelationTestCase {
             }
             SparseMatrix scoreMatrix = SparseMatrix.valueOf(rowSize, columnSize, table);
 
-            Correlation similarity = getCorrelation();
-            SymmetryMatrix similarityMatrix = similarity.calculateCoefficients(scoreMatrix, false);
-            assertEquals(rowSize, similarityMatrix.getRowSize());
-            for (MatrixScalar term : similarityMatrix) {
+            Correlation correlation = getCorrelation();
+            SymmetryMatrix symmetryMatrix = new SymmetryMatrix(scoreMatrix.getRowSize());
+            correlation.calculateCoefficients(scoreMatrix, false, symmetryMatrix::setValue);
+            assertEquals(rowSize, symmetryMatrix.getRowSize());
+            for (MatrixScalar term : symmetryMatrix) {
                 assertTrue(checkCorrelation(term.getValue()));
             }
 
             // 判断相等的情况.
             for (int index = 0, size = rowSize; index < size; index++) {
                 MathVector rowVector = scoreMatrix.getRowVector(index);
-                Assert.assertEquals(getIdentical(), similarity.getCoefficient(rowVector, rowVector), 0.001F);
+                Assert.assertEquals(getIdentical(), correlation.getCoefficient(rowVector, rowVector), 0.001F);
                 MathVector columnVector = scoreMatrix.getColumnVector(index);
-                Assert.assertEquals(getIdentical(), similarity.getCoefficient(columnVector, columnVector), 0.001F);
-                Assert.assertEquals(getIdentical(), similarityMatrix.getValue(index, index), 0.001F);
+                Assert.assertEquals(getIdentical(), correlation.getCoefficient(columnVector, columnVector), 0.001F);
+                Assert.assertEquals(getIdentical(), symmetryMatrix.getValue(index, index), 0.001F);
             }
 
-            similarityMatrix = similarity.calculateCoefficients(scoreMatrix, true);
-            assertEquals(columnSize, similarityMatrix.getRowSize());
-            for (MatrixScalar term : similarityMatrix) {
+            symmetryMatrix = new SymmetryMatrix(scoreMatrix.getColumnSize());
+            correlation.calculateCoefficients(scoreMatrix, true, symmetryMatrix::setValue);
+            assertEquals(columnSize, symmetryMatrix.getRowSize());
+            for (MatrixScalar term : symmetryMatrix) {
                 assertTrue(checkCorrelation(term.getValue()));
             }
             for (int index = 0, size = columnSize; index < size; index++) {
-                Assert.assertThat(similarityMatrix.getValue(index, index), CoreMatchers.equalTo(getIdentical()));
+                Assert.assertThat(symmetryMatrix.getValue(index, index), CoreMatchers.equalTo(getIdentical()));
             }
         });
         try {
