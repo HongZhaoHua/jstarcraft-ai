@@ -17,29 +17,17 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  */
 public class CPCSimilarity extends AbstractSimilarity {
 
-    private double median;
+    private float median;
 
-    @Override
-    public SymmetryMatrix makeCorrelationMatrix(MathMatrix trainMatrix, boolean transpose) {
-        float maximum = 0F;
-        float minimum = 0F;
-        for (MatrixScalar term : trainMatrix) {
-            if (term.getValue() > maximum) {
-                maximum = term.getValue();
-            }
-            if (term.getValue() < minimum) {
-                minimum = term.getValue();
-            }
-        }
-        median = (maximum + minimum) / 2;
-        return super.makeCorrelationMatrix(trainMatrix, transpose);
+    public CPCSimilarity(float median) {
+        this.median = median;
     }
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
-        double power = 0D, leftPower = 0D, rightPower = 0D;
+        float power = 0F, leftPower = 0F, rightPower = 0F;
         for (Float2FloatKeyValue term : scores) {
-            double leftDelta = term.getKey() - median;
-            double rightDelta = term.getValue() - median;
+            float leftDelta = term.getKey() - median;
+            float rightDelta = term.getValue() - median;
             power += leftDelta * rightDelta;
             leftPower += leftDelta * leftDelta;
             rightPower += rightDelta * rightDelta;
