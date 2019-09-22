@@ -18,10 +18,10 @@ public class DiversityEvaluatorTestCase extends AbstractRankingEvaluatorTestCase
 
     @Override
     protected Evaluator<IntSet, IntList> getEvaluator(SparseMatrix featureMatrix) {
-        Correlation similarity = new CosineSimilarity();
+        Correlation correlation = new CosineSimilarity();
         EnvironmentContext context = EnvironmentFactory.getContext();
         Future<SymmetryMatrix> task = context.doTask(() -> {
-            SymmetryMatrix similarityMatrix = similarity.makeCorrelationMatrix(featureMatrix, true);
+            SymmetryMatrix similarityMatrix = correlation.calculateCoefficients(featureMatrix, true);
             return similarityMatrix;
         });
         try {
