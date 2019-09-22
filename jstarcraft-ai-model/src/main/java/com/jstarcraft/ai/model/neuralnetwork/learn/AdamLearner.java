@@ -108,7 +108,7 @@ public class AdamLearner implements Learner, ModemCycle {
             float beta2t = (float) FastMath.pow(beta2, iteration + 1);
             float learnRatio = learnSchedule.valueAt(iteration, epoch);
             float alphat = (float) (learnRatio * FastMath.sqrt(1F - beta2t) / (1F - beta1t));
-            if (Double.isNaN(alphat) || alphat == 0D) {
+            if (Float.isNaN(alphat) || alphat == 0D) {
                 alphat = epsilon;
             }
 

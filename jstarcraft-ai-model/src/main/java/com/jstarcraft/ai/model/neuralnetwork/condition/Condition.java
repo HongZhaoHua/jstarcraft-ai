@@ -26,6 +26,6 @@ public interface Condition {
      * @param gradients
      * @return
      */
-    boolean stop(double newScore, double oldScore, Map<String, MathMatrix> gradients);
+    boolean stop(float newScore, float oldScore, Map<String, MathMatrix> gradients);
 
 }

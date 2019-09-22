@@ -17,8 +17,8 @@ import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 public class InvalidScoreCondition implements Condition {
 
     @Override
-    public boolean stop(double newScore, double oldScore, Map<String, MathMatrix> gradients) {
-        return Double.isNaN(newScore) || Double.isInfinite(newScore);
+    public boolean stop(float newScore, float oldScore, Map<String, MathMatrix> gradients) {
+        return Float.isNaN(newScore) || Float.isInfinite(newScore);
     }
 
 }

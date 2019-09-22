@@ -106,7 +106,7 @@ public class AdaMaxLearner implements Learner, ModemCycle {
             float beta1t = (float) FastMath.pow(beta1, iteration + 1);
             float learnRatio = learnSchedule.valueAt(iteration, epoch);
             float alphat = learnRatio / (1F - beta1t);
-            if (Double.isNaN(alphat) || Double.isInfinite(alphat) || alphat == 0F) {
+            if (Float.isNaN(alphat) || Float.isInfinite(alphat) || alphat == 0F) {
                 alphat = epsilon;
             }
 

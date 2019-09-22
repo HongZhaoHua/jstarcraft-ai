@@ -4,7 +4,6 @@ import java.util.concurrent.Semaphore;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
-import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
@@ -43,7 +42,7 @@ public interface Correlation {
                 int rightCursor = rightIndex;
                 context.doAlgorithmByAny(leftIndex * rightIndex, () -> {
                     float coefficient = getCoefficient(thisVector, thatVector);
-                    if (!Double.isNaN(coefficient)) {
+                    if (!Float.isNaN(coefficient)) {
                         monitor.notifyCoefficientCalculated(leftCursor, rightCursor, coefficient);
                     }
                     semaphore.release();

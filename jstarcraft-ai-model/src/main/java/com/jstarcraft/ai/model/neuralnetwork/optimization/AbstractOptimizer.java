@@ -18,9 +18,9 @@ public abstract class AbstractOptimizer implements Optimizer {
 
     protected Condition[] conditions;
 
-    protected double step;
+    protected float step;
 
-    protected double oldScore, newScore;
+    protected float oldScore, newScore;
 
     protected AbstractOptimizer() {
     }

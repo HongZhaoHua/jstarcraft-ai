@@ -35,7 +35,7 @@ public class DurationLimitCondition implements Condition {
     }
 
     @Override
-    public boolean stop(double newScore, double oldScore, Map<String, MathMatrix> gradients) {
+    public boolean stop(float newScore, float oldScore, Map<String, MathMatrix> gradients) {
         return System.currentTimeMillis() >= timeStamp;
     }
 

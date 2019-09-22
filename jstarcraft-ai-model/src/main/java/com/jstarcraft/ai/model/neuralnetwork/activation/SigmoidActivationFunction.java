@@ -48,7 +48,7 @@ public class SigmoidActivationFunction implements ActivationFunction {
                 int column = scalar.getColumn();
                 float value = input.getValue(row, column);
                 value = (float) (1F / (1F + FastMath.exp(-value)));
-                if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                if (threshold && (Float.isNaN(value) || Float.isInfinite(value))) {
                     value = MathUtility.EPSILON;
                 }
                 scalar.setValue(value);
@@ -62,7 +62,7 @@ public class SigmoidActivationFunction implements ActivationFunction {
             int index = scalar.getIndex();
             float value = input.getValue(index);
             value = (float) (1F / (1F + FastMath.exp(-value)));
-            if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+            if (threshold && (Float.isNaN(value) || Float.isInfinite(value))) {
                 value = MathUtility.EPSILON;
             }
             scalar.setValue(value);
@@ -84,7 +84,7 @@ public class SigmoidActivationFunction implements ActivationFunction {
                 float value = input.getValue(row, column);
                 value = (float) (1F / (1F + FastMath.exp(-value)));
                 value = value * (1F - value);
-                if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+                if (threshold && (Float.isNaN(value) || Float.isInfinite(value))) {
                     value = MathUtility.EPSILON;
                 }
                 value *= error.getValue(row, column);
@@ -100,7 +100,7 @@ public class SigmoidActivationFunction implements ActivationFunction {
             float value = input.getValue(index);
             value = (float) (1F / (1F + FastMath.exp(-value)));
             value = value * (1F - value);
-            if (threshold && (Double.isNaN(value) || Double.isInfinite(value))) {
+            if (threshold && (Float.isNaN(value) || Float.isInfinite(value))) {
                 value = MathUtility.EPSILON;
             }
             value *= error.getValue(index);
