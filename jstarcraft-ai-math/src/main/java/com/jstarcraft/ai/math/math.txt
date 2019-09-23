@@ -1,3 +1,6 @@
+偏度(skewness)和峰度(kurtosis):
+https://blog.csdn.net/xbmatrix/article/details/69360167
+
 附录D——自动微分(Autodiff):
 https://www.cnblogs.com/royhoo/p/Autodiff.html
 

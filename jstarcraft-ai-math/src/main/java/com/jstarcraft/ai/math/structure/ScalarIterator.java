@@ -1,5 +1,8 @@
 package com.jstarcraft.ai.math.structure;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
+
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -255,6 +258,59 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
             variance += (value * value);
         }
         return variance;
+    }
+
+    /**
+     * 获取偏度(skewness)
+     * 
+     * @param mean
+     * @return
+     */
+    default float getSkewness(float mean) {
+        float skewness = 0F;
+        int length = getKnownSize() + getUnknownSize();
+        int size = getElementSize();
+
+        for (MathScalar term : this) {
+            skewness += Math.pow(term.getValue() - mean, 3F);
+        }
+
+        // All the zero's we skiped
+        skewness += Math.pow(-mean, 3F) * (length - size);
+
+        float variance = getVariance(mean) / length;
+        skewness = (float) (skewness / (pow(Math.sqrt(variance), 3F) * (length - 1F)));
+
+        if (length >= 3) {
+            // We can use the bias corrected formula
+            return (float) (sqrt(length * (length - 1F)) / (length - 2F) * skewness);
+        }
+
+        return skewness;
+    }
+
+    /**
+     * 获取峰度(kurtosis)
+     * 
+     * @param mean
+     * @return
+     */
+    default float getKurtosis(float mean) {
+        float kurtosis = 0F;
+        int length = getKnownSize() + getUnknownSize();
+        int size = getElementSize();
+
+        for (MathScalar term : this) {
+            kurtosis += Math.pow(term.getValue() - mean, 3F);
+        }
+
+        // All the zero's we skipped
+        kurtosis += Math.pow(-mean, 4F) * (length - size);
+
+        float variance = getVariance(mean) / length;
+        kurtosis = (float) (kurtosis / (pow(Math.sqrt(variance), 4F) * (length - 1F)) - 3F);
+
+        return kurtosis;
     }
 
 }
