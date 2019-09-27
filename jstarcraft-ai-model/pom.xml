@@ -104,13 +104,6 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>jdk.tools</groupId>
-            <artifactId>jdk.tools</artifactId>
-            <scope>system</scope>
-            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-        </dependency>
-
         <!-- 桥接器:Slf4j使用Log4j2 -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
