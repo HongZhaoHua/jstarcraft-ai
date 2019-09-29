@@ -331,6 +331,9 @@ public class ArrayVector implements MathVector {
         this.size = values.length;
         assert capacity >= size;
         this.indexes = new int[size];
+        for (int index = 0; index < size; index++) {
+            indexes[index] = index;
+        }
         this.values = values;
     }
 
