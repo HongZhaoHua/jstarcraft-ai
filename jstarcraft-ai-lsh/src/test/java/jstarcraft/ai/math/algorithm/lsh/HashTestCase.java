@@ -9,23 +9,18 @@ import org.junit.Test;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
-import jstarcraft.ai.math.algorithm.lsh.CosineHash;
-import jstarcraft.ai.math.algorithm.lsh.EuclideanHash;
-import jstarcraft.ai.math.algorithm.lsh.HashFunction;
-import jstarcraft.ai.math.algorithm.lsh.ManhattanHash;
-import jstarcraft.ai.math.algorithm.lsh.MinHash;
 
 public class HashTestCase {
 
     private List<MathVector> dataset = new ArrayList<>(4);
     {
-        MathVector left = new KeyVector("1", new float[] { 1F, 1F, 0F, 0F, 0F, 1F, 1F });
+        MathVector left = new KeyVector("left", new float[] { 1F, 1F, 0F, 0F, 0F, 1F, 1F });
         dataset.add(left);
-        MathVector middle = new KeyVector("1", new float[] { 0F, 0F, 1F, 1F, 1F, 0F, 0F });
+        MathVector middle = new KeyVector("middle", new float[] { 0F, 0F, 1F, 1F, 1F, 0F, 0F });
         dataset.add(middle);
-        MathVector right = new KeyVector("1", new float[] { 1F, 0F, 0F, 0F, 0F, 1F, 1F });
+        MathVector right = new KeyVector("right", new float[] { 1F, 0F, 0F, 0F, 0F, 1F, 1F });
         dataset.add(right);
-        MathVector query = new KeyVector("1", new float[] { 0F, 1F, 1F, 1F, 1F, 0F, 0F });
+        MathVector query = new KeyVector("query", new float[] { 0F, 1F, 1F, 1F, 1F, 0F, 0F });
         dataset.add(query);
     }
 
