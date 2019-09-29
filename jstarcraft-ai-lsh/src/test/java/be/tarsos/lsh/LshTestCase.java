@@ -12,6 +12,7 @@ import be.tarsos.lsh.families.CityBlockHashFamily;
 import be.tarsos.lsh.families.CosineHashFamily;
 import be.tarsos.lsh.families.EuclidianHashFamily;
 import be.tarsos.lsh.families.HashFamily;
+import be.tarsos.lsh.families.MinHashFamily;
 import be.tarsos.lsh.util.TestUtils;
 
 public class LshTestCase {
@@ -29,7 +30,7 @@ public class LshTestCase {
         System.out.println("\nRadius for City block distance.");
         int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
         System.out.printf("%10s%15s%10s%10s%10s%10s%10s%10s\n", "#hashes", "#hashTables", "Correct", "Touched", "linear", "LSH", "Precision", "Recall");
-        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new CityBlockHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
+        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new CityBlockHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions), new MinHashFamily() };
 
         for (HashFamily family : families) {
             LSH lsh = new LSH(dataset, family);
