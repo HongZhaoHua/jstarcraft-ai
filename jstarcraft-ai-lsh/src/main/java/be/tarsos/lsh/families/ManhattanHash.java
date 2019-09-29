@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class CityBlockHash implements HashFunction {
+public class ManhattanHash implements HashFunction {
     /**
      * 
      */
@@ -15,7 +15,7 @@ public class CityBlockHash implements HashFunction {
     private int w;
     private MathVector randomPartition;
 
-    public CityBlockHash(Random rand, int dimensions, int width) {
+    public ManhattanHash(Random rand, int dimensions, int width) {
         this.w = width;
 
         randomPartition = new KeyVector("random", dimensions);

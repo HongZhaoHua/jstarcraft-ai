@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import be.tarsos.lsh.KeyVector;
 
-public class CityBlockHashTestCase {
+public class ManhattanHashTestCase {
 
     @Test
     public void testHash() {
@@ -18,7 +18,7 @@ public class CityBlockHashTestCase {
         v.setValue(2, 3);
 
         Random rand = new Random(0);
-        CityBlockHash hash = new CityBlockHash(rand, 3, 4);
+        ManhattanHash hash = new ManhattanHash(rand, 3, 4);
         int hashValue = hash.hash(v);
         assertEquals("Expected about 28799", 28799, hashValue);
     }

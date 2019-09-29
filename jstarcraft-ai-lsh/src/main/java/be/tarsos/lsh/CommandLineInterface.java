@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
-import be.tarsos.lsh.families.CityBlockHashFamily;
+import be.tarsos.lsh.families.ManhattanHashFamily;
 import be.tarsos.lsh.families.CosineHashFamily;
 import be.tarsos.lsh.families.EuclidianHashFamily;
 import be.tarsos.lsh.families.HashFamily;
@@ -113,7 +113,7 @@ public class CommandLineInterface {
         System.out.println("\nRadius for City block distance.");
         int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
 
-        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new CityBlockHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
+        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
 
         for (HashFamily family : families) {
             int[] numberOfHashes = { 2, 4, 8 };
@@ -176,7 +176,7 @@ public class CommandLineInterface {
         } else if (hashFamilyType.equalsIgnoreCase("l1")) {
             int w = (int) (10 * radius);
             w = w == 0 ? 1 : w;
-            family = new CityBlockHashFamily(w, dimensions);
+            family = new ManhattanHashFamily(w, dimensions);
         } else if (hashFamilyType.equalsIgnoreCase("l2")) {
             int w = (int) (10 * radius);
             w = w == 0 ? 1 : w;

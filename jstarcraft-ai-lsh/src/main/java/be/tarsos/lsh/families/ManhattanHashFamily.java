@@ -6,7 +6,7 @@ import java.util.Random;
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
-public class CityBlockHashFamily implements HashFamily {
+public class ManhattanHashFamily implements HashFamily {
 
     /**
      * 
@@ -15,14 +15,14 @@ public class CityBlockHashFamily implements HashFamily {
     private int dimensions;
     private int w;
 
-    public CityBlockHashFamily(int w, int dimensions) {
+    public ManhattanHashFamily(int w, int dimensions) {
         this.dimensions = dimensions;
         this.w = w;
     }
 
     @Override
     public HashFunction createHashFunction(Random rand) {
-        return new CityBlockHash(rand, dimensions, w);
+        return new ManhattanHash(rand, dimensions, w);
     }
 
     @Override
