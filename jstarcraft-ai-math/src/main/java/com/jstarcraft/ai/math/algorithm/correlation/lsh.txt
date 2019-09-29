@@ -28,6 +28,12 @@ http://www.lanceyan.com/tech/arch/simhash_hamming_distance_similarity.html
 使用SimHash进行海量文本去重:
 https://www.cnblogs.com/maybe2030/p/5203186.html
 
+simHash海量去重java实现:
+https://blog.csdn.net/ItRuler/article/details/87804208
+
+局部敏感哈希（LSH）之simhash和minhash:
+https://www.cnblogs.com/jingsupo/p/10607764.html
+
 A Java implementation of Locality Sensitive Hashing (LSH):
 https://github.com/tdebatty/java-LSH
 
