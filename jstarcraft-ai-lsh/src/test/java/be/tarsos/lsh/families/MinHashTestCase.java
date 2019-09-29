@@ -20,7 +20,7 @@ public class MinHashTestCase {
         Random rand = new Random(0);
         MinHash hash = new MinHash(rand);
         int hashValue = hash.hash(v);
-        assertEquals("Expected about 1785505949", 1785505949, hashValue);
+        assertEquals("Expected about -939719986", -939719986, hashValue);
     }
 
 }
