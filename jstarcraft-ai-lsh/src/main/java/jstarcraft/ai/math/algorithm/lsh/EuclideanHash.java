@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import java.util.Random;
 
@@ -8,14 +8,19 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class CosineHash implements HashFunction {
+public class EuclideanHash implements HashFunction {
     /**
      * 
      */
-    private static final long serialVersionUID = 778951747630668248L;
-    final MathVector randomProjection;
+    private static final long serialVersionUID = -3784656820380622717L;
+    private MathVector randomProjection;
+    private int offset;
+    private int w;
 
-    public CosineHash(Random rand, int dimensions) {
+    public EuclideanHash(Random rand, int dimensions, int w) {
+        this.w = w;
+        this.offset = rand.nextInt(w);
+
         randomProjection = new KeyVector("random", dimensions);
         for (int d = 0; d < dimensions; d++) {
             // mean 0
@@ -25,13 +30,9 @@ public class CosineHash implements HashFunction {
         }
     }
 
-    @Override
     public int hash(MathVector vector) {
         MathScalar scalar = DefaultScalar.getInstance();
-        // calculate the dot product.
-        float result = scalar.dotProduct(vector, randomProjection).getValue();
-        // returns a 'bit' encoded as an integer.
-        // 1 when positive or zero, 0 otherwise.
-        return result > 0 ? 1 : 0;
+        float hashValue = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
+        return Math.round(hashValue);
     }
 }

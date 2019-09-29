@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,8 +7,9 @@ import java.util.Random;
 import org.junit.Test;
 
 import be.tarsos.lsh.KeyVector;
+import jstarcraft.ai.math.algorithm.lsh.CosineHash;
 
-public class EuclideanHashTestCase {
+public class CosineHashTestCase {
 
     @Test
     public void testHash() {
@@ -18,7 +19,7 @@ public class EuclideanHashTestCase {
         v.setValue(2, 3);
 
         Random rand = new Random(0);
-        EuclideanHash hash = new EuclideanHash(rand, 3, 4);
+        CosineHash hash = new CosineHash(rand, 3);
         int hashValue = hash.hash(v);
         assertEquals("Expected about 1", 1, hashValue);
     }

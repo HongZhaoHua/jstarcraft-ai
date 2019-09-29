@@ -7,11 +7,11 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
-import be.tarsos.lsh.families.ManhattanHashFamily;
-import be.tarsos.lsh.families.CosineHashFamily;
-import be.tarsos.lsh.families.EuclidianHashFamily;
-import be.tarsos.lsh.families.HashFamily;
 import be.tarsos.lsh.util.TestUtils;
+import jstarcraft.ai.math.algorithm.lsh.CosineHashFamily;
+import jstarcraft.ai.math.algorithm.lsh.EuclidianHashFamily;
+import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.ManhattanHashFamily;
 
 /**
  * A class implementing a command line interface for the LSH program.

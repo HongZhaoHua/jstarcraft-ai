@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import be.tarsos.lsh.families.HashFamily;
-import be.tarsos.lsh.families.HashFunction;
+import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.HashFunction;
 
 /**
  * An index contains one or more locality sensitive hash tables. These hash

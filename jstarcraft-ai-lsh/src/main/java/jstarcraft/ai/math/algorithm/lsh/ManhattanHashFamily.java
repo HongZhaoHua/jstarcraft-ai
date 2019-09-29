@@ -1,27 +1,28 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import java.util.Arrays;
 import java.util.Random;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
-import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
-public class EuclidianHashFamily implements HashFamily {
+public class ManhattanHashFamily implements HashFamily {
+
     /**
      * 
      */
-    private static final long serialVersionUID = 3406464542795652263L;
-    private final int dimensions;
+    private static final long serialVersionUID = -8926838846356323484L;
+    private int dimensions;
     private int w;
 
-    public EuclidianHashFamily(int w, int dimensions) {
+    public ManhattanHashFamily(int w, int dimensions) {
         this.dimensions = dimensions;
         this.w = w;
     }
 
     @Override
     public HashFunction createHashFunction(Random rand) {
-        return new EuclideanHash(rand, dimensions, w);
+        return new ManhattanHash(rand, dimensions, w);
     }
 
     @Override
@@ -32,6 +33,7 @@ public class EuclidianHashFamily implements HashFamily {
 
     @Override
     public AbstractDistance createDistanceMeasure() {
-        return new EuclideanDistance();
+        return new ManhattanDistance();
     }
+
 }

@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import java.util.Random;
 

@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import java.util.Random;
 import org.junit.Test;
 
 import be.tarsos.lsh.KeyVector;
+import jstarcraft.ai.math.algorithm.lsh.MinHash;
 
 public class MinHashTestCase {
 

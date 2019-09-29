@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,11 @@ import org.junit.Test;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
+import jstarcraft.ai.math.algorithm.lsh.CosineHash;
+import jstarcraft.ai.math.algorithm.lsh.EuclideanHash;
+import jstarcraft.ai.math.algorithm.lsh.HashFunction;
+import jstarcraft.ai.math.algorithm.lsh.ManhattanHash;
+import jstarcraft.ai.math.algorithm.lsh.MinHash;
 
 public class HashTestCase {
 

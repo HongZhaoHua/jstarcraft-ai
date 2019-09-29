@@ -16,9 +16,9 @@ import java.util.concurrent.TimeoutException;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 
-import be.tarsos.lsh.families.DistanceComparator;
-import be.tarsos.lsh.families.HashFamily;
 import be.tarsos.lsh.util.FileUtils;
+import jstarcraft.ai.math.algorithm.lsh.DistanceComparator;
+import jstarcraft.ai.math.algorithm.lsh.HashFamily;
 
 /**
  * Implements a Locality Sensitive Hash scheme.

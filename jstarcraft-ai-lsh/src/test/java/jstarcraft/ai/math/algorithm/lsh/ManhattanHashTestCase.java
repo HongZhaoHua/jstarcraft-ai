@@ -1,4 +1,4 @@
-package be.tarsos.lsh.families;
+package jstarcraft.ai.math.algorithm.lsh;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,8 +7,9 @@ import java.util.Random;
 import org.junit.Test;
 
 import be.tarsos.lsh.KeyVector;
+import jstarcraft.ai.math.algorithm.lsh.ManhattanHash;
 
-public class CosineHashTestCase {
+public class ManhattanHashTestCase {
 
     @Test
     public void testHash() {
@@ -18,9 +19,9 @@ public class CosineHashTestCase {
         v.setValue(2, 3);
 
         Random rand = new Random(0);
-        CosineHash hash = new CosineHash(rand, 3);
+        ManhattanHash hash = new ManhattanHash(rand, 3, 4);
         int hashValue = hash.hash(v);
-        assertEquals("Expected about 1", 1, hashValue);
+        assertEquals("Expected about 28799", 28799, hashValue);
     }
 
 }
