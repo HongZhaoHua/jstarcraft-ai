@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class HashTestCase {
+public class LshTestCase {
 
     private List<MathVector> dataset = new ArrayList<>(4);
     {
