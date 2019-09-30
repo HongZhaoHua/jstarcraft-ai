@@ -1,0 +1,14 @@
+海量数据处理算法—Bloom Filter:
+https://www.cnblogs.com/zhxshseu/p/5289871.html
+
+大数据量下的集合过滤—Bloom Filter:
+https://www.cnblogs.com/z941030/p/9218356.html
+
+中文自然语言处理工具集:
+https://github.com/kidden/nlp4han
+
+Library of different Bloom filters in Java with optional Redis-backing, counting and many hashing options:
+https://github.com/Baqend/Orestes-Bloomfilter
+
+A stand-alone Bloom filter implementation written in Java:
+https://github.com/MagnusS/Java-BloomFilter
