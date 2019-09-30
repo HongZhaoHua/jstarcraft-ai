@@ -24,10 +24,11 @@
 
 package info.debatty.java.lsh.examples;
 
-import info.debatty.java.lsh.LSHSuperBit;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import info.debatty.java.lsh.LSHSuperBit;
 
 /**
  *

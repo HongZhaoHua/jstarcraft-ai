@@ -23,7 +23,6 @@
  */
 package info.debatty.java.lsh.examples;
 
-import info.debatty.java.lsh.LSHMinHash;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,6 +30,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Random;
+
+import info.debatty.java.lsh.LSHMinHash;
 
 /**
  *

@@ -7,7 +7,6 @@ import java.util.Random;
 import org.junit.Test;
 
 import be.tarsos.lsh.KeyVector;
-import jstarcraft.ai.math.algorithm.lsh.MinHash;
 
 public class MinHashTestCase {
 

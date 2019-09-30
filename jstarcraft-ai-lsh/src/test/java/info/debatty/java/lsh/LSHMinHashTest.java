@@ -24,6 +24,7 @@
 package info.debatty.java.lsh;
 
 import java.util.Random;
+
 import org.junit.Test;
 
 /**

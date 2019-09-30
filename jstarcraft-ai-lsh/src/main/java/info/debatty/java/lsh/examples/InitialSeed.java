@@ -24,8 +24,9 @@
 
 package info.debatty.java.lsh.examples;
 
-import info.debatty.java.lsh.MinHash;
 import java.util.Random;
+
+import info.debatty.java.lsh.MinHash;
 
 /**
  *
