@@ -8,7 +8,7 @@ import java.util.concurrent.Future;
 
 import org.apache.commons.math3.util.FastMath;
 
-import com.jstarcraft.core.utility.HashUtility;
+import com.jstarcraft.core.common.hash.HashUtility;
 
 /**
  * CPU环境上下文
