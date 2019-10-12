@@ -1,0 +1,2 @@
+NDCG Normalized discounted cumulative gain 理解分析:
+https://www.it610.com/article/5283790.htm
