@@ -6,3 +6,6 @@ https://github.com/NLPchina/Word2VEC_java
 
 中文自然语言处理工具集:
 https://github.com/kidden/nlp4han
+
+短文本分类:
+https://blog.csdn.net/rensihui/article/category/9026831
