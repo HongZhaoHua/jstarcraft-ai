@@ -75,8 +75,8 @@ JStarCraft AI框架各个模块之间的关系:
     * 树模型(tree)
 * 6.优化(optimization)
     * 梯度下降法(gradient descent)
-        * 批量梯度下降
-        * 随机梯度下降
+        * 批量梯度下降(batch gradient descent)
+        * 随机梯度下降(stochastic gradient descent)
     * 牛顿法和拟牛顿法(newton method/quasi newton method)
     * 共轭梯度法(conjugate gradient)
     * [试探法(heuristic)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
