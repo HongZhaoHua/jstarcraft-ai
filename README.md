@@ -79,11 +79,11 @@ JStarCraft AI框架各个模块之间的关系:
         * 随机梯度下降
     * 牛顿法和拟牛顿法(newton method/quasi newton method)
     * 共轭梯度法(conjugate gradient)
-    * [试探法(heuristics)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
-        * 模拟退火算法
-        * 遗传算法
-        * 蚁群算法
-        * 粒子群算法
+    * [试探法(heuristic)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E8%AF%95%E6%8E%A2%E6%B3%95)
+        * 模拟退火算法(simulate anneal)
+        * 遗传算法(genetic)
+        * 蚁群算法(ant colony)
+        * 粒子群算法(particle swarm)
 * [7.有监督学习(supervised)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%9C%89%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0)
     * 分类
     * 回归
