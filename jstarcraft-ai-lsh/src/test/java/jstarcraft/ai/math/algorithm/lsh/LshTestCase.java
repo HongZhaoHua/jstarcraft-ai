@@ -36,11 +36,11 @@ public class LshTestCase {
         dataset.add(query);
     }
 
-    private int[] signature(MathVector data, HashFunction[] hashs) {
+    private int[] signature(MathVector data, VectorHashFunction[] hashs) {
         int size = hashs.length;
         int[] signature = new int[size];
         for (int index = 0; index < size; index++) {
-            HashFunction hash = hashs[index];
+            VectorHashFunction hash = hashs[index];
             signature[index] = hash.hash(data);
         }
         return signature;
@@ -49,7 +49,7 @@ public class LshTestCase {
     @Test
     public void testCosineHash() {
         Random random = new Random(0);
-        HashFunction[] hashs = new HashFunction[3];
+        VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
             CosineHash hash = new CosineHash(random, 7);
             hashs[index] = hash;
@@ -69,7 +69,7 @@ public class LshTestCase {
     @Test
     public void testEuclideanHash() {
         Random random = new Random(0);
-        HashFunction[] hashs = new HashFunction[3];
+        VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
             EuclideanHash hash = new EuclideanHash(random, 7, 7);
             hashs[index] = hash;
@@ -89,7 +89,7 @@ public class LshTestCase {
     @Test
     public void testManhattanHash() {
         Random random = new Random(0);
-        HashFunction[] hashs = new HashFunction[3];
+        VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
             ManhattanHash hash = new ManhattanHash(random, 7, 7);
             hashs[index] = hash;
@@ -109,7 +109,7 @@ public class LshTestCase {
     @Test
     public void testMinHash() {
         Random random = new Random(0);
-        HashFunction[] hashs = new HashFunction[3];
+        VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
             MinHash hash = new MinHash(random);
             hashs[index] = hash;

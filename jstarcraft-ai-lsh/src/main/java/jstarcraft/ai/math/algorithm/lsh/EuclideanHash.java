@@ -8,7 +8,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class EuclideanHash implements HashFunction {
+public class EuclideanHash implements VectorHashFunction {
 
     private MathVector randomProjection;
 

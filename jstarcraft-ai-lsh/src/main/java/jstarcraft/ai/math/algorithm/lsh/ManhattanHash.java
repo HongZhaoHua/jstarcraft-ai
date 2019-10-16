@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class ManhattanHash implements HashFunction {
+public class ManhattanHash implements VectorHashFunction {
     
      private int w;
      

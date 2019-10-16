@@ -8,7 +8,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class CosineHash implements HashFunction {
+public class CosineHash implements VectorHashFunction {
 
     final MathVector randomProjection;
 

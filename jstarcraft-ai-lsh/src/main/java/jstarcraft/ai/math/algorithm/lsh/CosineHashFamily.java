@@ -16,7 +16,7 @@ public class CosineHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random random) {
+    public VectorHashFunction createHashFunction(Random random) {
         return new CosineHash(random, dimensions);
     }
 

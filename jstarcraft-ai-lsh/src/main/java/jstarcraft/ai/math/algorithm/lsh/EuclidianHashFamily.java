@@ -18,7 +18,7 @@ public class EuclidianHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random random) {
+    public VectorHashFunction createHashFunction(Random random) {
         return new EuclideanHash(random, dimensions, w);
     }
 

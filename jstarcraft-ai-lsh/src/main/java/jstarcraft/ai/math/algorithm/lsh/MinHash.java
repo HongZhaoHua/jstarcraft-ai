@@ -5,7 +5,7 @@ import java.util.Random;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
-public class MinHash implements HashFunction {
+public class MinHash implements VectorHashFunction {
    
     private int a;
     

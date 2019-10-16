@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import jstarcraft.ai.math.algorithm.lsh.HashFamily;
-import jstarcraft.ai.math.algorithm.lsh.HashFunction;
+import jstarcraft.ai.math.algorithm.lsh.VectorHashFunction;
 
 /**
  * An index contains one or more locality sensitive hash tables. These hash
@@ -25,7 +25,7 @@ class HashTable implements Serializable {
      * using an integer) and a list of possible nearest neighbours
      */
     private HashMap<String, List<KeyVector>> hashTable;
-    private HashFunction[] hashFunctions;
+    private VectorHashFunction[] hashFunctions;
     private HashFamily family;
 
     /**
@@ -38,7 +38,7 @@ class HashTable implements Serializable {
      */
     public HashTable(Random rand, int numberOfHashes, HashFamily family) {
         hashTable = new HashMap<String, List<KeyVector>>();
-        this.hashFunctions = new HashFunction[numberOfHashes];
+        this.hashFunctions = new VectorHashFunction[numberOfHashes];
         for (int i = 0; i < numberOfHashes; i++) {
             hashFunctions[i] = family.createHashFunction(rand);
         }

@@ -18,7 +18,7 @@ public class ManhattanHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random random) {
+    public VectorHashFunction createHashFunction(Random random) {
         return new ManhattanHash(random, dimensions, w);
     }
 
