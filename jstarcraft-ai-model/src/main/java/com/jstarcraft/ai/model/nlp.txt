@@ -1,3 +1,6 @@
+自然语言处理(NLP)一些任务的总结:
+https://www.jianshu.com/p/d80b065bdcf0
+
 项目是一个基本包.封装了大多数nlp项目中常用工具:
 https://github.com/NLPchina/nlp-lang
 
