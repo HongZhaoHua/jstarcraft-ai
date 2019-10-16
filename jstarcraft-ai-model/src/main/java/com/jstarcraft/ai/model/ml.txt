@@ -10,5 +10,11 @@ https://github.com/EdwardRaff/JSAT
 A Java-based set of classification clustering algorithms:
 https://github.com/tgsmith61591/clust4j
 
+MALLET is a Java-based package for statistical natural language processing, document classification, clustering, topic modeling, information extraction, and other machine learning applications to text:
+https://github.com/mimno/Mallet
+
 Machine learning, in numpy:
 https://github.com/ddbourgin/numpy-ml
+
+all kinds of text classification models and more with deep learning:
+https://github.com/brightmart/text_classification
