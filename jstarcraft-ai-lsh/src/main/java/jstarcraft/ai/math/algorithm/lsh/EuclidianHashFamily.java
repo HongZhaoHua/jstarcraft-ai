@@ -7,11 +7,9 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 
 public class EuclidianHashFamily implements HashFamily {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3406464542795652263L;
+
     private final int dimensions;
+
     private int w;
 
     public EuclidianHashFamily(int w, int dimensions) {
@@ -20,8 +18,8 @@ public class EuclidianHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random rand) {
-        return new EuclideanHash(rand, dimensions, w);
+    public HashFunction createHashFunction(Random random) {
+        return new EuclideanHash(random, dimensions, w);
     }
 
     @Override

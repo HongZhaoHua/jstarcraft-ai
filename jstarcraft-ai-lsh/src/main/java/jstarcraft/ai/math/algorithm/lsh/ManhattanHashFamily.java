@@ -8,11 +8,8 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
 public class ManhattanHashFamily implements HashFamily {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -8926838846356323484L;
     private int dimensions;
+
     private int w;
 
     public ManhattanHashFamily(int w, int dimensions) {
@@ -21,8 +18,8 @@ public class ManhattanHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random rand) {
-        return new ManhattanHash(rand, dimensions, w);
+    public HashFunction createHashFunction(Random random) {
+        return new ManhattanHash(random, dimensions, w);
     }
 
     @Override

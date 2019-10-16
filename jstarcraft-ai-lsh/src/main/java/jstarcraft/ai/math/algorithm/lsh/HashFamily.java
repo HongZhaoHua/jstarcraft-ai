@@ -13,7 +13,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
  * @author Joren Six
  * 
  */
-public interface HashFamily extends Serializable {
+public interface HashFamily {
 
     /**
      * Create a new hash function of this family.

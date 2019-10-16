@@ -9,10 +9,6 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class CosineHashFamily implements HashFamily {
 
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 7678152513757669089L;
     private final int dimensions;
 
     public CosineHashFamily(int dimensions) {
@@ -20,8 +16,8 @@ public class CosineHashFamily implements HashFamily {
     }
 
     @Override
-    public HashFunction createHashFunction(Random rand) {
-        return new CosineHash(rand, dimensions);
+    public HashFunction createHashFunction(Random random) {
+        return new CosineHash(random, dimensions);
     }
 
     @Override

@@ -8,17 +8,13 @@ import com.jstarcraft.ai.math.algorithm.correlation.similarity.JaccardIndexSimil
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class MinHashFamily implements HashFamily {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 3406464542795652263L;
 
     public MinHashFamily() {
     }
 
     @Override
-    public HashFunction createHashFunction(Random rand) {
-        return new MinHash(rand);
+    public HashFunction createHashFunction(Random random) {
+        return new MinHash(random);
     }
 
     @Override

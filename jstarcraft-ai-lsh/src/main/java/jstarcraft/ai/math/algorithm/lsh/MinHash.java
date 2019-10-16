@@ -6,17 +6,15 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
 public class MinHash implements HashFunction {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = -635398900309516287L;
+   
     private int a;
+    
     private int b;
 
-    public MinHash(Random rand) {
+    public MinHash(Random dimension) {
         // a and b should be randomly generated in [1,PRIME-1]
-        this.a = rand.nextInt(Integer.MAX_VALUE - 1) + 1;
-        this.b = rand.nextInt(Integer.MAX_VALUE - 1) + 1;
+        this.a = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;
+        this.b = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;
     }
 
     public int hash(MathVector vector) {

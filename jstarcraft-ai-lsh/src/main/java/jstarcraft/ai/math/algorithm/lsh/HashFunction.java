@@ -1,7 +1,5 @@
 package jstarcraft.ai.math.algorithm.lsh;
 
-import java.io.Serializable;
-
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
@@ -13,7 +11,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * 
  * @author Joren Six
  */
-public interface HashFunction extends Serializable {
+public interface HashFunction {
     /**
      * Hashes a vector of arbitrary dimensions to an integer. The hash function
      * needs to be locality sensitive to work in the locality sensitive hash (LSH)
@@ -25,4 +23,5 @@ public interface HashFunction extends Serializable {
      *         to some metric have a high probability to end up with the same hash.
      */
     int hash(MathVector vector);
+
 }

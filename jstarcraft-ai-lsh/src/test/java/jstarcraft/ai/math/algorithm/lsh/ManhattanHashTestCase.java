@@ -12,14 +12,14 @@ public class ManhattanHashTestCase {
 
     @Test
     public void testHash() {
-        KeyVector v = new KeyVector("hash", 3);
-        v.setValue(0, 1);
-        v.setValue(1, 2);
-        v.setValue(2, 3);
+        KeyVector vector = new KeyVector("hash", 3);
+        vector.setValue(0, 1);
+        vector.setValue(1, 2);
+        vector.setValue(2, 3);
 
-        Random rand = new Random(0);
-        ManhattanHash hash = new ManhattanHash(rand, 3, 4);
-        int hashValue = hash.hash(v);
+        Random random = new Random(0);
+        ManhattanHash hash = new ManhattanHash(random, 3, 4);
+        int hashValue = hash.hash(vector);
         assertEquals("Expected about 28799", 28799, hashValue);
     }
 
