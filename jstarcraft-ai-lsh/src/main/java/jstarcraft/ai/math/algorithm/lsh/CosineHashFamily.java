@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.CosineSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class CosineHashFamily implements HashFamily {
+public class CosineHashFamily implements LshHashFamily {
 
     private final int dimensions;
 
@@ -16,7 +16,7 @@ public class CosineHashFamily implements HashFamily {
     }
 
     @Override
-    public VectorHashFunction createHashFunction(Random random) {
+    public VectorHashFunction getHashFunction(Random random) {
         return new CosineHash(random, dimensions);
     }
 

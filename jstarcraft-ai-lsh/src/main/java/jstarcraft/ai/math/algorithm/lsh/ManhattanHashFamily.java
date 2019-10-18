@@ -6,7 +6,7 @@ import java.util.Random;
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
-public class ManhattanHashFamily implements HashFamily {
+public class ManhattanHashFamily implements LshHashFamily {
 
     private int dimensions;
 
@@ -18,7 +18,7 @@ public class ManhattanHashFamily implements HashFamily {
     }
 
     @Override
-    public VectorHashFunction createHashFunction(Random random) {
+    public VectorHashFunction getHashFunction(Random random) {
         return new ManhattanHash(random, dimensions, w);
     }
 

@@ -11,7 +11,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 import be.tarsos.lsh.util.TestUtils;
 import jstarcraft.ai.math.algorithm.lsh.CosineHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.EuclidianHashFamily;
-import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.ManhattanHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.MinHashFamily;
 
@@ -30,9 +30,9 @@ public class LshTestCase {
         System.out.println("\nRadius for City block distance.");
         int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
         System.out.printf("%10s%15s%10s%10s%10s%10s%10s%10s\n", "#hashes", "#hashTables", "Correct", "Touched", "linear", "LSH", "Precision", "Recall");
-        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions), new MinHashFamily() };
+        LshHashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions), new MinHashFamily() };
 
-        for (HashFamily family : families) {
+        for (LshHashFamily family : families) {
             LSH lsh = new LSH(dataset, family);
             lsh.buildIndex(rand, 2, 128);
             System.out.println(family.getClass().getSimpleName());

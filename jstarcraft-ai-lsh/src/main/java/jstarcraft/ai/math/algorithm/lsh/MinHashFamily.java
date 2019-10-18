@@ -7,13 +7,13 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.JaccardIndexSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
-public class MinHashFamily implements HashFamily {
+public class MinHashFamily implements LshHashFamily {
 
     public MinHashFamily() {
     }
 
     @Override
-    public VectorHashFunction createHashFunction(Random random) {
+    public VectorHashFunction getHashFunction(Random random) {
         return new MinHash(random);
     }
 

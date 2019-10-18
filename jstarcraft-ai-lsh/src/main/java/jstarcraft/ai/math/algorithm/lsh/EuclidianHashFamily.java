@@ -6,7 +6,7 @@ import java.util.Random;
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 
-public class EuclidianHashFamily implements HashFamily {
+public class EuclidianHashFamily implements LshHashFamily {
 
     private final int dimensions;
 
@@ -18,7 +18,7 @@ public class EuclidianHashFamily implements HashFamily {
     }
 
     @Override
-    public VectorHashFunction createHashFunction(Random random) {
+    public VectorHashFunction getHashFunction(Random random) {
         return new EuclideanHash(random, dimensions, w);
     }
 

@@ -24,7 +24,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 
 import be.tarsos.lsh.util.FileUtils;
 import jstarcraft.ai.math.algorithm.lsh.DistanceComparator;
-import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 
 /**
  * The index makes it easy to store vectors and lookup queries efficiently. For
@@ -40,7 +40,7 @@ public class Index implements Serializable {
 
     private final static Logger LOG = Logger.getLogger(Index.class.getName());
 
-    private HashFamily family;
+    private LshHashFamily family;
     private List<HashTable> hashTable;
     private int evaluated;
 
@@ -56,7 +56,7 @@ public class Index implements Serializable {
      *                           increases. Time needed to compute a hash also
      *                           increases marginally.
      */
-    public Index(Random rand, HashFamily family, int numberOfHashes, int numberOfHashTables) {
+    public Index(Random rand, LshHashFamily family, int numberOfHashes, int numberOfHashTables) {
         this.family = family;
         hashTable = new ArrayList<HashTable>();
         for (int i = 0; i < numberOfHashTables; i++) {
@@ -179,7 +179,7 @@ public class Index implements Serializable {
      * @param numberOfHashTables The number of hash tables
      * @return a new, or deserialized object.
      */
-    public static Index deserialize(Random rand, HashFamily family, int numberOfHashes, int numberOfHashTables) {
+    public static Index deserialize(Random rand, LshHashFamily family, int numberOfHashes, int numberOfHashTables) {
         Index index = new Index(rand, family, numberOfHashes, numberOfHashTables);
         String serializationFile = serializationName(index);
         if (FileUtils.exists(serializationFile)) {

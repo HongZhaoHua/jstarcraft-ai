@@ -18,7 +18,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 
 import be.tarsos.lsh.util.FileUtils;
 import jstarcraft.ai.math.algorithm.lsh.DistanceComparator;
-import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 
 /**
  * Implements a Locality Sensitive Hash scheme.
@@ -28,9 +28,9 @@ import jstarcraft.ai.math.algorithm.lsh.HashFamily;
 public class LSH {
     List<KeyVector> dataset;
     private Index index;
-    private final HashFamily hashFamily;
+    private final LshHashFamily hashFamily;
 
-    public LSH(List<KeyVector> dataset, HashFamily hashFamily) {
+    public LSH(List<KeyVector> dataset, LshHashFamily hashFamily) {
         this.dataset = dataset;
         this.hashFamily = hashFamily;
     }

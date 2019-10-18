@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.VectorHashFunction;
 
 /**
@@ -26,7 +26,7 @@ class HashTable implements Serializable {
      */
     private HashMap<String, List<KeyVector>> hashTable;
     private VectorHashFunction[] hashFunctions;
-    private HashFamily family;
+    private LshHashFamily family;
 
     /**
      * Initialize a new hash table, it needs a hash family and a number of hash
@@ -36,11 +36,11 @@ class HashTable implements Serializable {
      * @param family         The hash function family knows how to create new hash
      *                       functions, and is used therefore.
      */
-    public HashTable(Random rand, int numberOfHashes, HashFamily family) {
+    public HashTable(Random rand, int numberOfHashes, LshHashFamily family) {
         hashTable = new HashMap<String, List<KeyVector>>();
         this.hashFunctions = new VectorHashFunction[numberOfHashes];
         for (int i = 0; i < numberOfHashes; i++) {
-            hashFunctions[i] = family.createHashFunction(rand);
+            hashFunctions[i] = family.getHashFunction(rand);
         }
         this.family = family;
     }

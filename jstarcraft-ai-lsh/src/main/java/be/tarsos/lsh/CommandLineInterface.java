@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 import be.tarsos.lsh.util.TestUtils;
 import jstarcraft.ai.math.algorithm.lsh.CosineHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.EuclidianHashFamily;
-import jstarcraft.ai.math.algorithm.lsh.HashFamily;
+import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.ManhattanHashFamily;
 
 /**
@@ -33,7 +33,7 @@ public class CommandLineInterface {
     private int dimensions;
     private AbstractDistance measure;
     private int timeout = 40; // seconds timeout for radius search.
-    private HashFamily family;
+    private LshHashFamily family;
 
     private boolean benchmark;
     private boolean printHelp;
@@ -113,9 +113,9 @@ public class CommandLineInterface {
         System.out.println("\nRadius for City block distance.");
         int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
 
-        HashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
+        LshHashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
 
-        for (HashFamily family : families) {
+        for (LshHashFamily family : families) {
             int[] numberOfHashes = { 2, 4, 8 };
             if (family instanceof CosineHashFamily) {
                 numberOfHashes[0] *= 8;
@@ -169,8 +169,8 @@ public class CommandLineInterface {
         }
     }
 
-    private HashFamily getHashFamily(double radius, String hashFamilyType, int dimensions) {
-        HashFamily family = null;
+    private LshHashFamily getHashFamily(double radius, String hashFamilyType, int dimensions) {
+        LshHashFamily family = null;
         if (hashFamilyType.equalsIgnoreCase("cos")) {
             family = new CosineHashFamily(dimensions);
         } else if (hashFamilyType.equalsIgnoreCase("l1")) {
