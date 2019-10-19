@@ -12,7 +12,9 @@ public class IntegerMap implements BitMap {
     private int size;
 
     public IntegerMap(int size) {
-        this.bits = new int[size];
+        assert size > 0;
+        int elements = size % Integer.SIZE == 0 ? size / Integer.SIZE : size / Integer.SIZE + 1;
+        this.bits = new int[elements];
         this.size = size;
     }
 
@@ -30,7 +32,7 @@ public class IntegerMap implements BitMap {
     public void set(int index) {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
-        bits[row] = bits[row] | (1 << column);
+        bits[row] |= (1 << column);
     }
 
     @Override
