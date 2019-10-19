@@ -57,7 +57,7 @@ public abstract class LocalBloomFilter implements BloomFilter {
      * @param p Tolerable false positive rate
      * @return the optimal size <i>size</i> of the bloom filter in bits
      */
-    public static int optimalM(int n, float p) {
+    public static int optimalBits(int n, float p) {
         return (int) Math.ceil(-1 * (n * Math.log(p)) / Math.pow(Math.log(2), 2));
     }
 
@@ -66,11 +66,11 @@ public abstract class LocalBloomFilter implements BloomFilter {
      * <i>expectedElements</i> (expected number of elements in bloom filter) and
      * <i>size</i> (size of bloom filter in bits).
      *
-     * @param n Expected number of elements inserted in the bloom filter
      * @param m The size of the bloom filter in bits.
+     * @param n Expected number of elements inserted in the bloom filter
      * @return the optimal amount of hash functions hashes
      */
-    public static int optimalK(int n, int m) {
+    public static int optimalHashs(int m, int n) {
         return (int) Math.ceil((Math.log(2) * m) / n);
     }
 
@@ -78,24 +78,24 @@ public abstract class LocalBloomFilter implements BloomFilter {
      * Calculates the amount of elements a Bloom filter for which the given
      * configuration of size and hashes is optimal.
      *
-     * @param k number of hashes
      * @param m The size of the bloom filter in bits.
+     * @param k number of hashes
      * @return amount of elements a Bloom filter for which the given configuration
      *         of size and hashes is optimal.
      */
-    public static int optimalN(int k, int m) {
+    public static int optimalElements(int m, int k) {
         return (int) Math.ceil((Math.log(2) * m) / k);
     }
 
     /**
      * Calculates the best-case (uniform hash function) false positive probability.
      *
-     * @param k number of hashes
      * @param m The size of the bloom filter in bits.
      * @param n number of elements inserted in the filter
+     * @param k number of hashes
      * @return The calculated false positive probability
      */
-    public static float optimalP(int k, int m, int n) {
+    public static float optimalProbability(int m, int n, int k) {
         return (float) Math.pow((1 - Math.exp(-k * n / (float) m)), k);
     }
 
