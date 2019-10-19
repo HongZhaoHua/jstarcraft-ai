@@ -7,15 +7,13 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 
-        LshTestCase.class,
+        CosineHashFamilyTestCase.class,
 
-        CosineHashTestCase.class,
+        EuclideanHashFamilyTestCase.class,
 
-        EuclideanHashTestCase.class,
+        ManhattanHashFamilyTestCase.class,
 
-        ManhattanHashTestCase.class,
-
-        MinHashTestCase.class, })
+        MinHashFamilyTestCase.class, })
 public class LshTestSuite {
 
 }
