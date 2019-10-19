@@ -10,10 +10,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.StringUtility;
-
-import be.tarsos.lsh.KeyVector;
 
 public class LshTestCase {
 
@@ -21,13 +20,13 @@ public class LshTestCase {
 
     private List<MathVector> dataset = new ArrayList<>(4);
 
-    private MathVector left = new KeyVector("left", new float[] { 1F, 1F, 0F, 0F, 0F, 1F, 1F });
+    private MathVector left = new ArrayVector(7, new float[] { 1F, 1F, 0F, 0F, 0F, 1F, 1F });
 
-    private MathVector middle = new KeyVector("middle", new float[] { 0F, 0F, 1F, 1F, 1F, 0F, 0F });
+    private MathVector middle = new ArrayVector(7, new float[] { 0F, 0F, 1F, 1F, 1F, 0F, 0F });
 
-    private MathVector right = new KeyVector("right", new float[] { 1F, 0F, 0F, 0F, 0F, 1F, 1F });
+    private MathVector right = new ArrayVector(7, new float[] { 1F, 0F, 0F, 0F, 0F, 1F, 1F });
 
-    private MathVector query = new KeyVector("query", new float[] { 0F, 1F, 1F, 1F, 1F, 0F, 0F });
+    private MathVector query = new ArrayVector(7, new float[] { 0F, 1F, 1F, 1F, 1F, 0F, 0F });
 
     {
         dataset.add(left);
