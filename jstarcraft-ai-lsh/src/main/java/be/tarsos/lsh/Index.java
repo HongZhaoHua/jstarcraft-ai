@@ -20,7 +20,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 
 import be.tarsos.lsh.util.FileUtils;
 import jstarcraft.ai.math.algorithm.lsh.DistanceComparator;
@@ -115,7 +115,7 @@ public class Index implements Serializable {
         }
         List<KeyVector> candidates = new ArrayList<KeyVector>(candidateSet);
         evaluated += candidates.size();
-        AbstractDistance measure = family.getDistance();
+        MathDistance measure = family.getDistance();
         DistanceComparator dc = new DistanceComparator(query, measure);
         Collections.sort(candidates, dc);
         if (candidates.size() > maxSize) {

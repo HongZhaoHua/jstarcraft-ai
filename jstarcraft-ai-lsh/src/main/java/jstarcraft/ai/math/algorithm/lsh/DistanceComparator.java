@@ -2,7 +2,7 @@ package jstarcraft.ai.math.algorithm.lsh;
 
 import java.util.Comparator;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
@@ -15,14 +15,14 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 public class DistanceComparator implements Comparator<MathVector> {
 
     private final MathVector query;
-    private final AbstractDistance distanceMeasure;
+    private final MathDistance distanceMeasure;
 
     /**
      * 
      * @param query           The query vector.
      * @param distanceMeasure The distance vector to use.
      */
-    public DistanceComparator(MathVector query, AbstractDistance distanceMeasure) {
+    public DistanceComparator(MathVector query, MathDistance distanceMeasure) {
         this.query = query;
         this.distanceMeasure = distanceMeasure;
     }

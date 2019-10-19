@@ -3,7 +3,7 @@ package be.tarsos.lsh;
 import java.util.List;
 import java.util.Random;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
@@ -31,7 +31,7 @@ public class CommandLineInterface {
     private List<KeyVector> queries;
 
     private int dimensions;
-    private AbstractDistance measure;
+    private MathDistance measure;
     private int timeout = 40; // seconds timeout for radius search.
     private LshHashFamily family;
 

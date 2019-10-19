@@ -14,7 +14,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 
 import be.tarsos.lsh.util.FileUtils;
 import jstarcraft.ai.math.algorithm.lsh.DistanceComparator;
@@ -61,7 +61,7 @@ public class LSH {
      * @param neighboursSize the expected size of the neighbourhood.
      * @param measure        The measure to use to check for correctness.
      */
-    public void benchmark(int neighboursSize, AbstractDistance measure) {
+    public void benchmark(int neighboursSize, MathDistance measure) {
         long startTime = 0;
         double linearSearchTime = 0;
         double lshSearchTime = 0;
@@ -149,7 +149,7 @@ public class LSH {
      * @return The list of k nearest neighbours to the query vector, according to
      *         the given distance measure.
      */
-    public static List<KeyVector> linearSearch(List<KeyVector> dataset, final KeyVector query, int resultSize, AbstractDistance measure) {
+    public static List<KeyVector> linearSearch(List<KeyVector> dataset, final KeyVector query, int resultSize, MathDistance measure) {
         DistanceComparator dc = new DistanceComparator(query, measure);
         PriorityQueue<KeyVector> pq = new PriorityQueue<KeyVector>(dataset.size(), dc);
         pq.addAll(dataset);
@@ -210,7 +210,7 @@ public class LSH {
         return ret;
     }
 
-    static float determineRadius(Random rand, List<KeyVector> dataset, AbstractDistance measure, int timeout) {
+    static float determineRadius(Random rand, List<KeyVector> dataset, MathDistance measure, int timeout) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         float radius = 0f;
         DetermineRadiusTask drt = new DetermineRadiusTask(rand, dataset, measure);
@@ -237,9 +237,9 @@ public class LSH {
         private float radiusSum = 0F;
         private final List<KeyVector> dataset;
         private final Random rand;
-        private final AbstractDistance measure;
+        private final MathDistance measure;
 
-        public DetermineRadiusTask(Random rand, List<KeyVector> dataset, AbstractDistance measure) {
+        public DetermineRadiusTask(Random rand, List<KeyVector> dataset, MathDistance measure) {
             this.dataset = dataset;
             this.rand = rand;
             this.measure = measure;
