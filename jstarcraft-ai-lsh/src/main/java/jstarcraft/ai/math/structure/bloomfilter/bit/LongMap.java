@@ -27,16 +27,20 @@ public class LongMap implements BitMap {
     public void set(int index) {
         int row = index / Long.SIZE;
         int column = index % Long.SIZE;
-        bits[row] |= (1L << column);
-        size++;
+        if (((bits[row] >>> column) & 1L) == 0L) {
+            bits[row] |= (1L << column);
+            size++;
+        }
     }
 
     @Override
     public void unset(int index) {
         int row = index / Long.SIZE;
         int column = index % Long.SIZE;
-        bits[row] &= ~(1L << column);
-        size--;
+        if (((bits[row] >>> column) & 1L) == 1L) {
+            bits[row] &= ~(1L << column);
+            size--;
+        }
     }
 
     @Override

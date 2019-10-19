@@ -17,6 +17,15 @@ public class BitMapTestCase {
             bits.unset(index);
             Assert.assertFalse(bits.get(index));
         }
+
+        bits.set(0);
+        Assert.assertEquals(1, bits.size());
+        bits.set(0);
+        Assert.assertEquals(1, bits.size());
+        bits.unset(Integer.SIZE - 1);
+        Assert.assertEquals(1, bits.size());
+        bits.unset(0);
+        Assert.assertEquals(0, bits.size());
     }
 
     @Test
@@ -31,6 +40,15 @@ public class BitMapTestCase {
             bits.unset(index);
             Assert.assertFalse(bits.get(index));
         }
+
+        bits.set(0);
+        Assert.assertEquals(1, bits.size());
+        bits.set(0);
+        Assert.assertEquals(1, bits.size());
+        bits.unset(Long.SIZE - 1);
+        Assert.assertEquals(1, bits.size());
+        bits.unset(0);
+        Assert.assertEquals(0, bits.size());
     }
 
 }

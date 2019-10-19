@@ -32,16 +32,20 @@ public class IntegerMap implements BitMap {
     public void set(int index) {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
-        bits[row] |= (1 << column);
-        size++;
+        if (((bits[row] >>> column) & 1) == 0) {
+            bits[row] |= (1 << column);
+            size++;
+        }
     }
 
     @Override
     public void unset(int index) {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
-        bits[row] &= ~(1 << column);
-        size--;
+        if (((bits[row] >>> column) & 1) == 1) {
+            bits[row] &= ~(1 << column);
+            size--;
+        }
     }
 
     @Override
