@@ -8,11 +8,18 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class CosineHash implements VectorHashFunction {
+public class EuclideanHashFunction implements VectorHashFunction {
 
-    final MathVector randomProjection;
+    private MathVector randomProjection;
 
-    public CosineHash(Random random, int dimensions) {
+    private int offset;
+
+    private int w;
+
+    public EuclideanHashFunction(Random random, int dimensions, int w) {
+        this.w = w;
+        this.offset = random.nextInt(w);
+
         randomProjection = new KeyVector("random", dimensions);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
@@ -22,13 +29,9 @@ public class CosineHash implements VectorHashFunction {
         }
     }
 
-    @Override
     public int hash(MathVector vector) {
         MathScalar scalar = DefaultScalar.getInstance();
-        // calculate the dot product.
-        float hash = scalar.dotProduct(vector, randomProjection).getValue();
-        // returns a 'bit' encoded as an integer.
-        // 1 when positive or zero, 0 otherwise.
-        return hash > 0 ? 1 : 0;
+        float hash = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
+        return Math.round(hash);
     }
 }

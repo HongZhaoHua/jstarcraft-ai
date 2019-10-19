@@ -51,7 +51,7 @@ public class LshTestCase {
         Random random = new Random(0);
         VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
-            CosineHash hash = new CosineHash(random, 7);
+            CosineHashFunction hash = new CosineHashFunction(random, 7);
             hashs[index] = hash;
         }
 
@@ -71,7 +71,7 @@ public class LshTestCase {
         Random random = new Random(0);
         VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
-            EuclideanHash hash = new EuclideanHash(random, 7, 7);
+            EuclideanHashFunction hash = new EuclideanHashFunction(random, 7, 7);
             hashs[index] = hash;
         }
 
@@ -91,7 +91,7 @@ public class LshTestCase {
         Random random = new Random(0);
         VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
-            ManhattanHash hash = new ManhattanHash(random, 7, 7);
+            ManhattanHashFunction hash = new ManhattanHashFunction(random, 7, 7);
             hashs[index] = hash;
         }
 
@@ -111,7 +111,7 @@ public class LshTestCase {
         Random random = new Random(0);
         VectorHashFunction[] hashs = new VectorHashFunction[3];
         for (int index = 0; index < 3; index++) {
-            MinHash hash = new MinHash(random);
+            MinHashFunction hash = new MinHashFunction(random);
             hashs[index] = hash;
         }
 

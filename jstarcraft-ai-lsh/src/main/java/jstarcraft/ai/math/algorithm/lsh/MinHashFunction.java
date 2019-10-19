@@ -5,13 +5,13 @@ import java.util.Random;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
-public class MinHash implements VectorHashFunction {
+public class MinHashFunction implements VectorHashFunction {
    
     private int a;
     
     private int b;
 
-    public MinHash(Random dimension) {
+    public MinHashFunction(Random dimension) {
         // a and b should be randomly generated in [1,PRIME-1]
         this.a = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;
         this.b = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;

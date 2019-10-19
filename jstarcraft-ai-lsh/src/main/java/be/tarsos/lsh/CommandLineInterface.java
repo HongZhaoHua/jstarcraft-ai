@@ -9,7 +9,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.ManhattanDistance;
 
 import be.tarsos.lsh.util.TestUtils;
 import jstarcraft.ai.math.algorithm.lsh.CosineHashFamily;
-import jstarcraft.ai.math.algorithm.lsh.EuclidianHashFamily;
+import jstarcraft.ai.math.algorithm.lsh.EuclideanHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import jstarcraft.ai.math.algorithm.lsh.ManhattanHashFamily;
 
@@ -113,7 +113,7 @@ public class CommandLineInterface {
         System.out.println("\nRadius for City block distance.");
         int radiusCityBlock = (int) LSH.determineRadius(rand, dataset, new ManhattanDistance(), 20);
 
-        LshHashFamily[] families = { new EuclidianHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
+        LshHashFamily[] families = { new EuclideanHashFamily(radiusEuclidean, dimensions), new ManhattanHashFamily(radiusCityBlock, dimensions), new CosineHashFamily(dimensions) };
 
         for (LshHashFamily family : families) {
             int[] numberOfHashes = { 2, 4, 8 };
@@ -180,7 +180,7 @@ public class CommandLineInterface {
         } else if (hashFamilyType.equalsIgnoreCase("l2")) {
             int w = (int) (10 * radius);
             w = w == 0 ? 1 : w;
-            family = new EuclidianHashFamily(w, dimensions);
+            family = new EuclideanHashFamily(w, dimensions);
         } else {
             new IllegalArgumentException(hashFamilyType + " is unknown, should be one of cos|l1|l2");
         }

@@ -6,20 +6,20 @@ import java.util.Random;
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
 
-public class EuclidianHashFamily implements LshHashFamily {
+public class EuclideanHashFamily implements LshHashFamily {
 
     private final int dimensions;
 
     private int w;
 
-    public EuclidianHashFamily(int w, int dimensions) {
+    public EuclideanHashFamily(int w, int dimensions) {
         this.dimensions = dimensions;
         this.w = w;
     }
 
     @Override
     public VectorHashFunction getHashFunction(Random random) {
-        return new EuclideanHash(random, dimensions, w);
+        return new EuclideanHashFunction(random, dimensions, w);
     }
 
     @Override

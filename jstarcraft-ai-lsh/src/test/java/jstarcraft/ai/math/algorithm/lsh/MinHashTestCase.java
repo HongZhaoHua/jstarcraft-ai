@@ -18,7 +18,7 @@ public class MinHashTestCase {
         vector.setValue(2, 3);
 
         Random random = new Random(0);
-        MinHash hash = new MinHash(random);
+        MinHashFunction hash = new MinHashFunction(random);
         int hashValue = hash.hash(vector);
         assertEquals("Expected about -939719986", -939719986, hashValue);
     }

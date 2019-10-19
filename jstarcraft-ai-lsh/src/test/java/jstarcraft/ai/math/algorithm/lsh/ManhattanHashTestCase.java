@@ -18,7 +18,7 @@ public class ManhattanHashTestCase {
         vector.setValue(2, 3);
 
         Random random = new Random(0);
-        ManhattanHash hash = new ManhattanHash(random, 3, 4);
+        ManhattanHashFunction hash = new ManhattanHashFunction(random, 3, 4);
         int hashValue = hash.hash(vector);
         assertEquals("Expected about 28799", 28799, hashValue);
     }

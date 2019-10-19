@@ -19,7 +19,7 @@ public class ManhattanHashFamily implements LshHashFamily {
 
     @Override
     public VectorHashFunction getHashFunction(Random random) {
-        return new ManhattanHash(random, dimensions, w);
+        return new ManhattanHashFunction(random, dimensions, w);
     }
 
     @Override

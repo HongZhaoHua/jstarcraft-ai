@@ -18,7 +18,7 @@ public class EuclideanHashTestCase {
         vector.setValue(2, 3);
 
         Random random = new Random(0);
-        EuclideanHash hash = new EuclideanHash(random, 3, 4);
+        EuclideanHashFunction hash = new EuclideanHashFunction(random, 3, 4);
         int hashValue = hash.hash(vector);
         assertEquals("Expected about 1", 1, hashValue);
     }

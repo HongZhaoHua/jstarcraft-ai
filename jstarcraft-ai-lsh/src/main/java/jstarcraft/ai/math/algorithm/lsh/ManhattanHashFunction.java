@@ -7,13 +7,13 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 import be.tarsos.lsh.KeyVector;
 
-public class ManhattanHash implements VectorHashFunction {
-    
-     private int w;
-     
+public class ManhattanHashFunction implements VectorHashFunction {
+
+    private int w;
+
     private MathVector randomPartition;
 
-    public ManhattanHash(Random random, int dimensions, int width) {
+    public ManhattanHashFunction(Random random, int dimensions, int width) {
         this.w = width;
 
         randomPartition = new KeyVector("random", dimensions);

@@ -14,7 +14,7 @@ public class MinHashFamily implements LshHashFamily {
 
     @Override
     public VectorHashFunction getHashFunction(Random random) {
-        return new MinHash(random);
+        return new MinHashFunction(random);
     }
 
     @Override

@@ -18,7 +18,7 @@ public class CosineHashTestCase {
         vector.setValue(2, 3);
 
         Random random = new Random(0);
-        CosineHash hash = new CosineHash(random, 3);
+        CosineHashFunction hash = new CosineHashFunction(random, 3);
         int hashValue = hash.hash(vector);
         assertEquals("Expected about 1", 1, hashValue);
     }

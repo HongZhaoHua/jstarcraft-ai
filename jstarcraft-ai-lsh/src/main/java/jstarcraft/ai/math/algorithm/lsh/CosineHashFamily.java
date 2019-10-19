@@ -17,7 +17,7 @@ public class CosineHashFamily implements LshHashFamily {
 
     @Override
     public VectorHashFunction getHashFunction(Random random) {
-        return new CosineHash(random, dimensions);
+        return new CosineHashFunction(random, dimensions);
     }
 
     @Override

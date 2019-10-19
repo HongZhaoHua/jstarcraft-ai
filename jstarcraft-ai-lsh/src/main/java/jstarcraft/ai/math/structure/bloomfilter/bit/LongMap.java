@@ -1,5 +1,10 @@
 package jstarcraft.ai.math.structure.bloomfilter.bit;
 
+/**
+ * 
+ * @author Birdy
+ *
+ */
 public class LongMap implements BitMap {
 
     private long[] bits;
