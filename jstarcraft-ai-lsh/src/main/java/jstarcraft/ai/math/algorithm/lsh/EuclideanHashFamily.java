@@ -29,7 +29,7 @@ public class EuclideanHashFamily implements LshHashFamily {
     }
 
     @Override
-    public AbstractDistance createDistanceMeasure() {
+    public AbstractDistance getDistance() {
         return new EuclideanDistance();
     }
 }

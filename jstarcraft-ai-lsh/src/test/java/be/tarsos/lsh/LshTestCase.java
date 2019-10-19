@@ -36,7 +36,7 @@ public class LshTestCase {
             LSH lsh = new LSH(dataset, family);
             lsh.buildIndex(rand, 2, 128);
             System.out.println(family.getClass().getSimpleName());
-            lsh.benchmark(4, family.createDistanceMeasure());
+            lsh.benchmark(4, family.getDistance());
         }
     }
 

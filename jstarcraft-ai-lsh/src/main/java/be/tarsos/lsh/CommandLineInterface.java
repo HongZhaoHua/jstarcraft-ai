@@ -131,7 +131,7 @@ public class CommandLineInterface {
             for (int i = 0; i < numberOfHashes.length; i++) {
                 for (int j = 0; j < numberOfHashTables.length; j++) {
                     lsh.buildIndex(rand, numberOfHashes[i], numberOfHashTables[j]);
-                    lsh.benchmark(4, family.createDistanceMeasure());
+                    lsh.benchmark(4, family.getDistance());
                 }
             }
         }

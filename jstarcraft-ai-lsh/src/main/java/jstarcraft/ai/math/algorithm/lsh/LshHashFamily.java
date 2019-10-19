@@ -27,6 +27,6 @@ public interface LshHashFamily extends HashFamily<VectorHashFunction> {
      * 
      * @return The distance measure used to sort neighbourhood candidates.
      */
-    AbstractDistance createDistanceMeasure();
+    AbstractDistance getDistance();
 
 }

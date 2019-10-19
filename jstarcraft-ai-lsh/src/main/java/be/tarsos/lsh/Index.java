@@ -115,7 +115,7 @@ public class Index implements Serializable {
         }
         List<KeyVector> candidates = new ArrayList<KeyVector>(candidateSet);
         evaluated += candidates.size();
-        AbstractDistance measure = family.createDistanceMeasure();
+        AbstractDistance measure = family.getDistance();
         DistanceComparator dc = new DistanceComparator(query, measure);
         Collections.sort(candidates, dc);
         if (candidates.size() > maxSize) {

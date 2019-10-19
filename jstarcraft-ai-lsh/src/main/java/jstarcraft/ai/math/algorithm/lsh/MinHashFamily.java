@@ -24,7 +24,7 @@ public class MinHashFamily implements LshHashFamily {
     }
 
     @Override
-    public AbstractDistance createDistanceMeasure() {
+    public AbstractDistance getDistance() {
         JaccardIndexSimilarity similarity = new JaccardIndexSimilarity();
         return new AbstractDistance() {
 

@@ -37,7 +37,7 @@ public class CosineHashFamily implements LshHashFamily {
     }
 
     @Override
-    public AbstractDistance createDistanceMeasure() {
+    public AbstractDistance getDistance() {
         CosineSimilarity similarity = new CosineSimilarity();
         return new AbstractDistance() {
 
