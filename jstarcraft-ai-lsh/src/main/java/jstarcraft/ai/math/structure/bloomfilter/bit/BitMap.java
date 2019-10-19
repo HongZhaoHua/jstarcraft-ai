@@ -14,6 +14,8 @@ public interface BitMap {
 
     void unset(int index);
     
+    int capacity();
+    
     int size();
 
 }

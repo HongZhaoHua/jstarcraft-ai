@@ -9,23 +9,23 @@ public class IntegerMap implements BitMap {
 
     private int[] bits;
 
+    private int capacity;
+
     private int size;
 
-    public IntegerMap(int size) {
-        assert size > 0;
-        int elements = size % Integer.SIZE == 0 ? size / Integer.SIZE : size / Integer.SIZE + 1;
+    public IntegerMap(int capacity) {
+        assert capacity > 0;
+        int elements = capacity % Integer.SIZE == 0 ? capacity / Integer.SIZE : capacity / Integer.SIZE + 1;
         this.bits = new int[elements];
-        this.size = size;
+        this.capacity = capacity;
+        this.size = 0;
     }
 
     @Override
     public boolean get(int index) {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
-        if (((bits[row] >>> column) & 1) == 1) {
-            return true;
-        }
-        return false;
+        return ((bits[row] >>> column) & 1) == 1;
     }
 
     @Override
@@ -33,6 +33,7 @@ public class IntegerMap implements BitMap {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
         bits[row] |= (1 << column);
+        size++;
     }
 
     @Override
@@ -40,6 +41,12 @@ public class IntegerMap implements BitMap {
         int row = index / Integer.SIZE;
         int column = index % Integer.SIZE;
         bits[row] &= ~(1 << column);
+        size--;
+    }
+
+    @Override
+    public int capacity() {
+        return capacity;
     }
 
     @Override

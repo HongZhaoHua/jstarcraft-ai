@@ -4,23 +4,23 @@ public class LongMap implements BitMap {
 
     private long[] bits;
 
+    private int capacity;
+
     private int size;
 
-    public LongMap(int size) {
-        assert size > 0;
-        int elements = size % Long.SIZE == 0 ? size / Long.SIZE : size / Long.SIZE + 1;
+    public LongMap(int capacity) {
+        assert capacity > 0;
+        int elements = capacity % Long.SIZE == 0 ? capacity / Long.SIZE : capacity / Long.SIZE + 1;
         this.bits = new long[elements];
-        this.size = size;
+        this.capacity = capacity;
+        this.size = 0;
     }
 
     @Override
     public boolean get(int index) {
         int row = index / Long.SIZE;
         int column = index % Long.SIZE;
-        if (((bits[row] >>> column) & 1L) == 1L) {
-            return true;
-        }
-        return false;
+        return ((bits[row] >>> column) & 1L) == 1L;
     }
 
     @Override
@@ -28,6 +28,7 @@ public class LongMap implements BitMap {
         int row = index / Long.SIZE;
         int column = index % Long.SIZE;
         bits[row] |= (1L << column);
+        size++;
     }
 
     @Override
@@ -35,6 +36,12 @@ public class LongMap implements BitMap {
         int row = index / Long.SIZE;
         int column = index % Long.SIZE;
         bits[row] &= ~(1L << column);
+        size--;
+    }
+
+    @Override
+    public int capacity() {
+        return capacity;
     }
 
     @Override
