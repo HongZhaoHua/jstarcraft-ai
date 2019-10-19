@@ -1,6 +1,7 @@
 package com.jstarcraft.ai.math.algorithm.correlation.distance;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
@@ -13,7 +14,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public class LevenshteinDistance extends AbstractDistance {
+public class LevenshteinDistance extends AbstractCorrelation implements MathDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {

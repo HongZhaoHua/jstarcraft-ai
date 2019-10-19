@@ -6,10 +6,10 @@ package com.jstarcraft.ai.math.algorithm.correlation;
  * @author Birdy
  *
  */
-public abstract class AbstractSimilarity extends AbstractCorrelation {
+public interface MathSimilarity extends MathCorrelation {
 
     @Override
-    public float getIdentical() {
+    default float getIdentical() {
         return 1F;
     }
 

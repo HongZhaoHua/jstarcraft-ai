@@ -2,7 +2,8 @@ package com.jstarcraft.ai.math.algorithm.correlation.distance;
 
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
@@ -12,7 +13,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class MSEDistance extends AbstractDistance {
+public class MSEDistance extends AbstractCorrelation implements MathDistance {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float coefficient = 0F;

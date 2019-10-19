@@ -3,7 +3,9 @@ package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 import java.util.Iterator;
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
@@ -13,7 +15,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class KRCCSimilarity extends AbstractSimilarity {
+public class KRCCSimilarity extends AbstractCorrelation implements MathSimilarity {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         int count = scores.size();

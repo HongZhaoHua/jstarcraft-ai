@@ -15,7 +15,7 @@ import com.jstarcraft.core.utility.ArrayUtility;
  *
  */
 @ModemDefinition(value = { "distributionClass", "distributionParameters", "randomClass", "randomSeed" })
-public class QuantityProbability implements Probability<Double>, ModemCycle {
+public class QuantityProbability implements MathProbability<Double>, ModemCycle {
 
     private String distributionClass;
 

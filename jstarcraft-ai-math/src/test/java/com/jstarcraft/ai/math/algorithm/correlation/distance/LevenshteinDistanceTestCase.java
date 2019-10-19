@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistanceTestCase;
-import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathCorrelation;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.LevenshteinDistance;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 public class LevenshteinDistanceTestCase extends AbstractDistanceTestCase {
 
     @Override
-    protected Correlation getCorrelation() {
+    protected MathCorrelation getCorrelation() {
         return new LevenshteinDistance();
     }
 

@@ -10,7 +10,7 @@ import org.nd4j.linalg.api.rng.DefaultRandom;
 import org.nd4j.linalg.api.rng.Random;
 import org.nd4j.linalg.api.rng.distribution.Distribution;
 
-import com.jstarcraft.ai.math.algorithm.probability.Probability;
+import com.jstarcraft.ai.math.algorithm.probability.MathProbability;
 import com.jstarcraft.ai.math.algorithm.probability.QuantityProbability;
 
 public class NormalProbabilityTestCase extends ProbabilityTestCase {
@@ -23,14 +23,14 @@ public class NormalProbabilityTestCase extends ProbabilityTestCase {
     }
 
     @Override
-    protected Probability getNewFunction(int seed) {
+    protected MathProbability getNewFunction(int seed) {
         RandomGenerator random = new SynchronizedRandomGenerator(new MersenneTwister(seed));
         NormalDistribution distribution = new NormalDistribution(random, 1D, 5D);
         return new QuantityProbability(MersenneTwister.class, seed, NormalDistribution.class, 1D, 5D);
     }
 
     @Override
-    protected void assertSample(Probability newFuction, Distribution oldFunction) {
+    protected void assertSample(MathProbability newFuction, Distribution oldFunction) {
         Number newSample = newFuction.sample();
         Number oldSample = oldFunction.sample();
         Assert.assertThat(newSample, CoreMatchers.equalTo(oldSample));

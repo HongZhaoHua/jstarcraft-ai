@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.apache.commons.math3.util.FastMath;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
@@ -14,7 +15,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class ChebychevDistance extends AbstractDistance {
+public class ChebychevDistance extends AbstractCorrelation implements MathDistance {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float coefficient = 0F;

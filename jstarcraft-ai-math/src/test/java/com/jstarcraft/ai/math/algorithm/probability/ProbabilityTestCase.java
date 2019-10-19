@@ -32,18 +32,18 @@ public abstract class ProbabilityTestCase {
         return true;
     }
 
-    protected abstract void assertSample(Probability newFuction, Distribution oldFunction);
+    protected abstract void assertSample(MathProbability newFuction, Distribution oldFunction);
 
     protected abstract Distribution getOldFunction(int seed);
 
-    protected abstract Probability getNewFunction(int seed);
+    protected abstract MathProbability getNewFunction(int seed);
 
     @Test
     public void testSample() {
         int seed = 1000;
 
         Distribution oldFunction = getOldFunction(seed);
-        Probability<Number> newFuction = getNewFunction(seed);
+        MathProbability<Number> newFuction = getNewFunction(seed);
 
         for (int index = 0; index < seed; index++) {
             newFuction.setSeed(index);
@@ -64,9 +64,9 @@ public abstract class ProbabilityTestCase {
         int seed = 1000;
 
         for (ModemCodec codec : ModemCodec.values()) {
-            Probability<Number> oldFuction = getNewFunction(seed);
+            MathProbability<Number> oldFuction = getNewFunction(seed);
             byte[] data = codec.encodeModel(oldFuction);
-            Probability<Number> newFuction = (Probability) codec.decodeModel(data);
+            MathProbability<Number> newFuction = (MathProbability) codec.decodeModel(data);
             Assert.assertEquals(oldFuction.sample(), newFuction.sample());
         }
     }

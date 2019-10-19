@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
-import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathCorrelation;
 import com.jstarcraft.ai.math.structure.matrix.HashMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
@@ -27,7 +27,7 @@ public abstract class AbstractCorrelationTestCase {
 
     protected abstract float getIdentical();
 
-    protected abstract Correlation getCorrelation();
+    protected abstract MathCorrelation getCorrelation();
 
     @Test
     public void test() {
@@ -45,7 +45,7 @@ public abstract class AbstractCorrelationTestCase {
             }
             SparseMatrix scoreMatrix = SparseMatrix.valueOf(rowSize, columnSize, table);
 
-            Correlation correlation = getCorrelation();
+            MathCorrelation correlation = getCorrelation();
             SymmetryMatrix symmetryMatrix = new SymmetryMatrix(scoreMatrix.getRowSize());
             correlation.calculateCoefficients(scoreMatrix, false, symmetryMatrix::setValue);
             assertEquals(rowSize, symmetryMatrix.getRowSize());

@@ -3,7 +3,9 @@ package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 import java.util.Iterator;
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
@@ -28,7 +30,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  * 
  */
-public class ConsistencyIndexSimilarity extends AbstractSimilarity {
+public class ConsistencyIndexSimilarity extends AbstractCorrelation implements MathSimilarity {
 
     /* original number of features. */
     private int n;

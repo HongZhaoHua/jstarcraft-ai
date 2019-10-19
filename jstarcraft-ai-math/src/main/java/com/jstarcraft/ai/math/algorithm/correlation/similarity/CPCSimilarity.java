@@ -2,7 +2,9 @@ package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathSimilarity;
 import com.jstarcraft.ai.math.structure.matrix.MathMatrix;
 import com.jstarcraft.ai.math.structure.matrix.MatrixScalar;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
@@ -15,7 +17,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class CPCSimilarity extends AbstractSimilarity {
+public class CPCSimilarity extends AbstractCorrelation implements MathSimilarity {
 
     private float median;
 

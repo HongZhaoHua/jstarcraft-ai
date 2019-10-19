@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public interface Correlation {
+public interface MathCorrelation {
 
     /**
      * 根据分数矩阵计算相关度

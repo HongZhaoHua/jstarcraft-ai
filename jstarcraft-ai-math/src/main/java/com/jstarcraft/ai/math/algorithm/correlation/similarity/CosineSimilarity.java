@@ -2,7 +2,9 @@ package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
@@ -12,7 +14,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class CosineSimilarity extends AbstractSimilarity {
+public class CosineSimilarity extends AbstractCorrelation implements MathSimilarity {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float power = 0F, leftPower = 0F, rightPower = 0F;

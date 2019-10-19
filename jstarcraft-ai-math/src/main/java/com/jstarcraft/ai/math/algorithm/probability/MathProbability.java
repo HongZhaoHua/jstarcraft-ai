@@ -6,7 +6,7 @@ package com.jstarcraft.ai.math.algorithm.probability;
  * @author Birdy
  *
  */
-public interface Probability<T extends Number> {
+public interface MathProbability<T extends Number> {
 
     public final static long DEFAULT_SEED = 0L;
 

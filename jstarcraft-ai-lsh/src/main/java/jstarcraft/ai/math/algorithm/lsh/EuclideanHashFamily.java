@@ -1,12 +1,13 @@
 package jstarcraft.ai.math.algorithm.lsh;
 
-import java.util.Arrays;
 import java.util.Random;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
+import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class EuclideanHashFamily implements LshHashFamily {
+
+    private static final EuclideanDistance distance = new EuclideanDistance();
 
     private final int dimensions;
 
@@ -23,13 +24,8 @@ public class EuclideanHashFamily implements LshHashFamily {
     }
 
     @Override
-    public String combine(int[] hashes) {
-        // return Arrays.hashCode(hashes);
-        return Arrays.toString(hashes);
+    public float getCoefficient(MathVector leftVector, MathVector rightVector) {
+        return distance.getCoefficient(leftVector, rightVector);
     }
 
-    @Override
-    public AbstractDistance getDistance() {
-        return new EuclideanDistance();
-    }
 }

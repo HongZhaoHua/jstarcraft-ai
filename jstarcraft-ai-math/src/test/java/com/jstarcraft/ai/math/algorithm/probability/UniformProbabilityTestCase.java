@@ -18,12 +18,12 @@ public class UniformProbabilityTestCase extends ProbabilityTestCase {
     }
 
     @Override
-    protected Probability getNewFunction(int seed) {
+    protected MathProbability getNewFunction(int seed) {
         return new QuantityProbability(MersenneTwister.class, seed, UniformRealDistribution.class, 0.4D, 4D);
     }
 
     @Override
-    protected void assertSample(Probability newFuction, Distribution oldFunction) {
+    protected void assertSample(MathProbability newFuction, Distribution oldFunction) {
         Number newSample = newFuction.sample();
         Number oldSample = oldFunction.sample();
         Assert.assertThat(newSample, CoreMatchers.equalTo(oldSample));

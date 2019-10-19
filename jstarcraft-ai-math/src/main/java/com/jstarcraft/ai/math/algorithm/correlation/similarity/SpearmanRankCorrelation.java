@@ -5,7 +5,9 @@ package com.jstarcraft.ai.math.algorithm.correlation.similarity;
 
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractSimilarity;
+import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.MathSimilarity;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
@@ -16,7 +18,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class SpearmanRankCorrelation extends AbstractSimilarity {
+public class SpearmanRankCorrelation extends AbstractCorrelation implements MathSimilarity {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
         float coefficient = 0F;

@@ -15,7 +15,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
-public abstract class AbstractCorrelation implements Correlation {
+public abstract class AbstractCorrelation implements MathCorrelation {
 
     /**
      * 交集

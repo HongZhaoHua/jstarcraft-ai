@@ -18,12 +18,12 @@ public class BinomialProbabilityTestCase extends ProbabilityTestCase {
     }
 
     @Override
-    protected Probability getNewFunction(int seed) {
+    protected MathProbability getNewFunction(int seed) {
         return new QualityProbability(MersenneTwister.class, seed, BinomialDistribution.class, 10, 0.5D);
     }
 
     @Override
-    protected void assertSample(Probability newFuction, Distribution oldFunction) {
+    protected void assertSample(MathProbability newFuction, Distribution oldFunction) {
         Number newSample = newFuction.sample().doubleValue();
         Number oldSample = Math.ceil(oldFunction.sample());
         Assert.assertThat(newSample, CoreMatchers.equalTo(oldSample));
