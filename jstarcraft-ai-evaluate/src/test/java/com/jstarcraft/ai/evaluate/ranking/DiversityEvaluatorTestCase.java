@@ -6,7 +6,7 @@ import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.environment.EnvironmentFactory;
 import com.jstarcraft.ai.evaluate.AbstractRankingEvaluatorTestCase;
 import com.jstarcraft.ai.evaluate.Evaluator;
-import com.jstarcraft.ai.math.algorithm.correlation.Correlation;
+import com.jstarcraft.ai.math.algorithm.correlation.MathCorrelation;
 import com.jstarcraft.ai.math.algorithm.correlation.similarity.CosineSimilarity;
 import com.jstarcraft.ai.math.structure.matrix.SparseMatrix;
 import com.jstarcraft.ai.math.structure.matrix.SymmetryMatrix;
@@ -18,7 +18,7 @@ public class DiversityEvaluatorTestCase extends AbstractRankingEvaluatorTestCase
 
     @Override
     protected Evaluator<IntSet, IntList> getEvaluator(SparseMatrix featureMatrix) {
-        Correlation correlation = new CosineSimilarity();
+        MathCorrelation correlation = new CosineSimilarity();
         EnvironmentContext context = EnvironmentFactory.getContext();
         Future<SymmetryMatrix> task = context.doTask(() -> {
             SymmetryMatrix symmetryMatrix = new SymmetryMatrix(featureMatrix.getColumnSize());
