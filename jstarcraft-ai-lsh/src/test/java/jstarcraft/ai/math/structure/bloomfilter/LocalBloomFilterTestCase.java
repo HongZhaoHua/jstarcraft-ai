@@ -20,6 +20,8 @@ import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.jstarcraft.core.common.hash.HashUtility;
+
 public class LocalBloomFilterTestCase {
 
     static Random random = new Random();
@@ -32,6 +34,36 @@ public class LocalBloomFilterTestCase {
         int hashs = LocalBloomFilter.optimalHashs(bits, elments);
         Assert.assertEquals(997, LocalBloomFilter.optimalElements(bits, hashs));
         Assert.assertEquals(9.998266E-4F, LocalBloomFilter.optimalProbability(bits, elments, hashs), 0F);
+    }
+
+    protected BloomFilter getBloomFilter(int elments, float probability) {
+        int bits = LocalBloomFilter.optimalBits(elments, probability);
+        int hashs = LocalBloomFilter.optimalHashs(bits, elments);
+        StringHashFamily hashFamily = (random) -> {
+            int seed = random.nextInt();
+            return (data) -> {
+                return HashUtility.murmur2StringHash32(seed, data);
+            };
+        };
+        BloomFilter bloomFilter = new IntegerBloomFilter(bits, hashFamily, hashs, random);
+        return bloomFilter;
+    }
+
+    @Test
+    public void testBloomFilter() {
+        int elments = 1000;
+        float probability = 0.001F;
+        BloomFilter bloomFilter = getBloomFilter(elments, probability);
+        int times = 0;
+        for (int index = 0; index < elments; index++) {
+            String data = String.valueOf(index);
+            if (bloomFilter.get(data)) {
+                times++;
+            }
+            bloomFilter.put(data);
+            Assert.assertTrue(bloomFilter.get(data));
+        }
+        Assert.assertTrue(times < elments * probability);
     }
 
 }

@@ -27,10 +27,10 @@ public abstract class LocalBloomFilter implements BloomFilter {
 
     @Override
     public boolean get(String data) {
-        int size = bits.size();
+        int capacity = bits.capacity();
         for (StringHashFunction function : functions) {
             int hash = function.hash(data);
-            int index = Math.abs(hash % size);
+            int index = Math.abs(hash % capacity);
             if (!bits.get(index)) {
                 return false;
             }
@@ -40,10 +40,10 @@ public abstract class LocalBloomFilter implements BloomFilter {
 
     @Override
     public void put(String data) {
-        int size = bits.size();
+        int capacity = bits.capacity();
         for (StringHashFunction function : functions) {
             int hash = function.hash(data);
-            int index = Math.abs(hash % size);
+            int index = Math.abs(hash % capacity);
             bits.set(index);
         }
     }
