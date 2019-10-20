@@ -28,12 +28,14 @@ public class Knn<T> {
      * @param value
      */
     public synchronized void updateNeighbor(T keyValue) {
-        ;
         if (neighbors.size() >= k) {
             // 与边界值比较再判断是否更新
             if (comparator.compare(keyValue, this.keyValue) < 0) {
                 neighbors.add(keyValue);
-                neighbors.pollLast();
+                if (neighbors.size() > k) {
+                    // 防止大小不变的情况下
+                    neighbors.pollLast();
+                }
                 this.keyValue = neighbors.last();
             }
         } else {
