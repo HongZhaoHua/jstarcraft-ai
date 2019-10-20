@@ -3,9 +3,8 @@ package jstarcraft.ai.math.algorithm.lsh;
 import java.util.Arrays;
 import java.util.Random;
 
+import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-
-import be.tarsos.lsh.KeyVector;
 
 public class ManhattanHashFunction implements VectorHashFunction {
 
@@ -16,7 +15,7 @@ public class ManhattanHashFunction implements VectorHashFunction {
     public ManhattanHashFunction(Random random, int dimensions, int width) {
         this.w = width;
 
-        randomPartition = new KeyVector("random", dimensions);
+        randomPartition = new ArrayVector(dimensions, new float[dimensions]);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
             // standard deviation 1.0

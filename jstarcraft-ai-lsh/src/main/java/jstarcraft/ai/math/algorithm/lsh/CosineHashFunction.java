@@ -4,16 +4,15 @@ import java.util.Random;
 
 import com.jstarcraft.ai.math.structure.DefaultScalar;
 import com.jstarcraft.ai.math.structure.MathScalar;
+import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-
-import be.tarsos.lsh.KeyVector;
 
 public class CosineHashFunction implements VectorHashFunction {
 
     final MathVector randomProjection;
 
     public CosineHashFunction(Random random, int dimensions) {
-        randomProjection = new KeyVector("random", dimensions);
+        randomProjection = new ArrayVector(dimensions, new float[dimensions]);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
             // standard deviation 1.0

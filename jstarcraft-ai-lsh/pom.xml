@@ -42,7 +42,7 @@
         <!-- 核心框架依赖 -->
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-ai-evaluate</artifactId>
+            <artifactId>jstarcraft-ai-model</artifactId>
             <version>1.0</version>
         </dependency>
 
