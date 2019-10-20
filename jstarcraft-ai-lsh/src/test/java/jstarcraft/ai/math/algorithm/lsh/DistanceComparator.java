@@ -11,9 +11,9 @@ public class DistanceComparator implements Comparator<MathVector> {
 
     private final MathDistance distance;
 
-    public DistanceComparator(MathVector query, MathDistance distanceMeasure) {
+    public DistanceComparator(MathVector query, MathDistance distance) {
         this.query = query;
-        this.distance = distanceMeasure;
+        this.distance = distance;
     }
 
     @Override
