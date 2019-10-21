@@ -35,11 +35,11 @@ https://github.com/hankcs/hanlp-lucene-plugin
 IK分词:
 https://github.com/magese/ik-analyzer-solr
 
-jieba分词:
-https://github.com/huaban/jieba-analysis
-
 Jcseg分词:
 https://github.com/lionsoul2014/jcseg
+
+jieba分词:
+https://github.com/huaban/jieba-analysis
 
 mmseg4j分词:
 https://github.com/chenlb/mmseg4j-core
