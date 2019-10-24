@@ -15,6 +15,3 @@ https://github.com/mimno/Mallet
 
 Machine learning, in numpy:
 https://github.com/ddbourgin/numpy-ml
-
-all kinds of text classification models and more with deep learning:
-https://github.com/brightmart/text_classification

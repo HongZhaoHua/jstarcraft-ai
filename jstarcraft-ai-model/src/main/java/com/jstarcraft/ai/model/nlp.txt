@@ -13,6 +13,9 @@ https://github.com/kidden/nlp4han
 短文本分类:
 https://blog.csdn.net/rensihui/article/category/9026831
 
+all kinds of text classification models and more with deep learning:
+https://github.com/brightmart/text_classification
+
 ****
 
 分词
