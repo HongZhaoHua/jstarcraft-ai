@@ -16,7 +16,7 @@ import com.jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import com.jstarcraft.ai.math.algorithm.lsh.VectorHashFunction;
 import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
-import com.jstarcraft.ai.model.knn.Knn;
+import com.jstarcraft.core.utility.Neighborhood;
 import com.jstarcraft.core.utility.RandomUtility;
 import com.jstarcraft.core.utility.StringUtility;
 
@@ -136,7 +136,7 @@ public abstract class LshHashFamilyTestCase {
             neighbors.add(vector);
         }
 
-        Knn<NameVector> knn = new Knn<>(5, new DistanceComparator(query, family));
+        Neighborhood<NameVector> knn = new Neighborhood<>(5, new DistanceComparator(query, family));
         for (int stageIndex = 0; stageIndex < stageSize; stageIndex++) {
             int buckIndex = Arrays.hashCode(signature(query, functions[stageIndex])) % bucketSize;
             Int2ObjectOpenHashMap<ArrayList<NameVector>> table = tables[stageIndex];
