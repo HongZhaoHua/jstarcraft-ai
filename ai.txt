@@ -1,2 +1,6 @@
 大白话5分钟带你走进人工智能:
 https://www.cnblogs.com/LHWorldBlog/p/10929281.html
+
+AI learning-机器学习实战:
+https://github.com/apachecn/AiLearning
+https://ailearning.apachecn.org/
