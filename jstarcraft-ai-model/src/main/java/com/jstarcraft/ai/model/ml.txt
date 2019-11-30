@@ -15,3 +15,6 @@ https://github.com/mimno/Mallet
 
 Machine learning, in numpy:
 https://github.com/ddbourgin/numpy-ml
+
+Algorithms of the Intelligent Web:
+https://www.manning.com/books/algorithms-of-the-intelligent-web
