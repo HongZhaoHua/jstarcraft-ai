@@ -1,3 +1,14 @@
+Weka应用总结:
+https://blog.csdn.net/mingzai624/article/details/64918634
+Weka高级应用--Java API:
+https://blog.csdn.net/mingzai624/article/details/64919786
+
+WEKA中文详细教程:
+https://wenku.baidu.com/view/fe6c9a7031126edb6f1a10a2.html
+
+Weka中数据挖掘与机器学习:
+http://www.cnblogs.com/zlslch/category/999872.html
+
 Weka算法及源码分析:
 http://blog.csdn.net/roger__wong/article/category/2533491
 
@@ -7,9 +18,6 @@ http://koalaquwei.ucoz.com/search/?q=weka
 
 Weka:
 https://blog.csdn.net/u011292007/category_2317853.html
-
-Weka中数据挖掘与机器学习:
-http://www.cnblogs.com/zlslch/category/999872.html
 
 Combining Models - Boosting, Bagging, Stacking and Voting:
 https://www.youtube.com/watch?v=062w-dGDRr0
