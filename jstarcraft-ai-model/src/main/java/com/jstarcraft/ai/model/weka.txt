@@ -1,3 +1,5 @@
+----- 教程 -----
+
 Weka应用总结:
 https://blog.csdn.net/mingzai624/article/details/64918634
 Weka高级应用--Java API:
@@ -8,6 +10,8 @@ https://wenku.baidu.com/view/fe6c9a7031126edb6f1a10a2.html
 
 Weka中数据挖掘与机器学习:
 http://www.cnblogs.com/zlslch/category/999872.html
+
+----- 源码 -----
 
 Weka算法及源码分析:
 http://blog.csdn.net/roger__wong/article/category/2533491
