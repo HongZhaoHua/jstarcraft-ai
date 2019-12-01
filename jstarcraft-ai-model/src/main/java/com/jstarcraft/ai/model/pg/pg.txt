@@ -3,3 +3,9 @@ https://blog.csdn.net/libing_zeng/article/details/74625849
 
 带你搞懂朴素贝叶斯分类算法:
 https://blog.csdn.net/yizhen_nlp/article/details/70162431
+
+条件概率、全概率、先验概率、后验概率、类条件概率:
+https://blog.csdn.net/qq_35091353/article/details/102557011
+
+先验概率、条件概率、后验概率、全概率、贝叶斯公式:
+https://blog.csdn.net/Mr_health/article/details/100080951
