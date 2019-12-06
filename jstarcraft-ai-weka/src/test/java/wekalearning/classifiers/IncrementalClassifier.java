@@ -12,21 +12,21 @@ import java.io.File;
  */
 public class IncrementalClassifier {
 
-	public static void main(String[] args) throws Exception {
-		// 加载数据
-		ArffLoader loader = new ArffLoader();
-		loader.setFile(new File("data/weather.nominal.arff"));
-		Instances structure = loader.getStructure();
-		structure.setClassIndex(structure.numAttributes() - 1);
+    public static void main(String[] args) throws Exception {
+        // 加载数据
+        ArffLoader loader = new ArffLoader();
+        loader.setFile(new File("data/weather.nominal.arff"));
+        Instances structure = loader.getStructure();
+        structure.setClassIndex(structure.numAttributes() - 1);
 
-		// 训练NaiveBayes分类器
-		NaiveBayesUpdateable nb = new NaiveBayesUpdateable();
-		nb.buildClassifier(structure);
-		Instance instance;
-		while ((instance = loader.getNextInstance(structure)) != null)
-			nb.updateClassifier(instance);
+        // 训练NaiveBayes分类器
+        NaiveBayesUpdateable nb = new NaiveBayesUpdateable();
+        nb.buildClassifier(structure);
+        Instance instance;
+        while ((instance = loader.getNextInstance(structure)) != null)
+            nb.updateClassifier(instance);
 
-		// 输出生成模型
-		System.out.println(nb);
-	}
+        // 输出生成模型
+        System.out.println(nb);
+    }
 }

@@ -10,28 +10,28 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class OutputClusterDistribution {
 
-	public static void main(String[] args) throws Exception {
-		// 加载数据
-		Instances train = DataSource.read("data/segment-challenge.arff");
-		Instances test = DataSource.read("data/segment-test.arff");
-		if (!train.equalHeaders(test))
-			throw new Exception("训练集和测试集不兼容：" + train.equalHeadersMsg(test));
+    public static void main(String[] args) throws Exception {
+        // 加载数据
+        Instances train = DataSource.read("data/segment-challenge.arff");
+        Instances test = DataSource.read("data/segment-test.arff");
+        if (!train.equalHeaders(test))
+            throw new Exception("训练集和测试集不兼容：" + train.equalHeadersMsg(test));
 
-		// 构建聚类器
-		EM clusterer = new EM();
-		clusterer.buildClusterer(train);
+        // 构建聚类器
+        EM clusterer = new EM();
+        clusterer.buildClusterer(train);
 
-		// 输出预测
-		System.out.println("编号 - 簇  \t-\t 分布");
-		for (int i = 0; i < test.numInstances(); i++) {
-			int cluster = clusterer.clusterInstance(test.instance(i));
-			double[] dist = clusterer.distributionForInstance(test.instance(i));
-			System.out.print((i + 1));
-			System.out.print(" - ");
-			System.out.print(cluster);
-			System.out.print(" - ");
-			System.out.print(Utils.arrayToString(dist));
-			System.out.println();
-		}
-	}
+        // 输出预测
+        System.out.println("编号 - 簇  \t-\t 分布");
+        for (int i = 0; i < test.numInstances(); i++) {
+            int cluster = clusterer.clusterInstance(test.instance(i));
+            double[] dist = clusterer.distributionForInstance(test.instance(i));
+            System.out.print((i + 1));
+            System.out.print(" - ");
+            System.out.print(cluster);
+            System.out.print(" - ");
+            System.out.print(Utils.arrayToString(dist));
+            System.out.println();
+        }
+    }
 }

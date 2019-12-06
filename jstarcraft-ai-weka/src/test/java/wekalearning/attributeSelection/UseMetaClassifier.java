@@ -15,26 +15,26 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class UseMetaClassifier {
 
-	public static void main(String[] args) throws Exception {
-		// 加载数据
-		DataSource source = new DataSource("data/weather.numeric.arff");
-		Instances data = source.getDataSet();
-		// 设置类别属性索引
-		if (data.classIndex() == -1)
-			data.setClassIndex(data.numAttributes() - 1);
+    public static void main(String[] args) throws Exception {
+        // 加载数据
+        DataSource source = new DataSource("data/weather.numeric.arff");
+        Instances data = source.getDataSet();
+        // 设置类别属性索引
+        if (data.classIndex() == -1)
+            data.setClassIndex(data.numAttributes() - 1);
 
-		System.out.println("\n 使用元分类器");
-		AttributeSelectedClassifier classifier = new AttributeSelectedClassifier();
-		CfsSubsetEval eval = new CfsSubsetEval();
-		GreedyStepwise search = new GreedyStepwise();
-		search.setSearchBackwards(true);
-		J48 base = new J48();
-		classifier.setClassifier(base);
-		classifier.setEvaluator(eval);
-		classifier.setSearch(search);
-		Evaluation evaluation = new Evaluation(data);
-		evaluation.crossValidateModel(classifier, data, 10, new Random(1234));
-		System.out.println(evaluation.toSummaryString());
-	}
+        System.out.println("\n 使用元分类器");
+        AttributeSelectedClassifier classifier = new AttributeSelectedClassifier();
+        CfsSubsetEval eval = new CfsSubsetEval();
+        GreedyStepwise search = new GreedyStepwise();
+        search.setSearchBackwards(true);
+        J48 base = new J48();
+        classifier.setClassifier(base);
+        classifier.setEvaluator(eval);
+        classifier.setSearch(search);
+        Evaluation evaluation = new Evaluation(data);
+        evaluation.crossValidateModel(classifier, data, 10, new Random(1234));
+        System.out.println(evaluation.toSummaryString());
+    }
 
 }
