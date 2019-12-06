@@ -1,3 +1,6 @@
+Algorithms of the Intelligent Web(智能Web算法):
+https://www.manning.com/books/algorithms-of-the-intelligent-web?query=Algorithms%20of%20the%20Intelligent%20Web
+
 25个Java机器学习工具和库:
 http://www.codeceo.com/article/25-java-machine-learning-tools.html
 
