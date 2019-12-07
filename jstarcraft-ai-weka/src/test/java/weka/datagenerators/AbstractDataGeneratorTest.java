@@ -217,12 +217,4 @@ public abstract class AbstractDataGeneratorTest extends TestCase {
         }
     }
 
-    /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETester.checkToolTips()) {
-            fail("Tool tips inconsistent");
-        }
-    }
 }

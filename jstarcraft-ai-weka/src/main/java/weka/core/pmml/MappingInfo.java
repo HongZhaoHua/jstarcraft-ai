@@ -24,11 +24,12 @@ package weka.core.pmml;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.slf4j.Logger;
+
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Utils;
-import weka.gui.Logger;
 
 /**
  * Class that maintains the mapping between incoming data set structure and that
@@ -103,7 +104,7 @@ public class MappingInfo implements Serializable {
                     if (miningSchemaAtt.numValues() != incomingAtt.numValues()) {
                         String warningString = "[MappingInfo] WARNING: incoming nominal attribute " + incomingAtt.name() + " does not have the same " + "number of values as the corresponding mining " + "schema attribute.";
                         if (m_log != null) {
-                            m_log.logMessage(warningString);
+                            m_log.warn(warningString);
                         } else {
                             System.err.println(warningString);
                         }
@@ -116,7 +117,7 @@ public class MappingInfo implements Serializable {
                             if (indexInSchema < 0) {
                                 String warningString = "[MappingInfo] WARNING: incoming nominal attribute " + incomingAtt.name() + " has value " + incomingNomVal + " that doesn't occur in the mining schema.";
                                 if (m_log != null) {
-                                    m_log.logMessage(warningString);
+                                    m_log.warn(warningString);
                                 } else {
                                     System.err.println(warningString);
                                 }
@@ -250,7 +251,7 @@ public class MappingInfo implements Serializable {
                         result[i] = UNKNOWN_NOMINAL_VALUE;
                         String warningString = "[MappingInfo] WARNING: Can't match nominal value " + incomingAttValue;
                         if (m_log != null) {
-                            m_log.logMessage(warningString);
+                            m_log.warn(warningString);
                         } else {
                             System.err.println(warningString);
                         }

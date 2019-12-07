@@ -26,8 +26,6 @@ import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
 
-import weka.gui.LookAndFeel;
-
 /**
  * This class prints some information about the system setup, like Java version,
  * JVM settings etc. Useful for Bug-Reports.
@@ -72,18 +70,6 @@ public class SystemInfo implements RevisionHandler {
 
         // additional WEKA info
         m_Info.put("weka.version", Version.VERSION);
-
-        // look and feel info
-        laf = LookAndFeel.getInstalledLookAndFeels();
-        tmpStr = "";
-        for (i = 0; i < laf.length; i++) {
-            if (i > 0) {
-                tmpStr += ",";
-            }
-            tmpStr += laf[i];
-        }
-        m_Info.put("ui.installedLookAndFeels", tmpStr);
-        m_Info.put("ui.currentLookAndFeel", LookAndFeel.getSystemLookAndFeel());
 
         // memory info
         mem = new Memory();

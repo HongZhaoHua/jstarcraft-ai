@@ -87,9 +87,6 @@ public abstract class Logger implements RevisionHandler {
             if (trace[i].getClassName().equals(Logger.class.getName()))
                 continue;
 
-            if (trace[i].getClassName().equals(weka.gui.LogPanel.class.getName()))
-                continue;
-
             // fill in result
             result[0] = trace[i].getClassName();
             result[1] = trace[i].getMethodName();

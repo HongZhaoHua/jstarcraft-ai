@@ -233,15 +233,6 @@ public abstract class AbstractNearestNeighbourSearchTest extends TestCase {
     }
 
     /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETester.checkToolTips()) {
-            fail("Tool tips inconsistent");
-        }
-    }
-
-    /**
      * tests whether the number of instances returned by the algorithms is the same
      * as was requested
      */

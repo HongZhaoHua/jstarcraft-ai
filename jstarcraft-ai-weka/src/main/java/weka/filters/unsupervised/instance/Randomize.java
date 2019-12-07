@@ -38,7 +38,6 @@ import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 import weka.filters.Filter;
 import weka.filters.UnsupervisedFilter;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Randomly shuffles the order of instances passed
@@ -174,12 +173,10 @@ public class Randomize extends Filter implements UnsupervisedFilter, OptionHandl
         m_Seed = newRandomSeed;
     }
 
-    @ProgrammaticProperty
     public void setSeed(int seed) {
         setRandomSeed(seed);
     }
 
-    @ProgrammaticProperty
     public int getSeed() {
         return getRandomSeed();
     }

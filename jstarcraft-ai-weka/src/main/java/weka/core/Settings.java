@@ -33,7 +33,6 @@ import java.util.Set;
 
 import weka.core.metastore.MetaStore;
 import weka.core.metastore.XMLFileBasedMetaStore;
-import weka.knowledgeflow.LoggingLevel;
 
 /**
  * Maintains a collection of settings. Settings are key value pairs which can be
@@ -365,10 +364,6 @@ public class Settings implements Serializable {
 
         if (defaultVal instanceof Long) {
             return (T) (Long.valueOf(propVal));
-        }
-
-        if (defaultVal instanceof LoggingLevel) {
-            return (T) (LoggingLevel.stringToLevel(propVal));
         }
 
         return null;

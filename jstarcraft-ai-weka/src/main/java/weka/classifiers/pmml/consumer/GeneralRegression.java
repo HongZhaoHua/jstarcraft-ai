@@ -1172,7 +1172,7 @@ public class GeneralRegression extends PMMLClassifier implements Serializable {
                 if (m_log == null) {
                     System.err.println(message);
                 } else {
-                    m_log.logMessage(message);
+                    m_log.warn(message);
                 }
 
                 if (m_miningSchema.getFieldsAsInstances().classAttribute().isNumeric()) {

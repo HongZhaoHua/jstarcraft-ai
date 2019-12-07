@@ -35,8 +35,6 @@ import java.util.Hashtable;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import javax.swing.JFileChooser;
-
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Environment;
@@ -50,8 +48,6 @@ import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.experiment.InstanceQuery;
-import weka.gui.FilePropertyMetadata;
-import weka.gui.PasswordProperty;
 
 /**
  * <!-- globalinfo-start --> Reads Instances from a Database. Can read a
@@ -510,7 +506,6 @@ public class DatabaseLoader extends AbstractLoader implements BatchConverter, In
      * @return the custom props file, null if none used
      */
     @OptionMetadata(displayName = "DB config file", description = "The custom properties that the user can use to override the default ones.", displayOrder = 8)
-    @FilePropertyMetadata(fileChooserDialogType = JFileChooser.OPEN_DIALOG, directoriesOnly = false)
     public File getCustomPropsFile() {
         return m_CustomPropsFile;
     }
@@ -631,7 +626,6 @@ public class DatabaseLoader extends AbstractLoader implements BatchConverter, In
      * @return the database password
      */
     @OptionMetadata(displayName = "Password", description = "The database password", displayOrder = 3)
-    @PasswordProperty
     public String getPassword() {
         // return m_DataBaseConnection.getPassword();
         return m_Password;

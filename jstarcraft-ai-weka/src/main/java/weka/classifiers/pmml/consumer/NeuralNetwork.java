@@ -847,7 +847,7 @@ public class NeuralNetwork extends PMMLClassifier {
                 if (m_log == null) {
                     System.err.println(message);
                 } else {
-                    m_log.logMessage(message);
+                    m_log.warn(message);
                 }
 
                 if (m_miningSchema.getFieldsAsInstances().classAttribute().isNumeric()) {

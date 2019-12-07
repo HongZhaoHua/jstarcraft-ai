@@ -35,9 +35,27 @@
 
         <!-- 机器学习框架依赖 -->
         <dependency>
-            <groupId>nz.ac.waikato.cms.weka</groupId>
-            <artifactId>weka-stable</artifactId>
-            <version>3.8.3</version>
+            <groupId>com.googlecode.matrix-toolkits-java</groupId>
+            <artifactId>mtj</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
+            <artifactId>java-cup-11b</artifactId>
+            <version>2015.03.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
+            <artifactId>java-cup-11b-runtime</artifactId>
+            <version>2015.03.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>nz.ac.waikato.cms.weka.thirdparty</groupId>
+            <artifactId>bounce</artifactId>
+            <version>0.18</version>
         </dependency>
 
         <!-- Test框架依赖 -->

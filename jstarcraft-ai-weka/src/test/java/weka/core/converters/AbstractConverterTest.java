@@ -313,14 +313,4 @@ public abstract class AbstractConverterTest extends TestCase {
             fail("Saver: No globalInfo method");
     }
 
-    /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETesterLoader.checkToolTips())
-            fail("Loader: Tool tips inconsistent");
-
-        if (!m_GOETesterSaver.checkToolTips())
-            fail("Saver: Tool tips inconsistent");
-    }
 }

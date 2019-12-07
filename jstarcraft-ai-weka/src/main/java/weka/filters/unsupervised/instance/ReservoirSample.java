@@ -40,7 +40,6 @@ import weka.core.WeightedAttributesHandler;
 import weka.filters.Filter;
 import weka.filters.StreamableFilter;
 import weka.filters.UnsupervisedFilter;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Produces a random subsample of a dataset using the
@@ -223,12 +222,10 @@ public class ReservoirSample extends Filter implements UnsupervisedFilter, Optio
         m_RandomSeed = newSeed;
     }
 
-    @ProgrammaticProperty
     public void setSeed(int seed) {
         setRandomSeed(seed);
     }
 
-    @ProgrammaticProperty
     public int getSeed() {
         return getRandomSeed();
     }

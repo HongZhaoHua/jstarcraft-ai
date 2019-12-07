@@ -44,7 +44,6 @@ import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -56,7 +55,6 @@ import java.util.StringTokenizer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import weka.core.converters.ConverterUtils;
 import weka.core.logging.Logger;
 import weka.core.packageManagement.DefaultPackageManager;
 import weka.core.packageManagement.Dependency;
@@ -64,12 +62,7 @@ import weka.core.packageManagement.Package;
 import weka.core.packageManagement.PackageConstraint;
 import weka.core.packageManagement.PackageManager;
 import weka.core.packageManagement.VersionPackageConstraint;
-import weka.gui.ConverterFileChooser;
-import weka.gui.GenericObjectEditor;
 import weka.gui.GenericPropertiesCreator;
-import weka.gui.beans.BeansProperties;
-import weka.gui.beans.KnowledgeFlowApp;
-import weka.gui.explorer.ExplorerDefaults;
 
 /**
  * Class providing package management and manipulation routines. Also provides a
@@ -516,34 +509,34 @@ public class WekaPackageManager {
      *                             removed from ExplorerDefaults
      */
     public static void removeExplorerProps(String installedPackageName) {
-        try {
-            Properties expProps = new Properties();
-            String explorerProps = getPackageHome().getAbsolutePath() + File.separator + installedPackageName + File.separator + "Explorer.props";
-            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(explorerProps));
-            expProps.load(bi);
-            bi.close();
-            bi = null;
-            Set<Object> keys = expProps.keySet();
-            Iterator<Object> keysI = keys.iterator();
-            while (keysI.hasNext()) {
-                String key = (String) keysI.next();
-                if (!key.endsWith("Policy")) {
-                    // See if this key is in the Explorer props
-                    String existingVal = ExplorerDefaults.get(key, "");
-                    String toRemove = expProps.getProperty(key);
-                    if (existingVal.length() > 0) {
-                        // cover the case when the value to remove is at the start
-                        // or middle of a list
-                        existingVal = existingVal.replace(toRemove + ",", "");
-
-                        // the case when it's at the end
-                        existingVal = existingVal.replace("," + toRemove, "");
-                        ExplorerDefaults.set(key, existingVal);
-                    }
-                }
-            }
-        } catch (Exception ex) {
-        }
+//        try {
+//            Properties expProps = new Properties();
+//            String explorerProps = getPackageHome().getAbsolutePath() + File.separator + installedPackageName + File.separator + "Explorer.props";
+//            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(explorerProps));
+//            expProps.load(bi);
+//            bi.close();
+//            bi = null;
+//            Set<Object> keys = expProps.keySet();
+//            Iterator<Object> keysI = keys.iterator();
+//            while (keysI.hasNext()) {
+//                String key = (String) keysI.next();
+//                if (!key.endsWith("Policy")) {
+//                    // See if this key is in the Explorer props
+//                    String existingVal = ExplorerDefaults.get(key, "");
+//                    String toRemove = expProps.getProperty(key);
+//                    if (existingVal.length() > 0) {
+//                        // cover the case when the value to remove is at the start
+//                        // or middle of a list
+//                        existingVal = existingVal.replace(toRemove + ",", "");
+//
+//                        // the case when it's at the end
+//                        existingVal = existingVal.replace("," + toRemove, "");
+//                        ExplorerDefaults.set(key, existingVal);
+//                    }
+//                }
+//            }
+//        } catch (Exception ex) {
+//        }
     }
 
     /**
@@ -591,55 +584,55 @@ public class WekaPackageManager {
      * @param propsFile the properties file to process
      */
     protected static void processExplorerProps(File propsFile) {
-        try {
-            Properties expProps = new Properties();
-            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(propsFile));
-            expProps.load(bi);
-            bi.close();
-            bi = null;
-            Set<Object> keys = expProps.keySet();
-            Iterator<Object> keysI = keys.iterator();
-            while (keysI.hasNext()) {
-                String key = (String) keysI.next();
-                if (!key.endsWith("Policy")) {
-                    // See if this key is in the Explorer props
-                    String existingVal = ExplorerDefaults.get(key, "");
-                    if (existingVal.length() > 0) {
-                        // get the replacement policy (if any)
-                        String replacePolicy = expProps.getProperty(key + "Policy");
-                        if (replacePolicy != null && replacePolicy.length() > 0) {
-                            if (replacePolicy.equalsIgnoreCase("replace")) {
-                                String newVal = expProps.getProperty(key);
-                                ExplorerDefaults.set(key, newVal);
-                            } else {
-                                // default to append
-                                String newVal = expProps.getProperty(key);
-
-                                // only append if this value is not already there!!
-                                if (existingVal.indexOf(newVal) < 0) {
-                                    newVal = existingVal + "," + newVal;
-                                    ExplorerDefaults.set(key, newVal);
-                                }
-                            }
-                        } else {
-                            // default to append
-                            String newVal = expProps.getProperty(key);
-                            // only append if this value is not already there!!
-                            if (existingVal.indexOf(newVal) < 0) {
-                                newVal = existingVal + "," + newVal;
-                                ExplorerDefaults.set(key, newVal);
-                            }
-                        }
-                    } else {
-                        // simply add this new key/value combo
-                        String newVal = expProps.getProperty(key);
-                        ExplorerDefaults.set(key, newVal);
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            // ignore
-        }
+//        try {
+//            Properties expProps = new Properties();
+//            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(propsFile));
+//            expProps.load(bi);
+//            bi.close();
+//            bi = null;
+//            Set<Object> keys = expProps.keySet();
+//            Iterator<Object> keysI = keys.iterator();
+//            while (keysI.hasNext()) {
+//                String key = (String) keysI.next();
+//                if (!key.endsWith("Policy")) {
+//                    // See if this key is in the Explorer props
+//                    String existingVal = ExplorerDefaults.get(key, "");
+//                    if (existingVal.length() > 0) {
+//                        // get the replacement policy (if any)
+//                        String replacePolicy = expProps.getProperty(key + "Policy");
+//                        if (replacePolicy != null && replacePolicy.length() > 0) {
+//                            if (replacePolicy.equalsIgnoreCase("replace")) {
+//                                String newVal = expProps.getProperty(key);
+//                                ExplorerDefaults.set(key, newVal);
+//                            } else {
+//                                // default to append
+//                                String newVal = expProps.getProperty(key);
+//
+//                                // only append if this value is not already there!!
+//                                if (existingVal.indexOf(newVal) < 0) {
+//                                    newVal = existingVal + "," + newVal;
+//                                    ExplorerDefaults.set(key, newVal);
+//                                }
+//                            }
+//                        } else {
+//                            // default to append
+//                            String newVal = expProps.getProperty(key);
+//                            // only append if this value is not already there!!
+//                            if (existingVal.indexOf(newVal) < 0) {
+//                                newVal = existingVal + "," + newVal;
+//                                ExplorerDefaults.set(key, newVal);
+//                            }
+//                        }
+//                    } else {
+//                        // simply add this new key/value combo
+//                        String newVal = expProps.getProperty(key);
+//                        ExplorerDefaults.set(key, newVal);
+//                    }
+//                }
+//            }
+//        } catch (Exception ex) {
+//            // ignore
+//        }
     }
 
     /**
@@ -649,27 +642,27 @@ public class WekaPackageManager {
      * @param verbose   true to output more info
      */
     protected static void processGUIEditorsProps(File propsFile, boolean verbose) {
-        GenericObjectEditor.registerEditors();
-        try {
-            Properties editorProps = new Properties();
-            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(propsFile));
-            editorProps.load(bi);
-            bi.close();
-            bi = null;
-
-            Enumeration<?> enm = editorProps.propertyNames();
-            while (enm.hasMoreElements()) {
-                String name = enm.nextElement().toString();
-                String value = editorProps.getProperty(name, "");
-                if (verbose) {
-                    System.err.println("Registering " + name + " " + value);
-                }
-                GenericObjectEditor.registerEditor(name, value);
-            }
-
-        } catch (Exception ex) {
-            // ignore
-        }
+//        GenericObjectEditor.registerEditors();
+//        try {
+//            Properties editorProps = new Properties();
+//            BufferedInputStream bi = new BufferedInputStream(new FileInputStream(propsFile));
+//            editorProps.load(bi);
+//            bi.close();
+//            bi = null;
+//
+//            Enumeration<?> enm = editorProps.propertyNames();
+//            while (enm.hasMoreElements()) {
+//                String name = enm.nextElement().toString();
+//                String value = editorProps.getProperty(name, "");
+//                if (verbose) {
+//                    System.err.println("Registering " + name + " " + value);
+//                }
+//                GenericObjectEditor.registerEditor(name, value);
+//            }
+//
+//        } catch (Exception ex) {
+//            // ignore
+//        }
     }
 
     /**
@@ -697,52 +690,52 @@ public class WekaPackageManager {
      * @throws Exception if a problem occurs
      */
     protected static void processPackageDirectory(File directory, boolean verbose, List<File> goePropsFiles, boolean avoidTriggeringFullClassDiscovery) throws Exception {
-
-        File[] contents = directory.listFiles();
-
-        if (contents != null) {
-            // make sure that jar files and lib directory get processed first
-            /*
-             * for (File content : contents) { if (content.isFile() &&
-             * content.getPath().endsWith(".jar")) { if (verbose) {
-             * System.out.println("[WekaPackageManager] loading " + content.getPath()); }
-             * ClassloaderUtil.addFile(content.getPath());
-             * 
-             * } else if (content.isDirectory() &&
-             * content.getName().equalsIgnoreCase("lib")) { // add any jar files in the lib
-             * directory to the classpath processPackageDirectory(content, verbose,
-             * goePropsFiles, avoidTriggeringFullClassDiscovery); } }
-             */
-
-            // now any auxilliary files
-            for (File content : contents) {
-                if (content.isFile() && content.getPath().endsWith("Beans.props")) {
-                    // KnowledgeFlow plugin -- add the Beans.props file to the list of
-                    // bean plugin props
-
-                    BeansProperties.addToPluginBeanProps(content);
-
-                    if (!avoidTriggeringFullClassDiscovery) {
-                        KnowledgeFlowApp.disposeSingleton();
-                    }
-                } else if (content.isFile() && content.getPath().endsWith("Explorer.props") && !avoidTriggeringFullClassDiscovery) {
-                    // Explorer tabs plugin
-                    // process the keys in the properties file and append/add values
-                    processExplorerProps(content);
-                } else if (content.isFile() && content.getPath().endsWith("GUIEditors.props") && !avoidTriggeringFullClassDiscovery) {
-                    // Editor for a particular component
-                    processGUIEditorsProps(content, verbose);
-                } else if (content.isFile() && content.getPath().endsWith("GenericPropertiesCreator.props") && !avoidTriggeringFullClassDiscovery) {
-                    if (goePropsFiles != null) {
-                        goePropsFiles.add(content);
-                    } else {
-                        processGenericPropertiesCreatorProps(content);
-                    }
-                } else if (content.isFile() && content.getPath().endsWith("PluginManager.props")) {
-                    processPluginManagerProps(directory.getName(), content);
-                }
-            }
-        }
+//
+//        File[] contents = directory.listFiles();
+//
+//        if (contents != null) {
+//            // make sure that jar files and lib directory get processed first
+//            /*
+//             * for (File content : contents) { if (content.isFile() &&
+//             * content.getPath().endsWith(".jar")) { if (verbose) {
+//             * System.out.println("[WekaPackageManager] loading " + content.getPath()); }
+//             * ClassloaderUtil.addFile(content.getPath());
+//             * 
+//             * } else if (content.isDirectory() &&
+//             * content.getName().equalsIgnoreCase("lib")) { // add any jar files in the lib
+//             * directory to the classpath processPackageDirectory(content, verbose,
+//             * goePropsFiles, avoidTriggeringFullClassDiscovery); } }
+//             */
+//
+//            // now any auxilliary files
+//            for (File content : contents) {
+//                if (content.isFile() && content.getPath().endsWith("Beans.props")) {
+//                    // KnowledgeFlow plugin -- add the Beans.props file to the list of
+//                    // bean plugin props
+//
+//                    BeansProperties.addToPluginBeanProps(content);
+//
+//                    if (!avoidTriggeringFullClassDiscovery) {
+//                        KnowledgeFlowApp.disposeSingleton();
+//                    }
+//                } else if (content.isFile() && content.getPath().endsWith("Explorer.props") && !avoidTriggeringFullClassDiscovery) {
+//                    // Explorer tabs plugin
+//                    // process the keys in the properties file and append/add values
+//                    processExplorerProps(content);
+//                } else if (content.isFile() && content.getPath().endsWith("GUIEditors.props") && !avoidTriggeringFullClassDiscovery) {
+//                    // Editor for a particular component
+//                    processGUIEditorsProps(content, verbose);
+//                } else if (content.isFile() && content.getPath().endsWith("GenericPropertiesCreator.props") && !avoidTriggeringFullClassDiscovery) {
+//                    if (goePropsFiles != null) {
+//                        goePropsFiles.add(content);
+//                    } else {
+//                        processGenericPropertiesCreatorProps(content);
+//                    }
+//                } else if (content.isFile() && content.getPath().endsWith("PluginManager.props")) {
+//                    processPluginManagerProps(directory.getName(), content);
+//                }
+//            }
+//        }
     }
 
     /**
@@ -1284,13 +1277,13 @@ public class WekaPackageManager {
      * class discovery process.
      */
     public static void refreshGOEProperties() {
-        ClassDiscovery.clearClassCache();
-        GenericPropertiesCreator.regenerateGlobalOutputProperties();
-        GenericObjectEditor.determineClasses();
-        ConverterUtils.initialize();
-        ConverterFileChooser.initDefaultFilters();
-        KnowledgeFlowApp.disposeSingleton();
-        KnowledgeFlowApp.reInitialize();
+//        ClassDiscovery.clearClassCache();
+//        GenericPropertiesCreator.regenerateGlobalOutputProperties();
+//        GenericObjectEditor.determineClasses();
+//        ConverterUtils.initialize();
+//        ConverterFileChooser.initDefaultFilters();
+//        KnowledgeFlowApp.disposeSingleton();
+//        KnowledgeFlowApp.reInitialize();
     }
 
     /**
@@ -2150,8 +2143,8 @@ public class WekaPackageManager {
                             // of
                             // bean plugin props
 
-                            KnowledgeFlowApp.removeFromPluginBeanProps(content);
-                            KnowledgeFlowApp.disposeSingleton();
+//                            KnowledgeFlowApp.removeFromPluginBeanProps(content);
+//                            KnowledgeFlowApp.disposeSingleton();
                             break;
                         }
                     }

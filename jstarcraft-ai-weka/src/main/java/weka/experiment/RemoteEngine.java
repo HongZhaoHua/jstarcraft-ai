@@ -298,10 +298,6 @@ public class RemoteEngine extends UnicastRemoteObject implements Compute, Revisi
      * @param args
      */
     public static void main(String[] args) {
-        // make sure that all packages are loaded and available to
-        // the remote engines
-        weka.gui.GenericObjectEditor.determineClasses();
-
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new RMISecurityManager());
         }

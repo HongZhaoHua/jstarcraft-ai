@@ -853,14 +853,6 @@ public abstract class AbstractFilterTest extends TestCase {
     }
 
     /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETester.checkToolTips())
-            fail("Tool tips inconsistent");
-    }
-
-    /**
      * Compares the two datasets.
      *
      * @param data1 first dataset

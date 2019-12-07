@@ -1007,10 +1007,6 @@ public class FindWithCapabilities implements OptionHandler, CapabilitiesHandler,
         Iterator<Capability> iter;
         boolean first;
 
-        // make sure that packages are loaded and the GenericPropertiesCreator
-        // executes to populate the lists correctly
-        weka.gui.GenericObjectEditor.determineClasses();
-
         printMisses = false;
 
         try {

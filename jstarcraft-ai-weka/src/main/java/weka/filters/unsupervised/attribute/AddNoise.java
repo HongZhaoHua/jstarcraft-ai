@@ -37,7 +37,6 @@ import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.filters.Filter;
 import weka.filters.UnsupervisedFilter;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> An instance filter that changes a percentage of a
@@ -273,12 +272,10 @@ public class AddNoise extends Filter implements UnsupervisedFilter, OptionHandle
         m_RandomSeed = newSeed;
     }
 
-    @ProgrammaticProperty
     public void setSeed(int seed) {
         setRandomSeed(seed);
     }
 
-    @ProgrammaticProperty
     public int getSeed() {
         return getRandomSeed();
     }

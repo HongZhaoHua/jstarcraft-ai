@@ -25,6 +25,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -39,7 +40,6 @@ import weka.core.pmml.MiningSchema;
 import weka.core.pmml.TargetMetaInfo;
 import weka.core.pmml.VectorDictionary;
 import weka.core.pmml.VectorInstance;
-import weka.gui.Logger;
 
 /**
  * Implements a PMML SupportVectorMachineModel
@@ -200,7 +200,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -214,7 +214,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -228,7 +228,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -296,7 +296,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -371,7 +371,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -385,7 +385,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                     if (m_log == null) {
                         System.err.println(message);
                     } else {
-                        m_log.logMessage(message);
+                        m_log.warn(message);
                     }
                 }
             }
@@ -908,7 +908,7 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
                 if (m_log == null) {
                     System.err.println(message);
                 } else {
-                    m_log.logMessage(message);
+                    m_log.warn(message);
                 }
 
                 if (m_miningSchema.getFieldsAsInstances().classAttribute().isNumeric()) {

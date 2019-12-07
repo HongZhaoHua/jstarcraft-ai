@@ -803,11 +803,4 @@ public abstract class AbstractAttributeSelectionTest extends TestCase {
             fail("No globalInfo method");
     }
 
-    /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETester.checkToolTips())
-            fail("Tool tips inconsistent");
-    }
 }

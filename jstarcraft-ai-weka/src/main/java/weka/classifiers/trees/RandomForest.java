@@ -38,7 +38,6 @@ import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
 import weka.core.Utils;
 import weka.core.WekaException;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Class for constructing a forest of random
@@ -293,7 +292,6 @@ public class RandomForest extends Bagging {
      * @exception if argument is not a RandomTree
      */
     @Override
-    @ProgrammaticProperty
     public void setClassifier(Classifier newClassifier) {
         if (!(newClassifier instanceof RandomTree)) {
             throw new IllegalArgumentException("RandomForest: Argument of setClassifier() must be a RandomTree.");
@@ -308,7 +306,6 @@ public class RandomForest extends Bagging {
      * @exception if argument is not true
      */
     @Override
-    @ProgrammaticProperty
     public void setRepresentCopiesUsingWeights(boolean representUsingWeights) {
         if (!representUsingWeights) {
             throw new IllegalArgumentException("RandomForest: Argument of setRepresentCopiesUsingWeights() must be true.");

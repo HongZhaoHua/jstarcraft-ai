@@ -23,6 +23,7 @@ package weka.classifiers.pmml.consumer;
 
 import java.io.Serializable;
 
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -33,7 +34,6 @@ import weka.core.Instances;
 import weka.core.pmml.MappingInfo;
 import weka.core.pmml.MiningSchema;
 import weka.core.pmml.PMMLModel;
-import weka.gui.Logger;
 
 /**
  * Abstract base class for all PMML classifiers.

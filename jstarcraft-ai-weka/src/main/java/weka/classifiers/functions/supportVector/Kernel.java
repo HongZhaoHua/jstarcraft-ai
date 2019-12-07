@@ -36,7 +36,6 @@ import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * Abstract kernel. Kernels implementing this class must respect Mercer's
@@ -76,7 +75,6 @@ public abstract class Kernel implements Serializable, OptionHandler, Capabilitie
      * the second one always returns true. Checking capabilities is the
      * responsibility of the class using the kernel.
      */
-    @ProgrammaticProperty
     public void setDoNotCheckCapabilities(boolean doNotCheckCapabilities) {
     }
 
@@ -212,7 +210,6 @@ public abstract class Kernel implements Serializable, OptionHandler, Capabilitie
      * the second one always returns true. Checking capabilities is the
      * responsibility of the class using the kernel.
      */
-    @ProgrammaticProperty
     public void setChecksTurnedOff(boolean value) {
     }
 

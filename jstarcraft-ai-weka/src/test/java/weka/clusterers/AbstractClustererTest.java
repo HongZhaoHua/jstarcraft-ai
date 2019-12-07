@@ -592,11 +592,4 @@ public abstract class AbstractClustererTest extends TestCase {
             fail("No globalInfo method");
     }
 
-    /**
-     * tests the tool tips
-     */
-    public void testToolTips() {
-        if (!m_GOETester.checkToolTips())
-            fail("Tool tips inconsistent");
-    }
 }

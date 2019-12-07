@@ -47,7 +47,6 @@ public class InputMappedClassifierBeanInfo extends SimpleBeanInfo {
             ArrayList<PropertyDescriptor> pds = new ArrayList<PropertyDescriptor>();
 
             p1 = new PropertyDescriptor("modelPath", InputMappedClassifier.class);
-            p1.setPropertyEditorClass(weka.gui.beans.FileEnvironmentField.class);
             pds.add(p1);
 
             pds.add(new PropertyDescriptor("ignoreCaseForNames", InputMappedClassifier.class));

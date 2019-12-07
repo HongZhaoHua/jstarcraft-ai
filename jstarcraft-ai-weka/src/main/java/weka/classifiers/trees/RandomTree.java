@@ -45,7 +45,6 @@ import weka.core.Randomizable;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Class for constructing a tree that considers K
@@ -203,7 +202,6 @@ public class RandomTree extends AbstractClassifier implements OptionHandler, Wei
      * @param computeImpurityDecreases true to compute and store impurity decrease
      *                                 values for splitting attributes
      */
-    @ProgrammaticProperty
     public void setComputeImpurityDecreases(boolean computeImpurityDecreases) {
         m_computeImpurityDecreases = computeImpurityDecreases;
     }

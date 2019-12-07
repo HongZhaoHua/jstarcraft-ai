@@ -54,7 +54,6 @@ import weka.core.stopwords.Null;
 import weka.core.stopwords.StopwordsHandler;
 import weka.core.tokenizers.Tokenizer;
 import weka.core.tokenizers.WordTokenizer;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * Class for building and maintaining a dictionary of terms. Has methods for
@@ -180,7 +179,6 @@ public class DictionaryBuilder implements Aggregateable<DictionaryBuilder>, Opti
      *
      * @param averageDocLength the average document length to use
      */
-    @ProgrammaticProperty
     public void setAverageDocLength(double averageDocLength) {
         m_avgDocLength = averageDocLength;
     }

@@ -21,9 +21,8 @@
 
 package weka.core.pmml;
 
+import org.slf4j.Logger;
 import org.w3c.dom.Document;
-
-import weka.gui.Logger;
 
 /**
  * Interface for all PMML models

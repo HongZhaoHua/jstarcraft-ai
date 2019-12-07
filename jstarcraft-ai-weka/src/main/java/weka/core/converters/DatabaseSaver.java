@@ -29,8 +29,6 @@ import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.swing.JFileChooser;
-
 import weka.core.Attribute;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
@@ -43,8 +41,6 @@ import weka.core.OptionHandler;
 import weka.core.OptionMetadata;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
-import weka.gui.FilePropertyMetadata;
-import weka.gui.PasswordProperty;
 
 /**
  * <!-- globalinfo-start --> Writes to a database (tested with MySQL, InstantDB,
@@ -578,7 +574,6 @@ public class DatabaseSaver extends AbstractSaver implements BatchConverter, Incr
      * @return the database password
      */
     @OptionMetadata(displayName = "Password", description = "The database password", displayOrder = 3)
-    @PasswordProperty
     public String getPassword() {
         // return m_DataBaseConnection.getPassword();
         return m_Password;
@@ -617,7 +612,6 @@ public class DatabaseSaver extends AbstractSaver implements BatchConverter, Incr
      * @return the custom props file, null if none used
      */
     @OptionMetadata(displayName = "DB config file", description = "The custom properties that the user can use to override the default ones.", displayOrder = 8)
-    @FilePropertyMetadata(fileChooserDialogType = JFileChooser.OPEN_DIALOG, directoriesOnly = false)
     public File getCustomPropsFile() {
         return m_CustomPropsFile;
     }

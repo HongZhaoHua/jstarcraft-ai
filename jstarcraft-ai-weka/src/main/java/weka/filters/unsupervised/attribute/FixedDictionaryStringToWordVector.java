@@ -26,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import javax.swing.JFileChooser;
-
 import weka.core.Capabilities;
 import weka.core.DictionaryBuilder;
 import weka.core.Environment;
@@ -43,7 +41,6 @@ import weka.core.stopwords.StopwordsHandler;
 import weka.core.tokenizers.Tokenizer;
 import weka.filters.SimpleStreamFilter;
 import weka.filters.UnsupervisedFilter;
-import weka.gui.FilePropertyMetadata;
 
 /**
  * <!-- globalinfo-start --> Converts String attributes into a set of attributes
@@ -227,7 +224,6 @@ public class FixedDictionaryStringToWordVector extends SimpleStreamFilter implem
      * @param file the file to read from
      */
     @OptionMetadata(displayName = "Dictionary file", description = "The path to the dictionary to use", commandLineParamName = "dictionary", commandLineParamSynopsis = "-dictionary <path to dictionary file>", displayOrder = 1)
-    @FilePropertyMetadata(fileChooserDialogType = JFileChooser.OPEN_DIALOG, directoriesOnly = false)
     public void setDictionaryFile(File file) {
         m_dictionaryFile = file;
     }

@@ -28,14 +28,11 @@ import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import javax.swing.JFileChooser;
-
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.RevisionHandler;
 import weka.core.RevisionUtils;
 import weka.core.Utils;
-import weka.gui.FilePropertyMetadata;
 
 /**
  * <!-- globalinfo-start --> Takes results from a result producer and assembles
@@ -188,7 +185,6 @@ public class CSVResultListener implements ResultListener, OptionHandler, Revisio
      * 
      * @return Value of OutputFile.
      */
-    @FilePropertyMetadata(fileChooserDialogType = JFileChooser.SAVE_DIALOG, directoriesOnly = false)
     public File getOutputFile() {
 
         return m_OutputFile;

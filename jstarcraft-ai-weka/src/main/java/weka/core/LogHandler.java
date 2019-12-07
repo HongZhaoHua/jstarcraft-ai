@@ -20,7 +20,7 @@
 
 package weka.core;
 
-import weka.gui.Logger;
+import org.slf4j.Logger;
 
 /**
  * Interface to something that can output messages to a log

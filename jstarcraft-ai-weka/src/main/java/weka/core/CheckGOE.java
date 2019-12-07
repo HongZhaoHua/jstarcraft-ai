@@ -29,8 +29,6 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Vector;
 
-import weka.gui.ProgrammaticProperty;
-
 /**
  * Simple command line checking of classes that are editable in the GOE.
  * <p/>
@@ -348,15 +346,6 @@ public class CheckGOE extends Check {
                     m = desc[i].getWriteMethod().getAnnotation(OptionMetadata.class);
                 }
                 if (m != null) {
-                    continue;
-                }
-
-                // programatic properties don't need tip texts
-                ProgrammaticProperty p = desc[i].getReadMethod().getAnnotation(ProgrammaticProperty.class);
-                if (p == null) {
-                    p = desc[i].getWriteMethod().getAnnotation(ProgrammaticProperty.class);
-                }
-                if (p != null) {
                     continue;
                 }
 

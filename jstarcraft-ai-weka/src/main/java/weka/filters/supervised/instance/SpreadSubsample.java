@@ -40,7 +40,6 @@ import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.filters.Filter;
 import weka.filters.SupervisedFilter;
-import weka.gui.ProgrammaticProperty;
 
 /**
  * <!-- globalinfo-start --> Produces a random subsample of a dataset. The
@@ -350,12 +349,10 @@ public class SpreadSubsample extends Filter implements SupervisedFilter, OptionH
         m_RandomSeed = newSeed;
     }
 
-    @ProgrammaticProperty
     public void setSeed(int seed) {
         setRandomSeed(seed);
     }
 
-    @ProgrammaticProperty
     public int getSeed() {
         return getRandomSeed();
     }
