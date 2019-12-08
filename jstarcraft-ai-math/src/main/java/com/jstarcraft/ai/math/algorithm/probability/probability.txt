@@ -1,0 +1,2 @@
+概率中的PDF,PMF,CDF:
+http://blog.csdn.net/wzgbm/article/details/51680540

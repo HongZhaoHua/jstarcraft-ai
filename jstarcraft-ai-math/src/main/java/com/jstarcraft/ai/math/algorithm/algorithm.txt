@@ -1,6 +1,3 @@
-概率中的PDF,PMF,CDF:
-http://blog.csdn.net/wzgbm/article/details/51680540
-
 代码演示:
 http://introcs.cs.princeton.edu/java/code/
 
