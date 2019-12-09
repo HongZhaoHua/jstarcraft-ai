@@ -11,6 +11,9 @@ https://wenku.baidu.com/view/fe6c9a7031126edb6f1a10a2.html
 Weka中数据挖掘与机器学习:
 http://www.cnblogs.com/zlslch/category/999872.html
 
+数据挖掘学习和weka使用:
+https://www.cnblogs.com/htynkn/tag/weka/
+
 ----- 源码 -----
 
 Weka算法及源码分析:
