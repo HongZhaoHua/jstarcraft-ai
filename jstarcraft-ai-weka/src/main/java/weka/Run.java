@@ -85,7 +85,7 @@ public class Run {
                     // .getClassLoader(), matches.get(i));
                     Object scheme = WekaPackageClassLoaderManager.objectForName(matches.get(i));
                     if (classType == null || classType.isAssignableFrom(scheme.getClass())) {
-                        if (notJustRunnables || scheme instanceof weka.classifiers.Classifier || scheme instanceof weka.clusterers.Clusterer || scheme instanceof weka.associations.Associator || scheme instanceof weka.attributeSelection.ASEvaluation || scheme instanceof weka.filters.Filter || scheme instanceof weka.core.converters.AbstractFileLoader || scheme instanceof weka.core.converters.AbstractFileSaver || scheme instanceof weka.datagenerators.DataGenerator || scheme instanceof weka.core.CommandlineRunnable) {
+                        if (notJustRunnables || scheme instanceof weka.classifiers.Classifier || scheme instanceof weka.clusterers.Clusterer || scheme instanceof weka.associations.Associator || scheme instanceof weka.attributeSelection.ASEvaluation || scheme instanceof weka.filters.Filter || scheme instanceof weka.core.converters.AbstractFileLoader || scheme instanceof weka.core.converters.AbstractFileSaver || scheme instanceof weka.core.CommandlineRunnable) {
                             prunedMatches.add(matches.get(i));
                         }
                     }
@@ -255,9 +255,6 @@ public class Run {
                 if (scheme instanceof weka.core.converters.AbstractFileSaver) {
                     types.add(SchemeType.SAVER);
                 }
-                if (scheme instanceof weka.datagenerators.DataGenerator) {
-                    types.add(SchemeType.DATAGENERATOR);
-                }
             }
 
             SchemeType selectedType = null;
@@ -312,8 +309,6 @@ public class Run {
                 weka.core.converters.AbstractFileLoader.runFileLoader((weka.core.converters.AbstractFileLoader) scheme, options);
             } else if (selectedType == SchemeType.SAVER) {
                 weka.core.converters.AbstractFileSaver.runFileSaver((weka.core.converters.AbstractFileSaver) scheme, options);
-            } else if (selectedType == SchemeType.DATAGENERATOR) {
-                weka.datagenerators.DataGenerator.runDataGenerator((weka.datagenerators.DataGenerator) scheme, options);
             } else if (selectedType == SchemeType.COMMANDLINE) {
                 ((weka.core.CommandlineRunnable) scheme).run(scheme, options);
             }

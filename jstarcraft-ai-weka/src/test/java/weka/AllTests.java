@@ -47,9 +47,6 @@ public class AllTests extends TestSuite {
         // clusterers
         suite.addTest(weka.clusterers.AllTests.suite());
 
-        // data generators
-        suite.addTest(weka.datagenerators.AllTests.suite());
-
         // estimators
         // suite.addTest(weka.estimators.AllTests.suite());
 
