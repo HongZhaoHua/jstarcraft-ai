@@ -30,8 +30,6 @@ import java.util.Vector;
 
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -54,7 +52,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class CSVResultListener implements ResultListener, OptionHandler, RevisionHandler {
+public class CSVResultListener implements ResultListener, OptionHandler {
 
     /** for serialization */
     static final long serialVersionUID = -623185072785174658L;
@@ -351,13 +349,4 @@ public class CSVResultListener implements ResultListener, OptionHandler, Revisio
         m_Out.println("");
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // CSVResultListener

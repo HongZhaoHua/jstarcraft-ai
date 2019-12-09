@@ -30,7 +30,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.TechnicalInformation;
@@ -1529,13 +1528,4 @@ public class StringKernel extends Kernel implements TechnicalInformationHandler 
         super.buildKernel(data);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -51,8 +51,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -180,7 +178,7 @@ import weka.core.Utils;
  * @author Paul Conilione (paulc4321@yahoo.com.au)
  * @version $Revision$
  */
-public class BVDecomposeSegCVSub implements OptionHandler, TechnicalInformationHandler, RevisionHandler {
+public class BVDecomposeSegCVSub implements OptionHandler, TechnicalInformationHandler {
 
     /** Debugging mode, gives extra output if true. */
     protected boolean m_Debug;
@@ -1073,15 +1071,6 @@ public class BVDecomposeSegCVSub implements OptionHandler, TechnicalInformationH
         result += "\nVariance      :" + Utils.doubleToString(getWVariance(), 4);
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

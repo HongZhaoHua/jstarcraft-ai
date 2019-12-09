@@ -26,7 +26,6 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -327,16 +326,6 @@ public class NGramTokenizer extends CharacterDelimitedTokenizer {
         if (m_SplitString.length < m_NMax) {
             m_N = m_SplitString.length;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

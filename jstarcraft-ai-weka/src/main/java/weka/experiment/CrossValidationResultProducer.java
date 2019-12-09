@@ -33,8 +33,6 @@ import weka.core.AdditionalMeasureProducer;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -122,7 +120,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class CrossValidationResultProducer implements ResultProducer, OptionHandler, AdditionalMeasureProducer, RevisionHandler {
+public class CrossValidationResultProducer implements ResultProducer, OptionHandler, AdditionalMeasureProducer {
 
     /** for serialization */
     static final long serialVersionUID = -1580053925080091917L;
@@ -797,16 +795,6 @@ public class CrossValidationResultProducer implements ResultProducer, OptionHand
             result += ": " + Utils.backQuoteChars(m_Instances.relationName());
         }
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

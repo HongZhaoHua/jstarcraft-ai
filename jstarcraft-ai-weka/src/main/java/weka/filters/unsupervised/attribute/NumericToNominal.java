@@ -34,7 +34,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -421,16 +420,6 @@ public class NumericToNominal extends SimpleBatchFilter implements WeightedInsta
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

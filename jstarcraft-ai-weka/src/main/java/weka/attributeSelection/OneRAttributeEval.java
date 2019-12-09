@@ -33,7 +33,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
@@ -443,16 +442,6 @@ public class OneRAttributeEval extends ASEvaluation implements AttributeEvaluato
 
         text.append("\n");
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     @Override

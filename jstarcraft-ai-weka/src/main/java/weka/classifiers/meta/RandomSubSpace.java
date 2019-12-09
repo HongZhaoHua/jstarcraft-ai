@@ -32,7 +32,6 @@ import weka.classifiers.RandomizableParallelIteratedSingleClassifierEnhancer;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -556,15 +555,6 @@ public class RandomSubSpace extends RandomizableParallelIteratedSingleClassifier
             text.append(m_Classifiers[i].toString() + "\n\n");
 
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

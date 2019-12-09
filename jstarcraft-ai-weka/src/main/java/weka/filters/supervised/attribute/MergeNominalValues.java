@@ -35,7 +35,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SpecialFunctions;
 import weka.core.Statistics;
 import weka.core.TechnicalInformation;
@@ -728,16 +727,6 @@ public class MergeNominalValues extends SimpleBatchFilter implements SupervisedF
             result.add(instNew);
         }
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

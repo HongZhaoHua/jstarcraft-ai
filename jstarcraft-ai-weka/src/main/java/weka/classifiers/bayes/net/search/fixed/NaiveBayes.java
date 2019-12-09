@@ -23,7 +23,6 @@ package weka.classifiers.bayes.net.search.fixed;
 import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.search.SearchAlgorithm;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> The NaiveBayes class generates a fixed Bayes
@@ -65,14 +64,5 @@ public class NaiveBayes extends SearchAlgorithm {
             }
         }
     } // buildStructure
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // class NaiveBayes

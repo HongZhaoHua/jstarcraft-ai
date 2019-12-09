@@ -21,8 +21,6 @@
 
 package weka.core.stemmers;
 
-import weka.core.RevisionUtils;
-
 /**
  * <!-- globalinfo-start --> A dummy stemmer that performs no stemming at all.
  * <p/>
@@ -63,15 +61,6 @@ public class NullStemmer implements Stemmer {
      */
     public String toString() {
         return getClass().getName();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

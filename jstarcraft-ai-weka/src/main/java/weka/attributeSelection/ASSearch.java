@@ -24,8 +24,6 @@ package weka.attributeSelection;
 import java.io.Serializable;
 
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -35,7 +33,7 @@ import weka.core.Utils;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class ASSearch implements Serializable, RevisionHandler {
+public abstract class ASSearch implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 7591673350342236548L;
@@ -43,15 +41,6 @@ public abstract class ASSearch implements Serializable, RevisionHandler {
     // ===============
     // Public methods.
     // ===============
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     /**
      * Searches the attribute subset/ranking space.

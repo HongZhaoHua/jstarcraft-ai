@@ -31,8 +31,6 @@ import java.util.StringTokenizer;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.expressionlanguage.common.IfElseMacro;
 import weka.core.expressionlanguage.common.JavaMacro;
@@ -68,7 +66,7 @@ import weka.core.expressionlanguage.weka.InstancesHelper;
  * @version $Revision$
  * @see weka.core.UnsupportedAttributeTypeException
  */
-public class CostMatrix implements Serializable, RevisionHandler {
+public class CostMatrix implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -1973792250544554965L;
@@ -806,15 +804,6 @@ public class CostMatrix implements Serializable, RevisionHandler {
         return text.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     private static class InstanceExpression {
         private final DoubleExpression m_compiledExpression;

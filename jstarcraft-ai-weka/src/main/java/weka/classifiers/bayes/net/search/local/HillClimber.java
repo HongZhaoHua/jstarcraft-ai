@@ -30,8 +30,6 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.ParentSet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -89,7 +87,7 @@ public class HillClimber extends LocalScoreSearchAlgorithm {
      * the Operation class contains info on operations performed on the current
      * Bayesian network.
      */
-    class Operation implements Serializable, RevisionHandler {
+    class Operation implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -4880888790432547895L;
@@ -143,21 +141,12 @@ public class HillClimber extends LocalScoreSearchAlgorithm {
         /** change of score due to this operation **/
         public double m_fDeltaScore = -1E100;
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // class Operation
 
     /**
      * cache for remembering the change in score for steps in the search space
      */
-    class Cache implements RevisionHandler {
+    class Cache {
 
         /** change in score due to adding an arc **/
         double[][] m_fDeltaScoreAdd;
@@ -208,15 +197,6 @@ public class HillClimber extends LocalScoreSearchAlgorithm {
             return 0;
         } // get
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // class Cache
 
     /** cache for storing score differences **/
@@ -679,15 +659,5 @@ public class HillClimber extends LocalScoreSearchAlgorithm {
     public String useArcReversalTipText() {
         return "When set to true, the arc reversal operation is used in the search.";
     } // useArcReversalTipText
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // HillClimber

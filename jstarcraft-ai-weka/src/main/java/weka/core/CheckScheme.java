@@ -38,7 +38,7 @@ import java.util.Vector;
 public abstract class CheckScheme extends Check {
 
     /** a class for postprocessing the test-data */
-    public static class PostProcessor implements RevisionHandler {
+    public static class PostProcessor {
 
         /**
          * Provides a hook for derived classes to further modify the data. Currently,
@@ -51,14 +51,6 @@ public abstract class CheckScheme extends Check {
             return data;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** The number of instances in the datasets */

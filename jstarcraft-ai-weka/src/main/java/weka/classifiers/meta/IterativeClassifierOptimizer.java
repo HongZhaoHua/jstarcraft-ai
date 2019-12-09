@@ -46,7 +46,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -1227,16 +1226,6 @@ public class IterativeClassifierOptimizer extends RandomizableClassifier impleme
 
         IterativeClassifier c = getIterativeClassifier();
         return c.getClass().getName() + " " + Utils.joinOptions(((OptionHandler) c).getOptions());
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10649 $");
     }
 
     /**

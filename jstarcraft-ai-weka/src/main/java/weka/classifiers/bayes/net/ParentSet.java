@@ -23,8 +23,6 @@ package weka.classifiers.bayes.net;
 import java.io.Serializable;
 
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Helper class for Bayes Network classifiers. Provides datastructures to
@@ -33,7 +31,7 @@ import weka.core.RevisionUtils;
  * @author Remco Bouckaert (rrb@xm.co.nz)
  * @version $Revision$
  */
-public class ParentSet implements Serializable, RevisionHandler {
+public class ParentSet implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = 4155021284407181838L;
@@ -265,14 +263,5 @@ public class ParentSet implements Serializable, RevisionHandler {
             m_nParents[iParent] = other.m_nParents[iParent];
         }
     } // Copy
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // class ParentSet

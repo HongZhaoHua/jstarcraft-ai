@@ -47,7 +47,7 @@ import weka.core.scripting.JythonSerializableObject;
  * @author Richard Kirkby (rbk1@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class SerializedObject implements Serializable, RevisionHandler {
+public class SerializedObject implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 6635502953928860434L;
@@ -239,12 +239,4 @@ public class SerializedObject implements Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

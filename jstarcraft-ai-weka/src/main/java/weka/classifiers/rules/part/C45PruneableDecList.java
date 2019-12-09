@@ -26,7 +26,6 @@ import weka.classifiers.trees.j48.ModelSelection;
 import weka.classifiers.trees.j48.NoSplit;
 import weka.classifiers.trees.j48.Stats;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -198,13 +197,4 @@ public class C45PruneableDecList extends ClassifierDecList {
         return errors + Stats.addErrs(localModel().distribution().total(), errors, (float) CF);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

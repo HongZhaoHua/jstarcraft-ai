@@ -28,7 +28,6 @@ import java.io.Serializable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
 
 /**
  * Interface to something that can save Instances to an output destination in
@@ -38,7 +37,7 @@ import weka.core.RevisionHandler;
  * @author Stefan Mutter (mutter@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public interface Saver extends Serializable, RevisionHandler {
+public interface Saver extends Serializable {
 
     /** The retrieval modes */
     static final int NONE = 0;

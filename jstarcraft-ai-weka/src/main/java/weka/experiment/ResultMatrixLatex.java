@@ -21,7 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -462,15 +461,6 @@ public class ResultMatrixLatex extends ResultMatrix {
         result += "\\hline\n\\end{tabular} \\footnotesize \\par}\n\\end{table}";
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

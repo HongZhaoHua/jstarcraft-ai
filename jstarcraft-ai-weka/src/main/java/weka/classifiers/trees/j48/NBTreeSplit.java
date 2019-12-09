@@ -26,7 +26,6 @@ import java.util.Random;
 import weka.classifiers.bayes.NaiveBayesUpdateable;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.Discretize;
 
@@ -387,13 +386,4 @@ public class NBTreeSplit extends ClassifierSplitModel {
         return m_errors;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -28,7 +28,6 @@ import java.io.ObjectInputStream;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> Reads a source that contains serialized Instances.
@@ -176,15 +175,6 @@ public class SerializedInstancesLoader extends AbstractFileLoader implements Bat
         }
 
         return m_Dataset.instance(m_IncrementalIndex++);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

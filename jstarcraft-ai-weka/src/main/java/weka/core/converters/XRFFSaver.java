@@ -34,7 +34,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SingleIndex;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
@@ -399,16 +398,6 @@ public class XRFFSaver extends AbstractFileSaver implements BatchConverter, Weig
             resetWriter();
             setWriteMode(CANCEL);
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

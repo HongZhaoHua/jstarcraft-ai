@@ -26,7 +26,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -340,15 +339,6 @@ public class Standardize extends PotentialClassIgnorer implements UnsupervisedFi
         result.append("}\n");
 
         return result.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

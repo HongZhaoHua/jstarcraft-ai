@@ -40,7 +40,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -669,15 +668,6 @@ public class Stacking extends RandomizableParallelMultipleClassifiersCombiner im
         if (getMetaClassifier() instanceof CommandlineRunnable) {
             ((CommandlineRunnable) getMetaClassifier()).postExecution();
         }
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

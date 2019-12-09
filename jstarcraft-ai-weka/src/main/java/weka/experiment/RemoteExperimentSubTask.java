@@ -23,8 +23,6 @@ package weka.experiment;
 
 import java.io.File;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 
 /**
@@ -34,7 +32,7 @@ import weka.core.SerializedObject;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class RemoteExperimentSubTask implements Task, RevisionHandler {
+public class RemoteExperimentSubTask implements Task {
 
     /** ID added to avoid warning */
     private static final long serialVersionUID = -1674092706571603720L;
@@ -130,13 +128,4 @@ public class RemoteExperimentSubTask implements Task, RevisionHandler {
         return m_result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

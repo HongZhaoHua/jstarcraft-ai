@@ -30,7 +30,6 @@ import weka.core.DictionaryBuilder;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
-import weka.core.RevisionUtils;
 import weka.core.stemmers.NullStemmer;
 import weka.core.stemmers.Stemmer;
 import weka.core.stopwords.Null;
@@ -585,11 +584,6 @@ public class DictionarySaver extends AbstractFileSaver implements BatchConverter
     public void setDestination(OutputStream output) throws IOException {
         super.setDestination(output);
         m_binaryStream = new BufferedOutputStream(output);
-    }
-
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     public static void main(String[] args) {

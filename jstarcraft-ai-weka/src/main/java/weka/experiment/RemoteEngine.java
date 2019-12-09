@@ -32,8 +32,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import weka.core.Queue;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -42,7 +40,7 @@ import weka.core.Utils;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class RemoteEngine extends UnicastRemoteObject implements Compute, RevisionHandler {
+public class RemoteEngine extends UnicastRemoteObject implements Compute {
 
     /** for serialization */
     private static final long serialVersionUID = -1021538162895448259L;
@@ -278,16 +276,6 @@ public class RemoteEngine extends UnicastRemoteObject implements Compute, Revisi
         if (m_TaskStatus.size() == 0) {
             purgeClasses();
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -31,7 +31,6 @@ import java.util.Vector;
 
 import org.w3c.dom.Element;
 
-import weka.core.RevisionUtils;
 import weka.core.xml.XMLBasicSerialization;
 import weka.core.xml.XMLDocument;
 import weka.experiment.Experiment;
@@ -273,16 +272,6 @@ public class XMLExperiment extends XMLBasicSerialization {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

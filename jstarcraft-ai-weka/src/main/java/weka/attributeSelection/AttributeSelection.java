@@ -34,8 +34,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
@@ -93,7 +91,7 @@ import weka.filters.unsupervised.attribute.Remove;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class AttributeSelection implements Serializable, RevisionHandler {
+public class AttributeSelection implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = 4170171824147584330L;
@@ -1004,13 +1002,4 @@ public class AttributeSelection implements Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -32,8 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -45,7 +43,7 @@ import weka.core.Utils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class Kernel implements Serializable, OptionHandler, CapabilitiesHandler, RevisionHandler {
+public abstract class Kernel implements Serializable, OptionHandler, CapabilitiesHandler {
 
     /** for serialization */
     private static final long serialVersionUID = -6102771099905817064L;
@@ -239,16 +237,6 @@ public abstract class Kernel implements Serializable, OptionHandler, Capabilitie
         result.enableAll();
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

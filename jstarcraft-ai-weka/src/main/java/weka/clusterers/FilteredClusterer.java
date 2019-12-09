@@ -32,7 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.SupervisedFilter;
@@ -415,16 +414,6 @@ public class FilteredClusterer extends SingleClustererEnhancer implements Drawab
             return ((Drawable) m_Clusterer).graph();
         else
             throw new Exception("Clusterer: " + getClustererSpec() + " cannot be graphed");
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

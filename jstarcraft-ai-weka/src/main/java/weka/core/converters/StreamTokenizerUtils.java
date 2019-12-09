@@ -25,24 +25,16 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.StreamTokenizer;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Helper class for using stream tokenizers
  * 
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class StreamTokenizerUtils implements Serializable, RevisionHandler {
+public class StreamTokenizerUtils implements Serializable {
 
     /** For serialization */
     private static final long serialVersionUID = -5786996944597404253L;
-
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     /**
      * Gets token, skipping empty lines.

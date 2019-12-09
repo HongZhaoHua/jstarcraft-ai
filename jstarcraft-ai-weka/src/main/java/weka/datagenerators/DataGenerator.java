@@ -36,7 +36,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionHandler;
 import weka.core.Utils;
 
 /**
@@ -46,7 +45,7 @@ import weka.core.Utils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class DataGenerator implements OptionHandler, Randomizable, Serializable, RevisionHandler {
+public abstract class DataGenerator implements OptionHandler, Randomizable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -3698585946221802578L;

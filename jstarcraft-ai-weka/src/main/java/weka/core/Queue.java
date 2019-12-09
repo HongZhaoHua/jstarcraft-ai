@@ -34,7 +34,7 @@ import java.io.Serializable;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Queue extends Object implements Serializable, RevisionHandler {
+public class Queue extends Object implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -1141282001146389780L;
@@ -42,7 +42,7 @@ public class Queue extends Object implements Serializable, RevisionHandler {
     /**
      * Represents one node in the queue.
      */
-    protected class QueueNode implements Serializable, RevisionHandler {
+    protected class QueueNode implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -5119358279412097455L;
@@ -103,14 +103,6 @@ public class Queue extends Object implements Serializable, RevisionHandler {
             return m_Contents;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** Store a reference to the head of the queue */
@@ -259,15 +251,6 @@ public class Queue extends Object implements Serializable, RevisionHandler {
         }
         return retval;
     } // @ nowarn Post;
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     /**
      * Main method for testing this class.

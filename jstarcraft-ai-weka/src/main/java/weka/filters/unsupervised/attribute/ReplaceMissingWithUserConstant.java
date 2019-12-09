@@ -39,7 +39,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -669,16 +668,6 @@ public class ReplaceMissingWithUserConstant extends PotentialClassIgnorer implem
     @Override
     public void setEnvironment(Environment env) {
         m_env = env;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

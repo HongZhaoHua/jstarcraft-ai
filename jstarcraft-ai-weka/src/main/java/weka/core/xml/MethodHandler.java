@@ -24,9 +24,6 @@ import java.lang.reflect.Method;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class handles relationships between display names of properties (or
  * classes) and Methods that are associated with them.
@@ -34,7 +31,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class MethodHandler implements RevisionHandler {
+public class MethodHandler {
 
     /**
      * stores the properties/class - Method relationship
@@ -195,13 +192,4 @@ public class MethodHandler implements RevisionHandler {
         return m_Methods.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

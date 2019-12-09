@@ -158,7 +158,7 @@ import weka.core.matrix.Matrix;
  * @version $Revision$
  * @see #getTechnicalInformation()
  */
-public abstract class Optimization implements TechnicalInformationHandler, RevisionHandler {
+public abstract class Optimization implements TechnicalInformationHandler {
 
     protected double m_ALF = 1.0e-4;
 
@@ -1306,7 +1306,7 @@ public abstract class Optimization implements TechnicalInformationHandler, Revis
     /**
      * Implements a simple dynamic array for ints.
      */
-    protected class DynamicIntArray implements RevisionHandler {
+    protected class DynamicIntArray {
 
         /** The int array. */
         private int[] m_Objects;
@@ -1431,14 +1431,5 @@ public abstract class Optimization implements TechnicalInformationHandler, Revis
             return m_Size;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 }

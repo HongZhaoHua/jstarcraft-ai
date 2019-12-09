@@ -26,7 +26,6 @@ import weka.classifiers.trees.j48.Distribution;
 import weka.classifiers.trees.j48.ModelSelection;
 import weka.classifiers.trees.j48.NoSplit;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * Helper class for logistic model trees (weka.classifiers.trees.lmt.LMT) to
@@ -119,12 +118,4 @@ public class ResidualModelSelection extends ModelSelection {
         return null;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

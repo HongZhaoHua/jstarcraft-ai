@@ -33,7 +33,7 @@ import java.net.URLClassLoader;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}org
  * @version $Revision$
  */
-public class ClassloaderUtil implements RevisionHandler {
+public class ClassloaderUtil {
 
     // Parameters
     private static final Class<?>[] parameters = new Class[] { URL.class };
@@ -88,13 +88,4 @@ public class ClassloaderUtil implements RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

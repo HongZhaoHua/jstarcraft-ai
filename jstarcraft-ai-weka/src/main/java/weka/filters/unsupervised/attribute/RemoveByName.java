@@ -29,7 +29,6 @@ import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -309,16 +308,6 @@ public class RemoveByName extends SimpleStreamFilter implements WeightedInstance
     protected Instance process(Instance instance) throws Exception {
         m_Remove.input(instance);
         return m_Remove.output();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

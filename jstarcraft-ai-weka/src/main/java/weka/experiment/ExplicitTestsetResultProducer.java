@@ -34,8 +34,6 @@ import weka.core.Environment;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WekaException;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -164,7 +162,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class ExplicitTestsetResultProducer implements ResultProducer, OptionHandler, AdditionalMeasureProducer, RevisionHandler {
+public class ExplicitTestsetResultProducer implements ResultProducer, OptionHandler, AdditionalMeasureProducer {
 
     /** for serialization. */
     private static final long serialVersionUID = 2613585409333652530L;
@@ -1146,13 +1144,4 @@ public class ExplicitTestsetResultProducer implements ResultProducer, OptionHand
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

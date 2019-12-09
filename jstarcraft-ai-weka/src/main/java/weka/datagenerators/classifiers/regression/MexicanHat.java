@@ -32,7 +32,6 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.datagenerators.RegressionGenerator;
 
@@ -660,16 +659,6 @@ public class MexicanHat extends RegressionGenerator {
     @Override
     public String generateFinished() throws Exception {
         return "";
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

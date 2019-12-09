@@ -37,8 +37,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -125,7 +123,7 @@ public class OneR extends AbstractClassifier implements TechnicalInformationHand
     /**
      * Class for storing store a 1R rule.
      */
-    private class OneRRule implements Serializable, RevisionHandler {
+    private class OneRRule implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = 2252814630957092281L;
@@ -219,15 +217,6 @@ public class OneR extends AbstractClassifier implements TechnicalInformationHand
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** A 1-R rule */
@@ -755,16 +744,6 @@ public class OneR extends AbstractClassifier implements TechnicalInformationHand
     public void setMinBucketSize(int v) {
 
         m_minBucketSize = v;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

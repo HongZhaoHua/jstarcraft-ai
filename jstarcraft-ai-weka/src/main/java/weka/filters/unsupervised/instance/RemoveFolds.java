@@ -31,7 +31,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.filters.Filter;
@@ -452,16 +451,6 @@ public class RemoveFolds extends Filter implements UnsupervisedFilter, OptionHan
         m_NewBatch = true;
         m_FirstBatchDone = true;
         return (numPendingOutput() != 0);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

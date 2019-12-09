@@ -26,8 +26,6 @@ import java.util.Enumeration;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -36,7 +34,7 @@ import weka.core.Utils;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Distribution implements Cloneable, Serializable, RevisionHandler {
+public class Distribution implements Cloneable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 8526859638230806576L;
@@ -738,13 +736,4 @@ public class Distribution implements Cloneable, Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

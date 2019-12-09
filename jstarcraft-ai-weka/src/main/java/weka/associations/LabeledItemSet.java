@@ -28,8 +28,6 @@ import java.util.Hashtable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.WekaEnumeration;
 
 /**
@@ -45,7 +43,7 @@ import weka.core.WekaEnumeration;
  * @version $Revision$
  */
 
-public class LabeledItemSet extends ItemSet implements Serializable, RevisionHandler {
+public class LabeledItemSet extends ItemSet implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 4158771925518299903L;
@@ -442,13 +440,4 @@ public class LabeledItemSet extends ItemSet implements Serializable, RevisionHan
         return rules;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

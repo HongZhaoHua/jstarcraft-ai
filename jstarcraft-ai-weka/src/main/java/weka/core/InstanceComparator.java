@@ -40,7 +40,7 @@ import java.util.Comparator;
  * @see java.util.Arrays
  * @see java.util.Collections
  */
-public class InstanceComparator implements Comparator<Instance>, Serializable, RevisionHandler {
+public class InstanceComparator implements Comparator<Instance>, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -6589278678230949683L;
@@ -222,15 +222,6 @@ public class InstanceComparator implements Comparator<Instance>, Serializable, R
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

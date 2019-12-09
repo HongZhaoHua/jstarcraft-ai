@@ -44,9 +44,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class offers some methods for generating, reading and writing XML
  * documents.<br>
@@ -56,7 +53,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class XMLDocument implements RevisionHandler {
+public class XMLDocument {
 
     /**
      * the parsing instructions "&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;"
@@ -639,15 +636,6 @@ public class XMLDocument implements RevisionHandler {
             header += getDocType() + "\n\n";
 
         return toString(new StringBuffer(header), getDocument().getDocumentElement(), 0).toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

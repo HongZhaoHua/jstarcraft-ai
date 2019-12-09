@@ -27,8 +27,6 @@ import weka.classifiers.Classifier;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Generates points illustrating probablity cost tradeoffs that can be obtained
@@ -40,7 +38,7 @@ import weka.core.RevisionUtils;
  * @version $Revision$
  */
 
-public class CostCurve implements RevisionHandler {
+public class CostCurve {
 
     /** The name of the relation used in cost curve datasets */
     public static final String RELATION_NAME = "CostCurve";
@@ -132,16 +130,6 @@ public class CostCurve implements RevisionHandler {
         fv.add(new Attribute(NORM_EXPECTED_COST_NAME));
         fv.add(new Attribute(THRESHOLD_NAME));
         return new Instances(RELATION_NAME, fv, 100);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

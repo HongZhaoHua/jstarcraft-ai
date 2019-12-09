@@ -27,7 +27,6 @@ import java.util.Vector;
 import weka.core.EuclideanDistance;
 import weka.core.Instance;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -365,13 +364,4 @@ public class TopDownConstructor extends BallTreeConstructor implements Technical
         return result.toArray(new String[result.size()]);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

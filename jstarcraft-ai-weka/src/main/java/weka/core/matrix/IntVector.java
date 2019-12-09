@@ -23,16 +23,13 @@ package weka.core.matrix;
 
 import java.util.Arrays;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * A vector specialized on integers.
  * 
  * @author Yong Wang
  * @version $Revision$
  */
-public class IntVector implements Cloneable, RevisionHandler {
+public class IntVector implements Cloneable {
 
     /** Array for internal storage of elements. */
     int[] V;
@@ -386,15 +383,6 @@ public class IntVector implements Cloneable, RevisionHandler {
         }
 
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

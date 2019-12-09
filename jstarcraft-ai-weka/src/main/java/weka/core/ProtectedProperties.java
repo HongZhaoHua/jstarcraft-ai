@@ -33,7 +33,7 @@ import java.util.Properties;
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class ProtectedProperties extends Properties implements RevisionHandler {
+public class ProtectedProperties extends Properties {
 
     /** for serialization */
     private static final long serialVersionUID = 3876658672657323985L;
@@ -134,13 +134,4 @@ public class ProtectedProperties extends Properties implements RevisionHandler {
         throw new UnsupportedOperationException("ProtectedProperties cannot be modified!");
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

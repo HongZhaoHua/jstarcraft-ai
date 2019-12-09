@@ -50,8 +50,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.TechnicalInformation;
@@ -155,7 +153,7 @@ import weka.core.WeightedInstancesHandler;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}com)
  * @version $Revision$
  */
-public class HoeffdingTree extends AbstractClassifier implements UpdateableClassifier, WeightedInstancesHandler, OptionHandler, RevisionHandler, TechnicalInformationHandler, Drawable, Serializable {
+public class HoeffdingTree extends AbstractClassifier implements UpdateableClassifier, WeightedInstancesHandler, OptionHandler, TechnicalInformationHandler, Drawable, Serializable {
 
     /**
      * For serialization
@@ -924,16 +922,6 @@ public class HoeffdingTree extends AbstractClassifier implements UpdateableClass
         }
 
         return m_root.toString(m_printLeafModels);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     public static void main(String[] args) {

@@ -23,9 +23,6 @@ package weka.experiment;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * A class holding information for tasks being executed on RemoteEngines. Also
  * holds an object encapsulating any returnable result produced by the task
@@ -36,7 +33,7 @@ import weka.core.RevisionUtils;
  * @author <a href="mailto:mhall@cs.waikato.ac.nz">Mark Hall</a>
  * @version $Revision$
  */
-public class TaskStatusInfo implements Serializable, RevisionHandler {
+public class TaskStatusInfo implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -6129343303703560015L;
@@ -118,12 +115,4 @@ public class TaskStatusInfo implements Serializable, RevisionHandler {
         return m_TaskResult;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

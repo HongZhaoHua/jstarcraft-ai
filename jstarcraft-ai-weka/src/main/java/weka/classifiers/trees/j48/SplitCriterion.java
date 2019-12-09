@@ -23,8 +23,6 @@ package weka.classifiers.trees.j48;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-
 /**
  * Abstract class for computing splitting criteria with respect to distributions
  * of class values.
@@ -32,7 +30,7 @@ import weka.core.RevisionHandler;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class SplitCriterion implements Serializable, RevisionHandler {
+public abstract class SplitCriterion implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 5490996638027101259L;

@@ -22,15 +22,12 @@
 
 package weka.classifiers.lazy.kstar;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /*
  * @author Len Trigg (len@reeltwo.com)
  * @author Abdelaziz Mahoui (am14@cs.waikato.ac.nz)
  * @version $Revision 1.0 $
  */
-public class KStarWrapper implements RevisionHandler {
+public class KStarWrapper {
 
     /** used/reused to hold the sphere size */
     public double sphere = 0.0;
@@ -46,14 +43,5 @@ public class KStarWrapper implements RevisionHandler {
 
     /** used/reused to hold the smallest transformation probability */
     public double minProb = 0.0;
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 }

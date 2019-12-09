@@ -153,16 +153,6 @@ public class AllJavadoc extends Javadoc {
     }
 
     /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
-
-    /**
      * Parses the given commandline parameters and generates the Javadoc.
      * 
      * @param args the commandline parameters for the object

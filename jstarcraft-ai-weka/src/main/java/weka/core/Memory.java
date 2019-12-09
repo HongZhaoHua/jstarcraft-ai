@@ -36,7 +36,7 @@ import javax.swing.JOptionPane;
  * @version $Revision$
  * @see #setEnabled(boolean)
  */
-public class Memory implements RevisionHandler {
+public class Memory {
 
     public static final long OUT_OF_MEMORY_THRESHOLD = 52428800L;
 
@@ -295,16 +295,6 @@ public class Memory implements RevisionHandler {
         thGroup = null;
 
         System.gc();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

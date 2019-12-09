@@ -21,8 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
-
 /**
  * <!-- globalinfo-start --> Only outputs the significance indicators. Can be
  * used for spotting patterns.
@@ -323,15 +321,6 @@ public class ResultMatrixSignificance extends ResultMatrix {
      */
     public String toStringRanking() {
         return new ResultMatrixPlainText(this).toStringRanking();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

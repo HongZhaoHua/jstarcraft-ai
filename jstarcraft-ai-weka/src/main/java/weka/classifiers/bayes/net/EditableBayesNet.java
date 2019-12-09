@@ -38,7 +38,6 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.estimate.DiscreteEstimatorBayes;
 import weka.core.Attribute;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.estimators.Estimator;
 import weka.filters.Filter;
@@ -2785,16 +2784,6 @@ public class EditableBayesNet extends BayesNet {
             }
         } // redo
     } // class PasteAction
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     /**
      * @param args

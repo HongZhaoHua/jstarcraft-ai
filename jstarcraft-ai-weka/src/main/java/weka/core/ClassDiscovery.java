@@ -43,7 +43,7 @@ import java.util.jar.JarFile;
  * @version $Revision$
  * @see StringCompare
  */
-public class ClassDiscovery implements RevisionHandler {
+public class ClassDiscovery {
 
     /** whether to output some debug information. */
     public final static boolean VERBOSE = false;
@@ -390,16 +390,6 @@ public class ClassDiscovery implements RevisionHandler {
     }
 
     /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
-
-    /**
      * Possible calls:
      * <ul>
      * <li>weka.core.ClassDiscovery &lt;packages&gt;<br/>
@@ -458,7 +448,7 @@ public class ClassDiscovery implements RevisionHandler {
      * <li>special chars &lt; numbers &lt; letters</li>
      * </ul>
      */
-    public static class StringCompare implements Comparator<String>, RevisionHandler {
+    public static class StringCompare implements Comparator<String> {
 
         /**
          * appends blanks to the string if its shorter than <code>len</code>.
@@ -561,14 +551,5 @@ public class ClassDiscovery implements RevisionHandler {
             return (obj instanceof StringCompare);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 }

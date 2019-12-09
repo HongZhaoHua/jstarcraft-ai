@@ -280,11 +280,6 @@ public class CSVLoader extends AbstractFileLoader implements BatchConverter, Inc
         return "CSV data files";
     }
 
-    @Override
-    public String getRevision() {
-        return "$Revision$";
-    }
-
     /**
      * Returns the tip text for this property.
      *

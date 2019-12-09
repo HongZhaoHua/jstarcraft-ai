@@ -22,7 +22,6 @@
 package weka.classifiers.bayes.net.estimate;
 
 import weka.classifiers.bayes.net.search.local.Scoreable;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 import weka.core.Utils;
 import weka.estimators.DiscreteEstimator;
@@ -209,15 +208,6 @@ public class DiscreteEstimatorBayes extends Estimator implements Scoreable {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

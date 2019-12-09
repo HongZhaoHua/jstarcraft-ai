@@ -36,7 +36,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -1285,16 +1284,6 @@ public class Discretize extends PotentialClassIgnorer implements UnsupervisedFil
         copyValues(inst, false, instance.dataset(), outputFormatPeek());
 
         push(inst); // No need to copy instance
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

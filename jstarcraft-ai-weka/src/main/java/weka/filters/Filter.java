@@ -40,8 +40,6 @@ import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Queue;
 import weka.core.RelationalLocator;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.StringLocator;
 import weka.core.UnsupportedAttributeTypeException;
@@ -80,7 +78,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class Filter implements Serializable, CapabilitiesHandler, RevisionHandler, OptionHandler, CapabilitiesIgnorer, CommandlineRunnable {
+public abstract class Filter implements Serializable, CapabilitiesHandler, OptionHandler, CapabilitiesIgnorer, CommandlineRunnable {
 
     /** for serialization */
     private static final long serialVersionUID = -8835063755891851218L;
@@ -172,16 +170,6 @@ public abstract class Filter implements Serializable, CapabilitiesHandler, Revis
         result.setMinimumNumberInstances(0);
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

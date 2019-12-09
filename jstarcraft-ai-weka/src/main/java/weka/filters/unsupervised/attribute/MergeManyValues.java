@@ -431,16 +431,6 @@ public class MergeManyValues extends PotentialClassIgnorer implements Unsupervis
     }
 
     /**
-     * Returns the revision string.
-     * 
-     * @return The revision string.
-     */
-    @Override
-    public String getRevision() {
-        return "$Revision$";
-    }
-
-    /**
      * Main method for executing this filter.
      * 
      * @param args use -h to display all options

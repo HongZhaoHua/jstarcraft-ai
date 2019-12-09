@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Class for enumerating an array list's elements.
  */
-public class WekaEnumeration<E> implements Enumeration<E>, RevisionHandler {
+public class WekaEnumeration<E> implements Enumeration<E> {
 
     /** The counter. */
     private int m_Counter;
@@ -108,13 +108,4 @@ public class WekaEnumeration<E> implements Enumeration<E>, RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

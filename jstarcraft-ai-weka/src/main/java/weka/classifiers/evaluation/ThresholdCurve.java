@@ -28,8 +28,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -45,7 +43,7 @@ import weka.core.Utils;
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class ThresholdCurve implements RevisionHandler {
+public class ThresholdCurve {
 
     /** The name of the relation used in threshold curve datasets */
     public static final String RELATION_NAME = "ThresholdCurve";
@@ -451,16 +449,6 @@ public class ThresholdCurve implements RevisionHandler {
         }
         vals[count++] = prob;
         return new DenseInstance(1.0, vals);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

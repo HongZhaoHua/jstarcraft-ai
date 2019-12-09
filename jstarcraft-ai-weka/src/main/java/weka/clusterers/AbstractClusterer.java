@@ -33,8 +33,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -44,7 +42,7 @@ import weka.core.Utils;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class AbstractClusterer implements Clusterer, Cloneable, Serializable, CapabilitiesHandler, RevisionHandler, OptionHandler, CapabilitiesIgnorer, CommandlineRunnable {
+public abstract class AbstractClusterer implements Clusterer, Cloneable, Serializable, CapabilitiesHandler, OptionHandler, CapabilitiesIgnorer, CommandlineRunnable {
 
     /** for serialization */
     private static final long serialVersionUID = -6099962589663877632L;
@@ -309,16 +307,6 @@ public abstract class AbstractClusterer implements Clusterer, Cloneable, Seriali
         result.enableAll();
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

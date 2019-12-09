@@ -33,7 +33,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.UnsupportedAttributeTypeException;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -305,16 +304,6 @@ public class NominalToString extends Filter implements UnsupervisedFilter, Optio
         newData.setClassIndex(getInputFormat().classIndex());
 
         setOutputFormat(newData);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

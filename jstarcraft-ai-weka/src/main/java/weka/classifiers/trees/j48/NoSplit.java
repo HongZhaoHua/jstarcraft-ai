@@ -23,7 +23,6 @@ package weka.classifiers.trees.j48;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * Class implementing a "no-split"-split.
@@ -101,12 +100,4 @@ public final class NoSplit extends ClassifierSplitModel {
         return "true"; // or should this be false??
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

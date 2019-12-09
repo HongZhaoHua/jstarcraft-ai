@@ -26,7 +26,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> The RBF kernel : K(x, y) = exp(-gamma*(x-y)^2) <br>
@@ -214,13 +213,4 @@ public class RBFKernel extends CachedKernel {
         return "RBF Kernel: K(x,y) = exp(-" + m_gamma + "*(x-y)^2)";
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

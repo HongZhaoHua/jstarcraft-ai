@@ -28,7 +28,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 import weka.filters.Filter;
@@ -154,16 +153,6 @@ public class Obfuscate extends Filter implements UnsupervisedFilter, StreamableF
         }
         push((Instance) instance.copy(), false); // No need to copy
         return true;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -32,7 +32,6 @@ import weka.classifiers.pmml.consumer.TreeModel.MiningFunction;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.pmml.MiningSchema;
 
@@ -789,15 +788,6 @@ public class RuleSetModel extends PMMLClassifier {
         temp.append(m_ruleSet);
 
         return temp.toString();
-    }
-
-    /**
-     * Get the revision string for this class
-     * 
-     * @return the revision string
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
 }

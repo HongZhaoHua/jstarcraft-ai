@@ -28,7 +28,6 @@ import weka.classifiers.trees.m5.M5Base;
 import weka.classifiers.trees.m5.Rule;
 import weka.core.Drawable;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -272,16 +271,6 @@ public class M5P extends M5Base implements Drawable {
         }
 
         return options;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

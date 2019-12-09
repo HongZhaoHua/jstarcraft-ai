@@ -538,11 +538,6 @@ public class PMMLFactory {
             throw new Exception("Don't call this method!!");
         }
 
-        @Override
-        public String getRevision() {
-            return weka.core.RevisionUtils.extract("$Revision$");
-        }
-
         public void evaluatePMMLClassifier(String[] options) {
             runClassifier(this, options);
         }

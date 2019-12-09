@@ -21,7 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -389,15 +388,6 @@ public class ResultMatrixHTML extends ResultMatrix {
         result += "</table>\n";
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

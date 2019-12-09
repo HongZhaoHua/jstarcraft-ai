@@ -33,7 +33,7 @@ import java.util.HashSet;
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
-public class SelectedTag implements RevisionHandler, Serializable {
+public class SelectedTag implements Serializable {
 
     private static final long serialVersionUID = 6947341624626504975L;
 
@@ -146,12 +146,4 @@ public class SelectedTag implements RevisionHandler, Serializable {
         return getSelectedTag().toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

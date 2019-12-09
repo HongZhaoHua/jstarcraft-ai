@@ -16,9 +16,6 @@ package weka.core.matrix;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Cholesky Decomposition.
  * <P>
@@ -37,7 +34,7 @@ import weka.core.RevisionUtils;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class CholeskyDecomposition implements Serializable, RevisionHandler {
+public class CholeskyDecomposition implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -8739775942782694701L;
@@ -159,12 +156,4 @@ public class CholeskyDecomposition implements Serializable, RevisionHandler {
         return new Matrix(X, n, nx);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

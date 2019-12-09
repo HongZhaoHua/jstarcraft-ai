@@ -30,7 +30,7 @@ import java.util.Vector;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class Check implements OptionHandler, RevisionHandler {
+public abstract class Check implements OptionHandler {
 
     /** Debugging mode, gives extra output if true */
     protected boolean m_Debug = false;

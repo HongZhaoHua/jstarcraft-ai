@@ -36,7 +36,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.RandomSample;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -496,16 +495,6 @@ public class RandomSubset extends SimpleBatchFilter implements Randomizable, Wei
             result.add(newInstance);
         }
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

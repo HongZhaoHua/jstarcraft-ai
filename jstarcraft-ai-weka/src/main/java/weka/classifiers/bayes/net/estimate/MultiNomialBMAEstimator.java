@@ -30,7 +30,6 @@ import weka.classifiers.bayes.net.search.local.K2;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 import weka.core.Utils;
 import weka.estimators.Estimator;
@@ -346,13 +345,4 @@ public class MultiNomialBMAEstimator extends BayesNetEstimator {
         return options.toArray(new String[0]);
     } // getOptions
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // class MultiNomialBMAEstimator

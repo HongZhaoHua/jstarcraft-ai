@@ -32,7 +32,6 @@ import weka.core.Attribute;
 import weka.core.Drawable;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.pmml.Array;
 import weka.core.pmml.MiningSchema;
@@ -1635,11 +1634,6 @@ public class TreeModel extends PMMLClassifier implements Drawable {
         text.append("}\n");
 
         return text.toString();
-    }
-
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     @Override

@@ -35,7 +35,6 @@ import java.util.Vector;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 
 /**
@@ -442,15 +441,6 @@ public class SVMLightLoader extends AbstractFileLoader implements BatchConverter
      */
     public Instance getNextInstance(Instances structure) throws IOException {
         throw new IOException("SVMLightLoader can't read data sets incrementally.");
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -31,7 +31,7 @@ import java.util.Random;
  * @author Gabi Schmidberger (gabi@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class AlgVector implements Cloneable, Serializable, RevisionHandler {
+public class AlgVector implements Cloneable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -4023736016850256591L;
@@ -387,15 +387,6 @@ public class AlgVector implements Cloneable, Serializable, RevisionHandler {
 
         text.append("\n");
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

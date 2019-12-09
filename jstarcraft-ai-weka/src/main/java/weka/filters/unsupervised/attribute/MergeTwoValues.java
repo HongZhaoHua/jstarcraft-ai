@@ -32,7 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SingleIndex;
 import weka.core.UnsupportedAttributeTypeException;
 import weka.core.Utils;
@@ -434,16 +433,6 @@ public class MergeTwoValues extends Filter implements UnsupervisedFilter, Stream
         newData = new Instances(getInputFormat().relationName(), newAtts, 0);
         newData.setClassIndex(getInputFormat().classIndex());
         setOutputFormat(newData);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

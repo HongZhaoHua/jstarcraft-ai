@@ -30,8 +30,6 @@ import weka.classifiers.bayes.net.ParentSet;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * This is the base class for all search algorithms for learning Bayes networks.
@@ -43,7 +41,7 @@ import weka.core.RevisionUtils;
  * @author Remco Bouckaert
  * @version $Revision$
  */
-public class SearchAlgorithm implements OptionHandler, Serializable, RevisionHandler {
+public class SearchAlgorithm implements OptionHandler, Serializable {
 
     /** for serialization */
     static final long serialVersionUID = 6164792240778525312L;
@@ -409,13 +407,4 @@ public class SearchAlgorithm implements OptionHandler, Serializable, RevisionHan
         return "When set to true (default is false), after a network structure is learned" + " a Markov Blanket correction is applied to the network structure. This ensures" + " that all nodes in the network are part of the Markov blanket of the classifier" + " node.";
     } // markovBlanketClassifierTipText
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // class SearchAlgorithm

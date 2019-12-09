@@ -28,7 +28,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -238,16 +237,6 @@ public class ZeroR extends AbstractClassifier implements WeightedInstancesHandle
         } else {
             return "ZeroR predicts class value: " + m_Class.value((int) m_ClassValue);
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

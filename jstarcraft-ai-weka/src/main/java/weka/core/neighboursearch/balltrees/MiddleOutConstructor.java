@@ -33,8 +33,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.Randomizable;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -944,16 +942,6 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
     }
 
     /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
-
-    /**
      * Temp class to represent either a leaf node or an internal node. Should only
      * have two children (could be the case one child is an instance and the other
      * another node). Primarily used for anchor nodes. It stores the points
@@ -963,7 +951,7 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class TempNode implements RevisionHandler {
+    protected class TempNode {
 
         /** The anchor point of the node. */
         Instance anchor;
@@ -1011,15 +999,6 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
             return bf.toString();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1029,7 +1008,7 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class ListNode implements RevisionHandler, Serializable {
+    protected class ListNode implements Serializable {
 
         /** The index of the point. */
         int idx = -1;
@@ -1048,15 +1027,6 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
             distance = d;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1067,7 +1037,7 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class MyIdxList implements Serializable, RevisionHandler {
+    protected class MyIdxList implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = -2283869109722934927L;
@@ -1189,14 +1159,5 @@ public class MiddleOutConstructor extends BallTreeConstructor implements Randomi
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 }

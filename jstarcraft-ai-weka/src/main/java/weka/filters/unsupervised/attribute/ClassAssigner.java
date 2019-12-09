@@ -29,7 +29,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -270,16 +269,6 @@ public class ClassAssigner extends SimpleStreamFilter implements WeightedInstanc
     @Override
     protected Instance process(Instance instance) throws Exception {
         return instance;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -32,7 +32,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WekaException;
@@ -491,16 +490,6 @@ public class Resample extends Filter implements UnsupervisedFilter, OptionHandle
                 push(data.instance(random.nextInt(numEligible)), false); // No need to copy instance
             }
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

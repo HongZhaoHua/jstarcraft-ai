@@ -22,7 +22,6 @@
 package weka.classifiers.bayes;
 
 import weka.classifiers.UpdateableClassifier;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 
 /**
@@ -117,15 +116,6 @@ public class NaiveBayesUpdateable extends NaiveBayes implements UpdateableClassi
             throw new IllegalArgumentException("Can't use discretization " + "in NaiveBayesUpdateable!");
         }
         m_UseDiscretization = false;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

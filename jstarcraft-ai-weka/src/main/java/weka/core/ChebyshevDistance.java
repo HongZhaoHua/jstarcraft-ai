@@ -146,12 +146,4 @@ public class ChebyshevDistance extends NormalizableDistance implements Technical
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

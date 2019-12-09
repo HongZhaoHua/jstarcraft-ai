@@ -44,8 +44,6 @@ import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Summarizable;
 import weka.core.Utils;
 
@@ -87,7 +85,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class RegressionSplitEvaluator implements SplitEvaluator, OptionHandler, AdditionalMeasureProducer, RevisionHandler {
+public class RegressionSplitEvaluator implements SplitEvaluator, OptionHandler, AdditionalMeasureProducer {
 
     /** for serialization */
     static final long serialVersionUID = -328181640503349202L;
@@ -830,13 +828,4 @@ public class RegressionSplitEvaluator implements SplitEvaluator, OptionHandler, 
         return result + m_Template.getClass().getName() + " " + m_ClassifierOptions + "(version " + m_ClassifierVersion + ")";
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

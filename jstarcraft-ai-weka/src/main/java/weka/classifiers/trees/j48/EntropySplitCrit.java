@@ -22,7 +22,6 @@
 package weka.classifiers.trees.j48;
 
 import weka.core.ContingencyTables;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -70,12 +69,4 @@ public final class EntropySplitCrit extends EntropyBasedSplitCrit {
         return result / ContingencyTables.log2;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

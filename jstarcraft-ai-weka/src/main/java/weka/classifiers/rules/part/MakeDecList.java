@@ -29,8 +29,6 @@ import java.util.Vector;
 import weka.classifiers.trees.j48.ModelSelection;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -39,7 +37,7 @@ import weka.core.Utils;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class MakeDecList implements Serializable, RevisionHandler {
+public class MakeDecList implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -1427481323245079123L;
@@ -250,13 +248,4 @@ public class MakeDecList implements Serializable, RevisionHandler {
         return theRules.size();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -27,8 +27,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -41,7 +39,7 @@ import weka.core.Utils;
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class MarginCurve implements RevisionHandler {
+public class MarginCurve {
 
     /**
      * Calculates the cumulative margin distribution for the set of predictions,
@@ -134,16 +132,6 @@ public class MarginCurve implements RevisionHandler {
         vals[count++] = current;
         vals[count++] = cumulative;
         return new DenseInstance(1.0, vals);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

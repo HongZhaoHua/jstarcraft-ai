@@ -38,8 +38,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 
@@ -109,7 +107,7 @@ public class ArffLoader extends AbstractFileLoader implements BatchConverter, In
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class ArffReader implements RevisionHandler {
+    public static class ArffReader {
 
         /** the tokenizer for reading the stream */
         protected StreamTokenizer m_Tokenizer;
@@ -1000,15 +998,6 @@ public class ArffLoader extends AbstractFileLoader implements BatchConverter, In
             return m_retainStringValues;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1286,16 +1275,6 @@ public class ArffLoader extends AbstractFileLoader implements BatchConverter, In
             }
         }
         return current;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -25,9 +25,6 @@ import java.lang.reflect.Method;
 
 import org.w3c.dom.Element;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class handles relationships between display names of properties (or
  * classes) and Methods that are associated with them. It differentiates between
@@ -41,7 +38,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class XMLSerializationMethodHandler implements RevisionHandler {
+public class XMLSerializationMethodHandler {
 
     /** for storing read methods */
     protected MethodHandler m_ReadMethods = null;
@@ -261,13 +258,4 @@ public class XMLSerializationMethodHandler implements RevisionHandler {
         return "Read Methods:\n" + read() + "\n\n" + "Write Methods:\n" + write();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -25,7 +25,6 @@ import java.io.Serializable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
 import weka.core.Utils;
 
 /**
@@ -35,7 +34,7 @@ import weka.core.Utils;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class ClassifierSplitModel implements Cloneable, Serializable, RevisionHandler {
+public abstract class ClassifierSplitModel implements Cloneable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 4280730118393457457L;

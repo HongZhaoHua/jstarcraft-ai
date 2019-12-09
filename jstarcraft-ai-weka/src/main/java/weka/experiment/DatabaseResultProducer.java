@@ -29,7 +29,6 @@ import weka.core.AdditionalMeasureProducer;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -727,13 +726,4 @@ public class DatabaseResultProducer extends DatabaseResultListener implements Re
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // DatabaseResultProducer

@@ -29,7 +29,7 @@ import java.io.Serializable;
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
-public class Tag implements Serializable, RevisionHandler {
+public class Tag implements Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = 3326379903447135320L;
@@ -189,12 +189,4 @@ public class Tag implements Serializable, RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

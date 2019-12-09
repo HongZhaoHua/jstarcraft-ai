@@ -23,7 +23,6 @@ package weka.classifiers.meta;
 
 import weka.core.Instances;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> Class for running an arbitrary classifier on data
@@ -198,15 +197,6 @@ public class RandomizableFilteredClassifier extends FilteredClassifier {
 
         String result = "RandomizableFilteredClassifier using " + getClassifierSpec() + " on data filtered through " + getFilterSpec() + "\n\nFiltered Header\n" + m_FilteredInstances.toString() + "\n\nClassifier Model\n" + m_Classifier.toString();
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 9117 $");
     }
 
     /**

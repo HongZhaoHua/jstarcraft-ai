@@ -25,7 +25,6 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
 
-import weka.core.RevisionHandler;
 import weka.core.Utils;
 
 /**
@@ -34,7 +33,7 @@ import weka.core.Utils;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class Logger implements RevisionHandler {
+public abstract class Logger {
 
     /** the properties file. */
     public final static String PROPERTIES_FILE = "weka/core/logging/Logging.props";

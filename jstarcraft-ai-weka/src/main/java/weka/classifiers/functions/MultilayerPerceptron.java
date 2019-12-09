@@ -65,8 +65,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 import weka.filters.Filter;
@@ -442,22 +440,13 @@ public class MultilayerPerceptron extends AbstractClassifier implements OptionHa
             return m_link;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
      * Inner class used to draw the nodes onto.(uses the node lists!!) This will
      * also handle the user input.
      */
-    private class NodePanel extends JPanel implements RevisionHandler {
+    private class NodePanel extends JPanel {
 
         /** for serialization */
         static final long serialVersionUID = -3067621833388149984L;
@@ -662,15 +651,6 @@ public class MultilayerPerceptron extends AbstractClassifier implements OptionHa
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -679,7 +659,7 @@ public class MultilayerPerceptron extends AbstractClassifier implements OptionHa
      * @author Malcolm Ware (mfw4@cs.waikato.ac.nz)
      * @version $Revision$
      */
-    class ControlPanel extends JPanel implements RevisionHandler {
+    class ControlPanel extends JPanel {
 
         /** for serialization */
         static final long serialVersionUID = 7393543302294142271L;
@@ -866,15 +846,6 @@ public class MultilayerPerceptron extends AbstractClassifier implements OptionHa
             });
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -2654,13 +2625,4 @@ public class MultilayerPerceptron extends AbstractClassifier implements OptionHa
         return "This will cause the learning rate to decrease." + " This will divide the starting learning rate by the epoch number to" + " determine what the current learning rate should be. This may help" + " to stop the network from diverging from the target output, as well" + " as improve general performance. Note that the decaying learning" + " rate will not be shown in the GUI, only the original learning rate" + ". If the learning rate is changed in the GUI, this is treated as the" + " starting learning rate.";
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

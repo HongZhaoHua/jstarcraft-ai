@@ -38,7 +38,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Trie implements Serializable, Cloneable, Collection<String>, RevisionHandler {
+public class Trie implements Serializable, Cloneable, Collection<String> {
 
     /** for serialization */
     private static final long serialVersionUID = -5897980928817779048L;
@@ -49,7 +49,7 @@ public class Trie implements Serializable, Cloneable, Collection<String>, Revisi
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class TrieNode extends DefaultMutableTreeNode implements RevisionHandler {
+    public static class TrieNode extends DefaultMutableTreeNode {
 
         /** for serialization */
         private static final long serialVersionUID = -2252907099391881148L;
@@ -421,15 +421,6 @@ public class Trie implements Serializable, Cloneable, Collection<String>, Revisi
             return "" + getChar();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -438,7 +429,7 @@ public class Trie implements Serializable, Cloneable, Collection<String>, Revisi
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class TrieIterator implements Iterator<String>, RevisionHandler {
+    public static class TrieIterator implements Iterator<String> {
 
         /** the node to use as root */
         protected TrieNode m_Root;
@@ -499,15 +490,6 @@ public class Trie implements Serializable, Cloneable, Collection<String>, Revisi
         public void remove() {
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** the root node */
@@ -889,16 +871,6 @@ public class Trie implements Serializable, Cloneable, Collection<String>, Revisi
     @Override
     public String toString() {
         return toString(m_Root);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

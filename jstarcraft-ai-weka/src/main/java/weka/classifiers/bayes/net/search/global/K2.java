@@ -28,7 +28,6 @@ import java.util.Vector;
 import weka.classifiers.bayes.BayesNet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -409,13 +408,4 @@ public class K2 extends GlobalScoreSearchAlgorithm implements TechnicalInformati
         return "This Bayes Network learning algorithm uses a hill climbing algorithm " + "restricted by an order on the variables.\n\n" + "For more information see:\n\n" + getTechnicalInformation().toString() + "\n\n" + "Works with nominal variables and no missing values only.";
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

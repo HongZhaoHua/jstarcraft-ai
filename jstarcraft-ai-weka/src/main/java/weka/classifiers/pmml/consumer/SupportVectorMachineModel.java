@@ -34,7 +34,6 @@ import weka.classifiers.pmml.consumer.NeuralNetwork.MiningFunction;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.pmml.MiningSchema;
 import weka.core.pmml.TargetMetaInfo;
@@ -970,10 +969,6 @@ public class SupportVectorMachineModel extends PMMLClassifier implements Seriali
         }
 
         return preds;
-    }
-
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

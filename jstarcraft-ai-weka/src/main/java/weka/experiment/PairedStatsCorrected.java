@@ -21,7 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 
 /**
@@ -94,15 +93,6 @@ public class PairedStatsCorrected extends PairedStats {
                 differencesSignificance = -1;
             }
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

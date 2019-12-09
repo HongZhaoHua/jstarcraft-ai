@@ -197,7 +197,7 @@ import weka.gui.GenericPropertiesCreator;
  * @see Capabilities.Capability
  * @see GenericPropertiesCreator
  */
-public class FindWithCapabilities implements OptionHandler, CapabilitiesHandler, RevisionHandler, CommandlineRunnable {
+public class FindWithCapabilities implements OptionHandler, CapabilitiesHandler, CommandlineRunnable {
 
     /** the capabilities to look for. */
     protected Capabilities m_Capabilities = new Capabilities(this);
@@ -968,15 +968,7 @@ public class FindWithCapabilities implements OptionHandler, CapabilitiesHandler,
         return m_Matches;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
+    
 
     /**
      * Executes the location of classes with parameters from the commandline.

@@ -22,8 +22,6 @@ package weka.core.tokenizers;
 
 import java.util.NoSuchElementException;
 
-import weka.core.RevisionUtils;
-
 /**
  * <!-- globalinfo-start --> Alphabetic string tokenizer, tokens are to be
  * formed only from contiguous alphabetic sequences.
@@ -117,16 +115,6 @@ public class AlphabeticTokenizer extends Tokenizer {
         m_CurrentPos = 0;
         m_Str = new char[s.length()];
         s.getChars(0, s.length(), m_Str, 0);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

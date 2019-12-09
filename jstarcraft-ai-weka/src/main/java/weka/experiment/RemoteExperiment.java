@@ -37,7 +37,6 @@ import javax.swing.DefaultListModel;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Queue;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 import weka.core.xml.KOML;
@@ -910,16 +909,6 @@ public class RemoteExperiment extends Experiment {
         for (int i = 0; i < totalHosts; i++) {
             availableHost(-1);
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

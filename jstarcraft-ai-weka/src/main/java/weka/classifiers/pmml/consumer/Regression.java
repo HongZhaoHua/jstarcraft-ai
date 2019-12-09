@@ -31,7 +31,6 @@ import org.w3c.dom.NodeList;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.pmml.MiningSchema;
 import weka.core.pmml.TargetMetaInfo;
@@ -804,12 +803,4 @@ public class Regression extends PMMLClassifier implements Serializable {
         return preds;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see weka.core.RevisionHandler#getRevision()
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

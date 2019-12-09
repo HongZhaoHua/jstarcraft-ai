@@ -33,7 +33,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -460,15 +459,6 @@ public class MultiScheme extends RandomizableMultipleClassifiersCombiner {
 
         result += "Selected scheme: " + getClassifierSpec(m_ClassifierIndex) + "\n\n" + m_Classifier.toString();
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -28,7 +28,6 @@ import java.util.Vector;
 import weka.classifiers.bayes.BayesNet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -401,13 +400,4 @@ public class K2 extends LocalScoreSearchAlgorithm implements TechnicalInformatio
         return "When set to true, the order of the nodes in the network is random." + " Default random order is false and the order" + " of the nodes in the dataset is used." + " In any case, when the network was initialized as Naive Bayes Network, the" + " class variable is first in the ordering though.";
     } // randomOrderTipText
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

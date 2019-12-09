@@ -24,7 +24,6 @@ package weka.estimators;
 import java.io.Serializable;
 import java.util.Random;
 
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 
 /**
@@ -160,16 +159,6 @@ public class UnivariateNormalEstimator implements UnivariateDensityEstimator, Un
         updateMeanAndVariance();
 
         return "Mean: " + m_Mean + "\t" + "Variance: " + m_Variance;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

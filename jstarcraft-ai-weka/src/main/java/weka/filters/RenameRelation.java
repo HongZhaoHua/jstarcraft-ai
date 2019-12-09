@@ -27,7 +27,6 @@ import weka.core.Capabilities;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
-import weka.core.RevisionUtils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 
@@ -233,16 +232,6 @@ public class RenameRelation extends Filter implements StreamableFilter, Weighted
             insts.setRelationName(rel);
             break;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: $");
     }
 
     /**

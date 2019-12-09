@@ -25,8 +25,6 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import weka.core.AdditionalMeasureProducer;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * The class that measures the performance of a nearest neighbour search (NNS)
@@ -35,7 +33,7 @@ import weka.core.RevisionUtils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public class PerformanceStats implements AdditionalMeasureProducer, Serializable, RevisionHandler {
+public class PerformanceStats implements AdditionalMeasureProducer, Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = -7215110351388368092L;
@@ -331,12 +329,4 @@ public class PerformanceStats implements AdditionalMeasureProducer, Serializable
         return buf.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

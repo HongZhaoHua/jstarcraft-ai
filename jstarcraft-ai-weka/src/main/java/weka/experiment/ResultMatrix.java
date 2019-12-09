@@ -27,7 +27,6 @@ import java.util.Vector;
 
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
 import weka.core.Utils;
 
 /**
@@ -51,7 +50,7 @@ import weka.core.Utils;
  * @see #toStringSummary()
  * @see #toStringRanking()
  */
-public abstract class ResultMatrix implements Serializable, RevisionHandler, OptionHandler {
+public abstract class ResultMatrix implements Serializable, OptionHandler {
 
     /** for serialization. */
     private static final long serialVersionUID = 4487179306428209739L;

@@ -27,7 +27,6 @@ import java.io.OutputStream;
 
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.RevisionUtils;
 import weka.core.WeightedInstancesHandler;
 
 /**
@@ -163,15 +162,6 @@ public class SerializedInstancesSaver extends AbstractFileSaver implements Batch
         setWriteMode(WAIT);
         resetWriter();
         setWriteMode(CANCEL);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

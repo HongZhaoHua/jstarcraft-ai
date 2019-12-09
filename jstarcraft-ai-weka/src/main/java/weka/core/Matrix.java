@@ -41,7 +41,7 @@ import java.io.Writer;
  *             backwards compatibility.
  */
 @Deprecated
-public class Matrix implements Cloneable, Serializable, RevisionHandler {
+public class Matrix implements Cloneable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -3604757095849145838L;
@@ -476,16 +476,6 @@ public class Matrix implements Cloneable, Serializable, RevisionHandler {
      */
     public static Matrix parseMatlab(String matlab) throws Exception {
         return new Matrix(weka.core.matrix.Matrix.parseMatlab(matlab).getArray());
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

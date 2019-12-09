@@ -14,8 +14,6 @@
 
 package weka.core.matrix;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -26,7 +24,7 @@ import weka.core.Utils;
  * @version $Revision$
  */
 
-public class LinearRegression implements RevisionHandler {
+public class LinearRegression {
 
     /** the coefficients */
     protected double[] m_Coefficients = null;
@@ -175,12 +173,4 @@ public class LinearRegression implements RevisionHandler {
         return Utils.arrayToString(getCoefficients());
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

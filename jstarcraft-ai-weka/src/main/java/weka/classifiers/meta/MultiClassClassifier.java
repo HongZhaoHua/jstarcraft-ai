@@ -41,8 +41,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -196,7 +194,7 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
     /**
      * Interface for the code constructors
      */
-    private abstract class Code implements Serializable, RevisionHandler {
+    private abstract class Code implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = 418095077487120846L;
@@ -252,14 +250,6 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
             return sb.toString();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -283,14 +273,6 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
             // System.err.println("Code:\n" + this);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -364,14 +346,6 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /*
@@ -407,14 +381,6 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
             // System.err.println("Code:\n" + this);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1049,15 +1015,6 @@ public class MultiClassClassifier extends RandomizableSingleClassifierEnhancer i
             }
         } while (changed);
         return p;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

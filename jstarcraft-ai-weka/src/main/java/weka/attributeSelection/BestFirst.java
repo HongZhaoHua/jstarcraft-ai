@@ -32,8 +32,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -95,7 +93,7 @@ public class BestFirst extends ASSearch implements OptionHandler, StartSetHandle
      * 
      * @author Mark Hall (mhall@cs.waikato.ac.nz)
      **/
-    public class Link2 implements Serializable, RevisionHandler {
+    public class Link2 implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -8236598311516351420L;
@@ -123,15 +121,6 @@ public class BestFirst extends ASSearch implements OptionHandler, StartSetHandle
             return ("Node: " + m_data.toString() + "  " + m_merit);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -243,14 +232,6 @@ public class BestFirst extends ASSearch implements OptionHandler, StartSetHandle
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     // member variables
@@ -897,13 +878,4 @@ public class BestFirst extends ASSearch implements OptionHandler, StartSetHandle
         return list;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

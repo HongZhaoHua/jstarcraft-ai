@@ -30,7 +30,6 @@ import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -320,13 +319,5 @@ public class PairedCorrectedTTester extends PairedTTester implements TechnicalIn
         return "Performs test using corrected resampled t-test statistic (Nadeau and Bengio)";
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
+    
 }

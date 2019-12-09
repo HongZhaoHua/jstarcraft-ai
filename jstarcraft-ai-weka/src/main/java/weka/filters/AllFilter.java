@@ -25,7 +25,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 
@@ -167,15 +166,6 @@ public class AllFilter extends Filter implements Sourcable, WeightedAttributesHa
         result.append("}\n");
 
         return result.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

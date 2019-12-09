@@ -30,9 +30,6 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class is a helper class for XML serialization using
  * <a href="http://xstream.codehaus.org" target="_blank">XStream</a> . XStream
@@ -42,7 +39,7 @@ import weka.core.RevisionUtils;
  * @author Mark Hall (mhall{[at]}pentaho{[dot]}org)
  * @version $Revision$
  */
-public class XStream implements RevisionHandler {
+public class XStream {
 
     /**
      * indicates whether
@@ -341,13 +338,4 @@ public class XStream implements RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

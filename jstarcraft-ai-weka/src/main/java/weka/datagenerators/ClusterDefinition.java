@@ -26,7 +26,6 @@ import java.util.Enumeration;
 
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
 import weka.core.Utils;
 
 /**
@@ -38,7 +37,7 @@ import weka.core.Utils;
  * @version $Revision$
  */
 
-public abstract class ClusterDefinition implements Serializable, OptionHandler, RevisionHandler {
+public abstract class ClusterDefinition implements Serializable, OptionHandler {
 
     /** for serialization */
     private static final long serialVersionUID = -5950001207047429961L;

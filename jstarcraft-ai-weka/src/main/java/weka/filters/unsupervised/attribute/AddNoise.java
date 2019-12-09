@@ -31,7 +31,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.SingleIndex;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -618,16 +617,6 @@ public class AddNoise extends Filter implements UnsupervisedFilter, OptionHandle
                 }
             }
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

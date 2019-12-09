@@ -32,7 +32,7 @@ import java.util.Enumeration;
  * @version $Revision$
  */
 @Deprecated
-public class FastVector<E> extends ArrayList<E> implements Copyable, RevisionHandler {
+public class FastVector<E> extends ArrayList<E> implements Copyable {
 
     /** for serialization */
     private static final long serialVersionUID = -2173635135622930169L;
@@ -203,13 +203,4 @@ public class FastVector<E> extends ArrayList<E> implements Copyable, RevisionHan
         set(second, in);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

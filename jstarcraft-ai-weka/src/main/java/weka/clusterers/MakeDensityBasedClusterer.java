@@ -31,7 +31,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 import weka.estimators.DiscreteEstimator;
@@ -583,16 +582,6 @@ public class MakeDensityBasedClusterer extends AbstractDensityBasedClusterer imp
         Collections.addAll(options, super.getOptions());
 
         return options.toArray(new String[0]);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

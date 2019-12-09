@@ -30,7 +30,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 import weka.filters.AllFilter;
@@ -356,18 +355,6 @@ public class FilteredNeighbourSearch extends NearestNeighbourSearch implements C
         } else {
             setFilter(new AllFilter());
         }
-    }
-
-    /**
-     * Returns the revision string
-     * 
-     * @return the revision
-     * 
-     * @see weka.core.RevisionHandler#getRevision()
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 11006 $");
     }
 
     /**

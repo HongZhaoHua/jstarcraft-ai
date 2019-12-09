@@ -21,7 +21,6 @@
 package weka.classifiers.rules;
 
 import weka.classifiers.trees.m5.M5Base;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -154,15 +153,6 @@ public class M5Rules extends M5Base implements TechnicalInformationHandler {
         result.add(super.getTechnicalInformation());
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

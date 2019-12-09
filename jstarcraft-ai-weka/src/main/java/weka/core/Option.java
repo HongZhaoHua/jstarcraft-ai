@@ -49,7 +49,7 @@ import java.util.Vector;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Option implements RevisionHandler {
+public class Option {
 
     /** A cache of property descriptors */
     private static final Map<Class<?>, PropertyDescriptor[]> s_descriptorCache = new HashMap<Class<?>, PropertyDescriptor[]>();
@@ -643,12 +643,4 @@ public class Option implements RevisionHandler {
         return m_Synopsis;
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

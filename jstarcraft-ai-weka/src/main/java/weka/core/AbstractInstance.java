@@ -31,7 +31,7 @@ import java.util.Enumeration;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class AbstractInstance implements Instance, Serializable, RevisionHandler {
+public abstract class AbstractInstance implements Instance, Serializable {
 
     /** for serialization */
     static final long serialVersionUID = 1482635194499365155L;
@@ -818,16 +818,6 @@ public abstract class AbstractInstance implements Instance, Serializable, Revisi
     public final/* @pure@ */double weight() {
 
         return m_Weight;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

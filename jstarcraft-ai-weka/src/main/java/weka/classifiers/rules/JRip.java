@@ -36,8 +36,6 @@ import weka.core.Copyable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -703,7 +701,7 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
      * corresponding value. There are two inherited classes, namely NumericAntd and
      * NominalAntd in which the attributes are numeric and nominal respectively.
      */
-    public abstract class Antd implements WeightedInstancesHandler, Copyable, Serializable, RevisionHandler {
+    public abstract class Antd implements WeightedInstancesHandler, Copyable, Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -8929754772994154334L;
@@ -784,15 +782,6 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
             return cover;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -991,15 +980,6 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
             return (att.name() + symbol + Utils.doubleToString(splitPoint, 6));
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1120,15 +1100,6 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
             return (att.name() + " = " + att.value((int) value));
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1538,15 +1509,6 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
             return text.toString();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -2160,16 +2122,6 @@ public class JRip extends AbstractClassifier implements AdditionalMeasureProduce
         }
         sb.append("\nNumber of Rules : " + m_Ruleset.size() + "\n");
         return sb.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

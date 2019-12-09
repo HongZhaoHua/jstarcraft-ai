@@ -22,8 +22,6 @@ package weka.classifiers.functions.neural;
 
 import java.util.Random;
 
-import weka.core.RevisionUtils;
-
 /**
  * This class is used to represent a node in the neuralnet.
  * 
@@ -330,12 +328,4 @@ public class NeuralNode extends NeuralConnection {
 
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

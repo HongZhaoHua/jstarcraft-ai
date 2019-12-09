@@ -38,7 +38,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -876,16 +875,6 @@ public class LMT extends AbstractClassifier implements OptionHandler, Additional
      */
     public void setDoNotMakeSplitPointActualValue(boolean m_doNotMakeSplitPointActualValue) {
         this.m_doNotMakeSplitPointActualValue = m_doNotMakeSplitPointActualValue;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

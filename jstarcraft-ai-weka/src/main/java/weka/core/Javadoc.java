@@ -34,7 +34,7 @@ import java.util.Vector;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class Javadoc implements OptionHandler, RevisionHandler {
+public abstract class Javadoc implements OptionHandler {
 
     /** the start tag */
     protected String[] m_StartTag = null;

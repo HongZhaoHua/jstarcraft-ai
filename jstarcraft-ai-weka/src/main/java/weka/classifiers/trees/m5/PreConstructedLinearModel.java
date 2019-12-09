@@ -26,7 +26,6 @@ import java.io.Serializable;
 import weka.classifiers.AbstractClassifier;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -159,12 +158,4 @@ public class PreConstructedLinearModel extends AbstractClassifier implements Ser
         return b.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

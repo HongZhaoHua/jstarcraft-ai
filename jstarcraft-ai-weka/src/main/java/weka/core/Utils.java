@@ -56,7 +56,7 @@ import javax.swing.WindowConstants;
  * @author Julien Prados
  * @version $Revision$
  */
-public final class Utils implements RevisionHandler {
+public final class Utils {
 
     /**
      * The natural logarithm of 2.
@@ -2455,16 +2455,6 @@ public final class Utils implements RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

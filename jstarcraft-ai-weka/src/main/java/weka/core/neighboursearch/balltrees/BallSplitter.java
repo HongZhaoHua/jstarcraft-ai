@@ -28,8 +28,6 @@ import weka.core.EuclideanDistance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Abstract class for splitting a ball tree's BallNode.
@@ -37,7 +35,7 @@ import weka.core.RevisionUtils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public abstract class BallSplitter implements Serializable, OptionHandler, RevisionHandler {
+public abstract class BallSplitter implements Serializable, OptionHandler {
 
     /** ID to avoid warning */
     private static final long serialVersionUID = -2233739562654159948L;
@@ -164,13 +162,4 @@ public abstract class BallSplitter implements Serializable, OptionHandler, Revis
         m_DistanceFunction = func;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

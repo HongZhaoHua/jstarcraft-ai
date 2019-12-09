@@ -43,7 +43,7 @@ import java.util.jar.Manifest;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class ClassCache implements RevisionHandler {
+public class ClassCache {
 
     /**
      * For filtering classes.
@@ -433,16 +433,6 @@ public class ClassCache implements RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

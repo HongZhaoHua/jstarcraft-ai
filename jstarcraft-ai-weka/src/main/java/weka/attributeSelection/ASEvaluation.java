@@ -28,8 +28,6 @@ import weka.core.CapabilitiesHandler;
 import weka.core.CapabilitiesIgnorer;
 import weka.core.CommandlineRunnable;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -39,7 +37,7 @@ import weka.core.Utils;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class ASEvaluation implements Serializable, CapabilitiesHandler, CapabilitiesIgnorer, RevisionHandler, CommandlineRunnable {
+public abstract class ASEvaluation implements Serializable, CapabilitiesHandler, CapabilitiesIgnorer, CommandlineRunnable {
 
     /** for serialization */
     private static final long serialVersionUID = 2091705669885950849L;
@@ -157,16 +155,6 @@ public abstract class ASEvaluation implements Serializable, CapabilitiesHandler,
         result.enableAll();
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

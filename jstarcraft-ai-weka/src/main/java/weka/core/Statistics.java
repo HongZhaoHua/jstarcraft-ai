@@ -19,7 +19,7 @@ package weka.core;
  * @author Richard Kirkby (rkirkby@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Statistics implements RevisionHandler {
+public class Statistics {
 
     /** Some constants */
     protected static final double MACHEP = 1.11022302462515654042E-16;
@@ -996,16 +996,6 @@ public class Statistics implements RevisionHandler {
             }
         }
         return s;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -24,15 +24,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-
 /**
  * Abstract unit in a NeuralNetwork.
  *
  * @author Malcolm Ware (mfw4@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class NeuralConnection implements Serializable, RevisionHandler {
+public abstract class NeuralConnection implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -286208828571059163L;

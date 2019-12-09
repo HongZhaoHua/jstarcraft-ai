@@ -38,7 +38,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.SpecialFunctions;
 import weka.core.TechnicalInformation;
@@ -1213,16 +1212,6 @@ public class Discretize extends Filter implements SupervisedFilter, OptionHandle
         copyValues(inst, false, instance.dataset(), outputFormatPeek());
 
         push(inst); // No need to copy instance
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

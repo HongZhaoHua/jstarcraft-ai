@@ -23,8 +23,6 @@ package weka.experiment;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -117,7 +115,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Stats implements Serializable, RevisionHandler {
+public class Stats implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -8610544539090024102L;
@@ -339,15 +337,6 @@ public class Stats implements Serializable, RevisionHandler {
     public String toString() {
 
         return "Count   " + Utils.doubleToString(count, 8) + '\n' + "Min     " + Utils.doubleToString(min, 8) + '\n' + "Max     " + Utils.doubleToString(max, 8) + '\n' + "Sum     " + Utils.doubleToString(sum, 8) + '\n' + "SumSq   " + Utils.doubleToString(sumSq, 8) + '\n' + "Mean    " + Utils.doubleToString(mean, 8) + '\n' + "StdDev  " + Utils.doubleToString(stdDev, 8) + '\n';
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

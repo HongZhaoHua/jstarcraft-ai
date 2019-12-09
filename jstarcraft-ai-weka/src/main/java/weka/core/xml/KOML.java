@@ -26,9 +26,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class is a helper class for XML serialization using
  * <a href="http://koala.ilog.fr/XML/serialization/" target="_blank">KOML</a> .
@@ -38,7 +35,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision 1.0$
  */
-public class KOML implements RevisionHandler {
+public class KOML {
 
     /**
      * indicates whether
@@ -231,13 +228,4 @@ public class KOML implements RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

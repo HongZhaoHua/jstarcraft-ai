@@ -36,7 +36,7 @@ import java.io.LineNumberReader;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Version implements Comparable<String>, RevisionHandler {
+public class Version implements Comparable<String> {
 
     /** the version file */
     public final static String VERSION_FILE = "weka/core/version.txt";
@@ -253,16 +253,6 @@ public class Version implements Comparable<String>, RevisionHandler {
     @Override
     public String toString() {
         return VERSION;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -42,7 +42,6 @@ import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -1897,15 +1896,6 @@ public class RandomTree extends AbstractClassifier implements OptionHandler, Wei
         protected double gain(double[][] dist, double priorVal) {
 
             return priorVal - ContingencyTables.entropyConditionedOnRows(dist);
-        }
-
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
         }
 
         /**

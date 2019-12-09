@@ -28,10 +28,8 @@ import java.util.Set;
 import java.util.Vector;
 
 import weka.classifiers.bayes.BayesNet;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
-public class MarginCalculator implements Serializable, RevisionHandler {
+public class MarginCalculator implements Serializable {
     /** for serialization */
     private static final long serialVersionUID = 650278019241175534L;
 
@@ -185,7 +183,7 @@ public class MarginCalculator implements Serializable, RevisionHandler {
         return jtns;
     } // getJunctionTree
 
-    public class JunctionTreeSeparator implements Serializable, RevisionHandler {
+    public class JunctionTreeSeparator implements Serializable {
 
         private static final long serialVersionUID = 6502780192411755343L;
         int[] m_nNodes;
@@ -291,19 +289,9 @@ public class MarginCalculator implements Serializable, RevisionHandler {
             return fi;
         } // update
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
-
     } // class JunctionTreeSeparator
 
-    public class JunctionTreeNode implements Serializable, RevisionHandler {
+    public class JunctionTreeNode implements Serializable {
 
         private static final long serialVersionUID = 650278019241175536L;
         /**
@@ -659,16 +647,6 @@ public class MarginCalculator implements Serializable, RevisionHandler {
             }
         } // updateEvidence
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
-
     } // class JunctionTreeNode
 
     int getCPT(int[] nodeSet, int nNodes, int[] values, int[] order, BayesNet bayesNet) {
@@ -945,16 +923,6 @@ public class MarginCalculator implements Serializable, RevisionHandler {
     public double[] getMargin(int iNode) {
         return m_Margins[iNode];
     } // getMargin
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     public static void main(String[] args) {
         try {

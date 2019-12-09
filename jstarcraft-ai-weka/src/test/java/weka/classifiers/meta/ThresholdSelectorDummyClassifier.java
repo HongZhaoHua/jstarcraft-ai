@@ -24,7 +24,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * Dummy classifier - used in ThresholdSelectorTest.
@@ -101,13 +100,4 @@ public class ThresholdSelectorDummyClassifier extends AbstractClassifier {
         return buff.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

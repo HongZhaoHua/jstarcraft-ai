@@ -36,7 +36,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
@@ -775,15 +774,6 @@ public class RegressionByDiscretization extends SingleClassifierEnhancer impleme
             text.append(m_Classifier.toString());
         }
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -33,7 +33,7 @@ import java.util.Vector;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SystemInfo implements RevisionHandler {
+public class SystemInfo {
 
     /** for storing the information */
     private Hashtable<String, String> m_Info = null;
@@ -118,16 +118,6 @@ public class SystemInfo implements RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -28,7 +28,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.DenseInstance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 import weka.filters.SimpleBatchFilter;
@@ -168,16 +167,6 @@ public class Transpose extends SimpleBatchFilter implements UnsupervisedFilter, 
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10215 $");
     }
 
     /**

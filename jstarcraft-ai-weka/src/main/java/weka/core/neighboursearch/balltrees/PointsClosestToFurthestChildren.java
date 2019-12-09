@@ -23,7 +23,6 @@ package weka.core.neighboursearch.balltrees;
 import weka.core.EuclideanDistance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -199,13 +198,4 @@ public class PointsClosestToFurthestChildren extends BallSplitter implements Tec
         node.m_Right = new BallNode(node.m_End - numRight + 1, node.m_End, numNodesCreated + 2, (pivot = BallNode.calcCentroidPivot(node.m_End - numRight + 1, node.m_End, m_Instlist, m_Instances)), BallNode.calcRadius(node.m_End - numRight + 1, node.m_End, m_Instlist, m_Instances, pivot, m_DistanceFunction));
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

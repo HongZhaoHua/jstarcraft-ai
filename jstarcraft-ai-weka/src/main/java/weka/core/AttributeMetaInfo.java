@@ -26,7 +26,7 @@ import java.io.Serializable;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 
-public class AttributeMetaInfo implements Serializable, RevisionHandler {
+public class AttributeMetaInfo implements Serializable {
 
     /** The attribute's metadata. */
     protected ProtectedProperties m_Metadata;
@@ -274,13 +274,4 @@ public class AttributeMetaInfo implements Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10203 $");
-    }
 }

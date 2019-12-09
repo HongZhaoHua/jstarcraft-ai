@@ -37,8 +37,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Summarizable;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
@@ -138,7 +136,7 @@ public class CVParameterSelection extends RandomizableSingleClassifierEnhancer i
      * A data structure to hold values associated with a single cross-validation
      * search parameter
      */
-    protected class CVParameter implements Serializable, RevisionHandler {
+    protected class CVParameter implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -4668812017709421953L;
@@ -242,14 +240,6 @@ public class CVParameterSelection extends RandomizableSingleClassifierEnhancer i
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -814,15 +804,6 @@ public class CVParameterSelection extends RandomizableSingleClassifierEnhancer i
 
         String result = "Selected values: " + Utils.joinOptions(m_BestClassifierOptions);
         return result + '\n';
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -24,8 +24,6 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Vector;
 
-import weka.core.RevisionUtils;
-
 /**
  * The class that measures the performance of a tree based nearest neighbour
  * search algorithm.
@@ -312,12 +310,4 @@ public class TreePerformanceStats extends PerformanceStats {
         return buf.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

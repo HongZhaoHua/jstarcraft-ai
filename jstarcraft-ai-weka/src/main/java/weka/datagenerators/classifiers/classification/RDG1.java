@@ -33,8 +33,6 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WekaEnumeration;
 import weka.datagenerators.ClassificationGenerator;
@@ -168,7 +166,7 @@ public class RDG1 extends ClassificationGenerator {
     /**
      * class to represent decisionlist
      */
-    private class RuleList implements Serializable, RevisionHandler {
+    private class RuleList implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = 2830125413361938177L;
@@ -251,15 +249,6 @@ public class RDG1 extends ClassificationGenerator {
             return str.toString();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } /* end class RuleList ***** */
 
     /** Number of attribute the dataset should have */
@@ -1260,16 +1249,6 @@ public class RDG1 extends ClassificationGenerator {
         }
 
         return dataset;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

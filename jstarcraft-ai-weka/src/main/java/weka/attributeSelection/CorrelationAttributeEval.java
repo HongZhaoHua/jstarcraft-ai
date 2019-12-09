@@ -33,7 +33,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.ReplaceMissingValues;
@@ -440,16 +439,6 @@ public class CorrelationAttributeEval extends ASEvaluation implements AttributeE
         if (m_detailedOutputBuff != null && m_detailedOutputBuff.length() > 0) {
             m_detailedOutputBuff.append("\n");
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

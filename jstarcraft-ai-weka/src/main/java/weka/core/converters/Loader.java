@@ -28,7 +28,6 @@ import java.io.Serializable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
 
 /**
  * Interface to something that can load Instances from an input source in some
@@ -37,7 +36,7 @@ import weka.core.RevisionHandler;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public interface Loader extends Serializable, RevisionHandler {
+public interface Loader extends Serializable {
 
     /**
      * Exception that implementers can throw from getStructure() when they have not

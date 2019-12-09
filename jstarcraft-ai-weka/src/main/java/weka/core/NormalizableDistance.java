@@ -38,7 +38,7 @@ import weka.core.neighboursearch.PerformanceStats;
  *         weka.core.EuclideanDistance
  * @version $Revision$
  */
-public abstract class NormalizableDistance implements DistanceFunction, OptionHandler, Serializable, RevisionHandler {
+public abstract class NormalizableDistance implements DistanceFunction, OptionHandler, Serializable {
 
     /** Serial version id to avoid warning */
     private static final long serialVersionUID = -2806520224161351708L;

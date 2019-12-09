@@ -20,7 +20,6 @@
  */
 package weka.classifiers.bayes.net.estimate;
 
-import weka.core.RevisionUtils;
 import weka.estimators.DiscreteEstimator;
 
 /**
@@ -56,15 +55,6 @@ public class DiscreteEstimatorFullBayes extends DiscreteEstimatorBayes {
             m_SumOfCounts += m_Counts[iSymbol];
         }
     } // DiscreteEstimatorFullBayes
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
     /**
      * Main method for testing this class.

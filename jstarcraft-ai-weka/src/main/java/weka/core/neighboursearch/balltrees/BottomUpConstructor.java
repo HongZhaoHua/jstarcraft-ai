@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -303,7 +301,7 @@ public class BottomUpConstructor extends BallTreeConstructor implements Technica
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class TempNode implements RevisionHandler {
+    protected class TempNode {
 
         /** The centre/pivot of the node. */
         Instance anchor;
@@ -332,22 +330,6 @@ public class BottomUpConstructor extends BallTreeConstructor implements Technica
             return bf.toString();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -35,8 +35,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -49,7 +47,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class AbstractClassifier implements Classifier, BatchPredictor, Cloneable, Serializable, OptionHandler, CapabilitiesHandler, RevisionHandler, CapabilitiesIgnorer, CommandlineRunnable {
+public abstract class AbstractClassifier implements Classifier, BatchPredictor, Cloneable, Serializable, OptionHandler, CapabilitiesHandler, CapabilitiesIgnorer, CommandlineRunnable {
 
     /** for serialization */
     private static final long serialVersionUID = 6502780192411755341L;
@@ -481,16 +479,6 @@ public abstract class AbstractClassifier implements Classifier, BatchPredictor, 
         result.enableAll();
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

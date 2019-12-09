@@ -34,8 +34,6 @@ import weka.core.EuclideanDistance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -105,7 +103,7 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    public class CoverTreeNode implements Serializable, RevisionHandler {
+    public class CoverTreeNode implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = 1808760031169036512L;
@@ -170,15 +168,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
             return num_children == 0;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -187,7 +176,7 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    private class DistanceNode implements RevisionHandler {
+    private class DistanceNode {
 
         /**
          * The last distance is to the current reference point (potential current
@@ -208,15 +197,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
             return m_Instances.instance(idx);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** The euclidean distance function to use. */
@@ -680,7 +660,7 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class MyHeap implements RevisionHandler {
+    protected class MyHeap {
 
         /** the heap. */
         MyHeapElement m_heap[] = null;
@@ -870,15 +850,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
             return size() + noOfKthNearest();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -887,7 +858,7 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class MyHeapElement implements RevisionHandler {
+    protected class MyHeapElement {
 
         /** the distance. */
         public double distance;
@@ -907,15 +878,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
             distance = d;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -924,7 +886,7 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    private class d_node implements RevisionHandler {
+    private class d_node {
 
         /** The distance of the node's point to the query point. */
         double dist;
@@ -943,15 +905,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
             n = node;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     };
 
     /**
@@ -1905,16 +1858,6 @@ public class CoverTree extends NearestNeighbourSearch implements TechnicalInform
                 print(depth + 1, top_node.children.element(i)); // top_node.children[i]);
             }
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

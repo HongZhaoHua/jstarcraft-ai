@@ -28,9 +28,6 @@ import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * OutputZipper writes output to either gzipped files or to a multi entry zip
  * file. If the destination file is a directory each output string will be
@@ -41,7 +38,7 @@ import weka.core.RevisionUtils;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class OutputZipper implements RevisionHandler {
+public class OutputZipper {
 
     File m_destination;
     DataOutputStream m_zipOut = null;
@@ -100,15 +97,6 @@ public class OutputZipper implements RevisionHandler {
         if (m_zipOut != null) {
             m_zipOut.close();
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

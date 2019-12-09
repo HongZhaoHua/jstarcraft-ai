@@ -27,7 +27,6 @@ import java.util.Date;
 import java.util.regex.Matcher;
 
 import weka.core.ResourceUtils;
-import weka.core.RevisionUtils;
 
 /**
  * A simple file logger, that just logs to a single file. Deletes the file when
@@ -126,12 +125,4 @@ public class FileLogger extends ConsoleLogger {
         append(m_DateFormat.format(new Date()) + " " + cls + " " + method + m_LineFeed + level + ": " + msg + m_LineFeed);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

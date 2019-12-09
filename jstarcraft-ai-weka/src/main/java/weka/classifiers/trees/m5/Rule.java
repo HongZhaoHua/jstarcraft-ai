@@ -25,8 +25,6 @@ import java.io.Serializable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -35,7 +33,7 @@ import weka.core.Utils;
  * @author Mark Hall
  * @version $Revision$
  */
-public class Rule implements Serializable, RevisionHandler {
+public class Rule implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -4458627451682483204L;
@@ -611,13 +609,4 @@ public class Rule implements Serializable, RevisionHandler {
         return m_topOfTree;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

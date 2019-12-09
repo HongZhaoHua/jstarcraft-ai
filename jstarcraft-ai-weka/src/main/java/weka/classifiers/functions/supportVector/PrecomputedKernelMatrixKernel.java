@@ -32,7 +32,6 @@ import weka.core.Copyable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.matrix.Matrix;
 
@@ -322,13 +321,4 @@ public class PrecomputedKernelMatrixKernel extends Kernel implements Copyable {
         return 0;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

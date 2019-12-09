@@ -33,8 +33,6 @@ import weka.core.Instances;
 import weka.core.MultiInstanceCapabilitiesHandler;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializationHelper;
 import weka.core.TestInstances;
 import weka.core.Utils;
@@ -246,7 +244,7 @@ import weka.core.WeightedInstancesHandler;
  * @version $Revision$
  * @see TestInstances
  */
-public class CheckAssociator extends CheckScheme implements RevisionHandler {
+public class CheckAssociator extends CheckScheme {
 
     /*
      * Note about test methods: - methods return array of booleans - first index:
@@ -1366,16 +1364,6 @@ public class CheckAssociator extends CheckScheme implements RevisionHandler {
         }
 
         print(str);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

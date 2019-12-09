@@ -41,7 +41,6 @@ import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -988,15 +987,6 @@ public class FilteredClassifier extends RandomizableSingleClassifierEnhancer imp
 
         String result = "FilteredClassifier using " + getClassifierSpec() + " on data filtered through " + getFilterSpec() + "\n\nFiltered Header\n" + m_FilteredInstances.toString() + "\n\nClassifier Model\n" + m_Classifier.toString();
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

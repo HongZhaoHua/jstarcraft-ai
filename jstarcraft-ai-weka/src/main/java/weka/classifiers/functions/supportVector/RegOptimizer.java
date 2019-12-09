@@ -31,8 +31,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -58,7 +56,7 @@ import weka.core.Utils;
  * @author Remco Bouckaert (remco@cs.waikato.ac.nz,rrb@xm.co.nz)
  * @version $Revision$
  */
-public class RegOptimizer implements OptionHandler, Serializable, RevisionHandler {
+public class RegOptimizer implements OptionHandler, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -2198266997254461814L;
@@ -560,13 +558,4 @@ public class RegOptimizer implements OptionHandler, Serializable, RevisionHandle
         return text.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

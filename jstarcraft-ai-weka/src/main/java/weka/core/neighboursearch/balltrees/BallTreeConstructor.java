@@ -30,8 +30,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -40,7 +38,7 @@ import weka.core.Utils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public abstract class BallTreeConstructor implements OptionHandler, Serializable, RevisionHandler {
+public abstract class BallTreeConstructor implements OptionHandler, Serializable {
 
     /** ID to avoid warning */
     private static final long serialVersionUID = 982315539809240771L;
@@ -314,13 +312,4 @@ public abstract class BallTreeConstructor implements OptionHandler, Serializable
         return result.toArray(new String[result.size()]);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

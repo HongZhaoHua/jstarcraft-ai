@@ -34,7 +34,6 @@ import weka.core.Instances;
 import weka.core.MultiInstanceCapabilitiesHandler;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializationHelper;
 import weka.core.TestInstances;
 import weka.core.Utils;
@@ -1606,16 +1605,6 @@ public class CheckClassifier extends CheckScheme {
         }
 
         print(str);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

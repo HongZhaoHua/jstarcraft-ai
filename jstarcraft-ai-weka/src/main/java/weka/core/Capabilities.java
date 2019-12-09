@@ -71,7 +71,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Capabilities implements Cloneable, Serializable, RevisionHandler {
+public class Capabilities implements Cloneable, Serializable {
 
     /** serialversion UID */
     static final long serialVersionUID = -5478590032325567849L;
@@ -1894,13 +1894,4 @@ public class Capabilities implements Cloneable, Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

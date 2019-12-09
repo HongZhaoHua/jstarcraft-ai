@@ -30,8 +30,6 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -87,7 +85,7 @@ import weka.core.Utils;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Matrix implements Cloneable, Serializable, RevisionHandler {
+public class Matrix implements Cloneable, Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 7856794138418366180L;
@@ -1515,16 +1513,6 @@ public class Matrix implements Cloneable, Serializable, RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

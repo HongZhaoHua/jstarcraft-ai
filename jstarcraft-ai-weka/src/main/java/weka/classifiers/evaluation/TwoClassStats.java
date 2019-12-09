@@ -21,16 +21,13 @@
 
 package weka.classifiers.evaluation;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Encapsulates performance functions for two-class problems.
  * 
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class TwoClassStats implements RevisionHandler {
+public class TwoClassStats {
 
     /** The names used when converting this object to a confusion matrix */
     private static final String[] CATEGORY_NAMES = { "negative", "positive" };
@@ -260,13 +257,4 @@ public class TwoClassStats implements RevisionHandler {
         return res.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

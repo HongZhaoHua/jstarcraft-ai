@@ -21,7 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -353,15 +352,6 @@ public class ResultMatrixCSV extends ResultMatrix {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

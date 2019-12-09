@@ -24,7 +24,6 @@ package weka.classifiers.trees.j48;
 import java.util.Random;
 
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -187,12 +186,4 @@ public class PruneableClassifierTree extends ClassifierTree {
         return (PruneableClassifierTree) m_sons[index];
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -20,7 +20,6 @@
 
 package weka.core.neighboursearch.kdtrees;
 
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -203,12 +202,4 @@ public class MedianOfWidestDimension extends KDTreeNodeSplitter implements Techn
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

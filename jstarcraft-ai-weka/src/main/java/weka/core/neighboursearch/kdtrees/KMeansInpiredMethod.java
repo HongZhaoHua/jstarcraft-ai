@@ -22,7 +22,6 @@ package weka.core.neighboursearch.kdtrees;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -305,13 +304,4 @@ public class KMeansInpiredMethod extends KDTreeNodeSplitter implements Technical
         return left + 1;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

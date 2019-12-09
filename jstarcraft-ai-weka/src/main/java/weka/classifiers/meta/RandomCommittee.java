@@ -30,7 +30,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -311,15 +310,6 @@ public class RandomCommittee extends RandomizableParallelIteratedSingleClassifie
             return size;
         } else
             throw new Exception("Classifier: " + getClassifierSpec() + " cannot generate a partition");
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

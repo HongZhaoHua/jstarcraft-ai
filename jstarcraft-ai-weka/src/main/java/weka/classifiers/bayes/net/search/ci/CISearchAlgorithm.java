@@ -25,7 +25,6 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.ParentSet;
 import weka.classifiers.bayes.net.search.local.LocalScoreSearchAlgorithm;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> The CISearchAlgorithm class supports Bayes net
@@ -109,12 +108,4 @@ public class CISearchAlgorithm extends LocalScoreSearchAlgorithm {
         return false;
     } // IsConditionalIndependent
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // class CISearchAlgorithm

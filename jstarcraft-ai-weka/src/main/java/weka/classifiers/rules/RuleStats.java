@@ -28,8 +28,6 @@ import java.util.Random;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -47,7 +45,7 @@ import weka.core.Utils;
  * @author Xin Xu (xx5@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class RuleStats implements Serializable, RevisionHandler {
+public class RuleStats implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = -5708153367675298624L;
@@ -880,13 +878,4 @@ public class RuleStats implements Serializable, RevisionHandler {
         return rt;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

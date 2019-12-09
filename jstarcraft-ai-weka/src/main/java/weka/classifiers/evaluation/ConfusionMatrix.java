@@ -24,7 +24,6 @@ package weka.classifiers.evaluation;
 import java.util.ArrayList;
 
 import weka.classifiers.CostMatrix;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.matrix.Matrix;
 
@@ -324,13 +323,4 @@ public class ConfusionMatrix extends Matrix {
         return new String(ID);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

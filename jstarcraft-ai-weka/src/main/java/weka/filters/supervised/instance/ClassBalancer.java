@@ -26,7 +26,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -184,16 +183,6 @@ public class ClassBalancer extends SimpleBatchFilter implements SupervisedFilter
             result.instance(i).setWeight(factor * result.instance(i).weight() / sumOfWeightsPerClass[(int) dataToUseForMakingWeights.instance(i).classValue()]);
         }
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10215 $");
     }
 
     /**

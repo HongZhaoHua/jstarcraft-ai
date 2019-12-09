@@ -22,9 +22,6 @@ package weka.core.neighboursearch.kdtrees;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * A class representing a KDTree node. A node does not explicitly store the
  * instances that it contains. Instead, it only stores the start and end index
@@ -41,7 +38,7 @@ import weka.core.RevisionUtils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public class KDTreeNode implements Serializable, RevisionHandler {
+public class KDTreeNode implements Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = -3660396067582792648L;
@@ -161,12 +158,4 @@ public class KDTreeNode implements Serializable, RevisionHandler {
         return (m_End - m_Start + 1);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

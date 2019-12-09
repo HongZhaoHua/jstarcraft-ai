@@ -43,7 +43,7 @@ import java.util.Vector;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SerializationHelper implements RevisionHandler {
+public class SerializationHelper {
 
     /** the field name of serialVersionUID. */
     public final static String SERIAL_VERSION_UID = "serialVersionUID";
@@ -401,16 +401,6 @@ public class SerializationHelper implements RevisionHandler {
         ois.close();
 
         return result.toArray(new Object[result.size()]);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -32,7 +32,6 @@ import org.w3c.dom.NodeList;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.pmml.DerivedFieldMetaInfo;
 import weka.core.pmml.FieldMetaInfo;
@@ -797,15 +796,6 @@ public class NeuralNetwork extends PMMLClassifier {
         }
 
         m_outputs = new NeuralOutputs((Element) outputL.item(0), m_miningSchema);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see weka.core.RevisionHandler#getRevision()
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

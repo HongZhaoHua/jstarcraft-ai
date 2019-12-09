@@ -35,8 +35,6 @@ import java.util.Vector;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.WekaPackageClassLoaderManager;
 
 /**
@@ -47,7 +45,7 @@ import weka.core.WekaPackageClassLoaderManager;
  * @version $Revision$
  * @see Serializable
  */
-public class ConverterUtils implements Serializable, RevisionHandler {
+public class ConverterUtils implements Serializable {
 
     /** for serialization. */
     static final long serialVersionUID = -2460855349276148760L;
@@ -69,7 +67,7 @@ public class ConverterUtils implements Serializable, RevisionHandler {
      * @see #reset()
      * @see DataSink
      */
-    public static class DataSource implements Serializable, RevisionHandler {
+    public static class DataSource implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = -613122395928757332L;
@@ -497,15 +495,6 @@ public class ConverterUtils implements Serializable, RevisionHandler {
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -517,7 +506,7 @@ public class ConverterUtils implements Serializable, RevisionHandler {
      * @version $Revision$
      * @see DataSource
      */
-    public static class DataSink implements Serializable, RevisionHandler {
+    public static class DataSink implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = -1504966891136411204L;
@@ -646,15 +635,6 @@ public class ConverterUtils implements Serializable, RevisionHandler {
             DataSink.write(args[1], data);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** all available loaders (extension &lt;-&gt; classname). */
@@ -922,13 +902,4 @@ public class ConverterUtils implements Serializable, RevisionHandler {
         return (AbstractFileSaver) getConverterForExtension(extension, m_FileSavers);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

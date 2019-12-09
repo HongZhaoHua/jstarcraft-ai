@@ -22,8 +22,6 @@
 package weka.classifiers.trees.m5;
 
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Stores some statistics.
@@ -31,7 +29,7 @@ import weka.core.RevisionUtils;
  * @author Yong Wang (yongwang@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public final class Values implements RevisionHandler {
+public final class Values {
 
     int numInstances; // number of the instances
     int missingInstances; // number of the instances with missing values
@@ -103,12 +101,4 @@ public final class Values implements RevisionHandler {
         return text.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

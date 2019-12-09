@@ -32,7 +32,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -278,16 +277,6 @@ public class Randomize extends Filter implements UnsupervisedFilter, OptionHandl
         m_NewBatch = true;
         m_FirstBatchDone = true;
         return (numPendingOutput() != 0);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

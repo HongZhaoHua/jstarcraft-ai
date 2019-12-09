@@ -32,8 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TestInstances;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
@@ -152,7 +150,7 @@ import weka.core.WeightedInstancesHandler;
  * @version $Revision$
  * @see TestInstances
  */
-public class CheckEstimator implements OptionHandler, RevisionHandler {
+public class CheckEstimator implements OptionHandler {
 
     /*
      * Note about test methods: - methods return array of booleans - first index:
@@ -165,7 +163,7 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
     /**
      * a class for postprocessing the test-data
      */
-    public class PostProcessor implements RevisionHandler {
+    public class PostProcessor {
         /**
          * Provides a hook for derived classes to further modify the data. Currently,
          * the data is just passed through.
@@ -177,15 +175,6 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
             return data;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /*** The estimator to be examined */
@@ -216,7 +205,7 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
      * class that contains info about the attribute types the estimator can estimate
      * estimator work on one attribute only
      */
-    public static class AttrTypes implements RevisionHandler {
+    public static class AttrTypes {
 
         boolean nominal = false;
         boolean numeric = false;
@@ -309,22 +298,13 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
             return attrs;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
      * public class that contains info about the chosen attribute type estimator
      * work on one attribute only
      */
-    public static class EstTypes implements RevisionHandler {
+    public static class EstTypes {
 
         boolean incremental = false;
         boolean weighted = false;
@@ -345,15 +325,6 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
             supervised = s;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -2003,16 +1974,6 @@ public class CheckEstimator implements OptionHandler, RevisionHandler {
         }
 
         print(str);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

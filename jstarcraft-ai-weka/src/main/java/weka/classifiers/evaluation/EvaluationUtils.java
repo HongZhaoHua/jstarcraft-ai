@@ -27,8 +27,6 @@ import java.util.Random;
 import weka.classifiers.Classifier;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Contains utility functions for generating lists of predictions in various
@@ -37,7 +35,7 @@ import weka.core.RevisionUtils;
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class EvaluationUtils implements RevisionHandler {
+public class EvaluationUtils {
 
     /** Seed used to randomize data in cross-validation */
     private int m_Seed = 1;
@@ -132,13 +130,4 @@ public class EvaluationUtils implements RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

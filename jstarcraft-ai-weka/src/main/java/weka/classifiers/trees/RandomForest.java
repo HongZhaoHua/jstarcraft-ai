@@ -32,7 +32,6 @@ import weka.classifiers.meta.Bagging;
 import weka.core.Capabilities;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -799,16 +798,6 @@ public class RandomForest extends Bagging {
         setClassifier(classifier);
 
         Utils.checkForRemainingOptions(options);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

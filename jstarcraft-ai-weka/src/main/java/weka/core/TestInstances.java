@@ -164,7 +164,7 @@ import weka.core.Capabilities.Capability;
  * @version $Revision$
  * @see weka.classifiers.CheckClassifier
  */
-public class TestInstances implements Cloneable, Serializable, OptionHandler, RevisionHandler {
+public class TestInstances implements Cloneable, Serializable, OptionHandler {
 
     /** for serialization */
     private static final long serialVersionUID = -6263968936330390469L;
@@ -1845,16 +1845,6 @@ public class TestInstances implements Cloneable, Serializable, OptionHandler, Re
         result += "Word separators: " + getWordSeparators() + "\n";
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

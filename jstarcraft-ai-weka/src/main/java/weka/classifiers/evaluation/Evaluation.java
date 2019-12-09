@@ -68,8 +68,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializationHelper;
 import weka.core.Summarizable;
 import weka.core.Utils;
@@ -246,7 +244,7 @@ import weka.estimators.UnivariateKernelEstimator;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Evaluation implements Summarizable, RevisionHandler, Serializable {
+public class Evaluation implements Summarizable, Serializable {
 
     /**
      * For serialization
@@ -4871,13 +4869,4 @@ public class Evaluation implements Summarizable, RevisionHandler, Serializable {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

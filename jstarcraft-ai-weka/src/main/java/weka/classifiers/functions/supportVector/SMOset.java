@@ -23,16 +23,13 @@ package weka.classifiers.functions.supportVector;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Stores a set of integer of a given size.
  * 
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class SMOset implements Serializable, RevisionHandler {
+public class SMOset implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -8364829283188675777L;
@@ -150,12 +147,4 @@ public class SMOset implements Serializable, RevisionHandler {
         return m_number;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

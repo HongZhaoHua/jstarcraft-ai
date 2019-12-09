@@ -34,7 +34,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.SingleIndex;
 import weka.core.UnsupportedAttributeTypeException;
@@ -480,16 +479,6 @@ public class AddValues extends Filter implements UnsupervisedFilter, StreamableF
      */
     public void setSort(boolean value) {
         m_Sort = value;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

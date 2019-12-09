@@ -28,7 +28,6 @@ import java.util.Vector;
 import weka.classifiers.bayes.BayesNet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -467,15 +466,5 @@ public class LAGDHillClimber extends HillClimber {
     public String nrOfGoodOperationsTipText() {
         return "Sets the Number of Good Operations per Look Ahead Step. 'nrOfGoodOperations = 5' means that for the next " + "Look Ahead Step only the 5 best Operations (adding, deleting or reversing an arc) are taken into account for the " + "calculation of the best sequence consisting of nrOfLookAheadSteps operations.";
     } // nrOfGoodOperationsTipText
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // LAGDHillClimber

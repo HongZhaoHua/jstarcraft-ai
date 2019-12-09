@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Date;
 
-import weka.core.RevisionUtils;
 import weka.core.Tee;
 
 /**
@@ -333,12 +332,4 @@ public class OutputLogger extends FileLogger {
         append(m_DateFormat.format(new Date()) + " " + cls + " " + method + m_LineFeed + level + ": " + msg + m_LineFeed);
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

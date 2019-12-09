@@ -24,7 +24,6 @@ package weka.estimators;
 import java.util.Random;
 import java.util.Vector;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.matrix.Matrix;
 
@@ -193,16 +192,6 @@ public class NNConditionalEstimator implements ConditionalEstimator {
         String result = "NN Conditional Estimator. " + m_CondValues.size() + " data points.  Mean = " + Utils.doubleToString(m_ValueMean, 4, 2) + "  Conditional mean = " + Utils.doubleToString(m_CondMean, 4, 2);
         result += "  Covariance Matrix: \n" + m_Covariance;
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

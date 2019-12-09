@@ -24,13 +24,11 @@ import java.io.Serializable;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Class providing hash table keys for DecisionTable
  */
-public class DecisionTableHashKey implements Serializable, RevisionHandler {
+public class DecisionTableHashKey implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = 5674163500154964602L;
@@ -194,12 +192,4 @@ public class DecisionTableHashKey implements Serializable, RevisionHandler {
         System.out.println("Hash val: " + hashCode());
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -39,8 +39,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializationHelper;
 import weka.core.Utils;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -105,7 +103,7 @@ import weka.filters.unsupervised.attribute.Remove;
  * @version $Revision$
  * @see weka.core.Drawable
  */
-public class ClusterEvaluation implements Serializable, RevisionHandler {
+public class ClusterEvaluation implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = -830188327319128005L;
@@ -1262,16 +1260,6 @@ public class ClusterEvaluation implements Serializable, RevisionHandler {
         }
 
         return true;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

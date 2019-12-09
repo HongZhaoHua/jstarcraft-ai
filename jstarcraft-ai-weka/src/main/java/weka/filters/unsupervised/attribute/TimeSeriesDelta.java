@@ -26,7 +26,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.UnsupportedAttributeTypeException;
 import weka.core.Utils;
@@ -176,15 +175,6 @@ public class TimeSeriesDelta extends TimeSeriesTranslate {
         }
         inst.setDataset(dest.dataset());
         return inst;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

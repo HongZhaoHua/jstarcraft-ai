@@ -42,7 +42,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.SparseInstance;
 import weka.core.TechnicalInformation;
@@ -2294,16 +2293,6 @@ public class FPGrowth extends AbstractAssociator implements AssociationRulesProd
         text.append("}\n");
 
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

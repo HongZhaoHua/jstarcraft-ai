@@ -73,7 +73,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Instances extends AbstractList<Instance> implements Serializable, RevisionHandler {
+public class Instances extends AbstractList<Instance> implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = -19412345060742748L;
@@ -2604,13 +2604,4 @@ public class Instances extends AbstractList<Instance> implements Serializable, R
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -29,7 +29,7 @@ import java.util.Random;
  * @author Xin Xu (xx5@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public final class RandomVariates extends Random implements RevisionHandler {
+public final class RandomVariates extends Random {
 
     /** for serialization */
     private static final long serialVersionUID = -4763742718209460354L;
@@ -225,15 +225,6 @@ public final class RandomVariates extends Random implements RevisionHandler {
 
             return x;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

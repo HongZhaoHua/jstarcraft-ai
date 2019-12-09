@@ -21,8 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 import weka.core.Utils;
 
@@ -32,7 +30,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class PairedStats implements RevisionHandler {
+public class PairedStats {
 
     /** The stats associated with the data in column 1 */
     public Stats xStats;
@@ -217,15 +215,6 @@ public class PairedStats implements RevisionHandler {
 
         return "Analysis for " + Utils.doubleToString(count, 0) + " points:\n" + "                " + "         Column 1" + "         Column 2" + "       Difference\n" + "Minimums        " + Utils.doubleToString(xStats.min, 17, 4) + Utils.doubleToString(yStats.min, 17, 4) + Utils.doubleToString(differencesStats.min, 17, 4) + '\n' + "Maximums        " + Utils.doubleToString(xStats.max, 17, 4) + Utils.doubleToString(yStats.max, 17, 4) + Utils.doubleToString(differencesStats.max, 17, 4) + '\n' + "Sums            " + Utils.doubleToString(xStats.sum, 17, 4) + Utils.doubleToString(yStats.sum, 17, 4) + Utils.doubleToString(differencesStats.sum, 17, 4) + '\n' + "SumSquares      " + Utils.doubleToString(xStats.sumSq, 17, 4) + Utils.doubleToString(yStats.sumSq, 17, 4) + Utils.doubleToString(differencesStats.sumSq, 17, 4) + '\n' + "Means           " + Utils.doubleToString(xStats.mean, 17, 4) + Utils.doubleToString(yStats.mean, 17, 4) + Utils.doubleToString(differencesStats.mean, 17, 4) + '\n'
                 + "SDs             " + Utils.doubleToString(xStats.stdDev, 17, 4) + Utils.doubleToString(yStats.stdDev, 17, 4) + Utils.doubleToString(differencesStats.stdDev, 17, 4) + '\n' + "Prob(differences) " + Utils.doubleToString(differencesProbability, 4) + " (sigflag " + differencesSignificance + ")\n" + "Correlation       " + Utils.doubleToString(correlation, 4) + "\n";
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

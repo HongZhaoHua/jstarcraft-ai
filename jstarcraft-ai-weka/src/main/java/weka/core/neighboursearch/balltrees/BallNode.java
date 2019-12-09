@@ -26,8 +26,6 @@ import weka.core.DenseInstance;
 import weka.core.DistanceFunction;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Class representing a node of a BallTree.
@@ -35,7 +33,7 @@ import weka.core.RevisionUtils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public class BallNode implements Serializable, RevisionHandler {
+public class BallNode implements Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = -8289151861759883510L;
@@ -338,12 +336,4 @@ public class BallNode implements Serializable, RevisionHandler {
         return radius / 2;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

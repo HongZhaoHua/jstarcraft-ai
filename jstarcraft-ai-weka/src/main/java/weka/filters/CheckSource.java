@@ -28,8 +28,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.converters.ConverterUtils.DataSource;
 
@@ -76,7 +74,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  * @version $Revision$
  * @see weka.filters.Sourcable
  */
-public class CheckSource implements OptionHandler, RevisionHandler {
+public class CheckSource implements OptionHandler {
 
     /** the classifier used for generating the source code */
     protected Filter m_Filter = null;
@@ -457,16 +455,6 @@ public class CheckSource implements OptionHandler, RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

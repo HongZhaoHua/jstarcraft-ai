@@ -24,7 +24,6 @@ package weka.estimators;
 import weka.core.Aggregateable;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -187,16 +186,6 @@ public class DiscreteEstimator extends Estimator implements IncrementalEstimator
         // attributes
         result.enable(Capability.NUMERIC_ATTRIBUTES);
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     @Override

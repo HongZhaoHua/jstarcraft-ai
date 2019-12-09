@@ -24,7 +24,6 @@ package weka.estimators;
 import weka.core.Aggregateable;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 import weka.core.Utils;
 
@@ -209,16 +208,6 @@ public class NormalEstimator extends Estimator implements IncrementalEstimator, 
      */
     public double getSumOfWeights() {
         return m_SumOfWeights;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     @Override

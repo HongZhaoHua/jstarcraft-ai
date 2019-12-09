@@ -27,9 +27,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * A helper class for
  * <a href="http://www.jython.org/" target="_blank">Jython</a>.
@@ -37,7 +34,7 @@ import weka.core.RevisionUtils;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Jython implements Serializable, RevisionHandler {
+public class Jython implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -6972298704460209252L;
@@ -273,16 +270,6 @@ public class Jython implements Serializable, RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

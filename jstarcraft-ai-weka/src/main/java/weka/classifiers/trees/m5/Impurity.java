@@ -22,8 +22,6 @@
 package weka.classifiers.trees.m5;
 
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Class for handling the impurity values when spliting the instances
@@ -31,7 +29,7 @@ import weka.core.RevisionUtils;
  * @author Yong Wang (yongwang@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public final class Impurity implements RevisionHandler {
+public final class Impurity {
 
     double n; // number of total instances
     int attr; // splitting attribute
@@ -183,12 +181,4 @@ public final class Impurity implements RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

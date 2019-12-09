@@ -35,7 +35,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionMetadata;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -267,16 +266,6 @@ public class OrdinalToNumeric extends PotentialClassIgnorer implements Streamabl
         push(inst);
 
         return true;
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: $");
     }
 
     /**

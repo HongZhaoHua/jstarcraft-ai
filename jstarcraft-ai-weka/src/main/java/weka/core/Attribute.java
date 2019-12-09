@@ -83,7 +83,7 @@ import java.util.List;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Attribute implements Copyable, Serializable, RevisionHandler {
+public class Attribute implements Copyable, Serializable {
 
     /** for serialization */
     static final long serialVersionUID = -742180568732916383L;
@@ -1377,16 +1377,6 @@ public class Attribute implements Copyable, Serializable, RevisionHandler {
             }
         }
         return true;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

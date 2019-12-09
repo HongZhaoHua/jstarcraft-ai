@@ -34,8 +34,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -129,7 +127,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class BVDecompose implements OptionHandler, TechnicalInformationHandler, RevisionHandler {
+public class BVDecompose implements OptionHandler, TechnicalInformationHandler {
 
     /** Debugging mode, gives extra output if true */
     protected boolean m_Debug;
@@ -680,15 +678,6 @@ public class BVDecompose implements OptionHandler, TechnicalInformationHandler, 
         result += "\nVariance     : " + Utils.doubleToString(getVariance(), 6, 4);
 
         return result + "\n";
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

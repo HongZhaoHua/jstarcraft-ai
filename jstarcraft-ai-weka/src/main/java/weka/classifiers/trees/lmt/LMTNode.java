@@ -30,8 +30,6 @@ import weka.classifiers.trees.j48.ClassifierSplitModel;
 import weka.classifiers.trees.j48.ModelSelection;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.supervised.attribute.NominalToBinary;
@@ -39,7 +37,7 @@ import weka.filters.supervised.attribute.NominalToBinary;
 /**
  * Auxiliary class for list of LMTNodes
  */
-class CompareNode implements Comparator<LMTNode>, RevisionHandler {
+class CompareNode implements Comparator<LMTNode> {
 
     /**
      * Compares its two arguments for order.
@@ -60,15 +58,6 @@ class CompareNode implements Comparator<LMTNode>, RevisionHandler {
         return 0;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }
 
 /**
@@ -889,13 +878,4 @@ public class LMTNode extends LogisticBase {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

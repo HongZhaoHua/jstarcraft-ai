@@ -30,7 +30,6 @@ import weka.classifiers.evaluation.AbstractEvaluationMetric;
 import weka.classifiers.evaluation.Prediction;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
 import weka.core.Summarizable;
 
 /**
@@ -188,7 +187,7 @@ import weka.core.Summarizable;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Evaluation implements Serializable, Summarizable, RevisionHandler {
+public class Evaluation implements Serializable, Summarizable {
 
     /** For serialization */
     private static final long serialVersionUID = -170766452472965668L;
@@ -910,11 +909,6 @@ public class Evaluation implements Serializable, Summarizable, RevisionHandler {
      */
     public final double kappa() {
         return m_delegate.kappa();
-    }
-
-    @Override
-    public String getRevision() {
-        return m_delegate.getRevision();
     }
 
     /**

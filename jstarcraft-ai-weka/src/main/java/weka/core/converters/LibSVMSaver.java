@@ -32,7 +32,6 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SingleIndex;
 import weka.core.Utils;
 
@@ -404,16 +403,6 @@ public class LibSVMSaver extends AbstractFileSaver implements BatchConverter, In
             resetWriter();
             setWriteMode(CANCEL);
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

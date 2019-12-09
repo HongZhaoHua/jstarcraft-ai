@@ -23,7 +23,6 @@ package weka.estimators;
 
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.matrix.Matrix;
 
@@ -166,15 +165,6 @@ public class MahalanobisEstimator extends Estimator implements IncrementalEstima
         // attributes
         result.enable(Capability.NUMERIC_ATTRIBUTES);
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

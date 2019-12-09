@@ -34,8 +34,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.PartitionGenerator;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformationHandler;
@@ -75,7 +73,7 @@ import weka.filters.SupervisedFilter;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class PartitionMembership extends Filter implements SupervisedFilter, OptionHandler, RevisionHandler, TechnicalInformationHandler, WeightedInstancesHandler {
+public class PartitionMembership extends Filter implements SupervisedFilter, OptionHandler, TechnicalInformationHandler, WeightedInstancesHandler {
 
     /** for serialization */
     static final long serialVersionUID = 333532554667754026L;
@@ -372,8 +370,5 @@ public class PartitionMembership extends Filter implements SupervisedFilter, Opt
         runFilter(new PartitionMembership(), argv);
     }
 
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
+    
 }

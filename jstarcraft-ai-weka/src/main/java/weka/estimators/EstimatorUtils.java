@@ -28,8 +28,6 @@ import java.util.Vector;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Contains static utility functions for Estimators.
@@ -38,7 +36,7 @@ import weka.core.RevisionUtils;
  * @author Gabi Schmidberger (gabi@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class EstimatorUtils implements RevisionHandler {
+public class EstimatorUtils {
 
     /**
      * Find the minimum distance between values
@@ -303,13 +301,4 @@ public class EstimatorUtils implements RevisionHandler {
         return text.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

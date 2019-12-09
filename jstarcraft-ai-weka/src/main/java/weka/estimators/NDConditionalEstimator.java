@@ -21,8 +21,6 @@
 
 package weka.estimators;
 
-import weka.core.RevisionUtils;
-
 /**
  * Conditional probability estimator for a numeric domain conditional upon a
  * discrete domain (utilises separate normal estimators for each discrete
@@ -98,15 +96,6 @@ public class NDConditionalEstimator implements ConditionalEstimator {
             result += "Sub-estimator " + i + ": " + m_Estimators[i];
         }
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -39,7 +39,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -1370,16 +1369,6 @@ public class CfsSubsetEval extends ASEvaluation implements SubsetEvaluator, Thre
         m_missingSeparate = false;
         m_locallyPredictive = true;
         m_c_Threshold = 0.0;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

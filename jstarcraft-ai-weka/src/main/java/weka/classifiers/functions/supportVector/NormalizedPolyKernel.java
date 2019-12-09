@@ -23,7 +23,6 @@ package weka.classifiers.functions.supportVector;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 
 /**
  * <!-- globalinfo-start --> The normalized polynomial kernel.<br/>
@@ -153,12 +152,4 @@ public class NormalizedPolyKernel extends PolyKernel {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -37,7 +37,6 @@ import weka.core.Capabilities;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Utils;
 
@@ -678,16 +677,6 @@ public class ClassifierAttributeEval extends ASEvaluation implements AttributeEv
         text.append("\n");
 
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 14195 $");
     }
 
     /**

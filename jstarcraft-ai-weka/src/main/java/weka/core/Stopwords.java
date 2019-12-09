@@ -65,7 +65,7 @@ import java.util.Vector;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Stopwords implements RevisionHandler {
+public class Stopwords {
 
     /** The hash set containing the list of stopwords */
     protected HashSet<String> m_Words = null;
@@ -791,16 +791,6 @@ public class Stopwords implements RevisionHandler {
      */
     public static boolean isStopword(String str) {
         return m_Stopwords.is(str.toLowerCase());
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

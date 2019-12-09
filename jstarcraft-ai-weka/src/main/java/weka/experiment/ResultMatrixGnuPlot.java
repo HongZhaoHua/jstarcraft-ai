@@ -21,7 +21,6 @@
 
 package weka.experiment;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.Version;
 
@@ -391,15 +390,6 @@ public class ResultMatrixGnuPlot extends ResultMatrix {
      */
     public String toStringRanking() {
         return new ResultMatrixPlainText(this).toStringRanking();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

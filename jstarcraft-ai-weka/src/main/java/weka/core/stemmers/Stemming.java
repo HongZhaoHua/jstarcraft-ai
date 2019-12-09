@@ -35,8 +35,6 @@ import java.util.Vector;
 
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -46,7 +44,7 @@ import weka.core.Utils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Stemming implements RevisionHandler {
+public class Stemming {
 
     /**
      * lists all the options on the command line
@@ -165,13 +163,4 @@ public class Stemming implements RevisionHandler {
         reader.close();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

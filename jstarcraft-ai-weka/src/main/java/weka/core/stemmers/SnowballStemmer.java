@@ -30,7 +30,6 @@ import weka.core.ClassDiscovery;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.PluginManager;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WekaPackageClassLoaderManager;
 
@@ -434,16 +433,6 @@ public class SnowballStemmer implements Stemmer, OptionHandler {
         result += " " + Utils.joinOptions(getOptions());
 
         return result.trim();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

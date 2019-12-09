@@ -47,8 +47,6 @@ import java.util.Vector;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.Version;
 import weka.core.WekaPackageClassLoaderManager;
@@ -99,7 +97,7 @@ import weka.core.WekaPackageClassLoaderManager;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class XMLSerialization implements RevisionHandler {
+public class XMLSerialization {
 
     /** for debugging purposes only */
     protected static boolean DEBUG = false;
@@ -1773,13 +1771,4 @@ public class XMLSerialization implements RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

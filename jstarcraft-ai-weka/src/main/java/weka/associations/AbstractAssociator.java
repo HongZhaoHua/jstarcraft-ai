@@ -31,8 +31,6 @@ import weka.core.CapabilitiesIgnorer;
 import weka.core.CommandlineRunnable;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -43,7 +41,7 @@ import weka.core.Utils;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class AbstractAssociator implements Cloneable, Associator, Serializable, CapabilitiesHandler, CapabilitiesIgnorer, RevisionHandler, OptionHandler, CommandlineRunnable {
+public abstract class AbstractAssociator implements Cloneable, Associator, Serializable, CapabilitiesHandler, CapabilitiesIgnorer, OptionHandler, CommandlineRunnable {
 
     /** for serialization */
     private static final long serialVersionUID = -3017644543382432070L;
@@ -183,15 +181,6 @@ public abstract class AbstractAssociator implements Cloneable, Associator, Seria
         defaultC.enableAll();
 
         return defaultC;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

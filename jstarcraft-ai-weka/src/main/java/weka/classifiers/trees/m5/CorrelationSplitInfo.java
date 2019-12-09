@@ -24,8 +24,6 @@ package weka.classifiers.trees.m5;
 import java.io.Serializable;
 
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.experiment.PairedStats;
 
@@ -35,7 +33,7 @@ import weka.experiment.PairedStats;
  * @author Mark Hall (mhall@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public final class CorrelationSplitInfo implements Cloneable, Serializable, SplitEvaluate, RevisionHandler {
+public final class CorrelationSplitInfo implements Cloneable, Serializable, SplitEvaluate {
 
     /** for serialization */
     private static final long serialVersionUID = 4212734895125452770L;
@@ -220,13 +218,4 @@ public final class CorrelationSplitInfo implements Cloneable, Serializable, Spli
         return m_splitValue;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

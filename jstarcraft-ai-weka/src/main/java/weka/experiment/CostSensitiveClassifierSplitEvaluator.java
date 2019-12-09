@@ -39,7 +39,6 @@ import weka.core.AdditionalMeasureProducer;
 import weka.core.Attribute;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Summarizable;
 import weka.core.Utils;
 
@@ -575,13 +574,4 @@ public class CostSensitiveClassifierSplitEvaluator extends ClassifierSplitEvalua
         return result + m_Template.getClass().getName() + " " + m_ClassifierOptions + "(version " + m_ClassifierVersion + ")";
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // CostSensitiveClassifierSplitEvaluator

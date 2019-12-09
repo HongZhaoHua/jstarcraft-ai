@@ -24,9 +24,6 @@ package weka.classifiers.lazy.kstar;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * A class representing the caching system used to keep track of each attribute
  * value and its corresponding scale factor or stop parameter.
@@ -35,7 +32,7 @@ import weka.core.RevisionUtils;
  * @author Abdelaziz Mahoui (am14@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class KStarCache implements Serializable, RevisionHandler {
+public class KStarCache implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -7693632394267140678L;
@@ -87,7 +84,7 @@ public class KStarCache implements Serializable, RevisionHandler {
      * A custom hashtable class to support the caching system.
      * 
      */
-    public class CacheTable implements Serializable, RevisionHandler {
+    public class CacheTable implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -8086106452588253423L;
@@ -248,21 +245,12 @@ public class KStarCache implements Serializable, RevisionHandler {
             return (int) (bits ^ (bits >> 32));
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // CacheTable
 
     /**
      * Hashtable collision list.
      */
-    public class TableEntry implements Serializable, RevisionHandler {
+    public class TableEntry implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = 4057602386766259138L;
@@ -291,25 +279,6 @@ public class KStarCache implements Serializable, RevisionHandler {
             this.next = next;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // TableEntry
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // Cache

@@ -23,7 +23,6 @@ package weka.classifiers.bayes;
 import weka.classifiers.UpdateableClassifier;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -206,15 +205,6 @@ public class NaiveBayesMultinomialUpdateable extends NaiveBayesMultinomial imple
         }
 
         return result.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

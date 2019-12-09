@@ -33,7 +33,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.UnassignedClassException;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
@@ -589,16 +588,6 @@ public class SpreadSubsample extends Filter implements SupervisedFilter, OptionH
             }
         }
         return classIndices;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

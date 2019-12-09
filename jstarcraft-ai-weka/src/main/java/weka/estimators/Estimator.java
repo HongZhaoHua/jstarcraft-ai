@@ -36,8 +36,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializedObject;
 import weka.core.Utils;
 
@@ -91,7 +89,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public abstract class Estimator implements Cloneable, Serializable, OptionHandler, CapabilitiesHandler, CapabilitiesIgnorer, RevisionHandler {
+public abstract class Estimator implements Cloneable, Serializable, OptionHandler, CapabilitiesHandler, CapabilitiesIgnorer {
 
     /** for serialization */
     static final long serialVersionUID = -5902411487362274342L;
@@ -111,7 +109,7 @@ public abstract class Estimator implements Cloneable, Serializable, OptionHandle
     /**
      * Class to support a building process of an estimator.
      */
-    private static class Builder implements Serializable, RevisionHandler {
+    private static class Builder implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -5810927990193597303L;
@@ -128,15 +126,6 @@ public abstract class Estimator implements Cloneable, Serializable, OptionHandle
         /** class value index of the builder */
         int m_classValueIndex = -1;
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** Whether capabilities should not be checked */
@@ -685,16 +674,6 @@ public abstract class Estimator implements Cloneable, Serializable, OptionHandle
          */
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

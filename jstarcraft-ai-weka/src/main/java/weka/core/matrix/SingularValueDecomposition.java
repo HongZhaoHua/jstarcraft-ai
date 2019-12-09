@@ -16,9 +16,6 @@ package weka.core.matrix;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Singular Value Decomposition.
  * <P>
@@ -42,7 +39,7 @@ import weka.core.RevisionUtils;
  * @author eibe@cs.waikato.ac.nz
  * @version $Revision$
  */
-public class SingularValueDecomposition implements Serializable, RevisionHandler {
+public class SingularValueDecomposition implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -8738089610999867951L;
@@ -597,12 +594,4 @@ public class SingularValueDecomposition implements Serializable, RevisionHandler
         return r;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

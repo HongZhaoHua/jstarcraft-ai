@@ -44,7 +44,7 @@ import java.util.Vector;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PropertyPath implements RevisionHandler {
+public class PropertyPath {
 
     /**
      * Represents a single element of a property path
@@ -52,7 +52,7 @@ public class PropertyPath implements RevisionHandler {
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class PathElement implements Cloneable, RevisionHandler {
+    public static class PathElement implements Cloneable {
 
         /** the property */
         protected String m_Name;
@@ -129,14 +129,6 @@ public class PropertyPath implements RevisionHandler {
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -145,7 +137,7 @@ public class PropertyPath implements RevisionHandler {
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class Path implements RevisionHandler {
+    public static class Path {
 
         /** the structure */
         protected Vector<PathElement> m_Elements;
@@ -294,14 +286,6 @@ public class PropertyPath implements RevisionHandler {
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -310,7 +294,7 @@ public class PropertyPath implements RevisionHandler {
      * @author fracpete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    protected static class PropertyContainer implements RevisionHandler {
+    protected static class PropertyContainer {
 
         /** the descriptor */
         protected PropertyDescriptor m_Descriptor;
@@ -349,14 +333,6 @@ public class PropertyPath implements RevisionHandler {
             return m_Object;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -543,15 +519,6 @@ public class PropertyPath implements RevisionHandler {
      */
     public static void setValue(Object src, String path, Object value) {
         setValue(src, new Path(path), value);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -35,7 +35,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.filters.Filter;
@@ -821,16 +820,6 @@ public class PrincipalComponents extends Filter implements OptionHandler, Unsupe
         m_FirstBatchDone = true;
 
         return (numPendingOutput() != 0);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

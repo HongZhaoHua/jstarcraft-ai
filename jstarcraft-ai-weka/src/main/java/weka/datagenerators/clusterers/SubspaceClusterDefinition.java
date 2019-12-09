@@ -28,7 +28,6 @@ import java.util.Vector;
 
 import weka.core.Option;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Utils;
 import weka.datagenerators.ClusterDefinition;
@@ -839,13 +838,4 @@ public class SubspaceClusterDefinition extends ClusterDefinition {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

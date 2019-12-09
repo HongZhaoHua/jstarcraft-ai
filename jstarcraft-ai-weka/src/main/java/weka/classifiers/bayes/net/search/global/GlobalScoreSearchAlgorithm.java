@@ -31,7 +31,6 @@ import weka.classifiers.bayes.net.search.SearchAlgorithm;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -530,13 +529,4 @@ public class GlobalScoreSearchAlgorithm extends SearchAlgorithm {
         return super.markovBlanketClassifierTipText();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

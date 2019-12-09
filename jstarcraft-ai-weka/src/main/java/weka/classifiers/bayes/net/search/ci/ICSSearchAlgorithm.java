@@ -30,8 +30,6 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.ParentSet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -115,7 +113,7 @@ public class ICSSearchAlgorithm extends CISearchAlgorithm {
         return m_nMaxCardinality;
     }
 
-    class SeparationSet implements RevisionHandler {
+    class SeparationSet {
 
         public int[] m_set;
 
@@ -134,16 +132,6 @@ public class ICSSearchAlgorithm extends CISearchAlgorithm {
             }
             return false;
         } // contains
-
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
 
     } // class sepset
 
@@ -580,16 +568,6 @@ public class ICSSearchAlgorithm extends CISearchAlgorithm {
     @Override
     public String globalInfo() {
         return "This Bayes Network learning algorithm uses conditional independence tests " + "to find a skeleton, finds V-nodes and applies a set of rules to find the directions " + "of the remaining arrows.";
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

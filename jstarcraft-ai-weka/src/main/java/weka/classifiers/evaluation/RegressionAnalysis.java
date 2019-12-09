@@ -23,7 +23,6 @@ package weka.classifiers.evaluation;
 
 import weka.core.Attribute;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.matrix.Matrix;
 
 /**
@@ -240,12 +239,4 @@ public class RegressionAnalysis {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: ? $");
-    }
 }

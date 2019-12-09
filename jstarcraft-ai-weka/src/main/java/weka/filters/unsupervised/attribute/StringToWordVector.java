@@ -33,7 +33,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -1261,16 +1260,6 @@ public class StringToWordVector extends Filter implements UnsupervisedFilter, Op
      */
     public String tokenizerTipText() {
         return "The tokenizing algorithm to use on the strings.";
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

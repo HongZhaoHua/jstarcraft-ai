@@ -35,8 +35,6 @@ import weka.core.Drawable;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -146,7 +144,7 @@ public class Cobweb extends RandomizableClusterer implements Drawable, Technical
      * 
      * @see Serializable
      */
-    public class CNode implements Serializable, RevisionHandler {
+    public class CNode implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = 3452097436933325631L;
@@ -745,15 +743,6 @@ public class Cobweb extends RandomizableClusterer implements Drawable, Technical
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1263,16 +1252,6 @@ public class Cobweb extends RandomizableClusterer implements Drawable, Technical
         m_cobwebTree.graphTree(text);
         text.append("}\n");
         return text.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

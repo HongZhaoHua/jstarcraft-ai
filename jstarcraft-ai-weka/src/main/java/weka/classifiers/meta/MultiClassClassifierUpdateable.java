@@ -26,7 +26,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.unsupervised.instance.RemoveWithValues;
 
@@ -210,16 +209,6 @@ public class MultiClassClassifierUpdateable extends MultiClassClassifier impleme
          */
 
         return probs;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

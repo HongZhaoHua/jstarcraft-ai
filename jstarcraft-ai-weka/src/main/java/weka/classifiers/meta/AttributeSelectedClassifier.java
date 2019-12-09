@@ -39,7 +39,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 import weka.core.WekaException;
@@ -781,15 +780,6 @@ public class AttributeSelectedClassifier extends SingleClassifierEnhancer implem
         } else {
             throw new IllegalArgumentException(additionalMeasureName + " not supported (AttributeSelectedClassifier)");
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

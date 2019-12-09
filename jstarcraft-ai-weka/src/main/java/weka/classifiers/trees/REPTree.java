@@ -44,8 +44,6 @@ import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -117,7 +115,7 @@ public class REPTree extends AbstractClassifier implements OptionHandler, Weight
     }
 
     /** An inner class for building and storing the tree structure */
-    protected class Tree implements Serializable, RevisionHandler {
+    protected class Tree implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -1635481717888437935L;
@@ -1273,15 +1271,6 @@ public class REPTree extends AbstractClassifier implements OptionHandler, Weight
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** The Tree object */
@@ -2063,16 +2052,6 @@ public class REPTree extends AbstractClassifier implements OptionHandler, Weight
             return 1;
         }
         return numNodes();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -42,8 +42,6 @@ import weka.core.AdditionalMeasureProducer;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SerializationHelper;
 import weka.core.Utils;
 import weka.core.converters.AbstractFileLoader;
@@ -179,7 +177,7 @@ import weka.experiment.xml.XMLExperiment;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Experiment implements Serializable, OptionHandler, RevisionHandler {
+public class Experiment implements Serializable, OptionHandler {
 
     /** for serialization */
     static final long serialVersionUID = 44945596742646663L;
@@ -1228,13 +1226,4 @@ public class Experiment implements Serializable, OptionHandler, RevisionHandler 
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // Experiment

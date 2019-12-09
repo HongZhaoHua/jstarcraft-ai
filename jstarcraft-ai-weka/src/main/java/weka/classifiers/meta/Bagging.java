@@ -39,7 +39,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.PartitionGenerator;
 import weka.core.Randomizable;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -973,16 +972,6 @@ public class Bagging extends RandomizableParallelIteratedSingleClassifierEnhance
             return size;
         } else
             throw new Exception("Classifier: " + getClassifierSpec() + " cannot generate a partition");
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -24,7 +24,6 @@ package weka.experiment;
 import java.util.Random;
 
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -250,13 +249,4 @@ public class CrossValidationSplitResultProducer extends CrossValidationResultPro
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // CrossValidationSplitResultProducer

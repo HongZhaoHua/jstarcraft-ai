@@ -33,7 +33,6 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.OptionMetadata;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
@@ -400,16 +399,6 @@ public class ClassConditionalProbabilities extends SimpleBatchFilter implements 
     @Override
     public Capabilities getCapabilities() {
         return new NaiveBayes().getCapabilities();
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: $");
     }
 
     /**

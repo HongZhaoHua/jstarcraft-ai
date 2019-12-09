@@ -27,8 +27,6 @@ import java.util.ArrayList;
 
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -64,7 +62,7 @@ import weka.core.TechnicalInformationHandler;
  * @author Remco Bouckaert (rrb@xm.co.nz)
  * @version $Revision$
  */
-public class ADNode implements Serializable, TechnicalInformationHandler, RevisionHandler {
+public class ADNode implements Serializable, TechnicalInformationHandler {
 
     /** for serialization */
     static final long serialVersionUID = 397409728366910204L;
@@ -283,13 +281,4 @@ public class ADNode implements Serializable, TechnicalInformationHandler, Revisi
         }
     } // main
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // class ADNode

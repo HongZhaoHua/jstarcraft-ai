@@ -53,7 +53,7 @@ import java.util.Vector;
  * @version $Revision$
  */
 
-public class Tee extends PrintStream implements RevisionHandler {
+public class Tee extends PrintStream {
 
     /** the different PrintStreams. */
     protected Vector<PrintStream> m_Streams = new Vector<PrintStream>();
@@ -771,12 +771,4 @@ public class Tee extends PrintStream implements RevisionHandler {
         return this.getClass().getName() + ": " + m_Streams.size();
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

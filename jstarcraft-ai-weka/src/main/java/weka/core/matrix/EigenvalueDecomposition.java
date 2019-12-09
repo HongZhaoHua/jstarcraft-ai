@@ -16,9 +16,6 @@ package weka.core.matrix;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Eigenvalues and eigenvectors of a real matrix.
  * <P>
@@ -42,7 +39,7 @@ import weka.core.RevisionUtils;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class EigenvalueDecomposition implements Serializable, RevisionHandler {
+public class EigenvalueDecomposition implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 4011654467211422319L;
@@ -982,12 +979,4 @@ public class EigenvalueDecomposition implements Serializable, RevisionHandler {
         return X;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

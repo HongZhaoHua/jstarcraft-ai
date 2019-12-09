@@ -31,7 +31,6 @@ import java.util.Vector;
 import weka.core.ContingencyTables;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 import weka.core.Utils;
 
@@ -1033,16 +1032,6 @@ public class UnivariateMixtureEstimator implements UnivariateDensityEstimator, U
         }
 
         return options.toArray(new String[0]);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10971 $");
     }
 
     /**

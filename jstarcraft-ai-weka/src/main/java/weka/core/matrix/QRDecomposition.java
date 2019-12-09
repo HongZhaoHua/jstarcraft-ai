@@ -16,9 +16,6 @@ package weka.core.matrix;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * QR Decomposition.
  * <P>
@@ -38,7 +35,7 @@ import weka.core.RevisionUtils;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class QRDecomposition implements Serializable, RevisionHandler {
+public class QRDecomposition implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -5013090736132211418L;
@@ -242,12 +239,4 @@ public class QRDecomposition implements Serializable, RevisionHandler {
         return (new Matrix(X, n, nx).getMatrix(0, n - 1, 0, nx - 1));
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

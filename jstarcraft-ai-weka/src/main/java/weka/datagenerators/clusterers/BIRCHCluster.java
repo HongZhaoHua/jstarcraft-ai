@@ -33,8 +33,6 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.TechnicalInformation;
@@ -255,7 +253,7 @@ public class BIRCHCluster extends ClusterGenerator implements TechnicalInformati
     /**
      * class to represent cluster
      */
-    private class Cluster implements Serializable, RevisionHandler {
+    private class Cluster implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -8336901069823498140L;
@@ -333,21 +331,12 @@ public class BIRCHCluster extends ClusterGenerator implements TechnicalInformati
             return m_Center;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // end class Cluster
 
     /**
      * class to represent Vector for placement of the center in space
      */
-    private class GridVector implements Serializable, RevisionHandler {
+    private class GridVector implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -1900309948991039522L;
@@ -426,15 +415,6 @@ public class BIRCHCluster extends ClusterGenerator implements TechnicalInformati
 
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // end class GridVector
 
     /**
@@ -1518,16 +1498,6 @@ public class BIRCHCluster extends ClusterGenerator implements TechnicalInformati
         }
 
         return docu.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -27,7 +27,7 @@ package weka.core;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class ContingencyTables implements RevisionHandler {
+public class ContingencyTables {
 
     /** The natural logarithm of 2 */
     public static final double log2 = Math.log(2);
@@ -576,15 +576,6 @@ public class ContingencyTables implements RevisionHandler {
 
         // Return chi-value for the cell
         return (diff * diff / expected);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

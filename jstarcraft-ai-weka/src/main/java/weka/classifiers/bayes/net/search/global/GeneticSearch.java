@@ -30,8 +30,6 @@ import weka.classifiers.bayes.BayesNet;
 import weka.classifiers.bayes.net.ParentSet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -143,7 +141,7 @@ public class GeneticSearch extends GlobalScoreSearchAlgorithm {
      */
     boolean[] g_bIsSquare;
 
-    class BayesNetRepresentation implements RevisionHandler {
+    class BayesNetRepresentation {
         /** number of nodes in network **/
         int m_nNodes = 0;
 
@@ -329,15 +327,6 @@ public class GeneticSearch extends GlobalScoreSearchAlgorithm {
             return g_bIsSquare[nNum];
         } // isSquare
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // class BayesNetRepresentation
 
     /**
@@ -779,13 +768,4 @@ public class GeneticSearch extends GlobalScoreSearchAlgorithm {
         return "Determines the method of selecting a population. When set to true, tournament " + "selection is used (pick two at random and the highest is allowed to continue). " + "When set to false, the top scoring network structures are selected.";
     } // useTournamentSelectionTipText
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // GeneticSearch

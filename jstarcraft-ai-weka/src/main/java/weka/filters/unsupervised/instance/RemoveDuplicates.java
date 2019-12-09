@@ -27,7 +27,6 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.WeightedAttributesHandler;
 import weka.core.WeightedInstancesHandler;
 import weka.filters.SimpleBatchFilter;
@@ -179,16 +178,6 @@ public class RemoveDuplicates extends SimpleBatchFilter implements WeightedAttri
             return newInstances;
         }
         return new Instances(instances);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 9804 $");
     }
 
     /**

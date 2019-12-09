@@ -40,8 +40,6 @@ import java.util.Properties;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WekaException;
 import weka.core.WekaPackageClassLoaderManager;
@@ -64,7 +62,7 @@ import weka.core.logging.Logger;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class DatabaseUtils implements Serializable, RevisionHandler {
+public class DatabaseUtils implements Serializable {
 
     /** for serialization. */
     static final long serialVersionUID = -8252351994547116729L;
@@ -1454,16 +1452,6 @@ public class DatabaseUtils implements Serializable, RevisionHandler {
         } else {
             return s;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

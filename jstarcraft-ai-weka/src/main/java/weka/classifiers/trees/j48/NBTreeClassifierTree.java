@@ -22,7 +22,6 @@
 package weka.classifiers.trees.j48;
 
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -227,13 +226,4 @@ public class NBTreeClassifierTree extends ClassifierTree {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

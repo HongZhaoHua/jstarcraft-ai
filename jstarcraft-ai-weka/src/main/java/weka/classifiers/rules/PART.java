@@ -37,7 +37,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Summarizable;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
@@ -855,16 +854,6 @@ public class PART extends AbstractClassifier implements OptionHandler, WeightedI
      */
     public void setDoNotMakeSplitPointActualValue(boolean m_doNotMakeSplitPointActualValue) {
         this.m_doNotMakeSplitPointActualValue = m_doNotMakeSplitPointActualValue;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

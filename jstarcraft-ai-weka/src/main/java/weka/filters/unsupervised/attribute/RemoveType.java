@@ -31,7 +31,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.Utils;
@@ -416,16 +415,6 @@ public class RemoveType extends Filter implements UnsupervisedFilter, Streamable
         } else if (typeString.equals("relational")) {
             m_attTypeToDelete = Attribute.RELATIONAL;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

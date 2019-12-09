@@ -32,9 +32,6 @@ import java.io.FileWriter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class enables one to change the UID of a serialized object and therefore
  * not losing the data stored in the binary format.
@@ -42,7 +39,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class SerialUIDChanger implements RevisionHandler {
+public class SerialUIDChanger {
 
     /**
      * checks whether KOML is present
@@ -210,15 +207,6 @@ public class SerialUIDChanger implements RevisionHandler {
         // remove tempFile
         file = new File(tempFile);
         file.delete();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -25,8 +25,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import weka.core.RevisionUtils;
-
 /**
  * <!-- globalinfo-start --> Takes results from a result producer and sends them
  * to a database.
@@ -378,13 +376,4 @@ public class DatabaseResultListener extends DatabaseUtils implements ResultListe
         m_CacheKey = key.clone();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

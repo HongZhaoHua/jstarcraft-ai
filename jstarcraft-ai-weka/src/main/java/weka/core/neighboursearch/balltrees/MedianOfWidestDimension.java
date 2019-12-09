@@ -29,7 +29,6 @@ import weka.core.Instances;
 import weka.core.NormalizableDistance;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -362,13 +361,4 @@ public class MedianOfWidestDimension extends BallSplitter implements OptionHandl
         return result.toArray(new String[result.size()]);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

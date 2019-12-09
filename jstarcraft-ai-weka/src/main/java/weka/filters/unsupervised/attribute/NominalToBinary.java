@@ -34,7 +34,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SparseInstance;
 import weka.core.Utils;
 import weka.core.WeightedAttributesHandler;
@@ -610,16 +609,6 @@ public class NominalToBinary extends Filter implements UnsupervisedFilter, Optio
         copyValues(inst, false, instance.dataset(), getOutputFormat());
 
         push(inst); // No need to copy instance
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

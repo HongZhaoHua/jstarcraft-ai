@@ -34,7 +34,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.SingleIndex;
 import weka.core.Tag;
@@ -628,16 +627,6 @@ public class Add extends Filter implements UnsupervisedFilter, StreamableFilter,
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

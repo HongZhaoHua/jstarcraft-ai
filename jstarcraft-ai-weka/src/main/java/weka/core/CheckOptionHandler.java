@@ -584,16 +584,6 @@ public class CheckOptionHandler extends Check {
     }
 
     /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
-
-    /**
      * Main method for using the CheckOptionHandler.
      * 
      * @param args the options to the CheckOptionHandler

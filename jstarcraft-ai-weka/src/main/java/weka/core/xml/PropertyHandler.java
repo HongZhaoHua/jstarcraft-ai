@@ -24,9 +24,6 @@ import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This class stores information about properties to ignore or properties that
  * are allowed for a certain class.
@@ -34,7 +31,7 @@ import weka.core.RevisionUtils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class PropertyHandler implements RevisionHandler {
+public class PropertyHandler {
 
     /**
      * contains display names of properties to ignore in the serialization process
@@ -356,13 +353,4 @@ public class PropertyHandler implements RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

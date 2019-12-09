@@ -32,7 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.ResampleUtils;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -269,15 +268,6 @@ public class WeightedInstancesHandlerWrapper extends RandomizableSingleClassifie
         result.append(m_Classifier.toString());
 
         return result.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

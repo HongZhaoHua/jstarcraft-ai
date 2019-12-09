@@ -24,14 +24,11 @@ package weka.core.matrix;
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * @author Yong Wang
  * @version $Revision$
  */
-public class ExponentialFormat extends DecimalFormat implements RevisionHandler {
+public class ExponentialFormat extends DecimalFormat {
 
     /** for serialization */
     private static final long serialVersionUID = -5298981701073897741L;
@@ -104,12 +101,4 @@ public class ExponentialFormat extends DecimalFormat implements RevisionHandler 
         return s.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

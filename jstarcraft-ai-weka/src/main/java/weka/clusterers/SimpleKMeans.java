@@ -43,7 +43,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.ManhattanDistance;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.TechnicalInformation;
@@ -2264,16 +2263,6 @@ public class SimpleKMeans extends RandomizableClusterer implements NumberOfClust
             throw new Exception("No assignments made.");
         }
         return m_Assignments;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

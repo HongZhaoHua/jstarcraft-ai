@@ -25,8 +25,6 @@ import java.io.Serializable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.WekaPackageClassLoaderManager;
 
 /**
@@ -42,7 +40,7 @@ import weka.core.WekaPackageClassLoaderManager;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Groovy implements Serializable, RevisionHandler {
+public class Groovy implements Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = -2628766602043134673L;
@@ -198,16 +196,6 @@ public class Groovy implements Serializable, RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

@@ -21,8 +21,6 @@
 
 package weka.classifiers.trees.j48;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 
 /**
@@ -32,7 +30,7 @@ import weka.core.Statistics;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Stats implements RevisionHandler {
+public class Stats {
 
     /**
      * Computes estimated extra error for given total number of instances and error
@@ -84,12 +82,4 @@ public class Stats implements RevisionHandler {
         return (r * N) - e;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

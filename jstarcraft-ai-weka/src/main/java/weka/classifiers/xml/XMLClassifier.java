@@ -20,7 +20,6 @@
 
 package weka.classifiers.xml;
 
-import weka.core.RevisionUtils;
 import weka.core.xml.XMLBasicSerialization;
 
 /**
@@ -53,12 +52,4 @@ public class XMLClassifier extends XMLBasicSerialization {
         m_Properties.addAllowed(weka.classifiers.Classifier.class, "options");
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

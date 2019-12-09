@@ -25,9 +25,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Class implementing a stack.
  * 
@@ -39,7 +36,7 @@ import weka.core.RevisionUtils;
  *         (Java port)
  * @version $Revision$
  */
-public class Stack<T> implements Serializable, RevisionHandler {
+public class Stack<T> implements Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = 5604056321825539264L;
@@ -166,13 +163,4 @@ public class Stack<T> implements Serializable, RevisionHandler {
         v.elements.add(new_ele);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

@@ -23,9 +23,6 @@ package weka.classifiers.evaluation;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Encapsulates an evaluatable nominal prediction: the predicted probability
  * distribution plus the actual class value.
@@ -33,7 +30,7 @@ import weka.core.RevisionUtils;
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class NominalPrediction implements Prediction, Serializable, RevisionHandler {
+public class NominalPrediction implements Prediction, Serializable {
 
     /**
      * Remove this if you change this class so that serialization would be affected.
@@ -226,12 +223,4 @@ public class NominalPrediction implements Prediction, Serializable, RevisionHand
         return sb.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

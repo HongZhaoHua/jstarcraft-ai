@@ -24,8 +24,6 @@ package weka.classifiers.evaluation;
 import java.io.Serializable;
 
 import weka.classifiers.IntervalEstimator;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Encapsulates an evaluatable numeric prediction: the predicted class value
@@ -34,7 +32,7 @@ import weka.core.RevisionUtils;
  * @author Len Trigg (len@reeltwo.com)
  * @version $Revision$
  */
-public class NumericPrediction implements Prediction, Serializable, RevisionHandler {
+public class NumericPrediction implements Prediction, Serializable {
 
     /** for serialization. */
     private static final long serialVersionUID = -4880216423674233887L;
@@ -164,12 +162,4 @@ public class NumericPrediction implements Prediction, Serializable, RevisionHand
         return sb.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

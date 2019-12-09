@@ -28,7 +28,6 @@ import java.util.Vector;
 
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
 
 /**
  * A superclass for all tokenizer algorithms.
@@ -36,7 +35,7 @@ import weka.core.RevisionHandler;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public abstract class Tokenizer implements Enumeration<String>, OptionHandler, Serializable, RevisionHandler {
+public abstract class Tokenizer implements Enumeration<String>, OptionHandler, Serializable {
 
     /** Added to avoid warning */
     private static final long serialVersionUID = 7781271062738973996L;

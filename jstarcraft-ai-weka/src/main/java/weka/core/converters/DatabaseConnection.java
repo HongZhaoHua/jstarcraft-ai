@@ -26,7 +26,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import weka.core.RevisionUtils;
 import weka.experiment.DatabaseUtils;
 
 /**
@@ -118,12 +117,5 @@ public class DatabaseConnection extends DatabaseUtils {
         return m_PreparedStatement.getUpdateCount();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
+    
 }

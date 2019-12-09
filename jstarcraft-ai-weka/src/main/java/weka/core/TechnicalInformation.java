@@ -42,7 +42,7 @@ import java.util.Vector;
  * @version $Revision$
  * @see TechnicalInformationHandler
  */
-public class TechnicalInformation implements RevisionHandler {
+public class TechnicalInformation {
 
     /** the different types of information */
     public enum Type {
@@ -737,16 +737,6 @@ public class TechnicalInformation implements RevisionHandler {
         }
 
         return result;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

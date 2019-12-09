@@ -28,8 +28,6 @@ import weka.core.EuclideanDistance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 
 /**
  * Class that splits up a KDTreeNode.
@@ -37,7 +35,7 @@ import weka.core.RevisionUtils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public abstract class KDTreeNodeSplitter implements Serializable, OptionHandler, RevisionHandler {
+public abstract class KDTreeNodeSplitter implements Serializable, OptionHandler {
 
     /** ID added to prevent warning */
     private static final long serialVersionUID = 7222420817095067166L;
@@ -235,13 +233,5 @@ public abstract class KDTreeNodeSplitter implements Serializable, OptionHandler,
         return w;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
+    
 }

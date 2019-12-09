@@ -31,8 +31,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -43,7 +41,7 @@ import weka.core.Utils;
  * @author FracPete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class XMLOptions implements RevisionHandler {
+public class XMLOptions {
 
     /** tag for a single option. */
     public final static String TAG_OPTION = "option";
@@ -359,16 +357,6 @@ public class XMLOptions implements RevisionHandler {
     @Override
     public String toString() {
         return getXMLDocument().toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

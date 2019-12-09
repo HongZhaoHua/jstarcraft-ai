@@ -16,9 +16,6 @@ package weka.core.matrix;
 
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * LU Decomposition.
  * <P>
@@ -40,7 +37,7 @@ import weka.core.RevisionUtils;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class LUDecomposition implements Serializable, RevisionHandler {
+public class LUDecomposition implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -2731022568037808629L;
@@ -285,12 +282,4 @@ public class LUDecomposition implements Serializable, RevisionHandler {
         return Xmat;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

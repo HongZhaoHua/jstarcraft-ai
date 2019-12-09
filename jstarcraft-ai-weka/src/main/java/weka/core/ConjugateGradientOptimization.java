@@ -40,7 +40,7 @@ import weka.core.TechnicalInformation.Type;
  * @author Eibe Frank
  * @version $Revision$
  */
-public abstract class ConjugateGradientOptimization extends Optimization implements RevisionHandler {
+public abstract class ConjugateGradientOptimization extends Optimization {
 
     /**
      * Returns an instance of a TechnicalInformation object, containing detailed

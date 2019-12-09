@@ -42,7 +42,6 @@ import javax.swing.DefaultListModel;
 
 import org.w3c.dom.Element;
 
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -708,13 +707,4 @@ public class XMLBasicSerialization extends XMLSerialization {
         return matrix;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

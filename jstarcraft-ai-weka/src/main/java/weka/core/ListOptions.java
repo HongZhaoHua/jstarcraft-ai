@@ -29,7 +29,7 @@ import java.util.Vector;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class ListOptions implements OptionHandler, RevisionHandler, CommandlineRunnable {
+public class ListOptions implements OptionHandler, CommandlineRunnable {
 
     /** the classname */
     protected String m_Classname = ListOptions.class.getName();
@@ -145,16 +145,6 @@ public class ListOptions implements OptionHandler, RevisionHandler, CommandlineR
         }
 
         return result.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

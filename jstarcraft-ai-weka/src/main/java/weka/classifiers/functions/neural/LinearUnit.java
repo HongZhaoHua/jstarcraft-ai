@@ -20,9 +20,6 @@
 
 package weka.classifiers.functions.neural;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * This can be used by the neuralnode to perform all it's computations (as a
  * Linear unit).
@@ -30,7 +27,7 @@ import weka.core.RevisionUtils;
  * @author Malcolm Ware (mfw4@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class LinearUnit implements NeuralMethod, RevisionHandler {
+public class LinearUnit implements NeuralMethod {
 
     /** for serialization */
     private static final long serialVersionUID = 8572152807755673630L;
@@ -104,12 +101,4 @@ public class LinearUnit implements NeuralMethod, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

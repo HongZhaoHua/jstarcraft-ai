@@ -41,7 +41,7 @@ import java.io.Serializable;
  * @author Eibe Frank (eibe@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class SingleIndex implements Serializable, RevisionHandler, CustomDisplayStringProvider {
+public class SingleIndex implements Serializable, CustomDisplayStringProvider {
 
     /** for serialization. */
     static final long serialVersionUID = 5285169134430839303L;
@@ -203,15 +203,6 @@ public class SingleIndex implements Serializable, RevisionHandler, CustomDisplay
                 throw new IllegalArgumentException("Index is too large");
             }
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

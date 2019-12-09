@@ -26,9 +26,6 @@ import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.Serializable;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
-
 /**
  * Stores information on a property of an object: the class of the object with
  * the property; the property descriptor, and the current value.
@@ -36,7 +33,7 @@ import weka.core.RevisionUtils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class PropertyNode implements Serializable, RevisionHandler {
+public class PropertyNode implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = -8718165742572631384L;
@@ -123,13 +120,4 @@ public class PropertyNode implements Serializable, RevisionHandler {
         }
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 } // PropertyNode

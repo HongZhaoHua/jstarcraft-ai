@@ -41,7 +41,7 @@ import java.util.logging.SimpleFormatter;
  * @author fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Debug implements Serializable, RevisionHandler {
+public class Debug implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 66171861743328020L;
@@ -85,7 +85,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @version $Revision$
      * @see ThreadMXBean#isThreadCpuTimeEnabled()
      */
-    public static class Clock implements Serializable, RevisionHandler {
+    public static class Clock implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = 4622161807307942201L;
@@ -408,14 +408,6 @@ public class Debug implements Serializable, RevisionHandler {
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -427,7 +419,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @version $Revision$
      * @see SimpleDateFormat
      */
-    public static class Timestamp implements Serializable, RevisionHandler {
+    public static class Timestamp implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -6099868388466922753L;
@@ -527,14 +519,6 @@ public class Debug implements Serializable, RevisionHandler {
             return m_Formatter.format(getStamp());
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -546,7 +530,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @see Debug#writeToFile(String, String)
      * @see Debug#writeToFile(String, String, boolean)
      */
-    public static class SimpleLog implements Serializable, RevisionHandler {
+    public static class SimpleLog implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = -2671928223819510830L;
@@ -633,14 +617,6 @@ public class Debug implements Serializable, RevisionHandler {
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -652,7 +628,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @version $Revision$
      * @see Debug.SimpleLog
      */
-    public static class Log implements Serializable, RevisionHandler {
+    public static class Log implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = 1458435732111675823L;
@@ -852,14 +828,6 @@ public class Debug implements Serializable, RevisionHandler {
             return result;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -870,7 +838,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @author FracPete (fracpete at waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class Random extends java.util.Random implements Serializable, RevisionHandler {
+    public static class Random extends java.util.Random implements Serializable {
 
         /** for serialization */
         private static final long serialVersionUID = 1256846887618333956L;
@@ -1137,14 +1105,6 @@ public class Debug implements Serializable, RevisionHandler {
             return this.getClass().getName() + ": " + getID();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1153,7 +1113,7 @@ public class Debug implements Serializable, RevisionHandler {
      * @author Gabi Schmidberger (gabi at cs dot waikato dot ac dot nz)
      * @version $Revision$
      */
-    public static class DBO implements Serializable, RevisionHandler {
+    public static class DBO implements Serializable {
 
         /** for serialization */
         static final long serialVersionUID = -5245628124742606784L;
@@ -1293,14 +1253,6 @@ public class Debug implements Serializable, RevisionHandler {
             System.out.print(text);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -1616,12 +1568,4 @@ public class Debug implements Serializable, RevisionHandler {
         return result;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

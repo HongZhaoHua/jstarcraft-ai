@@ -42,7 +42,7 @@ import java.util.Iterator;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class Range implements Serializable, RevisionHandler, CustomDisplayStringProvider {
+public class Range implements Serializable, CustomDisplayStringProvider {
 
     /** for serialization. */
     static final long serialVersionUID = 3667337062176835900L;
@@ -412,16 +412,6 @@ public class Range implements Serializable, RevisionHandler, CustomDisplayString
         } catch (NumberFormatException ex) {
             return false;
         }
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

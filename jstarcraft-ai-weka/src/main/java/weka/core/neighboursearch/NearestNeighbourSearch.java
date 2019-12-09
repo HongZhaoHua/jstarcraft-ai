@@ -32,8 +32,6 @@ import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -43,7 +41,7 @@ import weka.core.Utils;
  * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
  * @version $Revision$
  */
-public abstract class NearestNeighbourSearch implements Serializable, OptionHandler, AdditionalMeasureProducer, RevisionHandler {
+public abstract class NearestNeighbourSearch implements Serializable, OptionHandler, AdditionalMeasureProducer {
 
     /** ID to avoid warning */
     private static final long serialVersionUID = 7516898393890379876L;
@@ -56,7 +54,7 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class MyHeap implements RevisionHandler {
+    protected class MyHeap {
 
         /** the heap. */
         MyHeapElement m_heap[] = null;
@@ -253,15 +251,6 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
             return size() + noOfKthNearest();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -270,7 +259,7 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
      * @author Ashraf M. Kibriya (amk14[at-the-rate]cs[dot]waikato[dot]ac[dot]nz)
      * @version $Revision$
      */
-    protected class MyHeapElement implements RevisionHandler {
+    protected class MyHeapElement {
 
         /** the index of this element. */
         public int index;
@@ -289,15 +278,6 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
             index = i;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -307,7 +287,7 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
      * @version $Revision$
      */
     // better to change this into a heap element
-    protected class NeighborNode implements RevisionHandler {
+    protected class NeighborNode {
 
         /** The neighbor instance. */
         public Instance m_Instance;
@@ -342,15 +322,6 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
             this(distance, instance, null);
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /**
@@ -362,7 +333,7 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
      * @version $Revision$
      */
     // better to change this into a heap
-    protected class NeighborList implements RevisionHandler {
+    protected class NeighborList {
 
         /** The first node in the list. */
         protected NeighborNode m_First;
@@ -508,15 +479,6 @@ public abstract class NearestNeighbourSearch implements Serializable, OptionHand
             return m_Last;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** The neighbourhood of instances to find neighbours in. */

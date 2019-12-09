@@ -16,8 +16,6 @@ package weka.core.matrix;
 
 import java.util.Random;
 
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Statistics;
 
 /**
@@ -31,7 +29,7 @@ import weka.core.Statistics;
  * @author Fracpete (fracpete at waikato dot ac dot nz)
  * @version $Revision$
  */
-public class Maths implements RevisionHandler {
+public class Maths {
 
     /** The constant 1 / sqrt(2 pi) */
     public static final double PSI = 0.3989422804014327028632;
@@ -383,12 +381,4 @@ public class Maths implements RevisionHandler {
         return v;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

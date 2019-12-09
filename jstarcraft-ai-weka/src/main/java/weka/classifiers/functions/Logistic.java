@@ -36,7 +36,6 @@ import weka.core.Instances;
 import weka.core.Optimization;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -447,10 +446,6 @@ public class Logistic extends AbstractClassifier implements OptionHandler, Weigh
             return m_oO.evaluateGradient(x);
         }
 
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     private class OptEngCG extends ConjugateGradientOptimization {
@@ -471,10 +466,6 @@ public class Logistic extends AbstractClassifier implements OptionHandler, Weigh
             return m_oO.evaluateGradient(x);
         }
 
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     private class OptObject {
@@ -1029,16 +1020,6 @@ public class Logistic extends AbstractClassifier implements OptionHandler, Weigh
         }
 
         return temp.toString();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     protected int m_numModels = 0;

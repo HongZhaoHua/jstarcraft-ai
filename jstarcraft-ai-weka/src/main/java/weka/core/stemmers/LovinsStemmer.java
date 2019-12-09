@@ -23,7 +23,6 @@ package weka.core.stemmers;
 
 import java.util.HashMap;
 
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -903,15 +902,6 @@ public class LovinsStemmer implements Stemmer, TechnicalInformationHandler {
      */
     public String toString() {
         return getClass().getName();
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

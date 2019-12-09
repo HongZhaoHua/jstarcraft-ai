@@ -26,7 +26,6 @@ import java.util.Enumeration;
 import weka.classifiers.bayes.BayesNet;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.TechnicalInformation;
 import weka.core.TechnicalInformation.Field;
 import weka.core.TechnicalInformation.Type;
@@ -276,15 +275,5 @@ public class TAN extends LocalScoreSearchAlgorithm implements TechnicalInformati
     public String globalInfo() {
         return "This Bayes Network learning algorithm determines the maximum weight spanning tree " + " and returns a Naive Bayes network augmented with a tree.\n\n" + "For more information see:\n\n" + getTechnicalInformation().toString();
     } // globalInfo
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 
 } // TAN

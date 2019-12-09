@@ -26,8 +26,6 @@ import java.io.Serializable;
 import weka.core.Attribute;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -71,7 +69,7 @@ import weka.core.Utils;
  * @version $Revision$
  **/
 
-public class Test implements Serializable, RevisionHandler {
+public class Test implements Serializable {
 
     /** for serialization */
     static final long serialVersionUID = -8890645875887157782L;
@@ -228,13 +226,4 @@ public class Test implements Serializable, RevisionHandler {
         return (m_AttIndex == t.m_AttIndex && m_Split == t.m_Split && m_Not == t.m_Not);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

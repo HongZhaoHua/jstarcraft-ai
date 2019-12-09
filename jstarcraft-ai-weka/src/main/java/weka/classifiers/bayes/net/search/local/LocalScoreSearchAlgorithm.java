@@ -31,7 +31,6 @@ import weka.classifiers.bayes.net.search.SearchAlgorithm;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.SelectedTag;
 import weka.core.Statistics;
 import weka.core.Tag;
@@ -681,13 +680,4 @@ public class LocalScoreSearchAlgorithm extends SearchAlgorithm {
         return "The ScoreBasedSearchAlgorithm class supports Bayes net " + "structure search algorithms that are based on maximizing " + "scores (as opposed to for example conditional independence " + "based search algorithms).";
     } // globalInfo
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

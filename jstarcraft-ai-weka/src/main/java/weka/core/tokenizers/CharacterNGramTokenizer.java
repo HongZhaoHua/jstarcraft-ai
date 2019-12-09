@@ -25,7 +25,6 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 import weka.core.Option;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -274,16 +273,6 @@ public class CharacterNGramTokenizer extends Tokenizer {
         m_CurrentPosition = 0;
         m_String = s;
         m_N = m_NMin;
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision: 10971 $");
     }
 
     /**

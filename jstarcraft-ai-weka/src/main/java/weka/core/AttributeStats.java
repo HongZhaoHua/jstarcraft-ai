@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @author <a href="mailto:len@reeltwo.com">Len Trigg</a>
  * @version $Revision$
  */
-public class AttributeStats implements Serializable, RevisionHandler {
+public class AttributeStats implements Serializable {
 
     /** for serialization */
     private static final long serialVersionUID = 4434688832743939380L;
@@ -144,12 +144,4 @@ public class AttributeStats implements Serializable, RevisionHandler {
         return sb.toString();
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

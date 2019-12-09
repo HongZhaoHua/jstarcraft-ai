@@ -38,8 +38,6 @@ import weka.core.AdditionalMeasureProducer;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.attribute.Remove;
@@ -112,7 +110,7 @@ import weka.filters.unsupervised.attribute.Remove;
  * @version $Revision$
  */
 
-public class DensityBasedClustererSplitEvaluator implements SplitEvaluator, OptionHandler, AdditionalMeasureProducer, RevisionHandler {
+public class DensityBasedClustererSplitEvaluator implements SplitEvaluator, OptionHandler, AdditionalMeasureProducer {
 
     /** for serialization. */
     private static final long serialVersionUID = 5124501059135692160L;
@@ -733,13 +731,4 @@ public class DensityBasedClustererSplitEvaluator implements SplitEvaluator, Opti
         return result + m_clusterer.getClass().getName() + " " + m_clustererOptions + "(version " + m_clustererVersion + ")";
     }
 
-    /**
-     * Returns the revision string.
-     *
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

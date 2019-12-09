@@ -258,12 +258,4 @@ public class EuclideanDistance extends NormalizableDistance implements Cloneable
         return instance.value(dim) <= value;
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

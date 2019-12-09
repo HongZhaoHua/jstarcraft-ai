@@ -22,8 +22,6 @@ package weka.core.logging;
 
 import java.util.Date;
 
-import weka.core.RevisionUtils;
-
 /**
  * A simple logger that outputs the logging information in the console.
  * 
@@ -45,12 +43,4 @@ public class ConsoleLogger extends Logger {
         System.err.println(m_DateFormat.format(new Date()) + " " + cls + " " + method + "\n" + level + ": " + msg);
     }
 
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
-    }
 }

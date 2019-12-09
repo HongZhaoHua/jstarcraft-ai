@@ -22,8 +22,6 @@ package weka.core.tokenizers;
 
 import java.util.StringTokenizer;
 
-import weka.core.RevisionUtils;
-
 /**
  * <!-- globalinfo-start --> A simple tokenizer that is using the
  * java.util.StringTokenizer class to tokenize the strings.
@@ -93,16 +91,6 @@ public class WordTokenizer extends CharacterDelimitedTokenizer {
     @Override
     public void tokenize(String s) {
         m_Tokenizer = new StringTokenizer(s, getDelimiters());
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

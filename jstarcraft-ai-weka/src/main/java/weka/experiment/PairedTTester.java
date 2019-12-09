@@ -37,8 +37,6 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.Range;
-import weka.core.RevisionHandler;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -112,7 +110,7 @@ import weka.core.Utils;
  * @author Len Trigg (trigg@cs.waikato.ac.nz)
  * @version $Revision$
  */
-public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
+public class PairedTTester implements OptionHandler, Tester {
 
     /** for serialization */
     static final long serialVersionUID = 8370014624008728610L;
@@ -178,7 +176,7 @@ public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
     protected ResultMatrix m_ResultMatrix = new ResultMatrixPlainText();
 
     /** A list of unique "dataset" specifiers that have been observed */
-    protected class DatasetSpecifiers implements RevisionHandler, Serializable {
+    protected class DatasetSpecifiers implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = -9020938059902723401L;
@@ -237,19 +235,10 @@ public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
             return m_Specifiers.size();
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** Utility class to store the instances pertaining to a dataset */
-    protected class Dataset implements RevisionHandler, Serializable {
+    protected class Dataset implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = -2801397601839433282L;
@@ -328,19 +317,10 @@ public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
             m_Dataset = newDataset;
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     }
 
     /** Utility class to store the instances in a resultset */
-    protected class Resultset implements RevisionHandler, Serializable {
+    protected class Resultset implements Serializable {
 
         /** for serialization. */
         private static final long serialVersionUID = 1543786683821339978L;
@@ -447,15 +427,6 @@ public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
             }
         }
 
-        /**
-         * Returns the revision string.
-         * 
-         * @return the revision
-         */
-        @Override
-        public String getRevision() {
-            return RevisionUtils.extract("$Revision$");
-        }
     } // Resultset
 
     /**
@@ -1474,16 +1445,6 @@ public class PairedTTester implements OptionHandler, Tester, RevisionHandler {
     @Override
     public String getDisplayName() {
         return "Paired T-Tester";
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**

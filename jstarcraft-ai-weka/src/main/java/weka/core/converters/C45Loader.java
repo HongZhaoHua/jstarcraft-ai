@@ -34,7 +34,6 @@ import weka.core.Attribute;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.RevisionUtils;
 import weka.core.Utils;
 
 /**
@@ -496,16 +495,6 @@ public class C45Loader extends AbstractFileLoader implements BatchConverter, Inc
         tokenizer.quoteChar('"');
         tokenizer.quoteChar('\'');
         tokenizer.eolIsSignificant(true);
-    }
-
-    /**
-     * Returns the revision string.
-     * 
-     * @return the revision
-     */
-    @Override
-    public String getRevision() {
-        return RevisionUtils.extract("$Revision$");
     }
 
     /**
