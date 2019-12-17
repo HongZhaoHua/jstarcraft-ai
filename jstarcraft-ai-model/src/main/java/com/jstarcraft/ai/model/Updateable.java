@@ -8,8 +8,18 @@ package com.jstarcraft.ai.model;
  */
 public interface Updateable<I> {
 
+    /**
+     * 更新(独立)
+     * 
+     * @param instance
+     */
     void update(I instance);
 
+    /**
+     * 更新(批量)
+     * 
+     * @param instances
+     */
     default void update(Iterable<I> instances) {
         for (I instance : instances) {
             update(instance);
