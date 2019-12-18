@@ -17,7 +17,7 @@ https://www.cnblogs.com/htynkn/tag/weka/
 weka数据挖掘拾遗:
 https://www.cnblogs.com/nocml/p/3545373.html
 https://www.cnblogs.com/nocml/p/3545611.html
-https://www.cnblogs.com/nocml/p/4524918.htm
+https://www.cnblogs.com/nocml/p/4524918.html
 
 ----- 源码 -----
 
