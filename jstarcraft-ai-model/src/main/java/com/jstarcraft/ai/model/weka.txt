@@ -14,6 +14,11 @@ http://www.cnblogs.com/zlslch/category/999872.html
 数据挖掘学习和weka使用:
 https://www.cnblogs.com/htynkn/tag/weka/
 
+weka数据挖掘拾遗:
+https://www.cnblogs.com/nocml/p/3545373.html
+https://www.cnblogs.com/nocml/p/3545611.html
+https://www.cnblogs.com/nocml/p/4524918.htm
+
 ----- 源码 -----
 
 Weka算法及源码分析:
