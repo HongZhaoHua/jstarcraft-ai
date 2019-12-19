@@ -19,6 +19,9 @@ https://www.cnblogs.com/nocml/p/3545373.html
 https://www.cnblogs.com/nocml/p/3545611.html
 https://www.cnblogs.com/nocml/p/4524918.html
 
+weka 特征选择:
+https://www.douban.com/note/556684683/
+
 ----- 源码 -----
 
 Weka算法及源码分析:
