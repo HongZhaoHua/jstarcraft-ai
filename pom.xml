@@ -40,6 +40,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- 兼容JDK11 -->
+            <dependency>
+                <groupId>jdk.tools</groupId>
+                <artifactId>jdk.tools</artifactId>
+                <version>1.8</version>
+                <scope>system</scope>
+                <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
+            </dependency>
+
             <!-- 核心框架依赖 -->
             <dependency>
                 <groupId>com.jstarcraft</groupId>
@@ -143,14 +152,6 @@
                         <artifactId>slf4j-log4j12</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-
-            <dependency>
-                <groupId>jdk.tools</groupId>
-                <artifactId>jdk.tools</artifactId>
-                <version>1.8</version>
-                <scope>system</scope>
-                <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
             </dependency>
 
             <!-- 桥接器:Slf4j使用Log4j2 -->
