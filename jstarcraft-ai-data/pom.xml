@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>com.jstarcraft</groupId>
-            <artifactId>jstarcraft-core-orm</artifactId>
+            <artifactId>jstarcraft-core-storage</artifactId>
         </dependency>
 
         <!-- 机器学习框架依赖 -->

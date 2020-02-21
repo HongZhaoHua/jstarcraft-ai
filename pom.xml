@@ -64,7 +64,7 @@
 
             <dependency>
                 <groupId>com.jstarcraft</groupId>
-                <artifactId>jstarcraft-core-orm</artifactId>
+                <artifactId>jstarcraft-core-storage</artifactId>
                 <version>1.0</version>
             </dependency>
 
