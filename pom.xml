@@ -49,7 +49,7 @@
                 <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
             </dependency>
 
-            <!-- 核心框架依赖 -->
+            <!-- JStarCraft框架依赖 -->
             <dependency>
                 <groupId>com.jstarcraft</groupId>
                 <artifactId>jstarcraft-core-cache</artifactId>
