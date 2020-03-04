@@ -26,7 +26,7 @@
     </build>
 
     <dependencies>
-        <!-- 核心框架依赖 -->
+        <!-- JStarCraft框架依赖 -->
         <dependency>
             <groupId>com.jstarcraft</groupId>
             <artifactId>jstarcraft-core-common</artifactId>
@@ -37,20 +37,15 @@
             <artifactId>jstarcraft-core-codec</artifactId>
         </dependency>
 
-        <!-- 机器学习框架依赖 -->
+        <!-- 数据框架依赖 -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-math3</artifactId>
+            <groupId>org.apache.parquet</groupId>
+            <artifactId>parquet-avro</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-core</artifactId>
+            <groupId>org.apache.parquet</groupId>
+            <artifactId>parquet-hadoop</artifactId>
         </dependency>
 
         <dependency>
@@ -66,16 +61,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.parquet</groupId>
-            <artifactId>parquet-avro</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.parquet</groupId>
-            <artifactId>parquet-hadoop</artifactId>
         </dependency>
 
         <!-- Test框架依赖 -->

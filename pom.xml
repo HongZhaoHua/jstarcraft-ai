@@ -62,43 +62,11 @@
                 <version>1.0</version>
             </dependency>
 
-            <!-- 数学框架依赖 -->
-            <dependency>
-                <groupId>ch.obermuhlner</groupId>
-                <artifactId>big-math</artifactId>
-                <version>2.1.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.9</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-math3</artifactId>
-                <version>3.6.1</version>
-            </dependency>
-
             <!-- 环境框架依赖 -->
             <dependency>
                 <groupId>org.nd4j</groupId>
                 <artifactId>nd4j-api</artifactId>
                 <version>1.0.0-beta3</version>
-            </dependency>
-
-            <!-- 模型框架依赖 -->
-            <dependency>
-                <groupId>org.deeplearning4j</groupId>
-                <artifactId>deeplearning4j-core</artifactId>
-                <version>1.0.0-beta3</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>it.unimi.dsi</groupId>
-                        <artifactId>fastutil</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <!-- 数据框架依赖 -->
@@ -142,6 +110,38 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
                 <version>5.1.6.RELEASE</version>
+            </dependency>
+
+            <!-- 数学框架依赖 -->
+            <dependency>
+                <groupId>ch.obermuhlner</groupId>
+                <artifactId>big-math</artifactId>
+                <version>2.1.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.9</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-math3</artifactId>
+                <version>3.6.1</version>
+            </dependency>
+
+            <!-- 模型框架依赖 -->
+            <dependency>
+                <groupId>org.deeplearning4j</groupId>
+                <artifactId>deeplearning4j-core</artifactId>
+                <version>1.0.0-beta3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>it.unimi.dsi</groupId>
+                        <artifactId>fastutil</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- Test框架依赖 -->
