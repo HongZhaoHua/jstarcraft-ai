@@ -93,6 +93,12 @@
                 <groupId>org.deeplearning4j</groupId>
                 <artifactId>deeplearning4j-core</artifactId>
                 <version>1.0.0-beta3</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>it.unimi.dsi</groupId>
+                        <artifactId>fastutil</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- 数据框架依赖 -->
@@ -106,6 +112,12 @@
                 <groupId>org.apache.parquet</groupId>
                 <artifactId>parquet-avro</artifactId>
                 <version>1.10.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>it.unimi.dsi</groupId>
+                        <artifactId>fastutil</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <dependency>
