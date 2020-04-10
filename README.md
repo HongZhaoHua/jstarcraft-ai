@@ -111,6 +111,7 @@ JStarCraft AI框架各个模块之间的关系:
         * ARFF
         * CSV
         * JSON
+        * Parquet
         * HQL
         * SQL
     * [数据处理](#数据处理)
