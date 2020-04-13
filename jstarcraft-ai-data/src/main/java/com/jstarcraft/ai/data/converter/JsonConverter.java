@@ -12,7 +12,7 @@ import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.module.DenseModule;
 import com.jstarcraft.ai.data.module.SparseModule;
-import com.jstarcraft.core.common.conversion.csv.ConversionUtility;
+import com.jstarcraft.core.common.conversion.ConversionUtility;
 import com.jstarcraft.core.common.conversion.json.JsonUtility;
 import com.jstarcraft.core.common.reflection.TypeUtility;
 import com.jstarcraft.core.utility.KeyValue;
