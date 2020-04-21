@@ -1,2 +1,5 @@
 NDCG Normalized discounted cumulative gain 理解分析:
 https://www.it610.com/article/5283790.htm
+
+机器学习排序:
+https://www.jiqizhixin.com/graph/technologies/124e6394-15ac-47e9-873d-fcbdfc91026c
