@@ -1,6 +1,9 @@
 机器学习(Machine Learning)、深度学习(Deep Learning)汇总与资源:
 http://mantchs.com/2020/02/03/ML/project/
 
+Encog 神经网络与机器学习框架:
+https://blog.csdn.net/u012970287/category_9272779.html
+
 Algorithms of the Intelligent Web(智能Web算法):
 https://www.manning.com/books/algorithms-of-the-intelligent-web?query=Algorithms%20of%20the%20Intelligent%20Web
 
