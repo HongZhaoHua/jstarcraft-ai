@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
-import com.jstarcraft.ai.math.algorithm.lsh.VectorHashFunction;
 import com.jstarcraft.ai.math.structure.vector.ArrayVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Neighborhood;

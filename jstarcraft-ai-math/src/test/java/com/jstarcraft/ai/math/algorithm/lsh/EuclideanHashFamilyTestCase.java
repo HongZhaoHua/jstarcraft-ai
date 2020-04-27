@@ -1,7 +1,5 @@
 package com.jstarcraft.ai.math.algorithm.lsh;
 
-import com.jstarcraft.ai.math.algorithm.lsh.EuclideanHashFamily;
-import com.jstarcraft.ai.math.algorithm.lsh.LshHashFamily;
 import com.jstarcraft.core.utility.RandomUtility;
 
 public class EuclideanHashFamilyTestCase extends LshHashFamilyTestCase {
