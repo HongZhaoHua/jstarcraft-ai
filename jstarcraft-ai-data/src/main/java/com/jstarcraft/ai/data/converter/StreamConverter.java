@@ -26,9 +26,9 @@ public abstract class StreamConverter extends AbstractConverter<InputStream> {
     protected abstract int parseData(DataModule module, BufferedReader buffer) throws IOException;
 
     @Override
-    public int convert(DataModule module, InputStream iterator) {
+    public int convert(DataModule module, InputStream stream) {
         try {
-            try (InputStreamReader reader = new InputStreamReader(iterator); BufferedReader buffer = new BufferedReader(reader)) {
+            try (InputStreamReader iterator = new InputStreamReader(stream); BufferedReader buffer = new BufferedReader(iterator)) {
                 return parseData(module, buffer);
             }
         } catch (Exception exception) {
