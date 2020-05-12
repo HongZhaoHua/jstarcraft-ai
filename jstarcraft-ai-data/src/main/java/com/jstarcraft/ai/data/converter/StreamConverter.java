@@ -10,6 +10,7 @@ import com.jstarcraft.ai.data.DataModule;
 import com.jstarcraft.ai.data.attribute.QualityAttribute;
 import com.jstarcraft.ai.data.attribute.QuantityAttribute;
 import com.jstarcraft.ai.data.exception.DataException;
+import com.jstarcraft.core.utility.StringUtility;
 
 /**
  * 流式转换器
@@ -28,7 +29,7 @@ public abstract class StreamConverter extends AbstractConverter<InputStream> {
     @Override
     public int convert(DataModule module, InputStream stream) {
         try {
-            try (InputStreamReader iterator = new InputStreamReader(stream); BufferedReader buffer = new BufferedReader(iterator)) {
+            try (InputStreamReader iterator = new InputStreamReader(stream, StringUtility.CHARSET); BufferedReader buffer = new BufferedReader(iterator)) {
                 return parseData(module, buffer);
             }
         } catch (Exception exception) {
