@@ -13,7 +13,7 @@ public class EuclideanHashFamily implements LshHashFamily {
 
     private int w;
 
-    public EuclideanHashFamily(int w, int dimensions) {
+    public EuclideanHashFamily(int dimensions, int w) {
         this.dimensions = dimensions;
         this.w = w;
     }

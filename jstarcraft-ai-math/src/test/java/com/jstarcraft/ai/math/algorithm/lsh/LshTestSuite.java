@@ -13,7 +13,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
         ManhattanHashFamilyTestCase.class,
 
-        MinHashFamilyTestCase.class, })
+        MinHashFamilyTestCase.class,
+
+        SimHashFamilyTestCase.class, })
 public class LshTestSuite {
 
 }

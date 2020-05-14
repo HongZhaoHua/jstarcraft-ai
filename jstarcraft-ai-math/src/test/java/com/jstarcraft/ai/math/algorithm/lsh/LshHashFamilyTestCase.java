@@ -34,7 +34,7 @@ public abstract class LshHashFamilyTestCase {
 		return signature;
 	}
 
-	protected abstract LshHashFamily getHashFamily(int dimensions);
+	protected abstract LshHashFamily getHashFamily(Random random, int dimensions);
 
 	@Test
 	public void testHashFunction() {
@@ -49,8 +49,8 @@ public abstract class LshHashFamilyTestCase {
 		dataset.add(right);
 		dataset.add(query);
 
-		LshHashFamily family = getHashFamily(7);
 		Random random = new Random(0);
+		LshHashFamily family = getHashFamily(random, 7);
 		VectorHashFunction[] functions = new VectorHashFunction[3];
 		for (int index = 0; index < 3; index++) {
 			VectorHashFunction function = family.getHashFunction(random);
@@ -82,8 +82,8 @@ public abstract class LshHashFamilyTestCase {
 		int dimensionSize = stageSize * signatureSize * 40;
 
 		Int2ObjectOpenHashMap<ArrayList<NameVector>>[] tables = new Int2ObjectOpenHashMap[stageSize];
-		LshHashFamily family = getHashFamily(dimensionSize);
 		Random random = new Random(0);
+		LshHashFamily family = getHashFamily(random, dimensionSize);
 		VectorHashFunction[][] functions = new VectorHashFunction[stageSize][signatureSize];
 		for (int stageIndex = 0; stageIndex < stageSize; stageIndex++) {
 			tables[stageIndex] = new Int2ObjectOpenHashMap<>();
@@ -93,6 +93,7 @@ public abstract class LshHashFamilyTestCase {
 			}
 		}
 
+		NameVector test = null;
 		// 构建不相似数据
 		for (int instanceIndex = 0; instanceIndex < 1000; instanceIndex++) {
 			float[] data = new float[dimensionSize];
@@ -110,6 +111,7 @@ public abstract class LshHashFamilyTestCase {
 				}
 				vectors.add(vector);
 			}
+			test = vector;
 		}
 
 		// 构建相似数据

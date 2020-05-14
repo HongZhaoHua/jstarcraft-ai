@@ -13,7 +13,7 @@ public class ManhattanHashFamily implements LshHashFamily {
 
     private int w;
 
-    public ManhattanHashFamily(int w, int dimensions) {
+    public ManhattanHashFamily(int dimensions, int w) {
         this.dimensions = dimensions;
         this.w = w;
     }

@@ -4,16 +4,16 @@ import java.util.Random;
 
 import com.jstarcraft.core.utility.RandomUtility;
 
-public class CosineHashFamilyTestCase extends LshHashFamilyTestCase {
+public class SimHashFamilyTestCase extends LshHashFamilyTestCase {
 
 	@Override
 	protected LshHashFamily getHashFamily(Random random, int dimensions) {
-		return new CosineHashFamily(dimensions);
+		return new SimHashFamily(random, dimensions, 7);
 	}
 
 	@Override
 	protected float getRandomData() {
-		return RandomUtility.randomFloat(1F);
+		return RandomUtility.randomInteger(2);
 	}
 
 }

@@ -12,8 +12,8 @@ public class ManhattanHashFunction implements VectorHashFunction {
 
 	private MathVector projection;
 
-	public ManhattanHashFunction(Random random, int dimensions, int width) {
-		this.w = width;
+	public ManhattanHashFunction(Random random, int dimensions, int w) {
+		this.w = w;
 
 		projection = new ArrayVector(dimensions, new float[dimensions]);
 		for (int dimension = 0; dimension < dimensions; dimension++) {

@@ -1,11 +1,13 @@
 package com.jstarcraft.ai.math.algorithm.lsh;
 
+import java.util.Random;
+
 import com.jstarcraft.core.utility.RandomUtility;
 
 public class MinHashFamilyTestCase extends LshHashFamilyTestCase {
 
     @Override
-    protected LshHashFamily getHashFamily(int dimensions) {
+    protected LshHashFamily getHashFamily(Random random, int dimensions) {
         return new MinHashFamily();
     }
 
