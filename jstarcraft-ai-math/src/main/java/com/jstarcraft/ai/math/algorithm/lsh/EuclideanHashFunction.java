@@ -9,7 +9,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 public class EuclideanHashFunction implements VectorHashFunction {
 
-    private MathVector randomProjection;
+    private MathVector projection;
 
     private int offset;
 
@@ -19,18 +19,18 @@ public class EuclideanHashFunction implements VectorHashFunction {
         this.w = w;
         this.offset = random.nextInt(w);
 
-        randomProjection = new ArrayVector(dimensions, new float[dimensions]);
+        projection = new ArrayVector(dimensions, new float[dimensions]);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
             // standard deviation 1.0
             float value = (float) random.nextGaussian();
-            randomProjection.setValue(dimension, value);
+            projection.setValue(dimension, value);
         }
     }
 
     public int hash(MathVector vector) {
         MathScalar scalar = DefaultScalar.getInstance();
-        float hash = (scalar.dotProduct(vector, randomProjection).getValue() + offset) / Float.valueOf(w);
+        float hash = (scalar.dotProduct(vector, projection).getValue() + offset) / Float.valueOf(w);
         return Math.round(hash);
     }
 }
