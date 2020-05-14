@@ -11,10 +11,10 @@ public class MinHashFunction implements VectorHashFunction {
     
     private int b;
 
-    public MinHashFunction(Random dimension) {
+    public MinHashFunction(Random random) {
         // a and b should be randomly generated in [1,PRIME-1]
-        this.a = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;
-        this.b = dimension.nextInt(Integer.MAX_VALUE - 1) + 1;
+        this.a = random.nextInt(Integer.MAX_VALUE - 1) + 1;
+        this.b = random.nextInt(Integer.MAX_VALUE - 1) + 1;
     }
 
     public int hash(MathVector vector) {
