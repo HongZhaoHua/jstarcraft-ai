@@ -19,15 +19,16 @@ public class EuclideanHashFunction implements VectorHashFunction {
         this.w = w;
         this.offset = random.nextInt(w);
 
-        projection = new ArrayVector(dimensions, new float[dimensions]);
+        this.projection = new ArrayVector(dimensions, new float[dimensions]);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
             // standard deviation 1.0
             float value = (float) random.nextGaussian();
-            projection.setValue(dimension, value);
+            this.projection.setValue(dimension, value);
         }
     }
 
+    @Override
     public int hash(MathVector vector) {
         MathScalar scalar = DefaultScalar.getInstance();
         float hash = (scalar.dotProduct(vector, projection).getValue() + offset) / Float.valueOf(w);

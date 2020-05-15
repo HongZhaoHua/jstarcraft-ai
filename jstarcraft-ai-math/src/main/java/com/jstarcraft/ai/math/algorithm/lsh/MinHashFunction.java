@@ -17,6 +17,7 @@ public class MinHashFunction implements VectorHashFunction {
         this.b = random.nextInt(Integer.MAX_VALUE - 1) + 1;
     }
 
+    @Override
     public int hash(MathVector vector) {
         int hash = Integer.MAX_VALUE;
         for (VectorScalar scalar : vector) {

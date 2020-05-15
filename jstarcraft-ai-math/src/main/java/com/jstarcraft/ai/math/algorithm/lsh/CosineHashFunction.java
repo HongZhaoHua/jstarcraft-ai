@@ -12,12 +12,12 @@ public class CosineHashFunction implements VectorHashFunction {
     final MathVector projection;
 
     public CosineHashFunction(Random random, int dimensions) {
-        projection = new ArrayVector(dimensions, new float[dimensions]);
+        this.projection = new ArrayVector(dimensions, new float[dimensions]);
         for (int dimension = 0; dimension < dimensions; dimension++) {
             // mean 0
             // standard deviation 1.0
             float value = (float) random.nextGaussian();
-            projection.setValue(dimension, value);
+            this.projection.setValue(dimension, value);
         }
     }
 

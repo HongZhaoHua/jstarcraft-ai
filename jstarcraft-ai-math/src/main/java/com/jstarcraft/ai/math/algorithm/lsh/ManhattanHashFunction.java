@@ -15,12 +15,12 @@ public class ManhattanHashFunction implements VectorHashFunction {
 	public ManhattanHashFunction(Random random, int dimensions, int w) {
 		this.w = w;
 
-		projection = new ArrayVector(dimensions, new float[dimensions]);
+		this.projection = new ArrayVector(dimensions, new float[dimensions]);
 		for (int dimension = 0; dimension < dimensions; dimension++) {
 			// mean 0
 			// standard deviation 1.0
 			float val = random.nextFloat() * w;
-			projection.setValue(dimension, val);
+			this.projection.setValue(dimension, val);
 		}
 	}
 

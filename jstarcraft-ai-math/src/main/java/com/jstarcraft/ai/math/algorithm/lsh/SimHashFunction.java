@@ -20,6 +20,7 @@ public class SimHashFunction implements VectorHashFunction {
 		}
 	}
 
+	@Override
 	public int hash(MathVector vector) {
 		MathScalar scalar = DefaultScalar.getInstance();
 		// calculate the dot product.

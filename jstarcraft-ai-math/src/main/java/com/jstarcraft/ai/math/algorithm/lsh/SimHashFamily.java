@@ -10,19 +10,17 @@ public class SimHashFamily implements LshHashFamily {
 
 	private static final HammingDistance distance = new HammingDistance();
 
-	private final int dimensions;
-
-	private int w;
-
 	private MathVector projection;
 
+	public SimHashFamily(MathVector projection) {
+		this.projection = projection;
+	}
+
 	public SimHashFamily(Random random, int dimensions, int w) {
-		this.dimensions = dimensions;
-		this.w = w;
 		this.projection = new ArrayVector(dimensions, new float[dimensions]);
 		for (int dimension = 0; dimension < dimensions; dimension++) {
 			float value = random.nextInt(w) + 1;
-			projection.setValue(dimension, value);
+			this.projection.setValue(dimension, value);
 		}
 	}
 
