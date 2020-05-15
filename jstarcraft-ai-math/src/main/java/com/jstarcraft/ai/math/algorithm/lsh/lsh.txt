@@ -25,6 +25,9 @@ https://www.cnblogs.com/maybe2030/p/5203186.html
 simHash海量去重java实现:
 https://blog.csdn.net/ItRuler/article/details/87804208
 
+Java实现LSH(Locality Sensitive Hash):
+https://www.cnblogs.com/fx-blog/p/8227988.html
+
 局部敏感哈希（LSH）之simhash和minhash:
 https://www.cnblogs.com/jingsupo/p/10607764.html
 
