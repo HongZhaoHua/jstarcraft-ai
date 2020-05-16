@@ -5,10 +5,10 @@ LSH的基本思想:
 https://blog.csdn.net/icvpr/article/details/12342159
 
 局部敏感哈希(LSH)——Locality Sensitive Hashing:
-http://cherishher.github.io/2018/09/19/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C/
+http://cherishher.github.io/2018/09/19/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C
 
 局部敏感哈希-Locality-Sensitive-Hashing-LSH:
-http://blog.rexking6.top/2018/10/09/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C-Locality-Sensitive-Hashing-LSH/
+http://blog.rexking6.top/2018/10/09/%E5%B1%80%E9%83%A8%E6%95%8F%E6%84%9F%E5%93%88%E5%B8%8C-Locality-Sensitive-Hashing-LSH
 
 深入浅出LSH
 http://www.cppblog.com/humanchao/archive/2018/02/24/215521.html
