@@ -39,3 +39,8 @@ https://github.com/JorenSix/TarsosLSH
 
 JImageHash is a performant perceptual image fingerprinting library entirely written in Java:
 https://github.com/KilianB/JImageHash
+
+ssdeep - Fuzzy hashing program.
+https://ssdeep-project.github.io/ssdeep/
+https://github.com/ssdeep-project/ssdeep
+
