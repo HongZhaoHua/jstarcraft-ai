@@ -1,2 +1,5 @@
 搜索引擎相关度算法-BM25 JAVA实现:
 https://blog.csdn.net/u011177064/article/details/103403325
+
+文本相似度-bm25算法原理及实现:
+https://www.jianshu.com/p/1e498888f505
