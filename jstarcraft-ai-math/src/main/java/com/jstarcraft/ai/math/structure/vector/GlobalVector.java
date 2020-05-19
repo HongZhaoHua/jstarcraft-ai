@@ -72,7 +72,7 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
     public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
         switch (mode) {
         case SERIAL: {
-            CompositeVectorScalar scalar = new CompositeVectorScalar();
+            GlobalVectorScalar scalar = new GlobalVectorScalar();
             int size = components.length;
             for (int point = 0; point < size; point++) {
                 MathVector vector = components[point];
@@ -94,7 +94,7 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
                 MathVector vector = components[point];
                 int split = splits[point];
                 context.doStructureByAny(point, () -> {
-                    CompositeVectorScalar scalar = new CompositeVectorScalar();
+                    GlobalVectorScalar scalar = new GlobalVectorScalar();
                     for (VectorScalar term : vector) {
                         scalar.update(term, term.getIndex() + split);
                         for (MathAccessor<VectorScalar> accessor : accessors) {
@@ -410,10 +410,10 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
 
     @Override
     public Iterator<VectorScalar> iterator() {
-        return new CompositeVectorIterator();
+        return new GlobalVectorIterator();
     }
 
-    private class CompositeVectorIterator implements Iterator<VectorScalar> {
+    private class GlobalVectorIterator implements Iterator<VectorScalar> {
 
         private int index;
 
@@ -425,7 +425,7 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
 
         private Iterator<VectorScalar> iterator = components[index].iterator();
 
-        private CompositeVectorScalar term = new CompositeVectorScalar();
+        private GlobalVectorScalar term = new GlobalVectorScalar();
 
         @Override
         public boolean hasNext() {
@@ -452,7 +452,7 @@ public class GlobalVector implements MathVector, MathMonitor<VectorScalar> {
 
     }
 
-    private class CompositeVectorScalar implements VectorScalar {
+    private class GlobalVectorScalar implements VectorScalar {
 
         private VectorScalar term;
 

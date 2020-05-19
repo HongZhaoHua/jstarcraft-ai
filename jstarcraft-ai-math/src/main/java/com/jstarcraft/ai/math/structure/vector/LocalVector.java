@@ -62,7 +62,7 @@ public class LocalVector implements MathVector {
     public ScalarIterator<VectorScalar> iterateElement(MathCalculator mode, MathAccessor<VectorScalar>... accessors) {
         switch (mode) {
         case SERIAL: {
-            SectionVectorScalar scalar = new SectionVectorScalar();
+            LocalVectorScalar scalar = new LocalVectorScalar();
             for (int index = 0; index < elementSize; index++) {
                 scalar.update(index);
                 for (MathAccessor<VectorScalar> accessor : accessors) {
@@ -77,7 +77,7 @@ public class LocalVector implements MathVector {
             for (int index = 0; index < elementSize; index++) {
                 int elementIndex = index;
                 context.doStructureByAny(index, () -> {
-                    SectionVectorScalar scalar = new SectionVectorScalar();
+                    LocalVectorScalar scalar = new LocalVectorScalar();
                     scalar.update(elementIndex);
                     for (MathAccessor<VectorScalar> accessor : accessors) {
                         accessor.accessElement(scalar);
@@ -198,19 +198,19 @@ public class LocalVector implements MathVector {
 
     @Override
     public Iterator<VectorScalar> iterator() {
-        return new SectionVectorIterator();
+        return new LocalVectorIterator();
     }
 
     /**
      * Iterator over a sparse vector
      */
-    private class SectionVectorIterator implements Iterator<VectorScalar> {
+    private class LocalVectorIterator implements Iterator<VectorScalar> {
 
         private int index;
 
         private int size = elementSize;
 
-        private SectionVectorScalar term = new SectionVectorScalar();
+        private LocalVectorScalar term = new LocalVectorScalar();
 
         @Override
         public boolean hasNext() {
@@ -230,7 +230,7 @@ public class LocalVector implements MathVector {
 
     }
 
-    private class SectionVectorScalar implements VectorScalar {
+    private class LocalVectorScalar implements VectorScalar {
 
         private int index;
 
