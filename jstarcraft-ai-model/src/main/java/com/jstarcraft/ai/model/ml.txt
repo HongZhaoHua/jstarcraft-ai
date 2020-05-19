@@ -1,3 +1,6 @@
+Java第三方工具库/包汇总:
+https://blog.csdn.net/panrenlong/article/details/79246349
+
 机器学习(Machine Learning)、深度学习(Deep Learning)汇总与资源:
 http://mantchs.com/2020/02/03/ML/project/
 

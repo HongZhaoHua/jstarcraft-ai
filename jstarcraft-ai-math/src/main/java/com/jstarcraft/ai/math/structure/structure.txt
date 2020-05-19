@@ -1,2 +1,14 @@
 玩转数据结构-从入门到进阶:
 https://github.com/RongleXie/Play-with-Data-Structures-Ronglexie
+
+Java Matrix Benchmark:
+http://lessthanoptimal.github.io/Java-Matrix-Benchmark
+
+EJML:A fast and easy to use linear algebra library written in Java for dense, sparse, real, and complex matrices:
+https://github.com/lessthanoptimal/ejml
+
+Java中的高效矩阵运算包EJML的使用:
+https://blog.csdn.net/qy20115549/article/details/79957101
+
+Java矩阵库—jblas、ujmp、jmatio的相互转化:
+https://www.cnblogs.com/lz3018/p/5084713.html

@@ -11,10 +11,7 @@ Catalano Framework 是一个 Java 和 Android 的科学计算框架:
 https://github.com/DiegoCatalano/Catalano-Framework
 
 Colt provides a set of Open Source Libraries for High Performance Scientific and Technical Computing in Java:
-http://dst.lbl.gov/ACSSoftware/colt/
-
-EJML:A fast and easy to use linear algebra library written in Java for dense, sparse, real, and complex matrices:
-https://github.com/lessthanoptimal/ejml
+http://dst.lbl.gov/ACSSoftware/colt
 
 Linear Algebra for Java:
 https://github.com/vkostyukov/la4j
