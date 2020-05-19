@@ -2,9 +2,6 @@ package com.jstarcraft.ai.math.algorithm.text;
 
 import java.util.List;
 
-import com.jstarcraft.ai.math.algorithm.text.CountTermFrequency;
-import com.jstarcraft.ai.math.algorithm.text.TermFrequency;
-
 import it.unimi.dsi.fastutil.ints.Int2FloatAVLTreeMap;
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 
