@@ -3,7 +3,6 @@ package com.jstarcraft.ai.math.algorithm.text;
 import java.util.Collection;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
-import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Term Frequency
@@ -15,32 +14,20 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  * @author Birdy
  *
  */
-public class BinaryTermFrequency implements TermFrequency {
+public class BinaryTermFrequency extends AbstractTermFrequency {
 
-    private Int2FloatMap keyValues;
+	public BinaryTermFrequency(Int2FloatMap keyValues, int... document) {
+		super(keyValues, document.length);
+		for (int term : document) {
+			keyValues.put(term, 1F);
+		}
+	}
 
-    public BinaryTermFrequency(Int2FloatMap keyValues, int... document) {
-        for (int term : document) {
-            keyValues.put(term, 1F);
-        }
-        this.keyValues = keyValues;
-    }
-
-    public BinaryTermFrequency(Int2FloatMap keyValues, Collection<Integer> document) {
-        for (int term : document) {
-            keyValues.put(term, 1F);
-        }
-        this.keyValues = keyValues;
-    }
-
-    @Override
-    public IntSet getKeys() {
-        return keyValues.keySet();
-    }
-
-    @Override
-    public float getValue(int key) {
-        return keyValues.get(key);
-    }
+	public BinaryTermFrequency(Int2FloatMap keyValues, Collection<Integer> document) {
+		super(keyValues, document.size());
+		for (int term : document) {
+			keyValues.put(term, 1F);
+		}
+	}
 
 }

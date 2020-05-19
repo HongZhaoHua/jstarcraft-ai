@@ -10,8 +10,10 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  */
 public interface TermFrequency {
 
-    IntSet getKeys();
+	IntSet getKeys();
 
-    float getValue(int key);
+	float getValue(int key);
+
+	int getLength();
 
 }
