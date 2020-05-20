@@ -1,3 +1,6 @@
+搜索中的权重度量利器: TF-IDF和BM25:
+https://my.oschina.net/stanleysun/blog/1617727
+
 Applying TF-IDF algorithm in practice:
 https://www.javacodegeeks.com/2016/07/applying-tf-idf-algorithm-practice.html
 

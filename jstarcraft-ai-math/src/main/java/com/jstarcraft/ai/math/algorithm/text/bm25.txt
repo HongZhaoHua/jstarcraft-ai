@@ -1,3 +1,6 @@
+BM25下一代Lucene相关性算法:
+https://www.jianshu.com/p/0b372804ff45
+
 BM25 文本相似度算法:
 https://blog.csdn.net/qq_20989105/article/details/95460003
 
