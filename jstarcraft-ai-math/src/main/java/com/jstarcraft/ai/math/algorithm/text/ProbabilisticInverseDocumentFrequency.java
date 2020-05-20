@@ -7,7 +7,6 @@ import org.apache.commons.math3.util.FastMath;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.IntIterator;
-import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Inverse Document Frequency
@@ -19,71 +18,59 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  * @author Birdy
  *
  */
-public class ProbabilisticInverseDocumentFrequency implements InverseDocumentFrequency {
+public class ProbabilisticInverseDocumentFrequency extends AbstractInverseDocumentFrequency {
 
-    private Int2FloatMap keyValues;
+	public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
+		super(keyValues);
+		int size = documents.length;
+		for (TermFrequency document : documents) {
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
+			}
+		}
+		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
+			int key = term.getIntKey();
+			float value = term.getFloatValue();
+			keyValues.put(key, (float) FastMath.log((size - value) / value));
+		}
+	}
 
-    public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
-        int size = documents.length;
-        for (TermFrequency document : documents) {
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
-            }
-        }
-        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-            int key = term.getIntKey();
-            float value = term.getFloatValue();
-            keyValues.put(key, (float) FastMath.log((size - value) / value));
-        }
-        this.keyValues = keyValues;
-    }
+	public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
+		super(keyValues);
+		int size = documents.size();
+		for (TermFrequency document : documents) {
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
+			}
+		}
+		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
+			int key = term.getIntKey();
+			float value = term.getFloatValue();
+			keyValues.put(key, (float) FastMath.log((size - value) / value));
+		}
+	}
 
-    public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
-        int size = documents.size();
-        for (TermFrequency document : documents) {
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
-            }
-        }
-        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-            int key = term.getIntKey();
-            float value = term.getFloatValue();
-            keyValues.put(key, (float) FastMath.log((size - value) / value));
-        }
-        this.keyValues = keyValues;
-    }
-
-    public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
-        int size = 0;
-        while (documents.hasNext()) {
-            size++;
-            TermFrequency document = documents.next();
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
-            }
-        }
-        for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
-            int key = term.getIntKey();
-            float value = term.getFloatValue();
-            keyValues.put(key, (float) FastMath.log((size - value) / value));
-        }
-        this.keyValues = keyValues;
-    }
-
-    @Override
-    public IntSet getKeys() {
-        return keyValues.keySet();
-    }
-
-    @Override
-    public float getValue(int key) {
-        return keyValues.get(key);
-    }
+	public ProbabilisticInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
+		super(keyValues);
+		int size = 0;
+		while (documents.hasNext()) {
+			size++;
+			TermFrequency document = documents.next();
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, keyValues.getOrDefault(term, 0F) + 1F);
+			}
+		}
+		for (Int2FloatMap.Entry term : keyValues.int2FloatEntrySet()) {
+			int key = term.getIntKey();
+			float value = term.getFloatValue();
+			keyValues.put(key, (float) FastMath.log((size - value) / value));
+		}
+	}
 
 }

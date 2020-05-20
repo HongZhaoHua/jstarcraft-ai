@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import it.unimi.dsi.fastutil.ints.Int2FloatMap;
 import it.unimi.dsi.fastutil.ints.IntIterator;
-import it.unimi.dsi.fastutil.ints.IntSet;
 
 /**
  * Inverse Document Frequency
@@ -17,52 +16,40 @@ import it.unimi.dsi.fastutil.ints.IntSet;
  * @author Birdy
  *
  */
-public class UnaryInverseDocumentFrequency implements InverseDocumentFrequency {
+public class UnaryInverseDocumentFrequency extends AbstractInverseDocumentFrequency {
 
-    private Int2FloatMap keyValues;
+	public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
+		super(keyValues);
+		for (TermFrequency document : documents) {
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, 1F);
+			}
+		}
+	}
 
-    public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, TermFrequency... documents) {
-        for (TermFrequency document : documents) {
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, 1F);
-            }
-        }
-        this.keyValues = keyValues;
-    }
+	public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
+		super(keyValues);
+		for (TermFrequency document : documents) {
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, 1F);
+			}
+		}
+	}
 
-    public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, Collection<TermFrequency> documents) {
-        for (TermFrequency document : documents) {
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, 1F);
-            }
-        }
-        this.keyValues = keyValues;
-    }
-
-    public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
-        while (documents.hasNext()) {
-            TermFrequency document = documents.next();
-            IntIterator iterator = document.getKeys().iterator();
-            while (iterator.hasNext()) {
-                int term = iterator.nextInt();
-                keyValues.put(term, 1F);
-            }
-        }
-        this.keyValues = keyValues;
-    }
-
-    @Override
-    public IntSet getKeys() {
-        return keyValues.keySet();
-    }
-
-    @Override
-    public float getValue(int key) {
-        return keyValues.get(key);
-    }
+	public UnaryInverseDocumentFrequency(Int2FloatMap keyValues, Iterator<TermFrequency> documents) {
+		super(keyValues);
+		while (documents.hasNext()) {
+			TermFrequency document = documents.next();
+			IntIterator iterator = document.getKeys().iterator();
+			while (iterator.hasNext()) {
+				int term = iterator.nextInt();
+				keyValues.put(term, 1F);
+			}
+		}
+	}
 
 }

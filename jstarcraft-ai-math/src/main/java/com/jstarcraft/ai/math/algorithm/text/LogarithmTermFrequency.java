@@ -18,8 +18,6 @@ import it.unimi.dsi.fastutil.ints.Int2FloatMap;
  */
 public class LogarithmTermFrequency extends AbstractTermFrequency {
 
-	private Int2FloatMap keyValues;
-
 	public LogarithmTermFrequency(Int2FloatMap keyValues, int... document) {
 		super(keyValues, document.length);
 		for (int term : document) {

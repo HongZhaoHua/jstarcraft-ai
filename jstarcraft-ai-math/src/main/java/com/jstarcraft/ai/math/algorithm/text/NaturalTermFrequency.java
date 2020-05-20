@@ -16,8 +16,6 @@ import it.unimi.dsi.fastutil.ints.Int2FloatMap;
  */
 public class NaturalTermFrequency extends AbstractTermFrequency {
 
-	private Int2FloatMap keyValues;
-
 	public NaturalTermFrequency(Int2FloatMap keyValues, int... document) {
 		super(keyValues, document.length);
 		for (int term : document) {
