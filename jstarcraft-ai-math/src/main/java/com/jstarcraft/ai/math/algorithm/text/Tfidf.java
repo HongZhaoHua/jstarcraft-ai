@@ -6,6 +6,7 @@ package com.jstarcraft.ai.math.algorithm.text;
  * @author Birdy
  *
  */
+// TODO 考虑迁移到NLP项目
 public class Tfidf {
 
 	private InverseDocumentFrequency idf;
