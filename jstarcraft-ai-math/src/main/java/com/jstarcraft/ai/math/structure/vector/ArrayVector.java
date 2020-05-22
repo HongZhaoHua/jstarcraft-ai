@@ -11,8 +11,8 @@ import org.apache.commons.math3.util.FastMath;
 import com.jstarcraft.ai.environment.EnvironmentContext;
 import com.jstarcraft.ai.math.structure.MathAccessor;
 import com.jstarcraft.ai.math.structure.MathCalculator;
-import com.jstarcraft.ai.math.structure.ScalarIterator;
 import com.jstarcraft.ai.math.structure.MathMonitor;
+import com.jstarcraft.ai.math.structure.ScalarIterator;
 
 /**
  * 数组向量
@@ -306,6 +306,19 @@ public class ArrayVector implements MathVector {
     }
 
     public ArrayVector(SparseVector vector) {
+        this.capacity = vector.getKnownSize() + vector.getUnknownSize();
+        this.size = vector.getElementSize();
+        this.indexes = new int[size];
+        this.values = new float[size];
+        int index = 0;
+        for (VectorScalar term : vector) {
+            this.indexes[index] = term.getIndex();
+            this.values[index] = term.getValue();
+            index++;
+        }
+    }
+    
+    public ArrayVector(HashVector vector) {
         this.capacity = vector.getKnownSize() + vector.getUnknownSize();
         this.size = vector.getElementSize();
         this.indexes = new int[size];
