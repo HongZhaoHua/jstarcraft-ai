@@ -20,7 +20,7 @@ import it.unimi.dsi.fastutil.longs.Long2FloatMap.Entry;
 import it.unimi.dsi.fastutil.longs.Long2FloatSortedMap;
 
 /**
- * 随机向量
+ * 哈希向量
  * 
  * @author Birdy
  *
