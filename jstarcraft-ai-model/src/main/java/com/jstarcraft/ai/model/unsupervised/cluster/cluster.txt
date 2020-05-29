@@ -1,0 +1,11 @@
+Canopy聚类算法:
+https://www.deeplearn.me/1765.html
+
+FarthestFirst:
+https://blog.csdn.net/nihaomafb/article/details/49120937
+
+K-means与K-means++:
+https://www.cnblogs.com/wang2825/articles/8696830.html
+
+K-means、K-means ++、K-modes和K-prototype聚类算法简述:
+https://blog.csdn.net/jerry81333/article/details/74285284
