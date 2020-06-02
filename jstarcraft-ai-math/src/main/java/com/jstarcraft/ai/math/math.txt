@@ -4,6 +4,9 @@ https://github.com/eobermuhlner/big-math
 偏度(skewness)和峰度(kurtosis):
 https://blog.csdn.net/xbmatrix/article/details/69360167
 
+偏度和峰度的计算:
+https://www.cnblogs.com/jiaxin359/p/8977333.html
+
 附录D——自动微分(Autodiff):
 https://www.cnblogs.com/royhoo/p/Autodiff.html
 
