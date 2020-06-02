@@ -115,21 +115,21 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
      * @param mean
      * @return
      */
-    default float getKurtosis(float mean) {
+    default float getKurtosis(float sum) {
+        int know = getKnownSize();
+        int unknow = getUnknownSize();
+        int length = know + unknow;
+        float mean = sum / length;
+
         float kurtosis = 0F;
-        int length = getKnownSize() + getUnknownSize();
-        int size = getElementSize();
-
         for (MathScalar term : this) {
-            kurtosis += Math.pow(term.getValue() - mean, 3F);
+            kurtosis += Math.pow(term.getValue() - mean, 4F);
         }
-
-        // All the zero's we skipped
-        kurtosis += Math.pow(-mean, 4F) * (length - size);
-
-        float variance = getVariance(mean) / length;
-        kurtosis = (float) (kurtosis / (pow(Math.sqrt(variance), 4F) * (length - 1F)) - 3F);
-
+        // TODO 处理跳过0的部分
+        kurtosis += Math.pow(-mean, 4F) * unknow;
+        // TODO 处理跳过0的部分
+        float variance = (getVariance(mean) + mean * mean * unknow) / length;
+        kurtosis = (float) (kurtosis / (Math.pow(variance, 2F) * (length - 1F)) - 3F);
         return kurtosis;
     }
 
@@ -236,26 +236,25 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
      * @param mean
      * @return
      */
-    default float getSkewness(float mean) {
-        float skewness = 0F;
-        int length = getKnownSize() + getUnknownSize();
-        int size = getElementSize();
+    default float getSkewness(float sum) {
+        int know = getKnownSize();
+        int unknow = getUnknownSize();
+        int length = know + unknow;
+        float mean = sum / length;
 
+        float skewness = 0F;
         for (MathScalar term : this) {
             skewness += Math.pow(term.getValue() - mean, 3F);
         }
-
-        // All the zero's we skiped
-        skewness += Math.pow(-mean, 3F) * (length - size);
-
-        float variance = getVariance(mean) / length;
+        // TODO 处理跳过0的部分
+        skewness += Math.pow(-mean, 3F) * unknow;
+        // TODO 处理跳过0的部分
+        float variance = (getVariance(mean) + mean * mean * unknow) / length;
         skewness = (float) (skewness / (pow(Math.sqrt(variance), 3F) * (length - 1F)));
-
         if (length >= 3) {
             // We can use the bias corrected formula
             return (float) (sqrt(length * (length - 1F)) / (length - 2F) * skewness);
         }
-
         return skewness;
     }
 
@@ -312,6 +311,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
             mean += delta / size;
             variance += delta * (value - mean);
         }
+        // TODO 考虑处理跳过0的部分
         return new Float2FloatKeyValue(mean, variance);
     }
 
@@ -331,12 +331,13 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
         // TODO 此处对称矩阵可能会存在错误,需要Override
         float variance = 0F;
         Iterator<T> iterator = this.iterator();
-        if (iterator.hasNext()) {
+        while (iterator.hasNext()) {
             MathScalar term = iterator.next();
             float value = term.getValue();
             value = value - mean;
             variance += (value * value);
         }
+        // TODO 考虑处理跳过0的部分
         return variance;
     }
 

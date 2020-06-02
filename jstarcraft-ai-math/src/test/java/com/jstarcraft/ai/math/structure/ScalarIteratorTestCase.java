@@ -54,6 +54,13 @@ public class ScalarIteratorTestCase {
         }
     }
 
+    @Test
+    public void testKurtosisAndSkewness() {
+        MathVector vector = DenseVector.valueOf(5, new float[] { 4.5899916F, 4.5916805F, 4.5911174F, 4.588303F, 4.5877404F });
+        Assert.assertEquals("峰度比较", -1.2815338F, vector.getKurtosis(vector.getSum(false)), MathUtility.EPSILON);
+        Assert.assertEquals("偏度比较", -0.20210096F, vector.getSkewness(vector.getSum(false)), MathUtility.EPSILON);
+    }
+
     private double getMedian(ArrayList<Integer> data) {
         int lenght = data.size();
         // 中位数
