@@ -24,6 +24,7 @@ import com.jstarcraft.ai.math.structure.ScalarIterator;
  * @author Birdy
  *
  */
+// TODO 考虑重构为基于IntegerArray与FloatArray
 public class ArrayVector implements MathVector {
 
     protected int capacity;
