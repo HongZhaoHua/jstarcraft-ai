@@ -1,2 +1,5 @@
+对核函数(kernel)最通俗易懂的理解:
+https://blog.csdn.net/qq_39521554/article/details/80605178
+
 通俗理解核方法(kernel function):
 https://blog.csdn.net/u014662865/article/details/80970470
