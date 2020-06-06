@@ -15,3 +15,6 @@ SVM入门（九）松弛变量（续）
 http://www.blogjava.net/zhenandaci/archive/2009/03/17/260315.html
 SVM入门（十）将SVM用于多类分类
 http://www.blogjava.net/zhenandaci/archive/2009/03/26/262113.html
+
+SVM系列-从基础到掌握:
+https://zhuanlan.zhihu.com/p/61123737
