@@ -1,6 +1,9 @@
 Weka矩阵分解:
 https://github.com/Waikato/weka-trunk/tree/master/weka/src/main/java/weka/core/matrix
 
+JSAT矩阵分解:
+https://github.com/EdwardRaff/JSAT/tree/master/JSAT/src/jsat/linear
+
 JAMA矩阵分解:
 https://math.nist.gov/javanumerics/jama
 
