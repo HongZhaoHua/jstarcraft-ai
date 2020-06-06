@@ -20,7 +20,8 @@ public class KernelDistance implements MathDistance {
 
     @Override
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
-        return kernel.calculate(leftVector, leftVector) + kernel.calculate(rightVector, rightVector) - kernel.calculate(leftVector, rightVector);
+        float coefficient = kernel.calculate(leftVector, leftVector) + kernel.calculate(rightVector, rightVector) - 2 * kernel.calculate(leftVector, rightVector);
+        return coefficient;
     }
 
 }
