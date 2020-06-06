@@ -3,3 +3,6 @@ https://github.com/Waikato/weka-trunk/tree/master/weka/src/main/java/weka/core/m
 
 JAMA矩阵分解:
 https://math.nist.gov/javanumerics/jama
+
+LU分解、LUP分解、Cholesky分解:
+https://zhuanlan.zhihu.com/p/84210687
