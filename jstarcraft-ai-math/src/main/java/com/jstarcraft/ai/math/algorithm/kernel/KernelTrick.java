@@ -10,6 +10,20 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public interface KernelTrick {
 
+    /**
+     * 计算核
+     * 
+     * @param leftVector
+     * @param rightVector
+     * @return
+     */
     float calculate(MathVector leftVector, MathVector rightVector);
+
+    /**
+     * 是否归一化
+     * 
+     * @return
+     */
+    boolean normalized();
 
 }
