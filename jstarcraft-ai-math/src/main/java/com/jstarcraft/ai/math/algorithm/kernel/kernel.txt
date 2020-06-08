@@ -6,7 +6,8 @@ https://blog.csdn.net/u014662865/article/details/80970470
 
 机器学习 核函数:
 https://www.cnblogs.com/xiaohuahua108/p/6146118.html
-Mercer定理:任何半正定的函数都可以作为核函数
+Mercer定理:任何半正定的函数都可以作为核函数.
+请注意,Mercer定理不是核函数必要条件,只是充分条件,即不满足Mercer定理的函数也可以是核函数.
 
 我所理解的 SVM
 我所理解的 SVM（支持向量机）- 1:
