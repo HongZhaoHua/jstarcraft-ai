@@ -197,7 +197,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
      * @param power
      * @return
      */
-    default float getNorm(float power) {
+    default float getNorm(float power, boolean root) {
         // TODO 此处对称矩阵可能会存在错误,需要Override
         // 处理power为0的情况
         if (power == 0F) {
@@ -226,7 +226,7 @@ public interface ScalarIterator<T extends MathScalar> extends MathIterator<T> {
                     norm += FastMath.pow(FastMath.abs(term.getValue()), power);
                 }
             }
-            return (float) FastMath.pow(norm, 1F / power);
+            return root ? (float) FastMath.pow(norm, 1F / power) : norm;
         }
     }
 

@@ -105,9 +105,9 @@ public class ScalarIteratorTestCase {
             });
 
             if (index == 0) {
-                Assert.assertEquals("范数值比较", message.getValue(), matrix.getNorm(index), MathUtility.EPSILON);
+                Assert.assertEquals("范数值比较", message.getValue(), matrix.getNorm(index, true), MathUtility.EPSILON);
             } else {
-                Assert.assertEquals("范数值比较", Math.pow(message.getValue(), 1D / message.getPower()), matrix.getNorm(index), MathUtility.EPSILON);
+                Assert.assertEquals("范数值比较", Math.pow(message.getValue(), 1D / message.getPower()), matrix.getNorm(index, true), MathUtility.EPSILON);
             }
         }
     }

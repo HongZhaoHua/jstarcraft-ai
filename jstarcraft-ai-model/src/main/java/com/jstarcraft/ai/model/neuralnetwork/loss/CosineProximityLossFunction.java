@@ -26,8 +26,8 @@ public class CosineProximityLossFunction implements LossFunction {
         for (int row = 0; row < trains.getRowSize(); row++) {
             MathVector vector = trains.getRowVector(row);
             MathVector mark = tests.getRowVector(row);
-            float scoreNorm = Math.max(vector.getNorm(2), MathUtility.EPSILON);
-            float markNorm = Math.max(mark.getNorm(2), MathUtility.EPSILON);
+            float scoreNorm = Math.max(vector.getNorm(2, true), MathUtility.EPSILON);
+            float markNorm = Math.max(mark.getNorm(2, true), MathUtility.EPSILON);
             for (VectorScalar term : vector) {
                 score += -(term.getValue() * mark.getValue(term.getIndex()) / scoreNorm / markNorm);
             }
@@ -41,8 +41,8 @@ public class CosineProximityLossFunction implements LossFunction {
         for (int row = 0; row < trains.getRowSize(); row++) {
             MathVector vector = trains.getRowVector(row);
             MathVector mark = tests.getRowVector(row);
-            float scoreNorm = vector.getNorm(2F);
-            float markNorm = mark.getNorm(2F);
+            float scoreNorm = vector.getNorm(2F, true);
+            float markNorm = mark.getNorm(2F, true);
             float squareNorm = scoreNorm * scoreNorm;
             float sum = 0F;
             for (VectorScalar term : vector) {
