@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractDistanceTestCase;
 import com.jstarcraft.ai.math.algorithm.correlation.MathCorrelation;
-import com.jstarcraft.ai.math.algorithm.correlation.distance.LevenshteinDistance;
 import com.jstarcraft.ai.math.structure.vector.DenseVector;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
