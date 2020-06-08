@@ -15,7 +15,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
-public class AnovaKernel extends RbfKernelTrick {
+public class AnovaKernelTrick extends RbfKernelTrick {
 
     private static final class AnovaDistance extends AbstractCorrelation implements MathDistance {
 
@@ -53,7 +53,7 @@ public class AnovaKernel extends RbfKernelTrick {
 
     private float d;
 
-    public AnovaKernel(float k, float sigma, float d) {
+    public AnovaKernelTrick(float k, float sigma, float d) {
         super(new AnovaDistance(k));
         this.sigma = sigma;
         this.d = d;

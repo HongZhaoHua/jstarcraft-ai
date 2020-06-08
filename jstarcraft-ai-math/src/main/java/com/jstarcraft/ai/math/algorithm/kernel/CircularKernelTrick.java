@@ -6,6 +6,6 @@ package com.jstarcraft.ai.math.algorithm.kernel;
  * @author Birdy
  *
  */
-public class CircularKernel {
+public class CircularKernelTrick {
 
 }
