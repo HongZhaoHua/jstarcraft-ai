@@ -1,27 +1,32 @@
 package com.jstarcraft.ai.math.algorithm.kernel;
 
+import org.apache.commons.math3.util.FastMath;
+
 import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 高斯核(Gaussian Kernel)
+ * 多元二次核(Multiquadric Kernel)
  * 
  * @author Birdy
  *
  */
-public class GaussianKernelTrick extends RbfKernelTrick {
+public class MultiquadricKernel extends RbfKernelTrick {
 
-    private float sigma;
+    private float power;
 
-    public GaussianKernelTrick(boolean root, float sigma) {
+    private float c;
+
+    public MultiquadricKernel(boolean root, float c, boolean inverse) {
         super(new NormDistance(2F, root));
-        this.sigma = 0.5F / (sigma * sigma);
+        this.c = c;
+        this.power = inverse ? -0.5F : 0.5F;
     }
 
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        return (float) Math.exp(-coefficient * coefficient * sigma);
+        return (float) FastMath.pow(coefficient + c * c, power);
     }
 
 }

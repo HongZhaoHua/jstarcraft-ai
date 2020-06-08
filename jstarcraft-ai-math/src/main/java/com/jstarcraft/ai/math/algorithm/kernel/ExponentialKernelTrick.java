@@ -1,6 +1,5 @@
 package com.jstarcraft.ai.math.algorithm.kernel;
 
-import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
@@ -12,12 +11,10 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class ExponentialKernelTrick extends RbfKernelTrick {
 
-    private static final MathDistance distance = new NormDistance(1F, false);
-
     private float sigma;
 
-    public ExponentialKernelTrick(float sigma) {
-        super(distance);
+    public ExponentialKernelTrick(boolean root, float sigma) {
+        super(new NormDistance(1F, root));
         this.sigma = 0.5F / (sigma * sigma);
     }
 

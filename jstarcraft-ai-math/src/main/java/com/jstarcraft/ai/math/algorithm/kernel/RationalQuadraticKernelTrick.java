@@ -4,24 +4,24 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 拉普拉斯核(Laplacian Kernel)
+ * 二次有理核(Rational Quadratic Kernel)
  * 
  * @author Birdy
  *
  */
-public class LaplacianKernelTrick extends RbfKernelTrick {
+public class RationalQuadraticKernelTrick extends RbfKernelTrick {
 
-    private float sigma;
+    private float c;
 
-    public LaplacianKernelTrick(boolean root, float sigma) {
-        super(new NormDistance(1F, root));
-        this.sigma = sigma;
+    public RationalQuadraticKernelTrick(boolean root, float c) {
+        super(new NormDistance(2F, root));
+        this.c = c;
     }
 
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        return (float) Math.exp(-coefficient * coefficient * sigma);
+        return 1 - coefficient / (coefficient + c);
     }
 
 }
