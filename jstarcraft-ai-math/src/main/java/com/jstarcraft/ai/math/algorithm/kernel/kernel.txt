@@ -9,6 +9,9 @@ https://www.cnblogs.com/xiaohuahua108/p/6146118.html
 Mercer定理:任何半正定的函数都可以作为核函数.
 请注意,Mercer定理不是核函数必要条件,只是充分条件,即不满足Mercer定理的函数也可以是核函数.
 
+常用核函数-Kernel Function:
+https://blog.csdn.net/chlele0105/article/details/17068949
+
 总结一下遇到的各种核函数:
 https://blog.csdn.net/wsj998689aa/article/details/47027365
 
