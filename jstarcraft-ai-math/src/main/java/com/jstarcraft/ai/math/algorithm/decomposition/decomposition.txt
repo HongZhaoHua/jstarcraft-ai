@@ -1,3 +1,6 @@
+通俗的理解矩阵分解的意义:
+https://blog.csdn.net/xuejianxinokok/article/details/79230190
+
 Weka矩阵分解:
 https://github.com/Waikato/weka-trunk/tree/master/weka/src/main/java/weka/core/matrix
 
