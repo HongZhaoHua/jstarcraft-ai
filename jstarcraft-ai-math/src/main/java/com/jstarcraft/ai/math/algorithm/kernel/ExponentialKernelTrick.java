@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class ExponentialKernelTrick extends RbfKernelTrick {
 
-    private static final MathDistance distance = new NormDistance(1F);
+    private static final MathDistance distance = new NormDistance(1F, false);
 
     private float sigma;
 

@@ -15,6 +15,10 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
 /**
  * 范数距离
  * 
+ * <pre>
+ * 闵可夫斯基距离(Minkowski Distance)
+ * </pre>
+ * 
  * This class implements the Norm distance. This is a generalization of the
  * Euclidean distance, in this respect that the power we use becomes a parameter
  * instead of being fixed to two.
@@ -37,8 +41,11 @@ public class NormDistance extends AbstractCorrelation implements MathDistance {
 
     private float power;
 
-    public NormDistance(float power) {
+    private boolean inverse;
+
+    public NormDistance(float power, boolean inverse) {
         this.power = power;
+        this.inverse = inverse;
     }
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
@@ -74,7 +81,7 @@ public class NormDistance extends AbstractCorrelation implements MathDistance {
                     norm += FastMath.pow(FastMath.abs(distance), power);
                 }
             }
-            return (float) FastMath.pow(norm, 1F / power);
+            return inverse ? (float) FastMath.pow(norm, 1F / power) : norm;
         }
     }
 

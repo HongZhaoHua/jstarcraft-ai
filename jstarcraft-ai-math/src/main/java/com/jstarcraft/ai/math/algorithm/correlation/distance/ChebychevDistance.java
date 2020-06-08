@@ -15,6 +15,7 @@ import com.jstarcraft.core.utility.Float2FloatKeyValue;
  * @author Birdy
  *
  */
+// TODO 考虑使用NormDistance替代
 public class ChebychevDistance extends AbstractCorrelation implements MathDistance {
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {

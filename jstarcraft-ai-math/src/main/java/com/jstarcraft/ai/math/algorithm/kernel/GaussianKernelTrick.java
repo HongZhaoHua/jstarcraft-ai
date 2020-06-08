@@ -1,7 +1,7 @@
 package com.jstarcraft.ai.math.algorithm.kernel;
 
 import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
-import com.jstarcraft.ai.math.algorithm.correlation.distance.EuclideanDistance;
+import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
@@ -12,7 +12,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class GaussianKernelTrick extends RbfKernelTrick {
 
-    private static final MathDistance distance = new EuclideanDistance();
+    private static final MathDistance distance = new NormDistance(2F, false);
 
     private float sigma;
 

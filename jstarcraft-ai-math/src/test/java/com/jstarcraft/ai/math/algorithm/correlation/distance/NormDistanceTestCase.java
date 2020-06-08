@@ -7,7 +7,7 @@ public class NormDistanceTestCase extends AbstractDistanceTestCase {
 
     @Override
     protected MathCorrelation getCorrelation() {
-        return new NormDistance(2F);
+        return new NormDistance(2F, true);
     }
 
 }

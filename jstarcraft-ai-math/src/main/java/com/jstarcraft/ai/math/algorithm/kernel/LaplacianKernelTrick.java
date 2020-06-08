@@ -11,7 +11,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  */
 public class LaplacianKernelTrick extends RbfKernelTrick {
 
-    private static final NormDistance distance = new NormDistance(1F);
+    private static final NormDistance distance = new NormDistance(1F, false);
 
     private float sigma;
 
