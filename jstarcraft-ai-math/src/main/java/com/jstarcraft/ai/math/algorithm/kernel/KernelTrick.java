@@ -24,6 +24,6 @@ public interface KernelTrick {
      * 
      * @return
      */
-    boolean normalized();
+//    boolean normalized();
 
 }
