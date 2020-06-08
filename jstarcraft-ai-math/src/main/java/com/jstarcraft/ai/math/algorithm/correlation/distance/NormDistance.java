@@ -41,11 +41,12 @@ public class NormDistance extends AbstractCorrelation implements MathDistance {
 
     private float power;
 
-    private boolean inverse;
+    /** 是否执行根号运算 */
+    private boolean root;
 
-    public NormDistance(float power, boolean inverse) {
+    public NormDistance(float power, boolean root) {
         this.power = power;
-        this.inverse = inverse;
+        this.root = root;
     }
 
     private float getCoefficient(List<Float2FloatKeyValue> scores) {
@@ -81,7 +82,7 @@ public class NormDistance extends AbstractCorrelation implements MathDistance {
                     norm += FastMath.pow(FastMath.abs(distance), power);
                 }
             }
-            return inverse ? (float) FastMath.pow(norm, 1F / power) : norm;
+            return root ? (float) FastMath.pow(norm, 1F / power) : norm;
         }
     }
 
