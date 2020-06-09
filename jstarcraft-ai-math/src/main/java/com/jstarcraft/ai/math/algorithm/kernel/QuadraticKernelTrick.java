@@ -9,11 +9,11 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
  * @author Birdy
  *
  */
-public class RationalQuadraticKernelTrick extends RbfKernelTrick {
+public class QuadraticKernelTrick extends RbfKernelTrick {
 
     private float c;
 
-    public RationalQuadraticKernelTrick(boolean root, float c) {
+    public QuadraticKernelTrick(boolean root, float c) {
         super(new NormDistance(2F, root));
         this.c = c;
     }
