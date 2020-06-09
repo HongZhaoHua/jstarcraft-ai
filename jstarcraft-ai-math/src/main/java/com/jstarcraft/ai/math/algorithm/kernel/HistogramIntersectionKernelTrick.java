@@ -2,21 +2,34 @@ package com.jstarcraft.ai.math.algorithm.kernel;
 
 import java.util.Iterator;
 
+import org.apache.commons.math3.util.FastMath;
+
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
 
 /**
- * Chi-Square Kernel(卡方核)
+ * Histogram Intersection Kernel
+ * 
+ * <pre>
+ * 用于图像处理
+ * </pre>
  * 
  * @author Birdy
  *
  */
-public class ChiSquareKernelTrick implements KernelTrick {
+public class HistogramIntersectionKernelTrick implements KernelTrick {
+
+    private float a;
+
+    private float b;
+
+    public HistogramIntersectionKernelTrick(float a, float b) {
+        this.a = a;
+        this.b = b;
+    }
 
     private float calculate(float leftScalar, float rightScalar) {
-        float subtract = leftScalar - rightScalar;
-        float add = leftScalar + rightScalar;
-        float coefficient = subtract * subtract * 2F / add;
+        float coefficient = (float) FastMath.min(FastMath.pow(FastMath.abs(leftScalar), a), FastMath.pow(FastMath.abs(rightScalar), b));
         return coefficient;
     }
 
