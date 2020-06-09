@@ -2,37 +2,30 @@ package com.jstarcraft.ai.math.algorithm.kernel;
 
 import java.util.List;
 
-import org.apache.commons.math3.util.FastMath;
-
 import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
 import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
- * Spline Kernel
+ * Chi-Square Kernel(卡方核)
  * 
  * @author Birdy
  *
  */
-public class SplineKernelTrick extends RbfKernelTrick {
+public class ChiSquareKernelTrick extends RbfKernelTrick {
 
-    private static final class SplineDistance extends AbstractCorrelation implements MathDistance {
+    private static final class ChiSquareDistance extends AbstractCorrelation implements MathDistance {
 
         private float getCoefficient(List<Float2FloatKeyValue> scores) {
             float coefficient = 0F;
             for (Float2FloatKeyValue term : scores) {
                 float leftScalar = term.getKey();
                 float rightScalar = term.getValue();
-                float multiply = leftScalar * rightScalar;
-                float minimum = FastMath.min(leftScalar, rightScalar);
+                float subtract = leftScalar - rightScalar;
                 float add = leftScalar + rightScalar;
-                float distance = 1F;
-                distance = distance + multiply;
-                distance = distance + multiply * minimum;
-                distance = distance - add / 2F * minimum * minimum;
-                distance = distance + minimum * minimum * minimum / 3;
-                coefficient *= distance;
+                float distance = subtract * subtract * 2F / add ;
+                coefficient += distance;
             }
             return coefficient;
         }
@@ -40,17 +33,21 @@ public class SplineKernelTrick extends RbfKernelTrick {
         @Override
         public float getCoefficient(MathVector leftVector, MathVector rightVector) {
             List<Float2FloatKeyValue> scores = getIntersectionScores(leftVector, rightVector);
-            if (scores.size() == 0) {
+            int intersection = scores.size();
+            if (intersection == 0) {
                 return Float.POSITIVE_INFINITY;
             }
+            int union = leftVector.getElementSize() + rightVector.getElementSize() - intersection;
             float coefficient = getCoefficient(scores);
+            coefficient *= union;
+            coefficient /= intersection;
             return coefficient;
         }
 
     }
 
-    public SplineKernelTrick() {
-        super(new SplineDistance());
+    public ChiSquareKernelTrick() {
+        super(new ChiSquareDistance());
     }
 
     @Override
