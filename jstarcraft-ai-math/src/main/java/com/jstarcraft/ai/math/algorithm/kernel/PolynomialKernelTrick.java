@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.structure.MathScalar;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 多项式核(Polynomial Kernel)
+ * Polynomial Kernel(多项式核)
  * 
  * @author Birdy
  *

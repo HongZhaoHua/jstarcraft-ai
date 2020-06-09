@@ -10,7 +10,7 @@ import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
- * ANOVA核(ANOVA Kernel)
+ * ANOVA Kernel(ANOVA核)
  * 
  * @author Birdy
  *

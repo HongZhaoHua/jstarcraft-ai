@@ -7,7 +7,7 @@ import com.jstarcraft.ai.math.structure.MathScalar;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * Sigmoid核(Sigmoid Kernel)
+ * Sigmoid Kernel(Sigmoid核)
  * 
  * @author Birdy
  *

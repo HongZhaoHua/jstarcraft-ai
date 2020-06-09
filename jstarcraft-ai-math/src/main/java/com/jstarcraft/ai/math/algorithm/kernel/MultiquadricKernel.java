@@ -6,7 +6,11 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 多元二次核(Multiquadric Kernel)
+ * Multiquadric Kernel(多元二次核)
+ * 
+ * <pre>
+ * 用于替代{@link QuadraticKernelTrick}
+ * </pre>
  * 
  * @author Birdy
  *

@@ -4,7 +4,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 高斯核(Gaussian Kernel)
+ * Gaussian Kernel(高斯核)
  * 
  * @author Birdy
  *

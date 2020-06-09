@@ -4,7 +4,11 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 二次有理核(Rational Quadratic Kernel)
+ * Quadratic Kernel(二次有理核)
+ * 
+ * <pre>
+ * 用于替代{@link MultiquadricKernel}
+ * </pre>
  * 
  * @author Birdy
  *

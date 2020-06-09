@@ -1,27 +1,34 @@
 package com.jstarcraft.ai.math.algorithm.kernel;
 
+import org.apache.commons.math3.util.FastMath;
+
 import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * Exponential Kernel(指数核)
+ * Spherical Kernel
+ * 
+ * <pre>
+ * 可以用于替代{@link CircularKernelTrick}
+ * </pre>
  * 
  * @author Birdy
  *
  */
-public class ExponentialKernelTrick extends RbfKernelTrick {
+public class SphericalKernelTrick extends RbfKernelTrick {
 
     private float sigma;
 
-    public ExponentialKernelTrick(boolean root, float sigma) {
+    public SphericalKernelTrick(boolean root, float sigma) {
         super(new NormDistance(1F, root));
-        this.sigma = 0.5F / (sigma * sigma);
+        this.sigma = sigma;
     }
 
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        return (float) Math.exp(-coefficient * coefficient * sigma);
+        coefficient = coefficient / sigma;
+        return (float) (1F - (1.5F * coefficient) + (0.5F * FastMath.pow(coefficient, 3)));
     }
 
 }

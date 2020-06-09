@@ -3,7 +3,7 @@ package com.jstarcraft.ai.math.algorithm.kernel;
 import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 
 /**
- * 径向基核(Radial Basis Function)
+ * Radial Basis Function(径向基核)
  * 
  * @author Birdy
  *

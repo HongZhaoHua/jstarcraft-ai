@@ -4,24 +4,21 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * Exponential Kernel(指数核)
+ * Power Kernel/Triangular Kernel(三角核)
  * 
  * @author Birdy
  *
  */
-public class ExponentialKernelTrick extends RbfKernelTrick {
+public class PowerKernelTrick extends RbfKernelTrick {
 
-    private float sigma;
-
-    public ExponentialKernelTrick(boolean root, float sigma) {
-        super(new NormDistance(1F, root));
-        this.sigma = 0.5F / (sigma * sigma);
+    public PowerKernelTrick(float power, boolean root) {
+        super(new NormDistance(power, root));
     }
 
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        return (float) Math.exp(-coefficient * coefficient * sigma);
+        return -coefficient;
     }
 
 }

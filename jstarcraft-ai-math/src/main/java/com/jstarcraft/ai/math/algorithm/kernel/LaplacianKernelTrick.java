@@ -4,7 +4,7 @@ import com.jstarcraft.ai.math.algorithm.correlation.distance.NormDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 拉普拉斯核(Laplacian Kernel)
+ * Laplacian Kernel(拉普拉斯核)
  * 
  * @author Birdy
  *

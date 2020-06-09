@@ -5,7 +5,7 @@ import com.jstarcraft.ai.math.structure.MathScalar;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 
 /**
- * 线性核(Linear Kernel)
+ * Linear Kernel(线性核)
  * 
  * @author Birdy
  *
