@@ -24,10 +24,15 @@ public class KernelSimilarity implements MathSimilarity {
     public float getCoefficient(MathVector leftVector, MathVector rightVector) {
         float leftCoefficient = kernel.calculate(leftVector, leftVector);
         float rightCoefficient = kernel.calculate(rightVector, rightVector);
+        float coefficient = kernel.calculate(leftVector, rightVector);
+        if (coefficient == leftCoefficient && coefficient == rightCoefficient) {
+            return 1F;
+        }
         if (leftCoefficient == 0F || rightCoefficient == 0F) {
+            // 防止NaN
             return 0F;
         } else {
-            return kernel.calculate(leftVector, rightVector) / (float) FastMath.sqrt(leftCoefficient * rightCoefficient);
+            return coefficient / (float) FastMath.sqrt(leftCoefficient * rightCoefficient);
         }
     }
 

@@ -1,15 +1,11 @@
 package com.jstarcraft.ai.math.algorithm.kernel;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.commons.math3.util.FastMath;
 
-import com.jstarcraft.ai.math.algorithm.correlation.AbstractCorrelation;
-import com.jstarcraft.ai.math.algorithm.correlation.MathDistance;
 import com.jstarcraft.ai.math.structure.vector.MathVector;
 import com.jstarcraft.ai.math.structure.vector.VectorScalar;
-import com.jstarcraft.core.utility.Float2FloatKeyValue;
 
 /**
  * Spline Kernel

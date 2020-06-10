@@ -27,8 +27,8 @@ public class WaveKernelTrick extends RbfKernelTrick {
 
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
-        float theta = chebychev.getCoefficient(leftVector, rightVector);
-        float coefficient = distance.getCoefficient(leftVector, rightVector);
+        float theta = chebychev.getCoefficient(leftVector, rightVector) + 1F;
+        float coefficient = distance.getCoefficient(leftVector, rightVector) + 1F;
         return (float) (theta / coefficient * FastMath.sin(coefficient / theta));
     }
 

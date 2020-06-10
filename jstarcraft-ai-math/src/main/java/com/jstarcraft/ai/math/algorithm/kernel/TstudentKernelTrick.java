@@ -18,7 +18,7 @@ public class TstudentKernelTrick extends RbfKernelTrick {
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        return 1F / 1F + coefficient;
+        return 1F / (1F + coefficient);
     }
 
 }

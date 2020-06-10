@@ -16,7 +16,7 @@ public class ChiSquareKernelTrick implements KernelTrick {
     private float calculate(float leftScalar, float rightScalar) {
         float subtract = leftScalar - rightScalar;
         float add = leftScalar + rightScalar;
-        float coefficient = subtract * subtract * 2F / add;
+        float coefficient = (subtract * subtract) / (add / 2F);
         return coefficient;
     }
 
@@ -48,7 +48,7 @@ public class ChiSquareKernelTrick implements KernelTrick {
                 }
             }
         }
-        return coefficient / count;
+        return 1F - coefficient;
     }
 
 }

@@ -27,8 +27,12 @@ public class SphericalKernelTrick extends RbfKernelTrick {
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        coefficient = coefficient / sigma;
-        return (float) (1F - (1.5F * coefficient) + (0.5F * FastMath.pow(coefficient, 3)));
+        if (coefficient > sigma) {
+            return 0F;
+        } else {
+            coefficient = coefficient / sigma;
+            return (float) (1F - (1.5F * coefficient) + (0.5F * FastMath.pow(coefficient, 3)));
+        }
     }
 
 }

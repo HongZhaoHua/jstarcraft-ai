@@ -29,8 +29,12 @@ public class CircularKernelTrick extends RbfKernelTrick {
     @Override
     public float calculate(MathVector leftVector, MathVector rightVector) {
         float coefficient = distance.getCoefficient(leftVector, rightVector);
-        coefficient = coefficient / sigma;
-        return (float) ((pi * FastMath.acos(-coefficient)) - (pi * coefficient * FastMath.sqrt(1F - euclidean.getCoefficient(leftVector, rightVector) / sigma)));
+        if (coefficient > sigma) {
+            return 0F;
+        } else {
+            coefficient = coefficient / sigma;
+            return (float) ((pi * FastMath.acos(-coefficient)) - (pi * coefficient * FastMath.sqrt(1F - euclidean.getCoefficient(leftVector, rightVector) / sigma)));
+        }
     }
 
 }
