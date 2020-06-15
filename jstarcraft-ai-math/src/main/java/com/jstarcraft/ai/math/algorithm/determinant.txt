@@ -1,0 +1,6 @@
+行列式求值的两种方法 Java实现:
+https://blog.csdn.net/kellyren/article/details/82986131
+
+Java计算行列式:
+https://blog.csdn.net/weixin_44589374/article/details/101883286
+https://blog.csdn.net/weixin_44589374/article/details/101883566
