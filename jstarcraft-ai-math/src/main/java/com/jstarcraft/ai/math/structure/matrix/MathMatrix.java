@@ -338,7 +338,7 @@ public interface MathMatrix extends ScalarIterator<MatrixScalar> {
      * 
      * <pre>
      * 左矩阵的列大小必须等于右矩阵的行大小
-     * 矩阵的行大小等于必须等于左矩阵的行大小,矩阵的列大小等于必须等于右矩阵的列大小
+     * 矩阵的行大小必须等于左矩阵的行大小,矩阵的列大小必须等于右矩阵的列大小
      * </pre>
      * 
      * @param leftMatrix
