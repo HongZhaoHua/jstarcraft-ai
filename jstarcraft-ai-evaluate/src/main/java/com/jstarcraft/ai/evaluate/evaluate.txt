@@ -3,3 +3,6 @@ https://www.it610.com/article/5283790.htm
 
 机器学习排序:
 https://www.jiqizhixin.com/graph/technologies/124e6394-15ac-47e9-873d-fcbdfc91026c
+
+聚类 | 超详细的性能度量和相似度方法总结:
+https://mp.weixin.qq.com/s?__biz=MzU0MDQ1NjAzNg==&mid=2247486748&idx=1&sn=c099f35ffba0c3e1240dad7eb78d8a13
