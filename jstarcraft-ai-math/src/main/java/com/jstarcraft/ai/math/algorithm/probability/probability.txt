@@ -1,2 +1,5 @@
 概率中的PDF,PMF,CDF:
 http://blog.csdn.net/wzgbm/article/details/51680540
+
+机器学习领域必知必会的12种概率分布:
+https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247486257&idx=1&sn=6f04234257b6b08ae9b9b4752f6178b1
