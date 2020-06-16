@@ -154,6 +154,11 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
     /**
      * 向量叉积运算
      * 
+     * <pre>
+     * 法向量垂直于左向量与右向量的平面
+     * 法向量所有标量之和等于左向量与右向量组成的平行四边形的面积
+     * </pre>
+     * 
      * @param leftVector
      * @param rightVector
      * @param mode
