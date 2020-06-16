@@ -6,3 +6,11 @@ https://m.uczzd.cn/webview/news?app=xiaomic-iflow&aid=291906161249417249
 
 叉积、点积、余弦相似性:
 https://blog.csdn.net/flyfish1986/article/details/79401970
+
+线性代数的几何意义:
+什么是线性代数
+https://www.cnblogs.com/AndyJee/p/3491443.html
+向量的基本几何意义
+https://www.cnblogs.com/AndyJee/p/3491458.html
+行列式的几何意义
+https://www.cnblogs.com/AndyJee/p/3491487.html
