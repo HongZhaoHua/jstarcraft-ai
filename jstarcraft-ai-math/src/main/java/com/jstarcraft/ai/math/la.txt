@@ -3,3 +3,6 @@ https://www.zhihu.com/question/20534668
 
 数学对于编程来说到底有多重要? 网友称: 编程大佬眼里的线性代数!
 https://m.uczzd.cn/webview/news?app=xiaomic-iflow&aid=291906161249417249
+
+叉积、点积、余弦相似性:
+https://blog.csdn.net/flyfish1986/article/details/79401970
