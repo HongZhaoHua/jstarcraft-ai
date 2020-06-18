@@ -14,3 +14,9 @@ https://www.cnblogs.com/AndyJee/p/3491443.html
 https://www.cnblogs.com/AndyJee/p/3491458.html
 行列式的几何意义
 https://www.cnblogs.com/AndyJee/p/3491487.html
+
+矩阵的逆、伪逆、左右逆:
+https://www.cnblogs.com/AndyJee/p/5082508.html
+
+伪逆矩阵（广义逆矩阵）:
+https://www.jianshu.com/p/609fa0cce409
