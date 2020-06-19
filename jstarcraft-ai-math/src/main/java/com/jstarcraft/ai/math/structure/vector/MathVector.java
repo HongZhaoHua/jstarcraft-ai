@@ -164,6 +164,7 @@ public interface MathVector extends ScalarIterator<VectorScalar> {
      * @param mode
      * @return
      */
+    @Deprecated
     default MathVector crossProduct(MathVector leftVector, MathVector rightVector, MathCalculator mode) {
         switch (mode) {
         case SERIAL: {
