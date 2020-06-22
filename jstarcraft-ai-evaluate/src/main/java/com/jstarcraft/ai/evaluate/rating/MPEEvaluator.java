@@ -10,7 +10,7 @@ import it.unimi.dsi.fastutil.floats.FloatList;
  * 平均相对误差评估器
  * 
  * <pre>
- * MPE = Mean Prediction  Error
+ * MPE = Mean Prediction Error
  * </pre>
  *
  * @author Birdy
