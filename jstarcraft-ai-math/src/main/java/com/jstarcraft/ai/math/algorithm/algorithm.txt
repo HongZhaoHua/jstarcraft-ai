@@ -7,7 +7,5 @@ http://blog.csdn.net/qy20115549/article/details/71566376?locationNum=15&fps=1
 Beta 函数和 Gamma 函数有什么用?
 https://www.zhihu.com/question/31407058
 
-https://www.wolframalpha.com/input
-
 常用统计算法JAVA实现:
 https://me.csdn.net/china_melancholy

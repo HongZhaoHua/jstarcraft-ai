@@ -1,3 +1,8 @@
+Wolfram 语言：快速编程入门:
+https://www.wolfram.com/language/fast-introduction-for-programmers/zh/
+https://www.wolframalpha.com
+https://www.jianshu.com/p/25059fd8d395
+
 Advanced Java BigDecimal math functions using arbitrary precision:
 https://github.com/eobermuhlner/big-math
 
