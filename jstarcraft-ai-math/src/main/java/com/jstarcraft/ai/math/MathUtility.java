@@ -14,6 +14,10 @@ public class MathUtility {
     /**
      * 计算对数
      * 
+     * <pre>
+     * 换底公式:logx(y) =loge(x) / loge(y)
+     * </pre>
+     * 
      * @param number
      * @param base
      * @return
