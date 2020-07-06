@@ -1,5 +1,5 @@
-Wolfram 语言：快速编程入门:
-https://www.wolfram.com/language/fast-introduction-for-programmers/zh/
+Wolfram for Software Developers:
+https://www.wolfram.com/developer/
 https://www.wolframalpha.com
 https://www.jianshu.com/p/25059fd8d395
 
