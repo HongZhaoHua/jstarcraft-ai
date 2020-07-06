@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
         // 激活函数测试集
-        CubeActivationFunctionTestCase.class,
+        PowerActivationFunctionTestCase.class,
 
         ELUActivationFunctionTestCase.class,
 

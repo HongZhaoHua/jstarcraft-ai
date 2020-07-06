@@ -26,8 +26,7 @@ public class ELUActivationFunction implements ActivationFunction {
 
     private float alpha;
 
-    public ELUActivationFunction() {
-        this(DEFAULT_ALPHA);
+    ELUActivationFunction() {
     }
 
     public ELUActivationFunction(float alpha) {
