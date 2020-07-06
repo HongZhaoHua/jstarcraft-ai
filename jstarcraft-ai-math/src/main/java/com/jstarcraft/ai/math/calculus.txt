@@ -1,0 +1,5 @@
+导数和微分的区别:
+https://www.cnblogs.com/liuys635/p/11269880.html
+
+微分（Differential）的定义，微分与导数的区别:
+https://blog.csdn.net/FreeSouthS/article/details/90202938
