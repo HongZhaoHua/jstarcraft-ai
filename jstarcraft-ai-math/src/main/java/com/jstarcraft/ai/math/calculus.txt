@@ -3,3 +3,6 @@ https://www.cnblogs.com/liuys635/p/11269880.html
 
 微分（Differential）的定义，微分与导数的区别:
 https://blog.csdn.net/FreeSouthS/article/details/90202938
+
+导数表:
+https://baike.baidu.com/item/%E5%AF%BC%E6%95%B0%E8%A1%A8/10889755
