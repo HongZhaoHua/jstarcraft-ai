@@ -47,10 +47,13 @@ JStarCraft AI框架各个模块之间的关系:
     * GPU计算
 * 3.数学(math)
     * 算法(algorithm)
-        * 分解
-        * 概率
-        * 相似度
-        * 损失函数
+        * 微积分(calculus)
+        * 相关性(correlation)
+            * 距离(distance)
+            * 相似度(similarity)
+        * 分解(decomposition)
+        * 核技巧(kernel)
+        * 概率(probability)
     * [数据结构(structure)](https://github.com/HongZhaoHua/jstarcraft-ai/wiki/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
         * 标量
         * 向量
