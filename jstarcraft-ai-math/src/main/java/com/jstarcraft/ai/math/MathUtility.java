@@ -15,7 +15,7 @@ public class MathUtility {
      * 计算对数
      * 
      * <pre>
-     * 换底公式:logx(y) =loge(x) / loge(y)
+     * 换底公式:logx(y)=loge(y)/loge(x)
      * </pre>
      * 
      * @param number
