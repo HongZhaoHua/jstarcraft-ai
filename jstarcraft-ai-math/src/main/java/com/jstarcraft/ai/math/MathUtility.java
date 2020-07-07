@@ -22,7 +22,7 @@ public class MathUtility {
      * @param base
      * @return
      */
-    public static float logarithm(float number, int base) {
+    public static float logarithm(float number, float base) {
         return (float) (Math.log(number) / Math.log(base));
     }
 
