@@ -8,7 +8,7 @@ Encog 神经网络与机器学习框架:
 https://blog.csdn.net/u012970287/category_9272779.html
 
 Algorithms of the Intelligent Web(智能Web算法):
-https://www.manning.com/books/algorithms-of-the-intelligent-web?query=Algorithms%20of%20the%20Intelligent%20Web
+https://www.manning.com/books/algorithms-of-the-intelligent-web
 
 25个Java机器学习工具和库:
 http://www.codeceo.com/article/25-java-machine-learning-tools.html
@@ -27,6 +27,3 @@ https://github.com/mimno/Mallet
 
 Machine learning, in numpy:
 https://github.com/ddbourgin/numpy-ml
-
-Algorithms of the Intelligent Web:
-https://www.manning.com/books/algorithms-of-the-intelligent-web
