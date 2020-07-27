@@ -3,3 +3,6 @@ https://www.cnblogs.com/mafeng/p/7910129.html
 
 Google S2 常用操作:
 https://blog.csdn.net/deng0515001/article/details/88031153
+
+附近的人位置距离计算方法:
+https://www.cnblogs.com/woshimrf/p/5000123.html
