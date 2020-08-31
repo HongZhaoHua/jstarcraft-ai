@@ -61,8 +61,12 @@ public class DenseModule extends AbstractModule {
         if (!quantityFeatures.isEmpty() && (quantityFeatures.firstIntKey() < 0 || quantityFeatures.lastIntKey() >= quantityOrder)) {
             throw new DataException();
         }
-        assert qualityOrder == qualityFeatures.size();
-        assert quantityOrder == quantityFeatures.size();
+        if (qualityOrder != qualityFeatures.size()) {
+            throw new DataException();
+        }
+        if (quantityOrder != quantityFeatures.size()) {
+            throw new DataException();
+        }
         for (Int2IntMap.Entry term : qualityFeatures.int2IntEntrySet()) {
             qualityValues[term.getIntKey()].associateData(term.getIntValue());
         }
