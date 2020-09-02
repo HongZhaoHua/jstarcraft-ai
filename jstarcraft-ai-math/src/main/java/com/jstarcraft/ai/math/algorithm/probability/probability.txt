@@ -3,3 +3,9 @@ http://blog.csdn.net/wzgbm/article/details/51680540
 
 机器学习领域必知必会的12种概率分布:
 https://mp.weixin.qq.com/s?__biz=MzIyNjM2MzQyNg==&mid=2247486257&idx=1&sn=6f04234257b6b08ae9b9b4752f6178b1
+
+HyperLogLog的Java版使用:
+https://www.jianshu.com/p/3a33a4c6bee6
+
+探索HyperLogLog算法（含Java实现）:
+https://www.jianshu.com/p/55defda6dcd2
