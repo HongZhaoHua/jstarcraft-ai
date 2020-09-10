@@ -22,6 +22,12 @@ Optimizer.optimize =>
 A Java implement of Deep Neural Network.(CNN,RNN)
 https://github.com/1036225283/xws
 
+Java实现的深度神经网络:
+https://blog.csdn.net/u011913612/category_9271841.html
+
+A Java implement of Deep Neural Network:
+https://github.com/sunnythree/CupDnn
+
 Java Machine Learning Library:
 https://github.com/Daniel-Liu-c0deb0t/Java-Machine-Learning
 
