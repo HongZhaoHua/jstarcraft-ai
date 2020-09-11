@@ -44,3 +44,6 @@ DL4J博客:
 http://blog.csdn.net/wangongxi
 http://blog.csdn.net/u011669700
 https://github.com/sjsdfg/deeplearning4j-issues
+
+DL4J中文:
+https://deeplearning4j.konduit.ai/v/zhong-wen-v1.0.0/
