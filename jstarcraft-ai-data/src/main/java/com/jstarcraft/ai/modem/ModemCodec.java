@@ -19,8 +19,8 @@ import com.jstarcraft.core.codec.ContentCodec;
 import com.jstarcraft.core.codec.csv.CsvContentCodec;
 import com.jstarcraft.core.codec.json.JsonContentCodec;
 import com.jstarcraft.core.codec.kryo.KryoContentCodec;
-import com.jstarcraft.core.codec.protocolbufferx.ProtocolContentCodec;
 import com.jstarcraft.core.codec.specification.CodecDefinition;
+import com.jstarcraft.core.codec.standard.StandardContentCodec;
 import com.jstarcraft.core.common.conversion.json.JsonUtility;
 import com.jstarcraft.core.common.reflection.ReflectionUtility;
 import com.jstarcraft.core.common.reflection.Specification;
@@ -41,7 +41,7 @@ public enum ModemCodec {
 
     KRYO(KryoContentCodec.class),
 
-    PROTOCOL_BUFFER_X(ProtocolContentCodec.class);
+    STANDARD(StandardContentCodec.class);
 
     private static final TypeFactory factory = TypeFactory.defaultInstance();
 
