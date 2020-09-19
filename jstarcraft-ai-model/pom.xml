@@ -49,6 +49,12 @@
             <artifactId>deeplearning4j-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.tribuo</groupId>
+            <artifactId>tribuo-all</artifactId>
+            <type>pom</type>
+        </dependency>
+
         <!-- Test框架依赖 -->
         <dependency>
             <groupId>junit</groupId>
