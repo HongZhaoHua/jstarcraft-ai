@@ -20,8 +20,8 @@ import org.apache.parquet.hadoop.example.GroupReadSupport;
 import org.apache.parquet.hadoop.example.GroupWriteSupport;
 import org.apache.parquet.hadoop.util.HadoopInputFile;
 import org.apache.parquet.hadoop.util.HadoopOutputFile;
+import org.apache.parquet.schema.LogicalTypeAnnotation;
 import org.apache.parquet.schema.MessageType;
-import org.apache.parquet.schema.OriginalType;
 import org.apache.parquet.schema.PrimitiveType;
 import org.apache.parquet.schema.Types;
 import org.apache.parquet.schema.Types.MessageTypeBuilder;
@@ -55,8 +55,8 @@ public class ParquetTestCase {
          * </pre>
          */
         MessageTypeBuilder builder = Types.buildMessage();
-        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("title");
-        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(OriginalType.UTF8).named("when");
+        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(LogicalTypeAnnotation.stringType()).named("title");
+        builder.required(PrimitiveType.PrimitiveTypeName.BINARY).as(LogicalTypeAnnotation.stringType()).named("when");
         builder.repeatedGroup().required(PrimitiveType.PrimitiveTypeName.FLOAT).named("longitude").required(PrimitiveType.PrimitiveTypeName.FLOAT).named("latitude").named("where");
         MessageType schema = builder.named("parquet");
 
