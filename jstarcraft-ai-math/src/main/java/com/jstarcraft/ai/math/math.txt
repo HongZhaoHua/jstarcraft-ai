@@ -6,15 +6,6 @@ https://www.jianshu.com/p/25059fd8d395
 Advanced Java BigDecimal math functions using arbitrary precision:
 https://github.com/eobermuhlner/big-math
 
-偏度和峰度如何影响您的分布:
-https://support.minitab.com/zh-cn/minitab/18/help-and-how-to/statistics/basic-statistics/supporting-topics/data-concepts/how-skewness-and-kurtosis-affect-your-distribution
-
-偏度(skewness)和峰度(kurtosis):
-https://blog.csdn.net/xbmatrix/article/details/69360167
-
-偏度和峰度的计算:
-https://www.cnblogs.com/jiaxin359/p/8977333.html
-
 附录D——自动微分(Autodiff):
 https://www.cnblogs.com/royhoo/p/Autodiff.html
 
