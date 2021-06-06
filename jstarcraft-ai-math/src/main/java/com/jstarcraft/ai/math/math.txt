@@ -18,6 +18,9 @@ http://dst.lbl.gov/ACSSoftware/colt
 Linear Algebra for Java:
 https://github.com/vkostyukov/la4j
 
+This is the Java version of LIBLINEAR.:
+https://github.com/bwaldvogel/liblinear-java
+
 All Algorithms implemented in Java:
 https://github.com/TheAlgorithms/Java
 
