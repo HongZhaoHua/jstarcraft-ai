@@ -1,0 +1,8 @@
+数据挖掘算法:
+https://github.com/linyiqun/DataMiningAlgorithm
+
+lyq算法库，涉及到相关数据挖掘，解压缩，模式匹配，图算法等多领域算法:
+https://github.com/linyiqun/lyq-algorithms-lib
+
+SPMF is an open-source software and data mining mining library written in Java, specialized in pattern mining (the discovery of patterns in data):
+http://www.philippe-fournier-viger.com/spmf
