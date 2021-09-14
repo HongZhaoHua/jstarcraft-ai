@@ -4,3 +4,6 @@ https://www.cnblogs.com/LHWorldBlog/p/10929281.html
 AI learning-机器学习实战:
 https://github.com/apachecn/AiLearning
 https://ailearning.apachecn.org/
+
+AI三大主义：符号主义、联结主义、行为主义:
+https://blog.csdn.net/ftimes/article/details/105024813

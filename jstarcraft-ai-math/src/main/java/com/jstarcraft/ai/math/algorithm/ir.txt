@@ -1,5 +1,11 @@
 大规模特征向量检索算法总结 (LSH PQ HNSW):
 https://www.6aiq.com/article/1587522027341
 
+多模态检索Deep Cross-Modal Hashing:
+https://blog.csdn.net/m0_38102073/article/details/104540018
+
+笔记︱几款多模态向量检索引擎：Faiss 、milvus、Proxima、vearch、Jina等:
+https://zhuanlan.zhihu.com/p/364923722
+
 Milvus 是一款开源的特征向量相似度搜索引擎:
 https://github.com/milvus-io/milvus/blob/master/README_CN.md
