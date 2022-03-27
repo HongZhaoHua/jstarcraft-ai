@@ -31,3 +31,9 @@ https://www.matongxue.com/madocs/910
 频率学派还是贝叶斯学派？聊一聊机器学习中的MLE和MAP:
 https://cloud.tencent.com/developer/article/1070069
 
+看见统计:
+https://seeing-theory.brown.edu/basic-probability/cn.html
+
+统计学里频率学派(Frequentist)与贝叶斯(Bayesian)学派的区别和在机器学习中的应用:
+https://zhuanlan.zhihu.com/p/337637096
+
