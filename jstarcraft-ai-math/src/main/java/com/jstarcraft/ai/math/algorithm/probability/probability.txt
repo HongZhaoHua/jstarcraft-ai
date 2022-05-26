@@ -1,3 +1,6 @@
+Probability(概率) vs Likelihood(似然):
+https://www.plob.org/article/23003.html
+
 概率中的PDF,PMF,CDF:
 http://blog.csdn.net/wzgbm/article/details/51680540
 

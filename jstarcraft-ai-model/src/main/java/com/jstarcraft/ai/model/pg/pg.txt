@@ -1,11 +1,39 @@
+条件概率、全概率、贝叶斯公式理解:
+https://learnku.com/articles/44888
+全概率公式理解:
+https://learnku.com/articles/44889
+
 联合概率、边际概率、条件概率:
 https://blog.csdn.net/libing_zeng/article/details/74625849
-
 带你搞懂朴素贝叶斯分类算法:
 https://blog.csdn.net/yizhen_nlp/article/details/70162431
-
 条件概率、全概率、先验概率、后验概率、类条件概率:
 https://blog.csdn.net/qq_35091353/article/details/102557011
-
 先验概率、条件概率、后验概率、全概率、贝叶斯公式:
 https://blog.csdn.net/Mr_health/article/details/100080951
+一文看懂 “极大似然估计” 与 “最大后验估计”:
+https://blog.csdn.net/wxc971231/article/details/115054494
+先验概率、后验概率、条件概率:
+https://blog.csdn.net/cxroom/article/details/41452337
+
+Think Bayes - 我所理解的贝叶斯定理:
+https://zhuanlan.zhihu.com/p/22467549
+全概率公式、贝叶斯公式:
+https://zhuanlan.zhihu.com/p/78297343
+喜来乐看病、贝叶斯定理与基础概率谬误:
+https://zhuanlan.zhihu.com/p/111774707
+
+怎样用非数学语言讲解贝叶斯定理（Bayes Theorem）？:
+https://www.matongxue.com/madocs/279/
+如何理解贝叶斯推断和Beta分布？:
+https://www.matongxue.com/madocs/910
+
+频率学派还是贝叶斯学派？聊一聊机器学习中的MLE和MAP:
+https://cloud.tencent.com/developer/article/1070069
+
+看见统计:
+https://seeing-theory.brown.edu/basic-probability/cn.html
+
+统计学里频率学派(Frequentist)与贝叶斯(Bayesian)学派的区别和在机器学习中的应用:
+https://zhuanlan.zhihu.com/p/337637096
+
