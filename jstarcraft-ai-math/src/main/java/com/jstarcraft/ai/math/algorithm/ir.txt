@@ -9,3 +9,6 @@ https://zhuanlan.zhihu.com/p/364923722
 
 Milvus 是一款开源的特征向量相似度搜索引擎:
 https://github.com/milvus-io/milvus/blob/master/README_CN.md
+
+在 Windows 上运行 Milvus 2.0:
+https://www.modb.pro/db/140633
